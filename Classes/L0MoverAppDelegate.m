@@ -12,6 +12,7 @@
 #import "L0MoverItemUI.h"
 #import "L0MoverImageItemUI.h"
 #import "L0MoverAddressBookItemUI.h"
+#import "L0BookmarkItemUI.h"
 #import "L0MoverItemAction.h"
 
 #import "L0ImageItem.h"
@@ -50,10 +51,12 @@ enum {
 	// Registering item subclasses.
 	[L0ImageItem registerClass];
 	[L0AddressBookPersonItem registerClass];
+	[L0BookmarkItem registerClass];
 	
 	// Registering UIs.
 	[L0MoverImageItemUI registerClass];
 	[L0MoverAddressBookItemUI registerClass];
+	[L0BookmarkItemUI registerClass];
 	
 	// Starting up peering services.
 	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];
@@ -117,12 +120,13 @@ enum {
 	if (!bookmarkedURL)
 		return NO;
 	L0BookmarkItem* item = [[[L0BookmarkItem alloc] initWithAddress:bookmarkedURL title:title] autorelease];
-	[self performSelector:@selector(addItemToTable:) withObject:item afterDelay:1.0];
+	[self performSelector:@selector(addItemToTableAndSave:) withObject:item afterDelay:0.7];
 	return YES;
 }
 
-- (void) addItemToTable:(L0MoverItem*) item;
+- (void) addItemToTableAndSave:(L0MoverItem*) item;
 {
+	[item storeToAppropriateApplication];
 	[self.tableController addItem:item animation:kL0SlideItemsTableAddByDropping];
 }
 
