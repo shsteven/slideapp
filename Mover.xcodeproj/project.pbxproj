@@ -15,6 +15,10 @@
 		1510C4E50FBEDB3D003849A6 /* L0MoverImageViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1510C4E30FBEDB3D003849A6 /* L0MoverImageViewer.xib */; };
 		1510C4EF0FBEDB96003849A6 /* L0MoverImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */; };
 		1510C5610FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */; };
+		15250B1C0FC692BD0073E5C7 /* nl.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15250B180FC692BA0073E5C7 /* nl.lproj */; };
+		15250B2B0FC692CA0073E5C7 /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15250B1F0FC692C70073E5C7 /* nl.lproj */; };
+		15250B4A0FC6945D0073E5C7 /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15250B3E0FC694570073E5C7 /* de.lproj */; };
+		15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15250B4B0FC6946E0073E5C7 /* de.lproj */; };
 		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
 		153734ED0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
@@ -156,6 +160,8 @@
 			dstPath = Settings.bundle;
 			dstSubfolderSpec = 7;
 			files = (
+				15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */,
+				15250B1C0FC692BD0073E5C7 /* nl.lproj in Copy Settings.bundle Localizations */,
 				154FB79A0FB1F18300DB26C6 /* fr.lproj in Copy Settings.bundle Localizations */,
 				154FB79B0FB1F18300DB26C6 /* it.lproj in Copy Settings.bundle Localizations */,
 				154FB79C0FB1F18300DB26C6 /* ru.lproj in Copy Settings.bundle Localizations */,
@@ -177,6 +183,10 @@
 		1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverImageItemUI.m; sourceTree = "<group>"; };
 		1510C55F0FBEEC6E003849A6 /* L0MoverAddressBookItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAddressBookItemUI.h; sourceTree = "<group>"; };
 		1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAddressBookItemUI.m; sourceTree = "<group>"; };
+		15250B180FC692BA0073E5C7 /* nl.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = nl.lproj; sourceTree = "<group>"; };
+		15250B1F0FC692C70073E5C7 /* nl.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = nl.lproj; sourceTree = "<group>"; };
+		15250B3E0FC694570073E5C7 /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
+		15250B4B0FC6946E0073E5C7 /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
 		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
 		153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0UITestingHooks.m"; sourceTree = "<group>"; };
 		153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
@@ -367,6 +377,8 @@
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
 			isa = PBXGroup;
 			children = (
+				15250B3E0FC694570073E5C7 /* de.lproj */,
+				15250B1F0FC692C70073E5C7 /* nl.lproj */,
 				154FB7900FB1F16000DB26C6 /* fr.lproj */,
 				154FB7910FB1F16000DB26C6 /* it.lproj */,
 				154FB7920FB1F16000DB26C6 /* ru.lproj */,
@@ -392,6 +404,8 @@
 		15729E260FB09BC200CD1310 /* Compiled Settings Locales */ = {
 			isa = PBXGroup;
 			children = (
+				15250B4B0FC6946E0073E5C7 /* de.lproj */,
+				15250B180FC692BA0073E5C7 /* nl.lproj */,
 				154FB7680FB1F06D00DB26C6 /* fr.lproj */,
 				154FB7690FB1F06D00DB26C6 /* it.lproj */,
 				154FB76A0FB1F06D00DB26C6 /* ru.lproj */,
@@ -725,6 +739,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15250B4A0FC6945D0073E5C7 /* de.lproj in Resources */,
+				15250B2B0FC692CA0073E5C7 /* nl.lproj in Resources */,
 				154FB7940FB1F16400DB26C6 /* fr.lproj in Resources */,
 				154FB7950FB1F16400DB26C6 /* it.lproj in Resources */,
 				154FB7960FB1F16400DB26C6 /* ru.lproj in Resources */,
