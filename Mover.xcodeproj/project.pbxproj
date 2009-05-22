@@ -660,10 +660,10 @@
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover" */;
 			buildPhases = (
 				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				15E7FDF90FADC41C00E9C438 /* Build Localizations */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				154FB7890FB1F0D500DB26C6 /* Copy Settings.bundle Localizations */,
-				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -936,13 +936,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.2.1;
 			};
 			name = "Ad Hoc";
 		};
@@ -973,13 +971,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.2.1;
 			};
 			name = "App Store";
 		};
@@ -1053,14 +1049,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.2.1;
 			};
 			name = Debug;
 		};
@@ -1068,13 +1062,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.2.1;
 			};
 			name = Release;
 		};
