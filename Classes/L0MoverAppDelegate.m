@@ -48,6 +48,8 @@ enum {
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application;
 {
+	self.tableHostController.cacheViewsDuringFlip = YES;
+	
 	// Registering item subclasses.
 	[L0ImageItem registerClass];
 	[L0AddressBookPersonItem registerClass];
