@@ -20,6 +20,7 @@
 
 - (IBAction) showAboutCopyrightWebPane;
 - (IBAction) openInfiniteLabsDotNet;
+- (IBAction) emailAFriend;
 
 @end
 

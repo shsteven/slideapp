@@ -60,6 +60,22 @@
 	[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net/"]];
 }
 
+- (IBAction) emailAFriend;
+{
+	NSString* mailMessage = NSLocalizedString(@"Check out this iPhone app, Mover: http://infinite-labs.net/mover/ -- also on App Store: http://infinite-labs.net/mover/download",
+											  @"Contents of 'Email a Friend' message");
+	NSString* mailSubject = NSLocalizedString(@"Check out this iPhone app, Mover",
+											  @"Subject of 'Email a Friend' message");
+	
+	NSString* mailURLString = [NSString stringWithFormat:@"mailto:?body=%@&subject=%@",
+							   [mailMessage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+							   [mailSubject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	L0Log(@"Will e-mail with URL: %@", mailURLString);
+	[UIApp openURL:[NSURL URLWithString:mailURLString]];
+	
+	
+}
+
 @end
 
 @implementation L0SlideAboutCopyrightWebPane
