@@ -7,6 +7,7 @@
 //
 
 #import "L0MoverBookmarksAccountPane.h"
+#import "L0MoverBookmarksAccountLoginPane.h"
 
 enum {
 	kL0MoverDoNotSaveSection = 0,
@@ -97,6 +98,12 @@ enum {
 			NSAssert(NO, @"Unknown section requested.");
 			return nil;
 	}
+}
+
+- (void) tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*) indexPath;
+{
+	L0MoverBookmarksAccountLoginPane* login = [[[L0MoverBookmarksAccountLoginPane alloc] initWithDefaultStyle] autorelease];
+	[self.navigationController pushViewController:login animated:YES];
 }
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000

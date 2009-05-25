@@ -67,6 +67,7 @@
 		15C0C16D0F75918800E5BA2F /* L0MoverItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C16C0F75918800E5BA2F /* L0MoverItemView.m */; };
 		15C0C1720F75938F00E5BA2F /* L0MoverItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1710F75938F00E5BA2F /* L0MoverItem.m */; };
 		15C0C1CE0F759B8700E5BA2F /* L0ImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */; };
+		15C595CC0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C595CB0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m */; };
 		15E054E60F8CEFC400506C27 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E054E50F8CEFC400506C27 /* QuartzCore.framework */; };
 		15E415140FB9882F0065E831 /* L0BookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E415130FB9882F0065E831 /* L0BookmarkItem.m */; };
 		15E714460FBD92FE0037C439 /* L0MoverItemAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E714450FBD92FE0037C439 /* L0MoverItemAction.m */; };
@@ -261,6 +262,8 @@
 		15C0C1710F75938F00E5BA2F /* L0MoverItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverItem.m; sourceTree = "<group>"; };
 		15C0C1CC0F759B8700E5BA2F /* L0ImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0ImageItem.h; sourceTree = "<group>"; };
 		15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0ImageItem.m; sourceTree = "<group>"; };
+		15C595CA0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverBookmarksAccountLoginPane.h; sourceTree = "<group>"; };
+		15C595CB0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverBookmarksAccountLoginPane.m; sourceTree = "<group>"; };
 		15C5E9E80F86103000236370 /* Mover.todo */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 4; path = Mover.todo; sourceTree = "<group>"; };
 		15D1C56F0F889D7000FF3016 /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
 		15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Release.xcconfig"; sourceTree = "<group>"; };
@@ -471,6 +474,8 @@
 				1557E66E0FC556AB00DC6B58 /* L0BookmarkItemUI.m */,
 				15390A4D0FC9277000222925 /* L0MoverBookmarksAccountPane.h */,
 				15390A4E0FC9277000222925 /* L0MoverBookmarksAccountPane.m */,
+				15C595CA0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.h */,
+				15C595CB0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m */,
 			);
 			name = "Bookmarks UI";
 			sourceTree = "<group>";
@@ -888,6 +893,7 @@
 				1557E66F0FC556AB00DC6B58 /* L0BookmarkItemUI.m in Sources */,
 				15FC3EC40FC6BE6D004470BA /* SFHFKeychainUtils.m in Sources */,
 				15390A500FC9277000222925 /* L0MoverBookmarksAccountPane.m in Sources */,
+				15C595CC0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
