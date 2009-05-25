@@ -7,6 +7,7 @@
 //
 
 #import "L0MoverAboutPane.h"
+#import "L0MoverBookmarksAccountPane.h"
 
 @implementation L0MoverAboutPane
 
@@ -74,6 +75,12 @@
 	[UIApp openURL:[NSURL URLWithString:mailURLString]];
 	
 	
+}
+
+- (IBAction) showBookmarksAccountPane;
+{
+	L0MoverBookmarksAccountPane* pane = [[[L0MoverBookmarksAccountPane alloc] initWithDefaultNibName] autorelease];
+	[self.navigationController pushViewController:pane animated:YES];
 }
 
 @end
