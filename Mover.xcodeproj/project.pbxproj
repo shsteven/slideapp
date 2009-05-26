@@ -51,6 +51,8 @@
 		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
+		15A244FB0FCBFF8A0034C943 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15A244EF0FCBFF8A0034C943 /* ja.lproj */; };
+		15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15A245080FCBFF9F0034C943 /* ja.lproj */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
 		15B7BF6D0F9C778E00EF9AB9 /* libLogging-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */; };
 		15B929350F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B929340F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m */; };
@@ -168,6 +170,7 @@
 			dstPath = Settings.bundle;
 			dstSubfolderSpec = 7;
 			files = (
+				15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */,
 				15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */,
 				15250B1C0FC692BD0073E5C7 /* nl.lproj in Copy Settings.bundle Localizations */,
 				154FB79A0FB1F18300DB26C6 /* fr.lproj in Copy Settings.bundle Localizations */,
@@ -239,6 +242,8 @@
 		15911E790F8FA2F900BECD18 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		159120810F8FD04B00BECD18 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/L0MoverAboutPane.xib; sourceTree = "<group>"; };
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		15A244EF0FCBFF8A0034C943 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
+		15A245080FCBFF9F0034C943 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logging.xcodeproj; path = Logging/Logging.xcodeproj; sourceTree = INFINITELABS_TOOLS; };
@@ -397,6 +402,7 @@
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
 			isa = PBXGroup;
 			children = (
+				15A244EF0FCBFF8A0034C943 /* ja.lproj */,
 				15250B3E0FC694570073E5C7 /* de.lproj */,
 				15250B1F0FC692C70073E5C7 /* nl.lproj */,
 				154FB7900FB1F16000DB26C6 /* fr.lproj */,
@@ -424,6 +430,7 @@
 		15729E260FB09BC200CD1310 /* Compiled Settings Locales */ = {
 			isa = PBXGroup;
 			children = (
+				15A245080FCBFF9F0034C943 /* ja.lproj */,
 				15250B4B0FC6946E0073E5C7 /* de.lproj */,
 				15250B180FC692BA0073E5C7 /* nl.lproj */,
 				154FB7680FB1F06D00DB26C6 /* fr.lproj */,
@@ -784,7 +791,7 @@
 				154FB7950FB1F16400DB26C6 /* it.lproj in Resources */,
 				154FB7960FB1F16400DB26C6 /* ru.lproj in Resources */,
 				154FB7970FB1F16400DB26C6 /* sv.lproj in Resources */,
-				1572DE8E0F82BE8B006BEEC0 /* MuiKit.bundle in Resources */,
+				15A244FB0FCBFF8A0034C943 /* ja.lproj in Resources */,
 				15E7FDED0FADC37900E9C438 /* MainWindow.xib in Resources */,
 				15E7FDF10FADC37A00E9C438 /* L0MoverItemView.xib in Resources */,
 				15C0C16A0F75910000E5BA2F /* frame.png in Resources */,
@@ -792,6 +799,7 @@
 				15F67E110F76262F0024A858 /* BLIP.png in Resources */,
 				15E7FDEF0FADC37A00E9C438 /* L0MoverItemsTable.xib in Resources */,
 				15F67FD60F7689F80024A858 /* ItemsTableBackdrop.png in Resources */,
+				1572DE8E0F82BE8B006BEEC0 /* MuiKit.bundle in Resources */,
 				15F67FDA0F768A800024A858 /* TableArrow_East.png in Resources */,
 				15F67FDB0F768A800024A858 /* TableArrow_North.png in Resources */,
 				15F67FDC0F768A800024A858 /* TableArrow_West.png in Resources */,
