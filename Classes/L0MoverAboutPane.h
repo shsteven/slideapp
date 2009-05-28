@@ -22,8 +22,6 @@
 - (IBAction) openInfiniteLabsDotNet;
 - (IBAction) emailAFriend;
 
-- (IBAction) showBookmarksAccountPane;
-
 @end
 
 @interface L0SlideAboutCopyrightWebPane : UIViewController <UIWebViewDelegate> {

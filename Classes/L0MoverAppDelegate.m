@@ -12,7 +12,6 @@
 #import "L0MoverItemUI.h"
 #import "L0MoverImageItemUI.h"
 #import "L0MoverAddressBookItemUI.h"
-#import "L0BookmarkItemUI.h"
 #import "L0MoverItemAction.h"
 
 #import "L0ImageItem.h"
@@ -20,8 +19,6 @@
 #import "L0BonjourPeeringService.h"
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
-
-#import "L0BookmarkItem.h"
 
 #import <netinet/in.h>
 
@@ -53,12 +50,10 @@ enum {
 	// Registering item subclasses.
 	[L0ImageItem registerClass];
 	[L0AddressBookPersonItem registerClass];
-	[L0BookmarkItem registerClass];
 	
 	// Registering UIs.
 	[L0MoverImageItemUI registerClass];
 	[L0MoverAddressBookItemUI registerClass];
-	[L0BookmarkItemUI registerClass];
 	
 	// Starting up peering services.
 	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];
@@ -98,33 +93,6 @@ enum {
 
 #pragma mark -
 #pragma mark Bookmark items
-
-- (BOOL) application:(UIApplication*) application handleOpenURL:(NSURL*) url;
-{
-	NSString* scheme = [url scheme];
-	if (![scheme isEqual:@"x-infinitelabs-mover"])
-		return NO;
-	
-	if (![[url resourceSpecifier] hasPrefix:@"add?"])
-		return NO;
-	
-	NSDictionary* query = [url dictionaryByDecodingQueryString];
-	NSString* urlString, * title;
-	if (!(urlString = [query objectForKey:@"url"]))
-		return NO;
-	if (!(title = [query objectForKey:@"title"]))
-		title = urlString;
-	
-	if (![urlString hasPrefix:@"http://"] && ![urlString hasPrefix:@"https://"])
-		return NO;
-	
-	NSURL* bookmarkedURL = [NSURL URLWithString:urlString];
-	if (!bookmarkedURL)
-		return NO;
-	L0BookmarkItem* item = [[[L0BookmarkItem alloc] initWithAddress:bookmarkedURL title:title] autorelease];
-	[self performSelector:@selector(addItemToTableAndSave:) withObject:item afterDelay:0.7];
-	return YES;
-}
 
 - (void) addItemToTableAndSave:(L0MoverItem*) item;
 {
