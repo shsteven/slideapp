@@ -62,7 +62,7 @@
 
 - (IBAction) emailAFriend;
 {
-	NSString* mailMessage = NSLocalizedString(@"Check out this iPhone app, Mover: http://infinite-labs.net/mover/ -- also on App Store: http://infinite-labs.net/mover/download",
+	NSString* mailMessage = NSLocalizedString(@"Mover is an app that allows you to share files with other iPhones near you, with style: http://infinite-labs.net/mover/ -- also on App Store: http://infinite-labs.net/mover/download",
 											  @"Contents of 'Email a Friend' message");
 	NSString* mailSubject = NSLocalizedString(@"Check out this iPhone app, Mover",
 											  @"Subject of 'Email a Friend' message");

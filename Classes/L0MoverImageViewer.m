@@ -7,6 +7,7 @@
 //
 
 #import "L0MoverImageViewer.h"
+#import <MuiKit/MuiKit.h>
 
 @interface L0MoverImageViewer ()
 - (void) clearOutlets;
@@ -38,15 +39,28 @@
 {
     [super viewDidLoad];
 	self.imageView.image = self.image;
+	self.scrollView.scrollsToTop = NO;
+	self.scrollView.clipsToBounds = YES;
+	self.scrollView.minimumZoomScale = 1.0;
+	self.scrollView.maximumZoomScale = 3.0;
 }
 
 - (void) viewWillAppear:(BOOL) ani;
 {
 	[super viewWillAppear:ani];
-	self.imageView.frame = self.imageView.superview.bounds;
-	self.scrollView.contentSize = self.imageView.frame.size;
-	self.scrollView.minimumZoomScale = 1.0;
-	self.scrollView.maximumZoomScale = 2.5;
+
+	CGRect bounds = self.scrollView.bounds;
+	CGSize imageSize = L0SizeFromSizeNotLargerThan(self.image.size, bounds.size);
+	
+//	CGFloat verticalInset = (bounds.size.height - imageSize.height) / 2;
+//	CGFloat horizontalInset = (bounds.size.width - imageSize.width) / 2;
+
+	self.imageView.frame = bounds;
+
+	self.scrollView.contentSize = imageSize;
+//	self.scrollView.contentInset = UIEdgeInsetsMake(-verticalInset, -horizontalInset, -verticalInset, -horizontalInset);
+
+	
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 	[self.scrollView setZoomScale:1.0 animated:NO];
 #endif
