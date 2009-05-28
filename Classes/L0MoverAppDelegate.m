@@ -375,6 +375,11 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	return mainAction != nil;
 }
 
+- (void) finishPerformingMainAction;
+{
+	[self.tableController unhighlightAllItems];
+}
+
 #define kL0MoverItemMenuSheetRemoveIdentifier @"kL0MoverItemMenuSheetRemoveIdentifier"
 #define kL0MoverItemMenuSheetCancelIdentifier @"kL0MoverItemMenuSheetCancelIdentifier"
 #define kL0MoverItemKey @"L0MoverItem"

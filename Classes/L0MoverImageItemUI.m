@@ -31,7 +31,7 @@
 - (void) showOrOpenItem:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
 {
 	L0ImageItem* item = (L0ImageItem*) i;
-	L0MoverImageViewer* viewer = [[[L0MoverImageViewer alloc] initWithImage:item.image] autorelease];
+	L0MoverImageViewer* viewer = [[[L0MoverImageViewer alloc] initWithImage:item.image dismissDelegate:UIApp.delegate selector:@selector(finishPerformingMainAction)] autorelease];
 	UINavigationController* controller = [[[UINavigationController alloc] initWithRootViewController:viewer] autorelease];	
 	controller.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 

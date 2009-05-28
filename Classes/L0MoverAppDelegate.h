@@ -58,6 +58,8 @@
 - (void) beginShowingActionMenuForItem:(L0MoverItem*) i includeRemove:(BOOL) r;
 - (BOOL) performMainActionForItem:(L0MoverItem*) i;
 
+- (void) finishPerformingMainAction;
+
 @end
 
 #if L0MoverAppDelegateAllowFriendMethods

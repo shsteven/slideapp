@@ -59,7 +59,7 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 	
 	NSMutableSet* viewsBeingHeld;
 	
-	BOOL hasBegunShowingActionMenu;
+	BOOL isHoldingOntoHighlight;
 }
 
 - (id) initWithDefaultNibName;
@@ -95,5 +95,6 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 - (void) returnItemToTableAfterSend:(L0MoverItem*) item toPeer:(L0MoverPeer*) peer;
 
 - (void) finishedShowingActionMenuForItem:(L0MoverItem*) item;
+- (void) unhighlightAllItems;
 
 @end

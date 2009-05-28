@@ -16,11 +16,14 @@
 
 @implementation L0MoverImageViewer
 
-- (id) initWithImage:(UIImage*) i;
+- (id) initWithImage:(UIImage*) i dismissDelegate:(id) d selector:(SEL) s;
 {
 	if (self = [super initWithNibName:@"L0MoverImageViewer" bundle:nil]) {
 		self.image = i;
 		self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismiss)] autorelease];
+		
+		delegate = d;
+		selector = s;
 	}
 	
 	return self;
@@ -93,6 +96,7 @@
 		hasBarStyle = NO;
 	}
 
+	[delegate performSelector:selector];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
