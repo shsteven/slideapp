@@ -138,6 +138,7 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
+						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIView" id="426909355">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -213,21 +214,6 @@
 							<string key="NSResourceName">About.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="792592445">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{297, 226}, {10, 15}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<string key="IBUIContentStretch">{{0, 0}, {0, 0}}</string>
-						<object class="NSCustomResource" key="IBUIImage" id="218625920">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">AboutPaneDisclosureIndicator.png</string>
-						</object>
-					</object>
 					<object class="IBUIImageView" id="366369148">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">256</int>
@@ -238,7 +224,10 @@
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="IBUIContentStretch">{{0, 0}, {0, 0}}</string>
-						<reference key="IBUIImage" ref="218625920"/>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">AboutPaneDisclosureIndicator.png</string>
+						</object>
 					</object>
 					<object class="IBUIButton" id="101615155">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -398,7 +387,6 @@
 							<reference ref="240573141"/>
 							<reference ref="745145114"/>
 							<reference ref="245135665"/>
-							<reference ref="792592445"/>
 							<reference ref="366369148"/>
 							<reference ref="101615155"/>
 							<reference ref="372908887"/>
@@ -489,11 +477,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">27</int>
 						<reference key="object" ref="240573141"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">33</int>
-						<reference key="object" ref="792592445"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
