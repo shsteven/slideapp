@@ -1,3 +1,3 @@
-﻿"Dismiss" = "了解";
-"Welcome to Mover! To start, add a few items to the table by touching \U201c+\U201d, then slide them off to nearby iPhones and iPods." = "Moverへようこそ! 開始するには、\U201c+\U201dをタッチし、いくつかのアイテムを追加してから近くのiPhoneやiPodまでスライドしてください。";
-"To see nearby devices, make sure they're all connected to the same Wi-Fi network as this one." = "近くのデバイスを表示するには、全てのデバイスを同じWi-Fiネットワークに接続する必要があります。";
+"Welcome to Mover! To start, add a few items to the table by touching \U201c+\U201d, then slide them off to nearby iPhones and iPods." = "Mover\U3078\U3088\U3046\U3053\U305d! \U958b\U59cb\U3059\U308b\U306b\U306f\U3001\U201c+\U201d\U3092\U30bf\U30c3\U30c1\U3057\U3001\U3044\U304f\U3064\U304b\U306e\U30a2\U30a4\U30c6\U30e0\U3092\U8ffd\U52a0\U3057\U3066\U304b\U3089\U8fd1\U304f\U306eiPhone\U3084iPod\U307e\U3067\U30b9\U30e9\U30a4\U30c9\U3057\U3066\U304f\U3060\U3055\U3044\U3002";
+"Dismiss" = "\U4e86\U89e3";
+"To see nearby devices, make sure they're all connected to the same Wi-Fi network as this one." = "\U8fd1\U304f\U306e\U30c7\U30d0\U30a4\U30b9\U3092\U8868\U793a\U3059\U308b\U306b\U306f\U3001\U5168\U3066\U306e\U30c7\U30d0\U30a4\U30b9\U3092\U540c\U3058Wi-Fi\U30cd\U30c3\U30c8\U30ef\U30fc\U30af\U306b\U63a5\U7d9a\U3059\U308b\U5fc5\U8981\U304c\U3042\U308a\U307e\U3059\U3002";

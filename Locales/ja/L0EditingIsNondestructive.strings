@@ -1,3 +1,3 @@
-﻿"Dismiss" = "了解";
-"Items you received are saved to their respective applications, and removing them from the table will not delete them from Photos or Contacts." = "受信したアイテムがそれぞれのアプリケーションに保存されるので、データ送受台から消しても「写真」や「連絡先」から削除されません。";
-"You can remove items from Mover's table. They won't be deleted." = "Moverのデータ送受台からアイテムを取り除いてもアプリケーションから削除されません。";
+"You can remove items from Mover's table. They won't be deleted." = "Mover\U306e\U30c7\U30fc\U30bf\U9001\U53d7\U53f0\U304b\U3089\U30a2\U30a4\U30c6\U30e0\U3092\U53d6\U308a\U9664\U3044\U3066\U3082\U30a2\U30d7\U30ea\U30b1\U30fc\U30b7\U30e7\U30f3\U304b\U3089\U524a\U9664\U3055\U308c\U307e\U305b\U3093\U3002";
+"Dismiss" = "\U4e86\U89e3";
+"Items you received are saved to their respective applications, and removing them from the table will not delete them from Photos or Contacts." = "\U53d7\U4fe1\U3057\U305f\U30a2\U30a4\U30c6\U30e0\U304c\U305d\U308c\U305e\U308c\U306e\U30a2\U30d7\U30ea\U30b1\U30fc\U30b7\U30e7\U30f3\U306b\U4fdd\U5b58\U3055\U308c\U308b\U306e\U3067\U3001\U30c7\U30fc\U30bf\U9001\U53d7\U53f0\U304b\U3089\U6d88\U3057\U3066\U3082\U300c\U5199\U771f\U300d\U3084\U300c\U9023\U7d61\U5148\U300d\U304b\U3089\U524a\U9664\U3055\U308c\U307e\U305b\U3093\U3002";
