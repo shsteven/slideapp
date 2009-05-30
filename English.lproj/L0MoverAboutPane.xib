@@ -128,7 +128,7 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">E-mail a Friend about Mover</string>
+						<string key="IBUIText">Tell a Friend about Mover</string>
 						<reference key="IBUIFont" ref="140666608"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>

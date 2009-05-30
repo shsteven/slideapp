@@ -52,6 +52,8 @@
 - (void) checkNetwork;
 - (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
 
+- (void) tellAFriend;
+
 @property(retain) IBOutlet UIView* networkUnavailableView;
 @property(readonly, getter=isNetworkAvailable) BOOL networkAvailable;
 
