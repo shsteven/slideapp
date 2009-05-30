@@ -8,6 +8,7 @@
 
 #import "L0MoverAboutPane.h"
 #import "L0MoverBookmarksAccountPane.h"
+#import "L0MoverAppDelegate.h"
 
 @implementation L0MoverAboutPane
 
@@ -62,19 +63,8 @@
 }
 
 - (IBAction) emailAFriend;
-{
-	NSString* mailMessage = NSLocalizedString(@"Check out this iPhone app, Mover: http://infinite-labs.net/mover/ -- also on App Store: http://infinite-labs.net/mover/download",
-											  @"Contents of 'Email a Friend' message");
-	NSString* mailSubject = NSLocalizedString(@"Check out this iPhone app, Mover",
-											  @"Subject of 'Email a Friend' message");
-	
-	NSString* mailURLString = [NSString stringWithFormat:@"mailto:?body=%@&subject=%@",
-							   [mailMessage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-							   [mailSubject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-	L0Log(@"Will e-mail with URL: %@", mailURLString);
-	[UIApp openURL:[NSURL URLWithString:mailURLString]];
-	
-	
+{	
+	[(L0MoverAppDelegate*)UIApp.delegate tellAFriend];
 }
 
 - (IBAction) showBookmarksAccountPane;

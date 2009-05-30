@@ -17,6 +17,11 @@
 	[[UIAlertView alertNamed:@"L0MoverWelcome"] performSelector:@selector(show) withObject:nil afterDelay:1.0];
 }
 
+- (void) testTellAFriendAlert;
+{
+	[[UIAlertView alertNamed:@"L0MoverTellAFriend"] performSelector:@selector(show) withObject:nil afterDelay:1.0];	
+}
+
 - (void) testContactTutorialAlert;
 {
 	[[UIAlertView alertNamed:@"L0ContactReceived"] performSelector:@selector(show) withObject:nil afterDelay:1.0];
@@ -34,7 +39,7 @@
 
 - (void) testNewVersionAlert;
 {
-	[self performSelector:@selector(displayNewVersionAlertWithVersion:) withObject:@"2.5" afterDelay:1.0];
+	[self performSelector:@selector(displayNewVersionAlertWithVersion:) withObject:@"99.9" afterDelay:1.0];
 }
 
 - (void) testNetworkBecomingUnavailable; // WARNING: Disables network watching, use with care.
@@ -69,8 +74,9 @@
 	[self performSelector:@selector(testImageTutorialAlert) withObject:nil afterDelay:10.0];
 	[self performSelector:@selector(testImageTutorialAlert_iPod) withObject:nil afterDelay:15.0];
 	[self performSelector:@selector(testNewVersionAlert) withObject:nil afterDelay:20.0];
-	[self performSelector:@selector(testNetworkBecomingUnavailable) withObject:nil afterDelay:25.0];
-	[self performSelector:@selector(testNetworkBecomingAvailable) withObject:nil afterDelay:30.0];
+	[self performSelector:@selector(testTellAFriendAlert) withObject:nil afterDelay:25.0];
+	[self performSelector:@selector(testNetworkBecomingUnavailable) withObject:nil afterDelay:30.0];
+	[self performSelector:@selector(testNetworkBecomingAvailable) withObject:nil afterDelay:35.0];
 }
 
 - (void) beginTestingModeBannerAnimation;

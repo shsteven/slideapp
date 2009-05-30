@@ -1,9 +1,4 @@
-﻿
-/* Class = "IBUILabel"; text = "version %@\n© Emanuele Vulcano, 2009. All rights reserved."; ObjectID = "6"; */
-"6.text" = "version %@\n© Emanuele Vulcano, 2009. Alla rättigheter förbehålls.";
-
-/* Class = "IBUILabel"; text = "Licenses & Copyright"; ObjectID = "9"; */
 "9.text" = "Licenser & Copyright";
-
-/* Class = "IBUINavigationItem"; title = "Licenses & Copyright"; ObjectID = "20"; */
+"6.text" = "version %@\n\U00a9 Emanuele Vulcano, 2009. Alla r\U00e4ttigheter f\U00f6rbeh\U00e5lls.";
 "20.title" = "Licenser & Copyright";
+"26.text" = "Tell a Friend about Mover";

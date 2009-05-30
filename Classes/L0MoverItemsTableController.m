@@ -457,7 +457,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 			itemView.highlighted = YES;	
 	}
 	
-	[self unhighlight:itemView];
+	isHoldingOntoHighlight = YES;
 }
 
 - (void) draggableViewDidBeginDragging:(L0DraggableView*) view;
@@ -484,9 +484,19 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	[v setHighlighted:YES animated:YES animationDuration:0.35];
 }
 
+- (void) unhighlightAllItems;
+{
+	isHoldingOntoHighlight = NO;
+	
+	for (L0MoverItem* item in (NSDictionary*) itemsToViews) {
+		L0MoverItemView* view = (L0MoverItemView*) CFDictionaryGetValue(itemsToViews, item);
+		[self unhighlight:view];
+	}
+}
+
 - (void) unhighlight:(L0MoverItemView*) v;
 {
-	if (hasBegunShowingActionMenu)
+	if (isHoldingOntoHighlight)
 		return;
 	
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(performHighlight:) object:v];
@@ -502,7 +512,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		L0Log(@"Showing action menu.");
 		L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) [UIApp delegate];
 		[delegate beginShowingActionMenuForItem:((L0MoverItemView*)view).item includeRemove:YES];
-		hasBegunShowingActionMenu = YES;
+		isHoldingOntoHighlight = YES;
 		return NO;
 	}
 }
@@ -511,7 +521,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 {
 	L0MoverItemView* v = (L0MoverItemView*) CFDictionaryGetValue(itemsToViews, item);
 	[v setHighlighted:NO animated:YES animationDuration:0.3];
-	hasBegunShowingActionMenu = NO;
+	isHoldingOntoHighlight = NO;
 }
 
 

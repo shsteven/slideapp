@@ -1,12 +1,11 @@
-﻿/* Add item - contact button */
-"Add Contact" = "Lägg till kontakt";
-
-/* Add item - image button */
-"Add Image" = "Lägg till bild";
-
-/* Add item - cancel button */
-"Cancel" = "Avbryt";
-
-/* Add item - take a photo button */
+"Mover is an app that allows you to share files with other iPhones near you, with style. Download it at http://infinite-labs.net/mover/download or see it in action at http://infinite-labs.net/mover/" = "Mover is an app that allows you to share files with other iPhones near you, with style. Download it at http://infinite-labs.net/mover/download or see it in action at http://infinite-labs.net/mover/";
+"Open" = "\U958b\U304f";
+"Check out this iPhone app, Mover" = "Check out this iPhone app, Mover";
+"Add Contact" = "L\U00e4gg till kontakt";
+"Show" = "\U8868\U793a";
+"Delete" = "\U524a\U9664";
+"Add Image" = "L\U00e4gg till bild";
 "Take a Photo" = "Ta bild";
-
+"Cancel" = "Avbryt";
+"Remove from Table" = "\U30c7\U30fc\U30bf\U9001\U53d7\U53f0\U304b\U3089\U53d6\U308a\U9664\U304f";
+"Save Again" = "\U518d\U4fdd\U5b58";

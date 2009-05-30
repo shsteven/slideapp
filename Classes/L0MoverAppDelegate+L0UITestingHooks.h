@@ -18,6 +18,7 @@
 
 - (void) testWelcomeAlert;
 - (void) testContactTutorialAlert;
+- (void) testTellAFriendAlert;
 - (void) testImageTutorialAlert;
 - (void) testImageTutorialAlert_iPod;
 - (void) testNewVersionAlert;

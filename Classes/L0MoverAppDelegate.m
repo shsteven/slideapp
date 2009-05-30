@@ -30,9 +30,11 @@ enum {
 	kL0MoverNewVersionAlertTag = 1000,
 	kL0MoverAddSheetTag,
 	kL0MoverItemMenuSheetTag,
+	kL0MoverTellAFriendAlertTag,
 };
 
 #define kL0MoverLastSeenVersionKey @"L0MoverLastSeenVersion"
+#define kL0MoverTellAFriendWasShownKey @"L0MoverTellAFriendWasShown"
 
 @interface L0MoverAppDelegate ()
 
@@ -93,7 +95,41 @@ enum {
 	networkUnavailableViewStartingPosition = self.networkUnavailableView.center;
 	self.networkUnavailableView.hidden = YES;
 	networkAvailable = YES;
-	[self beginWatchingNetwork];	
+	[self beginWatchingNetwork];
+	
+	// Make sure Tell a Friend is shown if needed.
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:kL0MoverTellAFriendWasShownKey]) {
+		[self performSelector:@selector(proposeTellingAFriend) withObject:nil afterDelay:10.0];
+	}
+}
+
+#pragma mark -
+#pragma mark Tell a Friend
+
+- (void) proposeTellingAFriend;
+{
+	BOOL hasPeers = self.tableController.northPeer || self.tableController.eastPeer || self.tableController.westPeer;
+	if (self.networkAvailable && !hasPeers) {
+		UIAlertView* a = [UIAlertView alertNamed:@"L0MoverTellAFriend"];
+		a.delegate = self;
+		a.tag = kL0MoverTellAFriendAlertTag;
+		[a show];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kL0MoverTellAFriendWasShownKey];
+	}
+}
+
+- (void) tellAFriend;
+{
+	NSString* mailMessage = NSLocalizedString(@"Mover is an app that allows you to share files with other iPhones near you, with style. Download it at http://infinite-labs.net/mover/download or see it in action at http://infinite-labs.net/mover/",
+											  @"Contents of 'Email a Friend' message");
+	NSString* mailSubject = NSLocalizedString(@"Check out this iPhone app, Mover",
+											  @"Subject of 'Email a Friend' message");
+	
+	NSString* mailURLString = [NSString stringWithFormat:@"mailto:?body=%@&subject=%@",
+							   [mailMessage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+							   [mailSubject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	L0Log(@"Will e-mail with URL: %@", mailURLString);
+	[UIApp openURL:[NSURL URLWithString:mailURLString]];
 }
 
 #pragma mark -
@@ -340,6 +376,12 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 			[UIApp openURL:[NSURL URLWithString:appStoreURLString]];
 			return;
 		}
+			
+		case kL0MoverTellAFriendAlertTag: {
+			if (buttonIndex == 0)
+				[self tellAFriend];
+			return;
+		}
 	}
 }
 
@@ -405,6 +447,11 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	L0MoverItemAction* mainAction = [[L0MoverItemUI UIForItem:i] mainActionForItem:i];
 	[mainAction performOnItem:i];
 	return mainAction != nil;
+}
+
+- (void) finishPerformingMainAction;
+{
+	[self.tableController unhighlightAllItems];
 }
 
 #define kL0MoverItemMenuSheetRemoveIdentifier @"kL0MoverItemMenuSheetRemoveIdentifier"

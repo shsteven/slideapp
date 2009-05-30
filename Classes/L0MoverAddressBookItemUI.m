@@ -50,6 +50,7 @@
 - (void) dismiss;
 {
 	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	[delegate finishPerformingMainAction];
 	[delegate.tableHostController dismissModalViewControllerAnimated:YES];
 }
 

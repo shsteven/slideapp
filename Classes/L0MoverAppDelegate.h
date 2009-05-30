@@ -52,11 +52,15 @@
 - (void) checkNetwork;
 - (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
 
+- (void) tellAFriend;
+
 @property(retain) IBOutlet UIView* networkUnavailableView;
 @property(readonly, getter=isNetworkAvailable) BOOL networkAvailable;
 
 - (void) beginShowingActionMenuForItem:(L0MoverItem*) i includeRemove:(BOOL) r;
 - (BOOL) performMainActionForItem:(L0MoverItem*) i;
+
+- (void) finishPerformingMainAction;
 
 @end
 

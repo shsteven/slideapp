@@ -32,6 +32,9 @@
 		self.opaque = NO;
 		self.editing = NO;
 		self.highlighted = NO;
+		
+		self.maximumSlideDistances = CGSizeMake(350, 150);
+		self.slideSpeedDampeningFactor = 0.6;
 	}
 	
     return self;

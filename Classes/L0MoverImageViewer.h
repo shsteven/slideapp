@@ -16,9 +16,12 @@
 	
 	BOOL hasBarStyle;
 	UIBarStyle lastBarStyle;
+	
+	id delegate;
+	SEL selector;
 }
 
-- (id) initWithImage:(UIImage*) i;
+- (id) initWithImage:(UIImage*) i dismissDelegate:(id) d selector:(SEL) s;
 
 @property(assign) IBOutlet UIImageView* imageView;
 @property(assign) IBOutlet UIScrollView* scrollView;
