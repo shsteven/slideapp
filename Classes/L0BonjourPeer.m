@@ -55,6 +55,11 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 - (void) dealloc;
 {
 	[_service release];
+	for (BLIPConnection* c in (NSDictionary*) _itemsBeingSentByConnection) {
+		[c setDelegate:nil];
+		[c close];
+	}
+	
 	CFRelease(_itemsBeingSentByConnection);
 	
 	[super dealloc];
