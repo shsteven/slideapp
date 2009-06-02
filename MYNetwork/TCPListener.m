@@ -227,7 +227,7 @@ static inline CFSocketRef TCPReleaseSocket( CFSocketRef socket ) {
                                                                       listener: self];
 	
 	// ∞ -- leak prevention
-	[conn release];
+	[conn autorelease];
 	
     if( ! conn )
         return NO;

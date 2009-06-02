@@ -82,9 +82,10 @@
 - (void) beginTestingModeBannerAnimation;
 {
 	static BOOL isInTestingMode = NO;
+	static NSTimer* bannerAnimationTimer = nil; // silences a clang analyzer warning
 	
 	if (!isInTestingMode) {
-		[[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(switchStatusBarColorForTestingModeAnimation:) userInfo:nil repeats:YES] retain];
+		bannerAnimationTimer = [[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(switchStatusBarColorForTestingModeAnimation:) userInfo:nil repeats:YES] retain];
 		isInTestingMode = YES;
 	}
 }
