@@ -207,7 +207,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 			int valueIndex = 0;
 			for (id value in values) {
 				id label = (id) ABMultiValueCopyLabelAtIndex(multi, valueIndex);
-				if (!label) label = [NSNull null];
+				if (!label) label = [[NSNull null] retain]; // balances the release below.
 				NSDictionary* item = [NSDictionary dictionaryWithObjectsAndKeys:
 									  value, kL0AddressBookValue,
 									  label, kL0AddressBookLabel,
