@@ -52,6 +52,8 @@
 		15A244FB0FCBFF8A0034C943 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15A244EF0FCBFF8A0034C943 /* ja.lproj */; };
 		15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15A245080FCBFF9F0034C943 /* ja.lproj */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
+		15B3FB200FD509A200D9C7C5 /* es.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15B3FB1C0FD5099D00D9C7C5 /* es.lproj */; };
+		15B3FB310FD509B200D9C7C5 /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15B3FB240FD509AF00D9C7C5 /* es.lproj */; };
 		15B7BF6D0F9C778E00EF9AB9 /* libLogging-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */; };
 		15B929350F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B929340F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m */; };
 		15B929400F906FA2001E40B7 /* L0MoverWelcome.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15B9293F0F906FA2001E40B7 /* L0MoverWelcome.alert */; };
@@ -167,6 +169,7 @@
 			dstPath = Settings.bundle;
 			dstSubfolderSpec = 7;
 			files = (
+				15B3FB200FD509A200D9C7C5 /* es.lproj in Copy Settings.bundle Localizations */,
 				15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */,
 				15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */,
 				15250B1C0FC692BD0073E5C7 /* nl.lproj in Copy Settings.bundle Localizations */,
@@ -239,6 +242,8 @@
 		15A245080FCBFF9F0034C943 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		15B3FB1C0FD5099D00D9C7C5 /* es.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = es.lproj; sourceTree = "<group>"; };
+		15B3FB240FD509AF00D9C7C5 /* es.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = es.lproj; sourceTree = "<group>"; };
 		15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logging.xcodeproj; path = Logging/Logging.xcodeproj; sourceTree = INFINITELABS_TOOLS; };
 		15B929330F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0HelpAlerts.h"; sourceTree = "<group>"; };
 		15B929340F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0HelpAlerts.m"; sourceTree = "<group>"; };
@@ -393,6 +398,7 @@
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
 			isa = PBXGroup;
 			children = (
+				15B3FB240FD509AF00D9C7C5 /* es.lproj */,
 				15A244EF0FCBFF8A0034C943 /* ja.lproj */,
 				15250B3E0FC694570073E5C7 /* de.lproj */,
 				15250B1F0FC692C70073E5C7 /* nl.lproj */,
@@ -421,6 +427,7 @@
 		15729E260FB09BC200CD1310 /* Compiled Settings Locales */ = {
 			isa = PBXGroup;
 			children = (
+				15B3FB1C0FD5099D00D9C7C5 /* es.lproj */,
 				15A245080FCBFF9F0034C943 /* ja.lproj */,
 				15250B4B0FC6946E0073E5C7 /* de.lproj */,
 				15250B180FC692BA0073E5C7 /* nl.lproj */,
@@ -706,6 +713,7 @@
 				fr,
 				ru,
 				sv,
+				es,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -762,6 +770,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B3FB310FD509B200D9C7C5 /* es.lproj in Resources */,
 				15250B4A0FC6945D0073E5C7 /* de.lproj in Resources */,
 				15250B2B0FC692CA0073E5C7 /* nl.lproj in Resources */,
 				154FB7940FB1F16400DB26C6 /* fr.lproj in Resources */,
