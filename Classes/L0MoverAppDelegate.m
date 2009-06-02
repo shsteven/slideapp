@@ -47,6 +47,8 @@ enum {
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application;
 {
+	L0Log(@"Here we are, starting up Mover with preferred locs = %@\ntaken from all locs = %@. The weather is a little cloudy but good and the device's preferred locs are = %@", [[NSBundle mainBundle] preferredLocalizations], [[NSBundle mainBundle] localizations], [NSLocale preferredLanguages]);
+	
 	self.tableHostController.cacheViewsDuringFlip = YES;
 	
 	// Registering item subclasses.
