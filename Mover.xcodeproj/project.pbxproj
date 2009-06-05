@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15080B800FD8FD9A0065D5AC /* CalloutBubble_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 15080B7E0FD8FD9A0065D5AC /* CalloutBubble_Highlighted.png */; };
+		15080B810FD8FD9A0065D5AC /* CalloutBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 15080B7F0FD8FD9A0065D5AC /* CalloutBubble.png */; };
+		15080B850FD901BB0065D5AC /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15080B840FD901BB0065D5AC /* NetworkToolbarIcon.png */; };
+		15080B8A0FD901FE0065D5AC /* L0MoverNetworkCalloutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15080B890FD901FE0065D5AC /* L0MoverNetworkCalloutController.m */; };
 		150A4D770FA39D5D006B9BB4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */; };
 		1510C46D0FBED26A003849A6 /* ActionButton_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */; };
 		1510C46E0FBED26A003849A6 /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1510C46C0FBED26A003849A6 /* ActionButton.png */; };
@@ -185,6 +189,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		15080B7E0FD8FD9A0065D5AC /* CalloutBubble_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalloutBubble_Highlighted.png; sourceTree = "<group>"; };
+		15080B7F0FD8FD9A0065D5AC /* CalloutBubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalloutBubble.png; sourceTree = "<group>"; };
+		15080B840FD901BB0065D5AC /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
+		15080B880FD901FE0065D5AC /* L0MoverNetworkCalloutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverNetworkCalloutController.h; sourceTree = "<group>"; };
+		15080B890FD901FE0065D5AC /* L0MoverNetworkCalloutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverNetworkCalloutController.m; sourceTree = "<group>"; };
 		150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton_Pressed.png; sourceTree = "<group>"; };
 		1510C46C0FBED26A003849A6 /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton.png; sourceTree = "<group>"; };
@@ -380,6 +389,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				15080B870FD901E00065D5AC /* Network Callout */,
 				1559B5B20F79843F005E4362 /* Peering */,
 				15C0C1CB0F759B7500E5BA2F /* Items */,
 				15E714410FBD92700037C439 /* Items UI */,
@@ -399,6 +409,15 @@
 				15B929FD0F907BD9001E40B7 /* L0MoverAboutPane.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		15080B870FD901E00065D5AC /* Network Callout */ = {
+			isa = PBXGroup;
+			children = (
+				15080B880FD901FE0065D5AC /* L0MoverNetworkCalloutController.h */,
+				15080B890FD901FE0065D5AC /* L0MoverNetworkCalloutController.m */,
+			);
+			name = "Network Callout";
 			sourceTree = "<group>";
 		};
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
@@ -666,6 +685,9 @@
 				15B929DD0F907B6C001E40B7 /* inflabs.png */,
 				1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */,
 				1510C46C0FBED26A003849A6 /* ActionButton.png */,
+				15080B840FD901BB0065D5AC /* NetworkToolbarIcon.png */,
+				15080B7E0FD8FD9A0065D5AC /* CalloutBubble_Highlighted.png */,
+				15080B7F0FD8FD9A0065D5AC /* CalloutBubble.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				1582D9280F9086910084EBC6 /* LicensesAndCopyrightPage */,
 				15AF0FEF0FA46B8B0047634C /* Settings.bundle */,
@@ -835,6 +857,9 @@
 				15390A5B0FC92D3E00222925 /* Delicious.png in Resources */,
 				15390A5D0FC92D4500222925 /* Instapaper.png in Resources */,
 				157CAF920FD16B18003E35C3 /* L0MoverTellAFriend.alert in Resources */,
+				15080B800FD8FD9A0065D5AC /* CalloutBubble_Highlighted.png in Resources */,
+				15080B810FD8FD9A0065D5AC /* CalloutBubble.png in Resources */,
+				15080B850FD901BB0065D5AC /* NetworkToolbarIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -906,6 +931,7 @@
 				15FC3EC40FC6BE6D004470BA /* SFHFKeychainUtils.m in Sources */,
 				15390A500FC9277000222925 /* L0MoverBookmarksAccountPane.m in Sources */,
 				15C595CC0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m in Sources */,
+				15080B8A0FD901FE0065D5AC /* L0MoverNetworkCalloutController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

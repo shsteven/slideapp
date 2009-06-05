@@ -397,12 +397,15 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 @synthesize window, toolbar;
 @synthesize tableController, tableHostView, tableHostController;
 
+@synthesize networkCalloutController;
+
 - (void) dealloc;
 {
 	[toolbar release];
 	[tableHostView release];
 	[tableHostController release];
 	[tableController release];
+	[networkCalloutController release];
     [window release];
     [super dealloc];
 }
@@ -609,6 +612,11 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 - (void) returnFromImagePicker;
 {
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];	
+}
+
+- (IBAction) showNetworkCallout;
+{
+	[self.networkCalloutController showAboveView:self.toolbar];
 }
 
 @end

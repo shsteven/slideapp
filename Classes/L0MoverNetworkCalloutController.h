@@ -1,0 +1,31 @@
+//
+//  L0MoverNetworkCalloutController.h
+//  Mover
+//
+//  Created by ∞ on 05/06/09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+
+@interface L0MoverNetworkCalloutController : NSObject {
+	UIView* networkCalloutView;
+	UILabel* networkLabel;
+	UILabel* availableNetworksLabel;
+}
+
+@property(retain) IBOutlet UILabel* networkLabel;
+@property(retain) IBOutlet UILabel* availableNetworksLabel;
+
+@property(retain) IBOutlet UIView* networkCalloutView;
+
+- (IBAction) highlightCallout;
+- (IBAction) unhighlightCallout;
+
+- (IBAction) pressedCallout;
+
+- (void) showAboveView:(UIView*) view;
+
+@end
+

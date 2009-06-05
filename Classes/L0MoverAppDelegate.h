@@ -15,6 +15,8 @@
 #import "L0PeerDiscovery.h"
 #import "L0MoverPeer.h"
 
+#import "L0MoverNetworkCalloutController.h"
+
 @interface L0MoverAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0MoverPeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate> {
     UIWindow *window;
 	
@@ -30,14 +32,18 @@
 	
 	double lastSeenVersion;
 	BOOL networkAvailable;
+	L0MoverNetworkCalloutController* networkCalloutController;
 }
 
-@property(retain) IBOutlet UIWindow *window;
+@property(retain) IBOutlet UIWindow* window;
 @property(retain) IBOutlet UIView* tableHostView;
 @property(retain) IBOutlet UIToolbar* toolbar;
 
 @property(retain) IBOutlet L0FlipViewController* tableHostController;
 @property(retain) L0MoverItemsTableController* tableController;
+
+@property(retain) IBOutlet L0MoverNetworkCalloutController* networkCalloutController;
+- (IBAction) showNetworkCallout;
 
 - (IBAction) addItem;
 - (void) addImageItem;
