@@ -17,7 +17,7 @@
    version="1.0"
    sodipodi:docname="CalloutBubble.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/CalloutBubble_Highlighted.png"
+   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/CalloutBubble.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -88,7 +88,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="215"
+     inkscape:cx="263.40397"
      inkscape:cy="40"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -124,7 +124,7 @@
        ry="0" />
     <g
        id="g2446"
-       transform="translate(400,-4.9999999e-6)">
+       transform="translate(40,120)">
       <path
          sodipodi:nodetypes="cccccccccccc"
          style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter4541);enable-background:accumulate"
@@ -133,7 +133,7 @@
       <path
          id="path4775"
          d="M 233.5,452.56531 C 229.068,452.56531 225.5,456.13331 225.5,460.56531 L 225.5,491.56531 C 225.5,495.99731 229.068,499.56531 233.5,499.56531 L 428.34375,499.56531 L 444.5,518.65906 L 460.65625,499.56531 L 526.5,499.56531 C 530.932,499.56531 534.5,495.99731 534.5,491.56531 L 534.5,460.56531 C 534.5,456.13331 530.932,452.56531 526.5,452.56531 L 233.5,452.56531 z"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          sodipodi:nodetypes="cccccccccccc" />
       <path
          sodipodi:nodetypes="ccccccccccc"
@@ -156,7 +156,7 @@
          sodipodi:nodetypes="cccccccccccc" />
       <path
          sodipodi:nodetypes="cccccccccccc"
-         style="opacity:1;fill:url(#linearGradient2478);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         style="opacity:1;fill:url(#linearGradient2478);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          d="M 233.5,352.56531 C 229.068,352.56531 225.5,356.13331 225.5,360.56531 L 225.5,391.56531 C 225.5,395.99731 229.068,399.56531 233.5,399.56531 L 428.34375,399.56531 L 444.5,418.65906 L 460.65625,399.56531 L 526.5,399.56531 C 530.932,399.56531 534.5,395.99731 534.5,391.56531 L 534.5,360.56531 C 534.5,356.13331 530.932,352.56531 526.5,352.56531 L 233.5,352.56531 z"
          id="path2455" />
       <path
