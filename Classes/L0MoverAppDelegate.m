@@ -18,6 +18,7 @@
 #import "L0ImageItem.h"
 #import "L0AddressBookPersonItem.h"
 #import "L0BonjourPeeringService.h"
+#import "L0BluetoothPeeringService.h"
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
@@ -66,6 +67,10 @@ enum {
 	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];
 	bonjourFinder.delegate = self;
 	[bonjourFinder start];
+	
+	L0BluetoothPeeringService* bluetoothFinder = [L0BluetoothPeeringService sharedService];
+	bluetoothFinder.delegate = self;
+	[bluetoothFinder start];
 	
 	// Setting up the UI.
 	self.tableController = [[[L0MoverItemsTableController alloc] initWithDefaultNibName] autorelease];
