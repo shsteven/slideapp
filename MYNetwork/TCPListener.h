@@ -38,6 +38,7 @@
     NSInteger /*NSNetServicesError*/ _bonjourError;
 
     Class _connectionClass;
+	id _delegate;
 }
 
 /** Initializes a new TCPListener that will listen on the given port when opened. */

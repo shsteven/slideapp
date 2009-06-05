@@ -29,7 +29,7 @@ static id <L0BookmarkItemStorage> L0BookmarkItemCurrentStorage = nil;
 - (id) initWithAddress:(NSURL*) url title:(NSString*) t;
 {
 	if (self = [super init]) {
-		self.type = kUTTypeURL;
+		self.type = (id) kUTTypeURL;
 		self.address = url;
 		self.title = t;
 		self.representingImage = [UIImage imageNamed:@"BookmarkIcon.png"];
@@ -48,7 +48,7 @@ static id <L0BookmarkItemStorage> L0BookmarkItemCurrentStorage = nil;
 
 + (NSArray*) supportedTypes;
 {
-	return [NSArray arrayWithObject:kUTTypeURL];
+	return [NSArray arrayWithObject:(id) kUTTypeURL];
 }
 
 - (NSData*) externalRepresentation;
