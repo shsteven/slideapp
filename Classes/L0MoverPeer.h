@@ -15,8 +15,6 @@
 
 @interface L0MoverPeer : NSObject {
 	id <L0MoverPeerDelegate> delegate;
-	double applicationVersion;
-	NSString* userVisibleApplicationVersion;
 }
 
 @property(readonly) NSString* name;

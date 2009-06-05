@@ -47,12 +47,13 @@ NSString* const kTCPPropertySSLClientSideAuthentication = @"kTCPPropertySSLClien
 - (NSString*) securityLevel                 {return [_sslProperties objectForKey: (id)kCFStreamSSLLevel];}
 - (void) setSecurityLevel: (NSString*)level {[self setSSLProperty: level forKey: (id)kCFStreamSSLLevel];}
 
+@dynamic delegate;
 
 - (void) tellDelegate: (SEL)selector withObject: (id)param
 {
-    if( [_delegate respondsToSelector: selector] ) {
+    if( [self.delegate respondsToSelector: selector] ) {
         @try{
-            [_delegate performSelector: selector withObject: self withObject: param];
+            [self.delegate performSelector: selector withObject: self withObject: param];
         }catchAndReport(@"%@ delegate",self.class);
     }
 }

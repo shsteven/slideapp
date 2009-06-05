@@ -218,8 +218,8 @@ static inline CFSocketRef TCPReleaseSocket( CFSocketRef socket ) {
     IPAddress *addr = [IPAddress addressOfSocket: socket];
     if( ! addr )
         return NO;
-    if( [_delegate respondsToSelector: @selector(listener:shouldAcceptConnectionFrom:)]
-       && ! [_delegate listener: self shouldAcceptConnectionFrom: addr] )
+    if( [self.delegate respondsToSelector: @selector(listener:shouldAcceptConnectionFrom:)]
+       && ! [self.delegate listener: self shouldAcceptConnectionFrom: addr] )
         return NO;
     
     Assert(_connectionClass);

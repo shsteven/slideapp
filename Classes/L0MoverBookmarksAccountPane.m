@@ -63,7 +63,7 @@ enum {
 	switch ([indexPath section]) {
 		case kL0MoverDoNotSaveSection: {
 			UITableViewCell* doNotSave = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,10,10) reuseIdentifier:nil] autorelease];
-			doNotSave.text = NSLocalizedString(@"Do Not Save", @"'Do Not Save' choice in the bookmarks account pane.");
+			doNotSave.textLabel.text = NSLocalizedString(@"Do Not Save", @"'Do Not Save' choice in the bookmarks account pane.");
 			return doNotSave;
 		}
 		

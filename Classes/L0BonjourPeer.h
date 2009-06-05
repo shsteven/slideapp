@@ -17,6 +17,8 @@
 @interface L0BonjourPeer : L0MoverPeer <BLIPConnectionDelegate> {
 	NSNetService* _service;
 	CFMutableDictionaryRef _itemsBeingSentByConnection;
+	double applicationVersion;
+	NSString* userVisibleApplicationVersion;
 }
 
 - (id) initWithNetService:(NSNetService*) service;

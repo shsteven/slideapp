@@ -31,7 +31,6 @@ typedef enum {
 @interface TCPEndpoint : NSObject
 {
     NSMutableDictionary *_sslProperties;
-    id _delegate;
 }
 
 /** The desired security level. Use the security level constants from NSStream.h,
@@ -48,5 +47,7 @@ typedef enum {
 
 //protected:
 - (void) tellDelegate: (SEL)selector withObject: (id)param;
+
+@property(assign) id delegate;
 
 @end

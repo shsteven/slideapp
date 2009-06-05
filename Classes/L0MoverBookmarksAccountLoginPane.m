@@ -110,7 +110,7 @@ enum {
 
 	switch ([indexPath row]) {
 		case 0: {
-			cell.text = NSLocalizedString(@"Username", @"Username label in bookmarks login pane.");
+			cell.textLabel.text = NSLocalizedString(@"Username", @"Username label in bookmarks login pane.");
 			if (self.username)
 				field.text = self.username;
 			field.tag = kL0MoverUsernameFieldTag;
@@ -118,7 +118,7 @@ enum {
 			break;
 			
 		case 1: {
-			cell.text = NSLocalizedString(@"Password", @"Password label in bookmarks login pane.");
+			cell.textLabel.text = NSLocalizedString(@"Password", @"Password label in bookmarks login pane.");
 			field.secureTextEntry = YES;
 			if (self.password)
 				field.text = self.password;

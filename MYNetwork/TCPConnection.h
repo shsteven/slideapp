@@ -37,6 +37,9 @@ typedef enum {
     TCPWriter *_writer;
     NSError *_error;
     NSTimeInterval _openTimeout;
+	
+	@protected
+	id _delegate;
 }
 
 /** Initializes a TCPConnection to the given IP address.
