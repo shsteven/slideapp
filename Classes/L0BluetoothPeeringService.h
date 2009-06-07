@@ -11,11 +11,14 @@
 
 #import "L0PeerDiscovery.h"
 
+@class L0BluetoothPeer, L0MoverItem;
+
 @interface L0BluetoothPeeringService : NSObject <GKSessionDelegate> {
 	id <L0PeerDiscoveryDelegate> delegate;
 	GKSession* session;
 	
 	NSMutableDictionary* currentPeers;
+	NSMutableDictionary* pendingItemsToSendByPeer;
 }
 
 + sharedService;
@@ -24,5 +27,7 @@
 - (void) stop;
 
 @property(assign) id <L0PeerDiscoveryDelegate> delegate;
+
+- (void) sendItem:(L0MoverItem*) i toPeer:(L0BluetoothPeer*) peer;
 
 @end
