@@ -103,7 +103,10 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 
 - (void) session:(GKSession*) s didReceiveConnectionRequestFromPeer:(NSString*) peerID;
 {
-	[s acceptConnectionFromPeer:peerID error:NULL];
+	if ([[s peersWithConnectionState:GKPeerStateConnected] count] == 0)
+		[s acceptConnectionFromPeer:peerID error:NULL];
+	else
+		[s denyConnectionFromPeer:peerID];
 }
 
 - (void) session:(GKSession*) s didFailWithError:(NSError*) error;
