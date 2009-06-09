@@ -449,6 +449,8 @@
 		1559B5B20F79843F005E4362 /* Peering */ = {
 			isa = PBXGroup;
 			children = (
+				15DEE3310FD922D000562663 /* L0BluetoothPeer.h */,
+				15DEE3320FD922D000562663 /* L0BluetoothPeer.m */,
 				15DEE3530FD9234E00562663 /* L0BluetoothPeeringService.h */,
 				15DEE3540FD9234E00562663 /* L0BluetoothPeeringService.m */,
 				1559B61B0F798BD9005E4362 /* L0PeerDiscovery.h */,
@@ -458,8 +460,6 @@
 				1559B5BD0F798463005E4362 /* L0BonjourPeer.m */,
 				1559B5DA0F798AE1005E4362 /* L0BonjourPeeringService.h */,
 				1559B5DB0F798AE1005E4362 /* L0BonjourPeeringService.m */,
-				15DEE3310FD922D000562663 /* L0BluetoothPeer.h */,
-				15DEE3320FD922D000562663 /* L0BluetoothPeer.m */,
 			);
 			name = Peering;
 			sourceTree = "<group>";
