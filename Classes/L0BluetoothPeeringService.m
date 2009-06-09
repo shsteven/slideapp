@@ -139,6 +139,11 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 		}
 			break;
 			
+		case GKPeerStateDisconnected: {
+			[pendingReceivedDataByPeer removeObjectForKey:peerID];
+		}
+			break;
+			
 		case GKPeerStateConnected: {
 			if ([pendingItemsToSendByPeer objectForKey:peerID])
 				[self performSendingForPeerID:peerID];
