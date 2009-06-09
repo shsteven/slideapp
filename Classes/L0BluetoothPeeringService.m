@@ -70,7 +70,7 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 	
 	NSAssert(!pendingItemsToSendByPeer, @"No pending item data dictionary");
 	pendingItemsToSendByPeer = [NSMutableDictionary new];
-
+	
 	NSAssert(!pendingReceivedDataByPeer, @"No pending item data dictionary");
 	pendingReceivedDataByPeer = [NSMutableDictionary new];
 }
@@ -141,7 +141,7 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 				[self performSendingForPeerID:peerID];
 		}
 			break;
-
+			
 	}
 }
 
@@ -153,7 +153,7 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 	NSMutableData* d = [pendingReceivedDataByPeer objectForKey:peerID];
 	if (!d) {
 		d = [NSMutableData data];
-		[pendingReceivedDataByPeer setObject:d forKey:peer];
+		[pendingReceivedDataByPeer setObject:d forKey:peerID];
 		[peer.delegate slidePeerWillSendUsItem:peer];
 	}
 	
@@ -194,9 +194,9 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 			
 			if (!L0IsDictionaryWithRequiredKeysAndTypes(plist, 
 														[NSDictionary dictionaryWithObjectsAndKeys:
-														 kL0MoverBTTypeKey, [NSString class],
-														 kL0MoverBTTitleKey, [NSString class],
-														 kL0MoverBTDataKey, [NSString class],
+														 [NSString class], kL0MoverBTTypeKey,
+														 [NSString class], kL0MoverBTTitleKey,
+														 [NSData class], kL0MoverBTDataKey,
 														 nil])) {
 				[self endReceivingItem:nil fromPeer:peer];
 				return;
@@ -249,7 +249,7 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 				uint32_t networkPayloadLength = htonl((uint32_t) payloadLength);
 				[dataToSend appendBytes:&networkPayloadLength length:sizeof(uint32_t)];
 				[dataToSend appendData:plistData];
-			
+				
 				[session sendData:dataToSend toPeers:[NSArray arrayWithObject:peerID] withDataMode:GKSendDataReliable error:NULL];
 			}
 		}
@@ -258,7 +258,7 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 		[pendingItemsToSendByPeer removeObjectForKey:peerID];
 	}
 }
-	
+
 
 - (void) sendItem:(L0MoverItem*) i toBluetoothPeer:(L0BluetoothPeer*) peer;
 {
