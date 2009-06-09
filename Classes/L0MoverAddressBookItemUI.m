@@ -41,7 +41,7 @@
 	personCtl.allowsEditing = NO;
 	personCtl.personViewDelegate = self;
 	
-	UINavigationController* ctl = [[UINavigationController alloc] initWithRootViewController:personCtl];
+	UINavigationController* ctl = [[[UINavigationController alloc] initWithRootViewController:personCtl] autorelease];
 	
 	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
 	[delegate.tableHostController presentModalViewController:ctl animated:YES];
