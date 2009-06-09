@@ -71,6 +71,11 @@ static const char kL0MoverBTDataHeader[4] = { 'M', 'O', 'V', 'R' };
 	L0Log(@"%@ (named '%@'): %@", peerID, [s displayNameForPeer:peerID], error);
 }
 
+- (void) session:(GKSession*) s didReceiveConnectionRequestFromPeer:(NSString*) peerID;
+{
+	[s acceptConnectionFromPeer:peerID error:NULL];
+}
+
 - (void) session:(GKSession*) s didFailWithError:(NSError*) error;
 {
 	L0Log(@"%@", error);
@@ -78,7 +83,10 @@ static const char kL0MoverBTDataHeader[4] = { 'M', 'O', 'V', 'R' };
 
 - (void) session:(GKSession*) s peer:(NSString*) peerID didChangeState:(GKPeerConnectionState) state;
 {
-	L0Log(@"%@ (%@) is now in state %@", peerID, [s displayNameForPeer:peerID], state);
+	if ([peerID isEqual:s.peerID]) {
+		L0Log(@"Ignoring change on self.");
+		return;
+	}
 	
 	switch (state) {
 		case GKPeerStateAvailable: {

@@ -7,7 +7,7 @@
 //
 
 #import "L0BluetoothPeer.h"
-
+#import "L0BluetoothPeeringService.h"
 
 @implementation L0BluetoothPeer
 
@@ -42,9 +42,8 @@
 
 - (BOOL) receiveItem:(L0MoverItem*) i;
 {
-	// TODO send the item
-	NSAssert(NO, @"Implement me");
-	return NO;
+	[[L0BluetoothPeeringService sharedService] sendItem:i toBluetoothPeer:self];
+	return YES;
 }
 
 @end
