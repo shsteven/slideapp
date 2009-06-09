@@ -34,7 +34,7 @@ static const char kL0MoverBTDataHeader[4] = { 'M', 'O', 'V', 'R' };
 	
 	NSString* name = nil;
 #if TARGET_IPHONE_SIMULATOR
-	name = [NSString stringWithFormat:@"Mover Test Rig (%d)", getpid()]
+	name = [NSString stringWithFormat:@"Mover Test Rig (%d)", getpid()];
 #endif
 	
 	session = [[GKSession alloc] initWithSessionID:nil displayName:name sessionMode:GKSessionModePeer];
