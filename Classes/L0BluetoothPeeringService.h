@@ -28,6 +28,6 @@
 
 @property(assign) id <L0PeerDiscoveryDelegate> delegate;
 
-- (void) sendItem:(L0MoverItem*) i toPeer:(L0BluetoothPeer*) peer;
+- (void) sendItem:(L0MoverItem*) i toBluetoothPeer:(L0BluetoothPeer*) peer;
 
 @end

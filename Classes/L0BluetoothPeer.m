@@ -21,6 +21,13 @@
 	return self;
 }
 
+- (void) dealloc;
+{
+	[peerID release];
+	[displayName release];
+	[super dealloc];
+}
+
 @synthesize name = displayName, peerID;
 
 - (double) applicationVersion;
