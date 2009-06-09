@@ -19,6 +19,7 @@
 	
 	NSMutableDictionary* currentPeers;
 	NSMutableDictionary* pendingItemsToSendByPeer;
+	NSMutableDictionary* pendingReceivedDataByPeer;
 }
 
 + sharedService;
