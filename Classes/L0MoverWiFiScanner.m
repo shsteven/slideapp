@@ -76,11 +76,6 @@ L0ObjCSingletonMethod(sharedScanner)
 {
 	if (self = [super init]) {
 		availableChannels = [NSMutableSet new];
-		
-		if (![self start]) {
-			[self release];
-			return nil;
-		}
 	}
 	
 	return self;
@@ -100,7 +95,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	listener.bonjourTXTRecord = [NSDictionary dictionaryWithObjectsAndKeys:
 								 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kL0BonjourPeerApplicationVersionKey,
 								 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], kL0BonjourPeerUserVisibleApplicationVersionKey,
-								 [[L0MoverPeering sharedService] uniquePeerIdentifierForSelf], kL0BonjourPeerUniqueIdentifierKey,
+								 [service uniquePeerIdentifierForSelf], kL0BonjourPeerUniqueIdentifierKey,
 								 nil];
 	NSError* e = nil;
 	[listener open:&e];
@@ -142,9 +137,13 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) setEnabled:(BOOL) e;
 {
-	if (e)
-		[self start];
-	else
+	if (e) {
+		NSAssert(service, @"You must first add this scanner to a peering service.");
+		if (![self start]) {
+			[[self retain] autorelease];
+			[service removeAvailableScannersObject:self];
+		}
+	} else
 		[self stop];
 }
 
@@ -158,7 +157,7 @@ L0ObjCSingletonMethod(sharedScanner)
 #pragma mark -
 #pragma mark KVC accessors
 
-@synthesize availableChannels;
+@synthesize availableChannels, service;
 
 - (void) addAvailableChannelsObject:(L0MoverWiFiChannel*) chan;
 {
@@ -223,7 +222,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	
 	if (isSelf) return;
 	
-	L0MoverWiFiChannel* channel = [[L0MoverWiFiChannel alloc] initWithNetService:sender];
+	L0MoverWiFiChannel* channel = [[L0MoverWiFiChannel alloc] initWithScanner:self netService:sender];
 	[self addAvailableChannelsObject:channel];
 	[channel release];
 }
@@ -252,7 +251,7 @@ L0ObjCSingletonMethod(sharedScanner)
 		return;
 	}
 	
-	[[L0MoverPeering sharedService] channelWillBeginReceiving:peer];
+	[service channelWillBeginReceiving:peer];
  	
 	[connection setDelegate:self];
 	[pendingConnections addObject:connection];
@@ -274,13 +273,13 @@ L0ObjCSingletonMethod(sharedScanner)
 		L0Log(@"No item could be created.");
 		[connection close];
 		[pendingConnections removeObject:connection];
-		[[L0MoverPeering sharedService] channelDidCancelReceivingItem:peer];
+		[service channelDidCancelReceivingItem:peer];
 		return;
 	}
 	
 	[connection close];
 	[pendingConnections removeObject:connection];
-	[[L0MoverPeering sharedService] channel:peer didReceiveItem:item];
+	[service channel:peer didReceiveItem:item];
 	[request respondWithString:@"OK"];
 }
 

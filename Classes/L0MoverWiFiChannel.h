@@ -18,9 +18,11 @@
 	double applicationVersion;
 	NSString* userVisibleApplicationVersion;
 	NSString* uniquePeerIdentifier;
+	
+	L0MoverWiFiScanner* scanner;
 }
 
-- (id) initWithNetService:(NSNetService*) service;
+- (id) initWithScanner:(L0MoverWiFiScanner*) scanner netService:(NSNetService*) s;
 
 @property(readonly) NSNetService* service;
 

@@ -30,8 +30,7 @@
 // The scanners that are available. Unavailable = can't ever
 // be used on this device.
 // Some scanners (eg Bluetooth) may start tentatively available
-// but become unavailable later. (For now, no KVO supported
-// on this key.)
+// but become unavailable later.
 @property(readonly) NSSet* availableScanners;
 
 // The peers we care about. Contains L0MoverPeers.
@@ -52,7 +51,10 @@
 
 // Makes a scanner unavailable.
 // This makes any peers it found gone too.
-- (void) makeScannerUnavailable:(id <L0MoverPeerScanner>) scanner;
+- (void) removeAvailableScannersObject:(id <L0MoverPeerScanner>) scanner;
+
+// Adds a scanner.
+- (void) addAvailableScannersObject:(id <L0MoverPeerScanner>) scanner;
 
 @end
 
@@ -60,11 +62,15 @@
 
 @protocol L0MoverPeerScanner <NSObject>
 
+// Scanners are owned by the peering service, so should not retain it.
+// This is set by addAvailableScannersObject:.
+@property(assign) L0MoverPeering* service;
+
 // Note: UI should prevent all scanners to be off at once, or otherwise
 // manage them so that the user isn't confused. No scanners = no peers ever
 // found = useless app.
-// New scanners start enabled, and should recuse themselves ASAP if they
-// detect unavailability.
+// New scanners start DISABLED, and should recuse themselves ASAP if they
+// detect unavailability once enabled = YES.
 // PLEASE NOTE: enabled = NO should make all channels unavailable at once.
 @property BOOL enabled;
 

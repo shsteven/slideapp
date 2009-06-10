@@ -27,9 +27,11 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 @synthesize service;
 @synthesize applicationVersion, userVisibleApplicationVersion, uniquePeerIdentifier;
 
-- (id) initWithNetService:(NSNetService*) s;
+- (id) initWithScanner:(L0MoverWiFiScanner*) sc netService:(NSNetService*) s;
 {
 	if (self = [super init]) {
+		scanner = sc;
+		
 		service = [s retain];
 		itemsBeingSentByConnection = L0CFDictionaryCreateMutableForObjects();
 		
@@ -93,7 +95,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	
 	CFDictionarySetValue(itemsBeingSentByConnection, connection, item);
 	
-	[[L0MoverPeering sharedService] channel:self willSendItemToOtherEndpoint:item];
+	[scanner.service channel:self willSendItemToOtherEndpoint:item];
 	connection.delegate = self;
 	BLIPRequest* request = [item contentsAsBLIPRequest];
 	[connection sendRequest:request];
@@ -106,7 +108,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 {
 	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(itemsBeingSentByConnection, connection);
 	if (i)
-		[[L0MoverPeering sharedService] channel:self didSendItemToOtherEndpoint:i];
+		[scanner.service channel:self didSendItemToOtherEndpoint:i];
 	
 	// we assume it's fine. for now.
 	[connection close];
@@ -123,7 +125,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	L0Log(@"%@, %@", connection, error);
 	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(itemsBeingSentByConnection, connection);
 	if (i)
-		[[L0MoverPeering sharedService] channel:self didSendItemToOtherEndpoint:i];
+		[scanner.service channel:self didSendItemToOtherEndpoint:i];
 	
 	CFDictionaryRemoveValue(itemsBeingSentByConnection, connection);
 }

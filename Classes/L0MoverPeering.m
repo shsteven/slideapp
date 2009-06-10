@@ -8,6 +8,7 @@
 
 #import "L0MoverPeering.h"
 #import "L0MoverPeer.h"
+#import "L0MoverWiFiScanner.h"
 #import <MuiKit/MuiKit.h>
 
 // Our private L0MoverPeer subclass.
@@ -110,7 +111,7 @@ L0ObjCSingletonMethod(sharedService);
 
 + allScanners;
 {
-	return [NSSet set]; // TODO
+	return [NSSet setWithObject:[L0MoverWiFiScanner sharedScanner]]; // TODO
 }
 
 #pragma mark Peers and channels
@@ -210,11 +211,18 @@ L0ObjCSingletonMethod(sharedService);
 
 #pragma mark Scanners and availability
 
-- (void) makeScannerUnavailable:(id <L0MoverPeerScanner>) scanner;
+- (void) addAvailableScannersObject:(id <L0MoverPeerScanner>) scanner;
+{
+	scanner.service = self;
+	[availableScanners addObject:scanner];
+}
+
+- (void) removeAvailableScannersObject:(id <L0MoverPeerScanner>) scanner;
 {
 	for (id channel in scanner.availableChannels)
 		[self removeChannel:channel];
 	
+	scanner.service = nil;
 	[availableScanners removeObject:scanner];
 }
 

@@ -15,14 +15,17 @@
 #import "L0BookmarkItemUI.h"
 #import "L0MoverItemAction.h"
 
-#import "L0ImageItem.h"
 #import "L0AddressBookPersonItem.h"
 #import "L0BonjourPeeringService.h"
 #import "L0BluetoothPeeringService.h"
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
+#import "L0MoverPeering.h"
+#import "L0MoverWiFiScanner.h"
+
 #import "L0BookmarkItem.h"
+#import "L0ImageItem.h"
 
 #import <netinet/in.h>
 
@@ -64,13 +67,20 @@ enum {
 	[L0BookmarkItemUI registerClass];
 	
 	// Starting up peering services.
-	//L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];
+//	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];
 //	bonjourFinder.delegate = self;
 //	[bonjourFinder start];
 	
-	L0BluetoothPeeringService* bluetoothFinder = [L0BluetoothPeeringService sharedService];
-	bluetoothFinder.delegate = self;
-	[bluetoothFinder start];
+//	L0BluetoothPeeringService* bluetoothFinder = [L0BluetoothPeeringService sharedService];
+//	bluetoothFinder.delegate = self;
+//	[bluetoothFinder start];
+	
+	L0MoverPeering* peering = [L0MoverPeering sharedService];
+	peering.delegate = self;
+	
+	L0MoverWiFiScanner* scanner = [L0MoverWiFiScanner sharedScanner];
+	[peering addAvailableScannersObject:scanner];
+	scanner.enabled = YES;
 	
 	// Setting up the UI.
 	self.tableController = [[[L0MoverItemsTableController alloc] initWithDefaultNibName] autorelease];

@@ -21,6 +21,10 @@
 	BLIPListener* listener;
 	NSMutableSet* pendingConnections;
 	NSMutableSet* availableChannels;
+	
+	L0MoverPeering* service;
 }
+
++ sharedScanner;
 
 @end

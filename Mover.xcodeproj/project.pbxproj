@@ -511,10 +511,10 @@
 			children = (
 				15E9AC930FE0172F00F0910A /* L0MoverWiFiChannel.h */,
 				15E9AC940FE0172F00F0910A /* L0MoverWiFiChannel.m */,
-				15C0C0B20FDFA243005A75B6 /* L0MoverPeering.h */,
-				15C0C0B30FDFA243005A75B6 /* L0MoverPeering.m */,
 				15C0C1860FDFD578005A75B6 /* L0MoverWiFiScanner.h */,
 				15C0C1870FDFD578005A75B6 /* L0MoverWiFiScanner.m */,
+				15C0C0B20FDFA243005A75B6 /* L0MoverPeering.h */,
+				15C0C0B30FDFA243005A75B6 /* L0MoverPeering.m */,
 			);
 			name = "Peering (with identities)";
 			sourceTree = "<group>";
