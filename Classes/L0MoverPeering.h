@@ -46,6 +46,13 @@
 // Channels can call this to notify of new items.
 - (void) channelWillBeginReceiving:(id <L0MoverPeerChannel>) channel;
 - (void) channel:(id <L0MoverPeerChannel>) channel didReceiveItem:(L0MoverItem*) i;
+- (void) channelDidCancelReceivingItem:(id <L0MoverPeerChannel>) channel;
+- (void) channel:(id <L0MoverPeerChannel>) channel willSendItemToOtherEndpoint:(L0MoverItem*) i;
+- (void) channel:(id <L0MoverPeerChannel>) channel didSendItemToOtherEndpoint:(L0MoverItem*) i;
+
+// Makes a scanner unavailable.
+// This makes any peers it found gone too.
+- (void) makeScannerUnavailable:(id <L0MoverPeerScanner>) scanner;
 
 @end
 
@@ -100,14 +107,14 @@
 // Must be the same for different channels to the same peer.
 // Never changes unless the peer fully disconnects (ie retracts
 // all channels) and then reappears later with a different id.
-@property(readonly) NSString* uniquePeerIdentifier;
+@property(readonly, copy) NSString* uniquePeerIdentifier;
 
 // May change. Should be set on first appaerance, but may
 // be KVO'd in the future.
 @property(readonly) double applicationVersion;
 @property(readonly, copy) NSString* userVisibleApplicationVersion;
 
-- (void) sendItemToOtherEndpoint:(L0MoverItem*) i;
+- (BOOL) sendItemToOtherEndpoint:(L0MoverItem*) i;
 
 @end
 

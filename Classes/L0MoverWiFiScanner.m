@@ -10,21 +10,19 @@
 
 #import "BLIP.h"
 #import "IPAddress.h"
+
+#import "L0MoverWiFiChannel.h"
+
 #import <netinet/in.h>
 #import <sys/types.h>
 #import <sys/socket.h>
 #import <ifaddrs.h>
 
-#define kL0BonjourPeerApplicationVersionKey @"L0AppVersion"
-#define kL0BonjourPeerUserVisibleApplicationVersionKey @"L0UserAppVersion"
-#define kL0BonjourPeerUniqueIdentifier @"L0PeerID"
-
-#define kL0BonjourPeeringServiceName @"_x-infinitelabs-slides._tcp."
+#pragma mark -
+#pragma mark IPAddress additions
 
 @interface IPAddress (L0BonjourPeerFinder_NetServicesMatching)
-
 - (BOOL) _l0_comesFromAddressOfService:(NSNetService*) s;
-
 @end
 
 @implementation IPAddress (L0BonjourPeerFinder_NetServicesMatching)
@@ -55,6 +53,21 @@
 
 @end
 
+// --------------------------
+#pragma mark -
+#pragma mark Wi-Fi Scanner
+
+@interface L0MoverWiFiScanner ()
+
+- (void) addAvailableChannelsObject:(L0MoverWiFiChannel*) chan;
+- (void) removeAvailableChannelsObject:(L0MoverWiFiChannel*) chan;
+
+- (BOOL) start;
+- (void) stop;
+
+@end
+
+
 @implementation L0MoverWiFiScanner
 
 L0ObjCSingletonMethod(sharedScanner)
@@ -62,25 +75,221 @@ L0ObjCSingletonMethod(sharedScanner)
 - (id) init;
 {
 	if (self = [super init]) {
-		browser = [[NSNetServiceBrowser alloc] init];
-		[browser setDelegate:self];
-		[browser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
+		availableChannels = [NSMutableSet new];
 		
-		listener = [[BLIPListener alloc] initWithPort:52525];
-		listener.delegate = self;
-		listener.pickAvailablePort = YES;
-		listener.bonjourServiceType = kL0BonjourPeeringServiceName;
-		listener.bonjourServiceName = [UIDevice currentDevice].name;
-		listener.bonjourTXTRecord = [NSDictionary dictionaryWithObjectsAndKeys:
-									 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kL0BonjourPeerApplicationVersionKey,
-									 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], kL0BonjourPeerUserVisibleApplicationVersionKey,
-									 [[L0MoverPeering sharedService] uniquePeerIdentifierForSelf], 
-									 nil];
-		NSError* e = nil;
-		[listener open:&e];
+		if (![self start]) {
+			[self release];
+			return nil;
+		}
 	}
 	
 	return self;
 }
+
+- (BOOL) start;
+{
+	if (listener) return YES;
+	
+	[self willChangeValueForKey:@"enabled"];
+	
+	listener = [[BLIPListener alloc] initWithPort:52525];
+	listener.delegate = self;
+	listener.pickAvailablePort = YES;
+	listener.bonjourServiceType = kL0BonjourPeeringServiceName;
+	listener.bonjourServiceName = [UIDevice currentDevice].name;
+	listener.bonjourTXTRecord = [NSDictionary dictionaryWithObjectsAndKeys:
+								 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kL0BonjourPeerApplicationVersionKey,
+								 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], kL0BonjourPeerUserVisibleApplicationVersionKey,
+								 [[L0MoverPeering sharedService] uniquePeerIdentifierForSelf], kL0BonjourPeerUniqueIdentifierKey,
+								 nil];
+	NSError* e = nil;
+	[listener open:&e];
+	if (e) {
+		L0LogAlways(@"Disabling Wi-Fi peering -- got an error while opening a socket on port 52525: %@", e);
+		
+		[self stop];
+		[self didChangeValueForKey:@"enabled"];
+		return NO;
+	}
+	
+	browser = [[NSNetServiceBrowser alloc] init];
+	[browser setDelegate:self];
+	[browser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
+	
+	[self didChangeValueForKey:@"enabled"];
+	return YES;
+}
+
+- (void) stop;
+{
+	[self willChangeValueForKey:@"enabled"];
+	
+	[browser stop];
+	[browser release]; browser = nil;
+	
+	[[self mutableSetValueForKey:@"availableChannels"] removeAllObjects];
+	
+	[listener close];
+	[listener release]; listener = nil;	
+	
+	[self didChangeValueForKey:@"enabled"];
+}
+
+- (BOOL) enabled;
+{
+	return listener != nil;
+}
+
+- (void) setEnabled:(BOOL) e;
+{
+	if (e)
+		[self start];
+	else
+		[self stop];
+}
+
+- (void) dealloc;
+{
+	[self stop];
+	[availableChannels release];
+	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark KVC accessors
+
+@synthesize availableChannels;
+
+- (void) addAvailableChannelsObject:(L0MoverWiFiChannel*) chan;
+{
+	[availableChannels addObject:chan];
+}
+
+- (void) removeAvailableChannelsObject:(L0MoverWiFiChannel*) chan;
+{
+	[availableChannels removeObject:chan];	
+}
+
+#pragma mark -
+#pragma mark Bonjour browsing.
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
+{
+	for (L0MoverWiFiChannel* peer in availableChannels) {
+		if ([peer.service isEqual:aNetService])
+			[self removeAvailableChannelsObject:peer];
+	}	
+}
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
+{
+	[aNetService retain];
+	[aNetService setDelegate:self];
+	[aNetService resolve];
+}
+
+- (void)netServiceDidResolveAddress:(NSNetService *)sender;
+{
+	[sender autorelease];
+	
+	BOOL isSelf = NO;
+	struct ifaddrs* interface;
+	
+	if (getifaddrs(&interface) == 0) {
+		struct ifaddrs* allInterfaces = interface;
+		while (interface != NULL) {
+			const struct sockaddr_in* address = (const struct sockaddr_in*) interface->ifa_addr;
+			if (address->sin_family != AF_INET) {
+				interface = interface->ifa_next;
+				continue;
+			}
+			
+			for (NSData* serviceAddressData in [sender addresses]) {
+				const struct sockaddr_in* serviceAddress = [serviceAddressData bytes];
+				if (serviceAddress->sin_family != AF_INET) continue;
+				
+				if (serviceAddress->sin_addr.s_addr == address->sin_addr.s_addr) {
+					isSelf = YES;
+					break;
+				}
+			}
+			
+			if (isSelf) break;
+			interface = interface->ifa_next;
+		}
+		
+		freeifaddrs(allInterfaces);
+	}
+	
+	if (isSelf) return;
+	
+	L0MoverWiFiChannel* channel = [[L0MoverWiFiChannel alloc] initWithNetService:sender];
+	[self addAvailableChannelsObject:channel];
+	[channel release];
+}
+
+#pragma mark -
+#pragma mark Item reception
+
+- (L0MoverWiFiChannel*) channelForAddress:(IPAddress*) a;
+{
+	for (L0MoverWiFiChannel* aPeer in availableChannels) {
+		if ([a _l0_comesFromAddressOfService:aPeer.service]) {
+			return aPeer;
+		}
+	}
+	
+	return nil;
+}
+
+- (void) listener:(TCPListener*) listener didAcceptConnection:(TCPConnection*) connection;
+{
+	L0MoverWiFiChannel* peer = [self channelForAddress:connection.address];
+	
+	if (!peer) {
+		L0Log(@"No peer associated with this connection; throwing away.");
+		[connection close];
+		return;
+	}
+	
+	[[L0MoverPeering sharedService] channelWillBeginReceiving:peer];
+ 	
+	[connection setDelegate:self];
+	[pendingConnections addObject:connection];
+}
+
+- (void) connection: (BLIPConnection*)connection receivedRequest: (BLIPRequest*)request;
+{
+	L0MoverWiFiChannel* peer = [self channelForAddress:connection.address];
+	
+	if (!peer) {
+		L0Log(@"No peer associated with this connection; throwing away.");
+		[pendingConnections removeObject:connection];
+		[connection close];
+		return;
+	}
+	
+	L0MoverItem* item = [L0MoverItem itemWithContentsOfBLIPRequest:request];
+	if (!item) {
+		L0Log(@"No item could be created.");
+		[connection close];
+		[pendingConnections removeObject:connection];
+		[[L0MoverPeering sharedService] channelDidCancelReceivingItem:peer];
+		return;
+	}
+	
+	[connection close];
+	[pendingConnections removeObject:connection];
+	[[L0MoverPeering sharedService] channel:peer didReceiveItem:item];
+	[request respondWithString:@"OK"];
+}
+
+#pragma mark -
+#pragma mark Network reachability (jamming)
+
+/* ALL TODO */
+
+- (BOOL) jammed { return NO; }
+
 
 @end

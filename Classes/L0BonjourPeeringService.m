@@ -16,6 +16,8 @@
 #import <sys/socket.h>
 #import <ifaddrs.h>
 
+#if 0
+
 @interface IPAddress (L0BonjourPeerFinder_NetServicesMatching)
 
 - (BOOL) _l0_comesFromAddressOfService:(NSNetService*) s;
@@ -230,3 +232,5 @@
 }
 
 @end
+
+#endif

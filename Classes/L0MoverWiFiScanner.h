@@ -8,9 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "L0MoverPeering.h"
+#import "BLIP.h"
 
-@interface L0MoverWiFiScanner : NSObject <L0MoverPeerScanner> {
-	
+#define kL0BonjourPeerApplicationVersionKey @"L0AppVersion"
+#define kL0BonjourPeerUserVisibleApplicationVersionKey @"L0UserAppVersion"
+#define kL0BonjourPeerUniqueIdentifierKey @"L0PeerID"
+
+#define kL0BonjourPeeringServiceName @"_x-infinitelabs-slides._tcp."
+
+@interface L0MoverWiFiScanner : NSObject <L0MoverPeerScanner, TCPListenerDelegate, TCPConnectionDelegate> {
+	NSNetServiceBrowser* browser;
+	BLIPListener* listener;
+	NSMutableSet* pendingConnections;
+	NSMutableSet* availableChannels;
 }
 
 @end

@@ -58,17 +58,19 @@
 
 - (BOOL) receiveItem:(L0MoverItem*) item;
 {
-	[[self.channels anyObject] sendItemToOtherEndpoint:item];
-	return YES;
+	return [[self.channels anyObject] sendItemToOtherEndpoint:item];
 }
 
 @end
 
-
+// ----------------------
 
 @interface L0MoverPeering ()
 + allScanners;
 - (L0MoverSynthesizedPeer*) peerWithChannel:(id <L0MoverPeerChannel>) channel;
+
+- (void) addChannel:(id <L0MoverPeerChannel>) channel;
+- (void) removeChannel:(id <L0MoverPeerChannel>) channel;
 @end
 
 L0UniquePointerConstant(kL0MoverPeeringObservationContext);
@@ -111,6 +113,8 @@ L0ObjCSingletonMethod(sharedService);
 	return [NSSet set]; // TODO
 }
 
+#pragma mark Peers and channels
+
 - (L0MoverPeer*) peerWithChannel:(id <L0MoverPeerChannel>) channel;
 {
 	for (L0MoverSynthesizedPeer* peer in peers) {
@@ -134,6 +138,24 @@ L0ObjCSingletonMethod(sharedService);
 	[peer.delegate moverPeer:peer didSendUsItem:i];
 }
 
+- (void) channelDidCancelReceivingItem:(id <L0MoverPeerChannel>) channel;
+{
+	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
+	[peer.delegate moverPeerDidCancelSendingUsItem:peer];
+}
+
+- (void) channel:(id <L0MoverPeerChannel>) channel willSendItemToOtherEndpoint:(L0MoverItem*) i;
+{
+	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
+	[peer.delegate moverPeer:peer willBeSentItem:i];
+}
+
+- (void) channel:(id <L0MoverPeerChannel>) channel didSendItemToOtherEndpoint:(L0MoverItem*) i;
+{
+	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
+	[peer.delegate moverPeer:peer wasSentItem:i];
+}
+
 - (void) observeValueForKeyPath:(NSString*) keyPath ofObject:(id) object change:(NSDictionary*) change context:(void*) context;
 {
 	if (context != kL0MoverPeeringObservationContext) return;
@@ -146,36 +168,54 @@ L0ObjCSingletonMethod(sharedService);
 		removed = [change l0_previousValue];
 	
 	// inserting new channels...
-	for (id <L0MoverPeerChannel> channel in inserted) {
-		L0Log(@"Found channel: %@", channel);
-		L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
-		if (peer) {
-			[peer.channels addObject:channel];
-			L0Log(@"Channel: %@ added to peer: %@", channel, peer);
-		} else {
-			L0Log(@"Creating new peer from channel: %@", channel);
-			L0MoverSynthesizedPeer* peer = [[L0MoverSynthesizedPeer alloc] initWithChannel:channel];
-			[peers addObject:peer];
-			[self.delegate peerFound:peer];
-			[peer release];
-		}
-	}
+	for (id <L0MoverPeerChannel> channel in inserted)
+		[self addChannel:channel];
 
 	// removing invalid channels...
-	for (id <L0MoverPeerChannel> channel in removed) {
-		L0Log(@"Lost channel: %@", channel);
-		L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
+	for (id <L0MoverPeerChannel> channel in removed)
+		[self removeChannel:channel];
+}
 
-		if (peer) {
-			[peer.channels removeObject:channel];
-			L0Log(@"Channel: %@ removed from peer: %@", channel, peer);
-			if ([peer.channels count] == 0) {
-				L0Log(@"Channel-less peer now being removed.");
-				[self.delegate peerLeft:peer];
-				[peers removeObject:peer];
-			}
+- (void) addChannel:(id <L0MoverPeerChannel>) channel;
+{
+	L0Log(@"Found channel: %@", channel);
+	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
+	if (peer) {
+		[peer.channels addObject:channel];
+		L0Log(@"Channel: %@ added to peer: %@", channel, peer);
+	} else {
+		L0Log(@"Creating new peer from channel: %@", channel);
+		L0MoverSynthesizedPeer* peer = [[L0MoverSynthesizedPeer alloc] initWithChannel:channel];
+		[peers addObject:peer];
+		[self.delegate peerFound:peer];
+		[peer release];
+	}
+}
+
+- (void) removeChannel:(id <L0MoverPeerChannel>) channel;
+{
+	L0Log(@"Lost channel: %@", channel);
+	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
+	
+	if (peer) {
+		[peer.channels removeObject:channel];
+		L0Log(@"Channel: %@ removed from peer: %@", channel, peer);
+		if ([peer.channels count] == 0) {
+			L0Log(@"Channel-less peer now being removed.");
+			[self.delegate peerLeft:peer];
+			[peers removeObject:peer];
 		}
 	}
+}
+
+#pragma mark Scanners and availability
+
+- (void) makeScannerUnavailable:(id <L0MoverPeerScanner>) scanner;
+{
+	for (id channel in scanner.availableChannels)
+		[self removeChannel:channel];
+	
+	[availableScanners removeObject:scanner];
 }
 
 @end
