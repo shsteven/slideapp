@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "L0PeerDiscovery.h"
 
-@interface L0MoverPeering : NSObject {
+@protocol L0MoverPeerChannel, L0MoverPeerScanner;
 
+@interface L0MoverPeering : NSObject {
+	id <L0PeerDiscoveryDelegate> delegate;
+	NSMutableSet* peers, * availableScanners;
+	NSString* uniquePeerIdentifierForSelf;
 }
 
 + sharedService;
@@ -30,19 +34,31 @@
 // on this key.)
 @property(readonly) NSSet* availableScanners;
 
-// The peers we care about.
-@property(readonly) NSSet* allPeers;
+// The peers we care about. Contains L0MoverPeers.
+@property(readonly) NSSet* peers;
 
 // Hook the rest of the app here.
 @property(assign) id <L0PeerDiscoveryDelegate> delegate;
 
+// Our current peer identifier.
+@property(readonly) NSString* uniquePeerIdentifierForSelf;
+
+// Channels can call this to notify of new items.
+- (void) channelWillBeginReceiving:(id <L0MoverPeerChannel>) channel;
+- (void) channel:(id <L0MoverPeerChannel>) channel didReceiveItem:(L0MoverItem*) i;
+
 @end
+
+// Scanners and channels -------
 
 @protocol L0MoverPeerScanner <NSObject>
 
 // Note: UI should prevent all scanners to be off at once, or otherwise
 // manage them so that the user isn't confused. No scanners = no peers ever
 // found = useless app.
+// New scanners start enabled, and should recuse themselves ASAP if they
+// detect unavailability.
+// PLEASE NOTE: enabled = NO should make all channels unavailable at once.
 @property BOOL enabled;
 
 // A jammed scanner is available but external trouble prevents
@@ -56,6 +72,23 @@
 @property(readonly) NSSet* availableChannels;
 
 @end
+
+// Someday, maybe.
+/* enum {
+	// Channel speed: on average, this channel...
+	// (pick the one that applies the most)
+	kL0MoverPeerChannelLowSpeed = 1 << 0; // high latency, or less than 10 kbps throughput
+	kL0MoverPeerChannelMediumSpeed = 1 << 1; // low latency, or tp in tens of kbps
+	kL0MoverPeerChannelHighSpeed = 1 << 2; // always unnoticeable latency, or tp of hundreds of kbps or more
+	
+	// Hops-to-destination distance
+	kL0MoverDirectNetworking = 1 << 3; // point-to-point connection
+	kL0MoverLinkLocalNetworking = 1 << 4; // needs an intermediary, but fast
+	kL0MoverWideAreaNetworking = 1 << 5; // Internet-style hopping, basically
+	
+	
+}; */
+
 
 @protocol L0MoverPeerChannel <NSObject>
 
@@ -73,6 +106,8 @@
 // be KVO'd in the future.
 @property(readonly) double applicationVersion;
 @property(readonly, copy) NSString* userVisibleApplicationVersion;
+
+- (void) sendItemToOtherEndpoint:(L0MoverItem*) i;
 
 @end
 

@@ -83,7 +83,6 @@
 								  nil];
 	NSError* e = nil;
 	[listener open:&e];
-	NSLog(@"%@", e);
 	
 //	_publishedService = [[NSNetService alloc] initWithDomain:@"" type:kL0BonjourPeeringServiceName name:[UIDevice currentDevice].name port:52525];
 //	[_publishedService publish];

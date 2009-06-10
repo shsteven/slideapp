@@ -75,6 +75,7 @@
 		15C0C16A0F75910000E5BA2F /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1690F75910000E5BA2F /* frame.png */; };
 		15C0C16D0F75918800E5BA2F /* L0MoverItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C16C0F75918800E5BA2F /* L0MoverItemView.m */; };
 		15C0C1720F75938F00E5BA2F /* L0MoverItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1710F75938F00E5BA2F /* L0MoverItem.m */; };
+		15C0C1880FDFD578005A75B6 /* L0MoverWiFiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1870FDFD578005A75B6 /* L0MoverWiFiScanner.m */; };
 		15C0C1CE0F759B8700E5BA2F /* L0ImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */; };
 		15C595CC0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C595CB0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m */; };
 		15DEE3330FD922D000562663 /* L0BluetoothPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DEE3320FD922D000562663 /* L0BluetoothPeer.m */; };
@@ -284,6 +285,8 @@
 		15C0C16C0F75918800E5BA2F /* L0MoverItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverItemView.m; sourceTree = "<group>"; };
 		15C0C1700F75938F00E5BA2F /* L0MoverItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverItem.h; sourceTree = "<group>"; };
 		15C0C1710F75938F00E5BA2F /* L0MoverItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverItem.m; sourceTree = "<group>"; };
+		15C0C1860FDFD578005A75B6 /* L0MoverWiFiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverWiFiScanner.h; sourceTree = "<group>"; };
+		15C0C1870FDFD578005A75B6 /* L0MoverWiFiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverWiFiScanner.m; sourceTree = "<group>"; };
 		15C0C1CC0F759B8700E5BA2F /* L0ImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0ImageItem.h; sourceTree = "<group>"; };
 		15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0ImageItem.m; sourceTree = "<group>"; };
 		15C595CA0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverBookmarksAccountLoginPane.h; sourceTree = "<group>"; };
@@ -505,6 +508,8 @@
 			children = (
 				15C0C0B20FDFA243005A75B6 /* L0MoverPeering.h */,
 				15C0C0B30FDFA243005A75B6 /* L0MoverPeering.m */,
+				15C0C1860FDFD578005A75B6 /* L0MoverWiFiScanner.h */,
+				15C0C1870FDFD578005A75B6 /* L0MoverWiFiScanner.m */,
 			);
 			name = "Peering (with identities)";
 			sourceTree = "<group>";
@@ -966,6 +971,7 @@
 				15DEE3330FD922D000562663 /* L0BluetoothPeer.m in Sources */,
 				15DEE3550FD9234E00562663 /* L0BluetoothPeeringService.m in Sources */,
 				15C0C0B40FDFA243005A75B6 /* L0MoverPeering.m in Sources */,
+				15C0C1880FDFD578005A75B6 /* L0MoverWiFiScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1115,10 +1121,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"L0LogUseOnRequestLogging=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
 					"$(INFINITELABS_TOOLS)/Logging/Build/Headers",
