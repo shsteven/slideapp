@@ -29,11 +29,11 @@
 
 @protocol L0MoverPeerDelegate <NSObject>
 
-- (void) slidePeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
-- (void) slidePeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
+- (void) moverPeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
+- (void) moverPeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
 
-- (void) slidePeerWillSendUsItem:(L0MoverPeer*) peer;
-- (void) slidePeer:(L0MoverPeer*) peer didSendUsItem:(L0MoverItem*) item;
-- (void) slidePeerDidCancelSendingUsItem:(L0MoverPeer*) peer;
+- (void) moverPeerWillSendUsItem:(L0MoverPeer*) peer;
+- (void) moverPeer:(L0MoverPeer*) peer didSendUsItem:(L0MoverItem*) item;
+- (void) moverPeerDidCancelSendingUsItem:(L0MoverPeer*) peer;
 
 @end

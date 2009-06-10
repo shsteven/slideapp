@@ -305,23 +305,23 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self persistItemsToMassStorage:[self.tableController items]];
 }
 
-- (void) slidePeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
+- (void) moverPeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
 {
 	L0Log(@"About to send item %@", item);
 }
 
-- (void) slidePeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
+- (void) moverPeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
 {
 	L0Log(@"Sent %@", item);
 	[self.tableController returnItemToTableAfterSend:item toPeer:peer];
 }
 
-- (void) slidePeerWillSendUsItem:(L0MoverPeer*) peer;
+- (void) moverPeerWillSendUsItem:(L0MoverPeer*) peer;
 {
 	L0Log(@"Receiving from %@", peer);
 	[self.tableController beginWaitingForItemComingFromPeer:peer];
 }
-- (void) slidePeer:(L0MoverPeer*) peer didSendUsItem:(L0MoverItem*) item;
+- (void) moverPeer:(L0MoverPeer*) peer didSendUsItem:(L0MoverItem*) item;
 {
 	L0Log(@"Received %@", item);
 	[item storeToAppropriateApplication];
@@ -332,7 +332,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	else if ([item isKindOfClass:[L0AddressBookPersonItem class]])
 		[self showAlertIfNotShownBeforeNamed:@"L0ContactReceived"];
 }
-- (void) slidePeerDidCancelSendingUsItem:(L0MoverPeer*) peer;
+- (void) moverPeerDidCancelSendingUsItem:(L0MoverPeer*) peer;
 {
 	[self.tableController stopWaitingForItemFromPeer:peer];
 }

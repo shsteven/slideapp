@@ -80,7 +80,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	
 	CFDictionarySetValue(_itemsBeingSentByConnection, connection, item);
 	
-	[delegate slidePeer:self willBeSentItem:item];
+	[delegate moverPeer:self willBeSentItem:item];
 	
 	connection.delegate = self;
 	BLIPRequest* request = [item contentsAsBLIPRequest];
@@ -94,7 +94,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 {
 	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(_itemsBeingSentByConnection, connection);
 	if (i)
-		[delegate slidePeer:self wasSentItem:i];
+		[delegate moverPeer:self wasSentItem:i];
 	
 	// we assume it's fine. for now.
 	[connection close];

@@ -162,7 +162,7 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 	if (!d) {
 		d = [NSMutableData data];
 		[pendingReceivedDataByPeer setObject:d forKey:peerID];
-		[peer.delegate slidePeerWillSendUsItem:peer];
+		[peer.delegate moverPeerWillSendUsItem:peer];
 	}
 	
 	[d appendData:data];
@@ -222,9 +222,9 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 {
 	[pendingReceivedDataByPeer removeObjectForKey:peer.peerID];
 	if (i)
-		[peer.delegate slidePeer:peer didSendUsItem:i];
+		[peer.delegate moverPeer:peer didSendUsItem:i];
 	else {
-		[peer.delegate slidePeerDidCancelSendingUsItem:peer];	
+		[peer.delegate moverPeerDidCancelSendingUsItem:peer];	
 		[session disconnectPeerFromAllPeers:peer.peerID];
 	}
 }
@@ -262,7 +262,7 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 			}
 		}
 		
-		[peer.delegate slidePeer:peer wasSentItem:itemToSend];
+		[peer.delegate moverPeer:peer wasSentItem:itemToSend];
 		[pendingItemsToSendByPeer removeObjectForKey:peerID];
 	}
 }
@@ -270,10 +270,10 @@ static BOOL L0IsDictionaryWithRequiredKeysAndTypes(id plist, NSDictionary* types
 
 - (void) sendItem:(L0MoverItem*) i toBluetoothPeer:(L0BluetoothPeer*) peer;
 {
-	[peer.delegate slidePeer:peer willBeSentItem:i];
+	[peer.delegate moverPeer:peer willBeSentItem:i];
 	// TODO a better way to perform canceling on send.
 	if (!session || [pendingItemsToSendByPeer objectForKey:peer.peerID]) {
-		[peer.delegate slidePeer:peer wasSentItem:i];
+		[peer.delegate moverPeer:peer wasSentItem:i];
 		return;
 	}
 	
