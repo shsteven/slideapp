@@ -38,7 +38,7 @@
 	NSAssert(chan, @"Chan must be nonnil");
 	
 	if (self = [super init]) {
-		channels = [NSMutableSet setWithObject:chan];
+		channels = [[NSMutableSet setWithObject:chan] retain];
 		uniquePeerIdentifier = [chan.uniquePeerIdentifier copy];
 		name = [chan.name copy];
 		userVisibleApplicationVersion = [chan.userVisibleApplicationVersion copy];
