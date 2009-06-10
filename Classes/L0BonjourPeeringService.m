@@ -197,7 +197,7 @@
 		return;
 	}
 	
-	[peer.delegate slidePeerWillSendUsItem:peer];
+	[peer.delegate moverPeerWillSendUsItem:peer];
 	
 	[connection setDelegate:self];
 	[pendingConnections addObject:connection];
@@ -219,13 +219,13 @@
 		L0Log(@"No item could be created.");
 		[connection close];
 		[pendingConnections removeObject:connection];
-		[peer.delegate slidePeerDidCancelSendingUsItem:peer];
+		[peer.delegate moverPeerDidCancelSendingUsItem:peer];
 		return;
 	}
 	
 	[connection close];
 	[pendingConnections removeObject:connection];
-	[peer.delegate slidePeer:peer didSendUsItem:item];
+	[peer.delegate moverPeer:peer didSendUsItem:item];
 	
 	[request respondWithString:@"OK"];
 }
