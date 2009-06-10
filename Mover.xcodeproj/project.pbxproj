@@ -15,8 +15,6 @@
 		1510C4E50FBEDB3D003849A6 /* L0MoverImageViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1510C4E30FBEDB3D003849A6 /* L0MoverImageViewer.xib */; };
 		1510C4EF0FBEDB96003849A6 /* L0MoverImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */; };
 		1510C5610FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */; };
-		15250B1C0FC692BD0073E5C7 /* nl.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15250B180FC692BA0073E5C7 /* nl.lproj */; };
-		15250B2B0FC692CA0073E5C7 /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15250B1F0FC692C70073E5C7 /* nl.lproj */; };
 		15250B4A0FC6945D0073E5C7 /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15250B3E0FC694570073E5C7 /* de.lproj */; };
 		15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15250B4B0FC6946E0073E5C7 /* de.lproj */; };
 		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
@@ -49,8 +47,6 @@
 		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
-		15A244FB0FCBFF8A0034C943 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15A244EF0FCBFF8A0034C943 /* ja.lproj */; };
-		15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15A245080FCBFF9F0034C943 /* ja.lproj */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
 		15B3FB200FD509A200D9C7C5 /* es.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15B3FB1C0FD5099D00D9C7C5 /* es.lproj */; };
 		15B3FB310FD509B200D9C7C5 /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15B3FB240FD509AF00D9C7C5 /* es.lproj */; };
@@ -170,9 +166,7 @@
 			dstSubfolderSpec = 7;
 			files = (
 				15B3FB200FD509A200D9C7C5 /* es.lproj in Copy Settings.bundle Localizations */,
-				15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */,
 				15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */,
-				15250B1C0FC692BD0073E5C7 /* nl.lproj in Copy Settings.bundle Localizations */,
 				154FB79A0FB1F18300DB26C6 /* fr.lproj in Copy Settings.bundle Localizations */,
 				154FB79B0FB1F18300DB26C6 /* it.lproj in Copy Settings.bundle Localizations */,
 				154FB79C0FB1F18300DB26C6 /* ru.lproj in Copy Settings.bundle Localizations */,
@@ -194,8 +188,6 @@
 		1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverImageItemUI.m; sourceTree = "<group>"; };
 		1510C55F0FBEEC6E003849A6 /* L0MoverAddressBookItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAddressBookItemUI.h; sourceTree = "<group>"; };
 		1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAddressBookItemUI.m; sourceTree = "<group>"; };
-		15250B180FC692BA0073E5C7 /* nl.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = nl.lproj; sourceTree = "<group>"; };
-		15250B1F0FC692C70073E5C7 /* nl.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = nl.lproj; sourceTree = "<group>"; };
 		15250B3E0FC694570073E5C7 /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
 		15250B4B0FC6946E0073E5C7 /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
 		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
@@ -238,8 +230,6 @@
 		15911E790F8FA2F900BECD18 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		159120810F8FD04B00BECD18 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/L0MoverAboutPane.xib; sourceTree = "<group>"; };
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		15A244EF0FCBFF8A0034C943 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
-		15A245080FCBFF9F0034C943 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		15B3FB1C0FD5099D00D9C7C5 /* es.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = es.lproj; sourceTree = "<group>"; };
@@ -399,9 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				15B3FB240FD509AF00D9C7C5 /* es.lproj */,
-				15A244EF0FCBFF8A0034C943 /* ja.lproj */,
 				15250B3E0FC694570073E5C7 /* de.lproj */,
-				15250B1F0FC692C70073E5C7 /* nl.lproj */,
 				154FB7900FB1F16000DB26C6 /* fr.lproj */,
 				154FB7910FB1F16000DB26C6 /* it.lproj */,
 				154FB7920FB1F16000DB26C6 /* ru.lproj */,
@@ -428,9 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				15B3FB1C0FD5099D00D9C7C5 /* es.lproj */,
-				15A245080FCBFF9F0034C943 /* ja.lproj */,
 				15250B4B0FC6946E0073E5C7 /* de.lproj */,
-				15250B180FC692BA0073E5C7 /* nl.lproj */,
 				154FB7680FB1F06D00DB26C6 /* fr.lproj */,
 				154FB7690FB1F06D00DB26C6 /* it.lproj */,
 				154FB76A0FB1F06D00DB26C6 /* ru.lproj */,
@@ -772,12 +758,10 @@
 			files = (
 				15B3FB310FD509B200D9C7C5 /* es.lproj in Resources */,
 				15250B4A0FC6945D0073E5C7 /* de.lproj in Resources */,
-				15250B2B0FC692CA0073E5C7 /* nl.lproj in Resources */,
 				154FB7940FB1F16400DB26C6 /* fr.lproj in Resources */,
 				154FB7950FB1F16400DB26C6 /* it.lproj in Resources */,
 				154FB7960FB1F16400DB26C6 /* ru.lproj in Resources */,
 				154FB7970FB1F16400DB26C6 /* sv.lproj in Resources */,
-				15A244FB0FCBFF8A0034C943 /* ja.lproj in Resources */,
 				15E7FDED0FADC37900E9C438 /* MainWindow.xib in Resources */,
 				15E7FDF10FADC37A00E9C438 /* L0MoverItemView.xib in Resources */,
 				15C0C16A0F75910000E5BA2F /* frame.png in Resources */,
