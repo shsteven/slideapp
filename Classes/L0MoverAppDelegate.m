@@ -16,8 +16,6 @@
 #import "L0MoverItemAction.h"
 
 #import "L0AddressBookPersonItem.h"
-#import "L0BonjourPeeringService.h"
-#import "L0BluetoothPeeringService.h"
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
