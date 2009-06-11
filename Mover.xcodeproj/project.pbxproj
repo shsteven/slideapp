@@ -1106,7 +1106,7 @@
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Mover;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F964A417-A6C3-4429-821B-FD1A01DAB1CD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6037617A-9EC8-4ED6-9EEE-19C57761D548";
 				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
 			name = "Ad Hoc";
