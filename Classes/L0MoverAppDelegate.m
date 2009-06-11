@@ -23,6 +23,7 @@
 
 #import "L0MoverPeering.h"
 #import "L0MoverWiFiScanner.h"
+#import "L0MoverBluetoothScanner.h"
 
 #import "L0BookmarkItem.h"
 #import "L0ImageItem.h"
@@ -81,6 +82,10 @@ enum {
 	L0MoverWiFiScanner* scanner = [L0MoverWiFiScanner sharedScanner];
 	[peering addAvailableScannersObject:scanner];
 	scanner.enabled = YES;
+
+	L0MoverBluetoothScanner* btScanner = [L0MoverBluetoothScanner sharedScanner];
+	[peering addAvailableScannersObject:btScanner];
+	btScanner.enabled = YES;
 	
 	// Setting up the UI.
 	self.tableController = [[[L0MoverItemsTableController alloc] initWithDefaultNibName] autorelease];

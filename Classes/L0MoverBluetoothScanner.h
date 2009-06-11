@@ -22,6 +22,8 @@
 	int retries;
 }
 
++ sharedScanner;
+
 @property(readonly) GKSession* bluetoothSession;
 
 @end

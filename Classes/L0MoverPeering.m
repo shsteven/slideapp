@@ -91,7 +91,7 @@ L0ObjCSingletonMethod(sharedService);
 	if (self = [super init]) {
 		availableScanners = [[NSMutableSet setWithSet:[[self class] allScanners]] retain];
 		peers = [NSMutableSet new];
-		uniquePeerIdentifierForSelf = [[[L0UUID UUID] stringValue] copy];
+		uniquePeerIdentifierForSelf = [[[[L0UUID UUID] stringValue] substringWithRange:NSMakeRange(0, 2)] copy];
 		
 		// set up KVO
 		for (id scanner in availableScanners)

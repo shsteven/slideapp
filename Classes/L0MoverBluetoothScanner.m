@@ -22,6 +22,8 @@
 
 @implementation L0MoverBluetoothScanner
 
+L0ObjCSingletonMethod(sharedScanner)
+
 @synthesize service, jammed;
 @synthesize bluetoothSession;
 
