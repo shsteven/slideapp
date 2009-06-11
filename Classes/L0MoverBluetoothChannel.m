@@ -1,0 +1,264 @@
+//
+//  L0MoverBluetoothChannel.m
+//  Mover
+//
+//  Created by ∞ on 11/06/09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//
+
+#import "L0MoverBluetoothChannel.h"
+#import <MuiKit/MuiKit.h>
+
+static const char kL0MoverBluetoothMessageHeader[] = { 'M', 'O', 'V', 'E', 'R' };
+static const size_t kL0MoverBluetoothMessageHeaderLength = sizeof(char) * 5;
+
+static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
+	int i; for (i = 0; i < kL0MoverBluetoothMessageHeaderLength; i++) {
+		if (packet[i] != kL0MoverBluetoothMessageHeader[i])
+			return NO;
+	}
+	
+	return YES;
+}
+
+#define kL0MoverBluetoothTitleKey @"Title"
+#define kL0MoverBluetoothTypeKey @"Type"
+#define kL0MoverBluetoothExternalRepresentationKey @"Data"
+
+@interface L0MoverBluetoothChannel ()
+
+- (void) endSendingItem;
+- (void) sendBlockOfDataAndRepeatIfNecessary;
+
+- (void) endReceivingItem:(L0MoverItem*) i;
+- (void) receiveItemFromData:(NSData*) d;
+
+@end
+
+
+@implementation L0MoverBluetoothChannel
+
+@synthesize uniquePeerIdentifier;
+
+- (id) initWithScanner:(L0MoverBluetoothScanner*) s peerID:(NSString*) p;
+{
+	if (self = [super init]) {
+		scanner = s;
+		peerID = [p copy];
+		
+		NSString* nameAndID = [s.bluetoothSession displayNameForPeer:p];
+		NSRange barRange = [nameAndID rangeOfString:@"|" options:NSBackwardsSearch];
+		NSInteger indexPastBar = barRange.location == NSNotFound? 0 : barRange.location + barRange.length;
+		
+		if (barRange.location == NSNotFound || indexPastBar >= [nameAndID length]) {
+			L0LogAlways(@"Owch! This Bluetooth peer (%@) has no pipe character in its name or no UUID past the bar -- suspiciously unusual. We're making a new UUID for it anyway, so that the machinery won't be confused by it.", nameAndID);
+			uniquePeerIdentifier = [[[L0UUID UUID] stringValue] copy];
+			name = [nameAndID copy];
+		} else {
+			uniquePeerIdentifier = [[nameAndID substringFromIndex:indexPastBar] copy];
+			name = [[nameAndID substringToIndex:barRange.location] copy];
+		}
+	}
+	
+	return self;
+}
+
+- (void) dealloc;
+{
+	[self endCommunicationWithOtherEndpoint];
+	[peerID release];
+	[name release];
+	[uniquePeerIdentifier release];
+	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark Communication
+
+- (void) communicateWithOtherEndpoint;
+{
+	if (itemToBeSent) {
+		dataToBeSent = [NSMutableData new];
+		[dataToBeSent appendBytes:kL0MoverBluetoothMessageHeader length:kL0MoverBluetoothMessageHeaderLength];
+		
+		NSData* externalRep = [itemToBeSent externalRepresentation];
+		NSString* title = itemToBeSent.title;
+		NSString* type = itemToBeSent.type;
+		
+		NSMutableDictionary* payloadPlist = [NSMutableDictionary dictionary];
+		[payloadPlist setObject:title forKey:kL0MoverBluetoothTitleKey];
+		[payloadPlist setObject:type forKey:kL0MoverBluetoothTypeKey];
+		[payloadPlist setObject:externalRep forKey:kL0MoverBluetoothExternalRepresentationKey];
+		
+		NSString* err = nil;
+		NSData* d = [NSPropertyListSerialization dataFromPropertyList:payloadPlist format:NSPropertyListBinaryFormat_v1_0 errorDescription:&err];
+		if (err) {
+			L0LogAlways(@"An error occurred while plistifying item %@: %@", itemToBeSent, err);
+			[self endSendingItem];
+			return;
+		}
+		
+		NSInteger len = [d length];
+		if (len > INT32_MAX) {
+			L0LogAlways(@"Too big to send: %@", itemToBeSent);
+			[self endSendingItem];
+			return;
+		}
+		
+		uint32_t lenNetwork = htonl(len);
+		[dataToBeSent appendBytes:&lenNetwork length:sizeof(uint32_t)];
+		[dataToBeSent appendData:d];
+		
+		[self sendBlockOfDataAndRepeatIfNecessary];
+	}
+}
+
+#define kL0MoverBluetoothSingleSendLimit (1024 * 1024)
+
+- (void) sendBlockOfDataAndRepeatIfNecessary;
+{
+	if (!dataToBeSent) return;
+	BOOL done = NO;
+	
+	NSData* toSend;
+	if ([dataToBeSent length] > kL0MoverBluetoothSingleSendLimit) {
+		NSRange sentRange = NSMakeRange(0, kL0MoverBluetoothSingleSendLimit);
+		toSend = [dataToBeSent subdataWithRange:sentRange];
+		[dataToBeSent replaceBytesInRange:sentRange withBytes:NULL length:0];
+	} else {
+		toSend = dataToBeSent; done = YES;
+	}
+	
+	NSError* e;
+	if (![scanner.bluetoothSession sendData:toSend toPeers:[NSArray arrayWithObject:peerID] withDataMode:GKSendDataReliable error:&e]) {
+		L0LogAlways(@"An error occurred while sending the item: %@", e);
+		[self endSendingItem];
+	} else if (!done) {
+		[self performSelector:@selector(sendBlockOfDataAndRepeatIfNecessary) withObject:nil afterDelay:0.1];
+	} else
+		[self endSendingItem];
+}
+
+- (BOOL) sendItemToOtherEndpoint:(L0MoverItem*) i;
+{
+	if (itemToBeSent)
+		return NO;
+
+	[scanner.service channel:self willSendItemToOtherEndpoint:i];
+
+	itemToBeSent = [i retain];
+	if ([[scanner.bluetoothSession peersWithConnectionState:GKPeerStateConnected] containsObject:peerID])
+		[self communicateWithOtherEndpoint];
+	else
+		[scanner.bluetoothSession connectToPeer:peerID withTimeout:5.0];
+	
+	return YES;
+}
+
+- (void) endSendingItem;
+{	
+	if (itemToBeSent) {
+		[scanner.service channel:self didSendItemToOtherEndpoint:itemToBeSent];
+		[itemToBeSent release]; itemToBeSent = nil;
+	}
+	
+	if (dataToBeSent) {
+		[dataToBeSent release]; dataToBeSent = nil;
+	}
+	
+	return;
+}
+
+- (void) receiveDataFromOtherEndpoint:(NSData*) data;
+{
+	if (!dataReceived)
+		dataReceived = [NSMutableData new];
+	
+	[dataReceived appendData:data];
+	
+	if ([dataReceived length] >= kL0MoverBluetoothMessageHeaderLength) {
+		const char* packetAtHeader = (const char*) [dataReceived bytes];
+		if (!L0MoverBluetoothStartsWithMessageHeader(packetAtHeader)) {
+			[self endReceivingItem:nil];
+			return;
+		}
+	}
+	
+	if ([dataReceived length] >= kL0MoverBluetoothMessageHeaderLength + sizeof(uint32_t)) {
+		uint32_t* packetAtNetworkLength = (uint32_t*) ([dataReceived bytes] + kL0MoverBluetoothMessageHeaderLength);
+		uint32_t networkLength = *packetAtNetworkLength;
+		uint32_t length = ntohl(networkLength);
+		
+		NSInteger restOfLength = [dataReceived length] - kL0MoverBluetoothMessageHeaderLength - sizeof(uint32_t);
+		
+		if (restOfLength >= length) {
+			NSData* payload = [dataReceived subdataWithRange:NSMakeRange(kL0MoverBluetoothMessageHeaderLength + sizeof(uint32_t), restOfLength)];
+			[self receiveItemFromData:payload];
+		}
+	}
+}
+
+- (void) receiveItemFromData:(NSData*) d;
+{
+	L0MoverItem* i = nil;
+	
+	NSString* error;
+	id plist = [NSPropertyListSerialization propertyListFromData:d mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&error];
+	
+	if (error) {
+		L0LogAlways(@"Could not turn the payload into a plist: %@", error);
+		[error release];
+	}
+	
+	NSString* title = nil, * type = nil;
+	NSData* externalRep = nil;
+	if (plist && [plist isKindOfClass:[NSDictionary class]]) {
+		title = [plist objectForKey:kL0MoverBluetoothTitleKey];
+		if (![title isKindOfClass:[NSString class]]) title = nil;
+		
+		type = [plist objectForKey:kL0MoverBluetoothTypeKey];
+		if (![type isKindOfClass:[NSString class]]) type = nil;
+
+		externalRep = [plist objectForKey:kL0MoverBluetoothExternalRepresentationKey];
+		if (![externalRep isKindOfClass:[NSData class]]) externalRep = nil;
+	}
+	
+	if (title && type && externalRep) {
+		i = [[[[L0MoverItem classForType:type] alloc] initWithExternalRepresentation:externalRep type:type title:title] autorelease];
+	}
+	
+	[self endReceivingItem:i];
+}
+
+- (void) endReceivingItem:(L0MoverItem*) i;
+{
+	if (!dataReceived) return;
+	
+	if (i)
+		[scanner.service channel:self didReceiveItem:i];
+	else
+		[scanner.service channelDidCancelReceivingItem:self];
+	
+	[dataReceived release];
+	dataReceived = nil;
+}
+
+- (void) endCommunicationWithOtherEndpoint;
+{
+	[self endSendingItem];
+	[self endReceivingItem:nil];
+}
+
+@synthesize name, peerID, uniquePeerIdentifier;
+
+- (double) applicationVersion;
+{
+	return kL0UnknownApplicationVersion;
+}
+
+- (NSString*) userVisibleApplicationVersion;
+{
+	return nil;
+}
+
+@end

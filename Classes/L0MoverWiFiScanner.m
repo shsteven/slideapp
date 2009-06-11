@@ -65,6 +65,10 @@
 - (BOOL) start;
 - (void) stop;
 
+- (void) beginWatchingNetwork;
+- (void) stopWatchingNetwork;
+- (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
+
 @end
 
 
@@ -112,6 +116,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	[browser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
 	
 	[self didChangeValueForKey:@"enabled"];
+	[self beginWatchingNetwork];
 	return YES;
 }
 
@@ -128,6 +133,8 @@ L0ObjCSingletonMethod(sharedScanner)
 	[listener release]; listener = nil;	
 	
 	[self didChangeValueForKey:@"enabled"];
+	
+	[self stopWatchingNetwork];
 }
 
 - (BOOL) enabled;
@@ -286,9 +293,76 @@ L0ObjCSingletonMethod(sharedScanner)
 #pragma mark -
 #pragma mark Network reachability (jamming)
 
-/* ALL TODO */
+@synthesize jammed;
 
-- (BOOL) jammed { return NO; }
+static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach, SCNetworkReachabilityFlags flags, void* meAsPointer) {
+	L0MoverWiFiScanner* myself = (L0MoverWiFiScanner*) meAsPointer;
+	[NSObject cancelPreviousPerformRequestsWithTarget:myself selector:@selector(checkNetwork) object:nil];
+	[myself updateNetworkWithFlags:flags];
+}
 
+- (void) beginWatchingNetwork;
+{
+	if (reach) return;
+	
+	// What follows comes from Reachability.m.
+	// Basically, we look for reachability for the link-local address --
+	// and filter for WWAN or connection-required responses in -updateNetworkWithFlags:.
+	
+	// Build a sockaddr_in that we can pass to the address reachability query.
+	struct sockaddr_in sin;
+	bzero(&sin, sizeof(sin));
+	sin.sin_len = sizeof(sin);
+	sin.sin_family = AF_INET;
+	
+	// IN_LINKLOCALNETNUM is defined in <netinet/in.h> as 169.254.0.0
+	sin.sin_addr.s_addr = htonl(IN_LINKLOCALNETNUM);
+	
+	reach = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*) &sin);
+	
+	SCNetworkReachabilityContext selfContext = {0, self, NULL, NULL, &CFCopyDescription};
+	SCNetworkReachabilitySetCallback(reach, &L0MoverAppDelegateNetworkStateChanged, &selfContext);
+	SCNetworkReachabilityScheduleWithRunLoop(reach, [[NSRunLoop currentRunLoop] getCFRunLoop], kCFRunLoopDefaultMode);
+	
+	SCNetworkReachabilityFlags flags;
+	if (!SCNetworkReachabilityGetFlags(reach, &flags))
+		[self performSelector:@selector(checkNetwork) withObject:nil afterDelay:0.5];
+	else
+		[self updateNetworkWithFlags:flags];
+}
+
+- (void) stopWatchingNetwork;
+{
+	if (!reach) return;
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkNetwork) object:nil];
+	
+	SCNetworkReachabilityUnscheduleFromRunLoop(reach, [[NSRunLoop currentRunLoop] getCFRunLoop], kCFRunLoopDefaultMode);
+	CFRelease(reach); reach = NULL;
+}
+
+- (void) checkNetwork;
+{
+	if (!reach) return;
+	
+	SCNetworkReachabilityFlags flags;
+	if (SCNetworkReachabilityGetFlags(reach, &flags))
+		[self updateNetworkWithFlags:flags];
+}
+
+- (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
+{
+	BOOL habemusNetwork = 
+		(flags & kSCNetworkReachabilityFlagsReachable) &&
+		!(flags & kSCNetworkReachabilityFlagsConnectionRequired);
+	// note that unlike Reachability.m we don't care about WWANs.
+	
+	[self willChangeValueForKey:@"jammed"];
+	jammed = !habemusNetwork;
+	[self didChangeValueForKey:@"jammed"];
+	
+	if (jammed)
+		[[self mutableArrayValueForKey:@"availableChannels"] removeAllObjects];
+}
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+
 #import "L0MoverPeering.h"
 #import "BLIP.h"
 
@@ -23,6 +25,8 @@
 	NSMutableSet* availableChannels;
 	
 	L0MoverPeering* service;
+	BOOL jammed;
+	SCNetworkReachabilityRef reach;
 }
 
 + sharedScanner;

@@ -85,6 +85,9 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	return [service name];
 }
 
+#pragma mark -
+#pragma mark Sending items
+
 - (BOOL) sendItemToOtherEndpoint:(L0MoverItem*) item;
 {
 	if (CFDictionaryContainsValue(itemsBeingSentByConnection, item))

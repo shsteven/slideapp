@@ -33,7 +33,7 @@
 @synthesize channels, uniquePeerIdentifier;
 @synthesize name, applicationVersion, userVisibleApplicationVersion;
 
-- (id) initWithChannel:(id <L0MoverPeerChannel>) chan;
+- (id) initWithFirstChannel:(id <L0MoverPeerChannel>) chan;
 {
 	NSAssert(chan, @"Chan must be nonnil");
 	
@@ -70,8 +70,8 @@
 + allScanners;
 - (L0MoverSynthesizedPeer*) peerWithChannel:(id <L0MoverPeerChannel>) channel;
 
-- (void) addChannel:(id <L0MoverPeerChannel>) channel;
-- (void) removeChannel:(id <L0MoverPeerChannel>) channel;
+- (void) makeChannelAvailable:(id <L0MoverPeerChannel>) channel;
+- (void) makeChannelUnavailable:(id <L0MoverPeerChannel>) channel;
 @end
 
 L0UniquePointerConstant(kL0MoverPeeringObservationContext);
@@ -170,14 +170,14 @@ L0ObjCSingletonMethod(sharedService);
 	
 	// inserting new channels...
 	for (id <L0MoverPeerChannel> channel in inserted)
-		[self addChannel:channel];
+		[self makeChannelAvailable:channel];
 
 	// removing invalid channels...
 	for (id <L0MoverPeerChannel> channel in removed)
-		[self removeChannel:channel];
+		[self makeChannelUnavailable:channel];
 }
 
-- (void) addChannel:(id <L0MoverPeerChannel>) channel;
+- (void) makeChannelAvailable:(id <L0MoverPeerChannel>) channel;
 {
 	L0Log(@"Found channel: %@", channel);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
@@ -186,14 +186,14 @@ L0ObjCSingletonMethod(sharedService);
 		L0Log(@"Channel: %@ added to peer: %@", channel, peer);
 	} else {
 		L0Log(@"Creating new peer from channel: %@", channel);
-		L0MoverSynthesizedPeer* peer = [[L0MoverSynthesizedPeer alloc] initWithChannel:channel];
+		L0MoverSynthesizedPeer* peer = [[L0MoverSynthesizedPeer alloc] initWithFirstChannel:channel];
 		[peers addObject:peer];
 		[self.delegate peerFound:peer];
 		[peer release];
 	}
 }
 
-- (void) removeChannel:(id <L0MoverPeerChannel>) channel;
+- (void) makeChannelUnavailable:(id <L0MoverPeerChannel>) channel;
 {
 	L0Log(@"Lost channel: %@", channel);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
@@ -220,7 +220,7 @@ L0ObjCSingletonMethod(sharedService);
 - (void) removeAvailableScannersObject:(id <L0MoverPeerScanner>) scanner;
 {
 	for (id channel in scanner.availableChannels)
-		[self removeChannel:channel];
+		[self makeChannelUnavailable:channel];
 	
 	scanner.service = nil;
 	[availableScanners removeObject:scanner];

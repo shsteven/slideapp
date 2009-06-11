@@ -905,8 +905,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		}
 		
 		if (item) {
-			[peer receiveItem:item];
-			sent = YES;
+			sent = [peer receiveItem:item];
 		}
 	} 
 	
