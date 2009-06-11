@@ -9,6 +9,9 @@
 #import "L0MoverBluetoothScanner.h"
 #import "L0MoverBluetoothChannel.h"
 
+#import <sys/types.h>
+#import <sys/sysctl.h>
+
 @interface L0MoverBluetoothScanner ()
 
 - (void) start;
@@ -20,12 +23,34 @@
 @end
 
 
+static NSString* L0MoverCurrentModelName() {
+	size_t length;
+	if (sysctlbyname("hw.machine", NULL, &length, NULL, 0) == -1)
+		return nil;
+	
+	char* hardwareModelC = malloc(sizeof(char) * length);
+	NSString* hardwareModel = nil;
+	if (sysctlbyname("hw.machine", hardwareModelC, &length, NULL, 0) != -1) {
+		hardwareModel = [[[NSString alloc] initWithBytes:hardwareModelC length:length - 1 encoding:NSASCIIStringEncoding] autorelease];
+	}
+	
+	free(hardwareModelC);
+	return hardwareModel;
+}
+
+
 @implementation L0MoverBluetoothScanner
 
 L0ObjCSingletonMethod(sharedScanner)
 
 @synthesize service, jammed;
 @synthesize bluetoothSession;
+
++ (BOOL) modelAssumedToSupportBluetooth;
+{
+	NSString* model = L0MoverCurrentModelName();
+	return ![model isEqual:@"iPhone1,1"] && ![model isEqual:@"iPod1,1"];
+}
 
 - (NSSet*) availableChannels;
 {
@@ -60,6 +85,8 @@ L0ObjCSingletonMethod(sharedScanner)
 {
 	NSAssert(service, @"First add this scanner to a peering service via addAvailableScannerObject:.");
 	if (bluetoothSession) return;
+	
+	L0Log(@"Model: %@ should support BT: %d", L0MoverCurrentModelName(), [[self class] modelAssumedToSupportBluetooth]);
 	
 	NSString* name = [UIDevice currentDevice].name;
 #if TARGET_IPHONE_SIMULATOR
@@ -110,7 +137,7 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) session:(GKSession*) session didFailWithError:(NSError*) error;
 {
-	if ([error code] == GKSessionCannotEnableError) { // No BT on device.
+	if ([error code] == GKSessionCannotEnableError && ![[self class] modelAssumedToSupportBluetooth]) { // No BT on device.
 		[[self retain] autorelease];
 		[self stop];
 		[self.service removeAvailableScannersObject:self];
