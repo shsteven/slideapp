@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class ARRollerView;
+
 #if kL0MoverInsertAdvertising
 #import <ARRollerView.h>
 #import <ARRollerProtocol.h>
