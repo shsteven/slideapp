@@ -594,8 +594,13 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self.tableHostController presentModalViewController:imagePicker animated:YES];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo;
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 {
+	L0Log(@"%@", info);
+	UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+	if (!image)
+		image = [info objectForKey:UIImagePickerControllerOriginalImage];
+	
 	L0ImageItem* item = [[L0ImageItem alloc] initWithTitle:@"" image:image];
 	if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
 		[item storeToAppropriateApplication];
