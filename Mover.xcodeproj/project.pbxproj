@@ -57,6 +57,7 @@
 		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
+		159F7BC00FE2D662001A6B91 /* L0MoverAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */; };
 		15A244FB0FCBFF8A0034C943 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15A244EF0FCBFF8A0034C943 /* ja.lproj */; };
 		15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15A245080FCBFF9F0034C943 /* ja.lproj */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
@@ -256,6 +257,10 @@
 		15911E790F8FA2F900BECD18 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		159120810F8FD04B00BECD18 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/L0MoverAboutPane.xib; sourceTree = "<group>"; };
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		159F7BBE0FE2D662001A6B91 /* L0MoverAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAdController.h; sourceTree = "<group>"; };
+		159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAdController.m; sourceTree = "<group>"; };
+		159F7BE40FE2D9B9001A6B91 /* Off.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Off.xcconfig; sourceTree = "<group>"; };
+		159F7BE60FE2DA03001A6B91 /* On.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = On.xcconfig; sourceTree = "<group>"; };
 		15A244EF0FCBFF8A0034C943 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
 		15A245080FCBFF9F0034C943 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
@@ -410,6 +415,8 @@
 				15F67F820F7632260024A858 /* L0MoverItemsTableController.m */,
 				15B929FC0F907BD9001E40B7 /* L0MoverAboutPane.h */,
 				15B929FD0F907BD9001E40B7 /* L0MoverAboutPane.m */,
+				159F7BBE0FE2D662001A6B91 /* L0MoverAdController.h */,
+				159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -484,6 +491,15 @@
 			name = "Wi-Fi";
 			sourceTree = "<group>";
 		};
+		159F7BE20FE2D9B9001A6B91 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				159F7BE60FE2DA03001A6B91 /* On.xcconfig */,
+				159F7BE40FE2D9B9001A6B91 /* Off.xcconfig */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 		15B7BF330F9C760300EF9AB9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,6 +540,7 @@
 		15D1C56C0F889D5C00FF3016 /* Configuration FIles */ = {
 			isa = PBXGroup;
 			children = (
+				159F7BE20FE2D9B9001A6B91 /* Ads */,
 				15D1C56F0F889D7000FF3016 /* Mover.xcconfig */,
 				15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */,
 				15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */,
@@ -946,6 +963,7 @@
 				157476160FE1922200E7A7A6 /* L0MoverPeering.m in Sources */,
 				157476190FE1923500E7A7A6 /* L0MoverWiFiScanner.m in Sources */,
 				157476350FE1930600E7A7A6 /* L0MoverWiFiChannel.m in Sources */,
+				159F7BC00FE2D662001A6B91 /* L0MoverAdController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,22 +1050,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = AdHoc.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "L0LogUseOnRequestLogging=1";
-				HEADER_SEARCH_PATHS = (
-					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
-					"$(INFINITELABS_TOOLS)/Logging/Build/Headers",
-				);
-				INFOPLIST_FILE = Info.plist;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Mover;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6037617A-9EC8-4ED6-9EEE-19C57761D548";
-				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
 			name = "Ad Hoc";
 		};
@@ -1067,21 +1072,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "L0LogUseOnRequestLogging=1";
-				HEADER_SEARCH_PATHS = (
-					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
-					"$(INFINITELABS_TOOLS)/Logging/Build/Headers",
-				);
-				INFOPLIST_FILE = Info.plist;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Mover;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B9112539-A4B0-4CCC-811E-DC7D731B5292";
-				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
 			name = "App Store";
 		};
@@ -1089,24 +1081,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"L0LogUseOnRequestLogging=1",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
-					"$(INFINITELABS_TOOLS)/Logging/Build/Headers",
-				);
-				INFOPLIST_FILE = Info.plist;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Mover;
-				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
 			name = Debug;
 		};
@@ -1114,18 +1088,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
-					"$(INFINITELABS_TOOLS)/Logging/Build/Headers",
-				);
-				INFOPLIST_FILE = Info.plist;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Mover;
-				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
 			name = Release;
 		};

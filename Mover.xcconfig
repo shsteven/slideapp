@@ -35,3 +35,21 @@ IBC_WARNINGS = NO
 // Local settings. See the Scripts/ directory and the README for more info.
 #include "Local.xcconfig"
 
+// Advertisement settings. If you're not me, you shouldn't change this. (Open source Mover does not have ads.)
+#include "Ads/CurrentSettings.xcconfig"
+
+GCC_PREPROCESSOR_DEFINITIONS = $(ILABS_ADWHIRL_GCC_PREPROCESSOR_DEFINITIONS)
+
+OTHER_LDFLAGS = -ObjC $(ILABS_ADWHIRL_OTHER_LDFLAGS)
+LIBRARY_SEARCH_PATHS = $(ILABS_ADWHIRL_LIBRARY_SEARCH_PATHS)
+
+HEADER_SEARCH_PATHS = $(INFINITELABS_LIB_MUIKIT)/Build/Headers $(INFINITELABS_TOOLS)/Logging/Build/Headers $(ILABS_ADWHIRL_HEADER_SEARCH_PATHS)
+
+USER_HEADER_SEARCH_PATHS = MYNetwork/** MYUtilities/**
+
+ALWAYS_SEARCH_USER_PATHS = NO
+INFOPLIST_FILE = Info.plist
+PRODUCT_NAME = Mover
+
+GCC_PRECOMPILE_PREFIX_HEADER = YES
+GCC_PREFIX_HEADER = $(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch

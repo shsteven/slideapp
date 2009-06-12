@@ -13,3 +13,5 @@ Local.xcconfig
 Local-Debug.xcconfig
 Local-Release.xcconfig
 Applied
+
+Ads/CurrentSettings.xcconfig
