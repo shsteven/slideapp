@@ -111,6 +111,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	self.westArrowView.alpha = 0;
 	
 	basePeerLabelColor = [self.northLabel.textColor retain];
+	
+	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	[delegate startAdvertisementsInView:self.advertisementStratum];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -126,6 +129,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 @synthesize northArrowView, eastArrowView, westArrowView;
 @synthesize northLabel, eastLabel, westLabel;
 @synthesize northSpinner, eastSpinner, westSpinner;
+@synthesize advertisementStratum;
 
 - (void) clearOutlets;
 {
@@ -136,6 +140,10 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	self.northLabel = nil;
 	self.eastLabel = nil;
 	self.westLabel = nil;
+	
+	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	[delegate stopAdvertisements];
+	self.advertisementStratum = nil;
 	
 	[basePeerLabelColor release];
 	basePeerLabelColor = nil;

@@ -60,6 +60,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 	NSMutableSet* viewsBeingHeld;
 	
 	BOOL isHoldingOntoHighlight;
+	
+	UIView* advertisementStratum;
 }
 
 - (id) initWithDefaultNibName;
@@ -79,6 +81,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 @property(retain) L0MoverPeer* northPeer;
 @property(retain) L0MoverPeer* eastPeer;
 @property(retain) L0MoverPeer* westPeer;
+
+@property(assign) IBOutlet UIView* advertisementStratum;
 
 - (BOOL) addPeerIfSpaceAllows:(L0MoverPeer*) peer;
 - (void) removePeer:(L0MoverPeer*) peer;
