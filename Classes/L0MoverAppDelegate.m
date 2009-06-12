@@ -66,14 +66,6 @@ enum {
 	[L0BookmarkItemUI registerClass];
 	
 	// Starting up peering services.
-//	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];
-//	bonjourFinder.delegate = self;
-//	[bonjourFinder start];
-	
-//	L0BluetoothPeeringService* bluetoothFinder = [L0BluetoothPeeringService sharedService];
-//	bluetoothFinder.delegate = self;
-//	[bluetoothFinder start];
-	
 	L0MoverPeering* peering = [L0MoverPeering sharedService];
 	peering.delegate = self;
 	

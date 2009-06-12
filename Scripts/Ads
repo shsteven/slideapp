@@ -1,0 +1,19 @@
+#!/bin/bash
+
+HERE="`dirname "$0"`"
+cd "$HERE/../Ads"
+
+if [ "$1" != "on" -a "$1" != "off" ]; then
+	echo "Usage: $0 <on|off>" >&2
+	exit 1
+fi	
+
+if [ -L CurrentSettings.xcconfig ]; then
+	rm CurrentSettings.xcconfig
+fi
+
+if [ "$1" == "on" ]; then
+	ln -s On.xcconfig CurrentSettings.xcconfig
+elif [ "$1" == "off" ]; then
+	ln -s Off.xcconfig CurrentSettings.xcconfig
+fi

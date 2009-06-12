@@ -116,7 +116,7 @@ L0ObjCSingletonMethod(sharedService);
 
 #pragma mark Peers and channels
 
-- (L0MoverPeer*) peerWithChannel:(id <L0MoverPeerChannel>) channel;
+- (L0MoverSynthesizedPeer*) peerWithChannel:(id <L0MoverPeerChannel>) channel;
 {
 	for (L0MoverSynthesizedPeer* peer in peers) {
 		if ([peer.uniquePeerIdentifier isEqual:channel.uniquePeerIdentifier]) {

@@ -5,3 +5,4 @@ cd "$HERE"/..
 touch Local.xcconfig
 touch Local-Debug.xcconfig
 touch Local-Release.xcconfig
+Scripts/Ads off
