@@ -15,6 +15,8 @@
 #import "L0BookmarkItemUI.h"
 #import "L0MoverItemAction.h"
 
+#import "L0MoverAdController.h"
+
 #import "L0AddressBookPersonItem.h"
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
@@ -105,6 +107,26 @@ enum {
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:kL0MoverTellAFriendWasShownKey]) {
 		[self performSelector:@selector(proposeTellingAFriend) withObject:nil afterDelay:10.0];
 	}
+}
+
+#pragma mark -
+#pragma mark Ad support
+
+- (void) startAdvertisementsInView:(UIView*) view;
+{
+	L0MoverAdController* ads = [L0MoverAdController sharedController];
+	ads.superview = view;
+	
+	CGPoint origin = toolbar.frame.origin;
+	origin.y -= kL0MoverAdSize.height - 5;
+	ads.origin = origin;
+	
+	[ads start];
+}
+
+- (void) stopAdvertisements;
+{
+	[[L0MoverAdController sharedController] stop];
 }
 
 #pragma mark -

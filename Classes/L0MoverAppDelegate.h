@@ -68,6 +68,9 @@
 
 - (void) finishPerformingMainAction;
 
+- (void) startAdvertisementsInView:(UIView*) view;
+- (void) stopAdvertisements;
+
 @end
 
 #if L0MoverAppDelegateAllowFriendMethods
