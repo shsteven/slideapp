@@ -26,4 +26,15 @@ L0ObjCSingletonMethod(sharedController)
 #endif
 }
 
+#if kL0MoverInsertAdvertising
+
+- (NSString*)adWhirlApplicationKey;
+{
+	// Not really needed, but triggers a build error if we've forgotten the key.
+	NSAssert(kL0MoverAdWhirlKey != nil, @"Needs to have the AdWhirl key to build with ads");
+	return kL0MoverAdWhirlKey;
+}
+
+#endif
+
 @end

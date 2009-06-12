@@ -6,11 +6,20 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
+#if kL0MoverInsertAdvertising
+#import <ARRollerView.h>
+#import <ARRollerProtocol.h>
+#endif
 
-@interface L0MoverAdController : NSObject {
+@interface L0MoverAdController : NSObject
+#if kL0MoverInsertAdvertising
+<ARRollerDelegate>
+#endif
+{
 	UIView* superview;
+	ARRollerView* view;
 }
 
 + sharedController;

@@ -42,6 +42,9 @@
 		1557E61E0FC5542400DC6B58 /* BookmarkIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1557E61D0FC5542400DC6B58 /* BookmarkIcon.png */; };
 		1557E66F0FC556AB00DC6B58 /* L0BookmarkItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1557E66E0FC556AB00DC6B58 /* L0BookmarkItemUI.m */; };
 		1559B5B10F7982D0005E4362 /* L0MoverPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5B00F7982D0005E4362 /* L0MoverPeer.m */; };
+		1561891C0FE2E4ED005AA908 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1561891B0FE2E4ED005AA908 /* libxml2.dylib */; };
+		1561891E0FE2E4FC005AA908 /* libsqlite3.0.8.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 156189190FE2E4DA005AA908 /* libsqlite3.0.8.6.dylib */; };
+		156189210FE2E504005AA908 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156189200FE2E504005AA908 /* CoreLocation.framework */; };
 		1572DE8D0F82BE83006BEEC0 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1572DE880F82BE7A006BEEC0 /* libMuiKit.a */; };
 		1572DE8E0F82BE8B006BEEC0 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1572DE8A0F82BE7A006BEEC0 /* MuiKit.bundle */; };
 		157476160FE1922200E7A7A6 /* L0MoverPeering.m in Sources */ = {isa = PBXBuildFile; fileRef = 157476140FE1922200E7A7A6 /* L0MoverPeering.m */; };
@@ -237,6 +240,9 @@
 		1559B5AF0F7982D0005E4362 /* L0MoverPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverPeer.h; sourceTree = "<group>"; };
 		1559B5B00F7982D0005E4362 /* L0MoverPeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverPeer.m; sourceTree = "<group>"; };
 		1559B61B0F798BD9005E4362 /* L0PeerDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0PeerDiscovery.h; sourceTree = "<group>"; };
+		156189190FE2E4DA005AA908 /* libsqlite3.0.8.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.8.6.dylib; path = usr/lib/libsqlite3.0.8.6.dylib; sourceTree = SDKROOT; };
+		1561891B0FE2E4ED005AA908 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		156189200FE2E504005AA908 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		157476140FE1922200E7A7A6 /* L0MoverPeering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverPeering.m; sourceTree = "<group>"; };
 		157476150FE1922200E7A7A6 /* L0MoverPeering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverPeering.h; sourceTree = "<group>"; };
 		157476170FE1923500E7A7A6 /* L0MoverWiFiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverWiFiScanner.h; sourceTree = "<group>"; };
@@ -388,6 +394,9 @@
 				15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */,
 				150A4D770FA39D5D006B9BB4 /* SystemConfiguration.framework in Frameworks */,
 				15FC3EDA0FC6C5C4004470BA /* Security.framework in Frameworks */,
+				1561891C0FE2E4ED005AA908 /* libxml2.dylib in Frameworks */,
+				1561891E0FE2E4FC005AA908 /* libsqlite3.0.8.6.dylib in Frameworks */,
+				156189210FE2E504005AA908 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,7 +663,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				15FC3ED90FC6C5C4004470BA /* Security.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -728,6 +736,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15FC3ED90FC6C5C4004470BA /* Security.framework */,
+				156189190FE2E4DA005AA908 /* libsqlite3.0.8.6.dylib */,
+				1561891B0FE2E4ED005AA908 /* libxml2.dylib */,
+				156189200FE2E504005AA908 /* CoreLocation.framework */,
 				150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */,
 				15911E770F8FA2F900BECD18 /* AddressBook.framework */,
 				15911E790F8FA2F900BECD18 /* AddressBookUI.framework */,
