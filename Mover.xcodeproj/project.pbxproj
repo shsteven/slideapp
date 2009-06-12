@@ -72,6 +72,7 @@
 		15B929DE0F907B6C001E40B7 /* inflabs_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B929DC0F907B6C001E40B7 /* inflabs_dark.png */; };
 		15B929DF0F907B6C001E40B7 /* inflabs.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B929DD0F907B6C001E40B7 /* inflabs.png */; };
 		15B929FE0F907BD9001E40B7 /* L0MoverAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B929FD0F907BD9001E40B7 /* L0MoverAboutPane.m */; };
+		15BCF8240FE2F08A0018555C /* L0MoverAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */; };
 		15C0C0B40FDFA243005A75B6 /* L0MoverPeering.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C0B30FDFA243005A75B6 /* L0MoverPeering.m */; };
 		15C0C16A0F75910000E5BA2F /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1690F75910000E5BA2F /* frame.png */; };
 		15C0C16D0F75918800E5BA2F /* L0MoverItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C16C0F75918800E5BA2F /* L0MoverItemView.m */; };
@@ -1002,6 +1003,7 @@
 				15E9AC950FE0172F00F0910A /* L0MoverWiFiChannel.m in Sources */,
 				15ED7E1E0FE0E6C00061B04E /* L0MoverBluetoothScanner.m in Sources */,
 				15ED7E230FE0E8440061B04E /* L0MoverBluetoothChannel.m in Sources */,
+				15BCF8240FE2F08A0018555C /* L0MoverAdController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
