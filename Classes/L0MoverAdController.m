@@ -19,6 +19,7 @@ L0ObjCSingletonMethod(sharedController)
 
 - (void) start;
 {
+	L0Log(@"Advertisements on!");
 	if (view) return;
 	
 	view = [[ARRollerView requestRollerViewWithDelegate:self] retain];
@@ -26,6 +27,7 @@ L0ObjCSingletonMethod(sharedController)
 
 - (void) stop;
 {
+	L0Log(@"Ads being disabled.");
 	[view setDelegateToNil];
 	[view removeFromSuperview];
 	[view release]; view = nil;
@@ -37,6 +39,12 @@ L0ObjCSingletonMethod(sharedController)
 - (void)didReceiveAd:(ARRollerView*)adWhirlView;
 {
 	if (view.superview) return;
+	if (!self.superview) {
+		L0Log(@"Ad received but no view to display it in. Agh! Dropping it.");
+		return;
+	}
+	
+	L0Log(@"Ad received with the view not attached to anything. Displaying.");
 	
 	CGRect frame = view.frame;
 	frame.origin = self.origin;
@@ -69,7 +77,11 @@ L0ObjCSingletonMethod(sharedController)
 
 #else
 
-+ sharedController { return nil; }
++ sharedController;
+{ 
+	L0Log(@"Advertisements disabled for this copy of Mover");
+	return nil;
+}
 - (void) start {}
 
 #endif
