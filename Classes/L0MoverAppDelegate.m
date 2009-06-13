@@ -83,10 +83,16 @@ enum {
 	self.tableController = [[[L0MoverItemsTableController alloc] initWithDefaultNibName] autorelease];
 	
 	NSMutableArray* itemsArray = [self.toolbar.items mutableCopy];
+
+	// edit button
+	[itemsArray insertObject:self.tableController.editButtonItem atIndex:2];
+	
+	// info button
 	UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
 	[infoButton addTarget:self.tableHostController action:@selector(showBack) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem* infoButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
 	[itemsArray addObject:infoButtonItem];
+
 	self.toolbar.items = itemsArray;
 	[itemsArray release];
     
