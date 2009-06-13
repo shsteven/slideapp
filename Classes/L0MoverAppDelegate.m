@@ -137,7 +137,7 @@ enum {
 	ads.superview = view;
 	
 	CGPoint origin = toolbar.frame.origin;
-	origin.y -= kL0MoverAdSize.height - 5;
+	origin.y -= kL0MoverAdSize.height;
 	ads.origin = origin;
 	
 	[ads start];

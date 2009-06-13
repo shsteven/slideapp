@@ -303,7 +303,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 										  @"L0MoverNetworkUI", @"Bluetooth is disabled (footer text in network config pane).");
 	} else {
 		return NSLocalizedStringFromTable(@"Connects with newer iPhone and iPod touch models with Bluetooth.",
-										  @"L0MoverNetworkUI", @"Bluetooth is ok (footer text in network config pane).");		
+										  @"L0MoverNetworkUI", @"Bluetooth is ok (footer text in network config pane).");
 	}
 }
 
