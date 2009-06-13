@@ -166,17 +166,16 @@ L0UniquePointerConstant(kL0MoverCalloutControllerObservationContext);
 	
 	for (id scanner in [self allScanners]) {
 		[scanner addObserver:self forKeyPath:@"jammed" options:0 context:(void*) kL0MoverCalloutControllerObservationContext];
+		[scanner addObserver:self forKeyPath:@"enabled" options:0 context:(void*) kL0MoverCalloutControllerObservationContext];
 	}
 	
-	[[L0MoverPeering sharedService] addObserver:self forKeyPath:@"availableScanners" options:0 context:(void*) kL0MoverCalloutControllerObservationContext];
+	[[L0MoverPeering sharedService] addObserver:self forKeyPath:@"availableScanners" options:NSKeyValueObservingOptionInitial context:(void*) kL0MoverCalloutControllerObservationContext];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
-	if (context != kL0MoverCalloutControllerObservationContext) return;
-	
-	if ([keyPath isEqual:@"jammed"] || [keyPath isEqual:@"availableScanners"])
-		[self updateAndShowIfNeeded];
+	if (context != kL0MoverCalloutControllerObservationContext) return;	
+	[self updateAndShowIfNeeded];
 }
 
 - (void) updateAndShowIfNeeded;

@@ -174,7 +174,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 
 - (void) prepareStatusCell:(UITableViewCell*) cell forScanner:(id <L0MoverPeerScanner>) s;
 {		
-	if (s.jammed)
+	if (s.jammed && s.enabled)
 		cell.textLabel.textColor = [UIColor redColor];
 	
 	if ([self.model count] == 1) {
@@ -201,9 +201,6 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 		
 		[self updateStateOfSwitch:enabledSwitch forScanner:s];
 		cell.accessoryView = enabledSwitch;
-		
-		if (s.jammed)
-			cell.textLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%@ (Disconnected)", @"L0MoverNetworkUI", @"Shown as a label in the config pane if a service is jammed and it has a switch. %@ is the network name. Example: 'Wi-Fi (Disconnected)'."), cell.textLabel.text];
 		
 	}
 	
@@ -330,8 +327,12 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 {
 	L0MoverNetworkSettingsPane* myself = [[L0MoverNetworkSettingsPane alloc] initWithStyle:UITableViewStyleGrouped];
 	UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:myself];
+	
 	myself.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:myself action:@selector(dismiss)] autorelease];
+	
 	[myself release];
+	
+	nav.navigationBar.barStyle = UIBarStyleBlack;
 	return [nav autorelease];
 }
 
