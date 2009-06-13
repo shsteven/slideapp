@@ -317,8 +317,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 				selfSize.height -= itemViewFrame.size.height / 2 + 10;
 				
 				CGPoint newCenter = CGPointMake(
-												(int) selfSize.width % random(),
-												(int) selfSize.height % random()
+												selfSize.width * (random() / (double) LONG_MAX),
+												selfSize.height * (random() / (double) LONG_MAX)
 												);
 				
 				view.center = newCenter;
