@@ -32,9 +32,6 @@ INTERNAL_VERSION = $(VERSION)
 IBC_NOTICES = NO
 IBC_WARNINGS = NO
 
-// Local settings. See the Scripts/ directory and the README for more info.
-#include "Local.xcconfig"
-
 // Advertisement settings. If you're not me, you shouldn't change this. (Open source Mover does not have ads.)
 #include "Ads/CurrentSettings.xcconfig"
 
@@ -53,3 +50,6 @@ PRODUCT_NAME = Mover
 
 GCC_PRECOMPILE_PREFIX_HEADER = YES
 GCC_PREFIX_HEADER = $(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch
+
+// Local settings. See the Scripts/ directory and the README for more info.
+#include "Local.xcconfig"

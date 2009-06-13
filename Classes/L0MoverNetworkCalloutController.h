@@ -13,6 +13,8 @@
 	UIView* networkCalloutView;
 	UILabel* networkLabel;
 	UILabel* availableNetworksLabel;
+	
+	BOOL allJammed;
 }
 
 @property(retain) IBOutlet UILabel* networkLabel;
@@ -26,6 +28,8 @@
 - (IBAction) pressedCallout;
 
 - (void) showAboveView:(UIView*) view;
+
+- (void) startWatchingForJams;
 
 @end
 

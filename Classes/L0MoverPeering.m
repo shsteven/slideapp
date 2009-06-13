@@ -222,6 +222,7 @@ L0ObjCSingletonMethod(sharedService);
 	for (id channel in scanner.availableChannels)
 		[self makeChannelUnavailable:channel];
 	
+	scanner.enabled = NO;
 	scanner.service = nil;
 	[availableScanners removeObject:scanner];
 }

@@ -111,7 +111,9 @@ enum {
 	networkUnavailableViewStartingPosition = self.networkUnavailableView.center;
 	self.networkUnavailableView.hidden = YES;
 	networkAvailable = YES;
-	[self beginWatchingNetwork];
+	//[self beginWatchingNetwork];
+	
+	[self.networkCalloutController startWatchingForJams];
 	
 	// Make sure Tell a Friend is shown if needed.
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:kL0MoverTellAFriendWasShownKey]) {
