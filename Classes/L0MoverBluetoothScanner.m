@@ -70,15 +70,23 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (BOOL) enabled;
 {
-	return bluetoothSession != nil && !jammed;
+	return bluetoothSession != nil;
 }
 
 - (void) setEnabled:(BOOL) enabled;
 {
 	if (enabled)
 		[self start];
-	else
+	else {
 		[self stop];
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(restart) object:nil];
+	}
+}
+
+- (void) restart;
+{
+	[self stop];
+	[self start];
 }
 
 - (void) start;
@@ -143,13 +151,12 @@ L0ObjCSingletonMethod(sharedScanner)
 		[self.service removeAvailableScannersObject:self];
 		return;
 	} else {
-		[self stop];
 		[self willChangeValueForKey:@"jammed"];
 		
 		if (retries <= 10) {
 			jammed = YES;
 			retries++;
-			[self performSelector:@selector(start) withObject:nil afterDelay:10.0];
+			[self performSelector:@selector(restart) withObject:nil afterDelay:10.0];
 		} else {
 			jammed = NO; // this makes us disabled.
 		}

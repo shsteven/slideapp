@@ -293,7 +293,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 - (NSString*) titleForFooterInBluetoothSection;
 {
 	if (self.bluetooth.jammed) {
-		return NSLocalizedStringFromTable(@"Bluetooth is off in the Settings application. Turn it on to enable.",
+		return NSLocalizedStringFromTable(@"Bluetooth is off. Turn it on in the Settings application to use it.",
 										  @"L0MoverNetworkUI", @"Bluetooth is jammed (footer text in network config pane).");
 	} else if (!self.bluetooth.enabled) {
 		return NSLocalizedStringFromTable(@"Turn on to see newer iPhone and iPod touch models near you with Bluetooth on.",

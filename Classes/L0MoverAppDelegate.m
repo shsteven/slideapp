@@ -126,6 +126,9 @@ enum {
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:kL0MoverTellAFriendWasShownKey]) {
 		[self performSelector:@selector(proposeTellingAFriend) withObject:nil afterDelay:10.0];
 	}
+	
+	// Make sure we show the network callout if there are one or more jams.
+	[self performSelector:@selector(showNetworkCalloutIfJammed) withObject:nil afterDelay:2.0];
 }
 
 #pragma mark -
@@ -667,6 +670,12 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 - (IBAction) showNetworkCallout;
 {
 	[self.networkCalloutController toggleCallout];
+}
+
+- (IBAction) showNetworkCalloutIfJammed;
+{
+	if ([[L0MoverWiFiScanner sharedScanner] jammed] || [[L0MoverBluetoothScanner sharedScanner] jammed])
+		[self.networkCalloutController showCallout];
 }
 
 - (void) presentModalViewController:(UIViewController*) vc;
