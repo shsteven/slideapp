@@ -24,6 +24,8 @@
 - (NSString*) descriptionForUnjammedScanners:(NSArray*) ujs; // TODO NSSet
 
 - (void) updateAndShowIfNeeded;
+- (void) hideCallout;
+- (void) hideCalloutAfterDelay;
 
 @end
 
@@ -66,9 +68,22 @@
 	L0Log(@"Yay!"); // TODO
 }
 
-- (void) showAboveView:(UIView*) view;
+#pragma mark -
+#pragma mark Showing and hiding
+
+- (void) toggleCallout;
+{
+	if (!self.networkCalloutView.superview)
+		[self showCallout];
+	else
+		[self hideCalloutUnlessJammed];
+}
+
+- (void) showCallout;
 {
 	if (self.networkCalloutView.superview) return;
+	
+	UIView* view = self.anchorView;
 	
 	CGRect frame = view.frame;
 	CGSize calloutSize = self.networkCalloutView.frame.size;
@@ -87,11 +102,50 @@
 	self.networkCalloutView.alpha = 0.0;
 	[view.superview addSubview:self.networkCalloutView];
 	[view.superview bringSubviewToFront:self.networkCalloutView];
-	 
+	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
 	self.networkCalloutView.alpha = 1.0;
 	[UIView commitAnimations];
+
+	[self hideCalloutAfterDelay];
+	
+	if (!allJammed)
+		[self hideCalloutAfterDelay];
+}
+
+- (void) hideCalloutAfterDelay;
+{
+	if (waitingForHide || allJammed) return;
+
+	waitingForHide = YES;
+	[self performSelector:@selector(hideCalloutUnlessJammed) withObject:nil afterDelay:7.0];
+}
+
+- (void) hideCallout;
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideCalloutUnlessJammed) object:nil];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.2];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(hideAnimation:didEndByFinishing:context:)];
+	
+	self.networkCalloutView.alpha = 0.0;
+	
+	[UIView commitAnimations];
+}
+
+- (void) hideAnimation:(NSString*) ani didEndByFinishing:(BOOL) finished context:(void*) nothing;
+{
+	[self.networkCalloutView removeFromSuperview];
+}
+
+- (void) hideCalloutUnlessJammed;
+{
+	waitingForHide = NO;
+	if (!allJammed)
+		[self hideCallout];
 }
 
 #pragma mark -
@@ -104,18 +158,24 @@ L0UniquePointerConstant(kL0MoverCalloutControllerObservationContext);
 	L0Log(@"Started watching for jams.");
 	
 	for (id scanner in [self allScanners]) {
-		[scanner addObserver:self forKeyPath:@"jammed" options:NSKeyValueObservingOptionInitial context:(void*) kL0MoverCalloutControllerObservationContext];
+		[scanner addObserver:self forKeyPath:@"jammed" options:0 context:(void*) kL0MoverCalloutControllerObservationContext];
 	}
+	
+	[[L0MoverPeering sharedService] addObserver:self forKeyPath:@"availableScanners" options:0 context:(void*) kL0MoverCalloutControllerObservationContext];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
-	if ([keyPath isEqual:@"jammed"])
+	if (context != kL0MoverCalloutControllerObservationContext) return;
+	
+	if ([keyPath isEqual:@"jammed"] || [keyPath isEqual:@"availableScanners"])
 		[self updateAndShowIfNeeded];
 }
 
 - (void) updateAndShowIfNeeded;
 {
+	BOOL wasAllJammed = allJammed;
+	
 	NSArray* ujs = [self unjammedScanners];
 	allJammed = ([ujs count] == 0);
 	
@@ -141,7 +201,10 @@ L0UniquePointerConstant(kL0MoverCalloutControllerObservationContext);
 	
 	[UIView commitAnimations];
 	
-	// TODO show if needed.
+	if (allJammed)
+		[self showCallout];
+	else if (wasAllJammed)
+		[self hideCalloutAfterDelay];
 }
 
 - (UIColor*) colorForCurrentStatus;
@@ -185,21 +248,23 @@ L0UniquePointerConstant(kL0MoverCalloutControllerObservationContext);
 	if ([ujs count] == 0)
 		return NSLocalizedStringFromTable(@"Disconnected", @"L0MoverNetworkUI", @"Shown on the callout bubble in red if all services are unavailable.");
 	else if ([ujs count] == 1 && [[peering availableScanners] count] == 1)
-		return NSLocalizedStringFromTable(@"On", @"L0MoverNetworkUI", @"Shown on the callout bubble if one service is available and unjammed.");
+		return NSLocalizedStringFromTable(@"On", @"L0MoverNetworkUI", @"Shown on the callout bubble if one service is available and unjammed (eg: 'Network: On').");
 	else {
 		NSMutableArray* scannerNames = [NSMutableArray array];
 		if ([ujs containsObject:[L0MoverWiFiScanner sharedScanner]])
 			[scannerNames addObject:
-			 NSLocalizedStringFromTable(@"Wi-Fi", @"L0MoverNetworkUI", @"Shown on the callout bubble if Wi-Fi is on (eg the Wi-Fi in 'Wi-Fi, Bluetooth, Web').")
+			 NSLocalizedStringFromTable(@"Wi-Fi", @"L0MoverNetworkUI", @"Shown on the callout bubble if Wi-Fi is on (eg the Wi-Fi in 'Network: Wi-Fi, Bluetooth, Web').")
 			 ];
 		if ([ujs containsObject:[L0MoverBluetoothScanner sharedScanner]])
 			[scannerNames addObject:
-			 NSLocalizedStringFromTable(@"Bluetooth", @"L0MoverNetworkUI", @"Shown on the callout bubble if Bluetooth is on (eg the Bluetooth in 'Wi-Fi, Bluetooth, Web').")
+			 NSLocalizedStringFromTable(@"Bluetooth", @"L0MoverNetworkUI", @"Shown on the callout bubble if Bluetooth is on (eg the Bluetooth in 'Network: Wi-Fi, Bluetooth, Web').")
 			 ];
 		
 		return [scannerNames componentsJoinedByString:@", "];
 	}
 }
+
+@synthesize anchorView;
 
 @end
 

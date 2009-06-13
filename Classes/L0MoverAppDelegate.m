@@ -113,6 +113,7 @@ enum {
 	networkAvailable = YES;
 	//[self beginWatchingNetwork];
 	
+	self.networkCalloutController.anchorView = self.toolbar;
 	[self.networkCalloutController startWatchingForJams];
 	
 	// Make sure Tell a Friend is shown if needed.
@@ -659,7 +660,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 - (IBAction) showNetworkCallout;
 {
-	[self.networkCalloutController showAboveView:self.toolbar];
+	[self.networkCalloutController toggleCallout];
 }
 
 @end

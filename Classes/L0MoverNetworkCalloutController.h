@@ -14,7 +14,10 @@
 	UILabel* networkLabel;
 	UILabel* availableNetworksLabel;
 	
+	UIView* anchorView;
+	
 	BOOL allJammed;
+	BOOL waitingForHide;
 }
 
 @property(retain) IBOutlet UILabel* networkLabel;
@@ -22,14 +25,18 @@
 
 @property(retain) IBOutlet UIView* networkCalloutView;
 
+@property(assign) UIView* anchorView;
+
 - (IBAction) highlightCallout;
 - (IBAction) unhighlightCallout;
 
 - (IBAction) pressedCallout;
 
-- (void) showAboveView:(UIView*) view;
-
 - (void) startWatchingForJams;
+
+- (void) showCallout;
+- (void) hideCalloutUnlessJammed;
+- (void) toggleCallout;
 
 @end
 
