@@ -122,6 +122,7 @@
 		15F67FDA0F768A800024A858 /* TableArrow_East.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F67FD70F768A800024A858 /* TableArrow_East.png */; };
 		15F67FDB0F768A800024A858 /* TableArrow_North.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F67FD80F768A800024A858 /* TableArrow_North.png */; };
 		15F67FDC0F768A800024A858 /* TableArrow_West.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F67FD90F768A800024A858 /* TableArrow_West.png */; };
+		15FBC1A40FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FBC1A30FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m */; };
 		15FC3EC40FC6BE6D004470BA /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FC3EC20FC6BE6D004470BA /* SFHFKeychainUtils.m */; };
 		15FC3ED70FC6C486004470BA /* AboutPaneDisclosureIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 15FC3ED60FC6C486004470BA /* AboutPaneDisclosureIndicator.png */; };
 		15FC3EDA0FC6C5C4004470BA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FC3ED90FC6C5C4004470BA /* Security.framework */; };
@@ -371,6 +372,8 @@
 		15F67FD70F768A800024A858 /* TableArrow_East.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableArrow_East.png; sourceTree = "<group>"; };
 		15F67FD80F768A800024A858 /* TableArrow_North.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableArrow_North.png; sourceTree = "<group>"; };
 		15F67FD90F768A800024A858 /* TableArrow_West.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableArrow_West.png; sourceTree = "<group>"; };
+		15FBC1A20FE41479001F0AB7 /* L0MoverNetworkSettingsPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverNetworkSettingsPane.h; sourceTree = "<group>"; };
+		15FBC1A30FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverNetworkSettingsPane.m; sourceTree = "<group>"; };
 		15FC3EC20FC6BE6D004470BA /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = Classes/SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		15FC3EC30FC6BE6D004470BA /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = Classes/SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		15FC3ED60FC6C486004470BA /* AboutPaneDisclosureIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AboutPaneDisclosureIndicator.png; sourceTree = "<group>"; };
@@ -419,7 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				15C0C0B10FDFA1EE005A75B6 /* Peering (with channels) */,
-				15080B870FD901E00065D5AC /* Network Callout */,
+				15080B870FD901E00065D5AC /* Network UI */,
 				15C0C1CB0F759B7500E5BA2F /* Items */,
 				15E714410FBD92700037C439 /* Items UI */,
 				1D3623240D0F684500981E51 /* L0MoverAppDelegate.h */,
@@ -442,13 +445,15 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		15080B870FD901E00065D5AC /* Network Callout */ = {
+		15080B870FD901E00065D5AC /* Network UI */ = {
 			isa = PBXGroup;
 			children = (
 				15080B880FD901FE0065D5AC /* L0MoverNetworkCalloutController.h */,
 				15080B890FD901FE0065D5AC /* L0MoverNetworkCalloutController.m */,
+				15FBC1A20FE41479001F0AB7 /* L0MoverNetworkSettingsPane.h */,
+				15FBC1A30FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m */,
 			);
-			name = "Network Callout";
+			name = "Network UI";
 			sourceTree = "<group>";
 		};
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
@@ -1004,6 +1009,7 @@
 				15ED7E1E0FE0E6C00061B04E /* L0MoverBluetoothScanner.m in Sources */,
 				15ED7E230FE0E8440061B04E /* L0MoverBluetoothChannel.m in Sources */,
 				15BCF8240FE2F08A0018555C /* L0MoverAdController.m in Sources */,
+				15FBC1A40FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

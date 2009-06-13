@@ -663,4 +663,9 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self.networkCalloutController toggleCallout];
 }
 
+- (void) presentModalViewController:(UIViewController*) vc;
+{
+	[self.tableHostController presentModalViewController:vc animated:YES];
+}
+
 @end

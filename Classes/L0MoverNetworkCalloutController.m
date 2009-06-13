@@ -12,6 +12,9 @@
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
 
+#import "L0MoverNetworkSettingsPane.h"
+#import "L0MoverAppDelegate.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 @interface L0MoverNetworkCalloutController ()
@@ -65,7 +68,11 @@
 - (IBAction) pressedCallout;
 {
 	[self unhighlightCallout];
-	L0Log(@"Yay!"); // TODO
+	
+	L0MoverNetworkSettingsPane* pane = [L0MoverNetworkSettingsPane networkSettingsPane];
+	
+	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	[delegate presentModalViewController:pane];
 }
 
 #pragma mark -

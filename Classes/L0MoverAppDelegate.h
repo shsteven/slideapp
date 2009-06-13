@@ -71,6 +71,8 @@
 - (void) startAdvertisementsInView:(UIView*) view;
 - (void) stopAdvertisements;
 
+- (void) presentModalViewController:(UIViewController*) vc;
+
 @end
 
 #if L0MoverAppDelegateAllowFriendMethods

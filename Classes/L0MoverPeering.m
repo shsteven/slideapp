@@ -79,7 +79,12 @@ L0UniquePointerConstant(kL0MoverPeeringObservationContext);
 @implementation L0MoverPeering
 
 L0ObjCSingletonMethod(sharedService);
-@synthesize availableScanners, delegate, uniquePeerIdentifierForSelf;
+@synthesize delegate, uniquePeerIdentifierForSelf;
+
+- (NSSet*) availableScanners;
+{
+	return scanners;
+}
 
 - (NSSet*) peers;
 {
@@ -89,12 +94,12 @@ L0ObjCSingletonMethod(sharedService);
 - (id) init;
 {
 	if (self = [super init]) {
-		availableScanners = [[NSMutableSet setWithSet:[[self class] allScanners]] retain];
+		scanners = [[NSMutableSet setWithSet:[[self class] allScanners]] retain];
 		peers = [NSMutableSet new];
 		uniquePeerIdentifierForSelf = [[[[L0UUID UUID] stringValue] substringWithRange:NSMakeRange(0, 2)] copy];
 		
 		// set up KVO
-		for (id scanner in availableScanners)
+		for (id scanner in scanners)
 			[scanner addObserver:self forKeyPath:@"availableChannels" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld|NSKeyValueObservingOptionInitial context:(void*) kL0MoverPeeringObservationContext];
 	}
 	
@@ -103,7 +108,7 @@ L0ObjCSingletonMethod(sharedService);
 
 - (void) dealloc;
 {
-	[availableScanners release];
+	[scanners release];
 	[peers release];
 	[uniquePeerIdentifierForSelf release];
 	[super dealloc];
@@ -214,7 +219,7 @@ L0ObjCSingletonMethod(sharedService);
 - (void) addAvailableScannersObject:(id <L0MoverPeerScanner>) scanner;
 {
 	scanner.service = self;
-	[availableScanners addObject:scanner];
+	[scanners addObject:scanner];
 }
 
 - (void) removeAvailableScannersObject:(id <L0MoverPeerScanner>) scanner;
@@ -224,7 +229,7 @@ L0ObjCSingletonMethod(sharedService);
 	
 	scanner.enabled = NO;
 	scanner.service = nil;
-	[availableScanners removeObject:scanner];
+	[scanners removeObject:scanner];
 }
 
 @end

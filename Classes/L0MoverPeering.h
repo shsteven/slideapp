@@ -13,7 +13,7 @@
 
 @interface L0MoverPeering : NSObject {
 	id <L0PeerDiscoveryDelegate> delegate;
-	NSMutableSet* peers, * availableScanners;
+	NSMutableSet* peers, * scanners;
 	NSString* uniquePeerIdentifierForSelf;
 }
 
