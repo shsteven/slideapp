@@ -25,8 +25,9 @@
 - (void) updateModel;
 - (void) updateStateOfSwitch:(UISwitch*) enabledSwitch forScanner:(id <L0MoverPeerScanner>) s;
 
-- (void) prepareCell:(UITableViewCell*) cell forWiFiSectionAtRow:(NSInteger) row;
-- (void) prepareCell:(UITableViewCell*) cell forBluetoothSectionAtRow:(NSInteger) row;
+- (UITableViewCell*) cellForWiFiSectionAtRow:(NSInteger) row;
+- (UITableViewCell*) cellForBluetoothSectionAtRow:(NSInteger) row;
+
 - (NSString*) titleForFooterInWiFiSection;
 - (NSString*) titleForFooterInBluetoothSection;
 
@@ -37,6 +38,25 @@ enum {
 	kL0MoverBluetoothSection,
 };
 typedef NSInteger L0MoverNetworkSettingsSection;
+
+@interface L0MoverTableViewWithCustomSectionMargins : UITableView
+{
+}
+
+@end
+
+@implementation L0MoverTableViewWithCustomSectionMargins
+
+- (CGRect) rectForFooterInSection:(NSInteger) section;
+{
+	CGRect rect = [super rectForFooterInSection:section];
+	rect.origin.x += 10;
+	rect.size.width -= 10;
+	return rect;
+}
+
+@end
+
 
 
 @implementation L0MoverNetworkSettingsPane
@@ -50,14 +70,17 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 }
 */
 
-/*
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void) loadView;
+{
+	UITableView* tableView = [[L0MoverTableViewWithCustomSectionMargins alloc] initWithFrame:CGRectMake(0, 0, 10, 10) style:UITableViewStyleGrouped];
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	tableView.delegate = self;
+	tableView.dataSource = self;
+	self.view = tableView;
+	
+	[tableView release];
+	[self viewDidLoad];
 }
-*/
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -104,6 +127,9 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
+	CATransition* t = [CATransition animation];
+	t.type = kCATransitionFade;
+	[self.tableView.layer addAnimation:t forKey:@"L0FadeTransition"];
 	[self updateModel];
 }
 
@@ -123,10 +149,6 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	
 	self.model = m;
 	
-	CATransition* t = [CATransition animation];
-	t.type = kCATransitionFade;
-	
-	[self.tableView.layer addAnimation:t forKey:@"L0FadeAnimation"];
 	[self.tableView reloadData];
 }
 
@@ -150,12 +172,15 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	return 0;
 }
 
-- (UIView*) accessoryViewForStatusCellOfScanner:(id <L0MoverPeerScanner>) s;
-{	
+- (void) prepareStatusCell:(UITableViewCell*) cell forScanner:(id <L0MoverPeerScanner>) s;
+{		
+	if (s.jammed)
+		cell.textLabel.textColor = [UIColor redColor];
+	
 	if ([self.model count] == 1) {
 		
 		// a label.
-		UILabel* stateLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 70, 30)] autorelease];
+		UILabel* stateLabel = cell.detailTextLabel;
 		
 		// by implied contract, only one channel available == that chan is enabled.
 		if (s.jammed) {
@@ -163,10 +188,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 			stateLabel.textColor = [UIColor redColor];
 		} else {
 			stateLabel.text = NSLocalizedStringFromTable(@"On", @"L0MoverNetworkUI", @"Shown as a label in the config pane if the only available service is connected.");
-			stateLabel.textColor = [UIColor blackColor];
 		}
-		
-		return stateLabel;
 		
 	} else {
 		
@@ -178,7 +200,10 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 		enabledSwitch.tag = [self.model indexOfObject:s]; // tag it with the scanner #
 		
 		[self updateStateOfSwitch:enabledSwitch forScanner:s];
-		return enabledSwitch;
+		cell.accessoryView = enabledSwitch;
+		
+		if (s.jammed)
+			cell.textLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%@ (Disconnected)", @"L0MoverNetworkUI", @"Shown as a label in the config pane if a service is jammed and it has a switch. %@ is the network name. Example: 'Wi-Fi (Disconnected)'."), cell.textLabel.text];
 		
 	}
 	
@@ -204,37 +229,42 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    
-    static NSString* kL0MoverNetworkSettingsCell = @"kL0MoverNetworkSettingsCell";
-    
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kL0MoverNetworkSettingsCell];
-	
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kL0MoverNetworkSettingsCell] autorelease];
-    }
-    
-    id scanner = [self.model objectAtIndex:[indexPath section]];
-	
+	id scanner = [self.model objectAtIndex:[indexPath section]];
+		
 	if (scanner == self.WiFi) {
-		[self prepareCell:cell forWiFiSectionAtRow:[indexPath row]];
+		return [self cellForWiFiSectionAtRow:[indexPath row]];
 	} else if (scanner == self.bluetooth) {
-		[self prepareCell:cell forBluetoothSectionAtRow:[indexPath row]];
+		return [self cellForBluetoothSectionAtRow:[indexPath row]];
 	}
+	
+	NSAssert(NO, @"An unknown scanner was encountered");
+	return nil;
+}
+
+- (UITableViewCell*) statusCellForScanner:(id <L0MoverPeerScanner>) s withLabel:(NSString*) label;
+{
+	BOOL requiresControl = [self.peering.availableScanners count] == 1;
+	UITableViewCellStyle style = requiresControl? UITableViewCellStyleValue1 : UITableViewCellStyleDefault;
+	UITableViewCell* cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:nil] autorelease];
+	cell.textLabel.text = label;
+
+	[self prepareStatusCell:cell forScanner:s];
 	
 	return cell;
 }
 
-- (void) prepareCell:(UITableViewCell*) cell forWiFiSectionAtRow:(NSInteger) row;
+- (UITableViewCell*) cellForWiFiSectionAtRow:(NSInteger) row;
 {
-	cell.textLabel.text = NSLocalizedStringFromTable(@"Wi-Fi", @"L0MoverNetworkUI", @"Label to the settings pane cell.");
-	cell.accessoryView = [self accessoryViewForStatusCellOfScanner:self.WiFi];
+	return [self statusCellForScanner:self.WiFi withLabel:NSLocalizedStringFromTable(@"Wi-Fi", @"L0MoverNetworkUI", @"Label to the settings pane cell.")];
 }
 
-- (void) prepareCell:(UITableViewCell*) cell forBluetoothSectionAtRow:(NSInteger) row;
+- (UITableViewCell*) cellForBluetoothSectionAtRow:(NSInteger) row;
 {
-	cell.textLabel.text = NSLocalizedStringFromTable(@"Bluetooth", @"L0MoverNetworkUI", @"Label to the settings pane cell.");
-	cell.accessoryView = [self accessoryViewForStatusCellOfScanner:self.bluetooth];
+	return [self statusCellForScanner:self.bluetooth withLabel:NSLocalizedStringFromTable(@"Bluetooth", @"L0MoverNetworkUI", @"Label to the settings pane cell.")];
 }
+
+#pragma mark -
+#pragma mark Footers
 
 - (NSString*) tableView:(UITableView*) tableView titleForFooterInSection:(NSInteger) section;
 {
@@ -252,13 +282,13 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 - (NSString*) titleForFooterInWiFiSection;
 {
 	if (self.WiFi.jammed) {
-		return NSLocalizedStringFromTable(@"Wi-Fi is available, but disconnected. Connect to a Wi-Fi network to see other devices connected to it.",
+		return NSLocalizedStringFromTable(@"Connect to a network to use Wi-Fi.",
 										  @"L0MoverNetworkUI", @"Wi-Fi is jammed (footer text in network config pane).");
 	} else if (!self.WiFi.enabled) {
-		return NSLocalizedStringFromTable(@"Turn on to connect with other devices on the same Wi-Fi network.",
+		return NSLocalizedStringFromTable(@"Turn on to see other devices using Wi-Fi.",
 										  @"L0MoverNetworkUI", @"Wi-Fi is disabled (footer text in network config pane).");
 	} else {
-		return NSLocalizedStringFromTable(@"Connects with other devices on the same Wi-Fi network.",
+		return NSLocalizedStringFromTable(@"Connects with other devices on this Wi-Fi network.",
 										  @"L0MoverNetworkUI", @"Wi-Fi is ok (footer text in network config pane).");		
 	}
 }
@@ -266,13 +296,13 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 - (NSString*) titleForFooterInBluetoothSection;
 {
 	if (self.bluetooth.jammed) {
-		return NSLocalizedStringFromTable(@"Bluetooth must be turned on from the Settings application before you can use it.",
+		return NSLocalizedStringFromTable(@"Bluetooth is off in the Settings application. Turn it on to enable.",
 										  @"L0MoverNetworkUI", @"Bluetooth is jammed (footer text in network config pane).");
 	} else if (!self.bluetooth.enabled) {
-		return NSLocalizedStringFromTable(@"Turn on to connect with newer iPhone and iPod touch models nearby that have Bluetooth on.",
+		return NSLocalizedStringFromTable(@"Turn on to see newer iPhone and iPod touch models near you with Bluetooth on.",
 										  @"L0MoverNetworkUI", @"Bluetooth is disabled (footer text in network config pane).");
 	} else {
-		return NSLocalizedStringFromTable(@"Connects with newer iPhone and iPod touch models nearby that have Bluetooth on.",
+		return NSLocalizedStringFromTable(@"Connects with newer iPhone and iPod touch models with Bluetooth.",
 										  @"L0MoverNetworkUI", @"Bluetooth is ok (footer text in network config pane).");		
 	}
 }

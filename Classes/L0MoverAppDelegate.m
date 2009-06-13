@@ -75,9 +75,15 @@ enum {
 	[peering addAvailableScannersObject:scanner];
 	scanner.enabled = YES;
 
+#if DEBUG && !kL0MoverTestByDisablingBluetooth
 	L0MoverBluetoothScanner* btScanner = [L0MoverBluetoothScanner sharedScanner];
 	[peering addAvailableScannersObject:btScanner];
 	btScanner.enabled = YES;
+#endif
+	
+#if !DEBUG && kL0MoverTestByDisablingBluetooth
+#error Disable kL0MoverTestByDisablingBluetooth in your local settings to build.
+#endif
 	
 	// Setting up the UI.
 	self.tableController = [[[L0MoverItemsTableController alloc] initWithDefaultNibName] autorelease];
