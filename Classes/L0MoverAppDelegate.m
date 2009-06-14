@@ -124,7 +124,7 @@ enum {
 	
 	// Make sure Tell a Friend is shown if needed.
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:kL0MoverTellAFriendWasShownKey]) {
-		[self performSelector:@selector(proposeTellingAFriend) withObject:nil afterDelay:10.0];
+		[self performSelector:@selector(proposeTellingAFriend) withObject:nil afterDelay:15.0];
 	}
 	
 	// Make sure we show the network callout if there are one or more jams.
