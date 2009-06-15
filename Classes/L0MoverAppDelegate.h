@@ -10,6 +10,7 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <SystemConfiguration/SystemConfiguration.h>
+#import <MessageUI/MessageUI.h>
 
 #import "L0MoverItemsTableController.h"
 #import "L0PeerDiscovery.h"
@@ -17,7 +18,7 @@
 
 #import "L0MoverNetworkCalloutController.h"
 
-@interface L0MoverAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0MoverPeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate> {
+@interface L0MoverAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0MoverPeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
     UIWindow *window;
 	
 	L0MoverItemsTableController* tableController;

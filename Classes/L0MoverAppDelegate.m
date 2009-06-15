@@ -179,11 +179,16 @@ enum {
 	NSString* mailSubject = NSLocalizedString(@"Check out this iPhone app, Mover",
 											  @"Subject of 'Email a Friend' message");
 	
-	NSString* mailURLString = [NSString stringWithFormat:@"mailto:?body=%@&subject=%@",
-							   [mailMessage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-							   [mailSubject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-	L0Log(@"Will e-mail with URL: %@", mailURLString);
-	[UIApp openURL:[NSURL URLWithString:mailURLString]];
+	MFMailComposeViewController* mailVC = [[MFMailComposeViewController new] autorelease];
+	mailVC.mailComposeDelegate = self;
+	[mailVC setSubject:mailSubject];
+	[mailVC setMessageBody:mailMessage isHTML:NO];
+	[self presentModalViewController:mailVC];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error;
+{
+	[controller dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -

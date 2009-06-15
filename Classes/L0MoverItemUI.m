@@ -10,6 +10,9 @@
 
 #import "L0ImageItem.h"
 #import "L0AddressBookPersonItem.h"
+#import "L0MoverAppDelegate.h"
+
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @implementation L0MoverItemUI
 
@@ -89,6 +92,65 @@ static NSMutableDictionary* L0ItemClassesToUIs = nil;
 - (void) resaveItem:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
 {
 	[i storeToAppropriateApplication];
+}
+
+- (L0MoverItemAction*) shareByEmailAction;
+{
+	return [L0MoverItemAction actionWithTarget:self selector:@selector(shareItemByEmail:forAction:) localizedLabel:NSLocalizedString(@"Share by E-mail", @"Default label for the 'Share by E-mail' action on items")];
+}
+// whose target is self and whose selector is:
+- (void) shareItemByEmail:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
+{
+	MFMailComposeViewController* mailVC = [[MFMailComposeViewController new] autorelease];
+	mailVC.mailComposeDelegate = self;
+	
+	NSData* d = nil; NSString* t = nil, * f = nil;
+	BOOL ok = [self fromItem:i getMailAttachmentData:&d mimeType:&t fileName:&f];
+	NSAssert(ok, @"We need data, MIME type and filename before we can share an item by e-mail.");
+	
+	[mailVC addAttachmentData:d mimeType:t fileName:f];
+	
+	NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Shared by Mover: %@", @"Subject of 'Share by E-mail' new mails"), f];
+	[mailVC setSubject:subject];
+	
+	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	[delegate presentModalViewController:mailVC];
+}
+
+- (BOOL) fromItem:(L0MoverItem*) i getMailAttachmentData:(NSData**) d mimeType:(NSString**) t fileName:(NSString**) f;
+{
+	BOOL allDone = YES;
+	
+	if (d) {
+		NSData* externalRep = [i externalRepresentation];
+		if (!externalRep) allDone = NO;
+		*d = externalRep;
+	}
+	
+	NSString* type = i.type;
+	
+	if (t) {
+		NSString* mime = [(id) UTTypeCopyPreferredTagWithClass((CFStringRef) type, kUTTagClassMIMEType) autorelease];
+		if (!mime) allDone = NO;
+		*t = mime;
+	}
+	
+	if (f) {
+		NSString* name = i.title;
+		NSString* extension = [(id) UTTypeCopyPreferredTagWithClass((CFStringRef) type, kUTTagClassFilenameExtension) autorelease];
+		if (name && extension) {
+			name = [name stringByAppendingFormat:@".%@", extension];
+			*f = name;
+		} else
+			allDone = NO;
+	}
+		
+	return allDone;
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
+{
+	[controller dismissModalViewControllerAnimated:YES];
 }
 
 - (BOOL) removingFromTableIsSafeForItem:(L0MoverItem*) i;
