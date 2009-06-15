@@ -23,6 +23,9 @@
 		15250B2B0FC692CA0073E5C7 /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15250B1F0FC692C70073E5C7 /* nl.lproj */; };
 		15250B4A0FC6945D0073E5C7 /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15250B3E0FC694570073E5C7 /* de.lproj */; };
 		15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15250B4B0FC6946E0073E5C7 /* de.lproj */; };
+		15277EA50FE633E20040F04D /* L0TextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15277EA40FE633E20040F04D /* L0TextItem.m */; };
+		15277ED10FE638FD0040F04D /* L0MoverTextViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15277ECF0FE638FD0040F04D /* L0MoverTextViewer.m */; };
+		15277ED20FE638FD0040F04D /* L0MoverTextViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15277ED00FE638FD0040F04D /* L0MoverTextViewer.xib */; };
 		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
 		153734ED0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
@@ -218,6 +221,11 @@
 		15250B1F0FC692C70073E5C7 /* nl.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = nl.lproj; sourceTree = "<group>"; };
 		15250B3E0FC694570073E5C7 /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
 		15250B4B0FC6946E0073E5C7 /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
+		15277EA30FE633E20040F04D /* L0TextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0TextItem.h; sourceTree = "<group>"; };
+		15277EA40FE633E20040F04D /* L0TextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0TextItem.m; sourceTree = "<group>"; };
+		15277ECE0FE638FD0040F04D /* L0MoverTextViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverTextViewer.h; sourceTree = "<group>"; };
+		15277ECF0FE638FD0040F04D /* L0MoverTextViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverTextViewer.m; sourceTree = "<group>"; };
+		15277ED00FE638FD0040F04D /* L0MoverTextViewer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = L0MoverTextViewer.xib; sourceTree = "<group>"; };
 		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
 		153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0UITestingHooks.m"; sourceTree = "<group>"; };
 		153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
@@ -536,6 +544,8 @@
 				15911E750F8FA2D900BECD18 /* L0AddressBookPersonItem.m */,
 				15E415120FB9882F0065E831 /* L0BookmarkItem.h */,
 				15E415130FB9882F0065E831 /* L0BookmarkItem.m */,
+				15277EA30FE633E20040F04D /* L0TextItem.h */,
+				15277EA40FE633E20040F04D /* L0TextItem.m */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -568,6 +578,9 @@
 			isa = PBXGroup;
 			children = (
 				15E714440FBD92FE0037C439 /* L0MoverItemAction.h */,
+				15277ECE0FE638FD0040F04D /* L0MoverTextViewer.h */,
+				15277ECF0FE638FD0040F04D /* L0MoverTextViewer.m */,
+				15277ED00FE638FD0040F04D /* L0MoverTextViewer.xib */,
 				15E714450FBD92FE0037C439 /* L0MoverItemAction.m */,
 				15E714490FBD94940037C439 /* L0MoverItemUI.h */,
 				15E7144A0FBD94940037C439 /* L0MoverItemUI.m */,
@@ -933,6 +946,7 @@
 				15080B800FD8FD9A0065D5AC /* CalloutBubble_Highlighted.png in Resources */,
 				15080B810FD8FD9A0065D5AC /* CalloutBubble.png in Resources */,
 				15080B850FD901BB0065D5AC /* NetworkToolbarIcon.png in Resources */,
+				15277ED20FE638FD0040F04D /* L0MoverTextViewer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,6 +1024,8 @@
 				15ED7E230FE0E8440061B04E /* L0MoverBluetoothChannel.m in Sources */,
 				15BCF8240FE2F08A0018555C /* L0MoverAdController.m in Sources */,
 				15FBC1A40FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m in Sources */,
+				15277EA50FE633E20040F04D /* L0TextItem.m in Sources */,
+				15277ED10FE638FD0040F04D /* L0MoverTextViewer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

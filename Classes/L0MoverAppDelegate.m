@@ -9,24 +9,25 @@
 #define L0MoverAppDelegateAllowFriendMethods 1
 #import "L0MoverAppDelegate.h"
 
-#import "L0MoverItemUI.h"
-#import "L0MoverImageItemUI.h"
-#import "L0MoverAddressBookItemUI.h"
-#import "L0BookmarkItemUI.h"
-#import "L0MoverItemAction.h"
-
 #import "L0MoverAdController.h"
 
-#import "L0AddressBookPersonItem.h"
-#import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
 #import "L0MoverPeering.h"
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
 
+#import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0BookmarkItem.h"
 #import "L0ImageItem.h"
+#import "L0TextItem.h"
+#import "L0AddressBookPersonItem.h"
+
+#import "L0MoverItemUI.h"
+#import "L0MoverImageItemUI.h"
+#import "L0MoverAddressBookItemUI.h"
+#import "L0BookmarkItemUI.h"
+#import "L0MoverItemAction.h"
 
 #import <netinet/in.h>
 
@@ -61,6 +62,7 @@ enum {
 	[L0ImageItem registerClass];
 	[L0AddressBookPersonItem registerClass];
 	[L0BookmarkItem registerClass];
+	[L0TextItem registerClass];
 	
 	// Registering UIs.
 	[L0MoverImageItemUI registerClass];
