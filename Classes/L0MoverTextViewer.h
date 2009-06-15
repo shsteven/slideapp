@@ -17,6 +17,7 @@
 	UITextView* textView;
 }
 
++ navigationControllerWithViewerForItem:(L0TextItem*) i delegate:(id) d didDismissSelector:(SEL) s;
 - (id) initWithItem:(L0TextItem*) item delegate:(id) delegate didDismissSelector:(SEL) didDismissSelector;
 
 @property(assign) IBOutlet UITextView* textView;
