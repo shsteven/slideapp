@@ -47,4 +47,21 @@
     [super dealloc];
 }
 
++ navigationControllerWithViewerForItem:(L0TextItem*) i delegate:(id) d didDismissSelector:(SEL) s;
+{
+	L0MoverTextViewer* me = [[[L0MoverTextViewer alloc] initWithItem:i delegate:d didDismissSelector:s] autorelease];
+	UINavigationController* c = [[[UINavigationController alloc] initWithRootViewController:me] autorelease];
+	
+	me.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismiss)] autorelease];
+	return c;
+}
+
+- (void) dismiss;
+{
+	[self dismissModalViewControllerAnimated:YES];
+	
+	if (delegate && didDismissSelector)
+		[delegate performSelector:didDismissSelector];
+}
+
 @end
