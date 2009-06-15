@@ -26,6 +26,7 @@
 #import "L0MoverItemUI.h"
 #import "L0MoverImageItemUI.h"
 #import "L0MoverAddressBookItemUI.h"
+#import "L0MoverTextItemUI.h"
 #import "L0BookmarkItemUI.h"
 #import "L0MoverItemAction.h"
 
@@ -37,6 +38,7 @@ enum {
 	kL0MoverAddSheetTag,
 	kL0MoverItemMenuSheetTag,
 	kL0MoverTellAFriendAlertTag,
+	kL0MoverDeleteConfirmationSheetTag,
 };
 
 #define kL0MoverLastSeenVersionKey @"L0MoverLastSeenVersion"
@@ -48,6 +50,7 @@ enum {
 @property(copy, setter=privateSetDocumentsDirectory:) NSString* documentsDirectory;
 
 - (BOOL) isCameraAvailable;
+- (void) paste;
 
 @end
 
@@ -68,6 +71,7 @@ enum {
 	[L0MoverImageItemUI registerClass];
 	[L0MoverAddressBookItemUI registerClass];
 	[L0BookmarkItemUI registerClass];
+	[L0MoverTextItemUI registerClass];
 	
 	// Starting up peering services.
 	L0MoverPeering* peering = [L0MoverPeering sharedService];
@@ -462,6 +466,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 #define kL0MoverAddImageButton @"kL0MoverAddImageButton"
 #define kL0MoverAddContactButton @"kL0MoverAddContactButton"
+#define kL0MoverPasteButton @"kL0MoverPasteButton"
 #define kL0MoverTakeAPhotoButton @"kL0MoverTakeAPhotoButton"
 #define kL0MoverCancelButton @"kL0MoverCancelButton"
 
@@ -489,6 +494,10 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	
 	[sheet addButtonWithTitle:NSLocalizedString(@"Add Contact", @"Add item - contact button")  identifier:kL0MoverAddContactButton];
 	
+	UIPasteboard* pb = [UIPasteboard generalPasteboard];
+	if ([pb.strings count] > 0)
+		[sheet addButtonWithTitle:NSLocalizedString(@"Paste", @"Add item - paste button") identifier:kL0MoverPasteButton];
+	
 	NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Add item - cancel button") identifier:kL0MoverCancelButton];
 	sheet.cancelButtonIndex = i;
 
@@ -508,6 +517,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 }
 
 #define kL0MoverItemMenuSheetRemoveIdentifier @"kL0MoverItemMenuSheetRemoveIdentifier"
+#define kL0MoverItemMenuSheetDeleteIdentifier @"kL0MoverItemMenuSheetDeleteIdentifier"
 #define kL0MoverItemMenuSheetCancelIdentifier @"kL0MoverItemMenuSheetCancelIdentifier"
 #define kL0MoverItemKey @"L0MoverItem"
 
@@ -534,7 +544,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 		if ([ui removingFromTableIsSafeForItem:i])
 			[actionMenu addButtonWithTitle:NSLocalizedString(@"Remove from Table", @"Remove button in action menu") identifier:kL0MoverItemMenuSheetRemoveIdentifier];
 		else {
-			NSInteger i = [actionMenu addButtonWithTitle:NSLocalizedString(@"Delete", @"Delete button in action menu") identifier:kL0MoverItemMenuSheetRemoveIdentifier /* TODO different id and confirmation sheet */];
+			NSInteger i = [actionMenu addButtonWithTitle:NSLocalizedString(@"Delete", @"Delete button in action menu") identifier:kL0MoverItemMenuSheetDeleteIdentifier];
 			actionMenu.destructiveButtonIndex = i;
 		}
 	}
@@ -557,7 +567,9 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 			else if ([identifier isEqual:kL0MoverTakeAPhotoButton])
 				[self takeAPhotoAndAddImageItem];
 			else if ([identifier isEqual:kL0MoverAddContactButton])
-				[self addAddressBookItem];			
+				[self addAddressBookItem];
+			else if ([identifier isEqual:kL0MoverPasteButton])
+				[self paste];
 		}
 			break;
 			
@@ -569,11 +581,37 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 			if ([identifier isEqual:kL0MoverItemMenuSheetRemoveIdentifier]) {
 				// TODO make a version w/o ani param
 				[self.tableController removeItem:item animation:kL0SlideItemsTableRemoveByFadingAway];
+			} else if ([identifier isEqual:kL0MoverItemMenuSheetDeleteIdentifier]) {
+				
+				L0ActionSheet* sheet = [L0ActionSheet new];
+				sheet.tag = kL0MoverDeleteConfirmationSheetTag;
+				
+				sheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+				sheet.title = NSLocalizedString(@"This item is only saved on Mover's table. If you delete it, there will be no way to recover it.", @"Prompt on unsafe delete confirmation sheet");
+				
+				NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Delete", @"Delete button in the unsafe delete confirmation sheet") identifier:kL0MoverItemMenuSheetDeleteIdentifier];
+				sheet.destructiveButtonIndex = i;
+				
+				i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button in the unsafe delete confirmation sheet") identifier:kL0MoverItemMenuSheetCancelIdentifier];
+				sheet.cancelButtonIndex = i;
+				sheet.delegate = self;
+				[sheet setValue:item forKey:kL0MoverItemKey];
+				
+				[sheet showInView:self.window];
+				
 			} else if ([identifier isKindOfClass:[L0MoverItemAction class]])
 				[identifier performOnItem:item];
 			
 			[self.tableController finishedShowingActionMenuForItem:item];
 			
+		}
+			break;
+			
+		case kL0MoverDeleteConfirmationSheetTag: {
+			if (buttonIndex == actionSheet.destructiveButtonIndex) {
+				L0MoverItem* item = [actionSheet valueForKey:kL0MoverItemKey];
+				[self.tableController removeItem:item animation:kL0SlideItemsTableRemoveByFadingAway];
+			}
 		}
 			break;
 	}
@@ -667,6 +705,16 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 - (void) returnFromImagePicker;
 {
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];	
+}
+
+- (void) paste;
+{
+	UIPasteboard* pb = [UIPasteboard generalPasteboard];
+	for (NSString* s in pb.strings) {
+		L0TextItem* item = [[L0TextItem alloc] initWithText:s];
+		[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
+		[item release];
+	}
 }
 
 - (IBAction) showNetworkCallout;

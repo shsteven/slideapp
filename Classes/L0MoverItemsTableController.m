@@ -313,13 +313,13 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 			if (!view.superview) {
 				CGSize selfSize = self.view.bounds.size;
 				CGRect itemViewFrame = view.frame;
-				selfSize.width -= itemViewFrame.size.width / 2 + 50;
-				selfSize.height -= itemViewFrame.size.height / 2 + 50;
+				selfSize.width -= (itemViewFrame.size.width * (3.0/4.0) + 100);
 				
 				CGPoint newCenter = CGPointMake(
 												selfSize.width * (random() / (double) LONG_MAX),
-												selfSize.height * (random() / (double) LONG_MAX)
+												selfSize.height - itemViewFrame.size.width - 100
 												);
+				newCenter.x += (selfSize.width / 2);
 				
 				view.center = newCenter;
 				[self.view addSubview:view];
