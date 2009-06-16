@@ -28,6 +28,26 @@
 	return [self showAction];
 }
 
+- (NSArray*) additionalActionsForItem:(L0MoverItem*) i;
+{
+	return [NSArray arrayWithObject:[self shareByEmailAction]];
+}
+
+- (BOOL) fromItem:(L0MoverItem*) i getMailAttachmentData:(NSData**) d mimeType:(NSString**) t fileName:(NSString**) f;
+{
+	if (d)
+		*d = [i externalRepresentation];
+	
+	if (t)
+		*t = @"image/png";
+	
+	if (f)
+		*f = NSLocalizedString(@"Image.png", @"Default filename for images shared via mail.");
+	
+	BOOL doneWithD = !d || *d != nil;
+	return doneWithD;
+}
+
 - (void) showOrOpenItem:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
 {
 	L0ImageItem* item = (L0ImageItem*) i;

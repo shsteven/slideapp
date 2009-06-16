@@ -6,9 +6,11 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0BookmarkItemUI.h"
+#import "L0MoverBookmarkItemUI.h"
+#import <MessageUI/MessageUI.h>
+#import "L0MoverAppDelegate.h"
 
-@implementation L0BookmarkItemUI
+@implementation L0MoverBookmarkItemUI
 
 + (NSArray*) supportedItemClasses;
 {
@@ -32,7 +34,7 @@
 
 - (BOOL) removingFromTableIsSafeForItem:(L0MoverItem*) i;
 {
-	return YES;
+	return NO;
 }
 
 - (L0MoverItemAction*) mainActionForItem:(L0MoverItem*) i;
@@ -44,6 +46,21 @@
 {
 	L0BookmarkItem* item = (L0BookmarkItem*) i;
 	[UIApp openURL:item.address];
+}
+
+- (NSArray*) additionalActionsForItem:(L0MoverItem*) i;
+{
+	return [NSArray arrayWithObject:[self shareByEmailAction]];
+}
+
+- (void) shareItemByEmail:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
+{
+	MFMailComposeViewController* mailVC = [[MFMailComposeViewController new] autorelease];
+	[mailVC setMessageBody:[((L0BookmarkItem*)i).address absoluteString] isHTML:NO];
+	mailVC.mailComposeDelegate = self;
+	
+	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	[delegate presentModalViewController:mailVC];
 }
 
 @end

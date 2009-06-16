@@ -96,7 +96,9 @@ static NSMutableDictionary* L0ItemClassesToUIs = nil;
 
 - (L0MoverItemAction*) shareByEmailAction;
 {
-	return [L0MoverItemAction actionWithTarget:self selector:@selector(shareItemByEmail:forAction:) localizedLabel:NSLocalizedString(@"Share by E-mail", @"Default label for the 'Share by E-mail' action on items")];
+	L0MoverItemAction* a = [L0MoverItemAction actionWithTarget:self selector:@selector(shareItemByEmail:forAction:) localizedLabel:NSLocalizedString(@"Share by E-mail", @"Default label for the 'Share by E-mail' action on items")];
+	a.hidden = ![MFMailComposeViewController canSendMail];
+	return a;
 }
 // whose target is self and whose selector is:
 - (void) shareItemByEmail:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
@@ -110,8 +112,8 @@ static NSMutableDictionary* L0ItemClassesToUIs = nil;
 	
 	[mailVC addAttachmentData:d mimeType:t fileName:f];
 	
-	NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Shared by Mover: %@", @"Subject of 'Share by E-mail' new mails"), f];
-	[mailVC setSubject:subject];
+	// NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Shared by Mover: %@", @"Subject of 'Share by E-mail' new mails"), f];
+	// [mailVC setSubject:subject];
 	
 	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
 	[delegate presentModalViewController:mailVC];

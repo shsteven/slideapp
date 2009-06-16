@@ -27,7 +27,7 @@
 	return [[[self alloc] initWithTarget:t selector:s localizedLabel:l] autorelease];
 }
 
-@synthesize target, selector, localizedLabel;
+@synthesize target, selector, localizedLabel, hidden;
 
 - (void) performOnItem:(L0MoverItem*) item;
 {

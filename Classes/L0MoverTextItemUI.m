@@ -31,7 +31,7 @@
 - (NSArray*) additionalActionsForItem:(L0MoverItem*) i;
 {
 	L0MoverItemAction* copyAction = [L0MoverItemAction actionWithTarget:self selector:@selector(copyItem:forAction:) localizedLabel:NSLocalizedString(@"Copy", @"As in 'Cut, Copy and Paste'.")];
-	return [NSArray arrayWithObject:copyAction];
+	return [NSArray arrayWithObjects:copyAction, [self shareByEmailAction], nil];
 }
 
 - (void) showOrOpenItem:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
@@ -47,6 +47,16 @@
 {
 	UIPasteboard* pb = [UIPasteboard generalPasteboard];
 	pb.string = ((L0TextItem*)i).text;
+}
+
+- (void) shareItemByEmail:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
+{
+	MFMailComposeViewController* mailVC = [[MFMailComposeViewController new] autorelease];
+	[mailVC setMessageBody:((L0TextItem*)i).text isHTML:NO];
+	mailVC.mailComposeDelegate = self;
+	
+	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	[delegate presentModalViewController:mailVC];
 }
 
 @end

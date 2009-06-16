@@ -11,7 +11,7 @@
 #import "L0MoverItemUI.h"
 #import "L0BookmarkItem.h"
 
-@interface L0BookmarkItemUI : L0MoverItemUI <L0BookmarkItemStorage> {
+@interface L0MoverBookmarkItemUI : L0MoverItemUI <L0BookmarkItemStorage> {
 
 }
 

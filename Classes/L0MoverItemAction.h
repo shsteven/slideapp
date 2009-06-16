@@ -13,6 +13,7 @@
 	id target;
 	SEL selector;
 	NSString* localizedLabel;
+	BOOL hidden;
 }
 
 // selector is of the form:
@@ -24,6 +25,8 @@
 @property(readonly) NSString* localizedLabel;
 @property(readonly) id target;
 @property(readonly) SEL selector;
+
+@property BOOL hidden;
 
 - (void) performOnItem:(L0MoverItem*) item;
 

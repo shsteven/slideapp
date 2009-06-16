@@ -41,6 +41,7 @@
 // Unlike the above this action is implemented — by default, it shows a
 // mail sheet with a single attachment (the item). 
 // You can override the method below to fine-tune what happens next.
+- (BOOL) fromItem:(L0MoverItem*) i getMailAttachmentData:(NSData**) d mimeType:(NSString**) t fileName:(NSString**) f;
 
 // Any out param may be NULL if we're not interested in it.
 // default: d == [i externalRepresentation]; t == result of UTTypeCopyPreferredTagWithClass() on i.type for MIME type; f == i.title, followed by the result of UTTypeCopyPreferredTagWithClass() on i.type for extension.

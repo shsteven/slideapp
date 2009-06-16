@@ -27,7 +27,7 @@
 #import "L0MoverImageItemUI.h"
 #import "L0MoverAddressBookItemUI.h"
 #import "L0MoverTextItemUI.h"
-#import "L0BookmarkItemUI.h"
+#import "L0MoverBookmarkItemUI.h"
 #import "L0MoverItemAction.h"
 
 #import <netinet/in.h>
@@ -70,7 +70,7 @@ enum {
 	// Registering UIs.
 	[L0MoverImageItemUI registerClass];
 	[L0MoverAddressBookItemUI registerClass];
-	[L0BookmarkItemUI registerClass];
+	[L0MoverBookmarkItemUI registerClass];
 	[L0MoverTextItemUI registerClass];
 	
 	// Starting up peering services.
@@ -174,6 +174,12 @@ enum {
 
 - (void) tellAFriend;
 {
+	if (![MFMailComposeViewController canSendMail]) {
+		UIAlertView* a = [UIAlertView alertNamed:@"L0MoverNoEmailSetUp"];
+		[a show];
+		return;
+	}
+	
 	NSString* mailMessage = NSLocalizedString(@"Mover is an app that allows you to share files with other iPhones near you, with style. Download it at http://infinite-labs.net/mover/download or see it in action at http://infinite-labs.net/mover/",
 											  @"Contents of 'Email a Friend' message");
 	NSString* mailSubject = NSLocalizedString(@"Check out this iPhone app, Mover",
@@ -538,12 +544,14 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[actionMenu setValue:i forKey:kL0MoverItemKey];
 	
 	L0MoverItemAction* mainAction;
-	if (mainAction = [ui mainActionForItem:i])
+	if ((mainAction = [ui mainActionForItem:i]) && !mainAction.hidden)
 		[actionMenu addButtonWithTitle:mainAction.localizedLabel identifier:mainAction];
 	
 	NSArray* a = [ui additionalActionsForItem:i];
-	for (L0MoverItemAction* otherAction in a)
-		[actionMenu addButtonWithTitle:otherAction.localizedLabel identifier:otherAction];
+	for (L0MoverItemAction* otherAction in a) {
+		if (!otherAction.hidden)
+			[actionMenu addButtonWithTitle:otherAction.localizedLabel identifier:otherAction];
+	}
 	
 	if (r) {
 		if ([ui removingFromTableIsSafeForItem:i])
