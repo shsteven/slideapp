@@ -249,18 +249,17 @@ enum {
 		return NO;
 	
 	NSDictionary* query = [url dictionaryByDecodingQueryString];
-	NSString* urlString, * title;
+	NSString* urlString;
 	if (!(urlString = [query objectForKey:@"url"]))
-		return NO;
-	if (!(title = [query objectForKey:@"title"]))
-		title = urlString;
-	
+		return NO;	
 	if (![urlString hasPrefix:@"http://"] && ![urlString hasPrefix:@"https://"])
 		return NO;
 	
 	NSURL* bookmarkedURL = [NSURL URLWithString:urlString];
 	if (!bookmarkedURL)
 		return NO;
+	
+	NSString* title = [bookmarkedURL host];
 	L0BookmarkItem* item = [[[L0BookmarkItem alloc] initWithAddress:bookmarkedURL title:title] autorelease];
 	[self performSelector:@selector(addItemToTableAndSave:) withObject:item afterDelay:0.7];
 	return YES;
