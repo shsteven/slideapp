@@ -4,7 +4,7 @@
 "Add Contact" = "Aggiungi contatto";
 "Username" = "Nome utente";
 "Take a Photo" = "Scatta una foto";
-"This item is only saved on Mover's table. If you delete it, there will be no way to recover it." = "This item is only saved on Mover's table. If you delete it, there will be no way to recover it.";
+"This item is only saved on Mover's table. If you delete it, there will be no way to recover it." = "Questo elemento è salvato solo sul tavolo di Mover. Se lo elimini, non potrà essere recuperato.";
 "Save Online" = "Salva sul web";
 "Remove from Table" = "Rimuovi dal Tavolo";
 "Copy" = "Copia";
@@ -12,7 +12,7 @@
 "Save Again" = "Salva Ancora";
 "Open" = "Open";
 "Image.png" = "Immagine.png";
-"Paste" = "Salva";
+"Paste" = "Incolla";
 "Check out this iPhone app, Mover" = "Guarda questa applicazione iPhone, Mover!";
 "Show" = "Mostra";
 "Delete" = "Elimina";
