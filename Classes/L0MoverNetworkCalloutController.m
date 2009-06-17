@@ -248,13 +248,9 @@ L0UniquePointerConstant(kL0MoverCalloutControllerObservationContext);
 }
 
 - (NSString*) descriptionForUnjammedScanners:(NSArray*) ujs;
-{
-	L0MoverPeering* peering = [L0MoverPeering sharedService];
-	
+{	
 	if ([ujs count] == 0)
 		return NSLocalizedStringFromTable(@"Disconnected", @"L0MoverNetworkUI", @"Shown on the callout bubble in red if all services are unavailable.");
-	else if ([ujs count] == 1 && [[peering availableScanners] count] == 1)
-		return NSLocalizedStringFromTable(@"On", @"L0MoverNetworkUI", @"Shown on the callout bubble if one service is available and unjammed (eg: 'Network: On').");
 	else {
 		NSMutableArray* scannerNames = [NSMutableArray array];
 		if ([ujs containsObject:[L0MoverWiFiScanner sharedScanner]])
