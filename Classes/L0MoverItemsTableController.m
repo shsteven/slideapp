@@ -311,15 +311,19 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		case kL0SlideItemsTableNoAddAnimation:
 		default: {
 			if (!view.superview) {
-				CGSize selfSize = self.view.bounds.size;
-				CGRect itemViewFrame = view.frame;
-				selfSize.width -= (itemViewFrame.size.width * (3.0/4.0) + 100);
+				CGRect bounds = self.view.bounds;
 				
-				CGPoint newCenter = CGPointMake(
-												selfSize.width * (random() / (double) LONG_MAX),
-												selfSize.height - itemViewFrame.size.width - 100
-												);
-				newCenter.x += (selfSize.width / 2);
+				// assuming item views are square
+				CGFloat maxExtent = (view.bounds.size.width / 2.0) * sqrt(2.0);
+				bounds = CGRectInset(bounds, maxExtent / 2.0, maxExtent / 2.0);
+				
+				CGFloat delta = bounds.size.height / 1.8;
+				bounds.size.height -= delta;
+				bounds.origin.y += delta;
+								
+				CGPoint newCenter;
+				newCenter.x = bounds.origin.x + (random() / (double) LONG_MAX) * bounds.size.width;
+				newCenter.y = bounds.origin.y + (random() / (double) LONG_MAX) * bounds.size.height;
 				
 				view.center = newCenter;
 				[self.view addSubview:view];
