@@ -246,6 +246,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	UITableViewCellStyle style = requiresControl? UITableViewCellStyleValue1 : UITableViewCellStyleDefault;
 	UITableViewCell* cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:nil] autorelease];
 	cell.textLabel.text = label;
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 	[self prepareStatusCell:cell forScanner:s];
 	
