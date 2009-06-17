@@ -761,8 +761,32 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 - (void) paste;
 {
 	UIPasteboard* pb = [UIPasteboard generalPasteboard];
+	NSMutableSet* addedURLs = [NSMutableSet set];
+	
 	for (NSString* s in pb.strings) {
-		L0TextItem* item = [[L0TextItem alloc] initWithText:s];
+		if ([s hasPrefix:@"http://"] || [s hasPrefix:@"https://"]) {
+			NSURL* u = [NSURL URLWithString:s];
+			if (u && ![addedURLs containsObject:u]) {
+				[addedURLs addObject:u];
+				L0BookmarkItem* item = [[L0BookmarkItem alloc] initWithAddress:u title:[u host]];
+				[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
+				[item release];
+			}
+		} else {
+			L0TextItem* item = [[L0TextItem alloc] initWithText:s];
+			[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
+			[item release];
+		}
+	}
+	
+	for (NSURL* u in pb.URLs) {
+		if (![[u scheme] isEqual:@"http"] && ![[u scheme] isEqual:@"https"])
+			continue;
+		
+		if ([addedURLs containsObject:u])
+			continue;
+		
+		L0BookmarkItem* item = [[L0BookmarkItem alloc] initWithAddress:u title:[u host]];
 		[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
 		[item release];
 	}
