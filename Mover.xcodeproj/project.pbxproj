@@ -314,6 +314,7 @@
 		15C595CA0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverBookmarksAccountLoginPane.h; sourceTree = "<group>"; };
 		15C595CB0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverBookmarksAccountLoginPane.m; sourceTree = "<group>"; };
 		15C5E9E80F86103000236370 /* Mover.todo */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 4; path = Mover.todo; sourceTree = "<group>"; };
+		15D07AF00FE803E900C6EE24 /* Local-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-Debug.xcconfig"; sourceTree = "<group>"; };
 		15D1C56F0F889D7000FF3016 /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
 		15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Release.xcconfig"; sourceTree = "<group>"; };
 		15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Debug.xcconfig"; sourceTree = "<group>"; };
@@ -574,6 +575,7 @@
 		15D1C56C0F889D5C00FF3016 /* Configuration FIles */ = {
 			isa = PBXGroup;
 			children = (
+				15D07AF00FE803E900C6EE24 /* Local-Debug.xcconfig */,
 				159F7BE20FE2D9B9001A6B91 /* Ads */,
 				15D1C56F0F889D7000FF3016 /* Mover.xcconfig */,
 				15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */,
