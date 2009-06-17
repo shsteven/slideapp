@@ -44,6 +44,9 @@ enum {
 #define kL0MoverLastSeenVersionKey @"L0MoverLastSeenVersion"
 #define kL0MoverTellAFriendWasShownKey @"L0MoverTellAFriendWasShown"
 
+#define kL0MoverBluetoothDisabledDefaultsKey @"kL0MoverBluetoothDisabled"
+#define kL0MoverWiFiDisabledDefaultsKey @"kL0MoverWiFiDisabled"
+
 @interface L0MoverAppDelegate ()
 
 - (void) returnFromImagePicker;
@@ -56,6 +59,33 @@ enum {
 
 
 @implementation L0MoverAppDelegate
+
+- (NSString*) defaultsKeyForDisablingScanner:(id <L0MoverPeerScanner>) s;
+{
+	NSString* key = nil;
+	if (s == [L0MoverWiFiScanner sharedScanner])
+		key = kL0MoverWiFiDisabledDefaultsKey;
+	else if (s == [L0MoverBluetoothScanner sharedScanner])
+		key = kL0MoverBluetoothDisabledDefaultsKey;
+
+	return key;
+}
+
+- (BOOL) isScannerEnabled:(id <L0MoverPeerScanner>) s;
+{
+	NSString* key = [self defaultsKeyForDisablingScanner:s];
+	if (key)
+		return ![[NSUserDefaults standardUserDefaults] boolForKey:key];
+	else
+		return NO;
+}
+
+- (void) setEnabled:(BOOL) e forScanner:(id <L0MoverPeerScanner>) s;
+{
+	NSString* key = [self defaultsKeyForDisablingScanner:s];
+	if (key)
+		[[NSUserDefaults standardUserDefaults] setBool:!e forKey:key];
+}
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application;
 {
@@ -77,14 +107,23 @@ enum {
 	L0MoverPeering* peering = [L0MoverPeering sharedService];
 	peering.delegate = self;
 	
+	BOOL btEnabled = [self isScannerEnabled:[L0MoverBluetoothScanner sharedScanner]];
+	BOOL wiFiEnabled = [self isScannerEnabled:[L0MoverWiFiScanner sharedScanner]];
+	
+	// sanity check
+	if (!btEnabled && !wiFiEnabled) {
+		wiFiEnabled = YES;
+		[self setEnabled:YES forScanner:[L0MoverWiFiScanner sharedScanner]];
+	}
+
 	L0MoverWiFiScanner* scanner = [L0MoverWiFiScanner sharedScanner];
 	[peering addAvailableScannersObject:scanner];
-	scanner.enabled = YES;
-
+	scanner.enabled = wiFiEnabled;
+	
 #if DEBUG && !kL0MoverTestByDisablingBluetooth
 	L0MoverBluetoothScanner* btScanner = [L0MoverBluetoothScanner sharedScanner];
 	[peering addAvailableScannersObject:btScanner];
-	btScanner.enabled = YES;
+	btScanner.enabled = btEnabled;
 #endif
 	
 #if !DEBUG && kL0MoverTestByDisablingBluetooth

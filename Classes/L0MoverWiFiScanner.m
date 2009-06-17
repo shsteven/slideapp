@@ -354,7 +354,8 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 {
 	BOOL habemusNetwork = 
 		(flags & kSCNetworkReachabilityFlagsReachable) &&
-		!(flags & kSCNetworkReachabilityFlagsConnectionRequired);
+		!(flags & kSCNetworkReachabilityFlagsConnectionRequired) &&
+		!(flags & kSCNetworkReachabilityFlagsIsWWAN);
 	// note that unlike Reachability.m we don't care about WWANs.
 	
 	[self willChangeValueForKey:@"jammed"];

@@ -12,6 +12,8 @@
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
 
+#import "L0MoverAppDelegate.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 @interface L0MoverNetworkSettingsPane ()
@@ -318,6 +320,9 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	L0Log(@"Toggling scanner %@ at section %d", scanner, sender.tag);
 	
 	scanner.enabled = !scanner.enabled;
+	
+	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	[delegate setEnabled:scanner.enabled forScanner:scanner];
 }
 
 #pragma mark -

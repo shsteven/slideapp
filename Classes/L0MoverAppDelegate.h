@@ -14,6 +14,7 @@
 
 #import "L0MoverItemsTableController.h"
 #import "L0PeerDiscovery.h"
+#import "L0MoverPeering.h"
 #import "L0MoverPeer.h"
 
 #import "L0MoverNetworkCalloutController.h"
@@ -73,6 +74,10 @@
 - (void) stopAdvertisements;
 
 - (void) presentModalViewController:(UIViewController*) vc;
+
+- (void) setEnabled:(BOOL) e forScanner:(id <L0MoverPeerScanner>) s;
+- (BOOL) isScannerEnabled:(id <L0MoverPeerScanner>) s;
+- (NSString*) defaultsKeyForDisablingScanner:(id <L0MoverPeerScanner>) s;
 
 @end
 
