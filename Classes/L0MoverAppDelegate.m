@@ -737,7 +737,9 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 - (IBAction) showNetworkCalloutIfJammed;
 {
-	if ([[L0MoverWiFiScanner sharedScanner] jammed] || [[L0MoverBluetoothScanner sharedScanner] jammed])
+	BOOL wiFiOff = [[L0MoverWiFiScanner sharedScanner] enabled] && [[L0MoverWiFiScanner sharedScanner] jammed];
+	BOOL bluetoothOff = [[L0MoverBluetoothScanner sharedScanner] enabled] && [[L0MoverBluetoothScanner sharedScanner] jammed];
+	if (wiFiOff || bluetoothOff)
 		[self.networkCalloutController showCallout];
 }
 
