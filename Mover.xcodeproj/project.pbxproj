@@ -66,6 +66,7 @@
 		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
+		159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */; };
 		15A244FB0FCBFF8A0034C943 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15A244EF0FCBFF8A0034C943 /* ja.lproj */; };
 		15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15A245080FCBFF9F0034C943 /* ja.lproj */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
@@ -279,6 +280,7 @@
 		15911E790F8FA2F900BECD18 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		159120810F8FD04B00BECD18 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/L0MoverAboutPane.xib; sourceTree = "<group>"; };
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AboutPaneBackdrop-LightBlue.png"; sourceTree = "<group>"; };
 		159F7BBE0FE2D662001A6B91 /* L0MoverAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAdController.h; sourceTree = "<group>"; };
 		159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAdController.m; sourceTree = "<group>"; };
 		159F7BE40FE2D9B9001A6B91 /* Off.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Off.xcconfig; sourceTree = "<group>"; };
@@ -747,6 +749,7 @@
 				158ED8550F9FAA5E00C65EDE /* iTunesArtwork */,
 				1591220F0F8FE41E00BECD18 /* Default.png */,
 				153735B60F8F5E06005B2BD3 /* Icon.png */,
+				159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */,
 				15911E3A0F8F738E00BECD18 /* Gear.png */,
 				15F67FD70F768A800024A858 /* TableArrow_East.png */,
 				15F67FD80F768A800024A858 /* TableArrow_North.png */,
@@ -966,6 +969,7 @@
 				15277ED20FE638FD0040F04D /* L0MoverTextViewer.xib in Resources */,
 				154E74BB0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert in Resources */,
 				155A56610FE9491B0089E853 /* TextIcon.png in Resources */,
+				159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
