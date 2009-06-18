@@ -13,6 +13,11 @@
 
 @synthesize superview, origin;
 
++ (BOOL) isPaidVersion;
+{
+	return [self sharedController] == nil;
+}
+
 #if kL0MoverInsertAdvertising
 
 L0ObjCSingletonMethod(sharedController)

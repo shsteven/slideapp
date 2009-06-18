@@ -63,7 +63,7 @@
      id="layer1"
      transform="translate(-185.51562,-106.86218)">
     <path
-       style="fill:#cccccc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 188.83816,108.42768 L 186.72482,110.71018 L 190.10616,114.33365 L 186.72482,117.98565 L 188.83816,120.29668 L 188.91741,120.18256 L 194.04225,114.61896 L 194.30642,114.36218 L 194.04225,114.07687 L 188.91741,108.5418 L 188.83816,108.42768 z"
        id="path2504"
        sodipodi:nodetypes="ccccccccccc" />

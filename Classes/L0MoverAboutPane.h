@@ -18,17 +18,31 @@
 	SEL selector;
 	
 	IBOutlet UIToolbar* toolbar;
+	
+	// Paid version button
+	IBOutlet UILabel* paidVersionButtonLabel;
+	IBOutlet UILabel* paidVersionButtonDetailLabel;
+	IBOutlet UIImageView* paidVersionDisclosureIndicator;
+	IBOutlet UIButton* paidVersionButton;
 }
 
 @property(assign) IBOutlet UILabel* versionLabel;
 @property(assign) IBOutlet UIToolbar* toolbar;
 @property(retain) L0SlideAboutCopyrightWebPane* copyrightPane;
 
+@property(assign) IBOutlet UILabel* paidVersionButtonLabel;
+@property(assign) IBOutlet UILabel* paidVersionButtonDetailLabel;
+@property(assign) IBOutlet UIImageView* paidVersionDisclosureIndicator;
+@property(assign) IBOutlet UIButton* paidVersionButton;
+
 - (IBAction) showAboutCopyrightWebPane;
 - (IBAction) openInfiniteLabsDotNet;
 - (IBAction) emailAFriend;
 
 - (IBAction) showBookmarksAccountPane;
+
+- (IBAction) downloadPlus;
+- (IBAction) addSafariBookmarklet;
 
 - (IBAction) dismiss;
 - (void) setDismissButtonTarget:(id) target selector:(SEL) selector;

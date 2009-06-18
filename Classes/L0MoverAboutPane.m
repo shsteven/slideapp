@@ -10,6 +10,8 @@
 #import "L0MoverBookmarksAccountPane.h"
 #import "L0MoverAppDelegate.h"
 
+#import "L0MoverAdController.h"
+
 @interface L0MoverAboutPane ()
 
 - (void) clearOutlets;
@@ -27,6 +29,18 @@
 	CGPoint center = self.toolbar.center;
 	center.y += self.toolbar.bounds.size.height + 20;
 	self.toolbar.center = center;
+	
+	if ([L0MoverAdController isPaidVersion]) {
+		self.paidVersionButton.enabled = NO;
+		
+		self.paidVersionButtonLabel.text = NSLocalizedString(@"Thanks for your support!", @"Paid version thank you banner");
+		self.paidVersionButtonDetailLabel.text = NSLocalizedString(@"This is Mover+, the paid version without ads.", @"Paid version thank you subbanner");
+		
+		self.paidVersionButtonLabel.textAlignment = UITextAlignmentCenter;
+		self.paidVersionButtonDetailLabel.textAlignment = UITextAlignmentCenter;
+		
+		self.paidVersionDisclosureIndicator.hidden = YES;
+	}
 }
 
 - (void) viewDidAppear:(BOOL) ani;
@@ -68,9 +82,14 @@
 	self.versionLabel = nil;
 	self.copyrightPane = nil;
 	self.toolbar = nil;
+	self.paidVersionButton = nil;
+	self.paidVersionButtonLabel = nil;
+	self.paidVersionButtonDetailLabel = nil;
+	self.paidVersionDisclosureIndicator = nil;
 }
 
 @synthesize versionLabel, copyrightPane, toolbar;
+@synthesize paidVersionButton, paidVersionButtonLabel, paidVersionButtonDetailLabel, paidVersionDisclosureIndicator;
 
 - (void) dealloc;
 {
@@ -86,6 +105,16 @@
 - (IBAction) openInfiniteLabsDotNet;
 {
 	[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net/"]];
+}
+
+- (IBAction) addSafariBookmarklet;
+{
+	[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/safari-bookmarklet/"]];
+}
+
+- (IBAction) downloadPlus;
+{
+	[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/download-plus/"]];
 }
 
 - (IBAction) emailAFriend;
