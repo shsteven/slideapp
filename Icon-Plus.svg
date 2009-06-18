@@ -18,10 +18,22 @@
    inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/Icon.png"
    inkscape:export-xdpi="10.02"
    inkscape:export-ydpi="10.02"
-   sodipodi:docname="Icon.svg"
+   sodipodi:docname="Icon-Plus.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs2396">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3362">
+      <stop
+         style="stop-color:#0099ff;stop-opacity:1;"
+         offset="0"
+         id="stop3364" />
+      <stop
+         style="stop-color:#97d6ff;stop-opacity:1"
+         offset="1"
+         id="stop3366" />
+    </linearGradient>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3231"
@@ -145,7 +157,7 @@
          offset="0"
          id="stop3157" />
       <stop
-         style="stop-color:#d5d5d5;stop-opacity:1"
+         style="stop-color:#b1ccff;stop-opacity:1"
          offset="1"
          id="stop3159" />
     </linearGradient>
@@ -218,6 +230,104 @@
          stdDeviation="6.8497695"
          id="feGaussianBlur3336" />
     </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3362"
+       id="linearGradient3368"
+       x1="13.22539"
+       y1="213.68313"
+       x2="10.165269"
+       y2="118.27837"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0.1282511,7.998972)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3371"
+       id="linearGradient3378"
+       gradientUnits="userSpaceOnUse"
+       x1="253.99918"
+       y1="578.77551"
+       x2="253.94736"
+       y2="414.89465" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3217"
+       id="linearGradient3380"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.3298447,0,0,1.3298447,124.46507,-469.5125)"
+       x1="339"
+       y1="579.36218"
+       x2="339"
+       y2="432.14465" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3231"
+       id="linearGradient3382"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.3298447,0,0,1.5308677,124.46507,-580.0552)"
+       x1="339"
+       y1="579.36218"
+       x2="339"
+       y2="490.35657" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3362"
+       id="linearGradient3384"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0.1282511,7.998972)"
+       x1="13.22539"
+       y1="213.68313"
+       x2="10.165269"
+       y2="118.27837" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3362"
+       id="linearGradient3388"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(78.111117,4.782872)"
+       x1="13.22539"
+       y1="213.68313"
+       x2="10.165269"
+       y2="118.27837" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3371"
+       id="linearGradient3402"
+       gradientUnits="userSpaceOnUse"
+       x1="253.99918"
+       y1="578.77551"
+       x2="253.94736"
+       y2="414.89465" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3217"
+       id="linearGradient3404"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.3298447,0,0,1.3298447,124.46507,-469.5125)"
+       x1="339"
+       y1="579.36218"
+       x2="339"
+       y2="432.14465" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3231"
+       id="linearGradient3406"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.3298447,0,0,1.5308677,124.46507,-580.0552)"
+       x1="339"
+       y1="579.36218"
+       x2="339"
+       y2="490.35657" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3362"
+       id="linearGradient3408"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(78.111117,4.782872)"
+       x1="13.22539"
+       y1="213.68313"
+       x2="10.165269"
+       y2="118.27837" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -278,46 +388,62 @@
        inkscape:export-xdpi="10"
        inkscape:export-ydpi="10" />
     <g
-       style="opacity:1"
-       transform="matrix(1.8412091,0.4964563,-0.5166878,1.7691145,-813.02521,-485.48443)"
-       id="g3669"
-       inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/LabsPrivate/Contingencies/Custom Page Art/Backdrop/Slides.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <rect
-         style="fill:url(#linearGradient4557);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter3357);enable-background:accumulate"
-         id="rect3671"
-         width="152"
-         height="152"
-         x="254"
-         y="440.36218"
-         rx="11"
-         ry="11"
-         transform="matrix(1.3298446,4.205256e-4,-4.205256e-4,1.3298446,124.61353,-469.47312)" />
-      <rect
-         ry="14.628291"
-         rx="14.628291"
-         y="116.1008"
-         x="462.24561"
-         height="202.13638"
-         width="202.13638"
-         id="rect3673"
-         style="fill:url(#linearGradient4559);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         transform="matrix(1,3.1622159e-4,-3.1622159e-4,1,0,0)" />
-      <rect
-         ry="16.839546"
-         rx="14.628291"
-         y="170.62444"
-         x="474.2142"
-         height="131.65462"
-         width="176.86934"
-         id="rect3675"
-         style="fill:url(#linearGradient4561);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-         transform="matrix(1,3.1622159e-4,-3.1622159e-4,1,0,0)" />
+       id="g3394"
+       transform="matrix(0.9590624,-0.283195,0.283195,0.9590624,-48.420809,-29.146636)">
+      <g
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/LabsPrivate/Contingencies/Custom Page Art/Backdrop/Slides.png"
+         id="g3669"
+         transform="matrix(1.906916,1.3828822e-2,-5.1664078e-2,1.8422984,-876.15254,-235.21001)">
+        <rect
+           transform="matrix(1.3298446,4.205256e-4,-4.205256e-4,1.3298446,124.61353,-469.47312)"
+           ry="11"
+           rx="11"
+           y="440.36218"
+           x="254"
+           height="152"
+           width="152"
+           id="rect3671"
+           style="fill:url(#linearGradient3402);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter3357);enable-background:accumulate" />
+        <rect
+           transform="matrix(1,3.1622159e-4,-3.1622159e-4,1,0,0)"
+           style="fill:url(#linearGradient3404);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect3673"
+           width="202.13638"
+           height="202.13638"
+           x="462.24561"
+           y="116.1008"
+           rx="14.628291"
+           ry="14.628291" />
+        <rect
+           transform="matrix(1,3.1622159e-4,-3.1622159e-4,1,0,0)"
+           style="fill:url(#linearGradient3406);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect3675"
+           width="176.86934"
+           height="131.65462"
+           x="474.2142"
+           y="170.62444"
+           rx="14.628291"
+           ry="16.839546" />
+      </g>
+      <text
+         transform="matrix(0.9998715,1.6031386e-2,-1.6031386e-2,0.9998715,0,0)"
+         sodipodi:linespacing="100%"
+         id="text3358"
+         y="399.32608"
+         x="56.169315"
+         style="font-size:31.39928818px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient3408);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.82549262;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Miso;-inkscape-font-specification:Miso"
+         xml:space="preserve"><tspan
+           style="font-size:627.98565674px;fill:url(#linearGradient3408);fill-opacity:1"
+           y="399.32608"
+           x="56.169315"
+           id="tspan3360"
+           sodipodi:role="line">+</tspan></text>
     </g>
     <g
        id="g2849"
-       transform="matrix(1.7210439,-0.8010378,0.8336813,1.6536545,-247.64169,-8.1072117)"
+       transform="matrix(1.8738093,0.3041258,-0.239263,1.8363962,102.43139,-152.91286)"
        inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/LabsPrivate/Contingencies/Custom Page Art/Backdrop/Slides.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
