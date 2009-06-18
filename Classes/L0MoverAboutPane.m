@@ -10,12 +10,42 @@
 #import "L0MoverBookmarksAccountPane.h"
 #import "L0MoverAppDelegate.h"
 
+@interface L0MoverAboutPane ()
+
+- (void) clearOutlets;
+
+@end
+
+
 @implementation L0MoverAboutPane
 
 - (void) viewWillAppear:(BOOL) ani;
 {
 	[super viewWillAppear:ani];
 	[self.navigationController setNavigationBarHidden:YES animated:ani];
+
+	CGPoint center = self.toolbar.center;
+	center.y += self.toolbar.bounds.size.height + 20;
+	self.toolbar.center = center;
+}
+
+- (void) viewDidAppear:(BOOL) ani;
+{
+	[super viewDidAppear:ani];
+	[self performSelector:@selector(showToolbar) withObject:nil afterDelay:1.2];
+}
+
+- (void) showToolbar;
+{	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.5];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	
+	CGPoint center = self.toolbar.center;
+	center.y -= self.toolbar.bounds.size.height + 20;
+	self.toolbar.center = center;
+	
+	[UIView commitAnimations];
 }
 
 - (void)viewDidLoad;
@@ -27,30 +57,20 @@
 	self.versionLabel.text = [NSString stringWithFormat:self.versionLabel.text, version];
 }
 
+- (void) viewDidUnload;
+{
+	[super viewDidUnload];
+	[self clearOutlets];
+}
+ 
 - (void) clearOutlets;
 {
 	self.versionLabel = nil;
 	self.copyrightPane = nil;
+	self.toolbar = nil;
 }
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
-- (void) viewDidUnload;
-{
-	[self clearOutlets];
-}
-#endif
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < 30000
-- (void) setView:(UIView*) v;
-{
-	if (!v)
-		[self clearOutlets];
-	
-	[super setView:v];
-}
-#endif
-
-@synthesize versionLabel, copyrightPane;
+@synthesize versionLabel, copyrightPane, toolbar;
 
 - (void) dealloc;
 {

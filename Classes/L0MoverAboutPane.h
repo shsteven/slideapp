@@ -16,9 +16,12 @@
 	
 	id target;
 	SEL selector;
+	
+	IBOutlet UIToolbar* toolbar;
 }
 
 @property(assign) IBOutlet UILabel* versionLabel;
+@property(assign) IBOutlet UIToolbar* toolbar;
 @property(retain) L0SlideAboutCopyrightWebPane* copyrightPane;
 
 - (IBAction) showAboutCopyrightWebPane;
