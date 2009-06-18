@@ -12,6 +12,12 @@
 
 @implementation L0MoverAboutPane
 
+- (void) viewWillAppear:(BOOL) ani;
+{
+	[super viewWillAppear:ani];
+	[self.navigationController setNavigationBarHidden:YES animated:ani];
+}
+
 - (void)viewDidLoad;
 {
     [super viewDidLoad];
@@ -73,12 +79,32 @@
 	[self.navigationController pushViewController:pane animated:YES];
 }
 
+- (IBAction) dismiss;
+{
+	if (target && selector)
+		[target performSelector:selector];
+}
+
+- (void) setDismissButtonTarget:(id) t selector:(SEL) s;
+{
+	target = t;
+	selector = s;
+}
+
 @end
 
 @implementation L0SlideAboutCopyrightWebPane
 
+- (void) viewDidAppear:(BOOL) ani;
+{
+	[super viewDidAppear:ani];
+}
+
 - (void) viewWillAppear:(BOOL) ani;
 {
+	[super viewWillAppear:ani];
+	[self.navigationController setNavigationBarHidden:NO animated:ani];
+	
 	UIWebView* wv = [[UIWebView alloc] initWithFrame:self.view.bounds];
 	wv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	wv.backgroundColor = self.view.backgroundColor;

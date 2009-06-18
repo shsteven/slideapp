@@ -17,6 +17,8 @@
 #import "L0MoverPeering.h"
 #import "L0MoverPeer.h"
 
+#import "L0MoverAboutPane.h"
+
 #import "L0MoverNetworkCalloutController.h"
 
 @interface L0MoverAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0MoverPeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
@@ -25,6 +27,7 @@
 	L0MoverItemsTableController* tableController;
 	UIView* tableHostView;
 	L0FlipViewController* tableHostController;
+	L0MoverAboutPane* aboutPane;
 	
 	NSString* documentsDirectory;
 	
@@ -43,6 +46,8 @@
 
 @property(retain) IBOutlet L0FlipViewController* tableHostController;
 @property(retain) L0MoverItemsTableController* tableController;
+
+@property(assign) IBOutlet L0MoverAboutPane* aboutPane;
 
 @property(retain) IBOutlet L0MoverNetworkCalloutController* networkCalloutController;
 - (IBAction) showNetworkCallout;

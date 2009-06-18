@@ -133,6 +133,8 @@ enum {
 	// Setting up the UI.
 	self.tableController = [[[L0MoverItemsTableController alloc] initWithDefaultNibName] autorelease];
 	
+	[self.aboutPane setDismissButtonTarget:self.tableHostController selector:@selector(showFront)];
+	
 	NSMutableArray* itemsArray = [self.toolbar.items mutableCopy];
 
 	// edit button
@@ -498,7 +500,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 }
 
 @synthesize window, toolbar;
-@synthesize tableController, tableHostView, tableHostController;
+@synthesize tableController, tableHostView, tableHostController, aboutPane;
 
 @synthesize networkCalloutController;
 

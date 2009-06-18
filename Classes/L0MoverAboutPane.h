@@ -13,6 +13,9 @@
 @interface L0MoverAboutPane : UIViewController {
 	IBOutlet UILabel* versionLabel;
 	IBOutlet L0SlideAboutCopyrightWebPane* copyrightPane;
+	
+	id target;
+	SEL selector;
 }
 
 @property(assign) IBOutlet UILabel* versionLabel;
@@ -23,6 +26,9 @@
 - (IBAction) emailAFriend;
 
 - (IBAction) showBookmarksAccountPane;
+
+- (IBAction) dismiss;
+- (void) setDismissButtonTarget:(id) target selector:(SEL) selector;
 
 @end
 
