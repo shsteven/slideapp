@@ -120,7 +120,7 @@ enum {
 	[peering addAvailableScannersObject:scanner];
 	scanner.enabled = wiFiEnabled;
 	
-#if DEBUG && !kL0MoverTestByDisablingBluetooth
+#if !DEBUG || (DEBUG && !kL0MoverTestByDisablingBluetooth)
 	L0MoverBluetoothScanner* btScanner = [L0MoverBluetoothScanner sharedScanner];
 	[peering addAvailableScannersObject:btScanner];
 	btScanner.enabled = btEnabled;
