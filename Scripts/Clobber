@@ -3,6 +3,12 @@
 set -avx
 
 HERE="`dirname "$0"`"
+HERE="`cd "$HERE"; pwd`"
 cd "$HERE"/..
-rm -Rf Build TemporaryItems "Compiled Locales" "Compiled Settings Locales"
+for i in Build TemporaryItems "Compiled Locales" "Compiled Settings Locales" Applied; do
+	if [ -d "$i" ]; then
+		rm -Rf "$i"
+	fi
+done
+
 xcodebuild "$@" clean
