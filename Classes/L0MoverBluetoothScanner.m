@@ -45,6 +45,30 @@ L0ObjCSingletonMethod(sharedScanner)
 
 @synthesize service, jammed;
 @synthesize bluetoothSession;
+#if DEBUG
+- (BOOL) jammed;
+{
+	if (isJammingSimulated)
+		return simulatedJammedValue;
+	
+	return jammed;
+}
+
+- (void) testBySimulatingJamming:(BOOL) simulatedJam;
+{
+	[self willChangeValueForKey:@"jammed"];
+	isJammingSimulated = YES;
+	simulatedJammedValue = simulatedJam;
+	[self didChangeValueForKey:@"jammed"];
+}
+
+- (void) testByStoppingJamSimulation;
+{
+	[self willChangeValueForKey:@"jammed"];
+	isJammingSimulated = NO;
+	[self didChangeValueForKey:@"jammed"];
+}
+#endif
 
 + (BOOL) modelAssumedToSupportBluetooth;
 {

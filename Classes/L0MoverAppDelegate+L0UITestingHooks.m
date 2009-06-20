@@ -8,6 +8,9 @@
 
 #import "L0MoverAppDelegate+L0UITestingHooks.h"
 
+#import "L0MoverWiFiScanner.h"
+#import "L0MoverBluetoothScanner.h"
+#import "L0MoverPeering.h"
 
 #if DEBUG
 @implementation L0MoverAppDelegate (L0UITestingHooks)
@@ -47,6 +50,11 @@
 	[self performSelector:@selector(performTestNetworkUnavailable) withObject:nil afterDelay:1.0];
 }
 
+- (void) testNoEmailSetUpAlert;
+{
+	[[UIAlertView alertNamed:@"L0MoverNoEmailSetUp"] performSelector:@selector(show) withObject:nil afterDelay:1.0];
+}
+
 - (void) performTestNetworkUnavailable;
 {
 	[self beginTestingModeBannerAnimation];
@@ -75,8 +83,58 @@
 	[self performSelector:@selector(testImageTutorialAlert_iPod) withObject:nil afterDelay:15.0];
 	[self performSelector:@selector(testNewVersionAlert) withObject:nil afterDelay:20.0];
 	[self performSelector:@selector(testTellAFriendAlert) withObject:nil afterDelay:25.0];
-	[self performSelector:@selector(testNetworkBecomingUnavailable) withObject:nil afterDelay:30.0];
-	[self performSelector:@selector(testNetworkBecomingAvailable) withObject:nil afterDelay:35.0];
+	[self performSelector:@selector(testNoEmailSetUpAlert) withObject:nil afterDelay:30.0];
+}
+
+- (void) testNetworkStateChanges;
+{
+	[self performSelector:@selector(beginTestingModeBannerAnimation) withObject:nil afterDelay:0.01];
+	
+	L0MoverWiFiScanner* wifi = [L0MoverWiFiScanner sharedScanner];
+	L0MoverBluetoothScanner* bt = [L0MoverBluetoothScanner sharedScanner];
+	
+	[self performSelector:@selector(setWiFiEnabled:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.01];
+	[self performSelector:@selector(setBluetoothEnabled:) withObject:[NSNumber numberWithBool:NO] afterDelay:5.0];
+	[self performSelector:@selector(setWiFiEnabled:) withObject:[NSNumber numberWithBool:YES] afterDelay:10.0];
+	[self performSelector:@selector(setBluetoothEnabled:) withObject:[NSNumber numberWithBool:YES] afterDelay:15.0];
+	
+	[self performSelector:@selector(setWiFiJammed:) withObject:[NSNumber numberWithBool:YES] afterDelay:20.0];
+	[self performSelector:@selector(setBluetoothJammed:) withObject:[NSNumber numberWithBool:YES] afterDelay:25.0];
+	[self performSelector:@selector(setWiFiJammed:) withObject:[NSNumber numberWithBool:NO] afterDelay:30.0];
+	[self performSelector:@selector(setBluetoothJammed:) withObject:[NSNumber numberWithBool:NO] afterDelay:35.0];
+	
+	L0MoverPeering* peering = [L0MoverPeering sharedService];
+	[peering performSelector:@selector(removeAvailableScannersObject:) withObject:bt afterDelay:40.0];
+	[self performSelector:@selector(setWiFiJammed:) withObject:[NSNumber numberWithBool:YES] afterDelay:45.0];
+	[self performSelector:@selector(setWiFiJammed:) withObject:[NSNumber numberWithBool:NO] afterDelay:50.0];
+	[peering performSelector:@selector(addAvailableScannersObject:) withObject:bt afterDelay:55.0];
+	
+	[wifi performSelector:@selector(testByStoppingJamSimulation) withObject:nil afterDelay:60.0];
+	[bt performSelector:@selector(testByStoppingJamSimulation) withObject:nil afterDelay:60.0];
+}
+
+- (void) setWiFiEnabled:(NSNumber*) n;
+{
+	L0MoverWiFiScanner* wifi = [L0MoverWiFiScanner sharedScanner];
+	wifi.enabled = [n boolValue];
+}
+
+- (void) setWiFiJammed:(NSNumber*) n;
+{
+	L0MoverWiFiScanner* wifi = [L0MoverWiFiScanner sharedScanner];
+	[wifi testBySimulatingJamming:[n boolValue]];
+}
+
+- (void) setBluetoothEnabled:(NSNumber*) n;
+{
+	L0MoverBluetoothScanner* bt = [L0MoverBluetoothScanner sharedScanner];
+	bt.enabled = [n boolValue];
+}
+
+- (void) setBluetoothJammed:(NSNumber*) n;
+{
+	L0MoverBluetoothScanner* bt = [L0MoverBluetoothScanner sharedScanner];
+	[bt testBySimulatingJamming:[n boolValue]];
 }
 
 - (void) beginTestingModeBannerAnimation;

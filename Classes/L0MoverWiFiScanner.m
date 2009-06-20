@@ -295,6 +295,31 @@ L0ObjCSingletonMethod(sharedScanner)
 
 @synthesize jammed;
 
+#if DEBUG
+- (BOOL) jammed;
+{
+	if (isJammingSimulated)
+		return simulatedJammedValue;
+	
+	return jammed;
+}
+
+- (void) testBySimulatingJamming:(BOOL) simulatedJam;
+{
+	[self willChangeValueForKey:@"jammed"];
+	isJammingSimulated = YES;
+	simulatedJammedValue = simulatedJam;
+	[self didChangeValueForKey:@"jammed"];
+}
+
+- (void) testByStoppingJamSimulation;
+{
+	[self willChangeValueForKey:@"jammed"];
+	isJammingSimulated = NO;
+	[self didChangeValueForKey:@"jammed"];
+}
+#endif
+
 static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach, SCNetworkReachabilityFlags flags, void* meAsPointer) {
 	L0MoverWiFiScanner* myself = (L0MoverWiFiScanner*) meAsPointer;
 	[NSObject cancelPreviousPerformRequestsWithTarget:myself selector:@selector(checkNetwork) object:nil];

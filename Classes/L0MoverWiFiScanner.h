@@ -27,8 +27,18 @@
 	L0MoverPeering* service;
 	BOOL jammed;
 	SCNetworkReachabilityRef reach;
+	
+#if DEBUG
+	BOOL isJammingSimulated;
+	BOOL simulatedJammedValue;
+#endif
 }
 
 + sharedScanner;
+
+#if DEBUG
+- (void) testBySimulatingJamming:(BOOL) simulatedJam;
+- (void) testByStoppingJamSimulation;
+#endif
 
 @end

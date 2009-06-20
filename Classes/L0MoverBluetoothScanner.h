@@ -20,10 +20,20 @@
 	NSMutableDictionary* channelsByPeerID;
 	BOOL jammed;
 	int retries;
+	
+#if DEBUG
+	BOOL isJammingSimulated;
+	BOOL simulatedJammedValue;
+#endif
 }
 
 + sharedScanner;
 
 @property(readonly) GKSession* bluetoothSession;
+
+#if DEBUG
+- (void) testBySimulatingJamming:(BOOL) simulatedJam;
+- (void) testByStoppingJamSimulation;
+#endif
 
 @end
