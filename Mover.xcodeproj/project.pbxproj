@@ -19,10 +19,6 @@
 		1510C4EF0FBEDB96003849A6 /* L0MoverImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */; };
 		1510C5610FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */; };
 		15146A130FE643B200F7B55C /* L0MoverTextItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 15146A120FE643B200F7B55C /* L0MoverTextItemUI.m */; };
-		15250B1C0FC692BD0073E5C7 /* nl.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15250B180FC692BA0073E5C7 /* nl.lproj */; };
-		15250B2B0FC692CA0073E5C7 /* nl.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15250B1F0FC692C70073E5C7 /* nl.lproj */; };
-		15250B4A0FC6945D0073E5C7 /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15250B3E0FC694570073E5C7 /* de.lproj */; };
-		15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15250B4B0FC6946E0073E5C7 /* de.lproj */; };
 		15277EA50FE633E20040F04D /* L0TextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15277EA40FE633E20040F04D /* L0TextItem.m */; };
 		15277ED10FE638FD0040F04D /* L0MoverTextViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15277ECF0FE638FD0040F04D /* L0MoverTextViewer.m */; };
 		15277ED20FE638FD0040F04D /* L0MoverTextViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15277ED00FE638FD0040F04D /* L0MoverTextViewer.xib */; };
@@ -38,14 +34,8 @@
 		154E74D50FE7F379005945F9 /* L0MoverItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1640F7590D000E5BA2F /* L0MoverItemView.xib */; };
 		154E74D60FE7F42F005945F9 /* L0MoverItemsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F67F840F7632BB0024A858 /* L0MoverItemsTable.xib */; };
 		154FB61E0FB18EA500DB26C6 /* L0MoverNewVersion.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FB61D0FB18EA500DB26C6 /* L0MoverNewVersion.alert */; };
-		154FB7940FB1F16400DB26C6 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 154FB7900FB1F16000DB26C6 /* fr.lproj */; };
 		154FB7950FB1F16400DB26C6 /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 154FB7910FB1F16000DB26C6 /* it.lproj */; };
-		154FB7960FB1F16400DB26C6 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 154FB7920FB1F16000DB26C6 /* ru.lproj */; };
-		154FB7970FB1F16400DB26C6 /* sv.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 154FB7930FB1F16000DB26C6 /* sv.lproj */; };
-		154FB79A0FB1F18300DB26C6 /* fr.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 154FB7680FB1F06D00DB26C6 /* fr.lproj */; };
 		154FB79B0FB1F18300DB26C6 /* it.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 154FB7690FB1F06D00DB26C6 /* it.lproj */; };
-		154FB79C0FB1F18300DB26C6 /* ru.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 154FB76A0FB1F06D00DB26C6 /* ru.lproj */; };
-		154FB79D0FB1F18300DB26C6 /* sv.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 154FB76B0FB1F06D00DB26C6 /* sv.lproj */; };
 		1557E61E0FC5542400DC6B58 /* BookmarkIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1557E61D0FC5542400DC6B58 /* BookmarkIcon.png */; };
 		1557E66F0FC556AB00DC6B58 /* L0MoverBookmarkItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1557E66E0FC556AB00DC6B58 /* L0MoverBookmarkItemUI.m */; };
 		1559B5B10F7982D0005E4362 /* L0MoverPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5B00F7982D0005E4362 /* L0MoverPeer.m */; };
@@ -67,8 +57,6 @@
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
 		159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */; };
-		15A244FB0FCBFF8A0034C943 /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15A244EF0FCBFF8A0034C943 /* ja.lproj */; };
-		15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15A245080FCBFF9F0034C943 /* ja.lproj */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
 		15B4268E0FD91A7D0065D461 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B4268D0FD91A7D0065D461 /* MobileCoreServices.framework */; };
 		15B7BF6D0F9C778E00EF9AB9 /* libLogging-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */; };
@@ -193,13 +181,7 @@
 			dstPath = Settings.bundle;
 			dstSubfolderSpec = 7;
 			files = (
-				15A2450C0FCBFFAC0034C943 /* ja.lproj in Copy Settings.bundle Localizations */,
-				15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */,
-				15250B1C0FC692BD0073E5C7 /* nl.lproj in Copy Settings.bundle Localizations */,
-				154FB79A0FB1F18300DB26C6 /* fr.lproj in Copy Settings.bundle Localizations */,
 				154FB79B0FB1F18300DB26C6 /* it.lproj in Copy Settings.bundle Localizations */,
-				154FB79C0FB1F18300DB26C6 /* ru.lproj in Copy Settings.bundle Localizations */,
-				154FB79D0FB1F18300DB26C6 /* sv.lproj in Copy Settings.bundle Localizations */,
 			);
 			name = "Copy Settings.bundle Localizations";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,10 +206,6 @@
 		1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAddressBookItemUI.m; sourceTree = "<group>"; };
 		15146A110FE643B200F7B55C /* L0MoverTextItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverTextItemUI.h; sourceTree = "<group>"; };
 		15146A120FE643B200F7B55C /* L0MoverTextItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverTextItemUI.m; sourceTree = "<group>"; };
-		15250B180FC692BA0073E5C7 /* nl.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = nl.lproj; sourceTree = "<group>"; };
-		15250B1F0FC692C70073E5C7 /* nl.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = nl.lproj; sourceTree = "<group>"; };
-		15250B3E0FC694570073E5C7 /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
-		15250B4B0FC6946E0073E5C7 /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
 		15277EA30FE633E20040F04D /* L0TextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0TextItem.h; sourceTree = "<group>"; };
 		15277EA40FE633E20040F04D /* L0TextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0TextItem.m; sourceTree = "<group>"; };
 		15277ECE0FE638FD0040F04D /* L0MoverTextViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverTextViewer.h; sourceTree = "<group>"; };
@@ -245,14 +223,8 @@
 		15390A5C0FC92D4500222925 /* Instapaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instapaper.png; sourceTree = "<group>"; };
 		154E74BA0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0MoverNoEmailSetUp.alert; sourceTree = "<group>"; };
 		154FB61D0FB18EA500DB26C6 /* L0MoverNewVersion.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0MoverNewVersion.alert; sourceTree = "<group>"; };
-		154FB7680FB1F06D00DB26C6 /* fr.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fr.lproj; sourceTree = "<group>"; };
 		154FB7690FB1F06D00DB26C6 /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = it.lproj; sourceTree = "<group>"; };
-		154FB76A0FB1F06D00DB26C6 /* ru.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ru.lproj; sourceTree = "<group>"; };
-		154FB76B0FB1F06D00DB26C6 /* sv.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sv.lproj; sourceTree = "<group>"; };
-		154FB7900FB1F16000DB26C6 /* fr.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fr.lproj; sourceTree = "<group>"; };
 		154FB7910FB1F16000DB26C6 /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = it.lproj; sourceTree = "<group>"; };
-		154FB7920FB1F16000DB26C6 /* ru.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ru.lproj; sourceTree = "<group>"; };
-		154FB7930FB1F16000DB26C6 /* sv.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sv.lproj; sourceTree = "<group>"; };
 		15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
 		1557E61D0FC5542400DC6B58 /* BookmarkIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BookmarkIcon.png; sourceTree = "<group>"; };
 		1557E66D0FC556AB00DC6B58 /* L0MoverBookmarkItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverBookmarkItemUI.h; sourceTree = "<group>"; };
@@ -285,8 +257,6 @@
 		159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAdController.m; sourceTree = "<group>"; };
 		159F7BE40FE2D9B9001A6B91 /* Off.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Off.xcconfig; sourceTree = "<group>"; };
 		159F7BE60FE2DA03001A6B91 /* On.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = On.xcconfig; sourceTree = "<group>"; };
-		15A244EF0FCBFF8A0034C943 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
-		15A245080FCBFF9F0034C943 /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		15B4268D0FD91A7D0065D461 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -401,7 +371,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* L0MoverAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* L0MoverAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* MoverLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* MoverPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
@@ -480,13 +450,7 @@
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
 			isa = PBXGroup;
 			children = (
-				15A244EF0FCBFF8A0034C943 /* ja.lproj */,
-				15250B3E0FC694570073E5C7 /* de.lproj */,
-				15250B1F0FC692C70073E5C7 /* nl.lproj */,
-				154FB7900FB1F16000DB26C6 /* fr.lproj */,
 				154FB7910FB1F16000DB26C6 /* it.lproj */,
-				154FB7920FB1F16000DB26C6 /* ru.lproj */,
-				154FB7930FB1F16000DB26C6 /* sv.lproj */,
 			);
 			path = "Compiled Locales";
 			sourceTree = "<group>";
@@ -494,13 +458,7 @@
 		15729E260FB09BC200CD1310 /* Compiled Settings Locales */ = {
 			isa = PBXGroup;
 			children = (
-				15A245080FCBFF9F0034C943 /* ja.lproj */,
-				15250B4B0FC6946E0073E5C7 /* de.lproj */,
-				15250B180FC692BA0073E5C7 /* nl.lproj */,
-				154FB7680FB1F06D00DB26C6 /* fr.lproj */,
 				154FB7690FB1F06D00DB26C6 /* it.lproj */,
-				154FB76A0FB1F06D00DB26C6 /* ru.lproj */,
-				154FB76B0FB1F06D00DB26C6 /* sv.lproj */,
 			);
 			path = "Compiled Settings Locales";
 			sourceTree = "<group>";
@@ -704,7 +662,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* MoverLite.app */,
+				1D6058910D05DD3D006BFB54 /* MoverPlus.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -839,7 +797,7 @@
 			);
 			name = Mover;
 			productName = Shard;
-			productReference = 1D6058910D05DD3D006BFB54 /* MoverLite.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* MoverPlus.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -917,13 +875,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15250B4A0FC6945D0073E5C7 /* de.lproj in Resources */,
-				15250B2B0FC692CA0073E5C7 /* nl.lproj in Resources */,
-				154FB7940FB1F16400DB26C6 /* fr.lproj in Resources */,
 				154FB7950FB1F16400DB26C6 /* it.lproj in Resources */,
-				154FB7960FB1F16400DB26C6 /* ru.lproj in Resources */,
-				154FB7970FB1F16400DB26C6 /* sv.lproj in Resources */,
-				15A244FB0FCBFF8A0034C943 /* ja.lproj in Resources */,
 				15E7FDED0FADC37900E9C438 /* MainWindow.xib in Resources */,
 				154E74D50FE7F379005945F9 /* L0MoverItemView.xib in Resources */,
 				15C0C16A0F75910000E5BA2F /* frame.png in Resources */,
