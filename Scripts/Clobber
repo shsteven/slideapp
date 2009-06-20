@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -avx
+
+HERE="`dirname "$0"`"
+cd "$HERE"/..
+rm -Rf Build TemporaryItems "Compiled Locales" "Compiled Settings Locales"
+xcodebuild "$@" clean
