@@ -1080,8 +1080,8 @@
 			baseConfigurationReference = 15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = AdHoc.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6037617A-9EC8-4ED6-9EEE-19C57761D548";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Emanuele Vulcano";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "61686463-5AF1-4C8E-9B79-A4943A29EE52";
 			};
 			name = "Ad Hoc";
 		};
