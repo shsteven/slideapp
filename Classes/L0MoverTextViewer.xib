@@ -62,6 +62,7 @@
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">2</int>
 						</object>
+						<int key="IBUIDataDetectorTypes">3</int>
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 416}</string>
