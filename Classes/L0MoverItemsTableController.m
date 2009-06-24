@@ -787,10 +787,10 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 - (void) addItem:(L0MoverItem*) item comingFromPeer:(L0MoverPeer*) peer;
 {
 	[self addItem:item animation:[self animationForPeer:peer]];
-	[self stopWaitingForItemFromPeer:peer];
+	[self endShowingPeerAsBusy:peer];
 }
 
-- (void) stopWaitingForItemFromPeer:(L0MoverPeer*) peer;
+- (void) endShowingPeerAsBusy:(L0MoverPeer*) peer;
 {
 	[[self spinnerForPeer:peer] stopAnimating];
 	
@@ -814,9 +814,11 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 	if (view)
 		[self animateItemView:view withAddAnimation:[self animationForPeer:peer]];
+
+	[self endShowingPeerAsBusy:peer];
 }
 
-- (void) beginWaitingForItemComingFromPeer:(L0MoverPeer*) peer;
+- (void) beginShowingPeerAsBusy:(L0MoverPeer*) peer;
 {
 	[[self spinnerForPeer:peer] startAnimating];
 	
@@ -917,6 +919,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		}
 		
 		if (item) {
+			[self beginShowingPeerAsBusy:peer];
 			sent = [peer receiveItem:item];
 		}
 	} 

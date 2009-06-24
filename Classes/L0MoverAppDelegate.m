@@ -410,24 +410,28 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 - (void) moverPeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
 {
 	L0Log(@"About to send item %@", item);
+	[UIApp beginNetworkUse];
 }
 
 - (void) moverPeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
 {
 	L0Log(@"Sent %@", item);
 	[self.tableController returnItemToTableAfterSend:item toPeer:peer];
+	[UIApp endNetworkUse];
 }
 
 - (void) moverPeerWillSendUsItem:(L0MoverPeer*) peer;
 {
 	L0Log(@"Receiving from %@", peer);
-	[self.tableController beginWaitingForItemComingFromPeer:peer];
+	[self.tableController beginShowingPeerAsBusy:peer];
+	[UIApp beginNetworkUse];
 }
 - (void) moverPeer:(L0MoverPeer*) peer didSendUsItem:(L0MoverItem*) item;
 {
 	L0Log(@"Received %@", item);
 	[item storeToAppropriateApplication];
 	[self.tableController addItem:item comingFromPeer:peer];
+	[UIApp endNetworkUse];
 	
 	if ([item isKindOfClass:[L0ImageItem class]])
 		[self showAlertIfNotShownBeforeNamedForiPhone:@"L0ImageReceived_iPhone" foriPodTouch:@"L0ImageReceived_iPodTouch"];
@@ -436,7 +440,8 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 }
 - (void) moverPeerDidCancelSendingUsItem:(L0MoverPeer*) peer;
 {
-	[self.tableController stopWaitingForItemFromPeer:peer];
+	[self.tableController endShowingPeerAsBusy:peer];
+	[UIApp endNetworkUse];
 }
 
 - (void) peerFound:(L0MoverPeer*) peer;
