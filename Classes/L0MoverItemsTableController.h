@@ -88,8 +88,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 - (void) removePeer:(L0MoverPeer*) peer;
 
 - (void) addItem:(L0MoverItem*) item comingFromPeer:(L0MoverPeer*) peer;
-- (void) beginWaitingForItemComingFromPeer:(L0MoverPeer*) peer;
-- (void) stopWaitingForItemFromPeer:(L0MoverPeer*) peer;
+- (void) beginShowingPeerAsBusy:(L0MoverPeer*) peer;
+- (void) endShowingPeerAsBusy:(L0MoverPeer*) peer;
 
 - (void) addItem:(L0MoverItem*) item animation:(L0SlideItemsTableAddAnimation) animation;
 - (void) removeItem:(L0MoverItem*) item animation:(L0SlideItemsTableRemoveAnimation) animation;
