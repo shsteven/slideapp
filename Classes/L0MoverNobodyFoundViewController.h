@@ -27,6 +27,7 @@
 @property(assign) IBOutlet UIView* nobodyFoundViewHost;
 
 - (IBAction) showNetworkHelp;
+- (IBAction) showNetworkState;
 
 - (void) updateDisplayOfNobodyFoundView;
 

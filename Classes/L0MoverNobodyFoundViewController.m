@@ -9,6 +9,7 @@
 #import "L0MoverTroubleshootingController.h"
 #import "L0MoverItemsTableController.h"
 #import "L0MoverPeering.h"
+#import "L0MoverAppDelegate.h"
 
 @interface L0MoverTroubleshootingController ()
 
@@ -68,9 +69,18 @@ L0UniquePointerConstant(kL0MoverTroubleshootingControllerObservationContext);
 		[self hideNobodyFoundViewAnimated:YES];	
 }
 
+#pragma mark -
+#pragma mark Actions
+
 - (IBAction) showNetworkHelp;
 {
-	
+	// TODO
+}
+
+- (IBAction) showNetworkState;
+{
+	L0MoverAppDelegate* delegate = (id) UIApp.delegate;
+	[delegate showNetworkSettingsPane];
 }
 
 #pragma mark -
