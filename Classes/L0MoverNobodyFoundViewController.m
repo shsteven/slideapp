@@ -6,12 +6,12 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0MoverTroubleshootingController.h"
+#import "L0MoverNobodyFoundViewController.h"
 #import "L0MoverItemsTableController.h"
 #import "L0MoverPeering.h"
 #import "L0MoverAppDelegate.h"
 
-@interface L0MoverTroubleshootingController ()
+@interface L0MoverNobodyFoundViewController ()
 
 - (void) displayNobodyFoundView;
 - (void) hideNobodyFoundViewAnimated:(BOOL) ani;
@@ -21,7 +21,7 @@
 @end
 
 
-@implementation L0MoverTroubleshootingController
+@implementation L0MoverNobodyFoundViewController
 
 @synthesize tableController;
 @synthesize nobodyFoundView, nobodyFoundViewSpinner, nobodyFoundViewHost;
@@ -30,6 +30,7 @@ L0UniquePointerConstant(kL0MoverTroubleshootingControllerObservationContext);
 
 - (void) awakeFromNib;
 {	
+	nobodyFoundViewFrame = self.nobodyFoundView.frame;
 	[self hideNobodyFoundViewAnimated:NO];
 	[self performSelector:@selector(updateDisplayOfNobodyFoundViewImmediately) withObject:nil afterDelay:3.0];
 	
@@ -117,6 +118,7 @@ L0UniquePointerConstant(kL0MoverTroubleshootingControllerObservationContext);
 		return;
 
 	self.nobodyFoundView.alpha = 0.0;
+	self.nobodyFoundView.frame = nobodyFoundViewFrame;
 	[self.nobodyFoundViewHost addSubview:self.nobodyFoundView];
 	
 	[self.nobodyFoundViewSpinner startAnimating];

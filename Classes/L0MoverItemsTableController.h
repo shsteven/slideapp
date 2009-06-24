@@ -11,7 +11,7 @@
 #import "L0MoverPeer.h"
 #import <MuiKit/MuiKit.h>
 
-#import "L0MoverTroubleshootingController.h"
+#import "L0MoverNobodyFoundViewController.h"
 
 enum {
 	kL0SlideItemsTableNoAddAnimation,
@@ -65,7 +65,7 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 	
 	UIView* advertisementStratum;
 	
-	L0MoverTroubleshootingController* troubleshooting;
+	L0MoverNobodyFoundViewController* troubleshooting;
 }
 
 - (id) initWithDefaultNibName;
@@ -88,7 +88,7 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 
 @property(assign) IBOutlet UIView* advertisementStratum;
 
-@property(retain) IBOutlet L0MoverTroubleshootingController* troubleshooting;
+@property(retain) IBOutlet L0MoverNobodyFoundViewController* troubleshooting;
 
 - (BOOL) addPeerIfSpaceAllows:(L0MoverPeer*) peer;
 - (void) removePeer:(L0MoverPeer*) peer;

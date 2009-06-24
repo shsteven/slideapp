@@ -10,11 +10,12 @@
 
 @class L0MoverItemsTableController;
 
-@interface L0MoverTroubleshootingController : NSObject {
+@interface L0MoverNobodyFoundViewController : NSObject {
 	L0MoverItemsTableController* tableController;
 	
 	UIView* nobodyFoundView;
 	UIActivityIndicatorView* nobodyFoundViewSpinner;
+	CGRect nobodyFoundViewFrame;
 	
 	UIView* nobodyFoundViewHost;
 }
