@@ -9,6 +9,8 @@
 #import "L0MoverPeering.h"
 #import "L0MoverPeer.h"
 #import "L0MoverWiFiScanner.h"
+#import "L0MoverBluetoothScanner.h"
+
 #import <MuiKit/MuiKit.h>
 
 // Our private L0MoverPeer subclass.
@@ -99,8 +101,13 @@ L0ObjCSingletonMethod(sharedService);
 		uniquePeerIdentifierForSelf = [[[[L0UUID UUID] stringValue] substringWithRange:NSMakeRange(0, 2)] copy];
 		
 		// set up KVO
-		for (id scanner in scanners)
+		for (id scanner in scanners) {
 			[scanner addObserver:self forKeyPath:@"availableChannels" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld|NSKeyValueObservingOptionInitial context:(void*) kL0MoverPeeringObservationContext];
+			
+			[scanner addObserver:self forKeyPath:@"enabled" options:NSKeyValueObservingOptionPrior|NSKeyValueObservingOptionInitial context:(void*) kL0MoverPeeringObservationContext];
+			[scanner addObserver:self forKeyPath:@"jammed" options:NSKeyValueObservingOptionPrior|NSKeyValueObservingOptionInitial context:(void*) kL0MoverPeeringObservationContext];
+		}
+			
 	}
 	
 	return self;
@@ -116,7 +123,7 @@ L0ObjCSingletonMethod(sharedService);
 
 + allScanners;
 {
-	return [NSSet setWithObject:[L0MoverWiFiScanner sharedScanner]]; // TODO
+	return [NSSet setWithObjects:[L0MoverWiFiScanner sharedScanner], [L0MoverBluetoothScanner sharedScanner], nil];
 }
 
 #pragma mark Peers and channels
@@ -166,20 +173,27 @@ L0ObjCSingletonMethod(sharedService);
 {
 	if (context != kL0MoverPeeringObservationContext) return;
 	
-	NSArray* inserted = nil, * removed = nil;
-	// TODO
-	if ([change l0_changeKind] == NSKeyValueChangeInsertion || [change l0_changeKind] == NSKeyValueChangeReplacement)
-		inserted = [change l0_changedValue];
-	if ([change l0_changeKind] == NSKeyValueChangeRemoval || [change l0_changeKind] == NSKeyValueChangeReplacement)
-		removed = [change l0_previousValue];
-	
-	// inserting new channels...
-	for (id <L0MoverPeerChannel> channel in inserted)
-		[self makeChannelAvailable:channel];
+	if ([keyPath isEqual:@"availableChannels"]) {
+		NSArray* inserted = nil, * removed = nil;
+		// TODO
+		if ([change l0_changeKind] == NSKeyValueChangeInsertion || [change l0_changeKind] == NSKeyValueChangeReplacement)
+			inserted = [change l0_changedValue];
+		if ([change l0_changeKind] == NSKeyValueChangeRemoval || [change l0_changeKind] == NSKeyValueChangeReplacement)
+			removed = [change l0_previousValue];
+		
+		// inserting new channels...
+		for (id <L0MoverPeerChannel> channel in inserted)
+			[self makeChannelAvailable:channel];
 
-	// removing invalid channels...
-	for (id <L0MoverPeerChannel> channel in removed)
-		[self makeChannelUnavailable:channel];
+		// removing invalid channels...
+		for (id <L0MoverPeerChannel> channel in removed)
+			[self makeChannelUnavailable:channel];
+	} else if ([keyPath isEqual:@"enabled"] || [keyPath isEqual:@"jammed"]) {
+		if ([change l0_isPrior])
+			[self willChangeValueForKey:@"disconnected"];
+		else
+			[self didChangeValueForKey:@"disconnected"];
+	}
 }
 
 - (void) makeChannelAvailable:(id <L0MoverPeerChannel>) channel;
@@ -230,6 +244,18 @@ L0ObjCSingletonMethod(sharedService);
 	scanner.enabled = NO;
 	scanner.service = nil;
 	[scanners removeObject:scanner];
+}
+
+
+
+- (BOOL) disconnected;
+{
+	for (id <L0MoverPeerScanner> s in scanners) {
+		if (s.enabled && !s.jammed)
+			return NO;
+	}
+	
+	return YES;
 }
 
 @end

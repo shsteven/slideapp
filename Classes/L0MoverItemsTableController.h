@@ -11,6 +11,8 @@
 #import "L0MoverPeer.h"
 #import <MuiKit/MuiKit.h>
 
+#import "L0MoverTroubleshootingController.h"
+
 enum {
 	kL0SlideItemsTableNoAddAnimation,
 	
@@ -62,6 +64,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 	BOOL isHoldingOntoHighlight;
 	
 	UIView* advertisementStratum;
+	
+	L0MoverTroubleshootingController* troubleshooting;
 }
 
 - (id) initWithDefaultNibName;
@@ -83,6 +87,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 @property(retain) L0MoverPeer* westPeer;
 
 @property(assign) IBOutlet UIView* advertisementStratum;
+
+@property(retain) IBOutlet L0MoverTroubleshootingController* troubleshooting;
 
 - (BOOL) addPeerIfSpaceAllows:(L0MoverPeer*) peer;
 - (void) removePeer:(L0MoverPeer*) peer;

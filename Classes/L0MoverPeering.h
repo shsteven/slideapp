@@ -56,6 +56,9 @@
 // Adds a scanner.
 - (void) addAvailableScannersObject:(id <L0MoverPeerScanner>) scanner;
 
+// We're disconnected if scanners are all disabled and/or jammed.
+@property(readonly) BOOL disconnected;
+
 @end
 
 // Scanners and channels -------

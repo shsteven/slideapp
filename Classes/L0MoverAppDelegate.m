@@ -30,6 +30,8 @@
 #import "L0MoverBookmarkItemUI.h"
 #import "L0MoverItemAction.h"
 
+#import "L0MoverNetworkSettingsPane.h"
+
 #import <netinet/in.h>
 
 // Alert/Action sheet tags
@@ -175,7 +177,7 @@ enum {
 	}
 	
 	// Make sure we show the network callout if there are one or more jams.
-	[self performSelector:@selector(showNetworkCalloutIfJammed) withObject:nil afterDelay:2.0];
+	[self.networkCalloutController performSelector:@selector(showNetworkCalloutIfJammed) withObject:nil afterDelay:2.0];
 }
 
 #pragma mark -
@@ -804,12 +806,10 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self.networkCalloutController toggleCallout];
 }
 
-- (IBAction) showNetworkCalloutIfJammed;
+- (void) showNetworkSettingsPane;
 {
-	BOOL wiFiOff = [[L0MoverWiFiScanner sharedScanner] enabled] && [[L0MoverWiFiScanner sharedScanner] jammed];
-	BOOL bluetoothOff = [[L0MoverBluetoothScanner sharedScanner] enabled] && [[L0MoverBluetoothScanner sharedScanner] jammed];
-	if (wiFiOff || bluetoothOff)
-		[self.networkCalloutController showCallout];
+	L0MoverNetworkSettingsPane* pane = [L0MoverNetworkSettingsPane networkSettingsPane];
+	[self presentModalViewController:pane];
 }
 
 - (void) presentModalViewController:(UIViewController*) vc;

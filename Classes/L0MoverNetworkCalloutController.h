@@ -38,5 +38,7 @@
 - (void) hideCalloutUnlessJammed;
 - (void) toggleCallout;
 
+- (void) showNetworkSettingsPane;
+
 @end
 

@@ -51,6 +51,7 @@
 
 @property(retain) IBOutlet L0MoverNetworkCalloutController* networkCalloutController;
 - (IBAction) showNetworkCallout;
+- (void) showNetworkSettingsPane;
 
 - (IBAction) addItem;
 - (void) addImageItem;

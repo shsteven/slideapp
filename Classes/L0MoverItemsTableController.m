@@ -130,6 +130,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 @synthesize northLabel, eastLabel, westLabel;
 @synthesize northSpinner, eastSpinner, westSpinner;
 @synthesize advertisementStratum;
+@synthesize troubleshooting;
 
 - (void) clearOutlets;
 {
@@ -147,6 +148,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	
 	[basePeerLabelColor release];
 	basePeerLabelColor = nil;
+	
+	self.troubleshooting = nil;
 }
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
@@ -684,6 +687,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 			[attrs setObject:peer forKey:@"peer"];
 		[self performSelector:@selector(performFadeInOutAnimationWithAttributes:) withObject:attrs afterDelay:0.7];
 	}
+	
+	[self.troubleshooting updateDisplayOfNobodyFoundView];
 }
 
 - (void) performFadeInOutAnimationWithAttributes:(NSDictionary*) d;

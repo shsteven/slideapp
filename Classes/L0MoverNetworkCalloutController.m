@@ -68,11 +68,13 @@
 - (IBAction) pressedCallout;
 {
 	[self unhighlightCallout];
-	
-	L0MoverNetworkSettingsPane* pane = [L0MoverNetworkSettingsPane networkSettingsPane];
-	
+	[self showNetworkSettingsPane];	
+}
+
+- (void) showNetworkSettingsPane;
+{
 	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
-	[delegate presentModalViewController:pane];
+	[delegate showNetworkSettingsPane];
 }
 
 #pragma mark -
@@ -170,6 +172,19 @@ L0UniquePointerConstant(kL0MoverCalloutControllerObservationContext);
 	}
 	
 	[[L0MoverPeering sharedService] addObserver:self forKeyPath:@"availableScanners" options:NSKeyValueObservingOptionInitial context:(void*) kL0MoverCalloutControllerObservationContext];
+}
+
+- (IBAction) showNetworkCalloutIfJammed;
+{
+	BOOL anyJammed = NO;
+	for (id <L0MoverPeerScanner> s in [[L0MoverPeering sharedService] availableScanners]) {
+		if (s.enabled && s.jammed) {
+			anyJammed = YES; break;
+		}
+	}
+	
+	if (anyJammed)
+		[self showCallout];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
