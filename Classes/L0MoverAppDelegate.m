@@ -644,7 +644,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 				[self.tableController removeItem:item animation:kL0SlideItemsTableRemoveByFadingAway];
 			} else if ([identifier isEqual:kL0MoverItemMenuSheetDeleteIdentifier]) {
 				
-				L0ActionSheet* sheet = [L0ActionSheet new];
+				L0ActionSheet* sheet = [[L0ActionSheet new] autorelease];
 				sheet.tag = kL0MoverDeleteConfirmationSheetTag;
 				
 				sheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
