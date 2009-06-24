@@ -52,7 +52,7 @@
 	UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:myself];
 	
 	myself.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:myself action:@selector(dismiss)] autorelease];
-	myself.title = @"Network Help";
+	myself.title = NSLocalizedStringFromTable(@"Network Help", @"L0MoverNetworkUI", @"Network help pane title");
 	
 	[myself release];
 	
