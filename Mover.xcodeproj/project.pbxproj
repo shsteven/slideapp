@@ -57,6 +57,9 @@
 		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
+		1592D5D80FF22A2900433F4B /* L0MoverWebPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1592D5D70FF22A2900433F4B /* L0MoverWebPane.m */; };
+		1592D60C0FF22CF100433F4B /* L0MoverNetworkHelpPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1592D60B0FF22CF100433F4B /* L0MoverNetworkHelpPane.m */; };
+		1592D6980FF2346500433F4B /* NetworkHelpPage in Resources */ = {isa = PBXBuildFile; fileRef = 1592D6970FF2346500433F4B /* NetworkHelpPage */; };
 		159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
 		15B4268E0FD91A7D0065D461 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B4268D0FD91A7D0065D461 /* MobileCoreServices.framework */; };
@@ -255,6 +258,11 @@
 		15911E790F8FA2F900BECD18 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		159120810F8FD04B00BECD18 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/L0MoverAboutPane.xib; sourceTree = "<group>"; };
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		1592D5D60FF22A2900433F4B /* L0MoverWebPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverWebPane.h; sourceTree = "<group>"; };
+		1592D5D70FF22A2900433F4B /* L0MoverWebPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverWebPane.m; sourceTree = "<group>"; };
+		1592D60A0FF22CF100433F4B /* L0MoverNetworkHelpPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverNetworkHelpPane.h; sourceTree = "<group>"; };
+		1592D60B0FF22CF100433F4B /* L0MoverNetworkHelpPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverNetworkHelpPane.m; sourceTree = "<group>"; };
+		1592D6500FF22F0000433F4B /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = NetworkHelp/English.lproj/NetworkHelpPage; sourceTree = "<group>"; };
 		159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AboutPaneBackdrop-LightBlue.png"; sourceTree = "<group>"; };
 		159F7BBE0FE2D662001A6B91 /* L0MoverAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAdController.h; sourceTree = "<group>"; };
 		159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAdController.m; sourceTree = "<group>"; };
@@ -303,7 +311,7 @@
 		15E714450FBD92FE0037C439 /* L0MoverItemAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverItemAction.m; sourceTree = "<group>"; };
 		15E714490FBD94940037C439 /* L0MoverItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverItemUI.h; sourceTree = "<group>"; };
 		15E7144A0FBD94940037C439 /* L0MoverItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverItemUI.m; sourceTree = "<group>"; };
-		15E7FDF50FADC3B800E9C438 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		15E7FDF50FADC3B800E9C438 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		15E9AC930FE0172F00F0910A /* L0MoverWiFiChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverWiFiChannel.h; sourceTree = "<group>"; };
 		15E9AC940FE0172F00F0910A /* L0MoverWiFiChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverWiFiChannel.m; sourceTree = "<group>"; };
 		15ED7E1C0FE0E6C00061B04E /* L0MoverBluetoothScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverBluetoothScanner.h; sourceTree = "<group>"; };
@@ -436,6 +444,8 @@
 				15B929FD0F907BD9001E40B7 /* L0MoverAboutPane.m */,
 				159F7BBE0FE2D662001A6B91 /* L0MoverAdController.h */,
 				159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */,
+				1592D5D60FF22A2900433F4B /* L0MoverWebPane.h */,
+				1592D5D70FF22A2900433F4B /* L0MoverWebPane.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -454,6 +464,8 @@
 		153B800C0FF209BA00DDFD16 /* Troubleshooting */ = {
 			isa = PBXGroup;
 			children = (
+				1592D60A0FF22CF100433F4B /* L0MoverNetworkHelpPane.h */,
+				1592D60B0FF22CF100433F4B /* L0MoverNetworkHelpPane.m */,
 				153B80060FF209A600DDFD16 /* L0MoverNobodyFoundViewController.h */,
 				153B80070FF209A600DDFD16 /* L0MoverNobodyFoundViewController.m */,
 			);
@@ -759,6 +771,7 @@
 				15080B7E0FD8FD9A0065D5AC /* CalloutBubble_Highlighted.png */,
 				15080B7F0FD8FD9A0065D5AC /* CalloutBubble.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				1592D6970FF2346500433F4B /* NetworkHelpPage */,
 				1582D9280F9086910084EBC6 /* LicensesAndCopyrightPage */,
 				15AF0FEF0FA46B8B0047634C /* Settings.bundle */,
 			);
@@ -936,6 +949,7 @@
 				154E74BB0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert in Resources */,
 				155A56610FE9491B0089E853 /* TextIcon.png in Resources */,
 				159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */,
+				1592D6980FF2346500433F4B /* NetworkHelpPage in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1031,6 +1045,8 @@
 				15277ED10FE638FD0040F04D /* L0MoverTextViewer.m in Sources */,
 				15146A130FE643B200F7B55C /* L0MoverTextItemUI.m in Sources */,
 				153B80080FF209A600DDFD16 /* L0MoverNobodyFoundViewController.m in Sources */,
+				1592D5D80FF22A2900433F4B /* L0MoverWebPane.m in Sources */,
+				1592D60C0FF22CF100433F4B /* L0MoverNetworkHelpPane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1050,6 +1066,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1592D6970FF2346500433F4B /* NetworkHelpPage */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1592D6500FF22F0000433F4B /* English */,
+			);
+			name = NetworkHelpPage;
+			sourceTree = "<group>";
+		};
 		15E7FDEC0FADC37900E9C438 /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

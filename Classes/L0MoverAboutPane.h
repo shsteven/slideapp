@@ -49,10 +49,9 @@
 
 @end
 
-@interface L0SlideAboutCopyrightWebPane : UIViewController <UIWebViewDelegate> {
-	UIWebView* webView;
-}
+#import "L0MoverWebPane.h"
 
-@property(retain) UIWebView* webView;
+@interface L0SlideAboutCopyrightWebPane : L0MoverWebPane {
+}
 
 @end

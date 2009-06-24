@@ -13,6 +13,7 @@
 	NSArray* model;
 }
 
++ modalNetworkSettingsPane;
 + networkSettingsPane;
 
 @end

@@ -144,53 +144,10 @@
 
 @implementation L0SlideAboutCopyrightWebPane
 
-- (void) viewDidAppear:(BOOL) ani;
+- (NSURL*) startingURL;
 {
-	[super viewDidAppear:ani];
-}
-
-- (void) viewWillAppear:(BOOL) ani;
-{
-	[super viewWillAppear:ani];
-	[self.navigationController setNavigationBarHidden:NO animated:ani];
-	
-	UIWebView* wv = [[UIWebView alloc] initWithFrame:self.view.bounds];
-	wv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	wv.backgroundColor = self.view.backgroundColor;
-	wv.delegate = self;
-	
-	[self.view addSubview:wv];
-	
-	NSString* index = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"LicensesAndCopyrightPage"];
-	NSURL* url = [NSURL fileURLWithPath:index];
-	[wv loadRequest:[NSURLRequest requestWithURL:url]];
-
-	self.webView = wv;
-	[wv release];
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
-{
-	if (navigationType == UIWebViewNavigationTypeBackForward || navigationType == UIWebViewNavigationTypeReload || navigationType == UIWebViewNavigationTypeFormSubmitted || navigationType == UIWebViewNavigationTypeFormResubmitted || navigationType == UIWebViewNavigationTypeOther)
-		return YES; // either they're benign, we have requested them, or we need a whole browser to handle 'em.
-	
-	// everything else, off we go.
-	[UIApp openURL:[request URL]];
-	return NO;
-}
-
-- (void) viewDidDisappear:(BOOL) ani;
-{
-	[self.webView removeFromSuperview];
-	self.webView = nil;
-}
-
-@synthesize webView;
-
-- (void) dealloc;
-{
-	[webView release];
-	[super dealloc];
+	NSString* path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"LicensesAndCopyrightPage"];
+	return [NSURL fileURLWithPath:path];
 }
 
 @end

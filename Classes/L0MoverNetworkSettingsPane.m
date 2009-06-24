@@ -106,7 +106,8 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 - (void) viewWillAppear:(BOOL) animated;
 {
     [super viewWillAppear:animated];
-
+	self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+	
 	self.title = NSLocalizedStringFromTable(@"Network", @"L0MoverNetworkUI", @"Title of the network settings pane");
 	
 	[self updateModel];
@@ -332,13 +333,17 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 + networkSettingsPane;
 {
 	L0MoverNetworkSettingsPane* myself = [[L0MoverNetworkSettingsPane alloc] initWithStyle:UITableViewStyleGrouped];
+	myself.title = NSLocalizedStringFromTable(@"Network", @"L0MoverNetworkUI", @"Title of the network settings pane");
+	return [myself autorelease];
+}
+
++ modalNetworkSettingsPane;
+{
+	L0MoverNetworkSettingsPane* myself = [self networkSettingsPane];
 	UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:myself];
 	
 	myself.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:myself action:@selector(dismiss)] autorelease];
 	
-	[myself release];
-	
-	nav.navigationBar.barStyle = UIBarStyleBlack;
 	return [nav autorelease];
 }
 

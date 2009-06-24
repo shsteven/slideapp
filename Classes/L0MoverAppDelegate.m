@@ -31,6 +31,7 @@
 #import "L0MoverItemAction.h"
 
 #import "L0MoverNetworkSettingsPane.h"
+#import "L0MoverNetworkHelpPane.h"
 
 #import <netinet/in.h>
 
@@ -808,7 +809,13 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 - (void) showNetworkSettingsPane;
 {
-	L0MoverNetworkSettingsPane* pane = [L0MoverNetworkSettingsPane networkSettingsPane];
+	L0MoverNetworkSettingsPane* pane = [L0MoverNetworkSettingsPane modalNetworkSettingsPane];
+	[self presentModalViewController:pane];
+}
+
+- (void) showNetworkHelpPane;
+{
+	L0MoverNetworkHelpPane* pane = [L0MoverNetworkHelpPane modalNetworkHelpPane];
 	[self presentModalViewController:pane];
 }
 

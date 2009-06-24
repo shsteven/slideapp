@@ -75,13 +75,12 @@ L0UniquePointerConstant(kL0MoverTroubleshootingControllerObservationContext);
 
 - (IBAction) showNetworkHelp;
 {
-	// TODO
+	[L0Mover showNetworkHelpPane];
 }
 
 - (IBAction) showNetworkState;
 {
-	L0MoverAppDelegate* delegate = (id) UIApp.delegate;
-	[delegate showNetworkSettingsPane];
+	[L0Mover showNetworkSettingsPane];
 }
 
 #pragma mark -
