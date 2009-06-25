@@ -970,7 +970,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"note: Just built bundle named '$ILABS_MOVER_BUNDLE_NAME'.\" >&2\n";
+			shellScript = "echo \"note: Just built bundle named '$ILABS_MOVER_BUNDLE_NAME' with configuration '$CONFIGURATION' and SDK '$SDK_NAME'.\" >&2\n";
 		};
 		15E7FDF90FADC41C00E9C438 /* Build Localizations */ = {
 			isa = PBXShellScriptBuildPhase;
