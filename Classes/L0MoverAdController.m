@@ -101,7 +101,11 @@ L0ObjCSingletonMethod(sharedController)
 	[super dealloc];
 }
 
-#if DEBUG
+#if DEBUG && kL0MoverDebugWithRealAds
+#warning Will include non-test advertisements in a debug build.
+#endif
+
+#if DEBUG && !kL0MoverDebugWithRealAds
 - (BOOL) useTestAd;
 {
 	return YES;
