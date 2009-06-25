@@ -304,7 +304,7 @@
 										<reference key="IBUINormalTitleShadowColor" ref="613065482"/>
 									</object>
 								</object>
-								<string key="NSFrame">{{0, 71}, {320, 189}}</string>
+								<string key="NSFrameSize">{320, 189}</string>
 								<reference key="NSSuperview" ref="534298780"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -314,7 +314,7 @@
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 							</object>
 						</object>
-						<string key="NSFrameSize">{320, 480}</string>
+						<string key="NSFrame">{{0, 71}, {320, 189}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -811,7 +811,7 @@
 			</object>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
-		<string key="IBDocument.LastKnownRelativeProjectPath">Mover.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../Mover.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">3.0</string>
 	</data>

@@ -27,27 +27,30 @@ L0ObjCSingletonMethod(sharedController)
 	L0Log(@"Advertisements on!");
 	if (view) return;
 	
-	view = [[ARRollerView requestRollerViewWithDelegate:self] retain];
+	view = [[AdMobView requestAdWithDelegate:self] retain];
 }
 
 - (void) stop;
 {
 	L0Log(@"Ads being disabled.");
-	[view setDelegateToNil];
-	[view removeFromSuperview];
+	if (view.superview)
+		[view removeFromSuperview];
 	[view release]; view = nil;
 }
 
 #pragma mark -
 #pragma mark Managing the ad view.
 
-- (void)didReceiveAd:(ARRollerView*)adWhirlView;
+- (void)didReceiveAd:(AdMobView*) adWhirlView;
 {
 	if (view.superview) return;
 	if (!self.superview) {
 		L0Log(@"Ad received but no view to display it in. Agh! Dropping it.");
 		return;
 	}
+	
+	view.userInteractionEnabled = YES;
+	self.superview.userInteractionEnabled = YES;
 	
 	L0Log(@"Ad received with the view not attached to anything. Displaying.");
 	
@@ -64,20 +67,50 @@ L0ObjCSingletonMethod(sharedController)
 	[UIView commitAnimations];
 }
 
+- (void) didFailToReceiveAd:(AdMobView*) adView;
+{
+	L0Log(@"Looks like we have no ads. Will retry in two minutes.");
+	[self stop];
+	[self performSelector:@selector(start) withObject:nil afterDelay:120.0];
+}
+
 #pragma mark -
 #pragma mark Administrivia
 
-- (NSString*)adWhirlApplicationKey;
+- (NSString*) publisherId;
 {
 	// Does nothing at runtime, but triggers a build error if we've forgotten the key.
-	NSAssert(kL0MoverAdWhirlKey != nil, @"Need to have the AdWhirl key to build with ads");
-	return kL0MoverAdWhirlKey;
+	NSAssert(kL0MoverAdMobKey != nil, @"Need to have the AdMob key to build with ads");
+	return kL0MoverAdMobKey;
+}
+
+// #717171
+- (UIColor*) adBackgroundColor;
+{
+	return [UIColor colorWithRed:0x71/255.0 green:0x71/255.0 blue:0x71/255.0 alpha:1.0];
+}
+
+- (UIColor*) primaryTextColor;
+{
+	return [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
 }
 
 - (void) dealloc;
 {
 	[self stop];
 	[super dealloc];
+}
+
+#if DEBUG
+- (BOOL) useTestAd;
+{
+	return YES;
+}
+#endif
+
+- (UIBarStyle) embeddedWebViewBarStyle;
+{
+	return UIBarStyleBlackOpaque;
 }
 
 #else

@@ -11,19 +11,19 @@
 @class ARRollerView;
 
 #if kL0MoverInsertAdvertising
-#import <ARRollerView.h>
-#import <ARRollerProtocol.h>
+#import <AdMob/AdMobView.h>
+#import <AdMob/AdMobDelegateProtocol.h>
 #endif
 
-#define kL0MoverAdSize (CGSizeMake(320, 50))
+#define kL0MoverAdSize (CGSizeMake(320, 48))
 
 @interface L0MoverAdController : NSObject
 #if kL0MoverInsertAdvertising
-<ARRollerDelegate>
+<AdMobDelegate>
 #endif
 {
 	UIView* superview;
-	ARRollerView* view;
+	AdMobView* view;
 	CGPoint origin;
 }
 
