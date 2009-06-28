@@ -128,8 +128,8 @@ L0ObjCSingletonMethod(sharedScanner)
 	name = [name stringByAppendingFormat:@"|%@", service.uniquePeerIdentifierForSelf];
 	
 	bluetoothSession = [[GKSession alloc] initWithSessionID:kL0MoverBTSessionIdentifier displayName:name sessionMode:GKSessionModePeer];
-	bluetoothSession.delegate = self;
 	[bluetoothSession setDataReceiveHandler:self withContext:NULL];
+	bluetoothSession.delegate = self;
 	
 	bluetoothSession.available = YES;
 	
@@ -139,6 +139,8 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state;
 {
+	L0Log(@"%@ has peer %@ in state %d", session, peerID, state);
+	
 	switch (state) {
 		case GKPeerStateAvailable:
 			[self makeChannelForPeer:peerID];
@@ -154,6 +156,10 @@ L0ObjCSingletonMethod(sharedScanner)
 			
 		case GKPeerStateDisconnected:
 			[[channelsByPeerID objectForKey:peerID] endCommunicationWithOtherEndpoint];
+			L0Log(@"available after disconnect = %@", [session peersWithConnectionState:GKPeerStateAvailable]);
+			if (![[session peersWithConnectionState:GKPeerStateAvailable] containsObject:peerID])
+				[self unmakeChannelForPeer:peerID];
+			break;
 	}
 }
 
@@ -182,7 +188,7 @@ L0ObjCSingletonMethod(sharedScanner)
 			retries++;
 			[self performSelector:@selector(restart) withObject:nil afterDelay:10.0];
 		} else {
-			jammed = NO; // this makes us disabled.
+			jammed = NO;
 		}
 		
 		[self didChangeValueForKey:@"jammed"];

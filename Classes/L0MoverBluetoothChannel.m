@@ -113,7 +113,7 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 	[self sendBlockOfDataAndRepeatIfNecessary];
 }
 
-#define kL0MoverBluetoothSingleSendLimit (1024 * 1024)
+#define kL0MoverBluetoothSingleSendLimit (10 * 1024)
 
 - (void) sendBlockOfDataAndRepeatIfNecessary;
 {
@@ -140,7 +140,7 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 		L0LogAlways(@"An error occurred while sending the item: %@", e);
 		[self endSendingItem];
 	} else if (!done) {
-		[self performSelector:@selector(sendBlockOfDataAndRepeatIfNecessary) withObject:nil afterDelay:0.1];
+		[self performSelector:@selector(sendBlockOfDataAndRepeatIfNecessary) withObject:nil afterDelay:0.05];
 	} else
 		[self endSendingItem];
 }
@@ -177,8 +177,10 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 
 - (void) receiveDataFromOtherEndpoint:(NSData*) data;
 {
-	if (!dataReceived)
+	if (!dataReceived) {
 		dataReceived = [NSMutableData new];
+		[scanner.service channelWillBeginReceiving:self];
+	}
 	
 	[dataReceived appendData:data];
 	
