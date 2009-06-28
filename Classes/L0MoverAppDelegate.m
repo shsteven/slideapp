@@ -554,7 +554,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[sheet addButtonWithTitle:NSLocalizedString(@"Add Contact", @"Add item - contact button")  identifier:kL0MoverAddContactButton];
 	
 	UIPasteboard* pb = [UIPasteboard generalPasteboard];
-	if ([pb.strings count] > 0)
+	if ([pb.strings count] > 0 || [pb.URLs count] > 0)
 		[sheet addButtonWithTitle:NSLocalizedString(@"Paste", @"Add item - paste button") identifier:kL0MoverPasteButton];
 	
 	NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Add item - cancel button") identifier:kL0MoverCancelButton];
