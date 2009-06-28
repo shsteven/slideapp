@@ -77,7 +77,7 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 
 - (void) communicateWithOtherEndpoint;
 {
-	if (itemToBeSent) {
+	if (itemToBeSent && !dataToBeSent) {
 		dataToBeSent = [NSMutableData new];
 		[dataToBeSent appendBytes:kL0MoverBluetoothMessageHeader length:kL0MoverBluetoothMessageHeaderLength];
 		
@@ -107,10 +107,10 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 		
 		uint32_t lenNetwork = htonl(len);
 		[dataToBeSent appendBytes:&lenNetwork length:sizeof(uint32_t)];
-		[dataToBeSent appendData:d];
-		
-		[self sendBlockOfDataAndRepeatIfNecessary];
+		[dataToBeSent appendData:d];		
 	}
+	
+	[self sendBlockOfDataAndRepeatIfNecessary];
 }
 
 #define kL0MoverBluetoothSingleSendLimit (1024 * 1024)
@@ -118,9 +118,15 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 - (void) sendBlockOfDataAndRepeatIfNecessary;
 {
 	if (!dataToBeSent) return;
+	// sanity check
+	if (![[scanner.bluetoothSession peersWithConnectionState:GKPeerStateConnected] containsObject:peerID]) {
+		[self endCommunicationWithOtherEndpoint];
+		return;
+	}
+	
 	BOOL done = NO;
 	
-	NSData* toSend;
+	NSData* toSend = nil;
 	if ([dataToBeSent length] > kL0MoverBluetoothSingleSendLimit) {
 		NSRange sentRange = NSMakeRange(0, kL0MoverBluetoothSingleSendLimit);
 		toSend = [dataToBeSent subdataWithRange:sentRange];
@@ -129,7 +135,7 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 		toSend = dataToBeSent; done = YES;
 	}
 	
-	NSError* e;
+	NSError* e = nil;
 	if (![scanner.bluetoothSession sendData:toSend toPeers:[NSArray arrayWithObject:peerID] withDataMode:GKSendDataReliable error:&e]) {
 		L0LogAlways(@"An error occurred while sending the item: %@", e);
 		[self endSendingItem];
