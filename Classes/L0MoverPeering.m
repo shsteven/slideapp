@@ -176,10 +176,10 @@ L0ObjCSingletonMethod(sharedService);
 	if ([keyPath isEqual:@"availableChannels"]) {
 		NSArray* inserted = nil, * removed = nil;
 		// TODO
-		if ([change l0_changeKind] == NSKeyValueChangeInsertion || [change l0_changeKind] == NSKeyValueChangeReplacement)
-			inserted = [change l0_changedValue];
-		if ([change l0_changeKind] == NSKeyValueChangeRemoval || [change l0_changeKind] == NSKeyValueChangeReplacement)
-			removed = [change l0_previousValue];
+		if (L0KVOChangeKind(change) == NSKeyValueChangeInsertion || L0KVOChangeKind(change) == NSKeyValueChangeReplacement)
+			inserted = L0KVOChangedValue(change);
+		if (L0KVOChangeKind(change) == NSKeyValueChangeRemoval || L0KVOChangeKind(change) == NSKeyValueChangeReplacement)
+			removed = L0KVOPreviousValue(change);
 		
 		// inserting new channels...
 		for (id <L0MoverPeerChannel> channel in inserted)
@@ -189,7 +189,7 @@ L0ObjCSingletonMethod(sharedService);
 		for (id <L0MoverPeerChannel> channel in removed)
 			[self makeChannelUnavailable:channel];
 	} else if ([keyPath isEqual:@"enabled"] || [keyPath isEqual:@"jammed"]) {
-		if ([change l0_isPrior])
+		if (L0KVOIsPrior(change))
 			[self willChangeValueForKey:@"disconnected"];
 		else
 			[self didChangeValueForKey:@"disconnected"];
