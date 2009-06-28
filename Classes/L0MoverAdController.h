@@ -17,6 +17,8 @@
 
 #define kL0MoverAdSize (CGSizeMake(320, 48))
 
+@class AdMobView;
+
 @interface L0MoverAdController : NSObject
 #if kL0MoverInsertAdvertising
 <AdMobDelegate>
