@@ -320,7 +320,7 @@ L0ObjCSingletonMethod(sharedScanner)
 }
 #endif
 
-static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach, SCNetworkReachabilityFlags flags, void* meAsPointer) {
+static void L0MoverWiFiNetworkStateChanged(SCNetworkReachabilityRef reach, SCNetworkReachabilityFlags flags, void* meAsPointer) {
 	L0MoverWiFiScanner* myself = (L0MoverWiFiScanner*) meAsPointer;
 	[NSObject cancelPreviousPerformRequestsWithTarget:myself selector:@selector(checkNetwork) object:nil];
 	[myself updateNetworkWithFlags:flags];
@@ -346,7 +346,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	reach = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*) &sin);
 	
 	SCNetworkReachabilityContext selfContext = {0, self, NULL, NULL, &CFCopyDescription};
-	SCNetworkReachabilitySetCallback(reach, &L0MoverAppDelegateNetworkStateChanged, &selfContext);
+	SCNetworkReachabilitySetCallback(reach, &L0MoverWiFiNetworkStateChanged, &selfContext);
 	SCNetworkReachabilityScheduleWithRunLoop(reach, [[NSRunLoop currentRunLoop] getCFRunLoop], kCFRunLoopDefaultMode);
 	
 	SCNetworkReachabilityFlags flags;
@@ -388,7 +388,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self didChangeValueForKey:@"jammed"];
 	
 	if (jammed)
-		[[self mutableArrayValueForKey:@"availableChannels"] removeAllObjects];
+		[[self mutableSetValueForKey:@"availableChannels"] removeAllObjects];
 }
 
 @end
