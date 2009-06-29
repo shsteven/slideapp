@@ -409,6 +409,9 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 {
 	[[L0MoverWiFiScanner sharedScanner] setEnabled:NO];
 	[[L0MoverBluetoothScanner sharedScanner] setEnabled:NO];
+	
+	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
+	
 	[self persistItemsToMassStorage:[self.tableController items]];	
 }
 
@@ -436,6 +439,8 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	L0Log(@"Received %@", item);
 	[item storeToAppropriateApplication];
 	[self.tableController addItem:item comingFromPeer:peer];
+	[self persistItemsToMassStorage:[self.tableController items]];
+
 	[UIApp endNetworkUse];
 	
 	if ([item isKindOfClass:[L0ImageItem class]])

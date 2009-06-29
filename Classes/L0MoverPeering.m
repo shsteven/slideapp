@@ -8,9 +8,11 @@
 
 #import "L0MoverPeering.h"
 #import "L0MoverPeer.h"
+
 #import "L0MoverWiFiScanner.h"
+#import "L0MoverWiFiChannel.h"
+
 #import "L0MoverBluetoothScanner.h"
-#import "L0MoverBluetoothChannel.h"
 
 #import <MuiKit/MuiKit.h>
 
@@ -66,7 +68,7 @@
 	id <L0MoverPeerChannel> selectedChan;
 	for (id <L0MoverPeerChannel> chan in self.channels) {
 		selectedChan = chan;
-		if ([chan isKindOfClass:[L0MoverBluetoothChannel class]])
+		if ([chan isKindOfClass:[L0MoverWiFiChannel class]])
 			break;
 	}
 	
@@ -102,12 +104,20 @@ L0ObjCSingletonMethod(sharedService);
 	return peers;
 }
 
+#define kL0MoverSelfUniqueIDKey @"L0MoverSelfUniqueID"
+
 - (id) init;
 {
 	if (self = [super init]) {
 		scanners = [[NSMutableSet setWithSet:[[self class] allScanners]] retain];
 		peers = [NSMutableSet new];
-		uniquePeerIdentifierForSelf = [[[[L0UUID UUID] stringValue] substringWithRange:NSMakeRange(0, 5)] copy];
+		NSString* selfId = [[NSUserDefaults standardUserDefaults] stringForKey:kL0MoverSelfUniqueIDKey];
+		if (!selfId) {
+			selfId = [[[L0UUID UUID] stringValue] substringWithRange:NSMakeRange(0, 5)];
+			[[NSUserDefaults standardUserDefaults] setObject:selfId forKey:kL0MoverSelfUniqueIDKey];
+		}
+		
+		uniquePeerIdentifierForSelf = [selfId copy];
 		
 		// set up KVO
 		for (id scanner in scanners) {

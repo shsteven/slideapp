@@ -130,6 +130,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	bluetoothSession = [[GKSession alloc] initWithSessionID:kL0MoverBTSessionIdentifier displayName:name sessionMode:GKSessionModePeer];
 	[bluetoothSession setDataReceiveHandler:self withContext:NULL];
 	bluetoothSession.delegate = self;
+	bluetoothSession.disconnectTimeout = 5.0;
 	
 	bluetoothSession.available = YES;
 	
@@ -145,11 +146,26 @@ L0ObjCSingletonMethod(sharedScanner)
 	
 	switch (state) {
 		case GKPeerStateAvailable:
-			[self makeChannelForPeer:peerID];
-			break;
-			
 		case GKPeerStateUnavailable:
-			[self unmakeChannelForPeer:peerID];
+		{
+			
+			NSMutableArray* peers = [NSMutableArray array];
+			[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateAvailable]];
+			[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateConnected]];
+			
+			NSArray* currentPeers = [[[channelsByPeerID allKeys] copy] autorelease];
+			
+			for (NSString* peer in peers) {
+				if (![currentPeers containsObject:peer])
+					[self makeChannelForPeer:peer];
+			}
+			
+			for (NSString* peer in currentPeers) {
+				if (![peers containsObject:peer])
+					[self unmakeChannelForPeer:peer];
+			}
+		}
+			
 			break;
 			
 		case GKPeerStateConnected:
@@ -169,7 +185,7 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error;
 {
-	[[channelsByPeerID objectForKey:peerID] endCommunicationWithOtherEndpoint];
+	[self unmakeChannelForPeer:peerID];
 }
 
 - (void) session:(GKSession*) session didFailWithError:(NSError*) error;

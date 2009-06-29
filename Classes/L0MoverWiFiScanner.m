@@ -181,7 +181,7 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
 {
-	for (L0MoverWiFiChannel* peer in availableChannels) {
+	for (L0MoverWiFiChannel* peer in [[availableChannels copy] autorelease]) {
 		if ([peer.service isEqual:aNetService])
 			[self removeAvailableChannelsObject:peer];
 	}	
