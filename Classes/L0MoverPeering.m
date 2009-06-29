@@ -10,6 +10,7 @@
 #import "L0MoverPeer.h"
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
+#import "L0MoverBluetoothChannel.h"
 
 #import <MuiKit/MuiKit.h>
 
@@ -61,7 +62,15 @@
 
 - (BOOL) receiveItem:(L0MoverItem*) item;
 {
-	return [[self.channels anyObject] sendItemToOtherEndpoint:item];
+	// return [[self.channels anyObject] sendItemToOtherEndpoint:item];
+	id <L0MoverPeerChannel> selectedChan;
+	for (id <L0MoverPeerChannel> chan in self.channels) {
+		selectedChan = chan;
+		if ([chan isKindOfClass:[L0MoverBluetoothChannel class]])
+			break;
+	}
+	
+	return [selectedChan sendItemToOtherEndpoint:item];
 }
 
 @end
@@ -98,7 +107,7 @@ L0ObjCSingletonMethod(sharedService);
 	if (self = [super init]) {
 		scanners = [[NSMutableSet setWithSet:[[self class] allScanners]] retain];
 		peers = [NSMutableSet new];
-		uniquePeerIdentifierForSelf = [[[[L0UUID UUID] stringValue] substringWithRange:NSMakeRange(0, 2)] copy];
+		uniquePeerIdentifierForSelf = [[[[L0UUID UUID] stringValue] substringWithRange:NSMakeRange(0, 5)] copy];
 		
 		// set up KVO
 		for (id scanner in scanners) {

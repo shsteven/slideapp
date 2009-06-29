@@ -9,12 +9,15 @@
 #import "L0MoverBluetoothChannel.h"
 #import <MuiKit/MuiKit.h>
 
-static const char kL0MoverBluetoothMessageHeader[] = { 'M', 'O', 'V', 'E', 'R' };
 static const size_t kL0MoverBluetoothMessageHeaderLength = sizeof(char) * 5;
 
-static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
+static const char kL0MoverBluetoothMessageHeader_ItemTransfer[] = { 'M', 'O', 'V', 'E', 'R' };
+static const char kL0MoverBluetoothMessageHeader_Acknowledgment[] = { 'M', 'V', 'a', 'c', 'k' };
+
+
+static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* with) {
 	int i; for (i = 0; i < kL0MoverBluetoothMessageHeaderLength; i++) {
-		if (packet[i] != kL0MoverBluetoothMessageHeader[i])
+		if (packet[i] != with[i])
 			return NO;
 	}
 	
@@ -28,7 +31,7 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 @interface L0MoverBluetoothChannel ()
 
 - (void) endSendingItem;
-- (void) sendBlockOfDataAndRepeatIfNecessary;
+- (void) sendBlockOfData;
 
 - (void) endReceivingItem:(L0MoverItem*) i;
 - (void) receiveItemFromData:(NSData*) d;
@@ -77,9 +80,12 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 
 - (void) communicateWithOtherEndpoint;
 {
+	L0Log(@"Communication ping");
+	
 	if (itemToBeSent && !dataToBeSent) {
+		L0Log(@"Preparing to send item");
 		dataToBeSent = [NSMutableData new];
-		[dataToBeSent appendBytes:kL0MoverBluetoothMessageHeader length:kL0MoverBluetoothMessageHeaderLength];
+		[dataToBeSent appendBytes:kL0MoverBluetoothMessageHeader_ItemTransfer length:kL0MoverBluetoothMessageHeaderLength];
 		
 		NSData* externalRep = [itemToBeSent externalRepresentation];
 		NSString* title = itemToBeSent.title;
@@ -108,14 +114,13 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 		uint32_t lenNetwork = htonl(len);
 		[dataToBeSent appendBytes:&lenNetwork length:sizeof(uint32_t)];
 		[dataToBeSent appendData:d];		
-	}
-	
-	[self sendBlockOfDataAndRepeatIfNecessary];
+		[self sendBlockOfData];
+	}	
 }
 
-#define kL0MoverBluetoothSingleSendLimit (10 * 1024)
+#define kL0MoverBluetoothSingleSendLimit (30 * 1024)
 
-- (void) sendBlockOfDataAndRepeatIfNecessary;
+- (void) sendBlockOfData;
 {
 	if (!dataToBeSent) return;
 	// sanity check
@@ -123,14 +128,14 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 		[self endCommunicationWithOtherEndpoint];
 		return;
 	}
+	L0Log(@"Sending block of data...");
 	
 	BOOL done = NO;
 	
 	NSData* toSend = nil;
+	NSRange sentRange = NSMakeRange(0, kL0MoverBluetoothSingleSendLimit);
 	if ([dataToBeSent length] > kL0MoverBluetoothSingleSendLimit) {
-		NSRange sentRange = NSMakeRange(0, kL0MoverBluetoothSingleSendLimit);
 		toSend = [dataToBeSent subdataWithRange:sentRange];
-		[dataToBeSent replaceBytesInRange:sentRange withBytes:NULL length:0];
 	} else {
 		toSend = dataToBeSent; done = YES;
 	}
@@ -138,9 +143,12 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 	NSError* e = nil;
 	if (![scanner.bluetoothSession sendData:toSend toPeers:[NSArray arrayWithObject:peerID] withDataMode:GKSendDataReliable error:&e]) {
 		L0LogAlways(@"An error occurred while sending the item: %@", e);
-		[self endSendingItem];
-	} else if (!done) {
-		[self performSelector:@selector(sendBlockOfDataAndRepeatIfNecessary) withObject:nil afterDelay:0.05];
+		if ([e code] != GKSessionTransportError)
+			done = YES;
+	}
+	
+	if (!done) {
+		[dataToBeSent replaceBytesInRange:sentRange withBytes:NULL length:0];
 	} else
 		[self endSendingItem];
 }
@@ -163,6 +171,8 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 
 - (void) endSendingItem;
 {	
+	L0Log(@"Ending send");
+	
 	if (itemToBeSent) {
 		[scanner.service channel:self didSendItemToOtherEndpoint:itemToBeSent];
 		[itemToBeSent release]; itemToBeSent = nil;
@@ -177,16 +187,31 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 
 - (void) receiveDataFromOtherEndpoint:(NSData*) data;
 {
+	L0Log(@"Received data.");
+	
+	if (dataToBeSent) {
+		L0Log(@"Will check for acknowledgment...");
+		// see if it's an acknowledgment
+		if ([data length] >= kL0MoverBluetoothMessageHeaderLength &&
+			L0MoverBluetoothStartsWithHeader([data bytes], kL0MoverBluetoothMessageHeader_Acknowledgment)) {
+			L0Log(@"Did acknowledge! Sending new block.");
+			[self sendBlockOfData];
+		}
+		
+		return;
+	}
+	
 	if (!dataReceived) {
+		L0Log(@"First data of new item.");
 		dataReceived = [NSMutableData new];
 		[scanner.service channelWillBeginReceiving:self];
 	}
 	
-	[dataReceived appendData:data];
-	
-	if ([dataReceived length] >= kL0MoverBluetoothMessageHeaderLength) {
+	if ([data length] >= kL0MoverBluetoothMessageHeaderLength) {
+		[dataReceived appendData:data];
+
 		const char* packetAtHeader = (const char*) [dataReceived bytes];
-		if (!L0MoverBluetoothStartsWithMessageHeader(packetAtHeader)) {
+		if (!L0MoverBluetoothStartsWithHeader(packetAtHeader, kL0MoverBluetoothMessageHeader_ItemTransfer)) {
 			[self endReceivingItem:nil];
 			return;
 		}
@@ -204,10 +229,14 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 			[self receiveItemFromData:payload];
 		}
 	}
+	
+	NSData* d = [NSData dataWithBytes:kL0MoverBluetoothMessageHeader_Acknowledgment length:kL0MoverBluetoothMessageHeaderLength];
+	[scanner.bluetoothSession sendData:d toPeers:[NSArray arrayWithObject:self.peerID] withDataMode:GKSendDataReliable error:NULL];
 }
 
 - (void) receiveItemFromData:(NSData*) d;
 {
+	L0Log(@"Full data received, unpacking");
 	L0MoverItem* i = nil;
 	
 	NSString* error;
@@ -240,7 +269,9 @@ static BOOL L0MoverBluetoothStartsWithMessageHeader(const char* packet) {
 
 - (void) endReceivingItem:(L0MoverItem*) i;
 {
+	L0Log(@"Ending reception...");
 	if (!dataReceived) return;
+	L0Log(@"Ending with received item %@", i);
 	
 	if (i)
 		[scanner.service channel:self didReceiveItem:i];

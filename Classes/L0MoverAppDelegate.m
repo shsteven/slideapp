@@ -407,7 +407,9 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 - (void) applicationWillTerminate:(UIApplication*) app;
 {
-	[self persistItemsToMassStorage:[self.tableController items]];
+	[[L0MoverWiFiScanner sharedScanner] setEnabled:NO];
+	[[L0MoverBluetoothScanner sharedScanner] setEnabled:NO];
+	[self persistItemsToMassStorage:[self.tableController items]];	
 }
 
 - (void) moverPeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;

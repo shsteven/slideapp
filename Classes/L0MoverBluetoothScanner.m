@@ -140,6 +140,8 @@ L0ObjCSingletonMethod(sharedScanner)
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state;
 {
 	L0Log(@"%@ has peer %@ in state %d", session, peerID, state);
+	L0Log(@"currently available = %@", [session peersWithConnectionState:GKPeerStateAvailable]);
+	L0Log(@"currently connected = %@", [session peersWithConnectionState:GKPeerStateConnected]);
 	
 	switch (state) {
 		case GKPeerStateAvailable:
@@ -156,9 +158,6 @@ L0ObjCSingletonMethod(sharedScanner)
 			
 		case GKPeerStateDisconnected:
 			[[channelsByPeerID objectForKey:peerID] endCommunicationWithOtherEndpoint];
-			L0Log(@"available after disconnect = %@", [session peersWithConnectionState:GKPeerStateAvailable]);
-			if (![[session peersWithConnectionState:GKPeerStateAvailable] containsObject:peerID])
-				[self unmakeChannelForPeer:peerID];
 			break;
 	}
 }
@@ -202,14 +201,17 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) makeChannelForPeer:(NSString*) peerID;
 {
-	L0MoverBluetoothChannel* chan = [[L0MoverBluetoothChannel alloc] initWithScanner:self peerID:peerID];
+	L0MoverBluetoothChannel* chan = [[[L0MoverBluetoothChannel alloc] initWithScanner:self peerID:peerID] autorelease];
+	if ([chan.uniquePeerIdentifier isEqual:[[L0MoverPeering sharedService] uniquePeerIdentifierForSelf]])
+		return;
+	
 	[self addAvailableChannelsObject:chan];
-	[chan release];
 }
 
 - (void) unmakeChannelForPeer:(NSString*) peerID;
 {
 	L0MoverBluetoothChannel* chan = [channelsByPeerID objectForKey:peerID];
+	[chan endCommunicationWithOtherEndpoint];
 	if (chan)
 		[self removeAvailableChannelsObject:chan];
 }
@@ -221,8 +223,12 @@ L0ObjCSingletonMethod(sharedScanner)
 	
 	bluetoothSession.delegate = nil;
 	bluetoothSession.available = NO;
+	[bluetoothSession disconnectFromAllPeers];
 	[bluetoothSession release];
 	bluetoothSession = nil;
+	
+	for (NSString* peerID in [NSArray arrayWithArray:[channelsByPeerID allKeys]])
+		[self unmakeChannelForPeer:peerID];
 	
 	[channelsByPeerID release];
 	channelsByPeerID = nil;
