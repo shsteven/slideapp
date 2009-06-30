@@ -75,6 +75,24 @@
 	return [selectedChan sendItemToOtherEndpoint:item];
 }
 
+- (void) addChannel:(id <L0MoverPeerChannel>) channel;
+{
+	NSMutableSet* oldChans = [NSMutableSet set];
+	for (id chan in self.channels) {
+		if ([chan isKindOfClass:[channel class]])
+			[oldChans addObject:chan];
+	}
+	
+	[self.channels minusSet:oldChans];
+	[self.channels addObject:channel];
+}
+
+- (NSString*) description;
+{
+	return [NSString stringWithFormat:@"%@ uid = %@, with channels = %@",
+			[super description], self.uniquePeerIdentifier, self.channels];
+}
+
 @end
 
 // ----------------------
@@ -160,30 +178,35 @@ L0ObjCSingletonMethod(sharedService);
 
 - (void) channelWillBeginReceiving:(id <L0MoverPeerChannel>) channel;
 {
+	L0Log(@"%@", channel);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
 	[peer.delegate moverPeerWillSendUsItem:peer];
 }
 
 - (void) channel:(id <L0MoverPeerChannel>) channel didReceiveItem:(L0MoverItem*) i;
 {
+	L0Log(@"%@ --> %@ --> us", channel, i);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
 	[peer.delegate moverPeer:peer didSendUsItem:i];
 }
 
 - (void) channelDidCancelReceivingItem:(id <L0MoverPeerChannel>) channel;
 {
+	L0Log(@"%@ --X--> us", channel);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
 	[peer.delegate moverPeerDidCancelSendingUsItem:peer];
 }
 
 - (void) channel:(id <L0MoverPeerChannel>) channel willSendItemToOtherEndpoint:(L0MoverItem*) i;
 {
+	L0Log(@"us -- %@ --> %@", i, channel);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
 	[peer.delegate moverPeer:peer willBeSentItem:i];
 }
 
 - (void) channel:(id <L0MoverPeerChannel>) channel didSendItemToOtherEndpoint:(L0MoverItem*) i;
 {
+	L0Log(@"us -- done --> (%@) %@", i, channel);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
 	[peer.delegate moverPeer:peer wasSentItem:i];
 }
@@ -220,7 +243,7 @@ L0ObjCSingletonMethod(sharedService);
 	L0Log(@"Found channel: %@", channel);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
 	if (peer) {
-		[peer.channels addObject:channel];
+		[peer addChannel:channel];
 		L0Log(@"Channel: %@ added to peer: %@", channel, peer);
 	} else {
 		L0Log(@"Creating new peer from channel: %@", channel);

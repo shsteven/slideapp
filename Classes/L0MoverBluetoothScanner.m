@@ -141,33 +141,27 @@ L0ObjCSingletonMethod(sharedScanner)
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state;
 {
 	L0Log(@"%@ has peer %@ in state %d", session, peerID, state);
-	L0Log(@"currently available = %@", [session peersWithConnectionState:GKPeerStateAvailable]);
-	L0Log(@"currently connected = %@", [session peersWithConnectionState:GKPeerStateConnected]);
+	
+	NSMutableArray* peers = [NSMutableArray array];
+	[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateAvailable]];
+	[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateConnected]];
+	[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateConnecting]];
+
+	NSArray* currentPeers = [[[channelsByPeerID allKeys] copy] autorelease];
+
+	L0Log(@"new peer collection = %@, previous peer collection = %@", peers, currentPeers);
+
+	for (NSString* peer in peers) {
+		if (![currentPeers containsObject:peer])
+			[self makeChannelForPeer:peer];
+	}
+	
+	for (NSString* peer in currentPeers) {
+		if (![peers containsObject:peer])
+			[self unmakeChannelForPeer:peer];
+	}
 	
 	switch (state) {
-		case GKPeerStateAvailable:
-		case GKPeerStateUnavailable:
-		{
-			
-			NSMutableArray* peers = [NSMutableArray array];
-			[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateAvailable]];
-			[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateConnected]];
-			
-			NSArray* currentPeers = [[[channelsByPeerID allKeys] copy] autorelease];
-			
-			for (NSString* peer in peers) {
-				if (![currentPeers containsObject:peer])
-					[self makeChannelForPeer:peer];
-			}
-			
-			for (NSString* peer in currentPeers) {
-				if (![peers containsObject:peer])
-					[self unmakeChannelForPeer:peer];
-			}
-		}
-			
-			break;
-			
 		case GKPeerStateConnected:
 			[[channelsByPeerID objectForKey:peerID] communicateWithOtherEndpoint];
 			break;

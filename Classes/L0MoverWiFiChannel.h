@@ -15,6 +15,8 @@
 	NSNetService* service;
 	
 	CFMutableDictionaryRef itemsBeingSentByConnection;
+	NSMutableSet* finalizingConnections;
+	
 	double applicationVersion;
 	NSString* userVisibleApplicationVersion;
 	NSString* uniquePeerIdentifier;

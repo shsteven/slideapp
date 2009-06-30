@@ -34,6 +34,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 		
 		service = [s retain];
 		itemsBeingSentByConnection = L0CFDictionaryCreateMutableForObjects();
+		finalizingConnections = [NSMutableSet new];
 		
 		NSData* txtData = [s TXTRecordData];
 		if (txtData) {
@@ -73,6 +74,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	}
 	
 	CFRelease(itemsBeingSentByConnection);
+	[finalizingConnections release];
 	
 	[userVisibleApplicationVersion release];
 	[uniquePeerIdentifier release];
@@ -114,12 +116,19 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 		[scanner.service channel:self didSendItemToOtherEndpoint:i];
 	
 	// we assume it's fine. for now.
+	[finalizingConnections addObject:connection];
 	[connection close];
 }
 
 - (void) connectionDidClose: (TCPConnection*)connection;
 {
 	L0Log(@"%@", connection);
+
+	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(itemsBeingSentByConnection, connection);
+	if (![finalizingConnections containsObject:connection])
+		[scanner.service channel:self didSendItemToOtherEndpoint:i];
+	
+	[finalizingConnections removeObject:connection];
 	CFDictionaryRemoveValue(itemsBeingSentByConnection, connection);
 }
 
