@@ -84,7 +84,7 @@
 
 - (void) offloadToFile:(NSString*) file;
 {
-	(void) [self representingImage]; // ensures it's loaded.
+	(void) [self image]; // ensures it's loaded.
 	[super offloadToFile:file];
 }
 

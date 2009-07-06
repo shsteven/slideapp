@@ -92,6 +92,12 @@ enum {
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application;
 {
+	// assert all outlets are in place
+	// IN PROGRESS.
+	L0AssertOutlet(self.shieldView);
+	L0AssertOutlet(self.shieldViewSpinner);
+	L0AssertOutlet(self.shieldViewLabel);
+	
 	self.tableHostController.cacheViewsDuringFlip = YES;
 	
 	// Registering item subclasses.
@@ -516,6 +522,40 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 @synthesize window, toolbar;
 @synthesize tableController, tableHostView, tableHostController, aboutPane;
+@synthesize shieldView, shieldViewSpinner, shieldViewLabel;
+
+- (void) beginShowingShieldViewWithText:(NSString*) text;
+{
+	self.shieldViewLabel.text = text;
+	if (self.shieldView.superview) return;
+	
+	self.shieldView.frame = self.window.bounds;
+	self.shieldView.alpha = 0.0;
+	[self.shieldViewSpinner startAnimating];
+	[self.window addSubview:self.shieldView];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.5];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	
+	self.shieldView.alpha = 1.0;
+	
+	[UIView commitAnimations];
+}
+
+- (void) endShowingShieldView;
+{
+	if (!self.shieldView.superview) return;
+
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.5];
+	
+	self.shieldView.alpha = 0.0;
+	
+	[UIView commitAnimations];
+	
+	[self.shieldView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.55];
+}
 
 @synthesize networkCalloutController;
 

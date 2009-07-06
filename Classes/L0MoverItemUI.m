@@ -14,6 +14,11 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+@interface L0MoverItemUI () <L0MoverItemUIAsynchronousMailDelegate>
+
+@end
+
+
 @implementation L0MoverItemUI
 
 static NSMutableDictionary* L0ItemClassesToUIs = nil;
@@ -103,20 +108,33 @@ static NSMutableDictionary* L0ItemClassesToUIs = nil;
 // whose target is self and whose selector is:
 - (void) shareItemByEmail:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
 {
-	MFMailComposeViewController* mailVC = [[MFMailComposeViewController new] autorelease];
-	mailVC.mailComposeDelegate = self;
-	
+	if (self.preparesEmailAsynchronously) {
+		[L0Mover beginShowingShieldViewWithText:NSLocalizedString(@"Preparing e-mail...", @"Label for shield view during asynchronous e-mail preparation")];
+		[self performSelector:@selector(beginSendingItemViaEmail:) withObject:i afterDelay:0.1];
+	} else {
+		NSData* d = nil; NSString* t = nil, * f = nil;
+		BOOL ok = [self fromItem:i getMailAttachmentData:&d mimeType:&t fileName:&f];
+		NSAssert(ok, @"We need data, MIME type and filename before we can share an item by e-mail.");	
+		[self finishedPreparingEmailWithData:d mimeType:t fileName:f];
+	}
+}
+
+- (BOOL) preparesEmailAsynchronously;
+{
+	return NO;
+}
+
+- (void) beginSendingItemViaEmail:(L0MoverItem*) i;
+{
+	[self beginSendingItemViaEmail:i delegate:self];
+}
+
+- (void) beginSendingItemViaEmail:(L0MoverItem*) i delegate:(id <L0MoverItemUIAsynchronousMailDelegate>) delegate;
+{	
 	NSData* d = nil; NSString* t = nil, * f = nil;
 	BOOL ok = [self fromItem:i getMailAttachmentData:&d mimeType:&t fileName:&f];
-	NSAssert(ok, @"We need data, MIME type and filename before we can share an item by e-mail.");
-	
-	[mailVC addAttachmentData:d mimeType:t fileName:f];
-	
-	// NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Shared by Mover: %@", @"Subject of 'Share by E-mail' new mails"), f];
-	// [mailVC setSubject:subject];
-	
-	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
-	[delegate presentModalViewController:mailVC];
+	NSAssert(ok, @"We need data, MIME type and filename before we can share an item by e-mail.");	
+	[delegate finishedPreparingEmailWithData:d mimeType:t fileName:f];
 }
 
 - (BOOL) fromItem:(L0MoverItem*) i getMailAttachmentData:(NSData**) d mimeType:(NSString**) t fileName:(NSString**) f;
@@ -159,6 +177,21 @@ static NSMutableDictionary* L0ItemClassesToUIs = nil;
 {
 	NSAssert(NO, @"You must override -removingFromTableIsSafeForItem:");
 	return NO;
+}
+
+- (void) finishedPreparingEmailWithData:(NSData*) d mimeType:(NSString*) t fileName:(NSString*) f;
+{
+	[L0Mover endShowingShieldView];
+	
+	MFMailComposeViewController* mailVC = [[MFMailComposeViewController new] autorelease];
+	mailVC.mailComposeDelegate = self;	
+	[mailVC addAttachmentData:d mimeType:t fileName:f];
+	
+	// NSString* subject = [NSString stringWithFormat:NSLocalizedString(@"Shared by Mover: %@", @"Subject of 'Share by E-mail' new mails"), f];
+	// [mailVC setSubject:subject];
+	
+	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	[delegate presentModalViewController:mailVC];
 }
 
 @end

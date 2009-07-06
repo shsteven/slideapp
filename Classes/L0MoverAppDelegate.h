@@ -40,6 +40,10 @@
 	double lastSeenVersion;
 	BOOL networkAvailable;
 	L0MoverNetworkCalloutController* networkCalloutController;
+	
+	UIView* shieldView;
+	UIActivityIndicatorView* shieldViewSpinner;
+	UILabel* shieldViewLabel;
 }
 
 @property(retain) IBOutlet UIWindow* window;
@@ -54,6 +58,12 @@
 @property(retain) IBOutlet L0MoverNetworkCalloutController* networkCalloutController;
 - (IBAction) showNetworkCallout;
 - (void) showNetworkSettingsPane;
+
+@property(retain) IBOutlet UIView* shieldView;
+@property(assign) IBOutlet UIActivityIndicatorView* shieldViewSpinner;
+@property(assign) IBOutlet UILabel* shieldViewLabel;
+- (void) beginShowingShieldViewWithText:(NSString*) text;
+- (void) endShowingShieldView;
 
 - (IBAction) addItem;
 - (void) addImageItem;

@@ -12,6 +12,13 @@
 #import "L0MoverItemAction.h"
 #import "L0MoverItem.h"
 
+@protocol L0MoverItemUIAsynchronousMailDelegate <NSObject>
+
+- (void) finishedPreparingEmailWithData:(NSData*) d mimeType:(NSString*) t fileName:(NSString*) f;
+
+@end
+
+
 @interface L0MoverItemUI : NSObject <MFMailComposeViewControllerDelegate> {}
 
 + (void) registerUI:(L0MoverItemUI*) ui forItemClass:(Class) c;
@@ -47,6 +54,16 @@
 // default: d == [i externalRepresentation]; t == result of UTTypeCopyPreferredTagWithClass() on i.type for MIME type; f == i.title, followed by the result of UTTypeCopyPreferredTagWithClass() on i.type for extension.
 // returns NO if any of the parts that weren't NULL could not be made.
 - (BOOL) fromItem:(L0MoverItem*) i getMailAttachmentData:(NSData**) d mimeType:(NSString**) t fileName:(NSString**) f;
+
+// If YES, beginSendingItemViaEmail:delegate: is called rather than synchronously
+// obtaining data with fromItem:getMailAttachmentData:mimeType:fileName:.
+// Defaults to NO.
+@property(readonly) BOOL preparesEmailAsynchronously;
+
+// Called if the e-mail is prepared asynchronously. The receiver
+// must arrange for a call to be made to the delegate when the
+// e-mail is ready.
+- (void) beginSendingItemViaEmail:(L0MoverItem*) i delegate:(id <L0MoverItemUIAsynchronousMailDelegate>) d;
 
 - (BOOL) removingFromTableIsSafeForItem:(L0MoverItem*) i;
 
