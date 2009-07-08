@@ -72,6 +72,15 @@ L0ObjCSingletonMethod(sharedScanner)
 
 + (BOOL) modelAssumedToSupportBluetooth;
 {
+#if DEBUG && kL0MoverTestByAssumingModelDoesNotSupportBluetooth
+#warning Testing: Will assume no model supports Bluetooth.
+	return NO;
+#endif
+	
+#if !DEBUG && kL0MoverTestByAssumingModelDoesNotSupportBluetooth
+#error Disable kL0MoverTestByAssumingModelDoesNotSupportBluetooth in your local settings to build.
+#endif
+
 	NSString* model = L0MoverCurrentModelName();
 	return ![model isEqual:@"iPhone1,1"] && ![model isEqual:@"iPod1,1"];
 }

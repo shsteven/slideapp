@@ -25,6 +25,8 @@
 	BOOL isJammingSimulated;
 	BOOL simulatedJammedValue;
 #endif
+	
+	GKSession* probeSession;
 }
 
 + sharedScanner;
@@ -35,5 +37,7 @@
 - (void) testBySimulatingJamming:(BOOL) simulatedJam;
 - (void) testByStoppingJamSimulation;
 #endif
+
++ (BOOL) modelAssumedToSupportBluetooth;
 
 @end

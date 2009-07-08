@@ -286,7 +286,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 		return NSLocalizedStringFromTable(@"Connect to a network to use Wi-Fi.",
 										  @"L0MoverNetworkUI", @"Wi-Fi is jammed (footer text in network config pane).");
 	} else if (!self.WiFi.enabled) {
-		return NSLocalizedStringFromTable(@"Turn on to see other devices using Wi-Fi.",
+		return NSLocalizedStringFromTable(@"Turn on to see other devices using Wi-Fi.\nIf you do, Bluetooth will be turned off.",
 										  @"L0MoverNetworkUI", @"Wi-Fi is disabled (footer text in network config pane).");
 	} else {
 		return NSLocalizedStringFromTable(@"Connects with other devices on this Wi-Fi network.",
@@ -300,7 +300,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 		return NSLocalizedStringFromTable(@"Bluetooth is off. Turn it on in the Settings application to use it.",
 										  @"L0MoverNetworkUI", @"Bluetooth is jammed (footer text in network config pane).");
 	} else if (!self.bluetooth.enabled) {
-		return NSLocalizedStringFromTable(@"Turn on to see newer iPhone and iPod touch models near you with Bluetooth on.",
+		return NSLocalizedStringFromTable(@"Turn on to see newer iPhone and iPod touch models near you with Bluetooth on.\nIf you do, Wi-Fi will be turned off.",
 										  @"L0MoverNetworkUI", @"Bluetooth is disabled (footer text in network config pane).");
 	} else {
 		return NSLocalizedStringFromTable(@"Connects with newer iPhone and iPod touch models with Bluetooth.",
@@ -321,10 +321,16 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	id <L0MoverPeerScanner> scanner = [self.model objectAtIndex:sender.tag];
 	L0Log(@"Toggling scanner %@ at section %d", scanner, sender.tag);
 	
+	BOOL newValue = !scanner.enabled;
 	scanner.enabled = !scanner.enabled;
+	if (scanner == self.WiFi)
+		self.bluetooth.enabled = !newValue;
+	else if (scanner == self.bluetooth)
+		self.WiFi.enabled = !newValue;
 	
 	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
-	[delegate setEnabled:scanner.enabled forScanner:scanner];
+	[delegate setEnabledDefault:self.WiFi.enabled forScanner:self.WiFi];
+	[delegate setEnabledDefault:self.bluetooth.enabled forScanner:self.bluetooth];
 }
 
 #pragma mark -

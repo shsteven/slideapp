@@ -83,7 +83,7 @@ enum {
 		return NO;
 }
 
-- (void) setEnabled:(BOOL) e forScanner:(id <L0MoverPeerScanner>) s;
+- (void) setEnabledDefault:(BOOL) e forScanner:(id <L0MoverPeerScanner>) s;
 {
 	NSString* key = [self defaultsKeyForDisablingScanner:s];
 	if (key)
@@ -116,23 +116,18 @@ enum {
 	L0MoverPeering* peering = [L0MoverPeering sharedService];
 	peering.delegate = self;
 	
-	BOOL btEnabled = [self isScannerEnabled:[L0MoverBluetoothScanner sharedScanner]];
 	BOOL wiFiEnabled = [self isScannerEnabled:[L0MoverWiFiScanner sharedScanner]];
 	
-	// sanity check
-	if (!btEnabled && !wiFiEnabled) {
-		wiFiEnabled = YES;
-		[self setEnabled:YES forScanner:[L0MoverWiFiScanner sharedScanner]];
-	}
-
 	L0MoverWiFiScanner* scanner = [L0MoverWiFiScanner sharedScanner];
 	[peering addAvailableScannersObject:scanner];
 	scanner.enabled = wiFiEnabled;
 	
 #if !DEBUG || (DEBUG && !kL0MoverTestByDisablingBluetooth)
-	L0MoverBluetoothScanner* btScanner = [L0MoverBluetoothScanner sharedScanner];
-	[peering addAvailableScannersObject:btScanner];
-	btScanner.enabled = btEnabled;
+	if ([L0MoverBluetoothScanner modelAssumedToSupportBluetooth]) {
+		L0MoverBluetoothScanner* btScanner = [L0MoverBluetoothScanner sharedScanner];
+		[peering addAvailableScannersObject:btScanner];
+		btScanner.enabled = !wiFiEnabled;
+	}
 #endif
 	
 #if !DEBUG && kL0MoverTestByDisablingBluetooth

@@ -127,7 +127,7 @@ L0ObjCSingletonMethod(sharedService);
 - (id) init;
 {
 	if (self = [super init]) {
-		scanners = [[NSMutableSet setWithSet:[[self class] allScanners]] retain];
+		scanners = [NSMutableSet new];
 		peers = [NSMutableSet new];
 		NSString* selfId = [[NSUserDefaults standardUserDefaults] stringForKey:kL0MoverSelfUniqueIDKey];
 		if (!selfId) {
