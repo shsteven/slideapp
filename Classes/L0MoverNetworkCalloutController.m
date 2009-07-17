@@ -8,7 +8,7 @@
 
 #import "L0MoverNetworkCalloutController.h"
 
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
 
@@ -38,19 +38,22 @@
 @synthesize networkLabel, availableNetworksLabel;
 @synthesize networkCalloutView;
 
-- (void) dealloc;
-{
-	[networkLabel release];
-	[availableNetworksLabel release];
-	[networkCalloutView release];
-	[super dealloc];
-}
-
 - (void) awakeFromNib;
 {
 	L0AssertOutlet(self.networkCalloutView);
 	L0AssertOutlet(self.networkLabel);
 	L0AssertOutlet(self.availableNetworksLabel);
+	
+	dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
+}
+
+- (void) dealloc;
+{
+	[dispatcher release];
+	[networkLabel release];
+	[availableNetworksLabel release];
+	[networkCalloutView release];
+	[super dealloc];
 }
 
 - (IBAction) highlightCallout;
@@ -160,24 +163,22 @@
 #pragma mark -
 #pragma mark Jamming detector
 
-L0UniquePointerConstant(kL0MoverCalloutControllerObservationContext);
-
 - (void) startWatchingForJams;
 {
 	L0Log(@"Started watching for jams.");
 	
 	for (id scanner in [self allScanners]) {
-		[scanner addObserver:self forKeyPath:@"jammed" options:0 context:(void*) kL0MoverCalloutControllerObservationContext];
-		[scanner addObserver:self forKeyPath:@"enabled" options:0 context:(void*) kL0MoverCalloutControllerObservationContext];
+		[dispatcher observe:@"jammed" ofObject:scanner usingSelector:@selector(networkStateOfObject:changed:) options:0];
+		[dispatcher observe:@"enabled" ofObject:scanner usingSelector:@selector(networkStateOfObject:changed:) options:0];
 	}
 	
-	[[L0MoverPeering sharedService] addObserver:self forKeyPath:@"availableScanners" options:NSKeyValueObservingOptionInitial context:(void*) kL0MoverCalloutControllerObservationContext];
+	[dispatcher observe:@"availableScanners" ofObject:[MvrNetworkExchange sharedExchange] usingSelector:@selector(networkStateOfObject:changed:) options:0];
 }
 
 - (IBAction) showNetworkCalloutIfJammed;
 {
 	BOOL anyJammed = NO;
-	for (id <L0MoverPeerScanner> s in [[L0MoverPeering sharedService] availableScanners]) {
+	for (id <L0MoverPeerScanner> s in [[MvrNetworkExchange sharedExchange] availableScanners]) {
 		if (s.enabled && s.jammed) {
 			anyJammed = YES; break;
 		}
@@ -187,9 +188,8 @@ L0UniquePointerConstant(kL0MoverCalloutControllerObservationContext);
 		[self showCallout];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
+- (void) networkStateOfObject:(id) o changed:(NSDictionary*) change;
 {
-	if (context != kL0MoverCalloutControllerObservationContext) return;	
 	[self updateAndShowIfNeeded];
 }
 
@@ -252,7 +252,7 @@ L0UniquePointerConstant(kL0MoverCalloutControllerObservationContext);
 - (NSArray*) unjammedScanners;
 {
 	NSMutableArray* scanners = [NSMutableArray array];
-	L0MoverPeering* peering = [L0MoverPeering sharedService];
+	MvrNetworkExchange* peering = [MvrNetworkExchange sharedExchange];
 	
 	for (id <L0MoverPeerScanner> scanner in [self allScanners]) {
 		if (!scanner.jammed && scanner.enabled && [[peering availableScanners] containsObject:scanner])

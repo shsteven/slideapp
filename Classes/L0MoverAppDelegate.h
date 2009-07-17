@@ -14,7 +14,7 @@
 
 #import "L0MoverItemsTableController.h"
 #import "L0PeerDiscovery.h"
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 #import "L0MoverPeer.h"
 
 #import "L0MoverAboutPane.h"

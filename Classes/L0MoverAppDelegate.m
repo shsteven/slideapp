@@ -13,7 +13,7 @@
 
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
 
@@ -113,7 +113,7 @@ enum {
 	[L0MoverTextItemUI registerClass];
 	
 	// Starting up peering services.
-	L0MoverPeering* peering = [L0MoverPeering sharedService];
+	MvrNetworkExchange* peering = [MvrNetworkExchange sharedExchange];
 	peering.delegate = self;
 	
 	BOOL wiFiEnabled = [self isScannerEnabled:[L0MoverWiFiScanner sharedScanner]];

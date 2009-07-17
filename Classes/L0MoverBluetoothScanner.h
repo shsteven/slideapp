@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 
 #define kL0MoverBTSessionIdentifier @"net.infinite-labs.Mover"
 
 @interface L0MoverBluetoothScanner : NSObject <L0MoverPeerScanner, GKSessionDelegate> {
-	L0MoverPeering* service;
+	MvrNetworkExchange* service;
 	GKSession* bluetoothSession;
 	
 	NSMutableDictionary* channelsByPeerID;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <MuiKit/MuiKit.h>
 
 @interface L0MoverNetworkCalloutController : NSObject {
 	UIView* networkCalloutView;
@@ -18,6 +18,8 @@
 	
 	BOOL allJammed;
 	BOOL waitingForHide;
+	
+	L0KVODispatcher* dispatcher;
 }
 
 @property(retain) IBOutlet UILabel* networkLabel;

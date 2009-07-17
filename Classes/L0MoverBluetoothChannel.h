@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 #import "L0MoverBluetoothScanner.h"
 
 @interface L0MoverBluetoothChannel : NSObject <L0MoverPeerChannel> {

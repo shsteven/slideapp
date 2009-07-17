@@ -8,7 +8,7 @@
 
 #import "L0MoverNetworkSettingsPane.h"
 
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
 
@@ -18,7 +18,7 @@
 
 @interface L0MoverNetworkSettingsPane ()
 
-@property(readonly) L0MoverPeering* peering;
+@property(readonly) MvrNetworkExchange* peering;
 @property(readonly) L0MoverWiFiScanner* WiFi;
 @property(readonly) L0MoverBluetoothScanner* bluetooth;
 
@@ -136,7 +136,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	[self updateModel];
 }
 
-- (L0MoverPeering*) peering { return [L0MoverPeering sharedService]; }
+- (MvrNetworkExchange*) peering { return [MvrNetworkExchange sharedExchange]; }
 - (L0MoverWiFiScanner*) WiFi { return [L0MoverWiFiScanner sharedScanner]; }
 - (L0MoverBluetoothScanner*) bluetooth { return [L0MoverBluetoothScanner sharedScanner]; }
 

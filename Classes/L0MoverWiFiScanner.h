@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 #import "BLIP.h"
 
 #define kL0BonjourPeerApplicationVersionKey @"L0AppVersion"
@@ -24,7 +24,7 @@
 	NSMutableSet* pendingConnections;
 	NSMutableSet* availableChannels;
 	
-	L0MoverPeering* service;
+	MvrNetworkExchange* service;
 	BOOL jammed;
 	SCNetworkReachabilityRef reach;
 	

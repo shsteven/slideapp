@@ -221,7 +221,7 @@ L0ObjCSingletonMethod(sharedScanner)
 - (void) makeChannelForPeer:(NSString*) peerID;
 {
 	L0MoverBluetoothChannel* chan = [[[L0MoverBluetoothChannel alloc] initWithScanner:self peerID:peerID] autorelease];
-	if ([chan.uniquePeerIdentifier isEqual:[[L0MoverPeering sharedService] uniquePeerIdentifierForSelf]])
+	if ([chan.uniquePeerIdentifier isEqual:[[MvrNetworkExchange sharedExchange] uniquePeerIdentifierForSelf]])
 		return;
 	
 	[self addAvailableChannelsObject:chan];

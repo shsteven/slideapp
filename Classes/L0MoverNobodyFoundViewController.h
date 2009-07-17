@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MuiKit/MuiKit.h>
 
 @class L0MoverItemsTableController;
 
@@ -18,6 +19,8 @@
 	CGRect nobodyFoundViewFrame;
 	
 	UIView* nobodyFoundViewHost;
+	
+	L0KVODispatcher* dispatcher;
 }
 
 @property(assign) IBOutlet L0MoverItemsTableController* tableController;

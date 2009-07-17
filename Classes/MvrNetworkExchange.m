@@ -6,7 +6,7 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 #import "L0MoverPeer.h"
 
 #import "L0MoverWiFiScanner.h"
@@ -97,7 +97,7 @@
 
 // ----------------------
 
-@interface L0MoverPeering ()
+@interface MvrNetworkExchange ()
 + allScanners;
 - (L0MoverSynthesizedPeer*) peerWithChannel:(id <L0MoverPeerChannel>) channel;
 
@@ -105,11 +105,11 @@
 - (void) makeChannelUnavailable:(id <L0MoverPeerChannel>) channel;
 @end
 
-L0UniquePointerConstant(kL0MoverPeeringObservationContext);
+// L0UniquePointerConstant(kL0MoverPeeringObservationContext);
 
-@implementation L0MoverPeering
+@implementation MvrNetworkExchange
 
-L0ObjCSingletonMethod(sharedService);
+L0ObjCSingletonMethod(sharedExchange);
 @synthesize delegate, uniquePeerIdentifierForSelf;
 
 - (NSSet*) availableScanners;
@@ -127,8 +127,10 @@ L0ObjCSingletonMethod(sharedService);
 - (id) init;
 {
 	if (self = [super init]) {
+		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 		scanners = [NSMutableSet new];
 		peers = [NSMutableSet new];
+		
 		NSString* selfId = [[NSUserDefaults standardUserDefaults] stringForKey:kL0MoverSelfUniqueIDKey];
 		if (!selfId) {
 			selfId = [[[L0UUID UUID] stringValue] substringWithRange:NSMakeRange(0, 5)];
@@ -136,15 +138,6 @@ L0ObjCSingletonMethod(sharedService);
 		}
 		
 		uniquePeerIdentifierForSelf = [selfId copy];
-		
-		// set up KVO
-		for (id scanner in scanners) {
-			[scanner addObserver:self forKeyPath:@"availableChannels" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld|NSKeyValueObservingOptionInitial context:(void*) kL0MoverPeeringObservationContext];
-			
-			[scanner addObserver:self forKeyPath:@"enabled" options:NSKeyValueObservingOptionPrior|NSKeyValueObservingOptionInitial context:(void*) kL0MoverPeeringObservationContext];
-			[scanner addObserver:self forKeyPath:@"jammed" options:NSKeyValueObservingOptionPrior|NSKeyValueObservingOptionInitial context:(void*) kL0MoverPeeringObservationContext];
-		}
-			
 	}
 	
 	return self;
@@ -152,6 +145,7 @@ L0ObjCSingletonMethod(sharedService);
 
 - (void) dealloc;
 {
+	[dispatcher release];
 	[scanners release];
 	[peers release];
 	[uniquePeerIdentifierForSelf release];
@@ -211,31 +205,22 @@ L0ObjCSingletonMethod(sharedService);
 	[peer.delegate moverPeer:peer wasSentItem:i];
 }
 
-- (void) observeValueForKeyPath:(NSString*) keyPath ofObject:(id) object change:(NSDictionary*) change context:(void*) context;
+- (void) availableChannelsOfObject:(id <L0MoverPeerScanner>) s changed:(NSDictionary*) change;
 {
-	if (context != kL0MoverPeeringObservationContext) return;
+	NSArray* inserted = nil, * removed = nil;
+	// TODO
+	if (L0KVOChangeKind(change) == NSKeyValueChangeInsertion || L0KVOChangeKind(change) == NSKeyValueChangeReplacement)
+		inserted = L0KVOChangedValue(change);
+	if (L0KVOChangeKind(change) == NSKeyValueChangeRemoval || L0KVOChangeKind(change) == NSKeyValueChangeReplacement)
+		removed = L0KVOPreviousValue(change);
 	
-	if ([keyPath isEqual:@"availableChannels"]) {
-		NSArray* inserted = nil, * removed = nil;
-		// TODO
-		if (L0KVOChangeKind(change) == NSKeyValueChangeInsertion || L0KVOChangeKind(change) == NSKeyValueChangeReplacement)
-			inserted = L0KVOChangedValue(change);
-		if (L0KVOChangeKind(change) == NSKeyValueChangeRemoval || L0KVOChangeKind(change) == NSKeyValueChangeReplacement)
-			removed = L0KVOPreviousValue(change);
-		
-		// inserting new channels...
-		for (id <L0MoverPeerChannel> channel in inserted)
-			[self makeChannelAvailable:channel];
-
-		// removing invalid channels...
-		for (id <L0MoverPeerChannel> channel in removed)
-			[self makeChannelUnavailable:channel];
-	} else if ([keyPath isEqual:@"enabled"] || [keyPath isEqual:@"jammed"]) {
-		if (L0KVOIsPrior(change))
-			[self willChangeValueForKey:@"disconnected"];
-		else
-			[self didChangeValueForKey:@"disconnected"];
-	}
+	// inserting new channels...
+	for (id <L0MoverPeerChannel> channel in inserted)
+		[self makeChannelAvailable:channel];
+	
+	// removing invalid channels...
+	for (id <L0MoverPeerChannel> channel in removed)
+		[self makeChannelUnavailable:channel];
 }
 
 - (void) makeChannelAvailable:(id <L0MoverPeerChannel>) channel;
@@ -274,6 +259,13 @@ L0ObjCSingletonMethod(sharedService);
 
 - (void) addAvailableScannersObject:(id <L0MoverPeerScanner>) scanner;
 {
+	// set up KVO
+	const NSKeyValueObservingOptions options = NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld|NSKeyValueObservingOptionInitial;
+
+	[dispatcher observe:@"availableChannels" ofObject:scanner usingSelector:@selector(availableChannelsOfObject:changed:) options:options];
+	[dispatcher observe:@"enabled" ofObject:scanner usingSelector:@selector(enabledOrJammedOfObject:changed:) options:options];
+	[dispatcher observe:@"jammed" ofObject:scanner usingSelector:@selector(enabledOrJammedOfObject:changed:) options:options];
+	
 	scanner.service = self;
 	[scanners addObject:scanner];
 }
@@ -286,9 +278,11 @@ L0ObjCSingletonMethod(sharedService);
 	scanner.enabled = NO;
 	scanner.service = nil;
 	[scanners removeObject:scanner];
+	
+	[dispatcher endObserving:@"availableChannels" ofObject:scanner];
+	[dispatcher endObserving:@"enabled" ofObject:scanner];
+	[dispatcher endObserving:@"jammed" ofObject:scanner];
 }
-
-
 
 - (BOOL) disconnected;
 {
@@ -298,6 +292,14 @@ L0ObjCSingletonMethod(sharedService);
 	}
 	
 	return YES;
+}
+
+- (void) enabledOrJammedOfObject:(id) o changed:(NSDictionary*) change;
+{
+	if (L0KVOIsPrior(change))
+		[self willChangeValueForKey:@"disconnected"];
+	else
+		[self didChangeValueForKey:@"disconnected"];	
 }
 
 @end

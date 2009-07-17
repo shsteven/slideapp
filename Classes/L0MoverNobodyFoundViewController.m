@@ -8,7 +8,7 @@
 
 #import "L0MoverNobodyFoundViewController.h"
 #import "L0MoverItemsTableController.h"
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 #import "L0MoverAppDelegate.h"
 
 @interface L0MoverNobodyFoundViewController ()
@@ -26,29 +26,26 @@
 @synthesize tableController;
 @synthesize nobodyFoundView, nobodyFoundViewSpinner, nobodyFoundViewHost;
 
-L0UniquePointerConstant(kL0MoverTroubleshootingControllerObservationContext);
-
 - (void) awakeFromNib;
-{	
+{
+	dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
+	
 	nobodyFoundViewFrame = self.nobodyFoundView.frame;
 	[self hideNobodyFoundViewAnimated:NO];
 	[self performSelector:@selector(updateDisplayOfNobodyFoundViewImmediately) withObject:nil afterDelay:3.0];
 	
-	[[L0MoverPeering sharedService] addObserver:self forKeyPath:@"disconnected" options:0 context:(void*) kL0MoverTroubleshootingControllerObservationContext];
+	// [ addObserver:self forKeyPath:@"disconnected" options:0 context:(void*) kL0MoverTroubleshootingControllerObservationContext];
+	[dispatcher observe:@"disconnected" ofObject:[MvrNetworkExchange sharedExchange] usingSelector:@selector(disconnectedOfObject:changed:) options:0];
 }
 
-- (void) observeValueForKeyPath:(NSString*) keyPath ofObject:(id) object change:(NSDictionary*) change context:(void*) context;
+- (void) disconnectedOfObject:(MvrNetworkExchange*) object changed:(NSDictionary*) d;
 {
-	if (context != kL0MoverTroubleshootingControllerObservationContext)
-		return;
-	
-	L0Log(@"%@ had key path changed = %@", object, keyPath);
 	[self updateDisplayOfNobodyFoundView];
 }
 
 - (BOOL) shouldShowNobodyFoundView;
 {
-	if ([[L0MoverPeering sharedService] disconnected])
+	if ([[MvrNetworkExchange sharedExchange] disconnected])
 		return NO;
 	
 	return !tableController.westPeer && !tableController.eastPeer && !tableController.northPeer;
@@ -130,7 +127,7 @@ L0UniquePointerConstant(kL0MoverTroubleshootingControllerObservationContext);
 
 - (void) dealloc;
 {
-	[[L0MoverPeering sharedService] removeObserver:self forKeyPath:@"disconnected"];
+	[[MvrNetworkExchange sharedExchange] removeObserver:self forKeyPath:@"disconnected"];
 	self.nobodyFoundView = nil;
 	[super dealloc];
 }

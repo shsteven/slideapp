@@ -7,17 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MuiKit/MuiKit.h>
+
 #import "L0PeerDiscovery.h"
 
-@protocol L0MoverPeerChannel, L0MoverPeerScanner;
+@protocol L0MoverPeerChannel, L0MoverPeerScanner, MvrTransfer;
 
-@interface L0MoverPeering : NSObject {
+@interface MvrNetworkExchange : NSObject {
 	id <L0PeerDiscoveryDelegate> delegate;
 	NSMutableSet* peers, * scanners;
 	NSString* uniquePeerIdentifierForSelf;
+	L0KVODispatcher* dispatcher;
 }
 
-+ sharedService;
++ sharedExchange;
 
 // Scanners find channels to other peers. Peering bundles channels to
 // the same peer together to make a single L0MoverPeer object
@@ -67,7 +70,7 @@
 
 // Scanners are owned by the peering service, so should not retain it.
 // This is set by addAvailableScannersObject:.
-@property(assign) L0MoverPeering* service;
+@property(assign) MvrNetworkExchange* service;
 
 // Note: UI should prevent all scanners to be off at once, or otherwise
 // manage them so that the user isn't confused. No scanners = no peers ever

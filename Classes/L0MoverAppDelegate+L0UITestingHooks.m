@@ -10,7 +10,7 @@
 
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
-#import "L0MoverPeering.h"
+#import "MvrNetworkExchange.h"
 
 #if DEBUG
 @implementation L0MoverAppDelegate (L0UITestingHooks)
@@ -103,7 +103,7 @@
 	[self performSelector:@selector(setWiFiJammed:) withObject:[NSNumber numberWithBool:NO] afterDelay:30.0];
 	[self performSelector:@selector(setBluetoothJammed:) withObject:[NSNumber numberWithBool:NO] afterDelay:35.0];
 	
-	L0MoverPeering* peering = [L0MoverPeering sharedService];
+	MvrNetworkExchange* peering = [MvrNetworkExchange sharedExchange];
 	[peering performSelector:@selector(removeAvailableScannersObject:) withObject:bt afterDelay:40.0];
 	[self performSelector:@selector(setWiFiJammed:) withObject:[NSNumber numberWithBool:YES] afterDelay:45.0];
 	[self performSelector:@selector(setWiFiJammed:) withObject:[NSNumber numberWithBool:NO] afterDelay:50.0];
