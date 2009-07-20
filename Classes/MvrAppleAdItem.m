@@ -36,14 +36,20 @@
 
 - (UIImage*) representingImage;
 {
-	float color = number * 40 / 255.0;
-	if (color > 1)
-		color = 1;
-	
+	UIColor* fillColor;
+	if (number == 4) // the fifth
+		fillColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+	else {
+		float color = number * 40 / 255.0;
+		if (color > 1)
+			color = 1;
+		fillColor = [UIColor colorWithWhite:color alpha:1.0];
+	}
+
 	UIGraphicsBeginImageContext(CGSizeMake(30, 30));
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	UIColor* gray = [UIColor colorWithWhite:color alpha:1.0];
-	CGContextSetFillColorWithColor(context, gray.CGColor);
+	CGContextSetFillColorWithColor(context, fillColor.CGColor);
+	CGContextFillRect(context, CGRectMake(0, 0, 30, 30));
 	UIImage* i = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
