@@ -35,6 +35,7 @@
 		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
+		15A852C81014E29C00F0D679 /* MvrAppleAdItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A852C71014E29C00F0D679 /* MvrAppleAdItem.m */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
 		15B7BF6D0F9C778E00EF9AB9 /* libLogging-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */; };
 		15B929350F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B929340F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m */; };
@@ -194,6 +195,8 @@
 		15911E790F8FA2F900BECD18 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		159120810F8FD04B00BECD18 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/L0MoverAboutPane.xib; sourceTree = "<group>"; };
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		15A852C61014E29B00F0D679 /* MvrAppleAdItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppleAdItem.h; sourceTree = "<group>"; };
+		15A852C71014E29C00F0D679 /* MvrAppleAdItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppleAdItem.m; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logging.xcodeproj; path = Logging/Logging.xcodeproj; sourceTree = INFINITELABS_TOOLS; };
@@ -399,6 +402,8 @@
 				15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */,
 				15911E740F8FA2D900BECD18 /* L0AddressBookPersonItem.h */,
 				15911E750F8FA2D900BECD18 /* L0AddressBookPersonItem.m */,
+				15A852C61014E29B00F0D679 /* MvrAppleAdItem.h */,
+				15A852C71014E29C00F0D679 /* MvrAppleAdItem.m */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -770,6 +775,7 @@
 				15B929350F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m in Sources */,
 				15B929FE0F907BD9001E40B7 /* L0MoverAboutPane.m in Sources */,
 				153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */,
+				15A852C81014E29C00F0D679 /* MvrAppleAdItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
