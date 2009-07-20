@@ -319,6 +319,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1533400B1014FD9F008E7F26 /* Apple Ad Stuff */,
 				1559B5B20F79843F005E4362 /* Peering */,
 				15C0C1CB0F759B7500E5BA2F /* Items */,
 				1D3623240D0F684500981E51 /* L0MoverAppDelegate.h */,
@@ -337,6 +338,15 @@
 				15B929FD0F907BD9001E40B7 /* L0MoverAboutPane.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		1533400B1014FD9F008E7F26 /* Apple Ad Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				15A852C61014E29B00F0D679 /* MvrAppleAdItem.h */,
+				15A852C71014E29C00F0D679 /* MvrAppleAdItem.m */,
+			);
+			name = "Apple Ad Stuff";
 			sourceTree = "<group>";
 		};
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
@@ -402,8 +412,6 @@
 				15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */,
 				15911E740F8FA2D900BECD18 /* L0AddressBookPersonItem.h */,
 				15911E750F8FA2D900BECD18 /* L0AddressBookPersonItem.m */,
-				15A852C61014E29B00F0D679 /* MvrAppleAdItem.h */,
-				15A852C71014E29C00F0D679 /* MvrAppleAdItem.m */,
 			);
 			name = Items;
 			sourceTree = "<group>";
