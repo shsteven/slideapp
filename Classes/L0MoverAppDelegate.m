@@ -15,6 +15,8 @@
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
+#import "MvrAppleAdItem.h"
+
 #import <netinet/in.h>
 
 // Alert tags
@@ -328,21 +330,15 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 {
 	[self.tableController setEditing:NO animated:YES];
 	
-	L0ActionSheet* sheet = [[L0ActionSheet new] autorelease];
-	sheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-	sheet.delegate = self;
-	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Add item - image button") identifier:kL0MoverAddImageButton];
-	
-	if ([self isCameraAvailable])
-		[sheet addButtonWithTitle:NSLocalizedString(@"Take a Photo", @"Add item - take a photo button") identifier:kL0MoverTakeAPhotoButton];
-	
-	[sheet addButtonWithTitle:NSLocalizedString(@"Add Contact", @"Add item - contact button")  identifier:kL0MoverAddContactButton];
-	
-	NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Add item - cancel button") identifier:kL0MoverCancelButton];
-	sheet.cancelButtonIndex = i;
+	// gutted for Apple ad.
+	static int counter = 0;
 
-	[sheet showInView:self.window];
-}
+	MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:counter];
+	[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
+	[adItem release];
+	
+	counter++;
+ }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
