@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StringsTable</key>
+	<string>Advanced</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Arrow placed at</string>
+			<key>Key</key>
+			<string>kMvrAppleAdPeerPlacement</string>
+			<key>DefaultValue</key>
+			<string>east</string>
+			<key>Values</key>
+			<array>
+				<string>east</string>
+				<string>west</string>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>Right (Sending iPhone)</string>
+				<string>Left (Receiving iPhone)</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
