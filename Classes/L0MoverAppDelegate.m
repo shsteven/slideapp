@@ -16,6 +16,7 @@
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
 #import "MvrAppleAdItem.h"
+#import "L0MoverAppDelegate+MvrAppleAd.h"
 
 #import <netinet/in.h>
 
@@ -216,33 +217,29 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 - (void) slidePeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
 {
 	L0Log(@"About to send item %@", item);
+	[self beginSendingForAppleAdWithItem:item];
 }
 
 - (void) slidePeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
 {
-	L0Log(@"Sent %@", item);
-	[self.tableController returnItemToTableAfterSend:item toPeer:peer];
+	// gutted for Apple ad.
 }
 
 - (void) slidePeerWillSendUsItem:(L0MoverPeer*) peer;
 {
 	L0Log(@"Receiving from %@", peer);
 	[self.tableController beginWaitingForItemComingFromPeer:peer];
+	
+	// rigged for Apple ad.
+	[self beginReceivingForAppleAd];
 }
 - (void) slidePeer:(L0MoverPeer*) peer didSendUsItem:(L0MoverItem*) item;
 {
-	L0Log(@"Received %@", item);
-	[item storeToAppropriateApplication];
-	[self.tableController addItem:item comingFromPeer:peer];
-	
-	if ([item isKindOfClass:[L0ImageItem class]])
-		[self showAlertIfNotShownBeforeNamedForiPhone:@"L0ImageReceived_iPhone" foriPodTouch:@"L0ImageReceived_iPodTouch"];
-	else if ([item isKindOfClass:[L0AddressBookPersonItem class]])
-		[self showAlertIfNotShownBeforeNamed:@"L0ContactReceived"];
+	// gutted for Apple ad.
 }
 - (void) slidePeerDidCancelSendingUsItem:(L0MoverPeer*) peer;
 {
-	[self.tableController stopWaitingForItemFromPeer:peer];
+	// gutted for Apple ad.
 }
 
 - (void) peerFound:(L0MoverPeer*) peer;

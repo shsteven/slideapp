@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		15038F250F852340008F6BBB /* RemoveButton_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 15038F240F852340008F6BBB /* RemoveButton_Pressed.png */; };
 		150A4D770FA39D5D006B9BB4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */; };
+		1533400F1014FE2B008E7F26 /* L0MoverAppDelegate+MvrAppleAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1533400E1014FE2B008E7F26 /* L0MoverAppDelegate+MvrAppleAd.m */; };
 		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
 		153734ED0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
@@ -160,6 +161,8 @@
 /* Begin PBXFileReference section */
 		15038F240F852340008F6BBB /* RemoveButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RemoveButton_Pressed.png; sourceTree = "<group>"; };
 		150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1533400D1014FE2B008E7F26 /* L0MoverAppDelegate+MvrAppleAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+MvrAppleAd.h"; sourceTree = "<group>"; };
+		1533400E1014FE2B008E7F26 /* L0MoverAppDelegate+MvrAppleAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+MvrAppleAd.m"; sourceTree = "<group>"; };
 		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
 		153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0UITestingHooks.m"; sourceTree = "<group>"; };
 		153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
@@ -345,6 +348,8 @@
 			children = (
 				15A852C61014E29B00F0D679 /* MvrAppleAdItem.h */,
 				15A852C71014E29C00F0D679 /* MvrAppleAdItem.m */,
+				1533400D1014FE2B008E7F26 /* L0MoverAppDelegate+MvrAppleAd.h */,
+				1533400E1014FE2B008E7F26 /* L0MoverAppDelegate+MvrAppleAd.m */,
 			);
 			name = "Apple Ad Stuff";
 			sourceTree = "<group>";
@@ -784,6 +789,7 @@
 				15B929FE0F907BD9001E40B7 /* L0MoverAboutPane.m in Sources */,
 				153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */,
 				15A852C81014E29C00F0D679 /* MvrAppleAdItem.m in Sources */,
+				1533400F1014FE2B008E7F26 /* L0MoverAppDelegate+MvrAppleAd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

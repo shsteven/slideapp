@@ -12,6 +12,11 @@
 
 @implementation MvrAppleAdItem
 
++ adItemWithNumber:(int) n;
+{
+	return [[[self alloc] initWithNumber:n] autorelease];
+}
+
 - (id) initWithNumber:(int) n;
 {
 	if (self = [super init]) {

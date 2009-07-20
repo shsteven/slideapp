@@ -668,6 +668,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) stopWaitingForItemFromPeer:(L0MoverPeer*) peer;
 {
+	L0Log(@"%@", peer);
 	[[self spinnerForPeer:peer] stopAnimating];
 	
 	[self _labelForPeer:peer].textColor = basePeerLabelColor;
@@ -694,6 +695,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) beginWaitingForItemComingFromPeer:(L0MoverPeer*) peer;
 {
+	L0Log(@"%@", peer);
+	
 	[[self spinnerForPeer:peer] startAnimating];
 	
 	[self _labelForPeer:peer].textColor = [UIColor colorWithRed:33.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0];
@@ -707,8 +710,6 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	[self _labelForPeer:peer].alpha = 0.3;
 	
 	[UIView commitAnimations];
-	
-	
 }
 
 #pragma mark -

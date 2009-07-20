@@ -13,6 +13,7 @@
 	int number;
 }
 
++ adItemWithNumber:(int) n;
 - (id) initWithNumber:(int) number;
 
 @end
