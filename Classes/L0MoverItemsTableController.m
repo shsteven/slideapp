@@ -496,37 +496,13 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	if ([queuedPeers containsObject:peer])
 		return YES;
 	
-	if (self.eastPeer && self.northPeer && self.westPeer) {
-		[queuedPeers addObject:peer];
-		return YES;
-	}
+	NSString* key = [[NSUserDefaults standardUserDefaults] objectForKey:@"kMvrAppleAdPeerPlacement"];
+	if (!key) key = @"eastPeer";
 	
-	BOOL added = NO;
-	while (!added) {
-		int where = random() % 3;
-		switch (where) {
-			case 0:
-				if (!self.northPeer) {
-					self.northPeer = peer;
-					added = YES;
-				}
-				break;
-
-			case 1:
-				if (!self.westPeer) {
-					self.westPeer = peer;
-					added = YES;
-				}
-				break;
-
-			case 2:
-				if (!self.eastPeer) {
-					self.eastPeer = peer;
-					added = YES;
-				}
-				break;
-		}
-	}
+	if ([self valueForKey:key])
+		[queuedPeers addObject:peer];
+	else 
+		[self setValue:peer forKey:key];
 	
 	return YES;
 }

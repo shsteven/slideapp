@@ -14,11 +14,11 @@
 			<key>Key</key>
 			<string>kMvrAppleAdPeerPlacement</string>
 			<key>DefaultValue</key>
-			<string>east</string>
+			<string>eastPeer</string>
 			<key>Values</key>
 			<array>
-				<string>east</string>
-				<string>west</string>
+				<string>eastPeer</string>
+				<string>westPeer</string>
 			</array>
 			<key>Titles</key>
 			<array>
