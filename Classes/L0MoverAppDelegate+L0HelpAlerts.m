@@ -16,7 +16,8 @@
 {
 	// the first method returns nil if the alert was already
 	// shown.
-	[[self alertIfNotShownBeforeNamed:name] show];
+	
+	// gutted for Apple ad.
 }
 
 - (UIAlertView*) alertIfNotShownBeforeNamed:(NSString*) name;
@@ -44,7 +45,7 @@
 
 - (void) showAlertIfNotShownBeforeNamedForiPhone:(NSString*) iPhoneName foriPodTouch:(NSString*) iPodTouchName;
 {
-	[[self alertIfNotShownBeforeNamedForiPhone:iPhoneName foriPodTouch:iPodTouchName] show];
+	// gutted for Apple ad.
 }
 
 @end
