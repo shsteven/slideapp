@@ -328,13 +328,12 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self.tableController setEditing:NO animated:YES];
 	
 	// gutted for Apple ad.
-	static int counter = 0;
 
-	MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:counter];
-	[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
-	[adItem release];
-	
-	counter++;
+	for (int i = 0; i <= 5; i++) {
+		MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:i];
+		[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
+		[adItem release];
+	}
  }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
