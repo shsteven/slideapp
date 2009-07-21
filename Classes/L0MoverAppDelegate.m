@@ -329,10 +329,20 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	
 	// gutted for Apple ad.
 
-	for (int i = 0; i <= 5; i++) {
-		MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:i];
+	NSString* key = [[NSUserDefaults standardUserDefaults] objectForKey:@"kMvrAppleAdPeerPlacement"];
+
+	if (!key || [key isEqual:@"eastPeer"]) { // sender
+	
+		for (int i = 0; i <= 5; i++) {
+			MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:i];
+			[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
+			[adItem release];
+		}
+		
+	} else {
+		MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:6];
 		[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
-		[adItem release];
+		[adItem release];		
 	}
  }
 
