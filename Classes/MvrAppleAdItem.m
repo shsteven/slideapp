@@ -17,6 +17,12 @@
 	return [[[self alloc] initWithNumber:n] autorelease];
 }
 
++ (void) initialize;
+{
+	int i; for (i = 0; i < 7; i++)
+		(void) [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpg", i]];
+}
+
 - (id) initWithNumber:(int) n;
 {
 	if (self = [super init]) {
@@ -41,24 +47,7 @@
 
 - (UIImage*) representingImage;
 {
-	UIColor* fillColor;
-	if (number == 4) // the fifth
-		fillColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
-	else {
-		float color = number * 40 / 255.0;
-		if (color > 1)
-			color = 1;
-		fillColor = [UIColor colorWithWhite:color alpha:1.0];
-	}
-
-	UIGraphicsBeginImageContext(CGSizeMake(30, 30));
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetFillColorWithColor(context, fillColor.CGColor);
-	CGContextFillRect(context, CGRectMake(0, 0, 30, 30));
-	UIImage* i = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	
-	return i;
+	return [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpg", number]];
 }
 
 - (id) initWithExternalRepresentation:(NSData*) payload type:(NSString*) ty title:(NSString*) ti;
