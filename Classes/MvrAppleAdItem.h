@@ -14,6 +14,8 @@
 }
 
 + adItemWithNumber:(int) n;
++ adItemForReceiving;
+
 - (id) initWithNumber:(int) number;
 
 @end

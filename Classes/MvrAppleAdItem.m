@@ -17,6 +17,11 @@
 	return [[[self alloc] initWithNumber:n] autorelease];
 }
 
++ adItemForReceiving;
+{
+	return [self adItemWithNumber:3];
+}
+
 + (void) initialize;
 {
 	int i; for (i = 0; i < 7; i++)

@@ -25,7 +25,7 @@
 	if (!self.tableController.westPeer)
 		return;
 	
-	MvrAppleAdItem* item = [MvrAppleAdItem adItemWithNumber:4]; // the fifth
+	MvrAppleAdItem* item = [MvrAppleAdItem adItemForReceiving]; // the fifth
 	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromWest];
 	[self.tableController stopWaitingForItemFromPeer:self.tableController.westPeer];
 }

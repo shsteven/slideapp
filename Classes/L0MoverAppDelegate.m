@@ -66,7 +66,8 @@ enum {
 	[window addSubview:self.tableHostController.view];
 	
 	// Loading persisted items from disk. (Later, so we avoid the AB constant bug.)
-	[self performSelector:@selector(addPersistedItemsToTable) withObject:nil afterDelay:0.05];
+	// rigged for Apple ad.
+	// [self performSelector:@selector(addPersistedItemsToTable) withObject:nil afterDelay:0.05];
 	
 	// Go!
 	[window makeKeyAndVisible];
@@ -205,13 +206,15 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 - (void) addPersistedItemsToTable;
 {
-	for (L0MoverItem* i in [self loadItemsFromMassStorage])
-		[self.tableController addItem:i animation:kL0SlideItemsTableNoAddAnimation];
+	// rigged for Apple ads.
+//	for (L0MoverItem* i in [self loadItemsFromMassStorage])
+//		[self.tableController addItem:i animation:kL0SlideItemsTableNoAddAnimation];
 }
 
 - (void) applicationWillTerminate:(UIApplication*) app;
 {
-	[self persistItemsToMassStorage:[self.tableController items]];
+	// rigged for Apple ads.
+	//[self persistItemsToMassStorage:[self.tableController items]];
 }
 
 - (void) slidePeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
@@ -344,7 +347,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 		[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
 		[adItem release];		
 	}
- }
+}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {

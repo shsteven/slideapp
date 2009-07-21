@@ -1,0 +1,39 @@
+*How to set up the Mover ad variant:* This variant of Mover has been rigged so that it conforms to the ad's timing. Only once before use, it needs some additional set-up on both the sending and receiving iPhones.
+
+**IMPORTANT:** When sending, the iPhone on the right will **ALWAYS** receive the slide with the image pictured below, regardless of which one was sent. This is a trick that allows the app to keep the timing precise. **Make sure the actor picks the slide with the image below on the sending iPhone!!!**
+
+**This is the image that will be received by the other iPhone, regardless of which image is sent from the first one:**
+
+<img src="AdImages/3.jpg">
+
+**How to up the sending iPhone (on the left of the TV screen):**
+
+* Install the application on the sending iPhone.
+
+* Open the **Settings** application on the device. Choose **Mover**, then **Apple Ad Settings**, then **Arrow placed at...**. Make sure it's set to **Right (Sending iPhone)**. If not, choose that option.
+
+* Open the **Mover** application.
+
+* Tap the “+” button. Unlike the real Mover, this will place six image slides on the table. Set them up as required. (*Hint*: if you touch and hold your finger over a slide, it will be picked up and placed at the top, in front of all other slides.)
+
+**How to up the receiving iPhone (on the right of the TV screen):**
+
+* Install the application on the receiving iPhone.
+
+* Open the **Settings** application on the device. Choose **Mover**, then **Apple Ad Settings**, then **Arrow placed at...**. Make sure it's set to **Left (Receiving iPhone)**. If not, choose that option.
+
+* Open the **Mover** application.
+
+* Tap the “+” button. Unlike the real Mover, this will add a single image slide on the table.
+
+**Shooting the ad:**
+
+* Connect both iPhones to the same network and open Mover on both. Make sure the arrows are shown on both devices.
+
+* Shoot a kickass ad.
+
+**IMPORTANT:** If you have to reshoot, you can use the “Edit” button to remove excess slides from the screen. Tap the “-” button on a slide to remove it. When finished, tap the “Done” button.
+
+---
+
+**A FOOTNOTE:** This variant is made expressely for the TV ad. It cannot upgrade from real versions of Mover. It will not install over them, but alongside them. Do not try to use it with real variants of Mover, as it won't work.
