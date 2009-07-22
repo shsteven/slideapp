@@ -122,7 +122,7 @@ enum {
 		NSDate* now = [NSDate date];
 		NSTimeInterval elapsed = [now timeIntervalSinceDate:self.itemSendingDate];
 		
-		NSTimeInterval finalImpulseSendMoment = (kMvrDelayBetweenSendAndReceive - elapsed / 2);
+		NSTimeInterval finalImpulseSendMoment = ([Mover delayBeforeArrivalAnimation] - elapsed / 2);
 		
 		L0Log(@"Will send final impulse in %f (or now if negative).", finalImpulseSendMoment);
 		// we need to warn in duration - elapsed/2 seconds.

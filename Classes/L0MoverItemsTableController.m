@@ -34,7 +34,8 @@ static CGFloat L0RandomSlideRotation() {
 	return (zeroToOneRandom * M_PI / 3.0) - M_PI / 6.0;
 }
 
-static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableController* self, UIView* view, CGPoint comingFrom, CGPoint goingTo) {
+static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableController* self, UIView* view, CGPoint comingFrom, CGPoint goingTo, NSTimeInterval duration) {
+	NSCAssert(duration > 0.2, @"Duration must be > 0.2!");
 	view.center = comingFrom;
 	
 	if (!view.superview)
@@ -42,7 +43,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationDuration:duration];
 	
 	CGFloat randomOffsetX = 20 * (random() / (double) LONG_MAX) * (random() & 1? 1 : -1);
 	CGFloat randomOffsetY = 20 * (random() / (double) LONG_MAX) * (random() & 1? 1 : -1);
@@ -54,7 +55,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 @interface L0MoverItemsTableController ()
 
 - (L0SlideItemsTableAddAnimation) animationForPeer:(L0MoverPeer*) peer;
-- (void) animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
+- (void) animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a duration:(NSTimeInterval) d;
 
 - (void) removeItemView:(L0MoverItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
 
@@ -68,6 +69,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 - (void) endHoldingView:(L0DraggableView*) view;
 
 - (UIActivityIndicatorView*) spinnerForPeer:(L0MoverPeer*) peer;
+
+- (void) addItem:(L0MoverItem*) item animation:(L0SlideItemsTableAddAnimation) a duration:(NSTimeInterval) d;
 
 @end
 
@@ -188,6 +191,11 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) addItem:(L0MoverItem*) item animation:(L0SlideItemsTableAddAnimation) a;
 {
+	[self addItem:item animation:a duration:1.0];
+}
+
+- (void) addItem:(L0MoverItem*) item animation:(L0SlideItemsTableAddAnimation) a duration:(NSTimeInterval) d;
+{
 	if (CFDictionaryGetValue(itemsToViews, item))
 		return;
 	
@@ -199,12 +207,12 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	[view displayWithContentsOfItem:item];
 	CFDictionarySetValue(itemsToViews, item, view);
 
-	[self animateItemView:view withAddAnimation:a];
+	[self animateItemView:view withAddAnimation:a duration:d];
 	
 	self.editButtonItem.enabled = YES;
 }
 
-- (void) animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
+- (void) animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a duration:(NSTimeInterval) duration;
 {
 	switch (a) {
 		case kL0SlideItemsTableAddByDropping: {
@@ -229,7 +237,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 			
 			[UIView beginAnimations:nil context:[view retain]];
 			[UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-			[UIView setAnimationDuration:0.5];
+			[UIView setAnimationDuration:duration];
 			
 			[UIView setAnimationDelegate:self];
 			[UIView setAnimationDidStopSelector:@selector(_addByDroppingAnimation:didFinish:forRetainedView:)];
@@ -251,7 +259,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 			CGPoint comingFrom = CGPointMake(selfFrame.size.width / 2, belowSouthCenterY);
 			CGPoint goingTo = CGPointMake(comingFrom.x, 2 * selfFrame.size.height / 3.0);
 			
-			L0AnimateSlideEntranceFromOffscreenPoint(self, view, comingFrom, goingTo);
+			L0AnimateSlideEntranceFromOffscreenPoint(self, view, comingFrom, goingTo, duration);
 			
 			break;
 		}
@@ -264,7 +272,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 			CGPoint comingFrom = CGPointMake(fartherThanEastX, selfFrame.size.height / 2);
 			CGPoint goingTo = CGPointMake(2 * selfFrame.size.width / 3.0, comingFrom.y);
 			
-			L0AnimateSlideEntranceFromOffscreenPoint(self, view, comingFrom, goingTo);
+			L0AnimateSlideEntranceFromOffscreenPoint(self, view, comingFrom, goingTo, duration);
 			
 			break;
 		}
@@ -278,7 +286,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 			CGPoint comingFrom = CGPointMake(selfFrame.size.width / 2, aboveNorthCenterY);
 			CGPoint goingTo = CGPointMake(comingFrom.x, selfFrame.size.height / 3.0);
 			
-			L0AnimateSlideEntranceFromOffscreenPoint(self, view, comingFrom, goingTo);
+			L0AnimateSlideEntranceFromOffscreenPoint(self, view, comingFrom, goingTo, duration);
 			
 			break;
 		}
@@ -291,7 +299,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 			CGPoint comingFrom = CGPointMake(beforeWestY, selfFrame.size.height / 2);
 			CGPoint goingTo = CGPointMake(selfFrame.size.width / 3.0, comingFrom.y);
 			
-			L0AnimateSlideEntranceFromOffscreenPoint(self, view, comingFrom, goingTo);
+			L0AnimateSlideEntranceFromOffscreenPoint(self, view, comingFrom, goingTo, duration);
 			
 			break;
 		}
@@ -662,7 +670,12 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) addItem:(L0MoverItem*) item comingFromPeer:(L0MoverPeer*) peer;
 {
-	[self addItem:item animation:[self animationForPeer:peer]];
+	[self addItem:item comingFromPeer:peer duration:1.0];
+}
+
+- (void) addItem:(L0MoverItem*) item comingFromPeer:(L0MoverPeer*) peer duration:(NSTimeInterval) duration;
+{
+	[self addItem:item animation:[self animationForPeer:peer] duration:duration];
 	[self stopWaitingForItemFromPeer:peer];
 }
 
@@ -687,10 +700,15 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) returnItemToTableAfterSend:(L0MoverItem*) item toPeer:(L0MoverPeer*) peer;
 {
+	[self returnItemToTableAfterSend:item toPeer:peer duration:1.0];
+}
+
+- (void) returnItemToTableAfterSend:(L0MoverItem*) item toPeer:(L0MoverPeer*) peer duration:(NSTimeInterval) d;
+{
 	L0MoverItemView* view = (L0MoverItemView*) CFDictionaryGetValue(itemsToViews, item);
 
 	if (view)
-		[self animateItemView:view withAddAnimation:[self animationForPeer:peer]];
+		[self animateItemView:view withAddAnimation:[self animationForPeer:peer] duration:d];
 }
 
 - (void) beginWaitingForItemComingFromPeer:(L0MoverPeer*) peer;

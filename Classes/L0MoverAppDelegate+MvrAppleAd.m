@@ -25,7 +25,7 @@
 		return;
 	
 	MvrAppleAdItem* item = [MvrAppleAdItem adItemForReceiving]; // the fifth
-	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromWest];
+	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromWest duration:[self durationOfArrivalAnimation]];
 	[self.tableController stopWaitingForItemFromPeer:self.tableController.westPeer];
 }
 
@@ -42,8 +42,42 @@ static L0MoverItem* adItemBeingSent = nil;
 	if (!self.tableController.eastPeer)
 		return;
 	
-	[self.tableController returnItemToTableAfterSend:adItemBeingSent toPeer:self.tableController.eastPeer];
+	[self.tableController returnItemToTableAfterSend:adItemBeingSent toPeer:self.tableController.eastPeer duration:[self durationOfArrivalAnimation]];
 	[adItemBeingSent release]; adItemBeingSent = nil;
+}
+
+static NSTimeInterval MvrDelayBeforeArrival = 0.0;
+BOOL foundOutDelayBeforeArrival = NO;
+- (NSTimeInterval) delayBeforeArrivalAnimation;
+{
+	if (!foundOutDelayBeforeArrival) {
+		
+		id timeObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"kMvrAppleAdAnimationDuration"];
+		NSTimeInterval time = timeObject? [timeObject doubleValue] : 1.0;
+		MvrDelayBeforeArrival = time >= 2.0? time - 1.0 : time - 0.5;
+		
+		foundOutDelayBeforeArrival = YES;
+	}
+	
+	return MvrDelayBeforeArrival;
+}
+
+static NSTimeInterval MvrDurationOfArrivalAnimation = 0.0;
+BOOL foundOutDurationOfArrival = NO;
+- (NSTimeInterval) durationOfArrivalAnimation;
+{
+
+	if (!foundOutDurationOfArrival) {
+		
+		id timeObject = [[NSUserDefaults standardUserDefaults] objectForKey:@"kMvrAppleAdAnimationDuration"];
+		NSTimeInterval time = timeObject? [timeObject doubleValue] : 1.0;
+		MvrDurationOfArrivalAnimation = time >= 2.0? 1.0 : 0.5;
+		
+		foundOutDurationOfArrival = YES;
+		
+	}
+
+	return MvrDurationOfArrivalAnimation;
 }
 
 @end

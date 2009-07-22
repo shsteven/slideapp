@@ -82,14 +82,17 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 - (void) removePeer:(L0MoverPeer*) peer;
 
 - (void) addItem:(L0MoverItem*) item comingFromPeer:(L0MoverPeer*) peer;
+- (void) addItem:(L0MoverItem*) item comingFromPeer:(L0MoverPeer*) peer duration:(NSTimeInterval) duration;
 - (void) beginWaitingForItemComingFromPeer:(L0MoverPeer*) peer;
 - (void) stopWaitingForItemFromPeer:(L0MoverPeer*) peer;
 
 - (void) addItem:(L0MoverItem*) item animation:(L0SlideItemsTableAddAnimation) animation;
+- (void) addItem:(L0MoverItem*) item animation:(L0SlideItemsTableAddAnimation) a duration:(NSTimeInterval) d;
 - (void) removeItem:(L0MoverItem*) item animation:(L0SlideItemsTableRemoveAnimation) animation;
 
 - (NSArray*) items;
 
 - (void) returnItemToTableAfterSend:(L0MoverItem*) item toPeer:(L0MoverPeer*) peer;
+- (void) returnItemToTableAfterSend:(L0MoverItem*) item toPeer:(L0MoverPeer*) peer duration:(NSTimeInterval) d;
 
 @end

@@ -41,6 +41,10 @@ enum {
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application;
 {
+	// cache stuff
+	[self delayBeforeArrivalAnimation];
+	[self durationOfArrivalAnimation];
+	
 	// Registering item subclasses.
 	[L0ImageItem registerClass];
 	[L0AddressBookPersonItem registerClass];

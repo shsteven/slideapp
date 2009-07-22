@@ -1,5 +1,7 @@
 *How to set up the Mover ad variant:* This variant of Mover has been rigged so that it conforms to the ad's timing. Only once before use, it needs some additional set-up on both the sending and receiving iPhones.
 
+**NEW IN THIS VERSION**: The Settings application now has a “Duration” setting for the approximate duration of the whole animation sequence. By default it's now set at 1 second. You can change this to be shorter or longer by opening the **Settings** application, then choosing **Mover** > **Apple Ad Settings** > **Duration**.
+
 **IMPORTANT:** When sending, the iPhone on the right will **ALWAYS** receive the slide with the image pictured below, regardless of which one was sent. This is a trick that allows the app to keep the timing precise. **Make sure the actor picks the slide with the image below on the sending iPhone!!!**
 
 **This is the image that will be received by the other iPhone, regardless of which image is sent from the first one:**

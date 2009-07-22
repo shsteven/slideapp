@@ -20,4 +20,7 @@
 - (void) beginSendingForAppleAdWithItem:(L0MoverItem*) i;
 - (void) returnItemAfterSendForAppleAd;
 
+- (NSTimeInterval) delayBeforeArrivalAnimation;
+- (NSTimeInterval) durationOfArrivalAnimation;
+
 @end
