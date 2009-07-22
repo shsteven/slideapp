@@ -21,11 +21,17 @@
 	AsyncSocket* them;
 	NSTimer* keepAliveTimer;
 	
+	NSDate* itemSendingDate;
+	
 	BOOL goingDown;
 }
 
 - (id) initWithNetService:(NSNetService*) service;
 
 @property(readonly) NSNetService* service;
+
+@property(copy) NSDate* itemSendingDate;
+
+- (void) sendEndingImpulse;
 
 @end

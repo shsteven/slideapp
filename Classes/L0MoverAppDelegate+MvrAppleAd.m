@@ -9,8 +9,6 @@
 #import "L0MoverAppDelegate+MvrAppleAd.h"
 #import "MvrAppleAdItem.h"
 
-#define kMvrDelayBetweenSendAndReceive 2.0
-
 @implementation L0MoverAppDelegate (MvrAppleAd)
 
 - (void) beginReceivingForAppleAd;
@@ -19,7 +17,6 @@
 		return;
 	
 	[self.tableController beginWaitingForItemComingFromPeer:self.tableController.westPeer];
-	[self performSelector:@selector(receiveItemForAppleAd) withObject:nil afterDelay:kMvrDelayBetweenSendAndReceive];
 }
 
 - (void) receiveItemForAppleAd;
@@ -32,17 +29,21 @@
 	[self.tableController stopWaitingForItemFromPeer:self.tableController.westPeer];
 }
 
+static L0MoverItem* adItemBeingSent = nil;
+
 - (void) beginSendingForAppleAdWithItem:(L0MoverItem*) i;
 {
-	[self performSelector:@selector(returnItemAfterSendForAppleAd:) withObject:i afterDelay:kMvrDelayBetweenSendAndReceive];
+	//[self performSelector:@selector(returnItemAfterSendForAppleAd:) withObject:i afterDelay:kMvrDelayBetweenSendAndReceive];
+	adItemBeingSent = [i retain];
 }
 
-- (void) returnItemAfterSendForAppleAd:(L0MoverItem*) i;
+- (void) returnItemAfterSendForAppleAd;
 {
 	if (!self.tableController.eastPeer)
 		return;
 	
-	[self.tableController returnItemToTableAfterSend:i toPeer:self.tableController.eastPeer];
+	[self.tableController returnItemToTableAfterSend:adItemBeingSent toPeer:self.tableController.eastPeer];
+	[adItemBeingSent release]; adItemBeingSent = nil;
 }
 
 @end

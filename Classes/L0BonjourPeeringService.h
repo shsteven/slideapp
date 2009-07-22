@@ -22,6 +22,8 @@
 	
 	AsyncSocket* serverSocket;
 	NSNetService* selfService;
+	
+	NSDate* transferTime;
 }
 
 + sharedService;

@@ -17,6 +17,13 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	return CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 }
 
+enum {
+	kMvrNoTimingTag,
+	kMvrTimingTagFirstImpulse,
+	
+	kMvrTimingTagReturnOfFirstImpulse,
+};
+
 @interface L0BonjourPeer ()
 
 @property(assign, setter=privateSetApplicationVersion:) double applicationVersion;
@@ -73,6 +80,8 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	[them disconnect];
 	[them release];
 	
+	self.itemSendingDate = nil;
+	
 	[super dealloc];
 }
 
@@ -83,21 +92,62 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 
 - (BOOL) receiveItem:(L0MoverItem*) item;
 {
+	[keepAliveTimer invalidate];
+	[keepAliveTimer release];
+	
 	const char byteToSend = 'K';
-	[them writeData:[NSData dataWithBytes:&byteToSend length:sizeof(char)] withTimeout:60 tag:0];
+	[them writeData:[NSData dataWithBytes:&byteToSend length:sizeof(char)] withTimeout:60 tag:kMvrTimingTagFirstImpulse];
 	[Mover beginSendingForAppleAdWithItem:item];
+	
+	self.itemSendingDate = [NSDate date];
+	
 	return YES;
 }
 
 - (void) sendKeepAlive:(NSTimer*) t;
 {
 	const char byteToSend = 'W';
-	[them writeData:[NSData dataWithBytes:&byteToSend length:sizeof(char)] withTimeout:60 tag:0];
+	[them writeData:[NSData dataWithBytes:&byteToSend length:sizeof(char)] withTimeout:60 tag:kMvrNoTimingTag];
+}
+
+- (void) onSocket:(AsyncSocket*) sock didWriteDataWithTag:(long) tag;
+{
+	if (tag == kMvrTimingTagFirstImpulse)
+		[them readDataToLength:1 withTimeout:60 tag:kMvrTimingTagReturnOfFirstImpulse];
+}
+
+- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag;
+{
+	if (tag == kMvrTimingTagReturnOfFirstImpulse) {
+		NSDate* now = [NSDate date];
+		NSTimeInterval elapsed = [now timeIntervalSinceDate:self.itemSendingDate];
+		
+		NSTimeInterval finalImpulseSendMoment = (kMvrDelayBetweenSendAndReceive - elapsed / 2);
+		
+		L0Log(@"Will send final impulse in %f (or now if negative).", finalImpulseSendMoment);
+		// we need to warn in duration - elapsed/2 seconds.
+		if (finalImpulseSendMoment > 0)
+			[self performSelector:@selector(sendEndingImpulse) withObject:nil afterDelay:finalImpulseSendMoment];
+		else {
+			// sumimasen, director! I failed you!
+			[self sendEndingImpulse];
+		}
+	}
+}
+
+- (void) sendEndingImpulse;
+{
+	const char byteToSend = 'Z';
+	[them writeData:[NSData dataWithBytes:&byteToSend length:sizeof(char)] withTimeout:60 tag:kMvrNoTimingTag];
+	self.itemSendingDate = nil;
+	[Mover returnItemAfterSendForAppleAd];
 }
 
 - (void) onSocketDidDisconnect:(AsyncSocket*) sock;
 {
 	[sock connectToAddress:[[_service addresses] objectAtIndex:0] error:NULL];
 }
+
+@synthesize itemSendingDate;
 
 @end

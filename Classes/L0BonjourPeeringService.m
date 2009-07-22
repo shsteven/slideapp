@@ -231,8 +231,24 @@
 	if ([data length] >= 1) {
 		const char* dataAsCharPointer = (const char*) [data bytes];
 		if (dataAsCharPointer[0] == 'K') {
+			
+#if DEBUG
+			transferTime = [NSDate new];
+#endif
+			
 			L0Log(@"Found a K!");
 			[Mover beginReceivingForAppleAd];
+			
+			const char returnImpulseContent = 'X';
+			[sock writeData:[NSData dataWithBytes:&returnImpulseContent length:1] withTimeout:60 tag:0];
+		} else if (dataAsCharPointer[0] == 'Z') {
+			L0Log(@"Found a Z! Ending!");
+			[Mover receiveItemForAppleAd];
+			
+#if DEBUG
+			L0Log(@"Time elapsed since starting the send: %f", [[NSDate date] timeIntervalSinceDate:transferTime]);
+			[transferTime release]; transferTime = nil;
+#endif
 		}
 	}
 	
