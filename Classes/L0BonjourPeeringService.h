@@ -8,18 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "L0PeerDiscovery.h"
-#import "BLIP.h"
+#import "AsyncSocket.h"
 
-#define kL0BonjourPeeringServiceName @"_x-infinitelabs-slides._tcp."
+#define kL0BonjourPeeringServiceName @"_x-il-mover-ad._tcp."
 
-@interface L0BonjourPeeringService : NSObject <TCPListenerDelegate, BLIPConnectionDelegate> {
+@interface L0BonjourPeeringService : NSObject {
 	id <L0PeerDiscoveryDelegate> delegate;
 	NSNetServiceBrowser* browser;
 
 	NSMutableSet* peers;
 	
-	BLIPListener* listener;
 	NSMutableSet* pendingConnections;
+	
+	AsyncSocket* serverSocket;
+	NSNetService* selfService;
 }
 
 + sharedService;

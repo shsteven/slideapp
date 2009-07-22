@@ -9,20 +9,22 @@
 #import "L0BonjourPeeringService.h"
 #import "L0BonjourPeer.h"
 
-#import "BLIP.h"
-#import "IPAddress.h"
+#import "L0MoverAppDelegate+MvrAppleAd.h"
+
 #import <netinet/in.h>
 #import <sys/types.h>
 #import <sys/socket.h>
 #import <ifaddrs.h>
 
-@interface IPAddress (L0BonjourPeerFinder_NetServicesMatching)
+#define L0Note() L0Log(@"<--");
+
+@interface NSData (L0BonjourPeerFinder_NetServicesMatching)
 
 - (BOOL) _l0_comesFromAddressOfService:(NSNetService*) s;
 
 @end
 
-@implementation IPAddress (L0BonjourPeerFinder_NetServicesMatching)
+@implementation NSData (L0BonjourPeerFinder_NetServicesMatching)
 
 #define L0IPv6AddressIsEqual(a, b) (\
 	(a).__u6_addr.__u6_addr32[0] == (b).__u6_addr.__u6_addr32[0] && \
@@ -32,17 +34,15 @@
 
 - (BOOL) _l0_comesFromAddressOfService:(NSNetService*) s;
 {
+	const struct sockaddr_in* selfIPv4 = [self bytes];
+	
 	for (NSData* addressData in [s addresses]) {
 		const struct sockaddr* s = [addressData bytes];
 		if (s->sa_family == AF_INET) {
 			const struct sockaddr_in* sIPv4 = (const struct sockaddr_in*) s;
-			if (self.ipv4 == sIPv4->sin_addr.s_addr)
+			if (selfIPv4->sin_addr.s_addr == sIPv4->sin_addr.s_addr)
 				return YES;
-		} /* else if (s->sa_family == AF_INET6) {
-			const struct sockaddr_in6* sIPv6 = (const struct sockaddr_in6*) s;
-			if (L0IPv6AddressIsEqual(self.ipv6, sIPv6->sin6_addr))
-				return YES;
-		} */
+		}
 	}
 	
 	return NO;
@@ -72,18 +72,22 @@
 	[browser setDelegate:self];
 	[browser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
 	
-	listener = [[BLIPListener alloc] initWithPort:52525];
-	listener.delegate = self;
-	listener.pickAvailablePort = YES;
-	listener.bonjourServiceType = kL0BonjourPeeringServiceName;
-	listener.bonjourServiceName = [UIDevice currentDevice].name;
-	listener.bonjourTXTRecord = [NSDictionary dictionaryWithObjectsAndKeys:
+	NSError* e;
+	serverSocket = [[AsyncSocket alloc] initWithDelegate:self];
+	if (![serverSocket acceptOnPort:52525 error:&e]) {
+		NSLog(@"%@", e);
+		abort();
+	}
+	
+	NSDictionary* txtRecord = [NSDictionary dictionaryWithObjectsAndKeys:
 								  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kL0BonjourPeerApplicationVersionKey,
 								  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], kL0BonjourPeerUserVisibleApplicationVersionKey,
 								  nil];
-	NSError* e = nil;
-	[listener open:&e];
-	NSLog(@"%@", e);
+	selfService = [[NSNetService alloc] initWithDomain:@"" type:kL0BonjourPeeringServiceName name:[UIDevice currentDevice].name port:52525];
+	[selfService setTXTRecordData:[NSNetService dataFromTXTRecordDictionary:txtRecord]];
+	[selfService publish];
+	
+	pendingConnections = [NSMutableSet new];
 	
 //	_publishedService = [[NSNetService alloc] initWithDomain:@"" type:kL0BonjourPeeringServiceName name:[UIDevice currentDevice].name port:52525];
 //	[_publishedService publish];
@@ -98,9 +102,18 @@
 		[delegate peerLeft:peer];
 	
 	[peers release]; peers = nil;
+
+	[selfService stop];
+	[selfService release]; selfService = nil;
 	
-	[listener close];
-	[listener release]; listener = nil;	
+	[serverSocket setDelegate:nil];
+	[serverSocket disconnect];
+	[serverSocket release]; serverSocket = nil;
+	
+	for (AsyncSocket* s in pendingConnections)
+		[s disconnect];
+	[pendingConnections release];
+	pendingConnections = nil;
 }
 
 - (void) dealloc;
@@ -176,7 +189,7 @@
 
 @synthesize delegate;
 
-- (L0BonjourPeer*) peerForAddress:(IPAddress*) a;
+- (L0BonjourPeer*) peerForAddress:(NSData*) a;
 {
 	for (L0BonjourPeer* aPeer in peers) {
 		if ([a _l0_comesFromAddressOfService:aPeer.service]) {
@@ -187,47 +200,52 @@
 	return nil;
 }
 
-- (void) listener:(TCPListener*) listener didAcceptConnection:(TCPConnection*) connection;
+- (void) onSocket:(AsyncSocket*) sock didAcceptNewSocket:(AsyncSocket*) newSocket;
 {
-	L0BonjourPeer* peer = [self peerForAddress:connection.address];
-	
-	if (!peer) {
-		L0Log(@"No peer associated with this connection; throwing away.");
-		[connection close];
-		return;
-	}
-	
-	[peer.delegate slidePeerWillSendUsItem:peer];
-	
-	[connection setDelegate:self];
-	[pendingConnections addObject:connection];
+	L0Log(@"%@", newSocket);
+	[pendingConnections addObject:newSocket];
 }
 
-- (void) connection: (BLIPConnection*)connection receivedRequest: (BLIPRequest*)request;
+- (void) onSocketDidDisconnect:(AsyncSocket*) sock;
 {
-	L0BonjourPeer* peer = [self peerForAddress:connection.address];
-	
-	if (!peer) {
-		L0Log(@"No peer associated with this connection; throwing away.");
-		[pendingConnections removeObject:connection];
-		[connection close];
-		return;
-	}
+	L0Note();
+	[pendingConnections removeObject:sock];
+}
 
-	L0MoverItem* item = [L0MoverItem itemWithContentsOfBLIPRequest:request];
-	if (!item) {
-		L0Log(@"No item could be created.");
-		[connection close];
-		[pendingConnections removeObject:connection];
-		[peer.delegate slidePeerDidCancelSendingUsItem:peer];
+- (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;
+{
+	L0Note();
+	
+	if (![pendingConnections containsObject:sock]) {
+		L0Log(@"Connection from a socket we don't have accepted -- ignoring %@", sock);
 		return;
 	}
 	
-	[connection close];
-	[pendingConnections removeObject:connection];
-	[peer.delegate slidePeer:peer didSendUsItem:item];
+	[sock readDataToLength:1 withTimeout:60 tag:0];
+}
+
+- (void)onSocket:(AsyncSocket*) sock didReadData:(NSData*) data withTag:(long) tag;
+{
+	L0Note();
 	
-	[request respondWithString:@"OK"];
+	if ([data length] >= 1) {
+		const char* dataAsCharPointer = (const char*) [data bytes];
+		if (dataAsCharPointer[0] == 'K') {
+			L0Log(@"Found a K!");
+			[Mover beginReceivingForAppleAd];
+		}
+	}
+	
+	[sock readDataToLength:1 withTimeout:60 tag:0];
+}
+
+- (NSTimeInterval) onSocket:(AsyncSocket *)sock
+  shouldTimeoutReadWithTag:(long)tag
+				   elapsed:(NSTimeInterval)elapsed
+				 bytesDone:(CFIndex)length;
+{
+	L0Log(@"Extending timeout.");
+	return 60;
 }
 
 @end

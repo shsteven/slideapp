@@ -8,6 +8,11 @@
 
 #import "L0BonjourPeer.h"
 
+#import <sys/socket.h>
+#import <netinet/in.h>
+
+#import "L0MoverAppDelegate+MvrAppleAd.h"
+
 static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	return CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 }
@@ -46,6 +51,9 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 			
 			L0Log(@"App version found: %f.", self.applicationVersion);
 			L0Log(@"User visible app version found: %@", self.userVisibleApplicationVersion);
+			
+			them = [[AsyncSocket alloc] initWithDelegate:self];
+			[them connectToAddress:[[service addresses] objectAtIndex:0] error:NULL];
 		}
 	}
 	
@@ -55,7 +63,15 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 - (void) dealloc;
 {
 	[_service release];
+	
+	[keepAliveTimer invalidate];
+	[keepAliveTimer release];
+	
 	CFRelease(_itemsBeingSentByConnection);
+	
+	them.delegate = nil;
+	[them disconnect];
+	[them release];
 	
 	[super dealloc];
 }
@@ -67,56 +83,21 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 
 - (BOOL) receiveItem:(L0MoverItem*) item;
 {
-	if (CFDictionaryContainsValue(_itemsBeingSentByConnection, item))
-		return NO;
-	
-	BLIPConnection* connection = [[BLIPConnection alloc] initToNetService:_service];
-	[connection open];
-	
-	CFDictionarySetValue(_itemsBeingSentByConnection, connection, item);
-	
-	[delegate slidePeer:self willBeSentItem:item];
-	
-	connection.delegate = self;
-	BLIPRequest* request = [item contentsAsBLIPRequest];
-	[connection sendRequest:request];
-	[connection release];
-	
+	const char byteToSend = 'K';
+	[them writeData:[NSData dataWithBytes:&byteToSend length:sizeof(char)] withTimeout:60 tag:0];
+	[Mover beginSendingForAppleAdWithItem:item];
 	return YES;
 }
 
-- (void) connection: (BLIPConnection*)connection receivedResponse: (BLIPResponse*)response;
+- (void) sendKeepAlive:(NSTimer*) t;
 {
-	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(_itemsBeingSentByConnection, connection);
-	if (i)
-		[delegate slidePeer:self wasSentItem:i];
-	
-	// we assume it's fine. for now.
-	[connection close];
+	const char byteToSend = 'W';
+	[them writeData:[NSData dataWithBytes:&byteToSend length:sizeof(char)] withTimeout:60 tag:0];
 }
 
-- (void) connectionDidClose: (TCPConnection*)connection;
+- (void) onSocketDidDisconnect:(AsyncSocket*) sock;
 {
-	L0Log(@"%@", connection);
-	CFDictionaryRemoveValue(_itemsBeingSentByConnection, connection);
-}
-
-- (void) connection: (TCPConnection*)connection failedToOpen: (NSError*)error;
-{
-	L0Log(@"%@, %@", connection, error);
-	CFDictionaryRemoveValue(_itemsBeingSentByConnection, connection);	
-}
-
-- (BOOL) connectionReceivedCloseRequest: (BLIPConnection*)connection;
-{
-	L0Log(@"%@", connection);
-	return YES;
-}
-
-- (void) connection: (BLIPConnection*)connection closeRequestFailedWithError: (NSError*)error;
-{
-	L0Log(@"%@, %@", connection, error);
-	[connection close];
+	[sock connectToAddress:[[_service addresses] objectAtIndex:0] error:NULL];
 }
 
 @end

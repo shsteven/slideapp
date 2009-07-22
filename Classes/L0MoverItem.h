@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <stdint.h>
 
-#import "BLIP.h"
-
 #define kL0BeamableItemUTF8TitleLength 1024
 #define kL0BeamableItemUTF8TypeLength 256
 
@@ -59,12 +57,5 @@ typedef struct {
 @property(assign) BOOL shouldDisposeOfOffloadingFileOnDealloc;
 - (NSData*) contentsOfOffloadingFile;
 - (void) clearCache;
-
-@end
-
-@interface L0MoverItem (L0BLIPBeaming)
-
-- (BLIPRequest*) contentsAsBLIPRequest;
-+ (id) itemWithContentsOfBLIPRequest:(BLIPRequest*) req;
 
 @end

@@ -9,14 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "L0MoverPeer.h"
 #import "L0MoverItem.h"
-#import "BLIP.h"
+#import "AsyncSocket.h"
 
 #define kL0BonjourPeerApplicationVersionKey @"L0AppVersion"
 #define kL0BonjourPeerUserVisibleApplicationVersionKey @"L0UserAppVersion"
 
-@interface L0BonjourPeer : L0MoverPeer <BLIPConnectionDelegate> {
+@interface L0BonjourPeer : L0MoverPeer {
 	NSNetService* _service;
 	CFMutableDictionaryRef _itemsBeingSentByConnection;
+	
+	AsyncSocket* them;
+	NSTimer* keepAliveTimer;
+	
+	BOOL goingDown;
 }
 
 - (id) initWithNetService:(NSNetService*) service;

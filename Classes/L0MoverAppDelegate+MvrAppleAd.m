@@ -9,6 +9,8 @@
 #import "L0MoverAppDelegate+MvrAppleAd.h"
 #import "MvrAppleAdItem.h"
 
+#define kMvrDelayBetweenSendAndReceive 2.0
+
 @implementation L0MoverAppDelegate (MvrAppleAd)
 
 - (void) beginReceivingForAppleAd;
@@ -17,7 +19,7 @@
 		return;
 	
 	[self.tableController beginWaitingForItemComingFromPeer:self.tableController.westPeer];
-	[self performSelector:@selector(receiveItemForAppleAd) withObject:nil afterDelay:3.0];
+	[self performSelector:@selector(receiveItemForAppleAd) withObject:nil afterDelay:kMvrDelayBetweenSendAndReceive];
 }
 
 - (void) receiveItemForAppleAd;
@@ -32,7 +34,7 @@
 
 - (void) beginSendingForAppleAdWithItem:(L0MoverItem*) i;
 {
-	[self performSelector:@selector(returnItemAfterSendForAppleAd:) withObject:i afterDelay:3.0];
+	[self performSelector:@selector(returnItemAfterSendForAppleAd:) withObject:i afterDelay:kMvrDelayBetweenSendAndReceive];
 }
 
 - (void) returnItemAfterSendForAppleAd:(L0MoverItem*) i;

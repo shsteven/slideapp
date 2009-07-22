@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "L0MoverAppDelegate.h"
 
+#define Mover ((L0MoverAppDelegate*) UIApp.delegate)
+
 @interface L0MoverAppDelegate (MvrAppleAd)
 
 - (void) beginReceivingForAppleAd;
