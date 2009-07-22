@@ -13,3 +13,4 @@ Local.xcconfig
 Local-Debug.xcconfig
 Local-Release.xcconfig
 Applied
+Dependencies.xcconfig
