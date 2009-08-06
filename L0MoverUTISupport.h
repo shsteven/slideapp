@@ -1,9 +1,9 @@
 // These are UTIs backported from Mac OS X
 // that we use in the app.
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
-	#import <MobileCoreServices/MobileCoreServices.h>
-#else
+//#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
+//	#import <MobileCoreServices/MobileCoreServices.h>
+//#else
 
 	#define kUTTypeTIFF @"public.tiff"
 	#define kUTTypeJPEG @"public.jpeg"
@@ -14,4 +14,4 @@
 	
 	#define kUTTypeURL @"public.url"
 
-#endif
+//#endif
