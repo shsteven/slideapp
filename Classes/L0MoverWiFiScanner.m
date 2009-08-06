@@ -263,6 +263,7 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) netServiceBrowserDidStopSearch:(NSNetServiceBrowser*) browser;
 {
+	L0Log(@"legacy? = %d, modern? = %d", browser == legacyBrowser, browser == modernBrowser);
 	if (browser == legacyBrowser)
 		[legacyBrowser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
 	else if (browser == modernBrowser)
