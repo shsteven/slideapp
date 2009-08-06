@@ -13,6 +13,10 @@
 
 @interface L0MoverWiFiChannel : NSObject <L0MoverPeerChannel, BLIPConnectionDelegate> {
 	NSNetService* service;
+	NSString* name;
+	NSString* type;
+	NSInteger port;
+	NSArray* addresses;
 	
 	CFMutableDictionaryRef itemsBeingSentByConnection;
 	NSMutableSet* finalizingConnections;

@@ -121,7 +121,7 @@
 // all channels) and then reappears later with a different id.
 @property(readonly, copy) NSString* uniquePeerIdentifier;
 
-// May change. Should be set on first appaerance, but may
+// May change. Should be set on first appearance, but may
 // be KVO'd in the future.
 @property(readonly) double applicationVersion;
 @property(readonly, copy) NSString* userVisibleApplicationVersion;

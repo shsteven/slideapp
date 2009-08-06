@@ -207,20 +207,17 @@ L0ObjCSingletonMethod(sharedExchange);
 
 - (void) availableChannelsOfObject:(id <L0MoverPeerScanner>) s changed:(NSDictionary*) change;
 {
-	NSArray* inserted = nil, * removed = nil;
-	// TODO
-	if (L0KVOChangeKind(change) == NSKeyValueChangeInsertion || L0KVOChangeKind(change) == NSKeyValueChangeReplacement)
-		inserted = L0KVOChangedValue(change);
-	if (L0KVOChangeKind(change) == NSKeyValueChangeRemoval || L0KVOChangeKind(change) == NSKeyValueChangeReplacement)
-		removed = L0KVOPreviousValue(change);
-	
-	// inserting new channels...
-	for (id <L0MoverPeerChannel> channel in inserted)
-		[self makeChannelAvailable:channel];
-	
-	// removing invalid channels...
-	for (id <L0MoverPeerChannel> channel in removed)
-		[self makeChannelUnavailable:channel];
+	[dispatcher forEachSetChange:change forObject:s invokeSelectorForInsertion:@selector(scanner:hadChannelInserted:) removal:@selector(scanner:hadChannelRemoved:)];
+}
+
+- (void) scanner:(id <L0MoverPeerScanner>) s hadChannelInserted:(id <L0MoverPeerChannel>) channel;
+{
+	[self makeChannelAvailable:channel];
+}
+
+- (void) scanner:(id <L0MoverPeerScanner>) s hadChannelRemoved:(id <L0MoverPeerChannel>) channel;
+{
+	[self makeChannelUnavailable:channel];
 }
 
 - (void) makeChannelAvailable:(id <L0MoverPeerChannel>) channel;

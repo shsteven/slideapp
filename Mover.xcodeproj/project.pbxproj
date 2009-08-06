@@ -176,6 +176,13 @@
 			remoteGlobalIDString = 15B7BEE40F9C744100EF9AB9;
 			remoteInfo = "Logging-iPhone (Library)";
 		};
+		15D20613102B568600A09315 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 154635591011BD77000238EE;
+			remoteInfo = "MuiKit+Test";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -425,7 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				153B800C0FF209BA00DDFD16 /* Troubleshooting */,
-				15C0C0B10FDFA1EE005A75B6 /* Peering (with channels) */,
+				15C0C0B10FDFA1EE005A75B6 /* Networking */,
 				15080B870FD901E00065D5AC /* Network UI */,
 				15C0C1CB0F759B7500E5BA2F /* Items */,
 				15E714410FBD92700037C439 /* Items UI */,
@@ -494,6 +501,7 @@
 			children = (
 				1572DE880F82BE7A006BEEC0 /* libMuiKit.a */,
 				1572DE8A0F82BE7A006BEEC0 /* MuiKit.bundle */,
+				15D20614102B568600A09315 /* MuiKit+Test.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -516,7 +524,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		15C0C0B10FDFA1EE005A75B6 /* Peering (with channels) */ = {
+		15C0C0B10FDFA1EE005A75B6 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				1559B61B0F798BD9005E4362 /* L0PeerDiscovery.h */,
@@ -527,7 +535,7 @@
 				15ED7E5A0FE0FC190061B04E /* Bluetooth */,
 				15ED7E200FE0E6CC0061B04E /* Wi-Fi (network + Bonjour) */,
 			);
-			name = "Peering (with channels)";
+			name = Networking;
 			sourceTree = "<group>";
 		};
 		15C0C1CB0F759B7500E5BA2F /* Items */ = {
@@ -894,6 +902,13 @@
 			fileType = archive.ar;
 			path = "libLogging-iPhone.a";
 			remoteRef = 15B7BF390F9C760300EF9AB9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15D20614102B568600A09315 /* MuiKit+Test.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MuiKit+Test.octest";
+			remoteRef = 15D20613102B568600A09315 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

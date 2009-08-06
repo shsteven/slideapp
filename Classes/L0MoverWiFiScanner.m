@@ -65,9 +65,14 @@
 - (BOOL) start;
 - (void) stop;
 
-- (void) beginWatchingNetwork;
-- (void) stopWatchingNetwork;
+- (void) beginMonitoringReachability;
+- (void) stopMonitoringReachability;
 - (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
+
+- (void) publishServicesWithName:(NSString*) serviceName;
+- (void) stopPublishingServices;
+- (void) startBrowsing;
+- (void) stopBrowsing;
 
 @end
 
@@ -94,13 +99,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	listener = [[BLIPListener alloc] initWithPort:52525];
 	listener.delegate = self;
 	listener.pickAvailablePort = YES;
-	listener.bonjourServiceType = kL0BonjourPeeringServiceName;
-	listener.bonjourServiceName = [UIDevice currentDevice].name;
-	listener.bonjourTXTRecord = [NSDictionary dictionaryWithObjectsAndKeys:
-								 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kL0BonjourPeerApplicationVersionKey,
-								 [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], kL0BonjourPeerUserVisibleApplicationVersionKey,
-								 [service uniquePeerIdentifierForSelf], kL0BonjourPeerUniqueIdentifierKey,
-								 nil];
+
 	NSError* e = nil;
 	[listener open:&e];
 	if (e) {
@@ -111,21 +110,104 @@ L0ObjCSingletonMethod(sharedScanner)
 		return NO;
 	}
 	
-	browser = [[NSNetServiceBrowser alloc] init];
-	[browser setDelegate:self];
-	[browser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
+	[self startBrowsing];
+	[self publishServicesWithName:[UIDevice currentDevice].name];
 	
+	[self beginMonitoringReachability];
+	
+	// Set up browser resetting
+//	NSAssert(!browserResetTimer, @"A browser reset timer is already present");
+//	browserResetTimer = [[NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(resetBrowsing:) userInfo:nil repeats:YES] retain];
+
 	[self didChangeValueForKey:@"enabled"];
-	[self beginWatchingNetwork];
 	return YES;
+}
+
+- (void) startBrowsing;
+{
+	[self stopBrowsing];
+	
+	legacyBrowser = [[NSNetServiceBrowser alloc] init];
+	[legacyBrowser setDelegate:self];
+	[legacyBrowser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];	
+
+	modernBrowser = [[NSNetServiceBrowser alloc] init];
+	[modernBrowser setDelegate:self];
+	[modernBrowser searchForServicesOfType:kMvrModernServiceName inDomain:@""];	
+}
+
+- (void) stopBrowsing;
+{
+	[legacyBrowser stop];
+	[legacyBrowser release]; legacyBrowser = nil;
+
+	[modernBrowser stop];
+	[modernBrowser release]; modernBrowser = nil;
+}
+
+- (void) stopPublishingServices;
+{
+	L0Note();
+	legacyService.delegate = nil;
+	[legacyService stop];
+	[legacyService release]; legacyService = nil;
+	
+	modernService.delegate = nil;
+	[modernService stop];
+	[modernService release]; modernService = nil;
+}
+
+- (void) publishServicesWithName:(NSString*) serviceName;
+{
+	L0Log(@"%@", serviceName);
+	[self stopPublishingServices];
+	NSDictionary* txtDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+								   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kL0BonjourPeerApplicationVersionKey,
+								   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], kL0BonjourPeerUserVisibleApplicationVersionKey,
+								   [service uniquePeerIdentifierForSelf], kL0BonjourPeerUniqueIdentifierKey,
+								   nil];
+	NSData* txtData = [NSNetService dataFromTXTRecordDictionary:txtDictionary];
+	
+	legacyService = [[NSNetService alloc] initWithDomain:@"" type:kL0BonjourPeeringServiceName name:serviceName port:listener.port];
+	[legacyService setTXTRecordData:txtData];
+	legacyService.delegate = self;
+	[legacyService publish];
+	
+	modernService = [[NSNetService alloc] initWithDomain:@"" type:kMvrModernServiceName name:serviceName port:listener.port];
+	[modernService setTXTRecordData:txtData];
+	modernService.delegate = self;
+	[modernService publish];
+}
+
+- (void)netService:(NSNetService *)sender didNotPublish:(NSDictionary *)errorDict
+{
+	L0Log(@"%@", errorDict);
+	
+	NSInteger i = [[errorDict objectForKey:NSNetServicesErrorCode] integerValue];
+	if (i == NSNetServicesCollisionError) {
+		uniquenessNameSuffix++;
+		
+		[self publishServicesWithName:[NSString stringWithFormat:@"%@ (%d)", [UIDevice currentDevice].name, uniquenessNameSuffix]];
+	}
+}
+
+- (void) resetBrowsing:(NSTimer*) t;
+{
+	L0Note();
+	
+	[self startBrowsing];
+	[self stopBrowsing];
 }
 
 - (void) stop;
 {
 	[self willChangeValueForKey:@"enabled"];
 	
-	[browser stop];
-	[browser release]; browser = nil;
+	[browserResetTimer invalidate];
+	[browserResetTimer release]; browserResetTimer = nil;
+	
+	[self stopBrowsing];
+	[self stopPublishingServices];
 	
 	[[self mutableSetValueForKey:@"availableChannels"] removeAllObjects];
 	
@@ -134,7 +216,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	
 	[self didChangeValueForKey:@"enabled"];
 	
-	[self stopWatchingNetwork];
+	[self stopMonitoringReachability];
 }
 
 - (BOOL) enabled;
@@ -179,12 +261,20 @@ L0ObjCSingletonMethod(sharedScanner)
 #pragma mark -
 #pragma mark Bonjour browsing.
 
+- (void) netServiceBrowserDidStopSearch:(NSNetServiceBrowser*) browser;
+{
+	if (browser == legacyBrowser)
+		[legacyBrowser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
+	else if (browser == modernBrowser)
+		[modernBrowser searchForServicesOfType:kMvrModernServiceName inDomain:@""];
+}
+
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
 {
-	for (L0MoverWiFiChannel* peer in [[availableChannels copy] autorelease]) {
-		if ([peer.service isEqual:aNetService])
-			[self removeAvailableChannelsObject:peer];
-	}	
+	for (L0MoverWiFiChannel* chan in [[availableChannels copy] autorelease]) {
+		if ([chan.service.name isEqual:aNetService.name] && [chan.service.type isEqual:aNetService.type])
+			[self removeAvailableChannelsObject:chan];
+	}
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
@@ -250,15 +340,15 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) listener:(TCPListener*) listener didAcceptConnection:(TCPConnection*) connection;
 {
-	L0MoverWiFiChannel* peer = [self channelForAddress:connection.address];
+	L0MoverWiFiChannel* chan = [self channelForAddress:connection.address];
 	
-	if (!peer) {
+	if (!chan) {
 		L0Log(@"No peer associated with this connection; throwing away.");
 		[connection close];
 		return;
 	}
 	
-	[service channelWillBeginReceiving:peer];
+	[service channelWillBeginReceiving:chan];
  	
 	[connection setDelegate:self];
 	[pendingConnections addObject:connection];
@@ -266,9 +356,9 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) connection: (BLIPConnection*)connection receivedRequest: (BLIPRequest*)request;
 {
-	L0MoverWiFiChannel* peer = [self channelForAddress:connection.address];
+	L0MoverWiFiChannel* chan = [self channelForAddress:connection.address];
 	
-	if (!peer) {
+	if (!chan) {
 		L0Log(@"No peer associated with this connection; throwing away.");
 		[pendingConnections removeObject:connection];
 		[connection close];
@@ -280,13 +370,13 @@ L0ObjCSingletonMethod(sharedScanner)
 		L0Log(@"No item could be created.");
 		[connection close];
 		[pendingConnections removeObject:connection];
-		[service channelDidCancelReceivingItem:peer];
+		[service channelDidCancelReceivingItem:chan];
 		return;
 	}
 	
 	[connection close];
 	[pendingConnections removeObject:connection];
-	[service channel:peer didReceiveItem:item];
+	[service channel:chan didReceiveItem:item];
 	[request respondWithString:@"OK"];
 }
 
@@ -322,11 +412,11 @@ L0ObjCSingletonMethod(sharedScanner)
 
 static void L0MoverWiFiNetworkStateChanged(SCNetworkReachabilityRef reach, SCNetworkReachabilityFlags flags, void* meAsPointer) {
 	L0MoverWiFiScanner* myself = (L0MoverWiFiScanner*) meAsPointer;
-	[NSObject cancelPreviousPerformRequestsWithTarget:myself selector:@selector(checkNetwork) object:nil];
+	[NSObject cancelPreviousPerformRequestsWithTarget:myself selector:@selector(checkReachability) object:nil];
 	[myself updateNetworkWithFlags:flags];
 }
 
-- (void) beginWatchingNetwork;
+- (void) beginMonitoringReachability;
 {
 	if (reach) return;
 	
@@ -351,22 +441,22 @@ static void L0MoverWiFiNetworkStateChanged(SCNetworkReachabilityRef reach, SCNet
 	
 	SCNetworkReachabilityFlags flags;
 	if (!SCNetworkReachabilityGetFlags(reach, &flags))
-		[self performSelector:@selector(checkNetwork) withObject:nil afterDelay:0.5];
+		[self performSelector:@selector(checkReachability) withObject:nil afterDelay:0.5];
 	else
 		[self updateNetworkWithFlags:flags];
 }
 
-- (void) stopWatchingNetwork;
+- (void) stopMonitoringReachability;
 {
 	if (!reach) return;
 	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkNetwork) object:nil];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkReachability) object:nil];
 	
 	SCNetworkReachabilityUnscheduleFromRunLoop(reach, [[NSRunLoop currentRunLoop] getCFRunLoop], kCFRunLoopDefaultMode);
 	CFRelease(reach); reach = NULL;
 }
 
-- (void) checkNetwork;
+- (void) checkReachability;
 {
 	if (!reach) return;
 	

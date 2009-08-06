@@ -44,6 +44,7 @@
 	L0AssertOutlet(self.networkLabel);
 	L0AssertOutlet(self.availableNetworksLabel);
 	
+	availableNetworksLabel.text = [self descriptionForUnjammedScanners:[self unjammedScanners]];
 	dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 }
 
@@ -252,12 +253,22 @@
 - (NSArray*) unjammedScanners;
 {
 	NSMutableArray* scanners = [NSMutableArray array];
-	MvrNetworkExchange* peering = [MvrNetworkExchange sharedExchange];
+	//MvrNetworkExchange* peering = [MvrNetworkExchange sharedExchange];
+//	
+//	for (id <L0MoverPeerScanner> scanner in [self allScanners]) {
+//		if (!scanner.jammed && scanner.enabled && [[peering availableScanners] containsObject:scanner])
+//			[scanners addObject:scanner];
+//	}
 	
-	for (id <L0MoverPeerScanner> scanner in [self allScanners]) {
-		if (!scanner.jammed && scanner.enabled && [[peering availableScanners] containsObject:scanner])
-			[scanners addObject:scanner];
-	}
+	// evil I know.
+	
+	L0MoverWiFiScanner* wifi = [L0MoverWiFiScanner sharedScanner];
+	if (wifi.enabled && !wifi.jammed)
+		[scanners addObject:wifi];
+	
+	L0MoverBluetoothScanner* bt = [L0MoverBluetoothScanner sharedScanner];
+	if (bt.enabled && !bt.jammed)
+		[scanners addObject:bt];
 	
 	return scanners;
 }

@@ -17,9 +17,15 @@
 #define kL0BonjourPeerUniqueIdentifierKey @"L0PeerID"
 
 #define kL0BonjourPeeringServiceName @"_x-infinitelabs-slides._tcp."
+#define kMvrModernServiceName @"_x-mover._tcp."
 
 @interface L0MoverWiFiScanner : NSObject <L0MoverPeerScanner, TCPListenerDelegate, TCPConnectionDelegate> {
-	NSNetServiceBrowser* browser;
+	NSNetServiceBrowser* legacyBrowser;
+	NSNetServiceBrowser* modernBrowser;
+	NSNetService* legacyService;
+	NSNetService* modernService;
+	int uniquenessNameSuffix;
+	
 	BLIPListener* listener;
 	NSMutableSet* pendingConnections;
 	NSMutableSet* availableChannels;
@@ -32,6 +38,8 @@
 	BOOL isJammingSimulated;
 	BOOL simulatedJammedValue;
 #endif
+	
+	NSTimer* browserResetTimer;
 }
 
 + sharedScanner;
