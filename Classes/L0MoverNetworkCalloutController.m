@@ -26,6 +26,8 @@
 - (UIColor*) selectedColorForCurrentStatus;
 - (NSString*) descriptionForUnjammedScanners:(NSArray*) ujs; // TODO NSSet
 
+- (void) update;
+
 - (void) updateAndShowIfNeeded;
 - (void) hideCallout;
 - (void) hideCalloutAfterDelay;
@@ -44,7 +46,6 @@
 	L0AssertOutlet(self.networkLabel);
 	L0AssertOutlet(self.availableNetworksLabel);
 	
-	availableNetworksLabel.text = [self descriptionForUnjammedScanners:[self unjammedScanners]];
 	dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 }
 
@@ -94,6 +95,7 @@
 
 - (void) showCallout;
 {
+	[self update];
 	if (self.networkCalloutView.superview) return;
 	
 	UIView* view = self.anchorView;
@@ -194,10 +196,8 @@
 	[self updateAndShowIfNeeded];
 }
 
-- (void) updateAndShowIfNeeded;
-{
-	BOOL wasAllJammed = allJammed;
-	
+- (void) update;
+{	
 	NSArray* ujs = [self unjammedScanners];
 	allJammed = ([ujs count] == 0);
 	
@@ -209,7 +209,7 @@
 	CATransition* t = [CATransition animation];
 	t.type = kCATransitionFade;
 	[availableNetworksLabel.layer addAnimation:t forKey:@"L0FadeAnimation"];
-
+	
 	t = [CATransition animation];
 	t.type = kCATransitionFade;
 	[networkLabel.layer addAnimation:t forKey:@"L0FadeAnimation"];
@@ -222,6 +222,12 @@
 	availableNetworksLabel.text = [self descriptionForUnjammedScanners:ujs];
 	
 	[UIView commitAnimations];
+}
+
+- (void) updateAndShowIfNeeded;
+{
+	BOOL wasAllJammed = allJammed;
+	[self update];
 	
 	if (allJammed)
 		[self showCallout];
@@ -253,22 +259,12 @@
 - (NSArray*) unjammedScanners;
 {
 	NSMutableArray* scanners = [NSMutableArray array];
-	//MvrNetworkExchange* peering = [MvrNetworkExchange sharedExchange];
-//	
-//	for (id <L0MoverPeerScanner> scanner in [self allScanners]) {
-//		if (!scanner.jammed && scanner.enabled && [[peering availableScanners] containsObject:scanner])
-//			[scanners addObject:scanner];
-//	}
+	MvrNetworkExchange* peering = [MvrNetworkExchange sharedExchange];
 	
-	// evil I know.
-	
-	L0MoverWiFiScanner* wifi = [L0MoverWiFiScanner sharedScanner];
-	if (wifi.enabled && !wifi.jammed)
-		[scanners addObject:wifi];
-	
-	L0MoverBluetoothScanner* bt = [L0MoverBluetoothScanner sharedScanner];
-	if (bt.enabled && !bt.jammed)
-		[scanners addObject:bt];
+	for (id <L0MoverPeerScanner> scanner in [self allScanners]) {
+		if (!scanner.jammed && scanner.enabled && [[peering availableScanners] containsObject:scanner])
+			[scanners addObject:scanner];
+	}
 	
 	return scanners;
 }
