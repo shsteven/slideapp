@@ -117,7 +117,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	
 	// Set up browser resetting
 //	NSAssert(!browserResetTimer, @"A browser reset timer is already present");
-//	browserResetTimer = [[NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(resetBrowsing:) userInfo:nil repeats:YES] retain];
+//	browserResetTimer = [[NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(resetBrowsing:) userInfo:nil repeats:YES] retain];
 
 	[self didChangeValueForKey:@"enabled"];
 	return YES;
@@ -125,24 +125,28 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) startBrowsing;
 {
+	L0Note();
 	[self stopBrowsing];
 	
 	legacyBrowser = [[NSNetServiceBrowser alloc] init];
 	[legacyBrowser setDelegate:self];
-	[legacyBrowser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];	
+	[legacyBrowser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@"local."];
 
 	modernBrowser = [[NSNetServiceBrowser alloc] init];
 	[modernBrowser setDelegate:self];
-	[modernBrowser searchForServicesOfType:kMvrModernServiceName inDomain:@""];	
+	[modernBrowser searchForServicesOfType:kMvrModernServiceName inDomain:@"local."];	
 }
 
 - (void) stopBrowsing;
 {
+	L0Note();
+	legacyBrowser.delegate = nil;
 	[legacyBrowser stop];
-	[legacyBrowser release]; legacyBrowser = nil;
+	[legacyBrowser autorelease]; legacyBrowser = nil;
 
+	modernBrowser.delegate = nil;
 	[modernBrowser stop];
-	[modernBrowser release]; modernBrowser = nil;
+	[modernBrowser autorelease]; modernBrowser = nil;
 }
 
 - (void) stopPublishingServices;
@@ -168,12 +172,12 @@ L0ObjCSingletonMethod(sharedScanner)
 								   nil];
 	NSData* txtData = [NSNetService dataFromTXTRecordDictionary:txtDictionary];
 	
-	legacyService = [[NSNetService alloc] initWithDomain:@"" type:kL0BonjourPeeringServiceName name:serviceName port:listener.port];
+	legacyService = [[NSNetService alloc] initWithDomain:@"local." type:kL0BonjourPeeringServiceName name:serviceName port:listener.port];
 	[legacyService setTXTRecordData:txtData];
 	legacyService.delegate = self;
 	[legacyService publish];
 	
-	modernService = [[NSNetService alloc] initWithDomain:@"" type:kMvrModernServiceName name:serviceName port:listener.port];
+	modernService = [[NSNetService alloc] initWithDomain:@"local." type:kMvrModernServiceName name:serviceName port:listener.port];
 	[modernService setTXTRecordData:txtData];
 	modernService.delegate = self;
 	[modernService publish];
@@ -181,7 +185,7 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void)netService:(NSNetService *)sender didNotPublish:(NSDictionary *)errorDict
 {
-	L0Log(@"%@", errorDict);
+	L0Log(@"%@ -> %@", service, errorDict);
 	
 	NSInteger i = [[errorDict objectForKey:NSNetServicesErrorCode] integerValue];
 	if (i == NSNetServicesCollisionError) {
@@ -195,8 +199,8 @@ L0ObjCSingletonMethod(sharedScanner)
 {
 	L0Note();
 	
-	[self startBrowsing];
-	[self stopBrowsing];
+	[self stop];
+	[self start];
 }
 
 - (void) stop;
