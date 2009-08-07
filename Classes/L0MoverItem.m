@@ -54,9 +54,22 @@ static NSMutableDictionary* classes = nil;
 @synthesize type;
 @synthesize representingImage;
 
+- (BOOL) allowsSendingFromOffloadedFile;
+{
+	return NO;
+}
+
 - (NSData*) externalRepresentation;
 {
-	NSAssert(NO, @"Subclasses of L0SlideItem must implement this method.");
+	if (self.allowsSendingFromOffloadedFile && self.offloadingFile)
+		return [NSData dataWithContentsOfMappedFile:self.offloadingFile];
+	else
+		return [self produceExternalRepresentation];
+}
+
+- (NSData*) produceExternalRepresentation;
+{
+	NSAssert(NO, @"Subclasses of L0MoverItem must implement this method.");
 	return nil;
 }
 
@@ -83,7 +96,7 @@ static NSMutableDictionary* classes = nil;
 
 - (void) offloadToFile:(NSString*) file;
 {	
-	BOOL didOffload = [[self externalRepresentation] writeToFile:file atomically:YES];
+	BOOL didOffload = [[self produceExternalRepresentation] writeToFile:file atomically:YES];
 	NSAssert(didOffload, @"We should be always be able to write a file in our Documents directory.");
 	
 	self.offloadingFile = file;

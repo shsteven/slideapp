@@ -17,13 +17,13 @@
 #define kL0BeamableItemNetworkPacketIdentifierString "ITEM"
 #define kL0BeamableItemNetworkPacketVersion1 1
 
-typedef struct {
-	char Kind[5]; // "ITEM", NULL-terminated.
-	int Version; // kL0BeamableItemNetworkPacketVersion1
-	char Title[kL0BeamableItemUTF8TitleLength]; // UTF-8 NULL-terminated.
-	char Type[kL0BeamableItemUTF8TypeLength]; // UTF-8 NULL-terminated version of a UTI, eg. kUTTypeVCard
-	uint32_t Size; // Size of the payload in bytes.
-} L0BeamableItemNetworkHeader;
+//typedef struct {
+//	char Kind[5]; // "ITEM", NULL-terminated.
+//	int Version; // kL0BeamableItemNetworkPacketVersion1
+//	char Title[kL0BeamableItemUTF8TitleLength]; // UTF-8 NULL-terminated.
+//	char Type[kL0BeamableItemUTF8TypeLength]; // UTF-8 NULL-terminated version of a UTI, eg. kUTTypeVCard
+//	uint32_t Size; // Size of the payload in bytes.
+//} L0BeamableItemNetworkHeader;
 
 @interface L0MoverItem : NSObject {
 	NSString* title;
@@ -43,10 +43,13 @@ typedef struct {
 @property(copy) NSString* type;
 @property(retain) UIImage* representingImage;
 
+- (NSData*) externalRepresentation;
+
 // Funnels
 
 + (NSArray*) supportedTypes;
-- (NSData*) externalRepresentation;
+- (NSData*) produceExternalRepresentation;
+@property(readonly) BOOL allowsSendingFromOffloadedFile;
 - (id) initWithExternalRepresentation:(NSData*) payload type:(NSString*) type title:(NSString*) title;
 
 - (void) storeToAppropriateApplication;

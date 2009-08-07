@@ -26,9 +26,14 @@
 			nil];
 }
 
-- (NSData*) externalRepresentation;
+- (BOOL) allowsSendingFromOffloadedFile;
+{
+	return YES;
+}
+
+- (NSData*) produceExternalRepresentation;
 {	
-	return UIImagePNGRepresentation([self.image imageByRenderingRotation]);
+	return UIImageJPEGRepresentation([self.image imageByRenderingRotation], 0.8);
 }
 
 - (id) initWithTitle:(NSString*) ti image:(UIImage*) img;
@@ -36,7 +41,7 @@
 	if (self = [super init]) {
 		self.title = ti;
 		self.image = img;
-		self.type = (id) kUTTypePNG;
+		self.type = (id) kUTTypeJPEG;
 	}
 	
 	return self;
@@ -57,7 +62,7 @@
 {
 	if (self = [super init]) {
 		self.title = ti;
-		self.type = (id) kUTTypePNG;
+		self.type = (id) kUTTypeJPEG;
 		UIImage* img = [UIImage imageWithData:payload];
 		
 		if (!img) {
