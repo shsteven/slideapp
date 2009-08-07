@@ -123,13 +123,6 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 - (void) connectionDidClose: (TCPConnection*)connection;
 {
 	L0Log(@"%@", connection);
-
-	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(itemsBeingSentByConnection, connection);
-	if (![finalizingConnections containsObject:connection])
-		[scanner.service channel:self didSendItemToOtherEndpoint:i];
-	
-	[finalizingConnections removeObject:connection];
-	CFDictionaryRemoveValue(itemsBeingSentByConnection, connection);
 }
 
 - (void) connection: (TCPConnection*)connection failedToOpen: (NSError*)error;
@@ -145,6 +138,14 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 - (BOOL) connectionReceivedCloseRequest: (BLIPConnection*)connection;
 {
 	L0Log(@"%@", connection);
+	
+	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(itemsBeingSentByConnection, connection);
+	if (![finalizingConnections containsObject:connection])
+		[scanner.service channel:self didSendItemToOtherEndpoint:i];
+	
+	[finalizingConnections removeObject:connection];
+	CFDictionaryRemoveValue(itemsBeingSentByConnection, connection);
+	
 	return YES;
 }
 
