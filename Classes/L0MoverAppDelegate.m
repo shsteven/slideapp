@@ -536,6 +536,9 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	self.shieldView.alpha = 1.0;
 	
 	[UIView commitAnimations];
+	
+	barStyleBeforeShowingShieldView = UIApp.statusBarStyle;
+	[UIApp setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];
 }
 
 - (void) endShowingShieldView;
@@ -550,6 +553,8 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[UIView commitAnimations];
 	
 	[self.shieldView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.55];
+	
+	[UIApp setStatusBarStyle:barStyleBeforeShowingShieldView animated:YES];
 }
 
 @synthesize networkCalloutController;

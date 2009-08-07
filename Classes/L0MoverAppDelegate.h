@@ -44,6 +44,8 @@
 	UIView* shieldView;
 	UIActivityIndicatorView* shieldViewSpinner;
 	UILabel* shieldViewLabel;
+	
+	UIBarStyle barStyleBeforeShowingShieldView;
 }
 
 @property(retain) IBOutlet UIWindow* window;
