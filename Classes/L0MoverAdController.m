@@ -15,7 +15,11 @@
 
 + (BOOL) isPaidVersion;
 {
-	return (BOOL) kL0MvrIsPaidVersion;
+#if kMvrIsPaidVersion
+	return YES;
+#else
+	return NO;
+#endif
 }
 
 #if kL0MoverInsertAdvertising
