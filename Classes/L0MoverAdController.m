@@ -15,7 +15,11 @@
 
 + (BOOL) isPaidVersion;
 {
+#if !kMvrIsPaidVersion
+	return NO;
+#else
 	return [self sharedController] == nil;
+#endif
 }
 
 #if kL0MoverInsertAdvertising

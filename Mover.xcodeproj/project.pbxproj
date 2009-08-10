@@ -206,6 +206,7 @@
 		15080B880FD901FE0065D5AC /* L0MoverNetworkCalloutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverNetworkCalloutController.h; sourceTree = "<group>"; };
 		15080B890FD901FE0065D5AC /* L0MoverNetworkCalloutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverNetworkCalloutController.m; sourceTree = "<group>"; };
 		150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		150E8648103085B4003C9531 /* OpenSource.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = OpenSource.xcconfig; sourceTree = "<group>"; };
 		1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton_Pressed.png; sourceTree = "<group>"; };
 		1510C46C0FBED26A003849A6 /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton.png; sourceTree = "<group>"; };
 		1510C4BD0FBED7A6003849A6 /* L0MoverImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverImageViewer.h; sourceTree = "<group>"; };
@@ -509,6 +510,7 @@
 		159F7BE20FE2D9B9001A6B91 /* Ads */ = {
 			isa = PBXGroup;
 			children = (
+				150E8648103085B4003C9531 /* OpenSource.xcconfig */,
 				159F7BE60FE2DA03001A6B91 /* On.xcconfig */,
 				159F7BE40FE2D9B9001A6B91 /* Off.xcconfig */,
 			);
