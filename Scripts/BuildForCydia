@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ "$ILABS_L0ShowOnRequestLogging" == "YES" ]; then
+	set -avx
+fi
+
+L0_LDID="`which ldid`"
+if [ "$?" != "0" ]; then
+	echo "Cannot find ldid in the path. Make sure it's available and try again." >&2
+	exit 1
+fi
+
+L0_CODESIGN="`which codesign_allocate`"
+if [ "$L0_CODESIGN" == "/usr/bin/codesign_allocate" -a "$ILABS_AllowMacOSXCodesign" != "YES" ]; then
+	echo "Found only Mac OS X's codesign_allocate on the path." >&2
+	echo "Put iPhoneOS.platform's /usr/bin directory on the path, or set the environment variable ILABS_AllowMacOSXCodesign to 'YES' before retrying." >&2
+	exit 1
+fi
+
+exit 0
+
+HERE="`dirname "$0"`"
+HERE="`cd "$HERE"; pwd`"
+cd "$HERE/../"
+
+"$HERE/Clobber"
+xcodebuild -configuration Release CODE_SIGNING_REQUIRED=NO
+ldid -S Build/Release-iphoneos/Mover.app/Mover
