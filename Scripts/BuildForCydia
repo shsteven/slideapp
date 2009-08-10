@@ -12,12 +12,19 @@ fi
 
 L0_CODESIGN="`which codesign_allocate`"
 if [ "$L0_CODESIGN" == "/usr/bin/codesign_allocate" -a "$ILABS_AllowMacOSXCodesign" != "YES" ]; then
-	echo "Found only Mac OS X's codesign_allocate on the path." >&2
-	echo "Put iPhoneOS.platform's /usr/bin directory on the path, or set the environment variable ILABS_AllowMacOSXCodesign to 'YES' before retrying." >&2
-	exit 1
-fi
 
-exit 0
+	DEVELOPER_DIR="`xcode-select -print-path`"
+	
+	if [ -x "$DEVELOPER_DIR/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate" ]; then
+		echo "warning: Using codesign_allocate from developer tools installed in $DEVELOPER_DIR" >&2
+		echo "If you want to use another Xcode installation, use xcode-select or add its $DEVELOPER_DIR/Platforms/iPhoneOS.platform/Developer/usr/bin/ directory in front of the PATH." >&2
+		export PATH="$DEVELOPER_DIR/Platforms/iPhoneOS.platform/Developer/usr/bin/":"$PATH"
+	else
+		echo "Found only Mac OS X's codesign_allocate on the path." >&2
+		echo "Put iPhoneOS.platform's /usr/bin directory on the path, or set the environment variable ILABS_AllowMacOSXCodesign to 'YES' before retrying." >&2
+		exit 1
+	fi
+fi
 
 HERE="`dirname "$0"`"
 HERE="`cd "$HERE"; pwd`"
@@ -25,4 +32,4 @@ cd "$HERE/../"
 
 "$HERE/Clobber"
 xcodebuild -configuration Release CODE_SIGNING_REQUIRED=NO
-ldid -S Build/Release-iphoneos/Mover.app/Mover
+ldid -S Build/Release-iphoneos/MoverEdge.app/MoverEdge
