@@ -798,7 +798,18 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	if (!documentsDirectory) {
 		NSArray* docsDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSAssert([docsDirs count] > 0, @"At least one documents directory is known");
-		self.documentsDirectory = [docsDirs objectAtIndex:0];
+
+		NSString* docsDir = [docsDirs objectAtIndex:0];
+
+#if kMvrUseSubdirectoryForItemStorage
+		docsDir = [docsDir stringByAppendingPathComponent:@"Mover Items"];
+		if (![[NSFileManager defaultManager] fileExistsAtPath:docsDir]) {
+			BOOL created = [[NSFileManager defaultManager] createDirectoryAtPath:docsDir attributes:nil];
+			NSAssert(created, @"Could not create the Mover Items subdirectory!");
+		}
+#endif
+		
+		self.documentsDirectory = docsDir;
 	}
 	
 	return documentsDirectory;
