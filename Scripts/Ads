@@ -12,8 +12,8 @@ elif [ "$ACTION" == "off" ]; then
 	ACTION=plus
 fi
 
-if [ "$ACTION" != "lite" -a "$ACTION" != "plus" ]; then
-	echo "Usage: $0 <on|off> (or <lite|plus>)" >&2
+if [ "$ACTION" != "lite" -a "$ACTION" != "plus" -a "$ACTION" != "opensource" ]; then
+	echo "Usage: $0 <on|off> (or <lite|plus|opensource>)" >&2
 	exit 1
 fi	
 
@@ -27,6 +27,9 @@ if [ "$ACTION" == "lite" ]; then
 elif [ "$ACTION" == "plus" ]; then
 	ln -s Off.xcconfig CurrentSettings.xcconfig
 	cp Plus/* ../
+elif [ "$ACTION" == "opensource" ]; then
+	ln -s OpenSource.xcconfig CurrentSettings.xcconfig
+	cp OpenSource/* ../
 fi
 
 "$HERE"/Clobber -configuration Debug
