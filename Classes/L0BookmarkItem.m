@@ -51,7 +51,7 @@ static id <L0BookmarkItemStorage> L0BookmarkItemCurrentStorage = nil;
 	return [NSArray arrayWithObject:(id) kUTTypeURL];
 }
 
-- (NSData*) externalRepresentation;
+- (NSData*) produceExternalRepresentation;
 {
 	return [[self.address absoluteString] dataUsingEncoding:NSUTF8StringEncoding];
 }

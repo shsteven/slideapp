@@ -25,7 +25,7 @@
 			nil];
 }
 
-- (NSData*) externalRepresentation;
+- (NSData*) produceExternalRepresentation;
 {	
 	return [self.text dataUsingEncoding:NSUTF8StringEncoding];
 }
