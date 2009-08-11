@@ -159,6 +159,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	[super dealloc];
 }
 
+
 - (BOOL) loadPersonInfoFromData:(NSData*) payload;
 {
 	NSString* error = nil;
@@ -354,7 +355,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	return self;
 }
 
-- (ABRecordRef) newPersonRecordWithContentsOfItem;
+- (ABRecordRef) copyPersonRecordWithContentsOfItem;
 {
 	NSDictionary* personInfoDictionary = [self personInfo];
 	NSDictionary* info = [personInfoDictionary objectForKey:kL0AddressBookPersonInfoProperties];
@@ -414,7 +415,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 
 - (void) storeToAppropriateApplication;
 {
-	ABRecordRef person = [self newPersonRecordWithContentsOfItem];
+	ABRecordRef person = [self copyPersonRecordWithContentsOfItem];
 	
 	ABAddressBookRef ab = ABAddressBookCreate();
 	CFErrorRef error = NULL;
@@ -434,6 +435,8 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	
 	CFRelease(ab);
 	CFRelease(person);
+	
+	// Check for dupes!
 }
 
 @end

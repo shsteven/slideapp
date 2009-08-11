@@ -29,7 +29,7 @@
 
 - (void) showOrOpenItem:(L0MoverItem*) i forAction:(L0MoverItemAction*) a;
 {
-	ABRecordRef person = [(L0AddressBookPersonItem*)i newPersonRecordWithContentsOfItem];
+	ABRecordRef person = [(L0AddressBookPersonItem*)i copyPersonRecordWithContentsOfItem];
 	if (!person) return;
 	
 	ABPersonViewController* personCtl = [[ABPersonViewController new] autorelease];

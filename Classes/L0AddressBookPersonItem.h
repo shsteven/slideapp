@@ -21,6 +21,6 @@
 
 @property(readonly) NSDictionary* personInfo;
 
-- (ABRecordRef) newPersonRecordWithContentsOfItem;
+- (ABRecordRef) copyPersonRecordWithContentsOfItem;
 
 @end
