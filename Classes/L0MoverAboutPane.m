@@ -30,11 +30,16 @@
 	center.y += self.toolbar.bounds.size.height + 20;
 	self.toolbar.center = center;
 	
-	if ([L0MoverAdController isPaidVersion]) {
+	if ([L0MoverAdController isPaidVersion] || [L0MoverAdController isOpenSourceVersion]) {
 		self.paidVersionButton.enabled = NO;
 		
-		self.paidVersionButtonLabel.text = NSLocalizedString(@"Thanks for your support!", @"Paid version thank you banner");
-		self.paidVersionButtonDetailLabel.text = NSLocalizedString(@"This is Mover+, the paid version without ads.", @"Paid version thank you subbanner");
+		if ([L0MoverAdController isPaidVersion]) {
+			self.paidVersionButtonLabel.text = NSLocalizedString(@"Thanks for your support!", @"Paid version thank you banner");
+			self.paidVersionButtonDetailLabel.text = NSLocalizedString(@"This is Mover+, the paid version without ads.", @"Paid version thank you subbanner");
+		} else {
+			self.paidVersionButtonLabel.text = NSLocalizedString(@"Thanks for using Mover!", @"FOSS version thank you banner");
+			self.paidVersionButtonDetailLabel.text = NSLocalizedString(@"This is Edge, the open source version of Mover.", @"FOSS version thank you subbanner");
+		}
 		
 		self.paidVersionButtonLabel.textAlignment = UITextAlignmentCenter;
 		self.paidVersionButtonDetailLabel.textAlignment = UITextAlignmentCenter;

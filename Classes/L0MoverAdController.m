@@ -22,6 +22,15 @@
 #endif
 }
 
++ (BOOL) isOpenSourceVersion;
+{
+#if !kMvrIsPaidVersion && !kL0MoverInsertAdvertising
+	return YES;
+#else
+	return NO;
+#endif
+}
+
 #if kL0MoverInsertAdvertising
 
 L0ObjCSingletonMethod(sharedController)

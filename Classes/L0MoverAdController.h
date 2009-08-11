@@ -31,6 +31,7 @@
 
 + sharedController;
 + (BOOL) isPaidVersion;
++ (BOOL) isOpenSourceVersion;
 
 @property(assign) UIView* superview;
 @property CGPoint origin;
