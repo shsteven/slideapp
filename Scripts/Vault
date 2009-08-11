@@ -1,0 +1,54 @@
+#!/bin/bash
+
+if [ "$ILABS_L0ShowOnRequestLogging" == "YES" ]; then
+	set -avx
+fi
+
+NOW="`date +%Y-%m-%d`"
+KIND="$1"
+
+HERE="`dirname "$0"`"
+HERE="`(cd "$HERE"; pwd)`"
+BUILD="$HERE"/../Build
+BUILD="`(cd "$BUILD"; pwd)`"
+
+case "$KIND" in
+	[Ee]dge)
+		PREFIX="Edge"
+		DIR="$BUILD"/Release-iphoneos
+		APP_NAME="MoverEdge.app"
+		;;
+	[Pp]lus)
+		PREFIX="Plus"
+		DIR="$BUILD"/"App Store-iphoneos"
+		APP_NAME="MoverPlus.app"
+		;;
+	[Ll]ite)
+		PREFIX="Lite"
+		DIR="$BUILD"/"App Store-iphoneos"
+		APP_NAME="MoverLite.app"
+		;;
+	*)
+		echo "Usage: $0 <Edge|Lite|Plus|edge|lite|plus>" >&2
+		exit 1
+esac
+
+if [ "$VAULT" == "" -a "$D" != "" ]; then
+	VAULT="$D"/Vault/Mover
+fi
+
+if [ ! -d "$VAULT" ]; then
+	echo "Set the VAULT environment variable first to point to the vault location." >&2
+	exit 1
+fi
+
+TARGET="$VAULT"/"$PREFIX-$NOW"
+if [ -e "$TARGET" ]; then
+	echo "The target '$TARGET' already exists. Delete it first." >&2
+	exit 1
+fi
+
+mv "$DIR" "$TARGET"
+cd "$TARGET"
+ditto -ck --keepParent --rsrc --sequesterRsrc "$APP_NAME" "Mover$PREFIX-$NOW.zip"
+
