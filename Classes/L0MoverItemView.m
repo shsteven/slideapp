@@ -35,6 +35,8 @@
 		
 		self.maximumSlideDistances = CGSizeMake(350, 150);
 		self.slideSpeedDampeningFactor = 0.6;
+		
+		self.isAccessibilityElement = YES;
 	}
 	
     return self;
@@ -60,6 +62,18 @@
 - (void) setItem:(L0MoverItem*) i;
 {
 	self.label.text = i.title;
+	
+	NSString* accessibilityLabel = i.title;
+	if ([accessibilityLabel length] == 0) {
+		if ([i isKindOfClass:[L0ImageItem class]])
+			accessibilityLabel = @"Image";
+		else
+			accessibilityLabel = nil;
+	}
+	
+	if (accessibilityLabel)
+		self.accessibilityLabel = accessibilityLabel;
+	
 	self.imageView.image = i.representingImage;
 	item = i;
 }
