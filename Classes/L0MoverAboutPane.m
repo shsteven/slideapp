@@ -38,7 +38,7 @@
 			self.paidVersionButtonDetailLabel.text = NSLocalizedString(@"This is Mover+, the paid version without ads.", @"Paid version thank you subbanner");
 		} else {
 			self.paidVersionButtonLabel.text = NSLocalizedString(@"Thanks for using Mover!", @"FOSS version thank you banner");
-			self.paidVersionButtonDetailLabel.text = NSLocalizedString(@"This is Edge, the open source version of Mover.", @"FOSS version thank you subbanner");
+			self.paidVersionButtonDetailLabel.text = NSLocalizedString(@"This is Mover Open, the open source version.", @"FOSS version thank you subbanner");
 		}
 		
 		self.paidVersionButtonLabel.textAlignment = UITextAlignmentCenter;

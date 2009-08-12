@@ -2,7 +2,7 @@
 ILABS_MOVER_APP_IDENTIFIER = net.infinitelabs.Mover.Edge
 
 ILABS_MOVER_BUNDLE_NAME = MoverEdge
-ILABS_MOVER_USER_VISIBLE_NAME = Mover Edge
+ILABS_MOVER_USER_VISIBLE_NAME = Mover Open
 
 ILABS_AD_GCC_PREPROCESSOR_DEFINITIONS = kMvrIsPaidVersion=0 kMvrUseSubdirectoryForItemStorage=1
 
