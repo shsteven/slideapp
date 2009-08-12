@@ -102,6 +102,9 @@
 - (void) showNetworkHelpPane;
 - (void) showNetworkSettingsPane;
 
+- (void) askWhetherToClearTable;
+- (void) clearTable;
+
 @end
 
 #if L0MoverAppDelegateAllowFriendMethods

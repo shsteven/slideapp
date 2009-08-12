@@ -11,6 +11,8 @@
 		15080B810FD8FD9A0065D5AC /* CalloutBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 15080B7F0FD8FD9A0065D5AC /* CalloutBubble.png */; };
 		15080B850FD901BB0065D5AC /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15080B840FD901BB0065D5AC /* NetworkToolbarIcon.png */; };
 		15080B8A0FD901FE0065D5AC /* L0MoverNetworkCalloutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15080B890FD901FE0065D5AC /* L0MoverNetworkCalloutController.m */; };
+		15097B8A1033783A008DB9CC /* MvrApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 15097B891033783A008DB9CC /* MvrApplication.m */; };
+		15097BD410337B70008DB9CC /* MvrClearTable.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15097BD310337B70008DB9CC /* MvrClearTable.alert */; };
 		150A4D770FA39D5D006B9BB4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */; };
 		1510C46D0FBED26A003849A6 /* ActionButton_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */; };
 		1510C46E0FBED26A003849A6 /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1510C46C0FBED26A003849A6 /* ActionButton.png */; };
@@ -205,6 +207,9 @@
 		15080B840FD901BB0065D5AC /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
 		15080B880FD901FE0065D5AC /* L0MoverNetworkCalloutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverNetworkCalloutController.h; sourceTree = "<group>"; };
 		15080B890FD901FE0065D5AC /* L0MoverNetworkCalloutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverNetworkCalloutController.m; sourceTree = "<group>"; };
+		15097B881033783A008DB9CC /* MvrApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrApplication.h; sourceTree = "<group>"; };
+		15097B891033783A008DB9CC /* MvrApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrApplication.m; sourceTree = "<group>"; };
+		15097BD310337B70008DB9CC /* MvrClearTable.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrClearTable.alert; sourceTree = "<group>"; };
 		150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		150E8648103085B4003C9531 /* OpenSource.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = OpenSource.xcconfig; sourceTree = "<group>"; };
 		1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton_Pressed.png; sourceTree = "<group>"; };
@@ -455,6 +460,8 @@
 				159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */,
 				1592D5D60FF22A2900433F4B /* L0MoverWebPane.h */,
 				1592D5D70FF22A2900433F4B /* L0MoverWebPane.m */,
+				15097B881033783A008DB9CC /* MvrApplication.h */,
+				15097B891033783A008DB9CC /* MvrApplication.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -771,6 +778,7 @@
 				154FB61D0FB18EA500DB26C6 /* L0MoverNewVersion.alert */,
 				157CAF910FD16B18003E35C3 /* L0MoverTellAFriend.alert */,
 				154E74BA0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert */,
+				15097BD310337B70008DB9CC /* MvrClearTable.alert */,
 				15E7FDF40FADC3B800E9C438 /* Localizable.strings */,
 				1582D8E30F90806F0084EBC6 /* WhiteOverlay.png */,
 				1582D8F20F9082A00084EBC6 /* About.png */,
@@ -969,6 +977,7 @@
 				155A56610FE9491B0089E853 /* TextIcon.png in Resources */,
 				159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */,
 				1592D6980FF2346500433F4B /* NetworkHelpPage in Resources */,
+				15097BD410337B70008DB9CC /* MvrClearTable.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,6 +1075,7 @@
 				153B80080FF209A600DDFD16 /* L0MoverNobodyFoundViewController.m in Sources */,
 				1592D5D80FF22A2900433F4B /* L0MoverWebPane.m in Sources */,
 				1592D60C0FF22CF100433F4B /* L0MoverNetworkHelpPane.m in Sources */,
+				15097B8A1033783A008DB9CC /* MvrApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

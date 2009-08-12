@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array>
+		<string>Clear All</string>
+		<string>Cancel</string>
+	</array>
+	<key>L0AlertInformativeText</key>
+	<string>Photos and contacts are already saved in their respective applications, but other items may be deleted and permanently lost.</string>
+	<key>L0AlertMessage</key>
+	<string>Do you want to remove all items from Mover's table?</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

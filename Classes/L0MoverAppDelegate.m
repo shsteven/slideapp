@@ -42,6 +42,7 @@ enum {
 	kL0MoverItemMenuSheetTag,
 	kL0MoverTellAFriendAlertTag,
 	kL0MoverDeleteConfirmationSheetTag,
+	kMvrClearTableAlertTag,
 };
 
 #define kL0MoverLastSeenVersionKey @"L0MoverLastSeenVersion"
@@ -503,6 +504,12 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 				[self tellAFriend];
 			return;
 		}
+			
+		case kMvrClearTableAlertTag: {
+			if (buttonIndex == 0)
+				[self clearTable];
+			return;
+		}
 	}
 }
 
@@ -880,6 +887,24 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 - (void) presentModalViewController:(UIViewController*) vc;
 {
 	[self.tableHostController presentModalViewController:vc animated:YES];
+}
+
+- (void) askWhetherToClearTable;
+{
+	UIAlertView* alert = [UIAlertView alertNamed:@"MvrClearTable"];
+	alert.cancelButtonIndex = 1;
+	alert.tag = kMvrClearTableAlertTag;
+	alert.delegate = self;
+	[alert show];
+}
+
+- (void) clearTable;
+{
+	NSArray* a = [NSArray arrayWithArray:[self.tableController items]];
+	for (L0MoverItem* i in a) {
+		i.shouldDisposeOfOffloadingFileOnDealloc = YES;
+		[self.tableController removeItem:i animation:kL0SlideItemsTableRemoveByFadingAway];
+	}
 }
 
 @end
