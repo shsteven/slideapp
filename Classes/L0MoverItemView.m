@@ -7,6 +7,7 @@
 //
 
 #import "L0MoverItemView.h"
+#import "L0ImageItem.h"
 
 @interface L0MoverItemView ()
 
