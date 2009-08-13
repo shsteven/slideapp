@@ -12,20 +12,27 @@
 
 @implementation MvrAppleAdItem
 
+static BOOL initialized = NO;
+static MvrAppleAdItem* items[7];
+
 + adItemWithNumber:(int) n;
 {
-	return [[[self alloc] initWithNumber:n] autorelease];
+	return items[n];
 }
 
 + adItemForReceiving;
 {
-	return [self adItemWithNumber:3];
+	return items[3];
 }
 
 + (void) initialize;
 {
-	int i; for (i = 0; i < 7; i++)
-		(void) [UIImage imageNamed:[NSString stringWithFormat:@"%d.jpg", i]];
+	if (!initialized) {
+		initialized = YES;
+		int i; for (i = 0; i < 7; i++) {
+			items[i] = [[self alloc] initWithNumber:i];
+		}
+	}
 }
 
 - (id) initWithNumber:(int) n;
@@ -33,6 +40,10 @@
 	if (self = [super init]) {
 		self.title = @"";
 		self.type = kMvrAppleAdItemType;
+
+		NSString* path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%d", n] ofType:@"jpg"];
+		image = [[UIImage alloc] initWithContentsOfFile:path];
+		
 		number = n;
 	}
 	
@@ -65,6 +76,12 @@
 	uint32_t* value = (uint32_t*) [payload bytes];
 	int i = CFSwapInt32BigToHost(*value);
 	return [self initWithNumber:i];
+}
+
+- (void) dealloc;
+{
+	[image release];
+	[super dealloc];
 }
 
 @end

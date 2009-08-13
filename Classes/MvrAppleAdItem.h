@@ -11,6 +11,7 @@
 
 @interface MvrAppleAdItem : L0MoverItem {
 	int number;
+	UIImage* image;
 }
 
 + adItemWithNumber:(int) n;
