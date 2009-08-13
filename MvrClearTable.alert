@@ -8,7 +8,7 @@
 		<string>Cancel</string>
 	</array>
 	<key>L0AlertInformativeText</key>
-	<string>Photos and contacts are already saved in their respective applications, but other items may be deleted and permanently lost.</string>
+	<string>Bookmarks and text clippings aren't saved in other apps and will be deleted.</string>
 	<key>L0AlertMessage</key>
 	<string>Do you want to remove all items from Mover's table?</string>
 	<key>L0AlertShowsSuppressionButton</key>
