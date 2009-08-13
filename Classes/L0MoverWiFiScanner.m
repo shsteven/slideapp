@@ -18,6 +18,8 @@
 #import <sys/socket.h>
 #import <ifaddrs.h>
 
+#import <MuiKit/MuiKit.h>
+
 #pragma mark -
 #pragma mark IPAddress additions
 
@@ -193,6 +195,8 @@ L0ObjCSingletonMethod(sharedScanner)
 		
 		[self publishServicesWithName:[NSString stringWithFormat:@"%@ (%d)", [UIDevice currentDevice].name, uniquenessNameSuffix]];
 	}
+	
+	[[UIAlertView alertNamed:@"MvrDidNotPublish"] show];
 }
 
 - (void) resetBrowsing:(NSTimer*) t;

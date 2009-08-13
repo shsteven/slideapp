@@ -65,6 +65,7 @@
 		159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
 		15B4268E0FD91A7D0065D461 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B4268D0FD91A7D0065D461 /* MobileCoreServices.framework */; };
+		15B4E80510340868004B803B /* MvrDidNotPublish.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15B4E80410340868004B803B /* MvrDidNotPublish.alert */; };
 		15B7BF6D0F9C778E00EF9AB9 /* libLogging-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */; };
 		15B929350F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B929340F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m */; };
 		15B929400F906FA2001E40B7 /* L0MoverWelcome.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15B9293F0F906FA2001E40B7 /* L0MoverWelcome.alert */; };
@@ -285,6 +286,7 @@
 		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		15B4268D0FD91A7D0065D461 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		15B4E80410340868004B803B /* MvrDidNotPublish.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrDidNotPublish.alert; sourceTree = "<group>"; };
 		15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logging.xcodeproj; path = Logging/Logging.xcodeproj; sourceTree = INFINITELABS_TOOLS; };
 		15B929330F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0HelpAlerts.h"; sourceTree = "<group>"; };
 		15B929340F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0HelpAlerts.m"; sourceTree = "<group>"; };
@@ -779,6 +781,7 @@
 				157CAF910FD16B18003E35C3 /* L0MoverTellAFriend.alert */,
 				154E74BA0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert */,
 				15097BD310337B70008DB9CC /* MvrClearTable.alert */,
+				15B4E80410340868004B803B /* MvrDidNotPublish.alert */,
 				15E7FDF40FADC3B800E9C438 /* Localizable.strings */,
 				1582D8E30F90806F0084EBC6 /* WhiteOverlay.png */,
 				1582D8F20F9082A00084EBC6 /* About.png */,
@@ -978,6 +981,7 @@
 				159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */,
 				1592D6980FF2346500433F4B /* NetworkHelpPage in Resources */,
 				15097BD410337B70008DB9CC /* MvrClearTable.alert in Resources */,
+				15B4E80510340868004B803B /* MvrDidNotPublish.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
