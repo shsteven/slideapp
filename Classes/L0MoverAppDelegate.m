@@ -334,23 +334,19 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 {
 	[self.tableController setEditing:NO animated:YES];
 	
-	// gutted for Apple ad.
-
-	NSString* key = [[NSUserDefaults standardUserDefaults] objectForKey:@"kMvrAppleAdPeerPlacement"];
-
-	if (!key || [key isEqual:@"eastPeer"]) { // sender
+	L0ActionSheet* sheet = [[L0ActionSheet new] autorelease];
+	sheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+	sheet.delegate = self;
+	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Add item - image button") identifier:kL0MoverAddImageButton];
 	
-		for (int i = 0; i <= 5; i++) {
-			MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:i];
-			[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
-			[adItem release];
-		}
-		
-	} else {
-		MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:6];
-		[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
-		[adItem release];		
-	}
+	[sheet addButtonWithTitle:NSLocalizedString(@"Take a Photo", @"Add item - take a photo button") identifier:kL0MoverTakeAPhotoButton];
+	
+	[sheet addButtonWithTitle:NSLocalizedString(@"Add Contact", @"Add item - contact button")  identifier:kL0MoverAddContactButton];
+	
+	NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Add item - cancel button") identifier:kL0MoverCancelButton];
+	sheet.cancelButtonIndex = i;
+
+	[sheet showInView:self.window];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
@@ -405,13 +401,29 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 - (void) addImageItem;
 {
-	if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-		return;
+	// if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+	// 	return;
+	// 
+	// UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
+	// imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+	// imagePicker.delegate = self;
+	// [self.tableHostController presentModalViewController:imagePicker animated:YES];
 	
-	UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
-	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	imagePicker.delegate = self;
-	[self.tableHostController presentModalViewController:imagePicker animated:YES];
+	NSString* key = [[NSUserDefaults standardUserDefaults] objectForKey:@"kMvrAppleAdPeerPlacement"];
+
+	if (!key || [key isEqual:@"eastPeer"]) { // sender
+	
+		for (int i = 0; i <= 5; i++) {
+			MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:i];
+			[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
+			[adItem release];
+		}
+		
+	} else {
+		MvrAppleAdItem* adItem = [[MvrAppleAdItem alloc] initWithNumber:6];
+		[self.tableController addItem:adItem animation:kL0SlideItemsTableAddFromSouth];
+		[adItem release];		
+	}
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo;
