@@ -105,9 +105,7 @@
 	if (![cr enableCrashReporterAndReturnError:&e])
 		L0LogAlways(@"This shouldn't have happened: crash reporting is turned off due to this error: %@. This means that if Mover crashes, we will never know. Ouch.", e);
 	else
-		L0Log(@"Crash reporting reporting for duty!");
-	
-	//[self performSelector:@selector(testByInducingCrash) withObject:nil afterDelay:3.0];
+		L0Log(@"Crash reporting reporting for duty!");	
 }
 
 - (void) processPendingCrashReportIfRequired;
