@@ -12,6 +12,10 @@
 
 @interface L0MoverAppDelegate (L0HelpAlerts)
 
+- (void) suppressHelpAlerts;
+- (void) resumeHelpAlerts;
+@property(readonly) BOOL helpAlertsSuppressed;
+
 - (void) showAlertIfNotShownBeforeNamed:(NSString*) name;
 - (UIAlertView*) alertIfNotShownBeforeNamed:(NSString*) name;
 

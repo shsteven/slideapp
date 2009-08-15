@@ -12,6 +12,25 @@
 
 @implementation L0MoverAppDelegate (L0HelpAlerts)
 
+static int MvrHelpAlertsSuppressionCount = 0;
+
+- (void) suppressHelpAlerts;
+{
+	MvrHelpAlertsSuppressionCount++;
+}
+
+- (void) resumeHelpAlerts;
+{
+	MvrHelpAlertsSuppressionCount--;
+	if (MvrHelpAlertsSuppressionCount < 0)
+		MvrHelpAlertsSuppressionCount = 0;
+}
+
+- (BOOL) helpAlertsSuppressed;
+{
+	return MvrHelpAlertsSuppressionCount > 0;
+}
+
 - (void) showAlertIfNotShownBeforeNamed:(NSString*) name;
 {
 	// the first method returns nil if the alert was already
@@ -21,6 +40,8 @@
 
 - (UIAlertView*) alertIfNotShownBeforeNamed:(NSString*) name;
 {
+	if (MvrHelpAlertsSuppressionCount > 0) return nil;
+	
 	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
 	NSString* key = [NSString stringWithFormat:@"L0HelpAlertShown_%@", name];
 	

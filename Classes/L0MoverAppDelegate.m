@@ -33,6 +33,8 @@
 #import "L0MoverNetworkSettingsPane.h"
 #import "L0MoverNetworkHelpPane.h"
 
+#import "L0MoverAppDelegate+MvrCrashReporting.h"
+
 #import <netinet/in.h>
 
 // Alert/Action sheet tags
@@ -99,6 +101,8 @@ enum {
 	L0AssertOutlet(self.shieldViewSpinner);
 	L0AssertOutlet(self.shieldViewLabel);
 	
+	[self startCrashReporting];
+	
 	self.tableHostController.cacheViewsDuringFlip = YES;
 	
 	// Registering item subclasses.
@@ -163,6 +167,10 @@ enum {
 	// Go!
 	[window makeKeyAndVisible];
 	
+	// Very first thing to do: process pending crash reports if any.
+	// This disables any help alerts below if needed.
+	[self processPendingCrashReportIfRequired];
+	
 	// Be helpful if this is the first time (ahem).
 	[self showAlertIfNotShownBeforeNamed:@"L0MoverWelcome"];
 	
@@ -209,7 +217,7 @@ enum {
 - (void) proposeTellingAFriend;
 {
 	BOOL hasPeers = self.tableController.northPeer || self.tableController.eastPeer || self.tableController.westPeer;
-	if (self.networkAvailable && !hasPeers) {
+	if (self.networkAvailable && !hasPeers && !self.helpAlertsSuppressed) {
 		UIAlertView* a = [UIAlertView alertNamed:@"L0MoverTellAFriend"];
 		a.delegate = self;
 		a.tag = kL0MoverTellAFriendAlertTag;
