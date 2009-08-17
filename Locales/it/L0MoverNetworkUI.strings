@@ -1,16 +1,12 @@
 "On" = "Acceso";
 "Network Help" = "Aiuto Rete";
 "Bluetooth is off. Turn it on in the Settings application to use it." = "Bluetooth \U00e8 spento. Accendilo nell'applicazione Impostazioni per usarlo.";
+"Turn on to see newer iPhone and iPod touch models near you with Bluetooth on.\nIf you do, Wi-Fi will be turned off." = "Accendilo per vedere altri modelli recenti di iPhone e iPod touch con Bluetooth acceso.\nSe lo accendi, verr\U00e0 spento Wi-Fi.";
 "Disconnected" = "Scollegato";
 "Wi-Fi" = "Wi-Fi";
 "Connect to a network to use Wi-Fi." = "Collegati a una rete per usare Wi-Fi.";
 "Connects with newer iPhone and iPod touch models with Bluetooth." = "Permette di collegarsi a modelli recenti di iPhone e iPod touch via Bluetooth.";
+"Turn on to see other devices using Wi-Fi.\nIf you do, Bluetooth will be turned off." = "Accendilo per vedere altri dispositivi sulla stessa rete Wi-Fi.\nSe lo accendi, verr\U00e0 spento Bluetooth.";
 "Bluetooth" = "Bluetooth";
 "Network" = "Rete";
 "Connects with other devices on this Wi-Fi network." = "Permette di collegarsi ad altri dispositivi su questa rete Wi-Fi.";
-
-/* Bluetooth is disabled (footer text in network config pane). */
-"Turn on to see newer iPhone and iPod touch models near you with Bluetooth on.\nIf you do, Wi-Fi will be turned off." = "Accendilo per vedere altri modelli recent di iPhone e iPod touch con Bluetooth acceso.\nSe lo accendi, verrà spento Wi-Fi.";
-
-/* Wi-Fi is disabled (footer text in network config pane). */
-"Turn on to see other devices using Wi-Fi.\nIf you do, Bluetooth will be turned off." = "Accendilo per vedere altri dispositivi sulla stessa rete Wi-Fi.\nSe lo accendi, verrà spento Bluetooth.";
