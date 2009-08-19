@@ -77,7 +77,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	return [NSArray arrayWithObject:kL0AddressBookPersonDataInPropertyListType];
 }
 
-- (NSData*) externalRepresentation;
+- (NSData*) produceExternalRepresentation;
 {
 	NSDictionary* info = self.personInfo;
 	
