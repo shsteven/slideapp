@@ -71,6 +71,7 @@
 - (void) stopMonitoringReachability;
 - (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
 
+- (void) publishServices;
 - (void) publishServicesWithName:(NSString*) serviceName;
 - (void) stopPublishingServices;
 - (void) startBrowsing;
@@ -87,6 +88,11 @@ L0ObjCSingletonMethod(sharedScanner)
 {
 	if (self = [super init]) {
 		availableChannels = [NSMutableSet new];
+		
+		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
+		[dispatcher observe:@"jammed" ofObject:self usingSelector:@selector(jammedChangedForSelf:change:) options:0];
+		
+		servicesBeingDisabled = [NSMutableSet new];
 	}
 	
 	return self;
@@ -113,7 +119,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	}
 	
 	[self startBrowsing];
-	[self publishServicesWithName:[UIDevice currentDevice].name];
+	[self publishServices];
 	
 	[self beginMonitoringReachability];
 	
@@ -154,18 +160,28 @@ L0ObjCSingletonMethod(sharedScanner)
 - (void) stopPublishingServices;
 {
 	L0Note();
-	legacyService.delegate = nil;
+	if (legacyService)
+		[servicesBeingDisabled addObject:legacyService];
 	[legacyService stop];
 	[legacyService release]; legacyService = nil;
 	
-	modernService.delegate = nil;
+	if (modernService)
+		[servicesBeingDisabled addObject:modernService];
 	[modernService stop];
 	[modernService release]; modernService = nil;
+	
+	L0Log(@"Services being disabled now = %@", servicesBeingDisabled);
+}
+
+- (void) publishServices;
+{
+	[self publishServicesWithName:[UIDevice currentDevice].name];
 }
 
 - (void) publishServicesWithName:(NSString*) serviceName;
 {
 	L0Log(@"%@", serviceName);
+	
 	[self stopPublishingServices];
 	NSDictionary* txtDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
 								   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kL0BonjourPeerApplicationVersionKey,
@@ -248,6 +264,9 @@ L0ObjCSingletonMethod(sharedScanner)
 {
 	[self stop];
 	[availableChannels release];
+	[dispatcher release];
+	[servicesBeingDisabled release];
+	
 	[super dealloc];
 }
 
@@ -293,9 +312,25 @@ L0ObjCSingletonMethod(sharedScanner)
 	[aNetService resolve];
 }
 
+- (void) netServiceDidStop:(NSNetService*) sender;
+{
+	L0Log(@"%@", sender);
+	if ([servicesBeingDisabled containsObject:sender]) {
+		[[sender retain] autorelease];
+		sender.delegate = nil;
+		[servicesBeingDisabled removeObject:sender];
+		
+		L0Log(@"After removal, services being disabled are: %@", servicesBeingDisabled);
+	}
+}
+
 - (void)netServiceDidResolveAddress:(NSNetService *)sender;
 {
 	[sender autorelease];
+	
+	L0Log(@"For service %@:", sender);
+	for (NSData* d in [sender addresses])
+		L0Log(@"Found address: %@", [d socketAddressStringValue]);
 	
 	BOOL isSelf = NO;
 	struct ifaddrs* interface;
@@ -486,8 +521,22 @@ static void L0MoverWiFiNetworkStateChanged(SCNetworkReachabilityRef reach, SCNet
 	jammed = !habemusNetwork;
 	[self didChangeValueForKey:@"jammed"];
 	
-	if (jammed)
+	if (jammed) {
 		[[self mutableSetValueForKey:@"availableChannels"] removeAllObjects];
+	}
+}
+
+- (void) jammedChangedForSelf:(id) me change:(NSDictionary*) change;
+{
+	if (self.jammed) {
+		[self stopBrowsing];
+		[self stopPublishingServices];
+	} else if (self.enabled) {
+		[self stopBrowsing];
+		[self performSelector:@selector(startBrowsing) withObject:nil afterDelay:0.3];
+		[self performSelector:@selector(publishServices) withObject:nil afterDelay:0.31];
+	}
+
 }
 
 @end

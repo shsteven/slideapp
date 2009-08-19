@@ -41,8 +41,10 @@
 
 - (void) show;
 {
-	if (![MFMailComposeViewController canSendMail])
+	if (![MFMailComposeViewController canSendMail]) {
+		L0Log(@"The user can't send e-mail, so we drop this one.");
 		return;
+	}
 	
 	[self retain];
 	[L0Mover suppressHelpAlerts];
@@ -55,7 +57,10 @@
 
 - (void) alertView:(UIAlertView*) alertView clickedButtonAtIndex:(NSInteger) buttonIndex;
 {
+	L0Log(@"%d", buttonIndex);
+	
 	if (buttonIndex != alertView.cancelButtonIndex) {
+		L0Log(@"Displaying mail compose view.");
 		MFMailComposeViewController* mail = [[MFMailComposeViewController alloc] init];
 		mail.mailComposeDelegate = self;
 		[mail setSubject:@"Mover Crash Report"]; // locale-invariant.
@@ -71,6 +76,7 @@
 
 - (void) mailComposeController:(MFMailComposeViewController*) controller didFinishWithResult:(MFMailComposeResult) result error:(NSError*) error;
 {
+	L0Log(@"Ending the reporting session.");
 	[controller dismissModalViewControllerAnimated:YES];
 	controller.mailComposeDelegate = nil;
 	[L0Mover resumeHelpAlerts];
@@ -78,7 +84,6 @@
 }
 
 @end
-
 
 
 @implementation L0MoverAppDelegate (MvrCrashReporting)
@@ -97,6 +102,17 @@
 }
 #endif
 
+static NSUncaughtExceptionHandler* MvrRealUncaughtExceptionHandler = NULL;
+static void L0LogUncaughtExceptionAndForward(NSException* e) {
+	L0LogAlways(@"Looks like we got an exception. This is unfortunately NOT GOOD AT ALL. Full details follow for posterity, just in case something goes wrong with the reporting machinery. Owch.\n\nException details:\n  name = %@\n  reason = %@\n   user info = %@\n   stack = %@",
+				[e name], [e reason], [e userInfo], [e callStackReturnAddresses]);
+	
+	if (MvrRealUncaughtExceptionHandler)
+		MvrRealUncaughtExceptionHandler(e);
+	else
+		abort();
+}
+
 - (void) startCrashReporting;
 {
 	PLCrashReporter* cr = [PLCrashReporter sharedReporter];
@@ -106,16 +122,24 @@
 		L0LogAlways(@"This shouldn't have happened: crash reporting is turned off due to this error: %@. This means that if Mover crashes, we will never know. Ouch.", e);
 	else
 		L0Log(@"Crash reporting reporting for duty!");
+	
+	MvrRealUncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
+	NSSetUncaughtExceptionHandler(&L0LogUncaughtExceptionAndForward);
 }
 
 - (void) processPendingCrashReportIfRequired;
 {
+	L0Note();
 	PLCrashReporter* cr = [PLCrashReporter sharedReporter];
 	
-	if (![cr hasPendingCrashReport])
+	if (![cr hasPendingCrashReport]) {
+		L0Log(@"No pending crash reports detected.");
 		return;
+	}
 	
-	NSError* e;
+	L0Log(@"Loading the pending crash reports and starting a sending session...");
+	
+	NSError* e = nil;
 	NSData* crashReportData = [cr loadPendingCrashReportDataAndReturnError:&e];
 	if (!crashReportData) {
 		L0LogAlways(@"Ouch! Looks like there was a partial crash report, but it couldn't be read because of this error: %@. Hope it wasn't anything important.", e);
@@ -126,7 +150,7 @@
 		[crashReportData writeToFile:crashReportLocation atomically:YES];
 		L0Log(@"Written crash report data at: %@", crashReportLocation);
 #endif
-		
+		L0Log(@"Displaying reporting UI.");
 		MvrCrashReportSender* sender = [[[MvrCrashReportSender alloc] initWithCrashReportData:crashReportData] autorelease];
 		[sender show];
 	}

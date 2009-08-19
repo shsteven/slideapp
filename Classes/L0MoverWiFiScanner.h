@@ -40,6 +40,9 @@
 #endif
 	
 	NSTimer* browserResetTimer;
+	
+	L0KVODispatcher* dispatcher;
+	NSMutableSet* servicesBeingDisabled;
 }
 
 + sharedScanner;
