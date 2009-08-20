@@ -16,6 +16,8 @@
 #import <sys/socket.h>
 #import <ifaddrs.h>
 
+#import "L0MoverAppDelegate.h"
+
 @interface IPAddress (L0BonjourPeerFinder_NetServicesMatching)
 
 - (BOOL) _l0_comesFromAddressOfService:(NSNetService*) s;
@@ -87,6 +89,22 @@
 	
 //	_publishedService = [[NSNetService alloc] initWithDomain:@"" type:kL0BonjourPeeringServiceName name:[UIDevice currentDevice].name port:52525];
 //	[_publishedService publish];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkAvailable:) name:kMvrNetworkAvailableNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkUnavailable:) name:kMvrNetworkUnavailableNotification object:nil];
+}
+
+- (void) networkAvailable:(NSNotification*) n;
+{
+	L0Log(@" <-- ");
+	[browser stop];
+	[browser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
+}
+
+- (void) networkUnavailable:(NSNotification*) n;
+{
+	L0Log(@" <-- ");
+	[browser stop];
 }
 
 - (void) stop;

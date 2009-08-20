@@ -230,6 +230,8 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 		[UIView commitAnimations];
 
 		self.networkUnavailableView.hidden = NO;
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:kMvrNetworkAvailableNotification object:self];
 	} else if (!habemusNetwork && wasUp) {
 		// disable UI for no network. Boo, user, boo!
 		CGPoint position = self.networkUnavailableView.center;
@@ -253,6 +255,8 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 		self.tableController.westPeer = nil;
 		
 		self.networkUnavailableView.hidden = NO;
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:kMvrNetworkUnavailableNotification object:self];
 	}
 
 	[self.networkUnavailableView.superview bringSubviewToFront:self.networkUnavailableView];

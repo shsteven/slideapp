@@ -15,6 +15,9 @@
 #import "L0PeerDiscovery.h"
 #import "L0MoverPeer.h"
 
+#define kMvrNetworkUnavailableNotification @"kMvrNetworkUnavailableNotification"
+#define kMvrNetworkAvailableNotification @"kMvrNetworkAvailableNotification"
+
 @interface L0MoverAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0MoverPeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate> {
     UIWindow *window;
 	
