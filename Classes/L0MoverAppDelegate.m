@@ -454,7 +454,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[UIApp endNetworkUse];
 	
 	if ([item isKindOfClass:[L0ImageItem class]])
-		[self showAlertIfNotShownBeforeNamedForiPhone:@"L0ImageReceived_iPhone" foriPodTouch:@"L0ImageReceived_iPodTouch"];
+		[self showAlertIfNotShownBeforeNamedForiPhone:@"L0ImageReceived_iPhone" foriPodTouch:@"L0ImageReceived_iPod"];
 	else if ([item isKindOfClass:[L0AddressBookPersonItem class]])
 		[self showAlertIfNotShownBeforeNamed:@"L0ContactReceived"];
 }
