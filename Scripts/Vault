@@ -13,7 +13,7 @@ BUILD="$HERE"/../Build
 BUILD="`(cd "$BUILD"; pwd)`"
 
 case "$KIND" in
-	[Ee]dge)
+	[Ee]dge|[Oo]pen)
 		PREFIX="Edge"
 		DIR="$BUILD"/Release-iphoneos
 		APP_NAME="MoverEdge.app"

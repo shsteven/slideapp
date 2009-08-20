@@ -3,5 +3,5 @@
 HERE="`dirname "$0"`"
 HERE="`cd "$HERE"; pwd`"
 
-"$HERE"/../Ads plus
+"$HERE"/../Ads opensource
 
