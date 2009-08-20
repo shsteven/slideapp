@@ -92,18 +92,13 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 
 - (void) connection: (BLIPConnection*)connection receivedResponse: (BLIPResponse*)response;
 {
-	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(_itemsBeingSentByConnection, connection);
-	if (i)
-		[delegate slidePeer:self wasSentItem:i];
-	
-	// we assume it's fine. for now.
+	L0Log(@"%@, %@", connection, response);
 	[connection close];
 }
 
 - (void) connectionDidClose: (TCPConnection*)connection;
 {
 	L0Log(@"%@", connection);
-	CFDictionaryRemoveValue(_itemsBeingSentByConnection, connection);
 }
 
 - (void) connection: (TCPConnection*)connection failedToOpen: (NSError*)error;
@@ -114,7 +109,12 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 
 - (BOOL) connectionReceivedCloseRequest: (BLIPConnection*)connection;
 {
-	L0Log(@"%@", connection);
+	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(_itemsBeingSentByConnection, connection);
+	if (i)
+		[delegate slidePeer:self wasSentItem:i];
+	
+	CFDictionaryRemoveValue(_itemsBeingSentByConnection, connection);
+	
 	return YES;
 }
 

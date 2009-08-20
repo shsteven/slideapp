@@ -243,9 +243,7 @@
 	
 	[connection close];
 	[pendingConnections removeObject:connection];
-	[peer.delegate slidePeer:peer didSendUsItem:item];
-	
-	[request respondWithString:@"OK"];
+	[peer.delegate slidePeer:peer didSendUsItem:item];	
 }
 
 @end
