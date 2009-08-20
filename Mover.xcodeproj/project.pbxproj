@@ -48,6 +48,8 @@
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
+		15AF49BD103D54590080FDAD /* ja.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15AF49B0103D54590080FDAD /* ja.lproj */; };
+		15AF49C2103D54640080FDAD /* ja.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15AF49BE103D54640080FDAD /* ja.lproj */; };
 		15B3FB200FD509A200D9C7C5 /* es.lproj in Copy Settings.bundle Localizations */ = {isa = PBXBuildFile; fileRef = 15B3FB1C0FD5099D00D9C7C5 /* es.lproj */; };
 		15B3FB310FD509B200D9C7C5 /* es.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15B3FB240FD509AF00D9C7C5 /* es.lproj */; };
 		15B7BF6D0F9C778E00EF9AB9 /* libLogging-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */; };
@@ -114,13 +116,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1533A265101BB9F9002D63FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 154635591011BD77000238EE;
-			remoteInfo = "MuiKit+Test";
-		};
 		1572DE870F82BE7A006BEEC0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
@@ -172,6 +167,7 @@
 			dstPath = Settings.bundle;
 			dstSubfolderSpec = 7;
 			files = (
+				15AF49C2103D54640080FDAD /* ja.lproj in Copy Settings.bundle Localizations */,
 				15B3FB200FD509A200D9C7C5 /* es.lproj in Copy Settings.bundle Localizations */,
 				15250B4F0FC694700073E5C7 /* de.lproj in Copy Settings.bundle Localizations */,
 				154FB79A0FB1F18300DB26C6 /* fr.lproj in Copy Settings.bundle Localizations */,
@@ -239,6 +235,8 @@
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		15AF49B0103D54590080FDAD /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
+		15AF49BE103D54640080FDAD /* ja.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ja.lproj; sourceTree = "<group>"; };
 		15B3FB1C0FD5099D00D9C7C5 /* es.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = es.lproj; sourceTree = "<group>"; };
 		15B3FB240FD509AF00D9C7C5 /* es.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = es.lproj; sourceTree = "<group>"; };
 		15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logging.xcodeproj; path = Logging/Logging.xcodeproj; sourceTree = INFINITELABS_TOOLS; };
@@ -395,6 +393,7 @@
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
 			isa = PBXGroup;
 			children = (
+				15AF49B0103D54590080FDAD /* ja.lproj */,
 				15B3FB240FD509AF00D9C7C5 /* es.lproj */,
 				15250B3E0FC694570073E5C7 /* de.lproj */,
 				154FB7900FB1F16000DB26C6 /* fr.lproj */,
@@ -422,6 +421,7 @@
 		15729E260FB09BC200CD1310 /* Compiled Settings Locales */ = {
 			isa = PBXGroup;
 			children = (
+				15AF49BE103D54640080FDAD /* ja.lproj */,
 				15B3FB1C0FD5099D00D9C7C5 /* es.lproj */,
 				15250B4B0FC6946E0073E5C7 /* de.lproj */,
 				154FB7680FB1F06D00DB26C6 /* fr.lproj */,
@@ -437,7 +437,6 @@
 			children = (
 				1572DE880F82BE7A006BEEC0 /* libMuiKit.a */,
 				1572DE8A0F82BE7A006BEEC0 /* MuiKit.bundle */,
-				1533A266101BB9F9002D63FB /* MuiKit+Test.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -729,13 +728,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1533A266101BB9F9002D63FB /* MuiKit+Test.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "MuiKit+Test.octest";
-			remoteRef = 1533A265101BB9F9002D63FB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		1572DE880F82BE7A006BEEC0 /* libMuiKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -771,6 +763,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15AF49BD103D54590080FDAD /* ja.lproj in Resources */,
 				15B3FB310FD509B200D9C7C5 /* es.lproj in Resources */,
 				15250B4A0FC6945D0073E5C7 /* de.lproj in Resources */,
 				154FB7940FB1F16400DB26C6 /* fr.lproj in Resources */,
