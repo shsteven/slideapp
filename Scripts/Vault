@@ -51,4 +51,4 @@ fi
 mv "$DIR" "$TARGET"
 cd "$TARGET"
 ditto -ck --keepParent --rsrc --sequesterRsrc "$APP_NAME" "Mover$PREFIX-$NOW.zip"
-
+open .
