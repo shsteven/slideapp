@@ -30,6 +30,7 @@ HERE="`dirname "$0"`"
 HERE="`cd "$HERE"; pwd`"
 cd "$HERE/../"
 
+"$HERE/Variants/Open"
 "$HERE/Clobber"
 xcodebuild -configuration Release CODE_SIGNING_REQUIRED=NO
 ldid -S Build/Release-iphoneos/MoverEdge.app/MoverEdge
