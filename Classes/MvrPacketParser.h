@@ -21,13 +21,18 @@ typedef NSUInteger MvrPacketParserState;
 
 extern NSString* const kMvrPacketParserErrorDomain;
 enum {
+	kMvrPacketParserNoError = 0,
+	
 	// After enough bytes have been collected for a new packet, the parser couldn't find the start of a packet. The bytes will have been consumed.
-	kMvrPacketParserDidNotFindStartError = 1,	
-	kMvrPacketParserNotUTF8StringError = 2,
-	kMvrPacketParserMetadataDidNotIncludeSize = 3,
-	kMvrPacketParserHasInvalidStopsStringError = 4,
-	kMvrPacketParserKeysAndStopsDoNotMatchError = 5,
-	kMvrPacketParserHasDuplicateKeysError = 6,
+	kMvrPacketParserDidNotFindStartError,
+	kMvrPacketParserNotUTF8StringError,
+	kMvrPacketParserMetadataDidNotIncludeSize,
+	kMvrPacketParserHasInvalidStopsStringError,
+	kMvrPacketParserKeysAndStopsDoNotMatchError,
+	kMvrPacketParserHasDuplicateKeysError,
+	kMvrPacketParserMetadataDidNotIncludeStopsError,
+	kMvrPacketParserHasInvalidKeysStringError,
+	kMvrPacketParserMetadataDidNotIncludeKeysError,
 };
 
 @class MvrPacketParser;
@@ -35,7 +40,7 @@ enum {
 
 - (void) packetParserDidStartReceiving:(MvrPacketParser*) p;
 - (void) packetParser:(MvrPacketParser*) p didReceiveMetadataItemWithKey:(NSString*) key value:(NSString*) value;
-- (void) packetParser:(MvrPacketParser*) p didReceiveBodyDataPart:(NSData*) d;
+- (void) packetParser:(MvrPacketParser*) p didReceivePayloadPart:(NSData*) d forKey:(NSString*) key;
 
 // e == nil if no error.
 - (void) packetParser:(MvrPacketParser*) p didReturnToStartingStateWithError:(NSError*) e;
@@ -70,8 +75,9 @@ enum {
 	id <MvrPacketParserDelegate> delegate;
 	MvrPacketParserState state;
 	NSString* lastSeenMetadataItemTitle;
-	long long lastReportedBodySize;
-	unsigned long long sizeOfReportedBytes;
+	
+	NSUInteger currentStop;
+	unsigned long long toReadForCurrentStop;
 	
 	NSArray* payloadStops;
 	NSArray* payloadKeys;

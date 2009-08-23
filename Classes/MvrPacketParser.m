@@ -112,11 +112,11 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (void) reset;
 {
-	lastReportedBodySize = -1;
-	sizeOfReportedBytes = 0;
 	self.lastSeenMetadataItemTitle = nil;
 	self.payloadStops = nil;
 	self.payloadKeys = nil;
+	currentStop = 0;
+	toReadForCurrentStop = 0;
 	
 	self.state = kMvrPacketParserExpectingStart;
 }	
@@ -207,16 +207,6 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	self.state = kMvrPacketParserExpectingMetadataItemValue;	
 }
 
-- (void) expectBody;
-{
-	if (lastReportedBodySize == 0) {
-		// we'd grab the body here, but since the body is empty, we go on.
-		[delegate packetParser:self didReceiveBodyDataPart:[NSData data]];
-		[self resetAndReportError:0];
-	} else
-		self.state = kMvrPacketParserExpectingBody;
-}
-
 - (BOOL) consumeMetadataItemValue;
 {
 	NSInteger loc = [self locationOfFirstNullInCurrentBuffer];
@@ -241,10 +231,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 }
 
 - (void) processAndReportMetadataItemWithTitle:(NSString*) title value:(NSString*) s;
-{
-	if ([title isEqual:kMvrPacketParserSizeKey])
-		lastReportedBodySize = [s longLongValue];
-	
+{	
 	if ([title isEqual:kMvrProtocolPayloadStopsKey]) {
 		if (![self setPayloadStopsFromString:s])
 			return;
@@ -277,6 +264,11 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 		}
 	}
 	
+	if ([stops count] == 0) {
+		[self resetAndReportError:kMvrPacketParserHasInvalidStopsStringError];
+		return NO;
+	}
+	
 	if (self.payloadKeys && [self.payloadKeys count] != [stops count]) {
 		[self resetAndReportError:kMvrPacketParserKeysAndStopsDoNotMatchError];
 		return NO;
@@ -295,6 +287,11 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	while ((index = [keys indexOfObject:@""]) != NSNotFound)
 		[keys removeObjectAtIndex:index];
 	
+	if ([keys count] == 0) {
+		[self resetAndReportError:kMvrPacketParserHasInvalidKeysStringError];
+		return NO;
+	}
+	
 	if (self.payloadStops && [self.payloadStops count] != [keys count]) {
 		[self resetAndReportError:kMvrPacketParserKeysAndStopsDoNotMatchError];
 		return NO;
@@ -309,23 +306,48 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	return YES;
 }
 
-- (BOOL) consumeBody;
+- (void) expectBody;
 {
-	if (lastReportedBodySize < 0) {
-		[self resetAndReportError:kMvrPacketParserMetadataDidNotIncludeSize];
-		return YES;
+	if (!self.payloadStops) {
+		[self resetAndReportError:kMvrPacketParserMetadataDidNotIncludeStopsError];
+		return;
 	}
-		
-	NSInteger i = MIN([currentBuffer length], lastReportedBodySize - sizeOfReportedBytes);
-	sizeOfReportedBytes += i;
-	NSAssert(sizeOfReportedBytes <= lastReportedBodySize, @"Should not report more bytes than I have been told to report");
-	NSRange dataRange = NSMakeRange(0, i);
 	
-	[delegate packetParser:self didReceiveBodyDataPart:[currentBuffer subdataWithRange:dataRange]];
-	[currentBuffer replaceBytesInRange:dataRange withBytes:NULL length:0];
+	if (!self.payloadKeys) {
+		[self resetAndReportError:kMvrPacketParserMetadataDidNotIncludeKeysError];
+		return;
+	}
 	
-	if (sizeOfReportedBytes == lastReportedBodySize)
-		[self resetAndReportError:0];
+	if ([self.payloadStops count] == 1 && [[self.payloadStops objectAtIndex:0] isEqual:[NSNumber numberWithInt:0]]) {
+		// we'd grab the body here, but since the body is empty, we go on.
+		[delegate packetParser:self didReceivePayloadPart:[NSData data] forKey:[self.payloadKeys objectAtIndex:0]];
+		[self resetAndReportError:kMvrPacketParserNoError];
+	} else {
+		currentStop = 0;
+		toReadForCurrentStop = [[self.payloadStops objectAtIndex:currentStop] longLongValue];
+		self.state = kMvrPacketParserExpectingBody;
+	}
+}
+
+- (BOOL) consumeBody;
+{		
+	NSUInteger lengthOfNewDataForCurrentStop =
+		MIN([currentBuffer length], toReadForCurrentStop);
+	
+	NSRange rangeOfPayloadPart = NSMakeRange(0, lengthOfNewDataForCurrentStop);
+	NSData* payloadPart = [currentBuffer subdataWithRange:rangeOfPayloadPart];
+	[delegate packetParser:self didReceivePayloadPart:payloadPart forKey:[self.payloadKeys objectAtIndex:currentStop]];
+	
+	[currentBuffer replaceBytesInRange:rangeOfPayloadPart withBytes:NULL length:0];
+	toReadForCurrentStop -= lengthOfNewDataForCurrentStop;
+	
+	if (toReadForCurrentStop == 0) {
+		currentStop++;
+		if (currentStop >= [self.payloadStops count])
+			[self resetAndReportError:kMvrPacketParserNoError];
+		else
+			toReadForCurrentStop = [[self.payloadStops objectAtIndex:currentStop] longLongValue];
+	}
 	
 	return YES;
 }
