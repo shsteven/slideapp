@@ -14,9 +14,18 @@
 @property(assign, setter=private_setState:) MvrPacketParserState state;
 @property(copy) NSString* lastSeenMetadataItemTitle;
 
-// code == 0 means that we reset reporting no error, code < 0 means that we skip reporting entirely.
+@property(copy) NSArray* payloadStops;
+- (BOOL) setPayloadStopsFromString:(NSString*) string;
+
+@property(copy) NSArray* payloadKeys;
+- (BOOL) setPayloadKeysFromString:(NSString*) string;
+
+// code == 0 means that we reset reporting no error (nil).
 - (void) resetAndReportError:(NSInteger) code;
+- (void) reset;
+
 - (NSInteger) locationOfFirstNullInCurrentBuffer;
+
 
 // These methods return YES if we can continue consuming, or NO if we need
 // to be woken up when more data is available.
@@ -24,6 +33,13 @@
 - (BOOL) consumeMetadataItemTitle;
 - (BOOL) consumeMetadataItemValue;
 - (BOOL) consumeBody;
+
+// These methods do state changes.
+- (void) expectMetadataItemTitle;
+- (void) expectMetadataItemValueWithTitle:(NSString*) s;
+- (void) expectBody; // This starts body consumption.
+
+- (void) processAndReportMetadataItemWithTitle:(NSString*) title value:(NSString*) s;
 
 @end
 
@@ -36,7 +52,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	if (self = [super init]) {
 		delegate = d;
 		currentBuffer = [NSMutableData new];
-		[self resetAndReportError:-1];
+		[self reset];
 	}
 	
 	return self;
@@ -44,11 +60,11 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (void) dealloc;
 {
-	self.lastSeenMetadataItemTitle = nil;
+	[self reset];
 	[super dealloc];
 }
 
-@synthesize state, lastSeenMetadataItemTitle;
+@synthesize state, lastSeenMetadataItemTitle, payloadStops, payloadKeys;
 
 - (void) appendData:(NSData*) data;
 {
@@ -57,11 +73,8 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (void) appendData:(NSData*) data isKnownStartOfNewPacket:(BOOL) reset;
 {
-	if (reset) {
-		[currentBuffer release];
-		currentBuffer = [[NSMutableData alloc] initWithData:data];
-		
-		[self resetAndReportError:(self.state == kMvrPacketParserStartingState)? -1 : 0];
+	if (reset && !self.expectingNewPacket) {
+		[self resetAndReportError:0];
 	}
 	
 	[currentBuffer appendData:data];
@@ -97,36 +110,42 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	}
 }
 
-- (void) resetAndReportError:(NSInteger) errorCode;
+- (void) reset;
 {
 	lastReportedBodySize = -1;
 	sizeOfReportedBytes = 0;
 	self.lastSeenMetadataItemTitle = nil;
+	self.payloadStops = nil;
+	self.payloadKeys = nil;
 	
 	self.state = kMvrPacketParserExpectingStart;
-	if (errorCode >= 0) {
-		NSError* e = nil;
-		if (errorCode != 0) 
-			e = [NSError errorWithDomain:kMvrPacketParserErrorDomain code:errorCode userInfo:nil];
-		[delegate packetParser:self didReturnToStartingStateWithError:e];
+}	
 
-		BOOL shouldResetAfterGoodPacket = NO;
+- (void) resetAndReportError:(NSInteger) errorCode;
+{
+	[self reset];
+	
+	NSError* e = nil;
+	if (errorCode != 0) 
+		e = [NSError errorWithDomain:kMvrPacketParserErrorDomain code:errorCode userInfo:nil];
+	[delegate packetParser:self didReturnToStartingStateWithError:e];
+
+	BOOL shouldResetAfterGoodPacket = NO;
+	
+	if (!e) {
+		shouldResetAfterGoodPacket = [delegate respondsToSelector:@selector(packetParserShouldResetAfterCompletingPacket:)]? [delegate packetParserShouldResetAfterCompletingPacket:self] : YES;
+	}
+	
+	if (e || shouldResetAfterGoodPacket) {
+		[currentBuffer release];
+		currentBuffer = [NSMutableData new];
 		
-		if (!e) {
-			shouldResetAfterGoodPacket = [delegate respondsToSelector:@selector(packetParserShouldResetAfterCompletingPacket:)]? [delegate packetParserShouldResetAfterCompletingPacket:self] : YES;
-		}
-		
-		if (e || shouldResetAfterGoodPacket) {
-			[currentBuffer release];
-			currentBuffer = [NSMutableData new];
-			
-			beingReset = YES;
-		}
-		
-		if (e) {
-			if ([delegate respondsToSelector:@selector(packetParserDidResetAfterError:)])
-				[delegate packetParserDidResetAfterError:self];
-		}
+		beingReset = YES;
+	}
+	
+	if (e) {
+		if ([delegate respondsToSelector:@selector(packetParserDidResetAfterError:)])
+			[delegate packetParserDidResetAfterError:self];
 	}
 }
 
@@ -137,8 +156,8 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 		if (memcmp(kMvrPacketParserStartingBytes, bytes,
 				   kMvrPacketParserStartingBytesLength) == 0) {
 			
-			self.state = kMvrPacketParserExpectingMetadataItemTitle;
 			[delegate packetParserDidStartReceiving:self];
+			[self expectMetadataItemTitle];
 			
 		} else
 			[self resetAndReportError:kMvrPacketParserDidNotFindStartError];
@@ -151,6 +170,12 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	return NO;
 }
 
+- (void) expectMetadataItemTitle;
+{
+	self.state = kMvrPacketParserExpectingMetadataItemTitle;
+	self.lastSeenMetadataItemTitle = nil;
+}
+
 - (BOOL) consumeMetadataItemTitle;
 {
 	NSInteger loc = [self locationOfFirstNullInCurrentBuffer];
@@ -160,26 +185,36 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	if (loc != 0) {
 	
 		NSString* s = [[NSString alloc] initWithBytes:[currentBuffer bytes] length:loc encoding:NSUTF8StringEncoding];
+		
 		if (!s)
 			[self resetAndReportError:kMvrPacketParserNotUTF8StringError];
-		else {
-			self.lastSeenMetadataItemTitle = s;
-			self.state = kMvrPacketParserExpectingMetadataItemValue;
-		}
+		else
+			[self expectMetadataItemValueWithTitle:s];
+		
 		[s release];
 		
-	} else {
-		if (lastReportedBodySize == 0) {
-			// we'd grab the body here, but since the body is empty, we go on.
-			[delegate packetParser:self didReceiveBodyDataPart:[NSData data]];
-			[self resetAndReportError:0];
-		} else
-			self.state = kMvrPacketParserExpectingBody;
-	}
+	} else
+		[self expectBody];
 	
 	if (!beingReset)
 		[currentBuffer replaceBytesInRange:NSMakeRange(0, loc + 1) withBytes:NULL length:0];
 	return YES;
+}
+
+- (void) expectMetadataItemValueWithTitle:(NSString*) s;
+{
+	self.lastSeenMetadataItemTitle = s;
+	self.state = kMvrPacketParserExpectingMetadataItemValue;	
+}
+
+- (void) expectBody;
+{
+	if (lastReportedBodySize == 0) {
+		// we'd grab the body here, but since the body is empty, we go on.
+		[delegate packetParser:self didReceiveBodyDataPart:[NSData data]];
+		[self resetAndReportError:0];
+	} else
+		self.state = kMvrPacketParserExpectingBody;
 }
 
 - (BOOL) consumeMetadataItemValue;
@@ -195,17 +230,82 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	if (!s)
 		[self resetAndReportError:kMvrPacketParserNotUTF8StringError];
 	else {
-		if ([self.lastSeenMetadataItemTitle isEqual:kMvrPacketParserSizeKey])
-			lastReportedBodySize = [s longLongValue];
-				
-		self.state = kMvrPacketParserExpectingMetadataItemTitle;
-		[delegate packetParser:self didReceiveMetadataItemWithKey:self.lastSeenMetadataItemTitle value:s];
-		self.lastSeenMetadataItemTitle = nil;
+		[self processAndReportMetadataItemWithTitle:self.lastSeenMetadataItemTitle value:s];
+		[self expectMetadataItemTitle];
 	}
 	[s release];
 	
 	if (!beingReset)
 		[currentBuffer replaceBytesInRange:NSMakeRange(0, loc + 1) withBytes:NULL length:0];
+	return YES;
+}
+
+- (void) processAndReportMetadataItemWithTitle:(NSString*) title value:(NSString*) s;
+{
+	if ([title isEqual:kMvrPacketParserSizeKey])
+		lastReportedBodySize = [s longLongValue];
+	
+	if ([title isEqual:kMvrProtocolPayloadStopsKey]) {
+		if (![self setPayloadStopsFromString:s])
+			return;
+	}
+	
+	if ([title isEqual:kMvrProtocolPayloadKeysKey]) {
+		if (![self setPayloadKeysFromString:s])
+			return;
+	}
+	
+	[delegate packetParser:self didReceiveMetadataItemWithKey:title value:s];
+}
+
+- (BOOL) setPayloadStopsFromString:(NSString*) string;
+{
+	NSScanner* s = [NSScanner scannerWithString:string];
+	[s setCharactersToBeSkipped:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+	
+	NSMutableArray* stops = [NSMutableArray array];
+	
+	long long max = -1;
+	while (![s isAtEnd]) {
+		long long stop;
+		if (![s scanLongLong:&stop] || stop < 0 || stop < max) {
+			[self resetAndReportError:kMvrPacketParserHasInvalidStopsStringError];
+			return NO;
+		} else {
+			[stops addObject:[NSNumber numberWithLongLong:stop]];
+			max = stop;
+		}
+	}
+	
+	if (self.payloadKeys && [self.payloadKeys count] != [stops count]) {
+		[self resetAndReportError:kMvrPacketParserKeysAndStopsDoNotMatchError];
+		return NO;
+	}
+
+	self.payloadStops = stops;
+	return YES;
+}
+
+- (BOOL) setPayloadKeysFromString:(NSString*) string;
+{
+	NSMutableArray* keys = [NSMutableArray arrayWithArray:
+							 [string componentsSeparatedByString:@" "]];
+	
+	NSUInteger index;
+	while ((index = [keys indexOfObject:@""]) != NSNotFound)
+		[keys removeObjectAtIndex:index];
+	
+	if (self.payloadStops && [self.payloadStops count] != [keys count]) {
+		[self resetAndReportError:kMvrPacketParserKeysAndStopsDoNotMatchError];
+		return NO;
+	}
+	
+	if ([[NSSet setWithArray:keys] count] != [keys count]) {
+		[self resetAndReportError:kMvrPacketParserHasDuplicateKeysError];
+		return NO;
+	}
+	
+	self.payloadKeys = keys;
 	return YES;
 }
 

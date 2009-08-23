@@ -34,16 +34,24 @@
 	[data appendBytes:&nullCharacter length:1];
 	[data appendData:[@"A short test packet" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
+
 	[data appendData:[@"Type" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
 	[data appendData:[@"net.infinite-labs.Mover.test-packet" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
+
 	[data appendData:[@"Size" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
 	[data appendData:[@"2" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
 	
+	[data appendData:[@"Payload-Stops" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
+	[data appendData:[@"2" dataUsingEncoding:NSUTF8StringEncoding]];
+	[data appendBytes:&nullCharacter length:1];	
+	
+	[data appendBytes:&nullCharacter length:1];
+	
 	[data appendData:[@"OK" dataUsingEncoding:NSUTF8StringEncoding]];
 	
 	return data;
@@ -55,6 +63,7 @@
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Title" value:@"A short test packet"];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Type" value:@"net.infinite-labs.Mover.test-packet"];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Size" value:@"2"];
+	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Payload-Stops" value:@"2"];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveBodyDataPart:[OCMArg checkWithSelector:@selector(isSameDataAsOKEncoded:) onObject:self]];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg isNil]];
 	[[[delegate stub] andReturnValue:[NSNumber numberWithBool:YES]] packetParserShouldResetAfterCompletingPacket:[OCMArg any]];
@@ -80,6 +89,7 @@
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Title" value:@"A short test packet"];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Type" value:@"net.infinite-labs.Mover.test-packet"];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Size" value:@"2"];
+	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Payload-Stops" value:@"2"];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveBodyDataPart:[OCMArg checkWithSelector:@selector(isSameDataAsOEncoded:) onObject:self]];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveBodyDataPart:[OCMArg checkWithSelector:@selector(isSameDataAsKEncoded:) onObject:self]];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg isNil]];
@@ -122,9 +132,17 @@
 	[self makeMockObjectExpectValidPacketMessages:delegate];
 	
 	MvrPacketParser* parser = [[[MvrPacketParser alloc] initWithDelegate:(id <MvrPacketParserDelegate>) delegate] autorelease];
+	STAssertTrue(parser.expectingNewPacket, nil);
+
 	[parser appendData:[self validPacket] isKnownStartOfNewPacket:YES];
+	STAssertTrue(parser.expectingNewPacket, nil);
+	
 	[parser appendData:garbage isKnownStartOfNewPacket:YES];
+	STAssertTrue(parser.expectingNewPacket, nil);
+	
 	[parser appendData:[self validPacket] isKnownStartOfNewPacket:YES];
+	STAssertTrue(parser.expectingNewPacket, nil);
+
 	[delegate verify];
 }
 

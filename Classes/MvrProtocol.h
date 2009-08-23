@@ -11,3 +11,6 @@ static const size_t kMvrPacketParserStartingBytesLength =
 	sizeof(kMvrPacketParserStartingBytes) / sizeof(uint8_t);
 
 #define kMvrPacketParserSizeKey @"Size"
+
+#define kMvrProtocolPayloadStopsKey @"Payload-Stops"
+#define kMvrProtocolPayloadKeysKey @"Payload-Keys"

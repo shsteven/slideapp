@@ -25,6 +25,9 @@ enum {
 	kMvrPacketParserDidNotFindStartError = 1,	
 	kMvrPacketParserNotUTF8StringError = 2,
 	kMvrPacketParserMetadataDidNotIncludeSize = 3,
+	kMvrPacketParserHasInvalidStopsStringError = 4,
+	kMvrPacketParserKeysAndStopsDoNotMatchError = 5,
+	kMvrPacketParserHasDuplicateKeysError = 6,
 };
 
 @class MvrPacketParser;
@@ -69,6 +72,9 @@ enum {
 	NSString* lastSeenMetadataItemTitle;
 	long long lastReportedBodySize;
 	unsigned long long sizeOfReportedBytes;
+	
+	NSArray* payloadStops;
+	NSArray* payloadKeys;
 	
 	BOOL beingReset;
 }
