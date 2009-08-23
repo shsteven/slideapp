@@ -21,3 +21,6 @@ Ads/CurrentSettings.xcconfig
 /ItemsTableBackdrop.png
 /Default.png
 /iTunesArtwork
+
+# These I don't want to distribute and are not essential to building.
+/OCMock.framework

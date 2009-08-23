@@ -14,8 +14,8 @@
 @property(assign, setter=private_setState:) MvrPacketParserState state;
 @property(copy) NSString* lastSeenMetadataItemTitle;
 
-// code == 0 means that we reset without reporting any error.
-- (void) resetAndReportError:(NSUInteger) code;
+// code == 0 means that we reset reporting no error, code < 0 means that we skip reporting entirely.
+- (void) resetAndReportError:(NSInteger) code;
 - (NSInteger) locationOfFirstNullInCurrentBuffer;
 
 // These methods return YES if we can continue consuming, or NO if we need
@@ -36,7 +36,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	if (self = [super init]) {
 		delegate = d;
 		currentBuffer = [NSMutableData new];
-		[self resetAndReportError:0];
+		[self resetAndReportError:-1];
 	}
 	
 	return self;
@@ -52,6 +52,18 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (void) appendData:(NSData*) data;
 {
+	[self appendData:data isKnownStartOfNewPacket:NO];
+}
+
+- (void) appendData:(NSData*) data isKnownStartOfNewPacket:(BOOL) reset;
+{
+	if (reset) {
+		[currentBuffer release];
+		currentBuffer = [[NSMutableData alloc] initWithData:data];
+		
+		[self resetAndReportError:(self.state == kMvrPacketParserStartingState)? -1 : 0];
+	}
+	
 	[currentBuffer appendData:data];
 	[self consumeCurrentBuffer];
 }
@@ -91,15 +103,17 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	}
 }
 
-- (void) resetAndReportError:(NSUInteger) errorCode;
+- (void) resetAndReportError:(NSInteger) errorCode;
 {
 	lastReportedBodySize = -1;
 	sizeOfReportedBytes = 0;
 	self.lastSeenMetadataItemTitle = nil;
 	
 	self.state = kMvrPacketParserExpectingStart;
-	if (errorCode != 0) {
-		NSError* e = [NSError errorWithDomain:kMvrPacketParserErrorDomain code:errorCode userInfo:nil];
+	if (errorCode >= 0) {
+		NSError* e = nil;
+		if (errorCode != 0) 
+			e = [NSError errorWithDomain:kMvrPacketParserErrorDomain code:errorCode userInfo:nil];
 		[delegate packetParser:self didReturnToStartingStateWithError:e];
 	}
 }
@@ -107,7 +121,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 - (BOOL) consumeStartOfPacket;
 {
 	if ([currentBuffer length] >= kMvrPacketParserStartingBytesLength) {
-		const char* bytes = (const char*) [currentBuffer bytes];
+		const uint8_t* bytes = (const uint8_t*) [currentBuffer bytes];
 		if (memcmp(kMvrPacketParserStartingBytes, bytes,
 				   kMvrPacketParserStartingBytesLength) == 0) {
 			
@@ -189,7 +203,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 		
 	NSInteger i = MIN([currentBuffer length], lastReportedBodySize - sizeOfReportedBytes);
 	sizeOfReportedBytes += i;
-	NSAssert(sizeOfReportedBytes < lastReportedBodySize, @"Should not report more bytes than I have been told to report");
+	NSAssert(sizeOfReportedBytes <= lastReportedBodySize, @"Should not report more bytes than I have been told to report");
 	NSRange dataRange = NSMakeRange(0, i);
 	
 	[delegate packetParser:self didReceiveBodyDataPart:[currentBuffer subdataWithRange:dataRange]];
@@ -211,6 +225,11 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	}
 	
 	return NSNotFound;
+}
+
+- (BOOL) expectingNewPacket;
+{
+	return self.state == kMvrPacketParserStartingState && [currentBuffer length] == 0;
 }
 
 @end

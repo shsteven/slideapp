@@ -36,6 +36,11 @@
 		153B80080FF209A600DDFD16 /* L0MoverNobodyFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153B80070FF209A600DDFD16 /* L0MoverNobodyFoundViewController.m */; };
 		153D00EA104145CC00469C50 /* MvrPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 153D00E9104145CC00469C50 /* MvrPacketParser.m */; };
 		153D0141104156F400469C50 /* MvrPacketBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 153D0140104156F400469C50 /* MvrPacketBuilder.m */; };
+		153D01CD10416C7E00469C50 /* MvrPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 153D00E9104145CC00469C50 /* MvrPacketParser.m */; };
+		153D01CE10416C7E00469C50 /* MvrPacketBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 153D0140104156F400469C50 /* MvrPacketBuilder.m */; };
+		153D01D110416CBE00469C50 /* MvrPacketParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 153D01D010416CBE00469C50 /* MvrPacketParserTests.m */; };
+		153D01E010416F4E00469C50 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153D01DF10416F4E00469C50 /* OCMock.framework */; };
+		153D01E410416F5D00469C50 /* OCMock.framework in Copy OCMock */ = {isa = PBXBuildFile; fileRef = 153D01DF10416F4E00469C50 /* OCMock.framework */; };
 		154E74BB0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154E74BA0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert */; };
 		154E74D30FE7F32D005945F9 /* L0MoverImageViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1510C4E40FBEDB3D003849A6 /* L0MoverImageViewer.xib */; };
 		154E74D50FE7F379005945F9 /* L0MoverItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1640F7590D000E5BA2F /* L0MoverItemView.xib */; };
@@ -194,6 +199,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		153D01F210416F8700469C50 /* Copy OCMock */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				153D01E410416F5D00469C50 /* OCMock.framework in Copy OCMock */,
+			);
+			name = "Copy OCMock";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		154FB7890FB1F0D500DB26C6 /* Copy Settings.bundle Localizations */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -254,6 +270,10 @@
 		153D013F104156F400469C50 /* MvrPacketBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPacketBuilder.h; sourceTree = "<group>"; };
 		153D0140104156F400469C50 /* MvrPacketBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketBuilder.m; sourceTree = "<group>"; };
 		153D014310415A7800469C50 /* MvrProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrProtocol.h; sourceTree = "<group>"; };
+		153D01C610416C6F00469C50 /* Mover+Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mover+Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		153D01C710416C6F00469C50 /* Mover+Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mover+Tests-Info.plist"; sourceTree = "<group>"; };
+		153D01D010416CBE00469C50 /* MvrPacketParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketParserTests.m; sourceTree = "<group>"; };
+		153D01DF10416F4E00469C50 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
 		154E74BA0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0MoverNoEmailSetUp.alert; sourceTree = "<group>"; };
 		154FB61D0FB18EA500DB26C6 /* L0MoverNewVersion.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0MoverNewVersion.alert; sourceTree = "<group>"; };
 		154FB7690FB1F06D00DB26C6 /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = it.lproj; sourceTree = "<group>"; };
@@ -422,6 +442,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		153D01C310416C6F00469C50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				153D01E010416F4E00469C50 /* OCMock.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,6 +546,7 @@
 		153D00E71041459900469C50 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				153D01CF10416C8200469C50 /* Unit Tests */,
 				153D014310415A7800469C50 /* MvrProtocol.h */,
 				153D00E8104145CC00469C50 /* MvrPacketParser.h */,
 				153D00E9104145CC00469C50 /* MvrPacketParser.m */,
@@ -525,6 +554,22 @@
 				153D0140104156F400469C50 /* MvrPacketBuilder.m */,
 			);
 			name = Protocol;
+			sourceTree = "<group>";
+		};
+		153D01CF10416C8200469C50 /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				153D01D010416CBE00469C50 /* MvrPacketParserTests.m */,
+			);
+			name = "Unit Tests";
+			sourceTree = "<group>";
+		};
+		153D01D710416F4300469C50 /* Unit Test Only */ = {
+			isa = PBXGroup;
+			children = (
+				153D01DF10416F4E00469C50 /* OCMock.framework */,
+			);
+			name = "Unit Test Only";
 			sourceTree = "<group>";
 		};
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
@@ -746,6 +791,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* MoverPlus.app */,
+				153D01C610416C6F00469C50 /* Mover+Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -762,6 +808,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				153D01C710416C6F00469C50 /* Mover+Tests-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -842,6 +889,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				153D01D710416F4300469C50 /* Unit Test Only */,
 				15270DAE10369CCF006858C0 /* CrashReporter.framework */,
 				155ABBDB0FE6D36A0069B069 /* MessageUI.framework */,
 				15DEE3340FD922D700562663 /* GameKit.framework */,
@@ -866,6 +914,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		153D01C510416C6F00469C50 /* Mover+Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 153D01CC10416C7100469C50 /* Build configuration list for PBXNativeTarget "Mover+Tests" */;
+			buildPhases = (
+				153D01F210416F8700469C50 /* Copy OCMock */,
+				153D01C110416C6F00469C50 /* Resources */,
+				153D01C210416C6F00469C50 /* Sources */,
+				153D01C310416C6F00469C50 /* Frameworks */,
+				153D01C410416C6F00469C50 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mover+Tests";
+			productName = "Mover+Tests";
+			productReference = 153D01C610416C6F00469C50 /* Mover+Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		1D6058900D05DD3D006BFB54 /* Mover */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover" */;
@@ -924,6 +991,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* Mover */,
+				153D01C510416C6F00469C50 /* Mover+Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -967,6 +1035,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		153D01C110416C6F00469C50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1043,6 +1118,19 @@
 			shellPath = /bin/sh;
 			shellScript = "echo \"note: Just built bundle named '$ILABS_MOVER_BUNDLE_NAME' with configuration '$CONFIGURATION' and SDK '$SDK_NAME'.\" >&2\n";
 		};
+		153D01C410416C6F00469C50 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		15E7FDF90FADC41C00E9C438 /* Build Localizations */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1060,6 +1148,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		153D01C210416C6F00469C50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				153D01CD10416C7E00469C50 /* MvrPacketParser.m in Sources */,
+				153D01CE10416C7E00469C50 /* MvrPacketBuilder.m in Sources */,
+				153D01D110416CBE00469C50 /* MvrPacketParserTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1187,6 +1285,112 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		153D01C810416C7100469C50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "Mover+Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Mover+Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		153D01C910416C7100469C50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "Mover+Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Mover+Tests";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		153D01CA10416C7100469C50 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "Mover+Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Mover+Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = "Ad Hoc";
+		};
+		153D01CB10416C7100469C50 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "Mover+Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Mover+Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = "App Store";
+		};
 		1582D2A00F87DC72008E5EC0 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */;
@@ -1292,6 +1496,17 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		153D01CC10416C7100469C50 /* Build configuration list for PBXNativeTarget "Mover+Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				153D01C810416C7100469C50 /* Debug */,
+				153D01C910416C7100469C50 /* Release */,
+				153D01CA10416C7100469C50 /* Ad Hoc */,
+				153D01CB10416C7100469C50 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

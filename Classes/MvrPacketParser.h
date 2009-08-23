@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "MvrProtocol.h"
 
-enum {
+enum {	
 	kMvrPacketParserExpectingStart,
 	kMvrPacketParserExpectingMetadataItemTitle,
 	kMvrPacketParserExpectingMetadataItemValue,
 	kMvrPacketParserExpectingBody,
+	
+	kMvrPacketParserStartingState = kMvrPacketParserExpectingStart,
 };
 typedef NSUInteger MvrPacketParserState;
 
@@ -49,7 +51,10 @@ enum {
 
 - (id) initWithDelegate:(id <MvrPacketParserDelegate>) delegate;
 - (void) appendData:(NSData*) data;
+- (void) appendData:(NSData*) data isKnownStartOfNewPacket:(BOOL) reset;
 
 @property(readonly, assign) MvrPacketParserState state;
+
+@property(readonly) BOOL expectingNewPacket;
 
 @end

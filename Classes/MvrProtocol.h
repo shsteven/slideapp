@@ -6,8 +6,8 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-static const char kMvrPacketParserStartingBytes[] = { 'M', 'O', 'V', 'R', '2' };
+static const uint8_t kMvrPacketParserStartingBytes[] = { 'M', 'O', 'V', 'R', '2' };
 static const size_t kMvrPacketParserStartingBytesLength =
-	sizeof(kMvrPacketParserStartingBytes) / sizeof(char);
+	sizeof(kMvrPacketParserStartingBytes) / sizeof(uint8_t);
 
 #define kMvrPacketParserSizeKey @"Size"
