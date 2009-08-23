@@ -34,6 +34,7 @@
 		15390A5B0FC92D3E00222925 /* Delicious.png in Resources */ = {isa = PBXBuildFile; fileRef = 15390A5A0FC92D3E00222925 /* Delicious.png */; };
 		15390A5D0FC92D4500222925 /* Instapaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 15390A5C0FC92D4500222925 /* Instapaper.png */; };
 		153B80080FF209A600DDFD16 /* L0MoverNobodyFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153B80070FF209A600DDFD16 /* L0MoverNobodyFoundViewController.m */; };
+		153D00EA104145CC00469C50 /* MvrPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 153D00E9104145CC00469C50 /* MvrPacketParser.m */; };
 		154E74BB0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154E74BA0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert */; };
 		154E74D30FE7F32D005945F9 /* L0MoverImageViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1510C4E40FBEDB3D003849A6 /* L0MoverImageViewer.xib */; };
 		154E74D50FE7F379005945F9 /* L0MoverItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1640F7590D000E5BA2F /* L0MoverItemView.xib */; };
@@ -247,6 +248,8 @@
 		15390A5C0FC92D4500222925 /* Instapaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Instapaper.png; sourceTree = "<group>"; };
 		153B80060FF209A600DDFD16 /* L0MoverNobodyFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverNobodyFoundViewController.h; sourceTree = "<group>"; };
 		153B80070FF209A600DDFD16 /* L0MoverNobodyFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverNobodyFoundViewController.m; sourceTree = "<group>"; };
+		153D00E8104145CC00469C50 /* MvrPacketParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPacketParser.h; sourceTree = "<group>"; };
+		153D00E9104145CC00469C50 /* MvrPacketParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketParser.m; sourceTree = "<group>"; };
 		154E74BA0FE7EE3A005945F9 /* L0MoverNoEmailSetUp.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0MoverNoEmailSetUp.alert; sourceTree = "<group>"; };
 		154FB61D0FB18EA500DB26C6 /* L0MoverNewVersion.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0MoverNewVersion.alert; sourceTree = "<group>"; };
 		154FB7690FB1F06D00DB26C6 /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = it.lproj; sourceTree = "<group>"; };
@@ -508,6 +511,15 @@
 			name = Troubleshooting;
 			sourceTree = "<group>";
 		};
+		153D00E71041459900469C50 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				153D00E8104145CC00469C50 /* MvrPacketParser.h */,
+				153D00E9104145CC00469C50 /* MvrPacketParser.m */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
 		154FB78F0FB1F14700DB26C6 /* Compiled Locales */ = {
 			isa = PBXGroup;
 			children = (
@@ -556,6 +568,7 @@
 		15C0C0B10FDFA1EE005A75B6 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				153D00E71041459900469C50 /* Protocol */,
 				1559B61B0F798BD9005E4362 /* L0PeerDiscovery.h */,
 				15C0C0B20FDFA243005A75B6 /* MvrNetworkExchange.h */,
 				15C0C0B30FDFA243005A75B6 /* MvrNetworkExchange.m */,
@@ -1102,6 +1115,7 @@
 				1592D60C0FF22CF100433F4B /* L0MoverNetworkHelpPane.m in Sources */,
 				15097B8A1033783A008DB9CC /* MvrApplication.m in Sources */,
 				15270DD910369D92006858C0 /* L0MoverAppDelegate+MvrCrashReporting.m in Sources */,
+				153D00EA104145CC00469C50 /* MvrPacketParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
