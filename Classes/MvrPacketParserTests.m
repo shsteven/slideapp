@@ -57,6 +57,7 @@
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Size" value:@"2"];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveBodyDataPart:[OCMArg checkWithSelector:@selector(isSameDataAsOKEncoded:) onObject:self]];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg isNil]];
+	[[[delegate stub] andReturnValue:[NSNumber numberWithBool:YES]] packetParserShouldResetAfterCompletingPacket:[OCMArg any]];
 }
 
 - (void) testParsingValidPacket;
@@ -82,7 +83,8 @@
 	[[delegate expect] packetParser:[OCMArg any] didReceiveBodyDataPart:[OCMArg checkWithSelector:@selector(isSameDataAsOEncoded:) onObject:self]];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveBodyDataPart:[OCMArg checkWithSelector:@selector(isSameDataAsKEncoded:) onObject:self]];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg isNil]];
-	
+	[[[delegate stub] andReturnValue:[NSNumber numberWithBool:YES]] packetParserShouldResetAfterCompletingPacket:[OCMArg any]];
+
 	MvrPacketParser* parser = [[[MvrPacketParser alloc] initWithDelegate:(id <MvrPacketParserDelegate>) delegate] autorelease];
 	
 	size_t i; for (i = 0; i < [data length]; i++) {
@@ -98,7 +100,7 @@
 	
 	OCMockObject* delegate = [OCMockObject mockForProtocol:@protocol(MvrPacketParserDelegate)];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg checkWithSelector:@selector(isMissingHeaderError:) onObject:self]];
-	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg checkWithSelector:@selector(isMissingHeaderError:) onObject:self]];
+	[[delegate expect] packetParserDidResetAfterError:[OCMArg any]];
 	
 	MvrPacketParser* parser = [[[MvrPacketParser alloc] initWithDelegate:(id <MvrPacketParserDelegate>) delegate] autorelease];
 	[parser appendData:garbage];
@@ -116,7 +118,7 @@
 	OCMockObject* delegate = [OCMockObject mockForProtocol:@protocol(MvrPacketParserDelegate)];
 	[self makeMockObjectExpectValidPacketMessages:delegate];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg checkWithSelector:@selector(isMissingHeaderError:) onObject:self]];
-	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg checkWithSelector:@selector(isMissingHeaderError:) onObject:self]];
+	[[delegate expect] packetParserDidResetAfterError:[OCMArg any]];
 	[self makeMockObjectExpectValidPacketMessages:delegate];
 	
 	MvrPacketParser* parser = [[[MvrPacketParser alloc] initWithDelegate:(id <MvrPacketParserDelegate>) delegate] autorelease];
@@ -137,6 +139,7 @@
 	OCMockObject* delegate = [OCMockObject mockForProtocol:@protocol(MvrPacketParserDelegate)];
 	[[delegate expect] packetParserDidStartReceiving:[OCMArg any]];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg checkWithSelector:@selector(isNotUTF8Error:) onObject:self]];
+	[[delegate expect] packetParserDidResetAfterError:[OCMArg any]];
 	
 	MvrPacketParser* parser = [[[MvrPacketParser alloc] initWithDelegate:(id <MvrPacketParserDelegate>) delegate] autorelease];
 	[parser appendData:data];
@@ -158,6 +161,7 @@
 	OCMockObject* delegate = [OCMockObject mockForProtocol:@protocol(MvrPacketParserDelegate)];
 	[[delegate expect] packetParserDidStartReceiving:[OCMArg any]];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg checkWithSelector:@selector(isNotUTF8Error:) onObject:self]];
+	[[delegate expect] packetParserDidResetAfterError:[OCMArg any]];
 	
 	MvrPacketParser* parser = [[[MvrPacketParser alloc] initWithDelegate:(id <MvrPacketParserDelegate>) delegate] autorelease];
 	[parser appendData:data];
@@ -176,6 +180,8 @@
 	[self makeMockObjectExpectValidPacketMessages:delegate];
 	[[delegate expect] packetParserDidStartReceiving:[OCMArg any]];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg checkWithSelector:@selector(isNotUTF8Error:) onObject:self]];
+	[[delegate expect] packetParserDidResetAfterError:[OCMArg any]];
+
 	[self makeMockObjectExpectValidPacketMessages:delegate];
 	
 	MvrPacketParser* parser = [[[MvrPacketParser alloc] initWithDelegate:(id <MvrPacketParserDelegate>) delegate] autorelease];
@@ -202,6 +208,7 @@
 	[[delegate expect] packetParserDidStartReceiving:[OCMArg any]];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg checkWithSelector:@selector(isNotUTF8Error:) onObject:self]];
 	[self makeMockObjectExpectValidPacketMessages:delegate];
+	[[delegate expect] packetParserDidResetAfterError:[OCMArg any]];
 	
 	MvrPacketParser* parser = [[[MvrPacketParser alloc] initWithDelegate:(id <MvrPacketParserDelegate>) delegate] autorelease];
 	[parser appendData:[self validPacket]];

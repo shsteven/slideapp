@@ -70,30 +70,24 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (void) consumeCurrentBuffer;
 {
-	while ([currentBuffer length] > 0) {
+	beingReset = NO;
+	BOOL shouldContinueParsingForData = YES;
+	while ([currentBuffer length] > 0 && shouldContinueParsingForData && !beingReset) {
 		switch (self.state) {
 			case kMvrPacketParserExpectingStart:
-				if (![self consumeStartOfPacket])
-					return;
-				
+				shouldContinueParsingForData = [self consumeStartOfPacket];
 				break;
 				
 			case kMvrPacketParserExpectingMetadataItemTitle:
-				if (![self consumeMetadataItemTitle])
-					return;
-				
+				shouldContinueParsingForData = [self consumeMetadataItemTitle];				
 				break;
 				
 			case kMvrPacketParserExpectingMetadataItemValue:
-				if (![self consumeMetadataItemValue])
-					return;
-				
+				shouldContinueParsingForData = [self consumeMetadataItemValue];
 				break;
 				
 			case kMvrPacketParserExpectingBody:
-				if (![self consumeBody])
-					return;
-				
+				shouldContinueParsingForData = [self consumeBody];				
 				break;
 				
 			default:
@@ -115,6 +109,24 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 		if (errorCode != 0) 
 			e = [NSError errorWithDomain:kMvrPacketParserErrorDomain code:errorCode userInfo:nil];
 		[delegate packetParser:self didReturnToStartingStateWithError:e];
+
+		BOOL shouldResetAfterGoodPacket = NO;
+		
+		if (!e) {
+			shouldResetAfterGoodPacket = [delegate respondsToSelector:@selector(packetParserShouldResetAfterCompletingPacket:)]? [delegate packetParserShouldResetAfterCompletingPacket:self] : YES;
+		}
+		
+		if (e || shouldResetAfterGoodPacket) {
+			[currentBuffer release];
+			currentBuffer = [NSMutableData new];
+			
+			beingReset = YES;
+		}
+		
+		if (e) {
+			if ([delegate respondsToSelector:@selector(packetParserDidResetAfterError:)])
+				[delegate packetParserDidResetAfterError:self];
+		}
 	}
 }
 
@@ -131,7 +143,8 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 		} else
 			[self resetAndReportError:kMvrPacketParserDidNotFindStartError];
 		
-		[currentBuffer replaceBytesInRange:NSMakeRange(0, 5) withBytes:NULL length:0];
+		if (!beingReset)
+			[currentBuffer replaceBytesInRange:NSMakeRange(0, kMvrPacketParserStartingBytesLength) withBytes:NULL length:0];
 		return YES;
 	}
 	
@@ -164,7 +177,8 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 			self.state = kMvrPacketParserExpectingBody;
 	}
 	
-	[currentBuffer replaceBytesInRange:NSMakeRange(0, loc + 1) withBytes:NULL length:0];
+	if (!beingReset)
+		[currentBuffer replaceBytesInRange:NSMakeRange(0, loc + 1) withBytes:NULL length:0];
 	return YES;
 }
 
@@ -190,7 +204,8 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	}
 	[s release];
 	
-	[currentBuffer replaceBytesInRange:NSMakeRange(0, loc + 1) withBytes:NULL length:0];
+	if (!beingReset)
+		[currentBuffer replaceBytesInRange:NSMakeRange(0, loc + 1) withBytes:NULL length:0];
 	return YES;
 }
 
