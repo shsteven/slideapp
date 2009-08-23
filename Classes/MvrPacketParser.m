@@ -346,7 +346,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 		if (currentStop >= [self.payloadStops count])
 			[self resetAndReportError:kMvrPacketParserNoError];
 		else
-			toReadForCurrentStop = [[self.payloadStops objectAtIndex:currentStop] longLongValue];
+			toReadForCurrentStop = [[self.payloadStops objectAtIndex:currentStop] longLongValue] - [[self.payloadStops objectAtIndex:currentStop - 1] longLongValue];
 	}
 	
 	return YES;

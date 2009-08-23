@@ -26,7 +26,6 @@ enum {
 	// After enough bytes have been collected for a new packet, the parser couldn't find the start of a packet. The bytes will have been consumed.
 	kMvrPacketParserDidNotFindStartError,
 	kMvrPacketParserNotUTF8StringError,
-	kMvrPacketParserMetadataDidNotIncludeSize,
 	kMvrPacketParserHasInvalidStopsStringError,
 	kMvrPacketParserKeysAndStopsDoNotMatchError,
 	kMvrPacketParserHasDuplicateKeysError,
