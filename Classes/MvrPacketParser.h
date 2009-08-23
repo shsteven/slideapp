@@ -58,15 +58,9 @@ enum {
 
 /*
  
- The packet parser works like some sort of state machine-driven thingie. When
- just created, it's in a 'starting state' with an empty buffer. As you append data,
- it progresses through a set of states, sending events to the delegate as it finds
- interesting stuff.
+ The packet parser works like some sort of state machine-driven thingie. When just created, it's in a 'starting state' with an empty buffer. As you append data, it progresses through a set of states, sending events to the delegate as it finds interesting stuff.
  
- It's possible that what got passed was truncated with partially-valid
- data, not enough to emit an event. In that case, the leftover data will be stored by
- the parser in a buffer until subsequent appendData:... calls complete the data or
- produce an invalid packet. If a packet is completed successfully, parsing will restart
+ It's possible that what got passed was truncated with partially-valid data, not enough to emit an event. In that case, the leftover data will be stored by the parser in a buffer until subsequent appendData:... calls complete the data or produce an invalid packet. If a packet is completed successfully, parsing will restart with the remaining data in the buffer, unless packetParserShouldResetAfterCompletingPacket: returns YES.
  
  */
 
@@ -87,10 +81,8 @@ enum {
 
 - (id) initWithDelegate:(id <MvrPacketParserDelegate>) delegate;
 
-// Appends data to the parser's internal buffer, then moves the parsing
-// machinery until all data produces events to the delegate.
-// If reset == YES, the current state of the parser will be discarded before
-// considering the new data (a reset).
+// Appends data to the parser's internal buffer, then moves the parsing machinery until all data that can produce events has done so.
+// If reset == YES, the current state of the parser will be discarded, including leftover data from previous calls that has not yet produced events, before considering the new data (a reset).
 - (void) appendData:(NSData*) data isKnownStartOfNewPacket:(BOOL) reset;
 
 // Convenience for appendData:data isKnownStartOfNewPacket:NO.
@@ -98,10 +90,8 @@ enum {
 
 @property(readonly, assign) MvrPacketParserState state;
 
-// Returns YES if the parsers is expecting a brand-new packet.
-// If NO, it means either that we're not in the starting state of the
-// parser, or that we are but there is data in the queue.
-// This is YES immediately after every reset.
+// Returns YES if the parser is expecting a brand-new packet.
+// If NO, it means either that we're not in the starting state of the parser, or that we are but there is data in the queue. This is YES immediately after every reset and remains YES until the state is changed or data that does not cause an event is appended.
 @property(readonly) BOOL expectingNewPacket;
 
 @end
