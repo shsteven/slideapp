@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MvrProtocol.h"
 
 enum {
 	kMvrPacketParserExpectingStart,
@@ -22,8 +23,6 @@ enum {
 	kMvrPacketParserNotUTF8StringError = 2,
 	kMvrPacketParserMetadataDidNotIncludeSize = 3,
 };
-
-#define kMvrPacketParserSizeKey @"Size"
 
 @class MvrPacketParser;
 @protocol MvrPacketParserDelegate <NSObject>

@@ -104,13 +104,9 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	}
 }
 
-static const char kMvrPacketParserStartingBytes[] = { 'M', 'O', 'V', 'R', '2' };
-static const size_t kMvrPacketParserStartingBytesLength =
-	sizeof(kMvrPacketParserStartingBytes) / sizeof(char);
-
 - (BOOL) consumeStartOfPacket;
 {
-	if ([currentBuffer length] >= 5) {
+	if ([currentBuffer length] >= kMvrPacketParserStartingBytesLength) {
 		const char* bytes = (const char*) [currentBuffer bytes];
 		if (memcmp(kMvrPacketParserStartingBytes, bytes,
 				   kMvrPacketParserStartingBytesLength) == 0) {
