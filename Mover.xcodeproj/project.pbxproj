@@ -1362,6 +1362,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "Mover+Tests";
+				SDKROOT = iphonesimulator3.0;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = "Ad Hoc";

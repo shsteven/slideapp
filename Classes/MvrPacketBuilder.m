@@ -11,6 +11,7 @@
 @interface MvrPacketBuilder ()
 
 - (void) stopWithoutNotifying;
+- (void) startProducingPayload;
 
 @end
 
@@ -18,11 +19,16 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 
 @implementation MvrPacketBuilder
 
+@synthesize running = sealed;
+
 - (id) initWithDelegate:(id <MvrPacketBuilderDelegate>) d;
 {
 	if (self = [super init]) {
 		delegate = d;
 		metadata = [NSMutableDictionary new];
+		payloadOrder = [NSMutableArray new];
+		payloadObjects = [NSMutableDictionary new];
+		payloadLengths = [NSMutableDictionary new];
 	}
 	
 	return self;
@@ -31,8 +37,10 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 - (void) dealloc;
 {
 	[self stop];
+	[payloadOrder release];
+	[payloadObjects release];
+	[payloadLengths release];
 	[metadata release];
-	[body release];
 	[super dealloc];
 }
 
@@ -47,31 +55,74 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	[metadata setObject:v forKey:k];
 }
 
-- (void) setBody:(id) b length:(unsigned long long) l;
+- (void) addPayload:(id) b length:(unsigned long long) length forKey:(NSString*) key;
 {
-	NSAssert(!sealed, @"You can't modify the body while a packet is being built.");
+	NSAssert(!sealed, @"You can't modify the payloads while a packet is being built.");
 	
-	if ([b isKindOfClass:[NSData class]])
-		l = [b length];
+	[payloadOrder removeObject:key];
+	[payloadOrder addObject:key];
 	
-	if (body != b) {
-		[body release];
-		
-		if ([b isKindOfClass:[NSData class]])
-			body = [b copy];
-		else
-			body = [b retain];
-	}
+	if ([b isKindOfClass:[NSData class]]) {
+		[payloadObjects setObject:[[b copy] autorelease] forKey:key];
+		[payloadLengths setObject:[NSNumber numberWithUnsignedInteger:[b length]] forKey:key];
+	} else if ([b isKindOfClass:[NSInputStream class]]) {
+		[payloadObjects setObject:b forKey:key];
+		[payloadLengths setObject:[NSNumber numberWithUnsignedLongLong:length] forKey:key];
+	} else
+		NSAssert(NO, @"Unknown kind of payload object.");
+}
+
+- (void) addPayloadWithData:(NSData*) d forKey:(NSString*) key;
+{
+	[self addPayload:d length:kMvrPacketBuilderDefaultLength forKey:key];
+}
+
+- (BOOL) addPayloadByReferencingFile:(NSString*) s forKey:(NSString*) key error:(NSError**) e;
+{
+	NSAssert(!sealed, @"You can't modify the payloads while a packet is being built.");
+
+	NSDictionary* d = [[NSFileManager defaultManager] attributesOfItemAtPath:s error:e];
+	if (!d) return NO;
 	
-	bodyLength = body? 0 : l;
+	NSInputStream* is = [NSInputStream inputStreamWithFileAtPath:s];
+	[self addPayload:is length:[[d objectForKey:NSFileSize] unsignedLongLongValue] forKey:key];
+	return YES;
+}
+
+- (void) removePayloadForKey:(NSString*) key;
+{
+	NSAssert(!sealed, @"You can't modify the payloads while a packet is being built.");
+	
+	[payloadOrder removeObject:key];
+	[payloadObjects removeObjectForKey:key];
+	[payloadLengths removeObjectForKey:key];
+}
+
+- (void) removeAllPayloads;
+{
+	NSAssert(!sealed, @"You can't modify the payloads while a packet is being built.");
+	
+	[payloadOrder removeAllObjects];
+	[payloadObjects removeAllObjects];
+	[payloadLengths removeAllObjects];
 }
 
 - (void) start;
 {
 	if (sealed) return;
 	cancelled = NO;
+	isWorkingOnStreamPayload = NO;
 	
-	[self setMetadataValue:[NSString stringWithFormat:@"%ull", bodyLength] forKey:kMvrPacketParserSizeKey];
+	NSMutableArray* stringVersionsOfPayloadStops = [NSMutableArray array];
+	unsigned long long current = 0;
+	for (NSNumber* n in payloadLengths) {
+		current += [n unsignedLongLongValue];
+		[stringVersionsOfPayloadStops addObject:[NSString stringWithFormat:@"%ull", current]];
+	}
+	
+	[self setMetadataValue:[stringVersionsOfPayloadStops componentsJoinedByString:@" "] forKey:kMvrProtocolPayloadStopsKey];
+	[self setMetadataValue:[payloadOrder componentsJoinedByString:@" "] forKey:kMvrProtocolPayloadKeysKey];
+	
 	sealed = YES;
 	
 	[delegate packetBuilderWillStart:self];
@@ -98,17 +149,50 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	
 	[delegate packetBuilder:self didProduceData:[NSData dataWithBytesNoCopy:(void*) &nullCharacter length:1 freeWhenDone:NO]];
 	if (cancelled) return;
+	currentPayloadIndex = 0;
 	
-	if ([body isKindOfClass:[NSData class]]) {
-		[delegate packetBuilder:self didProduceData:body];
-		sealed = NO;
-		if (cancelled) return;
+//	if ([body isKindOfClass:[NSData class]]) {
+//		[delegate packetBuilder:self didProduceData:body];
+//		sealed = NO;
+//		if (cancelled) return;
+//		[delegate packetBuilder:self didEndWithError:nil];
+//	} else if ([body isKindOfClass:[NSStream class]]) {
+//		toBeRead = bodyLength;
+//		[body scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+//		[body setDelegate:self];
+//		[body open];
+//	}
+	[self startProducingPayload];
+}
+
+- (void) startProducingPayload;
+{
+	while (!cancelled || currentPayloadIndex < [payloadOrder count]) {
+		
+		NSString* key = [payloadOrder objectAtIndex:currentPayloadIndex];
+		id payload = [payloadObjects objectForKey:key];
+		
+		if ([payload isKindOfClass:[NSData class]]) {
+			
+			isWorkingOnStreamPayload = NO;
+			[delegate packetBuilder:self didProduceData:payload];
+			
+		} else if ([payload isKindOfClass:[NSInputStream class]]) {
+			
+			isWorkingOnStreamPayload = YES;
+			toBeRead = [[payloadLengths objectForKey:key] unsignedLongLongValue];
+			[payload setDelegate:self];
+			[payload open];
+			return;
+			
+		}
+		
+		currentPayloadIndex++;
+	}
+	
+	if (!cancelled) {
 		[delegate packetBuilder:self didEndWithError:nil];
-	} else if ([body isKindOfClass:[NSStream class]]) {
-		toBeRead = bodyLength;
-		[body scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-		[body setDelegate:self];
-		[body open];
+		[self stopWithoutNotifying];
 	}
 }
 
@@ -133,8 +217,8 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 			if (cancelled) return;
 			
 			if (toBeRead == 0) {
-				[delegate packetBuilder:self didEndWithError:nil];
-				[self stopWithoutNotifying];
+				currentPayloadIndex++;
+				[self startProducingPayload];
 			}
 		}
 			break;
@@ -173,10 +257,12 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	if (!sealed) return;
 	cancelled = YES;
 	
-	if ([body isKindOfClass:[NSStream class]]) {
-		[body setDelegate:nil];
-		[body close];
-		[self setBody:nil length:kMvrPacketBuilderDefaultLength];
+	if (isWorkingOnStreamPayload) {
+		id body = [payloadObjects objectForKey:[payloadOrder objectAtIndex:currentPayloadIndex]];
+		if ([body isKindOfClass:[NSInputStream class]]) {
+			[body setDelegate:nil];
+			[body close];
+		}
 	}
 	
 	sealed = NO;
