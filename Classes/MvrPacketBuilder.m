@@ -58,6 +58,13 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	[metadata setObject:v forKey:k];
 }
 
+- (void) removeMetadataValueForKey:(NSString*) key;
+{
+	NSAssert(!sealed, @"You can't modify the metadata while a packet is being built.");
+	
+	[metadata removeObjectForKey:key];
+}
+
 - (void) addPayload:(id) b length:(unsigned long long) length forKey:(NSString*) key;
 {
 	NSAssert(!sealed, @"You can't modify the payloads while a packet is being built.");
@@ -110,13 +117,26 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	[payloadLengths removeAllObjects];
 }
 
+- (void) performDelayedStart:(NSTimer*) t;
+{
+	[self start];
+}
+
 - (void) start;
 {
+	@synchronized(self) {
+		if (self.runLoop != [NSRunLoop currentRunLoop]) {
+			[self.runLoop addTimer:[NSTimer timerWithTimeInterval:0 target:self selector:@selector(performDelayedStart:) userInfo:nil repeats:NO] forMode:NSRunLoopCommonModes];
+			return;
+		}
+	}
+	
 	if (sealed) return;
 	NSAssert(self.runLoop == [NSRunLoop currentRunLoop], @"Do not call -start on a thread other than the one where you scheduled the builder. Either call -start on the thread where you created the object, or use the .runLoop property to change what run loop to use to schedule stuff.");
 	
 	cancelled = NO;
 	isWorkingOnStreamPayload = NO;
+	paused = NO;
 	
 	NSMutableArray* stringVersionsOfPayloadStops = [NSMutableArray array];
 	unsigned long long current = 0;
@@ -208,30 +228,36 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 
 #define kMvrPacketBuilderStackBufferSize 10240
 
+- (void) producePayloadFromAvailableBytesOfStream:(NSInputStream*) aStream;
+{
+	uint8_t* buffer; NSUInteger bufferSize;
+	uint8_t stackBuffer[kMvrPacketBuilderStackBufferSize];
+	
+	if (![aStream getBuffer:&buffer length:&bufferSize]) {
+		buffer = stackBuffer;
+		bufferSize = [aStream read:buffer maxLength:kMvrPacketBuilderStackBufferSize];
+	}
+	
+	bufferSize = MIN(bufferSize, toBeRead);
+	toBeRead -= bufferSize;
+	
+	[delegate packetBuilder:self didProduceData:[NSData dataWithBytesNoCopy:buffer length:bufferSize freeWhenDone:NO]];
+	if (cancelled) return;
+	
+	if (toBeRead == 0) {
+		[aStream setDelegate:nil];
+		[aStream close];
+		currentPayloadIndex++;
+		[self startProducingPayload];
+	}
+}
+
 - (void) stream:(NSInputStream*) aStream handleEvent:(NSStreamEvent) eventCode;
-{	
+{
 	switch (eventCode) {
 		case NSStreamEventHasBytesAvailable: {
-			uint8_t* buffer; NSUInteger bufferSize;
-			uint8_t stackBuffer[kMvrPacketBuilderStackBufferSize];
-			
-			if (![aStream getBuffer:&buffer length:&bufferSize]) {
-				buffer = stackBuffer;
-				bufferSize = [aStream read:buffer maxLength:kMvrPacketBuilderStackBufferSize];
-			}
-			
-			bufferSize = MIN(bufferSize, toBeRead);
-			toBeRead -= bufferSize;
-			
-			[delegate packetBuilder:self didProduceData:[NSData dataWithBytesNoCopy:buffer length:bufferSize freeWhenDone:NO]];
-			if (cancelled) return;
-			
-			if (toBeRead == 0) {
-				[aStream setDelegate:nil];
-				[aStream close];
-				currentPayloadIndex++;
-				[self startProducingPayload];
-			}
+			if (!self.paused)
+				[self producePayloadFromAvailableBytesOfStream:aStream];
 		}
 			break;
 			
@@ -268,6 +294,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 {
 	if (!sealed) return;
 	cancelled = YES;
+	paused = NO;
 	
 	if (isWorkingOnStreamPayload) {
 		id body = [payloadObjects objectForKey:[payloadOrder objectAtIndex:currentPayloadIndex]];
@@ -278,6 +305,18 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	}
 	
 	sealed = NO;
+}
+
+@synthesize paused;
+- (void) setPaused:(BOOL) p;
+{
+	BOOL wasPaused = paused;
+	paused = p;
+	if (wasPaused && !paused && sealed && isWorkingOnStreamPayload) {
+		NSInputStream* is = [payloadObjects objectForKey:[payloadOrder objectAtIndex:currentPayloadIndex]];
+		if ([is hasBytesAvailable])
+			[self producePayloadFromAvailableBytesOfStream:is];
+	}
 }
 
 @end
