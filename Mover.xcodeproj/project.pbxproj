@@ -32,6 +32,7 @@
 		152AC41D1042B9B1000E5D0F /* WOW.data in Resources */ = {isa = PBXBuildFile; fileRef = 152AC4181042B9B1000E5D0F /* WOW.data */; };
 		152AC41E1042B9B1000E5D0F /* WOW-longer.data in Resources */ = {isa = PBXBuildFile; fileRef = 152AC4191042B9B1000E5D0F /* WOW-longer.data */; };
 		152AC41F1042B9B1000E5D0F /* OK.data in Resources */ = {isa = PBXBuildFile; fileRef = 152AC41A1042B9B1000E5D0F /* OK.data */; };
+		152AC4DB104309BD000E5D0F /* MvrChunkedBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 152AC4DA104309BD000E5D0F /* MvrChunkedBuffer.m */; };
 		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
 		153734ED0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
@@ -266,6 +267,8 @@
 		152AC4181042B9B1000E5D0F /* WOW.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WOW.data; sourceTree = SOURCE_ROOT; };
 		152AC4191042B9B1000E5D0F /* WOW-longer.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "WOW-longer.data"; sourceTree = SOURCE_ROOT; };
 		152AC41A1042B9B1000E5D0F /* OK.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OK.data; sourceTree = SOURCE_ROOT; };
+		152AC4D9104309BD000E5D0F /* MvrChunkedBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrChunkedBuffer.h; sourceTree = "<group>"; };
+		152AC4DA104309BD000E5D0F /* MvrChunkedBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrChunkedBuffer.m; sourceTree = "<group>"; };
 		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
 		153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0UITestingHooks.m"; sourceTree = "<group>"; };
 		153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
@@ -565,6 +568,8 @@
 				153D00E9104145CC00469C50 /* MvrPacketParser.m */,
 				153D013F104156F400469C50 /* MvrPacketBuilder.h */,
 				153D0140104156F400469C50 /* MvrPacketBuilder.m */,
+				152AC4D9104309BD000E5D0F /* MvrChunkedBuffer.h */,
+				152AC4DA104309BD000E5D0F /* MvrChunkedBuffer.m */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -1181,6 +1186,7 @@
 				153D01CE10416C7E00469C50 /* MvrPacketBuilder.m in Sources */,
 				153D01D110416CBE00469C50 /* MvrPacketParserTests.m in Sources */,
 				152AC3611042A671000E5D0F /* MvrPacketBuilderTest.m in Sources */,
+				152AC4DB104309BD000E5D0F /* MvrChunkedBuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
