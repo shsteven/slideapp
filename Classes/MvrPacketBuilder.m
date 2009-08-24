@@ -19,7 +19,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 
 @implementation MvrPacketBuilder
 
-@synthesize running = sealed;
+@synthesize running = sealed, runLoop;
 
 - (id) initWithDelegate:(id <MvrPacketBuilderDelegate>) d;
 {
@@ -29,6 +29,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 		payloadOrder = [NSMutableArray new];
 		payloadObjects = [NSMutableDictionary new];
 		payloadLengths = [NSMutableDictionary new];
+		self.runLoop = [NSRunLoop currentRunLoop];
 	}
 	
 	return self;
@@ -41,6 +42,8 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	[payloadObjects release];
 	[payloadLengths release];
 	[metadata release];
+
+	self.runLoop = nil;
 	[super dealloc];
 }
 
@@ -110,14 +113,17 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 - (void) start;
 {
 	if (sealed) return;
+	NSAssert(self.runLoop == [NSRunLoop currentRunLoop], @"Do not call -start on a thread other than the one where you scheduled the builder. Either call -start on the thread where you created the object, or use the .runLoop property to change what run loop to use to schedule stuff.");
+	
 	cancelled = NO;
 	isWorkingOnStreamPayload = NO;
 	
 	NSMutableArray* stringVersionsOfPayloadStops = [NSMutableArray array];
 	unsigned long long current = 0;
-	for (NSNumber* n in payloadLengths) {
+	for (NSString* key in payloadOrder) {
+		NSNumber* n = [payloadLengths objectForKey:key];
 		current += [n unsignedLongLongValue];
-		[stringVersionsOfPayloadStops addObject:[NSString stringWithFormat:@"%ull", current]];
+		[stringVersionsOfPayloadStops addObject:[NSString stringWithFormat:@"%llu", current]];
 	}
 	
 	[self setMetadataValue:[stringVersionsOfPayloadStops componentsJoinedByString:@" "] forKey:kMvrProtocolPayloadStopsKey];
@@ -135,8 +141,10 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	
 	// The metadata.
 	const char nullCharacter = 0;
-	
-	for (NSString* k in metadata) {
+	// This 'canonicalizes' the packets so that two packets with same metadata and same payloads are byte-for-byte equal, by sorting the metadata by key via compare:.
+	NSMutableArray* orderedMetadata = [NSMutableArray arrayWithArray:[metadata allKeys]];
+	[orderedMetadata sortUsingSelector:@selector(compare:)];
+	for (NSString* k in orderedMetadata) {
 		NSMutableData* d = [NSMutableData new];
 		[d appendData:[k dataUsingEncoding:NSUTF8StringEncoding]];
 		[d appendBytes:&nullCharacter length:1];
@@ -167,7 +175,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 
 - (void) startProducingPayload;
 {
-	while (!cancelled || currentPayloadIndex < [payloadOrder count]) {
+	while (!cancelled && currentPayloadIndex < [payloadOrder count]) {
 		
 		NSString* key = [payloadOrder objectAtIndex:currentPayloadIndex];
 		id payload = [payloadObjects objectForKey:key];
@@ -181,6 +189,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 			
 			isWorkingOnStreamPayload = YES;
 			toBeRead = [[payloadLengths objectForKey:key] unsignedLongLongValue];
+			[payload scheduleInRunLoop:self.runLoop forMode:NSRunLoopCommonModes];
 			[payload setDelegate:self];
 			[payload open];
 			return;
@@ -192,6 +201,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	
 	if (!cancelled) {
 		[delegate packetBuilder:self didEndWithError:nil];
+		currentPayloadIndex--;
 		[self stopWithoutNotifying];
 	}
 }
@@ -217,6 +227,8 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 			if (cancelled) return;
 			
 			if (toBeRead == 0) {
+				[aStream setDelegate:nil];
+				[aStream close];
 				currentPayloadIndex++;
 				[self startProducingPayload];
 			}

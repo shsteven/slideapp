@@ -43,9 +43,12 @@ enum {
 	NSUInteger currentPayloadIndex;
 	
 	BOOL sealed, cancelled;
+	
+	NSRunLoop* runLoop;
 }
 
 - (id) initWithDelegate:(id <MvrPacketBuilderDelegate>) d;
+@property(retain) NSRunLoop* runLoop;
 
 - (void) setMetadataValue:(NSString*) v forKey:(NSString*) k;
 

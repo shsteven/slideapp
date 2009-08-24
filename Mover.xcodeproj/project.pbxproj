@@ -26,6 +26,12 @@
 		15277EA50FE633E20040F04D /* L0TextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15277EA40FE633E20040F04D /* L0TextItem.m */; };
 		15277ED10FE638FD0040F04D /* L0MoverTextViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15277ECF0FE638FD0040F04D /* L0MoverTextViewer.m */; };
 		15277ED20FE638FD0040F04D /* L0MoverTextViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15277ED00FE638FD0040F04D /* L0MoverTextViewer.xib */; };
+		152AC3611042A671000E5D0F /* MvrPacketBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 152AC3601042A671000E5D0F /* MvrPacketBuilderTest.m */; };
+		152AC41B1042B9B1000E5D0F /* WOW-tooshort.data in Resources */ = {isa = PBXBuildFile; fileRef = 152AC4161042B9B1000E5D0F /* WOW-tooshort.data */; };
+		152AC41C1042B9B1000E5D0F /* OK-longer.data in Resources */ = {isa = PBXBuildFile; fileRef = 152AC4171042B9B1000E5D0F /* OK-longer.data */; };
+		152AC41D1042B9B1000E5D0F /* WOW.data in Resources */ = {isa = PBXBuildFile; fileRef = 152AC4181042B9B1000E5D0F /* WOW.data */; };
+		152AC41E1042B9B1000E5D0F /* WOW-longer.data in Resources */ = {isa = PBXBuildFile; fileRef = 152AC4191042B9B1000E5D0F /* WOW-longer.data */; };
+		152AC41F1042B9B1000E5D0F /* OK.data in Resources */ = {isa = PBXBuildFile; fileRef = 152AC41A1042B9B1000E5D0F /* OK.data */; };
 		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
 		153734ED0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
@@ -253,6 +259,13 @@
 		15277ECE0FE638FD0040F04D /* L0MoverTextViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverTextViewer.h; sourceTree = "<group>"; };
 		15277ECF0FE638FD0040F04D /* L0MoverTextViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverTextViewer.m; sourceTree = "<group>"; };
 		15277ED00FE638FD0040F04D /* L0MoverTextViewer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = L0MoverTextViewer.xib; sourceTree = "<group>"; };
+		152AC3601042A671000E5D0F /* MvrPacketBuilderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketBuilderTest.m; sourceTree = "<group>"; };
+		152AC3641042A803000E5D0F /* MvrPacketTestsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPacketTestsCommon.h; sourceTree = "<group>"; };
+		152AC4161042B9B1000E5D0F /* WOW-tooshort.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "WOW-tooshort.data"; sourceTree = SOURCE_ROOT; };
+		152AC4171042B9B1000E5D0F /* OK-longer.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OK-longer.data"; sourceTree = SOURCE_ROOT; };
+		152AC4181042B9B1000E5D0F /* WOW.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WOW.data; sourceTree = SOURCE_ROOT; };
+		152AC4191042B9B1000E5D0F /* WOW-longer.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "WOW-longer.data"; sourceTree = SOURCE_ROOT; };
+		152AC41A1042B9B1000E5D0F /* OK.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OK.data; sourceTree = SOURCE_ROOT; };
 		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
 		153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0UITestingHooks.m"; sourceTree = "<group>"; };
 		153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
@@ -559,7 +572,14 @@
 		153D01CF10416C8200469C50 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
+				152AC4161042B9B1000E5D0F /* WOW-tooshort.data */,
+				152AC4171042B9B1000E5D0F /* OK-longer.data */,
+				152AC4181042B9B1000E5D0F /* WOW.data */,
+				152AC4191042B9B1000E5D0F /* WOW-longer.data */,
+				152AC41A1042B9B1000E5D0F /* OK.data */,
+				152AC3641042A803000E5D0F /* MvrPacketTestsCommon.h */,
 				153D01D010416CBE00469C50 /* MvrPacketParserTests.m */,
+				152AC3601042A671000E5D0F /* MvrPacketBuilderTest.m */,
 			);
 			name = "Unit Tests";
 			sourceTree = "<group>";
@@ -1039,6 +1059,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				152AC41B1042B9B1000E5D0F /* WOW-tooshort.data in Resources */,
+				152AC41C1042B9B1000E5D0F /* OK-longer.data in Resources */,
+				152AC41D1042B9B1000E5D0F /* WOW.data in Resources */,
+				152AC41E1042B9B1000E5D0F /* WOW-longer.data in Resources */,
+				152AC41F1042B9B1000E5D0F /* OK.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,6 +1180,7 @@
 				153D01CD10416C7E00469C50 /* MvrPacketParser.m in Sources */,
 				153D01CE10416C7E00469C50 /* MvrPacketBuilder.m in Sources */,
 				153D01D110416CBE00469C50 /* MvrPacketParserTests.m in Sources */,
+				152AC3611042A671000E5D0F /* MvrPacketBuilderTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
