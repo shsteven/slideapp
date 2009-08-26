@@ -65,7 +65,7 @@
 - (BOOL) receiveItem:(L0MoverItem*) item;
 {
 	// return [[self.channels anyObject] sendItemToOtherEndpoint:item];
-	id <L0MoverPeerChannel> selectedChan;
+	id <L0MoverPeerChannel> selectedChan = nil;
 	for (id <L0MoverPeerChannel> chan in self.channels) {
 		selectedChan = chan;
 		if ([chan isKindOfClass:[L0MoverWiFiChannel class]])

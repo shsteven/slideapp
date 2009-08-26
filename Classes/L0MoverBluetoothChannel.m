@@ -288,7 +288,7 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 	[self endReceivingItem:nil];
 }
 
-@synthesize name, peerID, uniquePeerIdentifier;
+@synthesize name, peerID;
 
 - (double) applicationVersion;
 {

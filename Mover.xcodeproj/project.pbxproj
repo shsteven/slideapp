@@ -80,6 +80,9 @@
 		1592D6C10FF23E6500433F4B /* L0MoverItemsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1592D6C00FF23E6500433F4B /* L0MoverItemsTable.xib */; };
 		159B6A651036A84E00E79510 /* MvrCrashPending.alert in Resources */ = {isa = PBXBuildFile; fileRef = 159B6A641036A84E00E79510 /* MvrCrashPending.alert */; };
 		159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */; };
+		15AAEB7C10442721002AC69D /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AAEB7B10442721002AC69D /* AsyncSocket.m */; };
+		15AAEB7D10442728002AC69D /* MvrModernWiFiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AAEB7610441FF7002AC69D /* MvrModernWiFiScanner.m */; };
+		15AAEB8010442DBE002AC69D /* MvrWiFiIncomingTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AAEB7F10442DBE002AC69D /* MvrWiFiIncomingTransfer.m */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
 		15B4268E0FD91A7D0065D461 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B4268D0FD91A7D0065D461 /* MobileCoreServices.framework */; };
 		15B4E80510340868004B803B /* MvrDidNotPublish.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15B4E80410340868004B803B /* MvrDidNotPublish.alert */; };
@@ -143,7 +146,6 @@
 		15F67FDB0F768A800024A858 /* TableArrow_North.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F67FD80F768A800024A858 /* TableArrow_North.png */; };
 		15F67FDC0F768A800024A858 /* TableArrow_West.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F67FD90F768A800024A858 /* TableArrow_West.png */; };
 		15FBC1A40FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FBC1A30FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m */; };
-		15FC3EC40FC6BE6D004470BA /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FC3EC20FC6BE6D004470BA /* SFHFKeychainUtils.m */; };
 		15FC3ED70FC6C486004470BA /* AboutPaneDisclosureIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 15FC3ED60FC6C486004470BA /* AboutPaneDisclosureIndicator.png */; };
 		15FC3EDA0FC6C5C4004470BA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FC3ED90FC6C5C4004470BA /* Security.framework */; };
 		1D3623260D0F684500981E51 /* L0MoverAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* L0MoverAppDelegate.m */; };
@@ -333,6 +335,12 @@
 		159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAdController.m; sourceTree = "<group>"; };
 		159F7BE40FE2D9B9001A6B91 /* Off.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Off.xcconfig; sourceTree = "<group>"; };
 		159F7BE60FE2DA03001A6B91 /* On.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = On.xcconfig; sourceTree = "<group>"; };
+		15AAEB7510441FF7002AC69D /* MvrModernWiFiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrModernWiFiScanner.h; sourceTree = "<group>"; };
+		15AAEB7610441FF7002AC69D /* MvrModernWiFiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrModernWiFiScanner.m; sourceTree = "<group>"; };
+		15AAEB7A10442721002AC69D /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncSocket.h; path = ../../Trunks/AsyncSocket/AsyncSocket.h; sourceTree = SOURCE_ROOT; };
+		15AAEB7B10442721002AC69D /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncSocket.m; path = ../../Trunks/AsyncSocket/AsyncSocket.m; sourceTree = SOURCE_ROOT; };
+		15AAEB7E10442DBE002AC69D /* MvrWiFiIncomingTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiIncomingTransfer.h; sourceTree = "<group>"; };
+		15AAEB7F10442DBE002AC69D /* MvrWiFiIncomingTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiIncomingTransfer.m; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		15B4268D0FD91A7D0065D461 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -633,6 +641,17 @@
 			path = Ads;
 			sourceTree = "<group>";
 		};
+		15AAEB7410441FE2002AC69D /* Modern Wi-Fi */ = {
+			isa = PBXGroup;
+			children = (
+				15AAEB7E10442DBE002AC69D /* MvrWiFiIncomingTransfer.h */,
+				15AAEB7F10442DBE002AC69D /* MvrWiFiIncomingTransfer.m */,
+				15AAEB7510441FF7002AC69D /* MvrModernWiFiScanner.h */,
+				15AAEB7610441FF7002AC69D /* MvrModernWiFiScanner.m */,
+			);
+			name = "Modern Wi-Fi";
+			sourceTree = "<group>";
+		};
 		15B7BF330F9C760300EF9AB9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -645,6 +664,7 @@
 		15C0C0B10FDFA1EE005A75B6 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				15AAEB7410441FE2002AC69D /* Modern Wi-Fi */,
 				153D00E71041459900469C50 /* Protocol */,
 				1559B61B0F798BD9005E4362 /* L0PeerDiscovery.h */,
 				15C0C0B20FDFA243005A75B6 /* MvrNetworkExchange.h */,
@@ -841,6 +861,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				15AAEB7A10442721002AC69D /* AsyncSocket.h */,
+				15AAEB7B10442721002AC69D /* AsyncSocket.m */,
 				15FC3EC30FC6BE6D004470BA /* SFHFKeychainUtils.h */,
 				15FC3EC20FC6BE6D004470BA /* SFHFKeychainUtils.m */,
 				15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */,
@@ -1233,7 +1255,6 @@
 				1510C4EF0FBEDB96003849A6 /* L0MoverImageItemUI.m in Sources */,
 				1510C5610FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m in Sources */,
 				1557E66F0FC556AB00DC6B58 /* L0MoverBookmarkItemUI.m in Sources */,
-				15FC3EC40FC6BE6D004470BA /* SFHFKeychainUtils.m in Sources */,
 				15390A500FC9277000222925 /* L0MoverBookmarksAccountPane.m in Sources */,
 				15C595CC0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m in Sources */,
 				15080B8A0FD901FE0065D5AC /* L0MoverNetworkCalloutController.m in Sources */,
@@ -1254,6 +1275,9 @@
 				15270DD910369D92006858C0 /* L0MoverAppDelegate+MvrCrashReporting.m in Sources */,
 				153D00EA104145CC00469C50 /* MvrPacketParser.m in Sources */,
 				153D0141104156F400469C50 /* MvrPacketBuilder.m in Sources */,
+				15AAEB7C10442721002AC69D /* AsyncSocket.m in Sources */,
+				15AAEB7D10442728002AC69D /* MvrModernWiFiScanner.m in Sources */,
+				15AAEB8010442DBE002AC69D /* MvrWiFiIncomingTransfer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
