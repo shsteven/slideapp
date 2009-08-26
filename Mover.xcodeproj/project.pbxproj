@@ -71,6 +71,7 @@
 		1592D60C0FF22CF100433F4B /* L0MoverNetworkHelpPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1592D60B0FF22CF100433F4B /* L0MoverNetworkHelpPane.m */; };
 		1592D6980FF2346500433F4B /* NetworkHelpPage in Resources */ = {isa = PBXBuildFile; fileRef = 1592D6970FF2346500433F4B /* NetworkHelpPage */; };
 		1592D6C10FF23E6500433F4B /* L0MoverItemsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1592D6C00FF23E6500433F4B /* L0MoverItemsTable.xib */; };
+		15981AD81047057300D5CBD4 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 15981AD71047057300D5CBD4 /* AsyncSocket.m */; };
 		159B6A651036A84E00E79510 /* MvrCrashPending.alert in Resources */ = {isa = PBXBuildFile; fileRef = 159B6A641036A84E00E79510 /* MvrCrashPending.alert */; };
 		159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */; };
 		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
@@ -136,7 +137,6 @@
 		15F67FDB0F768A800024A858 /* TableArrow_North.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F67FD80F768A800024A858 /* TableArrow_North.png */; };
 		15F67FDC0F768A800024A858 /* TableArrow_West.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F67FD90F768A800024A858 /* TableArrow_West.png */; };
 		15FBC1A40FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FBC1A30FE41479001F0AB7 /* L0MoverNetworkSettingsPane.m */; };
-		15FC3EC40FC6BE6D004470BA /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FC3EC20FC6BE6D004470BA /* SFHFKeychainUtils.m */; };
 		15FC3ED70FC6C486004470BA /* AboutPaneDisclosureIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 15FC3ED60FC6C486004470BA /* AboutPaneDisclosureIndicator.png */; };
 		15FC3EDA0FC6C5C4004470BA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FC3ED90FC6C5C4004470BA /* Security.framework */; };
 		1D3623260D0F684500981E51 /* L0MoverAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* L0MoverAppDelegate.m */; };
@@ -311,6 +311,8 @@
 		1592D60B0FF22CF100433F4B /* L0MoverNetworkHelpPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverNetworkHelpPane.m; sourceTree = "<group>"; };
 		1592D6500FF22F0000433F4B /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = NetworkHelp/English.lproj/NetworkHelpPage; sourceTree = "<group>"; };
 		1592D6A30FF2392F00433F4B /* it */ = {isa = PBXFileReference; lastKnownFileType = folder; name = it; path = NetworkHelp/it.lproj/NetworkHelpPage; sourceTree = "<group>"; };
+		15981AD61047057300D5CBD4 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncSocket.h; path = Classes/AsyncSocket.h; sourceTree = "<group>"; };
+		15981AD71047057300D5CBD4 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncSocket.m; path = Classes/AsyncSocket.m; sourceTree = "<group>"; };
 		159B6A641036A84E00E79510 /* MvrCrashPending.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrCrashPending.alert; sourceTree = "<group>"; };
 		159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AboutPaneBackdrop-LightBlue.png"; sourceTree = "<group>"; };
 		159F7BBE0FE2D662001A6B91 /* L0MoverAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAdController.h; sourceTree = "<group>"; };
@@ -432,7 +434,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* L0MoverAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* L0MoverAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* MoverPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* MoverEdge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverEdge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
@@ -790,7 +792,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* MoverPlus.app */,
+				1D6058910D05DD3D006BFB54 /* MoverEdge.app */,
 				153D01C610416C6F00469C50 /* Mover+Tests.octest */,
 			);
 			name = Products;
@@ -816,6 +818,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				15981AD61047057300D5CBD4 /* AsyncSocket.h */,
+				15981AD71047057300D5CBD4 /* AsyncSocket.m */,
 				15FC3EC30FC6BE6D004470BA /* SFHFKeychainUtils.h */,
 				15FC3EC20FC6BE6D004470BA /* SFHFKeychainUtils.m */,
 				15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */,
@@ -952,7 +956,7 @@
 			);
 			name = Mover;
 			productName = Shard;
-			productReference = 1D6058910D05DD3D006BFB54 /* MoverPlus.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* MoverEdge.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1201,7 +1205,6 @@
 				1510C4EF0FBEDB96003849A6 /* L0MoverImageItemUI.m in Sources */,
 				1510C5610FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m in Sources */,
 				1557E66F0FC556AB00DC6B58 /* L0MoverBookmarkItemUI.m in Sources */,
-				15FC3EC40FC6BE6D004470BA /* SFHFKeychainUtils.m in Sources */,
 				15390A500FC9277000222925 /* L0MoverBookmarksAccountPane.m in Sources */,
 				15C595CC0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m in Sources */,
 				15080B8A0FD901FE0065D5AC /* L0MoverNetworkCalloutController.m in Sources */,
@@ -1222,6 +1225,7 @@
 				15270DD910369D92006858C0 /* L0MoverAppDelegate+MvrCrashReporting.m in Sources */,
 				153D00EA104145CC00469C50 /* MvrPacketParser.m in Sources */,
 				153D0141104156F400469C50 /* MvrPacketBuilder.m in Sources */,
+				15981AD81047057300D5CBD4 /* AsyncSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
