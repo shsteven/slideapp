@@ -20,6 +20,9 @@
 	
 	AsyncSocket* server;
 	NSNetService* netService;
+	NSNetServiceBrowser* browser;
+	
+	NSMutableSet* servicesBeingResolved;
 }
 
 + sharedScanner;

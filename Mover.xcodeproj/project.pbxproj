@@ -114,6 +114,7 @@
 		15E7FDF30FADC37A00E9C438 /* L0MoverAboutPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E7FDF20FADC37A00E9C438 /* L0MoverAboutPane.xib */; };
 		15E7FDF60FADC3B800E9C438 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15E7FDF40FADC3B800E9C438 /* Localizable.strings */; };
 		15E9AC950FE0172F00F0910A /* L0MoverWiFiChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E9AC940FE0172F00F0910A /* L0MoverWiFiChannel.m */; };
+		15EAD05B1045D6210004EF12 /* MvrWiFiChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EAD05A1045D6210004EF12 /* MvrWiFiChannel.m */; };
 		15ED7E1E0FE0E6C00061B04E /* L0MoverBluetoothScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15ED7E1D0FE0E6C00061B04E /* L0MoverBluetoothScanner.m */; };
 		15ED7E230FE0E8440061B04E /* L0MoverBluetoothChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 15ED7E220FE0E8440061B04E /* L0MoverBluetoothChannel.m */; };
 		15F67E100F76262F0024A858 /* BLIP Overview.txt in Resources */ = {isa = PBXBuildFile; fileRef = 15F67DF20F76262F0024A858 /* BLIP Overview.txt */; };
@@ -388,6 +389,8 @@
 		15E7FDF50FADC3B800E9C438 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		15E9AC930FE0172F00F0910A /* L0MoverWiFiChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverWiFiChannel.h; sourceTree = "<group>"; };
 		15E9AC940FE0172F00F0910A /* L0MoverWiFiChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverWiFiChannel.m; sourceTree = "<group>"; };
+		15EAD0591045D6210004EF12 /* MvrWiFiChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiChannel.h; sourceTree = "<group>"; };
+		15EAD05A1045D6210004EF12 /* MvrWiFiChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiChannel.m; sourceTree = "<group>"; };
 		15ED7E1C0FE0E6C00061B04E /* L0MoverBluetoothScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverBluetoothScanner.h; sourceTree = "<group>"; };
 		15ED7E1D0FE0E6C00061B04E /* L0MoverBluetoothScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverBluetoothScanner.m; sourceTree = "<group>"; };
 		15ED7E210FE0E8440061B04E /* L0MoverBluetoothChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverBluetoothChannel.h; sourceTree = "<group>"; };
@@ -644,6 +647,8 @@
 		15AAEB7410441FE2002AC69D /* Modern Wi-Fi */ = {
 			isa = PBXGroup;
 			children = (
+				15EAD0591045D6210004EF12 /* MvrWiFiChannel.h */,
+				15EAD05A1045D6210004EF12 /* MvrWiFiChannel.m */,
 				15AAEB7E10442DBE002AC69D /* MvrWiFiIncomingTransfer.h */,
 				15AAEB7F10442DBE002AC69D /* MvrWiFiIncomingTransfer.m */,
 				15AAEB7510441FF7002AC69D /* MvrModernWiFiScanner.h */,
@@ -1278,6 +1283,7 @@
 				15AAEB7C10442721002AC69D /* AsyncSocket.m in Sources */,
 				15AAEB7D10442728002AC69D /* MvrModernWiFiScanner.m in Sources */,
 				15AAEB8010442DBE002AC69D /* MvrWiFiIncomingTransfer.m in Sources */,
+				15EAD05B1045D6210004EF12 /* MvrWiFiChannel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
