@@ -15,25 +15,29 @@
 @interface MvrCrashReportSender : NSObject <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 {
 	NSData* data;
+	PLCrashReport* report;
 }
 
-- (id) initWithCrashReportData:(NSData*) d;
+- (id) initWithCrashReport:(PLCrashReport*) r data:(NSData*) d;
 - (void) show;
 
 @end
 
 @implementation MvrCrashReportSender
 
-- (id) initWithCrashReportData:(NSData*) d;
+- (id) initWithCrashReport:(PLCrashReport*) r data:(NSData*) d;
 {
-	if (self = [super init])
+	if (self = [super init]) {
+		report = [r retain];
 		data = [d copy];
+	}
 		
 	return self;
 }
 
 - (void) dealloc;
 {
+	[report release];
 	[data release];
 	[super dealloc];
 }
@@ -65,7 +69,19 @@
 		mail.mailComposeDelegate = self;
 		[mail setSubject:@"Mover Crash Report"]; // locale-invariant.
 		[mail setToRecipients:[NSArray arrayWithObject:@"Mover Reports <me@infinite-labs.net>"]];
-		[mail setMessageBody:NSLocalizedString(@"(you can add additional details here before sending if you want.)", @"Crash report e-mail body.") isHTML:NO];
+		
+		NSMutableString* emailBody = [NSMutableString stringWithString:NSLocalizedString(@"(you can add additional details here before sending if you want.)", @"Crash report e-mail body.")];
+		
+		[emailBody appendString:@"\n\n\n"];
+		
+		if (report.hasExceptionInfo) {
+			[emailBody appendFormat:@"Exception %@ -- %@\n", report.exceptionInfo.exceptionName, report.exceptionInfo.exceptionReason];
+		}
+		
+		[emailBody appendFormat:@"Signal %@ -- %@ at 0x%llx\n",
+		 report.signalInfo.name, report.signalInfo.code, (unsigned long long) report.signalInfo.address];
+		
+		[mail setMessageBody:emailBody isHTML:NO];
 		[mail addAttachmentData:data mimeType:@"application/octet-stream" fileName:@"Crash Report.plcrash"];
 		[L0Mover presentModalViewController:mail];
 		[mail release];
@@ -143,18 +159,27 @@ static void L0LogUncaughtExceptionAndForward(NSException* e) {
 	NSData* crashReportData = [cr loadPendingCrashReportDataAndReturnError:&e];
 	if (!crashReportData) {
 		L0LogAlways(@"Ouch! Looks like there was a partial crash report, but it couldn't be read because of this error: %@. Hope it wasn't anything important.", e);
+		return;
+	}
+	
+	PLCrashReport* crashReport = [[PLCrashReport alloc] initWithData:crashReportData error:&e];
+	if (!crashReport) {
+		L0LogAlways(@"Ouch! Looks like there was crash report data, but it couldn't be parsed into a full report because of this error: %@. Hope it wasn't anything important.", e);
+		return;
 	} else {
+		
 #if DEBUG
 		// In case we debug, it might be interesting to grab the file anyway (esp on the simulator, where we cannot send e-mail for real.
 		NSString* crashReportLocation = [NSTemporaryDirectory() stringByAppendingPathComponent:@"Crash Report.plcrash"];
 		[crashReportData writeToFile:crashReportLocation atomically:YES];
 		L0Log(@"Written crash report data at: %@", crashReportLocation);
 #endif
+		
 		L0Log(@"Displaying reporting UI.");
-		MvrCrashReportSender* sender = [[[MvrCrashReportSender alloc] initWithCrashReportData:crashReportData] autorelease];
+		MvrCrashReportSender* sender = [[[MvrCrashReportSender alloc] initWithCrashReport:crashReport data:crashReportData] autorelease];
 		[sender show];
 	}
-	
+
 	[cr purgePendingCrashReport];
 }
 
