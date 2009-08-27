@@ -20,6 +20,9 @@
 - (void) start;
 - (void) stop;
 
+- (MvrWiFiChannel*) channelForService:(NSNetService *)s;
+- (MvrWiFiChannel*) channelForAddress:(NSData *)a;
+
 @end
 
 
@@ -55,6 +58,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	if (enabled) return;
 	NSError* e = nil;
 	
+	NSAssert(!server, @"Server should be nil");
 	server = [[AsyncSocket alloc] initWithDelegate:self];
 	BOOL serverStarted = [server acceptOnPort:25252 error:&e];
 	NSString* assertion = serverStarted? nil : [NSString stringWithFormat:@"Could not start the server due to error %@", e];
@@ -65,12 +69,15 @@ L0ObjCSingletonMethod(sharedScanner)
 	[netService setDelegate:self];
 	[netService publish];
 
+	NSAssert(!servicesBeingResolved, @"Services being resolved should be nil");
 	servicesBeingResolved = [NSMutableSet new];
 	
+	NSAssert(!browser, @"Browser should be nil");
 	browser = [[NSNetServiceBrowser alloc] init];
 	[browser setDelegate:self];
-	[browser searchForServicesOfType:kMvrModernBonjourServiceName inDomain:@"local."];
+	[browser searchForServicesOfType:kMvrModernBonjourServiceName inDomain:@""];
 	
+	NSAssert(!transfers, @"Transfers should be nil");
 	transfers = [NSMutableSet new];
 }
 
@@ -117,13 +124,21 @@ L0ObjCSingletonMethod(sharedScanner)
 - (void) netServiceBrowser:(NSNetServiceBrowser*) aNetServiceBrowser didFindService:(NSNetService*) aNetService moreComing:(BOOL) moreComing;
 {
 	[aNetService setDelegate:self];
-	[aNetService resolve];
 	[servicesBeingResolved addObject:aNetService];
+	[aNetService resolve];
+}
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
+{
+	MvrWiFiChannel* channel = [self channelForService:aNetService];
+	if (channel)
+		[[self mutableSetValueForKey:@"availableChannels"] removeObject:channel];
 }
 
 - (void) netServiceDidResolveAddress:(NSNetService*) sender;
 {
-	[sender autorelease];
+	[[sender retain] autorelease];
+	[servicesBeingResolved removeObject:sender];
 	
 	L0Log(@"For service %@:", sender);
 	for (NSData* d in [sender addresses])
@@ -137,12 +152,14 @@ L0ObjCSingletonMethod(sharedScanner)
 		while (interface != NULL) {
 			const struct sockaddr_in* address = (const struct sockaddr_in*) interface->ifa_addr;
 			
-			NSData* addressData = [NSData dataWithBytesNoCopy:&address length:address->sin_len freeWhenDone:NO];
-			
-			for (NSData* senderAddress in [sender addresses]) {
-				if ([senderAddress socketAddressIsEqualToAddress:addressData]) {
-					isSelf = YES;
-					break;
+			for (NSData* senderAddressData in [sender addresses]) {
+				const struct sockaddr* senderAddress = (const struct sockaddr*) [senderAddressData bytes];
+				if (senderAddress->sa_family != AF_INET)
+					continue;
+				
+				const struct sockaddr_in* senderIPAddress = (const struct sockaddr_in*) senderAddress;
+				if (address->sin_addr.s_addr == senderIPAddress->sin_addr.s_addr) {
+					isSelf = YES; break;
 				}
 			}
 			
@@ -160,6 +177,12 @@ L0ObjCSingletonMethod(sharedScanner)
 	[channel release];
 }
 
+- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict;
+{
+	L0Log(@"Service %@ (named %@) failed to resolve for some reason. Boo!", sender, [sender name]);
+	[servicesBeingResolved removeObject:sender];
+}
+
 - (MvrWiFiChannel*) channelForAddress:(NSData*) a;
 {
 	for (MvrWiFiChannel* aPeer in availableChannels) {
@@ -167,6 +190,17 @@ L0ObjCSingletonMethod(sharedScanner)
 			if ([a socketAddressIsEqualToAddress:peerAddress])
 				return aPeer;
 		}
+	}
+	
+	return nil;
+}
+
+- (MvrWiFiChannel*) channelForService:(NSNetService*) s;
+{
+	for (NSData* d in [s addresses]) {
+		MvrWiFiChannel* channel;
+		if (channel = [self channelForAddress:d])
+			return channel;
 	}
 	
 	return nil;

@@ -16,6 +16,7 @@
 #import "MvrNetworkExchange.h"
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
+#import "MvrModernWiFiScanner.h"
 
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0BookmarkItem.h"
@@ -126,6 +127,10 @@ enum {
 	L0MoverWiFiScanner* scanner = [L0MoverWiFiScanner sharedScanner];
 	[peering addAvailableScannersObject:scanner];
 	scanner.enabled = wiFiEnabled;
+	
+	MvrModernWiFiScanner* modernWiFi = [MvrModernWiFiScanner sharedScanner];
+	[peering addAvailableScannersObject:modernWiFi];
+	modernWiFi.enabled = wiFiEnabled;
 	
 #if !DEBUG || (DEBUG && !kL0MoverTestByDisablingBluetooth)
 	if ([L0MoverBluetoothScanner modelAssumedToSupportBluetooth]) {

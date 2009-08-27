@@ -9,8 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "MvrNetworkExchange.h"
 
-@interface MvrWiFiChannel : NSObject <L0MoverPeerChannel> {
+#define kMvrWiFiChannelUniqueIdentifierKey @"UUID"
+#define kMvrWiFiChannelApplicationVersionKey @"Version"
+#define kMvrWiFiChannelUserVisibleApplicationVersionKey @"UserVersion"
 
+@interface MvrWiFiChannel : NSObject <L0MoverPeerChannel> {
+	NSNetService* service;
+	NSString* name, * uniquePeerIdentifier, * userVisibleApplicationVersion;
+	double applicationVersion;
 }
 
 - (id) initWithNetService:(NSNetService*) s;

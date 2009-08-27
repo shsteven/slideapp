@@ -114,7 +114,7 @@
 // This is pretty much what we need to make a L0MoverPeer.
 
 // Never changes.
-@property(readonly) NSString* name;
+@property(readonly, copy) NSString* name;
 
 // Must be the same for different channels to the same peer.
 // Never changes unless the peer fully disconnects (ie retracts
@@ -123,7 +123,7 @@
 
 // May change. Should be set on first appearance, but may
 // be KVO'd in the future.
-@property(readonly) double applicationVersion;
+@property(readonly, assign) double applicationVersion;
 @property(readonly, copy) NSString* userVisibleApplicationVersion;
 
 - (BOOL) sendItemToOtherEndpoint:(L0MoverItem*) i;
