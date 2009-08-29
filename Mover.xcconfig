@@ -6,8 +6,8 @@
 //  Copyright 2008 Emanuele Vulcano. All rights reserved.
 //
 
-USER_VISIBLE_VERSION = 2.0.4
-VERSION = 21.4
+USER_VISIBLE_VERSION = 2.1
+VERSION = 30.0
 
 BASE_BUILD_FOLDER = $(SRCROOT)
 
