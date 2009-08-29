@@ -15,6 +15,8 @@
 - (void) cancel;
 - (void) produceItem;
 
+@property(assign) CGFloat progress;
+
 @end
 
 
@@ -38,7 +40,7 @@
 	return self;
 }
 
-@synthesize finished;
+@synthesize finished, progress;
 
 - (void) clear;
 {
@@ -84,13 +86,14 @@
 
 - (void) packetParserDidStartReceiving:(MvrPacketParser*) p;
 {
-	// o well.
+	self.progress = p.progress;
 }
 
 - (void) packetParser:(MvrPacketParser*) p didReceiveMetadataItemWithKey:(NSString*) key value:(NSString*) value;
 {
 	if (isCancelled) return;
 	
+	self.progress = p.progress;
 	[metadata setObject:value forKey:key];
 }
 
@@ -104,6 +107,7 @@
 	if (![key isEqual:kMvrProtocolExternalRepresentationPayloadKey])
 		return;
 	
+	self.progress = p.progress;
 	[data appendData:d];
 }
 
@@ -135,6 +139,7 @@
 
 - (void) produceItem;
 {
+	self.progress = 1.0;
 	NSString* title = [metadata objectForKey:kMvrProtocolMetadataTitleKey], 
 		* type = [metadata objectForKey:kMvrProtocolMetadataTypeKey];
 	L0MoverItem* i = [[[[L0MoverItem classForType:type] alloc] initWithExternalRepresentation:data type:type title:title] autorelease];

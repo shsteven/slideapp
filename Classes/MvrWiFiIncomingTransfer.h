@@ -28,5 +28,6 @@
 - (id) initWithSocket:(AsyncSocket*) s channel:(id <L0MoverPeerChannel>) c;
 
 @property(readonly) BOOL finished;
+@property(readonly) CGFloat progress;
 
 @end
