@@ -15,6 +15,8 @@ static const size_t kMvrPacketParserStartingBytesLength =
 #define kMvrProtocolPayloadStopsKey @"Payload-Stops"
 #define kMvrProtocolPayloadKeysKey @"Payload-Keys"
 
+#define kMvrPacketIndeterminateProgress ((CGFloat) -1.0)
+
 // ----
 
 #define kMvrProtocolExternalRepresentationPayloadKey @"externalRepresentation"

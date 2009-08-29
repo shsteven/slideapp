@@ -8,10 +8,16 @@
 
 #import "MvrPacketBuilder.h"
 
+static inline CGFloat MvrProgressFromTo(unsigned long long from, unsigned long long to) {
+	return (CGFloat)to - (CGFloat)from / (CGFloat)to;
+}
+
 @interface MvrPacketBuilder ()
 
 - (void) stopWithoutNotifying;
 - (void) startProducingPayload;
+
+@property(assign) CGFloat progress;
 
 @end
 
@@ -134,6 +140,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	if (sealed) return;
 	NSAssert(self.runLoop == [NSRunLoop currentRunLoop], @"Do not call -start on a thread other than the one where you scheduled the builder. Either call -start on the thread where you created the object, or use the .runLoop property to change what run loop to use to schedule stuff.");
 	
+	
 	cancelled = NO;
 	isWorkingOnStreamPayload = NO;
 	paused = NO;
@@ -146,17 +153,22 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 		[stringVersionsOfPayloadStops addObject:[NSString stringWithFormat:@"%llu", current]];
 	}
 	
+	payloadsLength = current;
+	sent = 0;
+	
 	[self setMetadataValue:[stringVersionsOfPayloadStops componentsJoinedByString:@" "] forKey:kMvrProtocolPayloadStopsKey];
 	[self setMetadataValue:[payloadOrder componentsJoinedByString:@" "] forKey:kMvrProtocolPayloadKeysKey];
 	
 	sealed = YES;
-	
+	self.progress = 0.0;
+
 	if ([delegate respondsToSelector:@selector(packetBuilderWillStart:)])
 		[delegate packetBuilderWillStart:self];
 	if (cancelled) return;
 	
 	// The header.
 	NSData* d = [NSData dataWithBytesNoCopy:(void*) kMvrPacketParserStartingBytes length:kMvrPacketParserStartingBytesLength freeWhenDone:NO];
+	self.progress = 0.05 / 2;
 	[delegate packetBuilder:self didProduceData:d];
 	if (cancelled) return;
 	
@@ -176,21 +188,11 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 		if (cancelled) return;
 	}
 	
+	self.progress = 0.05;
 	[delegate packetBuilder:self didProduceData:[NSData dataWithBytesNoCopy:(void*) &nullCharacter length:1 freeWhenDone:NO]];
 	if (cancelled) return;
 	currentPayloadIndex = 0;
-	
-//	if ([body isKindOfClass:[NSData class]]) {
-//		[delegate packetBuilder:self didProduceData:body];
-//		sealed = NO;
-//		if (cancelled) return;
-//		[delegate packetBuilder:self didEndWithError:nil];
-//	} else if ([body isKindOfClass:[NSStream class]]) {
-//		toBeRead = bodyLength;
-//		[body scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-//		[body setDelegate:self];
-//		[body open];
-//	}
+
 	[self startProducingPayload];
 }
 
@@ -204,6 +206,8 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 		if ([payload isKindOfClass:[NSData class]]) {
 			
 			isWorkingOnStreamPayload = NO;
+			sent += [payload length];
+			self.progress = 0.95 * MvrProgressFromTo(sent, payloadsLength);
 			[delegate packetBuilder:self didProduceData:payload];
 			
 		} else if ([payload isKindOfClass:[NSInputStream class]]) {
@@ -241,6 +245,9 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	
 	bufferSize = MIN(bufferSize, toBeRead);
 	toBeRead -= bufferSize;
+
+	sent += bufferSize;
+	self.progress = 0.95 * MvrProgressFromTo(sent, payloadsLength);
 	
 	[delegate packetBuilder:self didProduceData:[NSData dataWithBytesNoCopy:buffer length:bufferSize freeWhenDone:NO]];
 	if (cancelled) return;
@@ -319,5 +326,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 			[self producePayloadFromAvailableBytesOfStream:is];
 	}
 }
+
+@synthesize progress;
 
 @end

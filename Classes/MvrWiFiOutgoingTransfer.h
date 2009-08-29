@@ -25,6 +25,7 @@
 - (id) initWithItem:(L0MoverItem*) i toChannel:(MvrWiFiChannel*) c;
 
 @property(readonly, assign) BOOL finished;
+@property(readonly, assign) CGFloat progress;
 
 - (void) start;
 

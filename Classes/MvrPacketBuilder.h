@@ -46,6 +46,10 @@ enum {
 	BOOL paused;
 	
 	NSRunLoop* runLoop;
+	
+	unsigned long long payloadsLength;
+	unsigned long long sent;
+	CGFloat progress;
 }
 
 - (id) initWithDelegate:(id <MvrPacketBuilderDelegate>) d;
@@ -104,5 +108,10 @@ enum {
 // Still, this property will be respected in any case where the builder could need to allocate more memory and/or access outside, slower-than-RAM resources such as reading from disk; if a paused builder is faced with either prospect, it will instead opt to wait until unpaused.
 // This property is reset to NO whenever the builder starts producing a packet.
 @property(getter=isPaused) BOOL paused;
+
+// Reports the progress of a building operation.
+// The value is only meaningful between a willStart and a didEndWithError.
+// The value may also be unavailable, in which case it will be kMvrPacketIndeterminateProgress.
+@property(readonly, assign) CGFloat progress;
 
 @end

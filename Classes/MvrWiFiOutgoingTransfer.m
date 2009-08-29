@@ -16,7 +16,8 @@
 
 - (void) buildPacket;
 
-@property(setter=private_setFinished:, assign) BOOL finished;
+@property(assign) BOOL finished;
+@property(assign) CGFloat progress;
 
 @end
 
@@ -40,7 +41,7 @@
 	[super dealloc];
 }
 
-@synthesize finished;
+@synthesize finished, progress;
 
 #pragma mark -
 #pragma mark Socket and state management.
@@ -118,13 +119,20 @@
 	[builder addPayloadWithData:exp forKey:kMvrProtocolExternalRepresentationPayloadKey];
 }
 
-- (void) packetBuilder:(MvrPacketBuilder*) builder didProduceData:(NSData*) d;
+- (void) packetBuilderWillStart:(MvrPacketBuilder *)b;
 {
-	[socket writeData:d withTimeout:20 tag:0];
+	self.progress = builder.progress;
 }
 
-- (void) packetBuilder:(MvrPacketBuilder*) builder didEndWithError:(NSError*) e;
+- (void) packetBuilder:(MvrPacketBuilder*) b didProduceData:(NSData*) d;
 {
+	[socket writeData:d withTimeout:20 tag:0];
+	self.progress = builder.progress;
+}
+
+- (void) packetBuilder:(MvrPacketBuilder*) b didEndWithError:(NSError*) e;
+{
+	self.progress = builder.progress;
 	[self endWithError:e];
 }
 
