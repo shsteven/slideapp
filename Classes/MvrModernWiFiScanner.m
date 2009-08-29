@@ -58,27 +58,40 @@ L0ObjCSingletonMethod(sharedScanner)
 	if (enabled) return;
 	NSError* e = nil;
 	
+	NSAssert(service, @"Need the exchange service set before running!");
+	
+	NSAssert(!servicesBeingResolved, @"Services being resolved should be nil");
+	servicesBeingResolved = [NSMutableSet new];
+
+	NSAssert(!transfers, @"Transfers should be nil");
+	transfers = [NSMutableSet new];
+
+	
 	NSAssert(!server, @"Server should be nil");
 	server = [[AsyncSocket alloc] initWithDelegate:self];
 	BOOL serverStarted = [server acceptOnPort:25252 error:&e];
 	NSString* assertion = serverStarted? nil : [NSString stringWithFormat:@"Could not start the server due to error %@", e];
 	NSAssert(serverStarted, assertion);
 	
+	
 	NSAssert(!netService, @"Service should be nil");
 	netService = [[NSNetService alloc] initWithDomain:@"local." type:kMvrModernBonjourServiceName name:[UIDevice currentDevice].name port:25252];
 	[netService setDelegate:self];
+
+	NSDictionary* txtDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+								   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kMvrWiFiChannelApplicationVersionKey,
+								   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], kMvrWiFiChannelUserVisibleApplicationVersionKey,
+								   [service uniquePeerIdentifierForSelf], kMvrWiFiChannelUniqueIdentifierKey,
+								   nil];
+	[netService setTXTRecordData:[NSNetService dataFromTXTRecordDictionary:txtDictionary]];
+	
 	[netService publish];
 
-	NSAssert(!servicesBeingResolved, @"Services being resolved should be nil");
-	servicesBeingResolved = [NSMutableSet new];
-	
+		
 	NSAssert(!browser, @"Browser should be nil");
 	browser = [[NSNetServiceBrowser alloc] init];
 	[browser setDelegate:self];
 	[browser searchForServicesOfType:kMvrModernBonjourServiceName inDomain:@""];
-	
-	NSAssert(!transfers, @"Transfers should be nil");
-	transfers = [NSMutableSet new];
 }
 
 - (void) stop;
