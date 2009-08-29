@@ -90,6 +90,9 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	beingReset = NO;
 	BOOL shouldContinueParsingForData = YES;
 	while ([currentBuffer length] > 0 && shouldContinueParsingForData && !beingReset) {
+		L0Log(@"Let's execute a cycle of parsing! State = %d", self.state);
+		L0Log(@"Bytes to read before cycle = %lu", (unsigned long) [currentBuffer length]);
+		
 		switch (self.state) {
 			case kMvrPacketParserExpectingStart:
 				shouldContinueParsingForData = [self consumeStartOfPacket];
@@ -111,11 +114,16 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 				NSAssert(NO, @"Unknown state reached");
 				return;
 		}
+		
+		L0Log(@"Bytes to read after cycle = %lu", (unsigned long) [currentBuffer length]);
+		L0Log(@"State after cycle: continue parsing for data? = %d, reset? = %d", shouldContinueParsingForData, beingReset);
 	}
 }
 
 - (void) reset;
 {
+	L0Log(@"Performing a reset.");
+	
 	self.lastSeenMetadataItemTitle = nil;
 	self.payloadStops = nil;
 	self.payloadKeys = nil;
@@ -131,6 +139,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 - (void) resetAndReportError:(NSInteger) errorCode;
 {
 	[self reset];
+	L0Log(@"Reporting error code %d", errorCode);
 	
 	NSError* e = nil;
 	if (errorCode != 0) 
@@ -158,11 +167,14 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (BOOL) consumeStartOfPacket;
 {
+	L0Log(@"Consuming the start of a packet...");
+	
 	if ([currentBuffer length] >= kMvrPacketParserStartingBytesLength) {
 		const uint8_t* bytes = (const uint8_t*) [currentBuffer bytes];
 		if (memcmp(kMvrPacketParserStartingBytes, bytes,
 				   kMvrPacketParserStartingBytesLength) == 0) {
-			
+
+			L0Log(@"Start found. Now expecting metadata item title.");
 			[delegate packetParserDidStartReceiving:self];
 			[self expectMetadataItemTitle];
 			
@@ -185,14 +197,17 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (BOOL) consumeMetadataItemTitle;
 {
+	L0Log(@"Looking for metadata item title...");
+
 	NSInteger loc = [self locationOfFirstNullInCurrentBuffer];
 	if (loc == NSNotFound)
 		return NO;
 	
 	if (loc != 0) {
-	
 		NSString* s = [[NSString alloc] initWithBytes:[currentBuffer bytes] length:loc encoding:NSUTF8StringEncoding];
 		
+		L0Log(@"Found title: %@ (nil means it's not UTF-8 and we bail out)", s);
+
 		if (!s)
 			[self resetAndReportError:kMvrPacketParserNotUTF8StringError];
 		else
@@ -200,8 +215,10 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 		
 		[s release];
 		
-	} else
+	} else {
+		L0Log(@"Found empty title (end of header). Now expecting body.");
 		[self expectBody];
+	}
 	
 	if (!beingReset)
 		[currentBuffer replaceBytesInRange:NSMakeRange(0, loc + 1) withBytes:NULL length:0];
@@ -216,17 +233,19 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (BOOL) consumeMetadataItemValue;
 {
+	L0Log(@"Looking for metadata item value...");
+
 	NSInteger loc = [self locationOfFirstNullInCurrentBuffer];
 	if (loc == NSNotFound)
 		return NO;
 	
-	NSString* s = nil;
-	
-	if (loc != 0)
-		s = [[NSString alloc] initWithBytes:[currentBuffer bytes] length:loc encoding:NSUTF8StringEncoding];
+	NSString* s = [[NSString alloc] initWithBytes:[currentBuffer bytes] length:loc encoding:NSUTF8StringEncoding];
+	L0Log(@"Found value: %@ (nil means it's not UTF-8 and we bail out)", s);
+
 	if (!s)
 		[self resetAndReportError:kMvrPacketParserNotUTF8StringError];
 	else {
+		L0Log("Found metadata item with key: %@ value: %@", self.lastSeenMetadataItemTitle, s);
 		[self processAndReportMetadataItemWithTitle:self.lastSeenMetadataItemTitle value:s];
 		[self expectMetadataItemTitle];
 	}
@@ -254,6 +273,8 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (BOOL) setPayloadStopsFromString:(NSString*) string;
 {
+	L0Log(@"Setting payload stops from '%@'", string);
+	
 	NSScanner* s = [NSScanner scannerWithString:string];
 	[s setCharactersToBeSkipped:[NSCharacterSet characterSetWithCharactersInString:@" "]];
 	
@@ -283,11 +304,14 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 	payloadLength = max;
 	self.payloadStops = stops;
+	L0Log(@"Found length = %llu, stops = %@", payloadLength, stops);
+	
 	return YES;
 }
 
 - (BOOL) setPayloadKeysFromString:(NSString*) string;
 {
+	L0Log(@"Setting payload keys from '%@'", string);
 	NSMutableArray* keys = [NSMutableArray arrayWithArray:
 							 [string componentsSeparatedByString:@" "]];
 	
@@ -311,6 +335,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	}
 	
 	self.payloadKeys = keys;
+	L0Log(@"Found keys = %@", keys);
 	return YES;
 }
 
@@ -340,8 +365,12 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (BOOL) consumeBody;
 {		
+	L0Log(@"Looking for a body portion...");
+	
 	NSUInteger lengthOfNewDataForCurrentStop =
 		MIN([currentBuffer length], toReadForCurrentStop);
+	
+	L0Log(@"Consuming %llu bytes (out of %llu remaining) for payload with key %@.", (unsigned long long) lengthOfNewDataForCurrentStop, (unsigned long long) toReadForCurrentStop, [self.payloadKeys objectAtIndex:currentStop]);
 	
 	read += lengthOfNewDataForCurrentStop;
 	self.progress = (CGFloat) payloadLength - (CGFloat) read / (CGFloat) payloadLength;
@@ -354,11 +383,15 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	toReadForCurrentStop -= lengthOfNewDataForCurrentStop;
 	
 	if (toReadForCurrentStop == 0) {
+		L0Log(@"Advancing to next payload...");
 		currentStop++;
-		if (currentStop >= [self.payloadStops count])
+		if (currentStop >= [self.payloadStops count]) {
+			L0Log(@"Uh, I'm out of payloads. Done!");
 			[self resetAndReportError:kMvrPacketParserNoError];
-		else
-			toReadForCurrentStop = [[self.payloadStops objectAtIndex:currentStop] longLongValue] - [[self.payloadStops objectAtIndex:currentStop - 1] longLongValue];
+		} else {
+			toReadForCurrentStop = [[self.payloadStops objectAtIndex:currentStop] unsignedLongLongValue] - [[self.payloadStops objectAtIndex:currentStop - 1] unsignedLongLongValue];
+			L0Log(@"Now expecting payload with key %@, long %llu", [self.payloadKeys objectAtIndex:currentStop], toReadForCurrentStop);
+		}
 	}
 	
 	return YES;

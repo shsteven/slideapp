@@ -80,6 +80,8 @@
 	L0Note();
 	[parser appendData:d isKnownStartOfNewPacket:isNewPacket];
 	isNewPacket = NO;
+
+	[sock readDataWithTimeout:15 tag:0];
 }
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err;
