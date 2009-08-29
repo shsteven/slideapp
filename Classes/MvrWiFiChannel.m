@@ -91,4 +91,14 @@ static NSString* MvrStringFromDataOrString(id x) {
 	[outgoingTransfers removeObject:transfer];
 }
 
+- (NSString*) medium;
+{
+	return kMvrWiFiMedium;
+}
+
+- (BOOL) isDeprecated;
+{
+	return NO;
+}
+
 @end

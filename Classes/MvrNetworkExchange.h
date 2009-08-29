@@ -11,6 +11,9 @@
 
 #import "L0PeerDiscovery.h"
 
+// The identifier for the Wi-Fi local link network medium.
+#define kMvrWiFiMedium @"Wi-Fi"
+
 @protocol L0MoverPeerChannel, L0MoverPeerScanner, MvrTransfer;
 
 @interface MvrNetworkExchange : NSObject {
@@ -127,6 +130,16 @@
 @property(readonly, copy) NSString* userVisibleApplicationVersion;
 
 - (BOOL) sendItemToOtherEndpoint:(L0MoverItem*) i;
+
+@optional
+
+// An identifier for the medium this channel uses, if any.
+// Example mediums are Wi-Fi, Bluetooth, the Internet...
+@property(readonly) NSString* medium;
+
+// If YES and other channels with the same medium are available, this channel will be made unavailable. Note that the unavailability of the new channels will not make this one available again.
+// Defaults to NO.
+@property(readonly, getter=isDeprecated) BOOL deprecated;
 
 @end
 

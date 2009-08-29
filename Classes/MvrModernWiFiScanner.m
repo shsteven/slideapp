@@ -134,6 +134,18 @@ L0ObjCSingletonMethod(sharedScanner)
 #pragma mark -
 #pragma mark Service browsing.
 
+- (void) netServiceBrowser:(NSNetServiceBrowser*) aNetServiceBrowser didNotSearch:(NSDictionary*) errorDict;
+{
+	L0Log(@"%@", errorDict);
+	[browser searchForServicesOfType:kMvrModernBonjourServiceName inDomain:@""];
+}
+
+- (void) netServiceBrowserDidStopSearch:(NSNetServiceBrowser*) aNetServiceBrowser;
+{
+	L0Note();
+	[browser searchForServicesOfType:kMvrModernBonjourServiceName inDomain:@""];
+}
+
 - (void) netServiceBrowser:(NSNetServiceBrowser*) aNetServiceBrowser didFindService:(NSNetService*) aNetService moreComing:(BOOL) moreComing;
 {
 	[aNetService setDelegate:self];
@@ -144,6 +156,7 @@ L0ObjCSingletonMethod(sharedScanner)
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
 {
 	MvrWiFiChannel* channel = [self channelForService:aNetService];
+	L0Log(@"%@ => %@", aNetService, channel);
 	if (channel)
 		[[self mutableSetValueForKey:@"availableChannels"] removeObject:channel];
 }
@@ -210,10 +223,9 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (MvrWiFiChannel*) channelForService:(NSNetService*) s;
 {
-	for (NSData* d in [s addresses]) {
-		MvrWiFiChannel* channel;
-		if (channel = [self channelForAddress:d])
-			return channel;
+	for (MvrWiFiChannel* aPeer in availableChannels) {
+		if ([s.name isEqual:aPeer.service.name] && [s.type isEqual:aPeer.service.type])
+			return aPeer;
 	}
 	
 	return nil;
