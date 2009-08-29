@@ -155,4 +155,14 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	[connection close];
 }
 
+- (NSString*) medium;
+{
+	return kMvrWiFiMedium;
+}
+
+- (BOOL) isDeprecated;
+{
+	return YES;
+}
+
 @end

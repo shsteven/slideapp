@@ -34,17 +34,26 @@
 	[data appendBytes:&nullCharacter length:1];
 	[data appendData:[@"A short test packet" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
+
 	[data appendData:[@"Type" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
 	[data appendData:[@"net.infinite-labs.Mover.test-packet" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
-	[data appendData:[@"Size" dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	[data appendData:[@"Payload-Stops" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
-	[data appendData:[@"2" dataUsingEncoding:NSUTF8StringEncoding]];
+	[data appendData:[@"2 5" dataUsingEncoding:NSUTF8StringEncoding]];
+	[data appendBytes:&nullCharacter length:1];	
+
+	[data appendData:[@"Payload-Keys" dataUsingEncoding:NSUTF8StringEncoding]];
 	[data appendBytes:&nullCharacter length:1];
+	[data appendData:[@"okay wow" dataUsingEncoding:NSUTF8StringEncoding]];
+	[data appendBytes:&nullCharacter length:1];	
 	
 	[data appendBytes:&nullCharacter length:1];
+	
 	[data appendData:[@"OK" dataUsingEncoding:NSUTF8StringEncoding]];
+	[data appendData:[@"WOW" dataUsingEncoding:NSUTF8StringEncoding]];
 	
 	return data;
 }
@@ -54,8 +63,10 @@
 	[[delegate expect] packetParserDidStartReceiving:[OCMArg any]];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Title" value:@"A short test packet"];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Type" value:@"net.infinite-labs.Mover.test-packet"];
-	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Size" value:@"2"];
-	[[delegate expect] packetParser:[OCMArg any] didReceiveBodyDataPart:[OCMArg checkWithSelector:@selector(isSameDataAsOKEncoded:) onObject:self]];
+	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Payload-Stops" value:@"2 5"];
+	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Payload-Keys" value:@"okay wow"];
+	[[delegate expect] packetParser:[OCMArg any] didReceivePayloadPart:[OCMArg checkWithSelector:@selector(isSameDataAsOKEncoded:) onObject:self] forKey:@"okay"];
+	[[delegate expect] packetParser:[OCMArg any] didReceivePayloadPart:[OCMArg checkWithSelector:@selector(isSameDataAsWOWEncoded:) onObject:self] forKey:@"wow"];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg isNil]];
 	[[[delegate stub] andReturnValue:[NSNumber numberWithBool:YES]] packetParserShouldResetAfterCompletingPacket:[OCMArg any]];
 }
@@ -79,9 +90,13 @@
 	[[delegate expect] packetParserDidStartReceiving:[OCMArg any]];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Title" value:@"A short test packet"];
 	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Type" value:@"net.infinite-labs.Mover.test-packet"];
-	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Size" value:@"2"];
-	[[delegate expect] packetParser:[OCMArg any] didReceiveBodyDataPart:[OCMArg checkWithSelector:@selector(isSameDataAsOEncoded:) onObject:self]];
-	[[delegate expect] packetParser:[OCMArg any] didReceiveBodyDataPart:[OCMArg checkWithSelector:@selector(isSameDataAsKEncoded:) onObject:self]];
+	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Payload-Stops" value:@"2 5"];
+	[[delegate expect] packetParser:[OCMArg any] didReceiveMetadataItemWithKey:@"Payload-Keys" value:@"okay wow"];
+	[[delegate expect] packetParser:[OCMArg any] didReceivePayloadPart:[OCMArg checkWithSelector:@selector(isSameDataAsOEncoded:) onObject:self] forKey:@"okay"];
+	[[delegate expect] packetParser:[OCMArg any] didReceivePayloadPart:[OCMArg checkWithSelector:@selector(isSameDataAsKEncoded:) onObject:self] forKey:@"okay"];
+	[[delegate expect] packetParser:[OCMArg any] didReceivePayloadPart:[OCMArg checkWithSelector:@selector(isSameDataAsWEncoded:) onObject:self] forKey:@"wow"];
+	[[delegate expect] packetParser:[OCMArg any] didReceivePayloadPart:[OCMArg checkWithSelector:@selector(isSameDataAsOEncoded:) onObject:self] forKey:@"wow"];
+	[[delegate expect] packetParser:[OCMArg any] didReceivePayloadPart:[OCMArg checkWithSelector:@selector(isSameDataAsWEncoded:) onObject:self] forKey:@"wow"];
 	[[delegate expect] packetParser:[OCMArg any] didReturnToStartingStateWithError:[OCMArg isNil]];
 	[[[delegate stub] andReturnValue:[NSNumber numberWithBool:YES]] packetParserShouldResetAfterCompletingPacket:[OCMArg any]];
 
@@ -122,9 +137,17 @@
 	[self makeMockObjectExpectValidPacketMessages:delegate];
 	
 	MvrPacketParser* parser = [[[MvrPacketParser alloc] initWithDelegate:(id <MvrPacketParserDelegate>) delegate] autorelease];
+	STAssertTrue(parser.expectingNewPacket, nil);
+
 	[parser appendData:[self validPacket] isKnownStartOfNewPacket:YES];
+	STAssertTrue(parser.expectingNewPacket, nil);
+	
 	[parser appendData:garbage isKnownStartOfNewPacket:YES];
+	STAssertTrue(parser.expectingNewPacket, nil);
+	
 	[parser appendData:[self validPacket] isKnownStartOfNewPacket:YES];
+	STAssertTrue(parser.expectingNewPacket, nil);
+
 	[delegate verify];
 }
 
@@ -222,6 +245,11 @@
 	return [d isEqualToData:[@"OK" dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
+- (BOOL) isSameDataAsWOWEncoded:(NSData*) d;
+{
+	return [d isEqualToData:[@"WOW" dataUsingEncoding:NSUTF8StringEncoding]];
+}
+
 - (BOOL) isSameDataAsOEncoded:(NSData*) d;
 {
 	const char* s = [d bytes];
@@ -232,6 +260,12 @@
 {
 	const char* s = [d bytes];
 	return [d length] == 1 && *s == 'K';
+}
+
+- (BOOL) isSameDataAsWEncoded:(NSData*) d;
+{
+	const char* s = [d bytes];
+	return [d length] == 1 && *s == 'W';
 }
 
 - (BOOL) isMissingHeaderError:(NSError*) e;

@@ -16,6 +16,14 @@
 
 #import <MuiKit/MuiKit.h>
 
+static BOOL MvrChannelIsDeprecated(id <L0MoverPeerChannel> c) {
+	return [c respondsToSelector:@selector(isDeprecated)] && c.deprecated;
+}
+
+static NSString* MvrChannelMedium(id <L0MoverPeerChannel> c) {
+	return [c respondsToSelector:@selector(medium)]? c.medium : nil;
+}
+
 // Our private L0MoverPeer subclass.
 // "Synthesized" from one or more channels.
 @interface L0MoverSynthesizedPeer : L0MoverPeer
@@ -75,16 +83,35 @@
 	return [selectedChan sendItemToOtherEndpoint:item];
 }
 
-- (void) addChannel:(id <L0MoverPeerChannel>) channel;
+- (void) addChannel:(id <L0MoverPeerChannel>) newChannel;
 {
-	NSMutableSet* oldChans = [NSMutableSet set];
+	NSMutableSet* removedChans = [NSMutableSet set];
 	for (id chan in self.channels) {
-		if ([chan isKindOfClass:[channel class]])
-			[oldChans addObject:chan];
+		// If we're trying to add a deprecated channel, but a better one is available, do nothing.
+		if (MvrChannelIsDeprecated(newChannel) &&
+			!MvrChannelIsDeprecated(chan) &&
+			MvrChannelMedium(newChannel) && MvrChannelMedium(chan) &&
+			[MvrChannelMedium(newChannel) isEqual:MvrChannelMedium(chan)]) {
+			L0Log(@"Silently dropping addition of %@ because we already have a better channel in (%@)", newChannel, chan);
+			return;
+		}
+		
+		// No two chans of the same class.
+		if ([chan isKindOfClass:[newChannel class]])
+			[removedChans addObject:chan];
+		
+		// If we have a deprecated channel, but this one is better, evict the deprecated one.
+		if (!MvrChannelIsDeprecated(newChannel) &&
+			MvrChannelIsDeprecated(chan) &&
+			MvrChannelMedium(newChannel) && MvrChannelMedium(chan) &&
+			[MvrChannelMedium(newChannel) isEqual:MvrChannelMedium(chan)]) {
+			L0Log(@"Evicting channel %@ because %@ is better.", chan, newChannel);
+			[removedChans addObject:chan];
+		}
 	}
 	
-	[self.channels minusSet:oldChans];
-	[self.channels addObject:channel];
+	[self.channels minusSet:removedChans];
+	[self.channels addObject:newChannel];
 }
 
 - (NSString*) description;
