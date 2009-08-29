@@ -23,6 +23,8 @@
 	
 	NSMutableDictionary* metadata;
 	id <L0MoverPeerChannel> channel;
+	
+	CGFloat progress;
 }
 
 - (id) initWithSocket:(AsyncSocket*) s channel:(id <L0MoverPeerChannel>) c;

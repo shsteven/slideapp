@@ -20,6 +20,8 @@
 	MvrPacketBuilder* builder;
 	
 	BOOL finished;
+	
+	CGFloat progress;
 }
 
 - (id) initWithItem:(L0MoverItem*) i toChannel:(MvrWiFiChannel*) c;
