@@ -22,7 +22,10 @@ enum {
 @class MvrPacketBuilder;
 @protocol MvrPacketBuilderDelegate <NSObject>
 
+@optional
 - (void) packetBuilderWillStart:(MvrPacketBuilder*) builder;
+
+@required
 - (void) packetBuilder:(MvrPacketBuilder*) builder didProduceData:(NSData*) d;
 - (void) packetBuilder:(MvrPacketBuilder*) builder didEndWithError:(NSError*) e;
 

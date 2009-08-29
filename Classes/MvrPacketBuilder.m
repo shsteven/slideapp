@@ -151,7 +151,8 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	
 	sealed = YES;
 	
-	[delegate packetBuilderWillStart:self];
+	if ([delegate respondsToSelector:@selector(packetBuilderWillStart:)])
+		[delegate packetBuilderWillStart:self];
 	if (cancelled) return;
 	
 	// The header.

@@ -17,6 +17,9 @@
 	NSNetService* service;
 	NSString* name, * uniquePeerIdentifier, * userVisibleApplicationVersion;
 	double applicationVersion;
+	
+	NSMutableSet* outgoingTransfers;
+	L0KVODispatcher* dispatch;
 }
 
 - (id) initWithNetService:(NSNetService*) s;

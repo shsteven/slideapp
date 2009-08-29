@@ -7,6 +7,7 @@
 //
 
 #import "MvrWiFiChannel.h"
+#import "MvrWiFiOutgoingTransfer.h"
 
 static NSString* MvrStringFromDataOrString(id x) {
 	if (!x) return nil;
@@ -51,6 +52,8 @@ static NSString* MvrStringFromDataOrString(id x) {
 		}
 		
 		service = [s retain];
+		outgoingTransfers = [NSMutableSet new];
+		dispatch = [[L0KVODispatcher alloc] initWithTarget:self];
 	}
 	
 	return self;
@@ -61,6 +64,8 @@ static NSString* MvrStringFromDataOrString(id x) {
 	[name release];
 	[uniquePeerIdentifier release];
 	[userVisibleApplicationVersion release];
+	[outgoingTransfers release];
+	[dispatch release];
 	
 	[service release];
 	
@@ -69,7 +74,21 @@ static NSString* MvrStringFromDataOrString(id x) {
 
 - (BOOL) sendItemToOtherEndpoint:(L0MoverItem*) i;
 {
-	return NO;
+	MvrWiFiOutgoingTransfer* transfer = [[MvrWiFiOutgoingTransfer alloc] initWithItem:i toChannel:self];
+
+	[dispatch observe:@"finished" ofObject:transfer usingSelector:@selector(transferDidChangeFinished:change:) options:0];
+	[outgoingTransfers addObject:transfer];
+	
+	[transfer start];
+	return YES;
+}
+
+- (void) transferDidChangeFinished:(MvrWiFiOutgoingTransfer*) transfer change:(NSDictionary*) change;
+{
+	if (!transfer.finished) return;
+	
+	[dispatch endObserving:@"finished" ofObject:transfer];
+	[outgoingTransfers removeObject:transfer];
 }
 
 @end

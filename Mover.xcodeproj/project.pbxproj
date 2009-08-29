@@ -62,6 +62,7 @@
 		1561891C0FE2E4ED005AA908 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1561891B0FE2E4ED005AA908 /* libxml2.dylib */; };
 		156189210FE2E504005AA908 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156189200FE2E504005AA908 /* CoreLocation.framework */; };
 		15618A910FE2E7D1005AA908 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15618A900FE2E7D1005AA908 /* libsqlite3.dylib */; };
+		1566CB0B10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1566CB0A10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m */; };
 		1572DE8D0F82BE83006BEEC0 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1572DE880F82BE7A006BEEC0 /* libMuiKit.a */; };
 		1572DE8E0F82BE8B006BEEC0 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1572DE8A0F82BE7A006BEEC0 /* MuiKit.bundle */; };
 		157CAF920FD16B18003E35C3 /* L0MoverTellAFriend.alert in Resources */ = {isa = PBXBuildFile; fileRef = 157CAF910FD16B18003E35C3 /* L0MoverTellAFriend.alert */; };
@@ -310,6 +311,8 @@
 		1561891B0FE2E4ED005AA908 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		156189200FE2E504005AA908 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		15618A900FE2E7D1005AA908 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		1566CB0910492E7F002F8478 /* MvrWiFiOutgoingTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiOutgoingTransfer.h; sourceTree = "<group>"; };
+		1566CB0A10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiOutgoingTransfer.m; sourceTree = "<group>"; };
 		157CAF910FD16B18003E35C3 /* L0MoverTellAFriend.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0MoverTellAFriend.alert; sourceTree = "<group>"; };
 		1582D29F0F87DC5E008E5EC0 /* AdHoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdHoc.plist; sourceTree = "<group>"; };
 		1582D8E30F90806F0084EBC6 /* WhiteOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteOverlay.png; sourceTree = "<group>"; };
@@ -653,6 +656,8 @@
 				15AAEB7F10442DBE002AC69D /* MvrWiFiIncomingTransfer.m */,
 				15AAEB7510441FF7002AC69D /* MvrModernWiFiScanner.h */,
 				15AAEB7610441FF7002AC69D /* MvrModernWiFiScanner.m */,
+				1566CB0910492E7F002F8478 /* MvrWiFiOutgoingTransfer.h */,
+				1566CB0A10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m */,
 			);
 			name = "Modern Wi-Fi";
 			sourceTree = "<group>";
@@ -1284,6 +1289,7 @@
 				15AAEB7D10442728002AC69D /* MvrModernWiFiScanner.m in Sources */,
 				15AAEB8010442DBE002AC69D /* MvrWiFiIncomingTransfer.m in Sources */,
 				15EAD05B1045D6210004EF12 /* MvrWiFiChannel.m in Sources */,
+				1566CB0B10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
