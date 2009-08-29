@@ -22,7 +22,7 @@
 
 @implementation MvrWiFiIncomingTransfer
 
-- (id) initWithSocket:(AsyncSocket*) s channel:(id <L0MoverPeerChannel>) c;
+- (id) initWithSocket:(AsyncSocket*) s scanner:(MvrModernWiFiScanner*) sc;
 {
 	if (self = [super init]) {
 		socket = [s retain];
@@ -32,9 +32,7 @@
 		isNewPacket = YES;
 		
 		data = [NSMutableData new];
-		channel = [c retain];
-		
-		[[MvrNetworkExchange sharedExchange] channelWillBeginReceiving:c];
+		scanner = sc; // It owns us.		
 	}
 	
 	return self;
@@ -66,6 +64,11 @@
 
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;
 {
+	channel = [[scanner channelForAddress:[sock connectedHostAddress]] retain];
+	if (!channel)
+		[self cancel];
+	
+	[[MvrNetworkExchange sharedExchange] channelWillBeginReceiving:channel];
 	[sock readDataWithTimeout:15 tag:0];
 }
 
@@ -132,7 +135,8 @@
 
 - (void) cancel;
 {
-	[[MvrNetworkExchange sharedExchange] channelDidCancelReceivingItem:channel];
+	if (channel)
+		[[MvrNetworkExchange sharedExchange] channelDidCancelReceivingItem:channel];
 	isCancelled = YES;
 	[self clear];
 }

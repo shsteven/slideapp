@@ -21,7 +21,6 @@
 - (void) stop;
 
 - (MvrWiFiChannel*) channelForService:(NSNetService *)s;
-- (MvrWiFiChannel*) channelForAddress:(NSData *)a;
 
 @end
 
@@ -236,13 +235,7 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) onSocket:(AsyncSocket*) sock didAcceptNewSocket:(AsyncSocket*) newSocket;
 {
-	MvrWiFiChannel* channel = [self channelForAddress:[newSocket connectedHostAddress]];
-	if (!channel) {
-		[newSocket disconnect];
-		return;
-	}
-	
-	MvrWiFiIncomingTransfer* transfer = [[MvrWiFiIncomingTransfer alloc] initWithSocket:newSocket channel:channel];
+	MvrWiFiIncomingTransfer* transfer = [[MvrWiFiIncomingTransfer alloc] initWithSocket:newSocket scanner:self];
 	[transfers addObject:transfer];
 	[transfer release];
 }

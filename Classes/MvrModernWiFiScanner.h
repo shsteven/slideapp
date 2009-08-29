@@ -10,6 +10,8 @@
 #import "AsyncSocket.h"
 #import "MvrNetworkExchange.h"
 
+#import "MvrWiFiChannel.h"
+
 #define kMvrModernBonjourServiceName @"_x-mover2._tcp."
 
 @interface MvrModernWiFiScanner : NSObject <L0MoverPeerScanner> {
@@ -29,5 +31,7 @@
 
 // Can be KVO'd.
 @property(readonly) NSSet* transfers;
+
+- (MvrWiFiChannel*) channelForAddress:(NSData*) a;
 
 @end

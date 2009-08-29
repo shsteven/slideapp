@@ -23,11 +23,12 @@
 	
 	NSMutableDictionary* metadata;
 	id <L0MoverPeerChannel> channel;
+	MvrModernWiFiScanner* scanner;
 	
 	CGFloat progress;
 }
 
-- (id) initWithSocket:(AsyncSocket*) s channel:(id <L0MoverPeerChannel>) c;
+- (id) initWithSocket:(AsyncSocket*) s scanner:(MvrModernWiFiScanner*) scanner;
 
 @property(readonly) BOOL finished;
 @property(readonly) CGFloat progress;
