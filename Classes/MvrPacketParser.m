@@ -77,9 +77,12 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 - (void) appendData:(NSData*) data isKnownStartOfNewPacket:(BOOL) reset;
 {
-	if (reset && !self.expectingNewPacket) {
+	L0Log(@"Will now restart the parsing machinery with %llu new bytes. (reset? = %d)", (unsigned long long) [data length], (int) reset);
+	
+	[[self retain] autorelease];
+	
+	if (reset && !self.expectingNewPacket)
 		[self resetAndReportError:0];
-	}
 	
 	[currentBuffer appendData:data];
 	[self consumeCurrentBuffer];
@@ -90,8 +93,8 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	beingReset = NO;
 	BOOL shouldContinueParsingForData = YES;
 	while ([currentBuffer length] > 0 && shouldContinueParsingForData && !beingReset) {
-		L0Log(@"Let's execute a cycle of parsing! State = %d", self.state);
-		L0Log(@"Bytes to read before cycle = %lu", (unsigned long) [currentBuffer length]);
+		L0Log(@"Let's execute a cycle of parsing! State = %d", (int) self.state);
+		L0Log(@"Bytes to read before cycle = %lu", (unsigned long long) [currentBuffer length]);
 		
 		switch (self.state) {
 			case kMvrPacketParserExpectingStart:

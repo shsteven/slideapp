@@ -49,14 +49,14 @@
 	[socket setDelegate:nil];
 	[socket release]; socket = nil;
 	
-	[metadata release]; metadata = nil;
-	
-	[parser release]; parser = nil;
+	[metadata release]; metadata = nil;	
 }
 
 - (void) dealloc;
 {
 	[self clear];
+	[parser release];
+
 	[super dealloc];
 }
 
