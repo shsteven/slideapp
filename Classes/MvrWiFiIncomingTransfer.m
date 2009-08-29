@@ -32,7 +32,8 @@
 		isNewPacket = YES;
 		
 		data = [NSMutableData new];
-		scanner = sc; // It owns us.		
+		scanner = sc; // It owns us.
+		metadata = [NSMutableDictionary new];
 	}
 	
 	return self;
@@ -64,9 +65,11 @@
 
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;
 {
+	L0Log(@"%@: %@:%d", self, host, port);
 	channel = [[scanner channelForAddress:[sock connectedHostAddress]] retain];
 	if (!channel)
 		[self cancel];
+	L0Log(@" => %@", channel);
 	
 	[[MvrNetworkExchange sharedExchange] channelWillBeginReceiving:channel];
 	[sock readDataWithTimeout:15 tag:0];
@@ -74,6 +77,7 @@
 
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)d withTag:(long)tag;
 {
+	L0Note();
 	[parser appendData:d isKnownStartOfNewPacket:isNewPacket];
 	isNewPacket = NO;
 }

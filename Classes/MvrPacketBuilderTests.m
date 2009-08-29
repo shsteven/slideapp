@@ -13,7 +13,7 @@
 #import "MvrPacketParser.h"
 #import "MvrPacketTestsCommon.h"
 
-@interface MvrPacketBuilderTest_ParserDelegate : NSObject <MvrPacketParserDelegate>
+@interface MvrPacketBuilderTests_ParserDelegate : NSObject <MvrPacketParserDelegate>
 {
 	NSMutableDictionary* metadata;
 	NSMutableDictionary* payloads;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation MvrPacketBuilderTest_ParserDelegate
+@implementation MvrPacketBuilderTests_ParserDelegate
 
 @synthesize metadata, payloads, lastError;
 
@@ -372,7 +372,7 @@
 
 - (void) testBuildingAndParsing;
 {
-	MvrPacketBuilderTest_ParserDelegate* parserDelegate = [[MvrPacketBuilderTest_ParserDelegate new] autorelease];
+	MvrPacketBuilderTests_ParserDelegate* parserDelegate = [[MvrPacketBuilderTests_ParserDelegate new] autorelease];
 	MvrPacketParser* parser = [[(MvrPacketParser*)[MvrPacketParser alloc] initWithDelegate:parserDelegate] autorelease];	
 	MvrPacketBuilderTest_ParsingDelegate* builderDelegate = [[MvrPacketBuilderTest_ParsingDelegate new] autorelease];
 	MvrPacketBuilder* builder = [[[MvrPacketBuilder alloc] initWithDelegate:builderDelegate] autorelease];

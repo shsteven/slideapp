@@ -48,6 +48,7 @@
 
 - (void) start;
 {
+	[self retain];
 	[[MvrNetworkExchange sharedExchange] channel:channel willSendItemToOtherEndpoint:item];
 	
 	NSData* address = nil;
@@ -66,9 +67,10 @@
 	NSAssert(!socket, @"No socket before starting");
 	socket = [[AsyncSocket alloc] initWithDelegate:self];
 	
-	NSError* e;
-	BOOL done = [socket connectToAddress:address error:&e];
+	NSError* e = nil;
+	BOOL done = [socket connectToAddress:address withTimeout:15 error:&e];
 	if (!done) {
+		L0Log(@"Did not connect: %@", e);
 		[self cancel];
 		return;
 	}
@@ -87,16 +89,20 @@
 	L0Log(@"%@", e);
 	
 	[socket disconnectAfterWriting];
+	[socket setDelegate:nil];
 	[socket release]; socket = nil;
 	
 	[builder stop];
 	[builder release]; builder = nil;
 	
 	[[MvrNetworkExchange sharedExchange] channel:channel didSendItemToOtherEndpoint:item];
+	
+	[self release];
 }
 
 - (void) onSocket:(AsyncSocket*) sock didConnectToHost:(NSString*) host port:(UInt16) port;
 {
+	L0Log(@"%@: %@:%d", self, host, port);
 	[self buildPacket];
 }
 
@@ -111,12 +117,14 @@
 - (void) buildPacket;
 {
 	builder = [[MvrPacketBuilder alloc] initWithDelegate:self];
-	[builder setMetadataValue:kMvrProtocolMetadataTitleKey forKey:item.title];
-	[builder setMetadataValue:kMvrProtocolMetadataTypeKey forKey:item.type];
+	[builder setMetadataValue:item.title forKey:kMvrProtocolMetadataTitleKey];
+	[builder setMetadataValue:item.type forKey:kMvrProtocolMetadataTypeKey];
 	
 	// TODO allow use of NSStreams alongside NSData in items.
 	NSData* exp = [item externalRepresentation];
 	[builder addPayloadWithData:exp forKey:kMvrProtocolExternalRepresentationPayloadKey];
+	
+	[builder start];
 }
 
 - (void) packetBuilderWillStart:(MvrPacketBuilder *)b;

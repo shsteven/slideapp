@@ -80,6 +80,7 @@ static NSString* MvrStringFromDataOrString(id x) {
 	[outgoingTransfers addObject:transfer];
 	
 	[transfer start];
+	[transfer release];
 	return YES;
 }
 

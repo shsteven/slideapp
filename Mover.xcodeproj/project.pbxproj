@@ -214,7 +214,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolderSpec = 16;
 			files = (
 				153D01E410416F5D00469C50 /* OCMock.framework in Copy OCMock */,
 			);
@@ -650,12 +650,12 @@
 		15AAEB7410441FE2002AC69D /* Modern Wi-Fi */ = {
 			isa = PBXGroup;
 			children = (
+				15AAEB7510441FF7002AC69D /* MvrModernWiFiScanner.h */,
+				15AAEB7610441FF7002AC69D /* MvrModernWiFiScanner.m */,
 				15EAD0591045D6210004EF12 /* MvrWiFiChannel.h */,
 				15EAD05A1045D6210004EF12 /* MvrWiFiChannel.m */,
 				15AAEB7E10442DBE002AC69D /* MvrWiFiIncomingTransfer.h */,
 				15AAEB7F10442DBE002AC69D /* MvrWiFiIncomingTransfer.m */,
-				15AAEB7510441FF7002AC69D /* MvrModernWiFiScanner.h */,
-				15AAEB7610441FF7002AC69D /* MvrModernWiFiScanner.m */,
 				1566CB0910492E7F002F8478 /* MvrWiFiOutgoingTransfer.h */,
 				1566CB0A10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m */,
 			);

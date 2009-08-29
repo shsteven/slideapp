@@ -130,12 +130,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 
 - (void) start;
 {
-	@synchronized(self) {
-		if (self.runLoop != [NSRunLoop currentRunLoop]) {
-			[self.runLoop addTimer:[NSTimer timerWithTimeInterval:0 target:self selector:@selector(performDelayedStart:) userInfo:nil repeats:NO] forMode:NSRunLoopCommonModes];
-			return;
-		}
-	}
+	L0Log(@"%@", self);
 	
 	if (sealed) return;
 	NSAssert(self.runLoop == [NSRunLoop currentRunLoop], @"Do not call -start on a thread other than the one where you scheduled the builder. Either call -start on the thread where you created the object, or use the .runLoop property to change what run loop to use to schedule stuff.");
@@ -162,6 +157,8 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	sealed = YES;
 	self.progress = 0.0;
 
+	NSMutableData* headerData = [NSMutableData data];
+	
 	if ([delegate respondsToSelector:@selector(packetBuilderWillStart:)])
 		[delegate packetBuilderWillStart:self];
 	if (cancelled) return;
@@ -169,30 +166,27 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	// The header.
 	NSData* d = [NSData dataWithBytesNoCopy:(void*) kMvrPacketParserStartingBytes length:kMvrPacketParserStartingBytesLength freeWhenDone:NO];
 	self.progress = 0.05 / 2;
-	[delegate packetBuilder:self didProduceData:d];
-	if (cancelled) return;
+	[headerData appendData:d];
 	
 	// The metadata.
-	const char nullCharacter = 0;
+	const uint8_t nullCharacter = 0;
 	// This 'canonicalizes' the packets so that two packets with same metadata and same payloads are byte-for-byte equal, by sorting the metadata by key via compare:.
 	NSMutableArray* orderedMetadata = [NSMutableArray arrayWithArray:[metadata allKeys]];
 	[orderedMetadata sortUsingSelector:@selector(compare:)];
 	for (NSString* k in orderedMetadata) {
-		NSMutableData* d = [NSMutableData new];
-		[d appendData:[k dataUsingEncoding:NSUTF8StringEncoding]];
-		[d appendBytes:&nullCharacter length:1];
-		[d appendData:[[metadata objectForKey:k] dataUsingEncoding:NSUTF8StringEncoding]];
-		[d appendBytes:&nullCharacter length:1];
-		[delegate packetBuilder:self didProduceData:d];
-		[d release];
-		if (cancelled) return;
+		[headerData appendData:[k dataUsingEncoding:NSUTF8StringEncoding]];
+		[headerData appendBytes:&nullCharacter length:1];
+		[headerData appendData:[[metadata objectForKey:k] dataUsingEncoding:NSUTF8StringEncoding]];
+		[headerData appendBytes:&nullCharacter length:1];
 	}
 	
+	[headerData appendBytes:&nullCharacter length:1];
+	
 	self.progress = 0.05;
-	[delegate packetBuilder:self didProduceData:[NSData dataWithBytesNoCopy:(void*) &nullCharacter length:1 freeWhenDone:NO]];
+	[delegate packetBuilder:self didProduceData:headerData];
 	if (cancelled) return;
+	 
 	currentPayloadIndex = 0;
-
 	[self startProducingPayload];
 }
 
@@ -225,9 +219,9 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	}
 	
 	if (!cancelled) {
-		[delegate packetBuilder:self didEndWithError:nil];
 		currentPayloadIndex--;
 		[self stopWithoutNotifying];
+		[delegate packetBuilder:self didEndWithError:nil];
 	}
 }
 
