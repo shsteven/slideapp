@@ -10,6 +10,8 @@
 
 @interface MvrPacketParser ()
 
+@property(assign) CGFloat progress;
+
 - (void) consumeCurrentBuffer;
 @property(assign, setter=private_setState:) MvrPacketParserState state;
 @property(copy) NSString* lastSeenMetadataItemTitle;
@@ -57,6 +59,8 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	
 	return self;
 }
+
+@synthesize progress;
 
 - (void) dealloc;
 {
@@ -117,6 +121,9 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	self.payloadKeys = nil;
 	currentStop = 0;
 	toReadForCurrentStop = 0;
+	payloadLength = 0;
+	read = 0;
+	self.progress = kMvrPacketIndeterminateProgress;
 	
 	self.state = kMvrPacketParserExpectingStart;
 }	
@@ -274,6 +281,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 		return NO;
 	}
 
+	payloadLength = max;
 	self.payloadStops = stops;
 	return YES;
 }
@@ -320,6 +328,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	
 	if ([self.payloadStops count] == 1 && [[self.payloadStops objectAtIndex:0] isEqual:[NSNumber numberWithInt:0]]) {
 		// we'd grab the body here, but since the body is empty, we go on.
+		self.progress = 1.0;
 		[delegate packetParser:self didReceivePayloadPart:[NSData data] forKey:[self.payloadKeys objectAtIndex:0]];
 		[self resetAndReportError:kMvrPacketParserNoError];
 	} else {
@@ -333,6 +342,9 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 {		
 	NSUInteger lengthOfNewDataForCurrentStop =
 		MIN([currentBuffer length], toReadForCurrentStop);
+	
+	read += lengthOfNewDataForCurrentStop;
+	self.progress = (CGFloat) payloadLength - (CGFloat) read / (CGFloat) payloadLength;
 	
 	NSRange rangeOfPayloadPart = NSMakeRange(0, lengthOfNewDataForCurrentStop);
 	NSData* payloadPart = [currentBuffer subdataWithRange:rangeOfPayloadPart];

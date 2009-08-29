@@ -74,6 +74,10 @@ enum {
 	
 	NSArray* payloadStops;
 	NSArray* payloadKeys;
+
+	unsigned long long payloadLength;
+	unsigned long long read;
+	CGFloat progress;
 	
 	BOOL beingReset;
 }
@@ -92,5 +96,8 @@ enum {
 // Returns YES if the parser is expecting a brand-new packet.
 // If NO, it means either that we're not in the starting state of the parser, or that we are but there is data in the queue. This is YES immediately after every reset and remains YES until the state is changed or data that does not cause an event is appended.
 @property(readonly) BOOL expectingNewPacket;
+
+// Returns the progress of the operation. May be kMvrPacketIndeterminateProgress.
+@property(readonly, assign) CGFloat progress;
 
 @end
