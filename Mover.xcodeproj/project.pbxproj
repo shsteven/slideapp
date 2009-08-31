@@ -106,6 +106,7 @@
 		15C0C1880FDFD578005A75B6 /* L0MoverWiFiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1870FDFD578005A75B6 /* L0MoverWiFiScanner.m */; };
 		15C0C1CE0F759B8700E5BA2F /* L0ImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */; };
 		15C595CC0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C595CB0FCAB66100991406 /* L0MoverBookmarksAccountLoginPane.m */; };
+		15DC6E46104AB7F30094C09A /* MvrWiFiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DC6E45104AB7F30094C09A /* MvrWiFiScanner.m */; };
 		15DEE3350FD922D700562663 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15DEE3340FD922D700562663 /* GameKit.framework */; };
 		15E054E60F8CEFC400506C27 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E054E50F8CEFC400506C27 /* QuartzCore.framework */; };
 		15E415140FB9882F0065E831 /* L0BookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E415130FB9882F0065E831 /* L0BookmarkItem.m */; };
@@ -381,6 +382,8 @@
 		15D1C56F0F889D7000FF3016 /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
 		15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Release.xcconfig"; sourceTree = "<group>"; };
 		15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Debug.xcconfig"; sourceTree = "<group>"; };
+		15DC6E44104AB7F30094C09A /* MvrWiFiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiScanner.h; sourceTree = "<group>"; };
+		15DC6E45104AB7F30094C09A /* MvrWiFiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiScanner.m; sourceTree = "<group>"; };
 		15DEE3340FD922D700562663 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		15E054E50F8CEFC400506C27 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15E415120FB9882F0065E831 /* L0BookmarkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0BookmarkItem.h; sourceTree = "<group>"; };
@@ -674,6 +677,7 @@
 		15C0C0B10FDFA1EE005A75B6 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				15DC6E43104AB7D10094C09A /* Wi-Fi Family */,
 				15AAEB7410441FE2002AC69D /* Modern Wi-Fi */,
 				153D00E71041459900469C50 /* Protocol */,
 				1559B61B0F798BD9005E4362 /* L0PeerDiscovery.h */,
@@ -727,6 +731,15 @@
 				15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */,
 			);
 			name = "Configuration FIles";
+			sourceTree = "<group>";
+		};
+		15DC6E43104AB7D10094C09A /* Wi-Fi Family */ = {
+			isa = PBXGroup;
+			children = (
+				15DC6E44104AB7F30094C09A /* MvrWiFiScanner.h */,
+				15DC6E45104AB7F30094C09A /* MvrWiFiScanner.m */,
+			);
+			name = "Wi-Fi Family";
 			sourceTree = "<group>";
 		};
 		15E714410FBD92700037C439 /* Items UI */ = {
@@ -1290,6 +1303,7 @@
 				15AAEB8010442DBE002AC69D /* MvrWiFiIncomingTransfer.m in Sources */,
 				15EAD05B1045D6210004EF12 /* MvrWiFiChannel.m in Sources */,
 				1566CB0B10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m in Sources */,
+				15DC6E46104AB7F30094C09A /* MvrWiFiScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

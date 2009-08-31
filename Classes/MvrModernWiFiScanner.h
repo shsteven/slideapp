@@ -12,13 +12,16 @@
 
 #import "MvrWiFiChannel.h"
 
+#import "MvrWiFiScanner.h"
+
 #define kMvrModernBonjourServiceName @"_x-mover2._tcp."
 
-@interface MvrModernWiFiScanner : NSObject <L0MoverPeerScanner> {
+@interface MvrModernWiFiScanner : MvrWiFiScanner <L0MoverPeerScanner> {
 	MvrNetworkExchange* service;
 	NSMutableSet* availableChannels;
 	NSMutableSet* transfers;
 	BOOL enabled;
+	BOOL jammed;
 	
 	AsyncSocket* server;
 	NSNetService* netService;

@@ -22,6 +22,10 @@
 
 - (MvrWiFiChannel*) channelForService:(NSNetService *)s;
 
+@property(assign) BOOL jammed;
+
+- (void) restartSearching;
+
 @end
 
 
@@ -55,6 +59,8 @@ L0ObjCSingletonMethod(sharedScanner)
 - (void) start;
 {
 	if (enabled) return;
+	if (self.jammed) return;
+	
 	NSError* e = nil;
 	
 	NSAssert(service, @"Need the exchange service set before running!");
@@ -85,17 +91,20 @@ L0ObjCSingletonMethod(sharedScanner)
 	[netService setTXTRecordData:[NSNetService dataFromTXTRecordDictionary:txtDictionary]];
 	
 	[netService publish];
-
-		
+			
 	NSAssert(!browser, @"Browser should be nil");
 	browser = [[NSNetServiceBrowser alloc] init];
 	[browser setDelegate:self];
-	[browser searchForServicesOfType:kMvrModernBonjourServiceName inDomain:@""];
+	[self restartSearching];
+	
+	[self startMonitoringReachability];
 }
 
 - (void) stop;
 {
 	if (!enabled) return;
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(restartSearching) object:nil];
 	
 	[netService setDelegate:nil];
 	[netService stop];
@@ -116,6 +125,8 @@ L0ObjCSingletonMethod(sharedScanner)
 	}
 	
 	[servicesBeingResolved release];
+	
+	[self stopMonitoringReachability];
 }
 
 - (void) dealloc;
@@ -133,16 +144,24 @@ L0ObjCSingletonMethod(sharedScanner)
 #pragma mark -
 #pragma mark Service browsing.
 
+- (void) restartSearching;
+{
+	L0Note();
+	[browser searchForServicesOfType:kMvrModernBonjourServiceName inDomain:@""];
+}
+
 - (void) netServiceBrowser:(NSNetServiceBrowser*) aNetServiceBrowser didNotSearch:(NSDictionary*) errorDict;
 {
 	L0Log(@"%@", errorDict);
-	[browser searchForServicesOfType:kMvrModernBonjourServiceName inDomain:@""];
+	
+	if ([[errorDict objectForKey:NSNetServicesErrorCode] integerValue] != NSNetServicesActivityInProgress)
+		[self performSelector:@selector(restartSearching) withObject:nil afterDelay:7.0];
 }
 
 - (void) netServiceBrowserDidStopSearch:(NSNetServiceBrowser*) aNetServiceBrowser;
 {
 	L0Note();
-	[browser searchForServicesOfType:kMvrModernBonjourServiceName inDomain:@""];
+	[self restartSearching];
 }
 
 - (void) netServiceBrowser:(NSNetServiceBrowser*) aNetServiceBrowser didFindService:(NSNetService*) aNetService moreComing:(BOOL) moreComing;
@@ -238,6 +257,21 @@ L0ObjCSingletonMethod(sharedScanner)
 	MvrWiFiIncomingTransfer* transfer = [[MvrWiFiIncomingTransfer alloc] initWithSocket:newSocket scanner:self];
 	[transfers addObject:transfer];
 	[transfer release];
+}
+
+#pragma mark -
+#pragma mark Jamming
+
+@synthesize jammed;
+
+- (void) setJammed:(BOOL) j;
+{
+	jammed = j;
+	
+	if (jammed && enabled)
+		[self stop];
+	else if (!jammed && enabled)
+		[self start];
 }
 
 @end
