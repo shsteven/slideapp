@@ -124,7 +124,7 @@ L0ObjCSingletonMethod(sharedScanner)
 		[s stop];
 	}
 	
-	[servicesBeingResolved release];
+	[servicesBeingResolved release]; servicesBeingResolved = nil;
 	
 	[self stopMonitoringReachability];
 }
