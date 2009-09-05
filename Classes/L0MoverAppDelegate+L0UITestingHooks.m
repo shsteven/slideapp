@@ -45,33 +45,9 @@
 	[self performSelector:@selector(displayNewVersionAlertWithVersion:) withObject:@"99.9" afterDelay:1.0];
 }
 
-- (void) testNetworkBecomingUnavailable; // WARNING: Disables network watching, use with care.
-{
-	[self performSelector:@selector(performTestNetworkUnavailable) withObject:nil afterDelay:1.0];
-}
-
 - (void) testNoEmailSetUpAlert;
 {
 	[[UIAlertView alertNamed:@"L0MoverNoEmailSetUp"] performSelector:@selector(show) withObject:nil afterDelay:1.0];
-}
-
-- (void) performTestNetworkUnavailable;
-{
-	[self beginTestingModeBannerAnimation];
-	[self stopWatchingNetwork];
-	self.networkAvailable = NO;
-}
-
-- (void) testNetworkBecomingAvailable; // WARNING: Disables network watching, use with care.
-{
-	[self performSelector:@selector(performTestNetworkAvailable) withObject:nil afterDelay:1.0];
-}
-
-- (void) performTestNetworkAvailable;
-{
-	[self beginTestingModeBannerAnimation];
-	[self stopWatchingNetwork];
-	self.networkAvailable = YES;
 }
 
 - (void) testByPerformingAlertParade; // WARNING: Disables network watching, use with care.

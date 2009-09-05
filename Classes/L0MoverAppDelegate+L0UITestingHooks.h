@@ -27,11 +27,6 @@
 // Performs all of the above 5s one from the other.
 - (void) testByPerformingAlertParade; // WARNING: Disables network watching, use with care.
 
-// OLD -- DO NOT USE
-- (void) testNetworkBecomingUnavailable; // WARNING: Disables network watching, use with care.
-- (void) testNetworkBecomingAvailable; // WARNING: Disables network watching, use with care.
-// END OLD -- DO NOT USE
-
 // toggles enabling and simulated jamming on wifi and bluetooth, then finally makes bt unavailable. USE ONCE PER SESSION (restart before reusing).
 - (void) testNetworkStateChanges;
 

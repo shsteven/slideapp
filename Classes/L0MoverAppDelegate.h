@@ -38,7 +38,6 @@
 	CGPoint networkUnavailableViewStartingPosition;
 	
 	double lastSeenVersion;
-	BOOL networkAvailable;
 	L0MoverNetworkCalloutController* networkCalloutController;
 	
 	UIView* shieldView;
@@ -76,14 +75,7 @@
 
 @property(readonly, copy) NSString* documentsDirectory;
 
-- (void) beginWatchingNetwork;
-- (void) checkNetwork;
-- (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
-
 - (void) tellAFriend;
-
-@property(retain) IBOutlet UIView* networkUnavailableView;
-@property(readonly, getter=isNetworkAvailable) BOOL networkAvailable;
 
 - (void) beginShowingActionMenuForItem:(L0MoverItem*) i includeRemove:(BOOL) r;
 - (BOOL) performMainActionForItem:(L0MoverItem*) i;
@@ -109,11 +101,6 @@
 
 #if L0MoverAppDelegateAllowFriendMethods
 @interface L0MoverAppDelegate (L0FriendMethods)
-
-@property(readwrite) BOOL networkAvailable;
-#if DEBUG
-- (void) stopWatchingNetwork;
-#endif
 
 - (void) displayNewVersionAlertWithVersion:(NSString*) version;
 

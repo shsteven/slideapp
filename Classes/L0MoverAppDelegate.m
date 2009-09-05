@@ -62,6 +62,8 @@ enum {
 - (BOOL) isCameraAvailable;
 - (void) paste;
 
+@property(readonly, getter=isNetworkAvailable) BOOL networkAvailable;
+
 @end
 
 
@@ -74,6 +76,8 @@ enum {
 		key = kL0MoverWiFiDisabledDefaultsKey;
 	else if (s == [L0MoverBluetoothScanner sharedScanner])
 		key = kL0MoverBluetoothDisabledDefaultsKey;
+	else
+		key = [NSString stringWithFormat:@"MvrScannerDisabled: %@", NSStringFromClass([s class])];
 
 	return key;
 }
@@ -179,11 +183,7 @@ enum {
 	// Be helpful if this is the first time (ahem).
 	[self showAlertIfNotShownBeforeNamed:@"L0MoverWelcome"];
 	
-	networkUnavailableViewStartingPosition = self.networkUnavailableView.center;
-	self.networkUnavailableView.hidden = YES;
-	networkAvailable = YES;
-	//[self beginWatchingNetwork];
-	
+	// Set up the network callout.
 	self.networkCalloutController.anchorView = self.toolbar;
 	[self.networkCalloutController startWatchingForJams];
 	
@@ -218,6 +218,16 @@ enum {
 
 #pragma mark -
 #pragma mark Tell a Friend
+
+- (BOOL) isNetworkAvailable;
+{
+	for (id <L0MoverPeerScanner> s in [[MvrNetworkExchange sharedExchange] availableScanners]) {
+		if (!s.jammed && s.enabled)
+			return YES;
+	}
+	
+	return NO;
+}
 
 - (void) proposeTellingAFriend;
 {
@@ -289,126 +299,6 @@ enum {
 {
 	[item storeToAppropriateApplication];
 	[self.tableController addItem:item animation:kL0SlideItemsTableAddByDropping];
-}
-
-#pragma mark -
-#pragma mark Reachability
-
-static SCNetworkReachabilityRef reach = NULL;
-
-static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach, SCNetworkReachabilityFlags flags, void* nothing) {
-	L0MoverAppDelegate* myself = (L0MoverAppDelegate*) UIApp.delegate;
-	[NSObject cancelPreviousPerformRequestsWithTarget:myself selector:@selector(checkNetwork) object:nil];
-	[myself updateNetworkWithFlags:flags];
-}
-
-@synthesize networkUnavailableView, networkAvailable;
-
-- (void) beginWatchingNetwork;
-{
-	if (reach) return;
-	
-	// What follows comes from Reachability.m.
-	// Basically, we look for reachability for the link-local address --
-	// and filter for WWAN or connection-required responses in -updateNetworkWithFlags:.
-	
-	// Build a sockaddr_in that we can pass to the address reachability query.
-	struct sockaddr_in sin;
-	bzero(&sin, sizeof(sin));
-	sin.sin_len = sizeof(sin);
-	sin.sin_family = AF_INET;
-	
-	// IN_LINKLOCALNETNUM is defined in <netinet/in.h> as 169.254.0.0
-	sin.sin_addr.s_addr = htonl(IN_LINKLOCALNETNUM);
-	
-	reach = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*) &sin);
-	
-	SCNetworkReachabilityContext emptyContext = {0, self, NULL, NULL, NULL};
-	SCNetworkReachabilitySetCallback(reach, &L0MoverAppDelegateNetworkStateChanged, &emptyContext);
-	SCNetworkReachabilityScheduleWithRunLoop(reach, [[NSRunLoop currentRunLoop] getCFRunLoop], kCFRunLoopDefaultMode);
-	
-	SCNetworkReachabilityFlags flags;
-	if (!SCNetworkReachabilityGetFlags(reach, &flags))
-		[self performSelector:@selector(checkNetwork) withObject:nil afterDelay:0.5];
-	else
-		[self updateNetworkWithFlags:flags];
-}
-
-#if DEBUG
-- (void) stopWatchingNetwork;
-{
-	if (!reach) return;
-	
-	SCNetworkReachabilityUnscheduleFromRunLoop(reach, [[NSRunLoop currentRunLoop] getCFRunLoop], kCFRunLoopDefaultMode);
-	CFRelease(reach); reach = NULL;
-}
-#endif
-
-- (void) checkNetwork;
-{
-	SCNetworkReachabilityFlags flags;
-	if (SCNetworkReachabilityGetFlags(reach, &flags))
-		[self updateNetworkWithFlags:flags];
-}
-
-- (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
-{
-	BOOL habemusNetwork = 
-		(flags & kSCNetworkReachabilityFlagsReachable) &&
-		!(flags & kSCNetworkReachabilityFlagsConnectionRequired);
-	// note that unlike Reachability.m we don't care about WWANs.
-	
-	self.networkAvailable = habemusNetwork;
-}
-
-- (void) setNetworkAvailable:(BOOL) habemusNetwork;
-{
-	BOOL wasUp = networkAvailable;
-	networkAvailable = habemusNetwork;
-	L0Log(@"Available = %d", habemusNetwork);
-	
-	if (habemusNetwork && !wasUp) {
-		// update UI for network. Huzzah!
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-		[UIView setAnimationDuration:1.0];
-		
-		self.networkUnavailableView.alpha = 0.0;
-		CGPoint position = self.networkUnavailableView.center;
-		position.y =
-		self.networkUnavailableView.superview.frame.size.height +
-		self.networkUnavailableView.superview.frame.size.height;
-		self.networkUnavailableView.center = position;
-		
-		[UIView commitAnimations];
-
-		self.networkUnavailableView.hidden = NO;
-	} else if (!habemusNetwork && wasUp) {
-		// disable UI for no network. Boo, user, boo!
-		CGPoint position = self.networkUnavailableView.center;
-		position.y =
-		self.networkUnavailableView.superview.frame.size.height +
-		self.networkUnavailableView.superview.frame.size.height;
-		self.networkUnavailableView.center = position;
-		
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-		[UIView setAnimationDuration:1.0];
-		
-		self.networkUnavailableView.alpha = 1.0;
-		self.networkUnavailableView.center = networkUnavailableViewStartingPosition;
-		
-		[UIView commitAnimations];
-		
-		// clear all peers off the table. TODO: only Bonjour peers!
-		self.tableController.northPeer = nil;
-		self.tableController.eastPeer = nil;
-		self.tableController.westPeer = nil;
-		
-		self.networkUnavailableView.hidden = NO;
-	}
-
-	[self.networkUnavailableView.superview bringSubviewToFront:self.networkUnavailableView];
 }
 
 #pragma mark -
