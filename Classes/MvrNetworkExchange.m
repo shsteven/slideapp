@@ -10,9 +10,8 @@
 #import "L0MoverPeer.h"
 
 #import "L0MoverWiFiScanner.h"
-#import "L0MoverWiFiChannel.h"
-
 #import "L0MoverBluetoothScanner.h"
+#import "MvrModernWiFiScanner.h"
 
 #import <MuiKit/MuiKit.h>
 
@@ -75,9 +74,10 @@ static NSString* MvrChannelMedium(id <L0MoverPeerChannel> c) {
 	// return [[self.channels anyObject] sendItemToOtherEndpoint:item];
 	id <L0MoverPeerChannel> selectedChan = nil;
 	for (id <L0MoverPeerChannel> chan in self.channels) {
+		if (!MvrChannelIsDeprecated(selectedChan) && MvrChannelIsDeprecated(chan))
+			continue;
+		
 		selectedChan = chan;
-		if ([chan isKindOfClass:[L0MoverWiFiChannel class]])
-			break;
 	}
 	
 	return [selectedChan sendItemToOtherEndpoint:item];
@@ -125,7 +125,6 @@ static NSString* MvrChannelMedium(id <L0MoverPeerChannel> c) {
 // ----------------------
 
 @interface MvrNetworkExchange ()
-+ allScanners;
 - (L0MoverSynthesizedPeer*) peerWithChannel:(id <L0MoverPeerChannel>) channel;
 
 - (void) makeChannelAvailable:(id <L0MoverPeerChannel>) channel;
@@ -181,7 +180,11 @@ L0ObjCSingletonMethod(sharedExchange);
 
 + allScanners;
 {
-	return [NSSet setWithObjects:[L0MoverWiFiScanner sharedScanner], [L0MoverBluetoothScanner sharedScanner], nil];
+	return [NSSet setWithObjects:
+			[L0MoverWiFiScanner sharedScanner],
+			[MvrModernWiFiScanner sharedScanner],
+			[L0MoverBluetoothScanner sharedScanner],
+			nil];
 }
 
 #pragma mark Peers and channels

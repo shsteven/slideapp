@@ -142,7 +142,7 @@ L0ObjCSingletonMethod(sharedScanner)
 
 	modernBrowser = [[NSNetServiceBrowser alloc] init];
 	[modernBrowser setDelegate:self];
-	[modernBrowser searchForServicesOfType:kMvrModernServiceName inDomain:@"local."];	
+	[modernBrowser searchForServicesOfType:kMvrStandardServiceName inDomain:@"local."];	
 }
 
 - (void) stopBrowsing;
@@ -195,7 +195,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	legacyService.delegate = self;
 	[legacyService publish];
 	
-	modernService = [[NSNetService alloc] initWithDomain:@"local." type:kMvrModernServiceName name:serviceName port:listener.port];
+	modernService = [[NSNetService alloc] initWithDomain:@"local." type:kMvrStandardServiceName name:serviceName port:listener.port];
 	[modernService setTXTRecordData:txtData];
 	modernService.delegate = self;
 	[modernService publish];
@@ -294,7 +294,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	if (browser == legacyBrowser)
 		[legacyBrowser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
 	else if (browser == modernBrowser)
-		[modernBrowser searchForServicesOfType:kMvrModernServiceName inDomain:@""];
+		[modernBrowser searchForServicesOfType:kMvrStandardServiceName inDomain:@""];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;

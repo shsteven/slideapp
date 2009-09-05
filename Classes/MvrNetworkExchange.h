@@ -33,6 +33,9 @@
 // When the last channel to a peer disappears, the peer has left the building (er) and
 // peerLeft: is called.
 
+// A set of all interesting scanners.
++ (NSSet*) allScanners;
+
 // The scanners that are available. Unavailable = can't ever
 // be used on this device.
 // Some scanners (eg Bluetooth) may start tentatively available

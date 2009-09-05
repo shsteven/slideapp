@@ -10,7 +10,7 @@
 
 
 @interface L0MoverNetworkSettingsPane : UITableViewController {
-	NSArray* model;
+	BOOL isBluetoothAvailable;
 }
 
 + modalNetworkSettingsPane;

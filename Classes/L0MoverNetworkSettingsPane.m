@@ -16,16 +16,20 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#define kMvrWiFiClassFamily ([MvrWiFiScanner class])
+#define kMvrBluetoothClassFamily ([L0MoverBluetoothScanner class])
+
 @interface L0MoverNetworkSettingsPane ()
 
-@property(readonly) MvrNetworkExchange* peering;
-@property(readonly) L0MoverWiFiScanner* WiFi;
-@property(readonly) L0MoverBluetoothScanner* bluetooth;
-
-@property(copy) NSArray* model;
+// -- New methods for handling families of scanners --
+- (BOOL) areScannersAvailableForClass:(Class) c;
+- (BOOL) areScannersEnabledForClass:(Class) c;
+- (BOOL) areScannersJammedForClass:(Class) c;
+- (void) setEnabled:(BOOL) e forScannersOfClass:(Class) c;
+// -- - --
 
 - (void) updateModel;
-- (void) updateStateOfSwitch:(UISwitch*) enabledSwitch forScanner:(id <L0MoverPeerScanner>) s;
+- (void) updateStateOfSwitch:(UISwitch*) enabledSwitch forScannerClass:(Class) c;
 
 - (UITableViewCell*) cellForWiFiSectionAtRow:(NSInteger) row;
 - (UITableViewCell*) cellForBluetoothSectionAtRow:(NSInteger) row;
@@ -33,48 +37,95 @@
 - (NSString*) titleForFooterInWiFiSection;
 - (NSString*) titleForFooterInBluetoothSection;
 
+@property(readonly) MvrNetworkExchange* peering;
+
 @end
 
 enum {
 	kL0MoverWiFiSection = 0,
 	kL0MoverBluetoothSection,
+
+	kMvrNetworkSettingsSectionCount,
 };
 typedef NSInteger L0MoverNetworkSettingsSection;
-
-@interface L0MoverTableViewWithCustomSectionMargins : UITableView
-{
-}
-
-@end
-
-@implementation L0MoverTableViewWithCustomSectionMargins
-
-- (CGRect) rectForFooterInSection:(NSInteger) section;
-{
-	CGRect rect = [super rectForFooterInSection:section];
-	rect.origin.x += 10;
-	rect.size.width -= 10;
-	return rect;
-}
-
-@end
-
 
 
 @implementation L0MoverNetworkSettingsPane
 
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
-    }
-    return self;
+#pragma mark -
+#pragma mark Scanner families
+
+- (BOOL) areScannersAvailableForClass:(Class) c;
+{
+	for (id s in self.peering.availableScanners) {
+		if ([s isKindOfClass:c])
+			return YES;
+	}
+	
+	return NO;
 }
-*/
+
+- (BOOL) areScannersEnabledForClass:(Class) c;
+{
+	for (id <L0MoverPeerScanner> s in self.peering.availableScanners) {
+		if ([s isKindOfClass:c] && s.enabled)
+			return YES;
+	}
+	
+	return NO;
+}
+
+- (BOOL) areScannersEnabledForClassesOtherThan:(Class) c;
+{
+	for (id <L0MoverPeerScanner> s in self.peering.availableScanners) {
+		if (![s isKindOfClass:c] && s.enabled)
+			return YES;
+	}
+	
+	return NO;
+}
+
+- (BOOL) areScannersJammedForClass:(Class) c;
+{
+	for (id <L0MoverPeerScanner> s in self.peering.availableScanners) {
+		if ([s isKindOfClass:c] && s.enabled && s.jammed)
+			return YES;
+	}
+	
+	return NO;
+}
+
+- (void) setEnabled:(BOOL) e forScannersOfClass:(Class) c;
+{
+	for (id <L0MoverPeerScanner> s in self.peering.availableScanners) {
+		if ([s isKindOfClass:c]) {
+			s.enabled = e;
+			[L0Mover setEnabledDefault:e forScanner:s];
+		}
+	}
+}
+
+- (void) setEnabled:(BOOL) e forScannersOfClassesOtherThan:(Class) c;
+{
+	for (id <L0MoverPeerScanner> s in self.peering.availableScanners) {
+		if (![s isKindOfClass:c]) {
+			s.enabled = e;
+			[L0Mover setEnabledDefault:e forScanner:s];
+		}
+	}
+}
+
+#pragma mark -
+#pragma mark Model
+
+- (MvrNetworkExchange*) peering { return [MvrNetworkExchange sharedExchange]; }
+
+#pragma mark -
+#pragma mark UI implementation
 
 - (void) loadView;
 {
-	UITableView* tableView = [[L0MoverTableViewWithCustomSectionMargins alloc] initWithFrame:CGRectMake(0, 0, 10, 10) style:UITableViewStyleGrouped];
+	UITableView* tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 10, 10) style:UITableViewStyleGrouped];
 
 	tableView.delegate = self;
 	tableView.dataSource = self;
@@ -84,48 +135,29 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	[self viewDidLoad];
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-#pragma mark -
-#pragma mark Model
-
-@synthesize model;
-
-- (void) dealloc;
-{
-	[model release];
-	[super dealloc];
-}
-
 - (void) viewWillAppear:(BOOL) animated;
 {
     [super viewWillAppear:animated];
 	self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 	
-	self.title = NSLocalizedStringFromTable(@"Network", @"L0MoverNetworkUI", @"Title of the network settings pane");
+	
 	
 	[self updateModel];
 	
 	[self.peering addObserver:self forKeyPath:@"availableScanners" options:0 context:NULL];
-	[self.WiFi addObserver:self forKeyPath:@"jammed" options:0 context:NULL];
-	[self.bluetooth addObserver:self forKeyPath:@"jammed" options:0 context:NULL];
-	[self.WiFi addObserver:self forKeyPath:@"enabled" options:0 context:NULL];
-	[self.bluetooth addObserver:self forKeyPath:@"enabled" options:0 context:NULL];
+	for (id s in [MvrNetworkExchange allScanners]) {
+		[s addObserver:self forKeyPath:@"enabled" options:0 context:NULL];
+		[s addObserver:self forKeyPath:@"jammed" options:0 context:NULL];
+	}
 }
 
 - (void) viewDidDisappear:(BOOL) animated;
 {
 	[self.peering removeObserver:self forKeyPath:@"availableScanners"];
-	[self.WiFi removeObserver:self forKeyPath:@"jammed"];
-	[self.bluetooth removeObserver:self forKeyPath:@"jammed"];
-	[self.WiFi removeObserver:self forKeyPath:@"enabled"];
-	[self.bluetooth removeObserver:self forKeyPath:@"enabled"];
+	for (id s in [MvrNetworkExchange allScanners]) {
+		[s removeObserver:self forKeyPath:@"enabled"];
+		[s removeObserver:self forKeyPath:@"jammed"];
+	}
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
@@ -136,21 +168,11 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	[self updateModel];
 }
 
-- (MvrNetworkExchange*) peering { return [MvrNetworkExchange sharedExchange]; }
-- (L0MoverWiFiScanner*) WiFi { return [L0MoverWiFiScanner sharedScanner]; }
-- (L0MoverBluetoothScanner*) bluetooth { return [L0MoverBluetoothScanner sharedScanner]; }
-
 // -------
 
 - (void) updateModel;
 {
-	NSMutableArray* m = [NSMutableArray array];
-	[m addObject:self.WiFi];
-	
-	if ([self.peering.availableScanners containsObject:self.bluetooth])
-		[m addObject:self.bluetooth];
-	
-	self.model = m;
+	isBluetoothAvailable = [self areScannersAvailableForClass:kMvrBluetoothClassFamily];
 	
 	[self.tableView reloadData];
 }
@@ -160,33 +182,58 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView*) tableView;
 {
-	return [self.model count];
+	NSInteger sections = kMvrNetworkSettingsSectionCount;
+	if (!isBluetoothAvailable)
+		sections--;
+	
+	return sections;
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger) tableView:(UITableView*) tableView numberOfRowsInSection:(NSInteger) section;
 {
-	id scanner = [self.model objectAtIndex:section];
-	
-	if (scanner == self.WiFi || scanner == self.bluetooth)
+	if (section < kMvrNetworkSettingsSectionCount)
 		return 1;
 	
+	NSAssert(NO, @"Too high a section request!");
 	return 0;
 }
 
-- (void) prepareStatusCell:(UITableViewCell*) cell forScanner:(id <L0MoverPeerScanner>) s;
+- (NSInteger) sectionIndexForScannerClass:(Class) c;
+{
+	if ([c isEqual:kMvrWiFiClassFamily])
+		return kL0MoverWiFiSection;
+	else if ([c isEqual:kMvrBluetoothClassFamily])
+		return kL0MoverBluetoothSection;
+	
+	NSAssert(NO, @"This is an unknown scanner class!");
+	return -1;
+}
+
+- (Class) scannerClassForSectionIndex:(NSInteger) section;
+{
+	if (section == kL0MoverWiFiSection)
+		return kMvrWiFiClassFamily;
+	else if (section == kL0MoverBluetoothSection)
+		return kMvrBluetoothClassFamily;
+	
+	NSAssert(NO, @"This is an unknown section!");
+	return nil;
+}
+
+- (void) prepareStatusCell:(UITableViewCell*) cell forScannerClass:(Class) c;
 {		
-	if (s.jammed && s.enabled)
+	if ([self areScannersJammedForClass:c])
 		cell.textLabel.textColor = [UIColor redColor];
 	
-	if ([self.model count] == 1) {
+	if (!isBluetoothAvailable) {
 		
 		// a label.
 		UILabel* stateLabel = cell.detailTextLabel;
 		
-		// by implied contract, only one channel available == that chan is enabled.
-		if (s.jammed) {
+		// only Wi-Fi is available, so we show its state.
+		if ([self areScannersJammedForClass:c]) {
 			stateLabel.text = NSLocalizedStringFromTable(@"Disconnected", @"L0MoverNetworkUI", @"Shown as a label in the config pane if the only available service is jammed.");
 			stateLabel.textColor = [UIColor redColor];
 		} else {
@@ -200,40 +247,29 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 		[enabledSwitch sizeToFit];
 		
 		[enabledSwitch addTarget:self action:@selector(toggledEnabled:) forControlEvents:UIControlEventValueChanged];
-		enabledSwitch.tag = [self.model indexOfObject:s]; // tag it with the scanner #
+		enabledSwitch.tag = [self sectionIndexForScannerClass:c];
 		
-		[self updateStateOfSwitch:enabledSwitch forScanner:s];
+		[self updateStateOfSwitch:enabledSwitch forScannerClass:c];
 		cell.accessoryView = enabledSwitch;
 		
 	}
 	
 }
 
-- (void) updateStateOfSwitch:(UISwitch*) enabledSwitch forScanner:(id <L0MoverPeerScanner>) s;
+- (void) updateStateOfSwitch:(UISwitch*) enabledSwitch forScannerClass:(Class) c;
 {
-	BOOL anyOtherIsEnabled = NO;
-	for (id <L0MoverPeerScanner> other in self.model) {
-		if (s == other) continue;
-		
-		if (other.enabled) {
-			anyOtherIsEnabled = YES;
-			break;
-		}
-	}
+	// enable only if others are enabled.
+	enabledSwitch.enabled = [self areScannersEnabledForClassesOtherThan:c];	
 	
-	if (!anyOtherIsEnabled)
-		enabledSwitch.enabled = NO;
-	
-	enabledSwitch.on = s.enabled;
+	// turn on if enabled, off if disabled.
+	enabledSwitch.on = [self areScannersEnabledForClass:c];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-{
-	id scanner = [self.model objectAtIndex:[indexPath section]];
-		
-	if (scanner == self.WiFi) {
+{	
+	if ([indexPath section] == kL0MoverWiFiSection) {
 		return [self cellForWiFiSectionAtRow:[indexPath row]];
-	} else if (scanner == self.bluetooth) {
+	} else if ([indexPath section] == kL0MoverBluetoothSection) {
 		return [self cellForBluetoothSectionAtRow:[indexPath row]];
 	}
 	
@@ -241,27 +277,27 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	return nil;
 }
 
-- (UITableViewCell*) statusCellForScanner:(id <L0MoverPeerScanner>) s withLabel:(NSString*) label;
+- (UITableViewCell*) statusCellForScannerClass:(Class) c withLabel:(NSString*) label;
 {
-	BOOL requiresControl = [self.peering.availableScanners count] == 1;
-	UITableViewCellStyle style = requiresControl? UITableViewCellStyleValue1 : UITableViewCellStyleDefault;
+	UITableViewCellStyle style = isBluetoothAvailable? UITableViewCellStyleValue1 : UITableViewCellStyleDefault;
+	
 	UITableViewCell* cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:nil] autorelease];
 	cell.textLabel.text = label;
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-	[self prepareStatusCell:cell forScanner:s];
+	[self prepareStatusCell:cell forScannerClass:c];
 	
 	return cell;
 }
 
 - (UITableViewCell*) cellForWiFiSectionAtRow:(NSInteger) row;
 {
-	return [self statusCellForScanner:self.WiFi withLabel:NSLocalizedStringFromTable(@"Wi-Fi", @"L0MoverNetworkUI", @"Label to the settings pane cell.")];
+	return [self statusCellForScannerClass:kMvrWiFiClassFamily withLabel:NSLocalizedStringFromTable(@"Wi-Fi", @"L0MoverNetworkUI", @"Label to the settings pane cell.")];
 }
 
 - (UITableViewCell*) cellForBluetoothSectionAtRow:(NSInteger) row;
 {
-	return [self statusCellForScanner:self.bluetooth withLabel:NSLocalizedStringFromTable(@"Bluetooth", @"L0MoverNetworkUI", @"Label to the settings pane cell.")];
+	return [self statusCellForScannerClass:kMvrBluetoothClassFamily withLabel:NSLocalizedStringFromTable(@"Bluetooth", @"L0MoverNetworkUI", @"Label to the settings pane cell.")];
 }
 
 #pragma mark -
@@ -269,23 +305,24 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 
 - (NSString*) tableView:(UITableView*) tableView titleForFooterInSection:(NSInteger) section;
 {
-	id scanner = [self.model objectAtIndex:section];
-	
-	if (scanner == self.WiFi) {
+	if (section == kL0MoverWiFiSection)
 		return [self titleForFooterInWiFiSection];
-	} else if (scanner == self.bluetooth) {
+	else if (section == kL0MoverBluetoothSection)
 		return [self titleForFooterInBluetoothSection];
-	}
 	
+	NSAssert(NO, @"This is an unknown section index!");
 	return nil;
 }
 
 - (NSString*) titleForFooterInWiFiSection;
 {
-	if (self.WiFi.jammed) {
+	BOOL jammed = [self areScannersJammedForClass:kMvrWiFiClassFamily],
+		enabled = [self areScannersEnabledForClass:kMvrWiFiClassFamily];
+	
+	if (jammed) {
 		return NSLocalizedStringFromTable(@"Connect to a network to use Wi-Fi.",
 										  @"L0MoverNetworkUI", @"Wi-Fi is jammed (footer text in network config pane).");
-	} else if (!self.WiFi.enabled) {
+	} else if (!enabled) {
 		return NSLocalizedStringFromTable(@"Turn on to see other devices using Wi-Fi.\nIf you do, Bluetooth will be turned off.",
 										  @"L0MoverNetworkUI", @"Wi-Fi is disabled (footer text in network config pane).");
 	} else {
@@ -296,10 +333,13 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 
 - (NSString*) titleForFooterInBluetoothSection;
 {
-	if (self.bluetooth.jammed) {
+	BOOL jammed = [self areScannersJammedForClass:kMvrBluetoothClassFamily],
+		enabled = [self areScannersEnabledForClass:kMvrBluetoothClassFamily];
+	
+	if (jammed) {
 		return NSLocalizedStringFromTable(@"Bluetooth is off. Turn it on in the Settings application to use it.",
 										  @"L0MoverNetworkUI", @"Bluetooth is jammed (footer text in network config pane).");
-	} else if (!self.bluetooth.enabled) {
+	} else if (!enabled) {
 		return NSLocalizedStringFromTable(@"Turn on to see newer iPhone and iPod touch models near you with Bluetooth on.\nIf you do, Wi-Fi will be turned off.",
 										  @"L0MoverNetworkUI", @"Bluetooth is disabled (footer text in network config pane).");
 	} else {
@@ -318,26 +358,20 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 
 - (IBAction) toggledEnabled:(UISwitch*) sender;
 {
-	id <L0MoverPeerScanner> scanner = [self.model objectAtIndex:sender.tag];
-	L0Log(@"Toggling scanner %@ at section %d", scanner, sender.tag);
+	Class c = [self scannerClassForSectionIndex:sender.tag];
 	
-	BOOL newValue = !scanner.enabled;
-	scanner.enabled = !scanner.enabled;
-	if (scanner == self.WiFi)
-		self.bluetooth.enabled = !newValue;
-	else if (scanner == self.bluetooth)
-		self.WiFi.enabled = !newValue;
+	L0Log(@"Toggling scanner class %@ at section %d", c, sender.tag);
 	
-	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
-	[delegate setEnabledDefault:self.WiFi.enabled forScanner:self.WiFi];
-	[delegate setEnabledDefault:self.bluetooth.enabled forScanner:self.bluetooth];
+	BOOL newValue = ![self areScannersEnabledForClass:c];
+	[self setEnabled:newValue forScannersOfClass:c];
+	[self setEnabled:!newValue forScannersOfClassesOtherThan:c];	
 }
 
 #pragma mark -
 #pragma mark Construction
 
 + networkSettingsPane;
-{
+{	
 	L0MoverNetworkSettingsPane* myself = [[L0MoverNetworkSettingsPane alloc] initWithStyle:UITableViewStyleGrouped];
 	myself.title = NSLocalizedStringFromTable(@"Network", @"L0MoverNetworkUI", @"Title of the network settings pane");
 	return [myself autorelease];

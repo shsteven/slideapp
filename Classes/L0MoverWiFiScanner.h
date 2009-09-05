@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
+#import "MvrWiFiScanner.h"
+
 #import "MvrNetworkExchange.h"
 #import "BLIP.h"
 
@@ -17,9 +19,9 @@
 #define kL0BonjourPeerUniqueIdentifierKey @"L0PeerID"
 
 #define kL0BonjourPeeringServiceName @"_x-infinitelabs-slides._tcp."
-#define kMvrModernServiceName @"_x-mover._tcp."
+#define kMvrStandardServiceName @"_x-mover._tcp."
 
-@interface L0MoverWiFiScanner : NSObject <L0MoverPeerScanner, TCPListenerDelegate, TCPConnectionDelegate> {
+@interface L0MoverWiFiScanner : MvrWiFiScanner <L0MoverPeerScanner, TCPListenerDelegate, TCPConnectionDelegate> {
 	NSNetServiceBrowser* legacyBrowser;
 	NSNetServiceBrowser* modernBrowser;
 	NSNetService* legacyService;
@@ -32,7 +34,6 @@
 	
 	MvrNetworkExchange* service;
 	BOOL jammed;
-	SCNetworkReachabilityRef reach;
 	
 #if DEBUG
 	BOOL isJammingSimulated;
