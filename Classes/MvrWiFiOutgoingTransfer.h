@@ -22,6 +22,9 @@
 	BOOL finished;
 	
 	CGFloat progress;
+	
+	unsigned long chunksPending;
+	BOOL canFinish;
 }
 
 - (id) initWithItem:(L0MoverItem*) i toChannel:(MvrWiFiChannel*) c;

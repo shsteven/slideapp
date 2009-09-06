@@ -86,9 +86,9 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	
 	[currentBuffer appendData:data];
 	
-	// An optimization: if we're in the expecting body state and we need to read a body, we only consume every 500 KB or so.
+	// An optimization: if we're in the expecting body state and we need to read a body, we only consume every 500 KiB or so.
 	if (self.state == kMvrPacketParserExpectingBody) {
-		if ([currentBuffer length] < MIN(300 * 1024, toReadForCurrentStop))
+		if ([currentBuffer length] < MIN(500 * 1024, toReadForCurrentStop))
 			return;
 	}
 	
@@ -100,7 +100,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	if (self.state != kMvrPacketParserExpectingBody)
 		return 0;
 	
-	return MIN(toReadForCurrentStop - [currentBuffer length], 300 * 1024 - [currentBuffer length]);
+	return MIN(toReadForCurrentStop - [currentBuffer length], 500 * 1024 - [currentBuffer length]);
 }
 
 - (void) consumeCurrentBuffer;

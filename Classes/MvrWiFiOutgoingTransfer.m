@@ -88,7 +88,11 @@
 	
 	L0Log(@"%@", e);
 	
-	[socket disconnectAfterWriting];
+	if (!e)
+		[socket disconnectAfterReadingAndWriting];
+	else
+		[socket disconnect];
+
 	[socket setDelegate:nil];
 	[socket release]; socket = nil;
 	
@@ -109,6 +113,17 @@
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err;
 {
 	[self endWithError:err];
+}
+
+- (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag;
+{
+	chunksPending--;
+	L0Log(@"%u chunks still pending", chunksPending);
+	
+	if (chunksPending == 0 && canFinish) {
+		L0Log(@"Ending without error (delayed).");
+		[self endWithError:nil];
+	}
 }
 
 #pragma mark -
@@ -134,14 +149,26 @@
 
 - (void) packetBuilder:(MvrPacketBuilder*) b didProduceData:(NSData*) d;
 {
-	[socket writeData:d withTimeout:20 tag:0];
-	self.progress = builder.progress;
+	[socket writeData:d withTimeout:-1 tag:0];
+	chunksPending++;
+	self.progress = builder.progress;	
+
+	L0Log(@"Writing %llu bytes, %u chunks now pending", (unsigned long long) [d length], chunksPending);
 }
 
 - (void) packetBuilder:(MvrPacketBuilder*) b didEndWithError:(NSError*) e;
 {
+	L0Log(@"%@", e);
+	
 	self.progress = builder.progress;
-	[self endWithError:e];
+
+	if (!e && chunksPending > 0) {
+		L0Log(@"Delaying the end signal until all chunks are confirmed written");
+		canFinish = YES;
+	} else {
+		L0Log(@"Ending now.");
+		[self endWithError:e];
+	}
 }
 
 @end
