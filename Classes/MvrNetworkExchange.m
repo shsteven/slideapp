@@ -200,25 +200,20 @@ L0ObjCSingletonMethod(sharedExchange);
 	return nil;
 }
 
-- (void) channelWillBeginReceiving:(id <L0MoverPeerChannel>) channel;
+- (void) channel:(id <L0MoverPeerChannel>) channel didStartReceiving:(id <MvrIncoming>) transfer;
 {
-	L0Log(@"%@", channel);
+	L0Log(@"%@ --> %@ --> us", channel, transfer);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
-	[peer.delegate moverPeerWillSendUsItem:peer];
+	if (peer)
+		[peer.delegate moverPeer:peer didStartReceiving:transfer];
 }
 
-- (void) channel:(id <L0MoverPeerChannel>) channel didReceiveItem:(L0MoverItem*) i;
+- (void) channel:(id <L0MoverPeerChannel>) channel didStopReceiving:(id <MvrIncoming>) transfer;
 {
-	L0Log(@"%@ --> %@ --> us", channel, i);
+	L0Log(@"%@ --> %@ -X-> us", channel, transfer);
 	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
-	[peer.delegate moverPeer:peer didSendUsItem:i];
-}
-
-- (void) channelDidCancelReceivingItem:(id <L0MoverPeerChannel>) channel;
-{
-	L0Log(@"%@ --X--> us", channel);
-	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
-	[peer.delegate moverPeerDidCancelSendingUsItem:peer];
+	if (peer)
+		[peer.delegate moverPeer:peer didStopReceiving:transfer];
 }
 
 - (void) channel:(id <L0MoverPeerChannel>) channel willSendItemToOtherEndpoint:(L0MoverItem*) i;

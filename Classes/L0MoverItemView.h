@@ -18,6 +18,8 @@
 	UIButton* actionButton;
 	UIImageView* highlightView;
 	UIImageView* backdropView;
+	UIActivityIndicatorView* spinner;
+	UIProgressView* progressBar;
 	
 	L0MoverItem* item;
 
@@ -26,6 +28,8 @@
 	
 	BOOL editing;
 	BOOL highlighted;
+	BOOL transferring;
+	CGFloat progress;
 }
 
 @property(retain) IBOutlet UIView* contentView;
@@ -33,6 +37,9 @@
 @property(assign) IBOutlet UIImageView* imageView;
 @property(assign) IBOutlet UIImageView* backdropView;
 @property(assign) IBOutlet UIButton* actionButton;
+
+@property(assign) IBOutlet UIActivityIndicatorView* spinner;
+@property(assign) IBOutlet UIProgressView* progressBar;
 
 @property(retain) IBOutlet UIImageView* highlightView;
 
@@ -47,5 +54,8 @@
 @property(getter=isHighlighted) BOOL highlighted;
 
 - (IBAction) performDelete;
+
+@property(getter=isTransferring) BOOL transferring;
+@property(assign) CGFloat progress;
 
 @end

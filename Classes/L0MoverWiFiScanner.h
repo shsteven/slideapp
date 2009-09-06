@@ -30,6 +30,7 @@
 	
 	BLIPListener* listener;
 	NSMutableSet* pendingConnections;
+	CFMutableDictionaryRef connectionsToTransfers;
 	NSMutableSet* availableChannels;
 	
 	MvrNetworkExchange* service;

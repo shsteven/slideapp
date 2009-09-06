@@ -8,10 +8,14 @@
 
 #import "L0MoverItemView.h"
 #import "L0ImageItem.h"
+#import "MvrProtocol.h"
 
 @interface L0MoverItemView ()
 
 - (void) removeHighlightViewIfPossible;
+
+- (void) stopProgress;
+- (void) updateProgress;
 
 @end
 
@@ -19,6 +23,7 @@
 @implementation L0MoverItemView
 
 @synthesize contentView, label, imageView, highlightView, backdropView;
+@synthesize spinner, progressBar;
 
 - (id) initWithFrame:(CGRect) frame;
 {
@@ -38,6 +43,8 @@
 		self.slideSpeedDampeningFactor = 0.6;
 		
 		self.isAccessibilityElement = YES;
+		
+		progress = kMvrPacketIndeterminateProgress;
 	}
 	
     return self;
@@ -188,6 +195,60 @@
 - (void) setHighlighted:(BOOL) h;
 {
 	[self setHighlighted:h animated:NO animationDuration:0.0];
+}
+
+@synthesize transferring;
+- (void) setTransferring:(BOOL) t;
+{
+	BOOL wasTransferring = transferring;
+	transferring = t;
+	
+	[self updateProgress];
+
+	if (t && !wasTransferring) {
+		[UIView beginAnimations:nil context:NULL];
+		
+		self.label.alpha = 0.0;
+		self.imageView.alpha = 0.0;
+		self.progressBar.alpha = 1.0;
+		self.spinner.alpha = 1.0;
+		
+		[UIView commitAnimations];
+		
+	} else {
+		[self stopProgress];
+		
+		[UIView beginAnimations:nil context:NULL];
+		
+		self.label.alpha = 1.0;
+		self.imageView.alpha = 1.0;
+		self.progressBar.alpha = 0.0;
+		self.spinner.alpha = 0.0;
+		
+		[UIView commitAnimations];
+	}
+}
+
+@synthesize progress;
+- (void) setProgress:(CGFloat) p;
+{
+	progress = p;
+	[self updateProgress];
+}
+
+- (void) updateProgress;
+{
+	if (self.transferring && progress == kMvrPacketIndeterminateProgress) {
+		[self.spinner startAnimating];
+	} else {
+		[self.spinner stopAnimating];
+		self.progressBar.progress = progress;
+	}
+}
+
+- (void) stopProgress;
+{
+	[self.spinner stopAnimating];
 }
 
 @end

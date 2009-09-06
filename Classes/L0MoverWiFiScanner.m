@@ -20,6 +20,42 @@
 
 #import <MuiKit/MuiKit.h>
 
+#import "MvrProtocol.h"
+
+#pragma mark -
+#pragma mark Transfer marker.
+
+@interface MvrLegacyWiFiIncomingTransfer : NSObject <MvrIncoming>
+{
+	L0MoverItem* item;
+}
+
+- (void) setItem:(L0MoverItem*) i;
+
+@end
+
+@implementation MvrLegacyWiFiIncomingTransfer
+
+@synthesize item;
+- (void) setItem:(L0MoverItem*) i;
+{
+	if (i != item) {
+		[item release];
+		item = [i retain];
+	}
+}
+
+- (CGFloat) progress { return kMvrPacketIndeterminateProgress; }
+
+
+- (void) dealloc;
+{
+	[item release];
+	[super dealloc];
+}
+
+@end
+
 #pragma mark -
 #pragma mark IPAddress additions
 
@@ -127,6 +163,8 @@ L0ObjCSingletonMethod(sharedScanner)
 //	NSAssert(!browserResetTimer, @"A browser reset timer is already present");
 //	browserResetTimer = [[NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(resetBrowsing:) userInfo:nil repeats:YES] retain];
 
+	connectionsToTransfers = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	
 	[self didChangeValueForKey:@"enabled"];
 	return YES;
 }
@@ -237,6 +275,8 @@ L0ObjCSingletonMethod(sharedScanner)
 	
 	[listener close];
 	[listener release]; listener = nil;	
+	
+	CFRelease(connectionsToTransfers); connectionsToTransfers = NULL;
 	
 	[self didChangeValueForKey:@"enabled"];
 	
@@ -392,7 +432,9 @@ L0ObjCSingletonMethod(sharedScanner)
 		return;
 	}
 	
-	[service channelWillBeginReceiving:chan];
+	MvrLegacyWiFiIncomingTransfer* transfer = [[MvrLegacyWiFiIncomingTransfer new] autorelease];
+	CFDictionarySetValue(connectionsToTransfers, (const void*) connection, (const void*) transfer);
+	[service channel:chan didStartReceiving:transfer];
  	
 	[connection setDelegate:self];
 	[pendingConnections addObject:connection];
@@ -404,24 +446,30 @@ L0ObjCSingletonMethod(sharedScanner)
 	
 	if (!chan) {
 		L0Log(@"No peer associated with this connection; throwing away.");
-		[pendingConnections removeObject:connection];
-		[connection close];
-		return;
+		goto returnAfterRemovingConnection;
+	}
+	
+	MvrLegacyWiFiIncomingTransfer* transfer = (MvrLegacyWiFiIncomingTransfer*) CFDictionaryGetValue(connectionsToTransfers, (const void*) connection);
+	if (!transfer) {
+		L0Log(@"No transfer associated with this connection; throwing away");
+		goto returnAfterRemovingConnection;
 	}
 	
 	L0MoverItem* item = [L0MoverItem itemWithContentsOfBLIPRequest:request];
 	if (!item) {
 		L0Log(@"No item could be created.");
-		[connection close];
-		[pendingConnections removeObject:connection];
-		[service channelDidCancelReceivingItem:chan];
-		return;
+		goto returnAfterRemovingConnection;
 	}
 	
-	[connection close];
-	[pendingConnections removeObject:connection];
-	[service channel:chan didReceiveItem:item];
 	[request respondWithString:@"OK"];
+	
+returnAfterRemovingConnection:
+	CFDictionaryRemoveValue(connectionsToTransfers, (const void*) connection);
+	[pendingConnections removeObject:connection];
+	[connection close];
+	
+	if (chan && transfer)
+		[service channel:chan didStopReceiving:transfer];
 }
 
 #pragma mark -

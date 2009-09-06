@@ -53,10 +53,12 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 @interface L0MoverItemsTableController ()
 
+- (L0MoverItemView*) makeItemView;
 - (L0SlideItemsTableAddAnimation) animationForPeer:(L0MoverPeer*) peer;
 - (void) animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
-
 - (void) removeItemView:(L0MoverItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
+
+- (void) setItem:(L0MoverItem*) item forItemView:(L0MoverItemView*) view;
 
 - (CGFloat) labelAlphaForPeer:(L0MoverPeer*) peer;
 - (CGFloat) arrowAlphaForPeer:(L0MoverPeer*) peer;
@@ -87,9 +89,14 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	
 	if (self = [self initWithNibName:@"L0MoverItemsTable" bundle:nil]) {
 		itemsToViews = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+		transfersToViews = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+
 		viewsBeingHeld = [NSMutableSet new];
+		
 		self.editButtonItem.enabled = NO;
 		queuedPeers = [NSMutableArray new];
+		
+		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 	}
 	
 	return self;
@@ -180,6 +187,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	self.westPeer = nil;
 	[queuedPeers release];
 	
+	[dispatcher release];
+	
     [super dealloc];
 }
 
@@ -206,17 +215,29 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	if (CFDictionaryGetValue(itemsToViews, item))
 		return;
 	
+	L0MoverItemView* view = [self makeItemView];
+	[self setItem:item forItemView:view];
+
+	[self animateItemView:view withAddAnimation:a];
+	
+	self.editButtonItem.enabled = YES;
+}
+
+- (L0MoverItemView*) makeItemView;
+{
 	L0MoverItemView* view = [[L0MoverItemView alloc] initWithFrame:CGRectZero];
 	[view sizeToFit];
 	[view setActionButtonTarget:self selector:@selector(showEditingActionMenuForItemOfView:)];
 	view.delegate = self;
 	view.transform = CGAffineTransformMakeRotation(L0RandomSlideRotation());
-	[view setItem:item];
-	CFDictionarySetValue(itemsToViews, item, view);
+	return view;
+}
 
-	[self animateItemView:view withAddAnimation:a];
-	
-	self.editButtonItem.enabled = YES;
+- (void) setItem:(L0MoverItem*) item forItemView:(L0MoverItemView*) view;
+{
+	view.item = item;
+	CFDictionarySetValue(itemsToViews, item, view);
+	view.transferring = NO;
 }
 
 - (void) animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
@@ -378,10 +399,13 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		}
 	}
 	
-	// TODO make file lifecycle not dependant on item object lifecycle.
-	view.item.shouldDisposeOfOffloadingFileOnDealloc = YES;
+	if (view.item) {
+		// TODO make file lifecycle not dependant on item object lifecycle.
+		view.item.shouldDisposeOfOffloadingFileOnDealloc = YES;
+
+		CFDictionaryRemoveValue(itemsToViews, view.item);
+	}
 	
-	CFDictionaryRemoveValue(itemsToViews, view.item);
 	if (CFDictionaryGetCount(itemsToViews) == 0) {
 		[self setEditing:NO animated:ani != kL0SlideItemsTableNoRemoveAnimation];
 		self.editButtonItem.enabled = NO;
@@ -396,6 +420,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) showEditingActionMenuForItemOfView:(L0MoverItemView*) view;
 {
+	if (!view.item) return;
+	
 	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
 	view.highlighted = YES;
 	[delegate beginShowingActionMenuForItem:view.item includeRemove:YES];
@@ -465,7 +491,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 - (void) draggableView:(L0DraggableView*) view didTapMultipleTimesWithTouch:(UITouch*) t;
 {
 	L0MoverItemView* itemView = (L0MoverItemView*) view;
-	if (!self.editing) {
+	if (!self.editing && itemView.item) {
 		L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
 		BOOL performed = [delegate performMainActionForItem:itemView.item];
 		if (performed)
@@ -520,7 +546,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (BOOL) draggableViewShouldBeginDraggingAfterPressAndHold:(L0DraggableView*) view;
 {
-	if (self.editing) {
+	if (self.editing || !((L0MoverItemView*)view).item) {
 		[self beginHoldingView:view];
 		return YES;
 	} else {
@@ -960,6 +986,48 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	free(allItemsCArray);
 	
 	return arr;
+}
+
+- (void) trackIncomingTransfer:(id <MvrIncoming>) transfer fromPeer:(L0MoverPeer*) peer;
+{
+	L0MoverItemView* view = [self makeItemView];
+	CFDictionarySetValue(transfersToViews, (const void*) transfer, view);
+	
+	view.transferring = YES;
+	[self animateItemView:view withAddAnimation:[self animationForPeer:peer]];
+	
+	[dispatcher observe:@"item" ofObject:transfer usingSelector:@selector(itemOfTransfer:changed:) options:0];
+	[dispatcher observe:@"progress" ofObject:transfer usingSelector:@selector(progressOfTransfer:changed:) options:NSKeyValueObservingOptionInitial];
+}
+
+- (void) itemOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
+{
+	if (!transfer.item)
+		return;
+	
+	L0MoverItemView* view = (L0MoverItemView*) CFDictionaryGetValue(transfersToViews, (const void*) transfer);
+	if (!view)
+		return;
+	
+	[self setItem:transfer.item forItemView:view];
+	[self endTrackingIncomingTransfer:transfer];
+}
+
+- (void) progressOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
+{
+	L0MoverItemView* view = (L0MoverItemView*) CFDictionaryGetValue(transfersToViews, (const void*) transfer);
+	if (!view)
+		return;
+	
+	view.progress = transfer.progress;
+}
+
+- (void) endTrackingIncomingTransfer:(id <MvrIncoming>) transfer;
+{	
+	[dispatcher endObserving:@"item" ofObject:transfer];
+	[dispatcher endObserving:@"progress" ofObject:transfer];
+	
+	CFDictionaryRemoveValue(transfersToViews, (const void*) transfer);
 }
 
 @end

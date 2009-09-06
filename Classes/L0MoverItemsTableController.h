@@ -39,6 +39,7 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 
 @interface L0MoverItemsTableController : UIViewController <L0DraggableViewDelegate> {
 	CFMutableDictionaryRef itemsToViews;
+	CFMutableDictionaryRef transfersToViews;
 	
 	UIImageView* northArrowView;
 	UIImageView* eastArrowView;
@@ -66,6 +67,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 	UIView* advertisementStratum;
 	
 	L0MoverNobodyFoundViewController* troubleshooting;
+	
+	L0KVODispatcher* dispatcher;
 }
 
 - (id) initWithDefaultNibName;
@@ -106,5 +109,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 
 - (void) finishedShowingActionMenuForItem:(L0MoverItem*) item;
 - (void) unhighlightAllItems;
+
+- (void) trackIncomingTransfer:(id <MvrIncoming>) transfer fromPeer:(L0MoverPeer*) peer;
+- (void) endTrackingIncomingTransfer:(id <MvrIncoming>) transfer;
 
 @end
