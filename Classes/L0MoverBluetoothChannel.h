@@ -12,6 +12,8 @@
 #import "MvrNetworkExchange.h"
 #import "L0MoverBluetoothScanner.h"
 
+@class MvrLegacyBluetoothIncomingTransfer;
+
 @interface L0MoverBluetoothChannel : NSObject <L0MoverPeerChannel> {
 	L0MoverBluetoothScanner* scanner;
 	NSString* peerID;
@@ -22,6 +24,8 @@
 	L0MoverItem* itemToBeSent;
 	NSMutableData* dataToBeSent;
 	NSMutableData* dataReceived;
+	
+	MvrLegacyBluetoothIncomingTransfer* currentTransfer;
 }
 
 - (id) initWithScanner:(L0MoverBluetoothScanner*) scanner peerID:(NSString*) peerID;

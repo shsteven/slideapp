@@ -9,6 +9,8 @@
 #import "L0MoverBluetoothChannel.h"
 #import <MuiKit/MuiKit.h>
 
+#import "MvrProtocol.h"
+
 static const size_t kL0MoverBluetoothMessageHeaderLength = sizeof(char) * 5;
 
 static const char kL0MoverBluetoothMessageHeader_ItemTransfer[] = { 'M', 'O', 'V', 'E', 'R' };
@@ -38,6 +40,40 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 
 @end
 
+#pragma mark -
+#pragma mark Transfer marker.
+
+@interface MvrLegacyBluetoothIncomingTransfer : NSObject <MvrIncoming>
+{
+	L0MoverItem* item;
+}
+
+- (void) setItem:(L0MoverItem*) i;
+
+@end
+
+@implementation MvrLegacyBluetoothIncomingTransfer
+
+@synthesize item;
+- (void) setItem:(L0MoverItem*) i;
+{
+	if (i != item) {
+		[item release];
+		item = [i retain];
+	}
+}
+
+- (CGFloat) progress { return kMvrPacketIndeterminateProgress; }
+
+
+- (void) dealloc;
+{
+	[item release];
+	[super dealloc];
+}
+
+@end
+
 
 @implementation L0MoverBluetoothChannel
 
@@ -61,6 +97,8 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 			uniquePeerIdentifier = [[nameAndID substringFromIndex:indexPastBar] copy];
 			name = [[nameAndID substringToIndex:barRange.location] copy];
 		}
+		
+		currentTransfer = [MvrLegacyBluetoothIncomingTransfer new];
 	}
 	
 	return self;
@@ -72,6 +110,8 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 	[peerID release];
 	[name release];
 	[uniquePeerIdentifier release];
+	[currentTransfer release];
+	
 	[super dealloc];
 }
 
@@ -204,7 +244,7 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 	if (!dataReceived) {
 		L0Log(@"First data of new item.");
 		dataReceived = [NSMutableData new];
-		[scanner.service channelWillBeginReceiving:self];
+		[scanner.service channel:self didStartReceiving:currentTransfer];
 	}
 	
 	if ([data length] >= kL0MoverBluetoothMessageHeaderLength) {
@@ -273,10 +313,9 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 	if (!dataReceived) return;
 	L0Log(@"Ending with received item %@", i);
 	
-	if (i)
-		[scanner.service channel:self didReceiveItem:i];
-	else
-		[scanner.service channelDidCancelReceivingItem:self];
+	[currentTransfer setItem:i];
+	[scanner.service channel:self didStopReceiving:currentTransfer];
+	[currentTransfer setItem:nil];
 	
 	[dataReceived release];
 	dataReceived = nil;
