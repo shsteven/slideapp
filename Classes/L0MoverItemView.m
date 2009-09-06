@@ -215,6 +215,7 @@
 		
 		[UIView commitAnimations];
 		
+		[self.spinner startAnimating];
 		[self updateProgress];
 		
 	} else {
@@ -255,7 +256,6 @@
 			[UIView commitAnimations];
 		}
 		
-		[self.spinner stopAnimating];
 		self.progressBar.progress = progress;
 	}
 }
