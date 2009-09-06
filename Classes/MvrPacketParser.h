@@ -100,4 +100,8 @@ enum {
 // Returns the progress of the operation. May be kMvrPacketIndeterminateProgress.
 @property(readonly, assign) CGFloat progress;
 
+// May return an amount of bytes that are expected. It may not know, in which case it returns 0.
+// If it returns a nonzero number, then the packet is ensured to be at least this more bytes long.
+@property(readonly) unsigned long long expectedSize;
+
 @end

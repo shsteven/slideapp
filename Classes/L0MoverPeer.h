@@ -28,10 +28,17 @@
 
 @protocol MvrIncoming <NSObject>
 
-@property(readonly) CGFloat progress;
+// All properties MUST provide KVO notifications.
+// An incoming transfer is complete whenever its .item property is set to the received item; or whenever the .canceled property is set to YES, whichever comes first.
 @property(readonly) L0MoverItem* item;
+@property(readonly, getter=isCancelled) BOOL cancelled;
+
+// Reports on progress. 0.0-1.0 inclusive or kMvrPacketIndeterminateProgress to indicate progress is unknown.
+@property(readonly) CGFloat progress;
 
 @optional
+
+// Manually cancels the arrival. Canceling must be signaled by setting .canceled to YES (and notified via KVO).
 - (void) cancel;
 
 @end
@@ -42,5 +49,4 @@
 - (void) moverPeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
 
 - (void) moverPeer:(L0MoverPeer*) peer didStartReceiving:(id <MvrIncoming>) incomingTransfer;
-- (void) moverPeer:(L0MoverPeer*) peer didStopReceiving:(id <MvrIncoming>) incomingTransfer;
 @end

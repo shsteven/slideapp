@@ -225,7 +225,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (L0MoverItemView*) makeItemView;
 {
-	L0MoverItemView* view = [[L0MoverItemView alloc] initWithFrame:CGRectZero];
+	L0MoverItemView* view = [[[L0MoverItemView alloc] initWithFrame:CGRectZero] autorelease];
 	[view sizeToFit];
 	[view setActionButtonTarget:self selector:@selector(showEditingActionMenuForItemOfView:)];
 	view.delegate = self;
@@ -998,6 +998,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	
 	[dispatcher observe:@"item" ofObject:transfer usingSelector:@selector(itemOfTransfer:changed:) options:0];
 	[dispatcher observe:@"progress" ofObject:transfer usingSelector:@selector(progressOfTransfer:changed:) options:NSKeyValueObservingOptionInitial];
+	[dispatcher observe:@"cancelled" ofObject:transfer usingSelector:@selector(cancelledOfTransfer:changed:) options:NSKeyValueObservingOptionInitial];
 }
 
 - (void) itemOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
@@ -1006,26 +1007,36 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		return;
 	
 	L0MoverItemView* view = (L0MoverItemView*) CFDictionaryGetValue(transfersToViews, (const void*) transfer);
-	if (!view)
-		return;
-	
-	[self setItem:transfer.item forItemView:view];
+	if (view)
+		[self setItem:transfer.item forItemView:view];
 	[self endTrackingIncomingTransfer:transfer];
 }
 
 - (void) progressOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
 {
 	L0MoverItemView* view = (L0MoverItemView*) CFDictionaryGetValue(transfersToViews, (const void*) transfer);
-	if (!view)
+	if (view)
+		view.progress = transfer.progress;
+}
+
+- (void) cancelledOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
+{
+	if (!transfer.cancelled)
 		return;
 	
-	view.progress = transfer.progress;
+	L0MoverItemView* view = (L0MoverItemView*) CFDictionaryGetValue(transfersToViews, (const void*) transfer);
+	
+	if (view)
+		[self removeItemView:view animation:kL0SlideItemsTableRemoveByFadingAway];
+	
+	[self endTrackingIncomingTransfer:transfer];
 }
 
 - (void) endTrackingIncomingTransfer:(id <MvrIncoming>) transfer;
 {	
 	[dispatcher endObserving:@"item" ofObject:transfer];
 	[dispatcher endObserving:@"progress" ofObject:transfer];
+	[dispatcher endObserving:@"cancelled" ofObject:transfer];
 	
 	CFDictionaryRemoveValue(transfersToViews, (const void*) transfer);
 }

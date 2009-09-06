@@ -46,9 +46,11 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 @interface MvrLegacyBluetoothIncomingTransfer : NSObject <MvrIncoming>
 {
 	L0MoverItem* item;
+	BOOL cancelled;
 }
 
 - (void) setItem:(L0MoverItem*) i;
+- (void) setCancelled:(BOOL) c;
 
 @end
 
@@ -61,6 +63,12 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 		[item release];
 		item = [i retain];
 	}
+}
+
+@synthesize cancelled;
+- (void) setCancelled:(BOOL) c;
+{
+	cancelled = c;
 }
 
 - (CGFloat) progress { return kMvrPacketIndeterminateProgress; }
@@ -314,8 +322,7 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 	L0Log(@"Ending with received item %@", i);
 	
 	[currentTransfer setItem:i];
-	[scanner.service channel:self didStopReceiving:currentTransfer];
-	[currentTransfer setItem:nil];
+	[currentTransfer setCancelled:(i == nil)];
 	
 	[dataReceived release];
 	dataReceived = nil;

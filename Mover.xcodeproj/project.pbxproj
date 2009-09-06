@@ -349,7 +349,6 @@
 		15AAEB7B10442721002AC69D /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncSocket.m; path = ../../Trunks/AsyncSocket/AsyncSocket.m; sourceTree = SOURCE_ROOT; };
 		15AAEB7E10442DBE002AC69D /* MvrWiFiIncomingTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiIncomingTransfer.h; sourceTree = "<group>"; };
 		15AAEB7F10442DBE002AC69D /* MvrWiFiIncomingTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiIncomingTransfer.m; sourceTree = "<group>"; };
-		15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverUTISupport.h; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		15B4268D0FD91A7D0065D461 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		15B4E80410340868004B803B /* MvrDidNotPublish.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrDidNotPublish.alert; sourceTree = "<group>"; };
@@ -874,7 +873,6 @@
 			children = (
 				1582D29F0F87DC5E008E5EC0 /* AdHoc.plist */,
 				15C5E9E80F86103000236370 /* Mover.todo */,
-				15AB647C0F82AEFC001221FE /* L0MoverUTISupport.h */,
 				15D1C56C0F889D5C00FF3016 /* Configuration FIles */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,

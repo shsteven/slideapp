@@ -15,6 +15,7 @@
 - (void) cancel;
 - (void) produceItem;
 - (void) setItem:(L0MoverItem*) i;
+- (void) setCancelled:(BOOL)c;
 
 @property(assign) CGFloat progress;
 
@@ -53,13 +54,12 @@
 	[socket release]; socket = nil;
 	
 	[metadata release]; metadata = nil;
-	
-	[self setItem:nil];
 }
 
 - (void) dealloc;
 {
 	[self clear];
+	[self setItem:nil];
 	[parser release];
 
 	[super dealloc];
@@ -86,7 +86,14 @@
 	[parser appendData:d isKnownStartOfNewPacket:isNewPacket];
 	isNewPacket = NO;
 
-	[sock readDataWithTimeout:15 tag:0];
+	// keep alive
+	[sock writeData:[AsyncSocket LFData] withTimeout:-1 tag:0];
+	
+	unsigned long long size = parser.expectedSize;
+	if (size == 0)
+		[sock readDataWithTimeout:15 tag:0];
+	else
+		[sock readDataToLength:size withTimeout:15 tag:0];
 }
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err;
@@ -148,7 +155,7 @@
 {
 	if (channel) {
 		[self setItem:nil];
-		[[MvrNetworkExchange sharedExchange] channel:channel didStopReceiving:self];
+		[self setCancelled:YES];
 	}
 	
 	isCancelled = YES;
@@ -162,7 +169,7 @@
 		* type = [metadata objectForKey:kMvrProtocolMetadataTypeKey];
 	L0MoverItem* i = [[[[L0MoverItem classForType:type] alloc] initWithExternalRepresentation:data type:type title:title] autorelease];
 	[self setItem:i];
-	[[MvrNetworkExchange sharedExchange] channel:channel didStopReceiving:self];
+	[self setCancelled:(i == nil)];
 
 	[self clear];
 }
@@ -174,6 +181,12 @@
 		[item release];
 		item = [i retain];
 	}
+}
+
+@synthesize cancelled = isCancelled;
+- (void) setCancelled:(BOOL) c;
+{
+	isCancelled = c;
 }
 
 @end

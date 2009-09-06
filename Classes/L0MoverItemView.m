@@ -206,11 +206,13 @@
 	[self updateProgress];
 
 	if (t && !wasTransferring) {
+		self.progressBar.alpha = 0.0;
+		self.progressBar.hidden = NO;
+
 		[UIView beginAnimations:nil context:NULL];
 		
 		self.label.alpha = 0.0;
 		self.imageView.alpha = 0.0;
-		self.progressBar.alpha = 1.0;
 		self.spinner.alpha = 1.0;
 		
 		[UIView commitAnimations];
@@ -238,9 +240,21 @@
 
 - (void) updateProgress;
 {
+	L0Log(@"Progress update: %f", progress);
+	
 	if (self.transferring && progress == kMvrPacketIndeterminateProgress) {
+		[UIView beginAnimations:nil context:NULL];
+		self.progressBar.alpha = 0.0;
+		[UIView commitAnimations];
+		
 		[self.spinner startAnimating];
 	} else {
+		if (self.progressBar.alpha < 1.0) {
+			[UIView beginAnimations:nil context:NULL];
+			self.progressBar.alpha = 1.0;
+			[UIView commitAnimations];
+		}
+		
 		[self.spinner stopAnimating];
 		self.progressBar.progress = progress;
 	}

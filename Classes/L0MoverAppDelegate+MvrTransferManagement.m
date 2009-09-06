@@ -36,7 +36,9 @@
 	
 	[UIApp beginNetworkUse];
 	
+	[observedTransfers addObject:incomingTransfer];
 	[dispatcher observe:@"item" ofObject:incomingTransfer usingSelector:@selector(itemOfTransfer:changed:) options:0];
+	[dispatcher observe:@"cancelled" ofObject:incomingTransfer usingSelector:@selector(cancelledOfTransfer:changed:) options:0];
 }
 
 - (void) itemOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
@@ -55,17 +57,24 @@
 	else if ([item isKindOfClass:[L0AddressBookPersonItem class]])
 		[self showAlertIfNotShownBeforeNamed:@"L0ContactReceived"];
 	
-	[dispatcher endObserving:@"item" ofObject:transfer];
+	[self stopTrackingIncomingTransfer:transfer];
 }
 
-- (void) moverPeer:(L0MoverPeer*) peer didStopReceiving:(id <MvrIncoming>) incomingTransfer;
+- (void) cancelledOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
 {
-	[dispatcher endObserving:@"item" ofObject:incomingTransfer];
+	if (!transfer.cancelled)
+		return;
+	
+	[self stopTrackingIncomingTransfer:transfer];	
+}
+
+- (void) stopTrackingIncomingTransfer:(id <MvrIncoming>) transfer;
+{
+	[dispatcher endObserving:@"item" ofObject:transfer];
+	[dispatcher endObserving:@"cancelled" ofObject:transfer];
+	[observedTransfers removeObject:transfer];
 	
 	[UIApp endNetworkUse];
-	
-	[self.tableController endTrackingIncomingTransfer:incomingTransfer];
-	
 }
 
 @end

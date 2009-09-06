@@ -11,5 +11,6 @@
 
 @interface L0MoverAppDelegate (MvrTransferManagement) <L0MoverPeerDelegate>
 
+- (void) stopTrackingIncomingTransfer:(id <MvrIncoming>) t;
 
 @end

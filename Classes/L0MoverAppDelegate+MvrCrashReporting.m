@@ -162,7 +162,7 @@ static void L0LogUncaughtExceptionAndForward(NSException* e) {
 		return;
 	}
 	
-	PLCrashReport* crashReport = [[PLCrashReport alloc] initWithData:crashReportData error:&e];
+	PLCrashReport* crashReport = [[[PLCrashReport alloc] initWithData:crashReportData error:&e] autorelease];
 	if (!crashReport) {
 		L0LogAlways(@"Ouch! Looks like there was crash report data, but it couldn't be parsed into a full report because of this error: %@. Hope it wasn't anything important.", e);
 		return;

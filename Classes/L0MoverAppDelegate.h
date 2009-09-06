@@ -47,6 +47,7 @@
 	UIBarStyle barStyleBeforeShowingShieldView;
 	
 	L0KVODispatcher* dispatcher;
+	NSMutableSet* observedTransfers;
 }
 
 @property(retain) IBOutlet UIWindow* window;

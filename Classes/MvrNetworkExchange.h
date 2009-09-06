@@ -53,7 +53,6 @@
 
 // Channels can call this to notify of new items.
 - (void) channel:(id <L0MoverPeerChannel>) channel didStartReceiving:(id <MvrIncoming>) transfer;
-- (void) channel:(id <L0MoverPeerChannel>) channel didStopReceiving:(id <MvrIncoming>) transfer;
 - (void) channel:(id <L0MoverPeerChannel>) channel willSendItemToOtherEndpoint:(L0MoverItem*) i;
 - (void) channel:(id <L0MoverPeerChannel>) channel didSendItemToOtherEndpoint:(L0MoverItem*) i;
 

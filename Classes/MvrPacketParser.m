@@ -85,7 +85,22 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 		[self resetAndReportError:0];
 	
 	[currentBuffer appendData:data];
+	
+	// An optimization: if we're in the expecting body state and we need to read a body, we only consume every 500 KB or so.
+	if (self.state == kMvrPacketParserExpectingBody) {
+		if ([currentBuffer length] < MIN(300 * 1024, toReadForCurrentStop))
+			return;
+	}
+	
 	[self consumeCurrentBuffer];
+}
+
+- (unsigned long long) expectedSize;
+{
+	if (self.state != kMvrPacketParserExpectingBody)
+		return 0;
+	
+	return MIN(toReadForCurrentStop - [currentBuffer length], 300 * 1024 - [currentBuffer length]);
 }
 
 - (void) consumeCurrentBuffer;
@@ -118,7 +133,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 				return;
 		}
 		
-		L0Log(@"Bytes to read after cycle = %lu", (unsigned long) [currentBuffer length]);
+		L0Log(@"Bytes to read after cycle = %llu", (unsigned long long) [currentBuffer length]);
 		L0Log(@"State after cycle: continue parsing for data? = %d, reset? = %d", shouldContinueParsingForData, beingReset);
 	}
 }
@@ -376,7 +391,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	L0Log(@"Consuming %llu bytes (out of %llu remaining) for payload with key %@.", (unsigned long long) lengthOfNewDataForCurrentStop, (unsigned long long) toReadForCurrentStop, [self.payloadKeys objectAtIndex:currentStop]);
 	
 	read += lengthOfNewDataForCurrentStop;
-	self.progress = (CGFloat) payloadLength - (CGFloat) read / (CGFloat) payloadLength;
+	self.progress = (CGFloat) read / (CGFloat) payloadLength;
 	
 	NSRange rangeOfPayloadPart = NSMakeRange(0, lengthOfNewDataForCurrentStop);
 	NSData* payloadPart = [currentBuffer subdataWithRange:rangeOfPayloadPart];

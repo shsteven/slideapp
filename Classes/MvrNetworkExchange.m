@@ -207,14 +207,14 @@ L0ObjCSingletonMethod(sharedExchange);
 	if (peer)
 		[peer.delegate moverPeer:peer didStartReceiving:transfer];
 }
-
-- (void) channel:(id <L0MoverPeerChannel>) channel didStopReceiving:(id <MvrIncoming>) transfer;
-{
-	L0Log(@"%@ --> %@ -X-> us", channel, transfer);
-	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
-	if (peer)
-		[peer.delegate moverPeer:peer didStopReceiving:transfer];
-}
+//
+//- (void) channel:(id <L0MoverPeerChannel>) channel didStopReceiving:(id <MvrIncoming>) transfer;
+//{
+//	L0Log(@"%@ --> %@ -X-> us", channel, transfer);
+//	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
+//	if (peer)
+//		[peer.delegate moverPeer:peer didStopReceiving:transfer];
+//}
 
 - (void) channel:(id <L0MoverPeerChannel>) channel willSendItemToOtherEndpoint:(L0MoverItem*) i;
 {

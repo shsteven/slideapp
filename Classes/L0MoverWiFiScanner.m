@@ -28,9 +28,11 @@
 @interface MvrLegacyWiFiIncomingTransfer : NSObject <MvrIncoming>
 {
 	L0MoverItem* item;
+	BOOL cancelled;
 }
 
 - (void) setItem:(L0MoverItem*) i;
+- (void) setCancelled:(BOOL) cancelled;
 
 @end
 
@@ -45,8 +47,13 @@
 	}
 }
 
-- (CGFloat) progress { return kMvrPacketIndeterminateProgress; }
+@synthesize cancelled;
+- (void) setCancelled:(BOOL) c;
+{
+	cancelled = c;
+}
 
+- (CGFloat) progress { return kMvrPacketIndeterminateProgress; }
 
 - (void) dealloc;
 {
@@ -276,7 +283,9 @@ L0ObjCSingletonMethod(sharedScanner)
 	[listener close];
 	[listener release]; listener = nil;	
 	
-	CFRelease(connectionsToTransfers); connectionsToTransfers = NULL;
+	if (connectionsToTransfers) {
+		CFRelease(connectionsToTransfers); connectionsToTransfers = NULL;
+	}
 	
 	[self didChangeValueForKey:@"enabled"];
 	
@@ -458,8 +467,10 @@ L0ObjCSingletonMethod(sharedScanner)
 	L0MoverItem* item = [L0MoverItem itemWithContentsOfBLIPRequest:request];
 	if (!item) {
 		L0Log(@"No item could be created.");
+		[transfer setCancelled:YES];
 		goto returnAfterRemovingConnection;
-	}
+	} else
+		[transfer setItem:item];
 	
 	[request respondWithString:@"OK"];
 	
@@ -467,9 +478,6 @@ returnAfterRemovingConnection:
 	CFDictionaryRemoveValue(connectionsToTransfers, (const void*) connection);
 	[pendingConnections removeObject:connection];
 	[connection close];
-	
-	if (chan && transfer)
-		[service channel:chan didStopReceiving:transfer];
 }
 
 #pragma mark -

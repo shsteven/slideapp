@@ -7,7 +7,7 @@
 //
 
 #import "L0BookmarkItem.h"
-#import "L0MoverUTISupport.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @implementation L0BookmarkItem
 

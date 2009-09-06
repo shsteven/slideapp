@@ -112,6 +112,7 @@ enum {
 	// A few thingies...
 	self.tableHostController.cacheViewsDuringFlip = YES;
 	dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
+	observedTransfers = [NSMutableSet new];
 	
 	// Registering item subclasses.
 	[L0ImageItem registerClass];
@@ -130,16 +131,20 @@ enum {
 	peering.delegate = self;
 	
 	BOOL wiFiEnabled = [self isScannerEnabled:[L0MoverWiFiScanner sharedScanner]];
-	
+
+#if !DEBUG || !kL0MoverTestByDisablingLegacyWiFi
 	L0MoverWiFiScanner* scanner = [L0MoverWiFiScanner sharedScanner];
 	[peering addAvailableScannersObject:scanner];
 	scanner.enabled = wiFiEnabled;
+#endif
 	
+#if !DEBUG || !kL0MoverTestByDisablingModernWiFi
 	MvrModernWiFiScanner* modernWiFi = [MvrModernWiFiScanner sharedScanner];
 	[peering addAvailableScannersObject:modernWiFi];
 	modernWiFi.enabled = wiFiEnabled;
+#endif
 	
-#if !DEBUG || (DEBUG && !kL0MoverTestByDisablingBluetooth)
+#if !DEBUG || !kL0MoverTestByDisablingBluetooth
 	if ([L0MoverBluetoothScanner modelAssumedToSupportBluetooth]) {
 		L0MoverBluetoothScanner* btScanner = [L0MoverBluetoothScanner sharedScanner];
 		[peering addAvailableScannersObject:btScanner];
@@ -147,8 +152,23 @@ enum {
 	}
 #endif
 	
+	// Safeguards
 #if !DEBUG && kL0MoverTestByDisablingBluetooth
 #error Disable kL0MoverTestByDisablingBluetooth in your local settings to build.
+#elif DEBUG && kL0MoverTestByDisablingBluetooth
+#warning Modern Wi-Fi is disabled for this build.
+#endif
+	
+#if !DEBUG && kL0MoverTestByDisablingModernWiFi
+#error Disable kL0MoverTestByDisablingModernWiFi in your local settings to build.
+#elif DEBUG && kL0MoverTestByDisablingModernWiFi
+#warning Modern Wi-Fi is disabled for this build.
+#endif
+	
+#if !DEBUG && kL0MoverTestByDisablingLegacyWiFi
+#error Disable kL0MoverTestByDisablingLegacyWiFi in your local settings to build.
+#elif DEBUG && kL0MoverTestByDisablingLegacyWiFi
+#warning Legacy Wi-Fi is disabled for this build.
 #endif
 	
 	// Setting up the UI.
