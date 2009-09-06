@@ -85,9 +85,9 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	NSString* error = nil;
 	NSData* d = [NSPropertyListSerialization dataFromPropertyList:info format:NSPropertyListBinaryFormat_v1_0 errorDescription:&error];
 	
-	if (error) {
-		NSLog(@"An error occurred while serializing an address book contact: %@", error);
-		[error release]; error = nil;
+	if (!d && error) {
+		[error autorelease];
+		[NSException raise:@"MvrUnexpectedException" format:@"I had problems serializing an address book item (error '%@') which shouldn't have happened."];
 	}
 	
 	return d;
