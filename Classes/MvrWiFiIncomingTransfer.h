@@ -11,7 +11,7 @@
 #import "MvrPacketParser.h"
 #import "AsyncSocket.h"
 
-@interface MvrWiFiIncomingTransfer : NSObject <MvrPacketParserDelegate> {
+@interface MvrWiFiIncomingTransfer : NSObject <MvrPacketParserDelegate, MvrIncoming> {
 	AsyncSocket* socket;
 	BOOL finished;
 	MvrPacketParser* parser;
@@ -26,6 +26,8 @@
 	MvrModernWiFiScanner* scanner;
 	
 	CGFloat progress;
+	
+	L0MoverItem* item;
 }
 
 - (id) initWithSocket:(AsyncSocket*) s scanner:(MvrModernWiFiScanner*) scanner;

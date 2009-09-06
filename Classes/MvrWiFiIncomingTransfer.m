@@ -14,6 +14,7 @@
 - (void) checkMetadataIfNeeded;
 - (void) cancel;
 - (void) produceItem;
+- (void) setItem:(L0MoverItem*) i;
 
 @property(assign) CGFloat progress;
 
@@ -43,13 +44,17 @@
 
 - (void) clear;
 {
+	self.progress = kMvrPacketIndeterminateProgress;
+	
 	[channel release]; channel = nil;
 	
 	[socket disconnect];
 	[socket setDelegate:nil];
 	[socket release]; socket = nil;
 	
-	[metadata release]; metadata = nil;	
+	[metadata release]; metadata = nil;
+	
+	[self setItem:nil];
 }
 
 - (void) dealloc;
@@ -71,7 +76,7 @@
 		[self cancel];
 	L0Log(@" => %@", channel);
 	
-	[[MvrNetworkExchange sharedExchange] channelWillBeginReceiving:channel];
+	[[MvrNetworkExchange sharedExchange] channel:channel didStartReceiving:self];
 	[sock readDataWithTimeout:15 tag:0];
 }
 
@@ -141,8 +146,11 @@
 
 - (void) cancel;
 {
-	if (channel)
-		[[MvrNetworkExchange sharedExchange] channelDidCancelReceivingItem:channel];
+	if (channel) {
+		[self setItem:nil];
+		[[MvrNetworkExchange sharedExchange] channel:channel didStopReceiving:self];
+	}
+	
 	isCancelled = YES;
 	[self clear];
 }
@@ -153,13 +161,19 @@
 	NSString* title = [metadata objectForKey:kMvrProtocolMetadataTitleKey], 
 		* type = [metadata objectForKey:kMvrProtocolMetadataTypeKey];
 	L0MoverItem* i = [[[[L0MoverItem classForType:type] alloc] initWithExternalRepresentation:data type:type title:title] autorelease];
-	
-	if (i) {
-		// TODO
-		[[MvrNetworkExchange sharedExchange] channel:channel didReceiveItem:i];
-	}
-	
+	[self setItem:i];
+	[[MvrNetworkExchange sharedExchange] channel:channel didStopReceiving:self];
+
 	[self clear];
+}
+
+@synthesize item;
+- (void) setItem:(L0MoverItem*) i;
+{
+	if (i != item) {
+		[item release];
+		item = [i retain];
+	}
 }
 
 @end
