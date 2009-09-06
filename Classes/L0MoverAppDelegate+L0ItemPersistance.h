@@ -13,6 +13,7 @@
 
 @interface L0MoverAppDelegate (L0ItemPersistance)
 
+- (void) persistItemToMassStorage:(L0MoverItem*) i;
 - (void) persistItemsToMassStorage:(NSArray*) items;
 - (NSArray*) loadItemsFromMassStorage;
 

@@ -18,6 +18,16 @@ static inline NSDictionary* L0InformationFromItem(L0MoverItem* i) {
 
 @implementation L0MoverAppDelegate (L0ItemPersistance)
 
+- (void) persistItemToMassStorage:(L0MoverItem*) i;
+{
+	// TODO a decent storage layer
+	NSMutableArray* a = [NSMutableArray arrayWithArray:self.tableController.items];
+	if (![a containsObject:i])
+		[a addObject:i];
+	
+	[self persistItemsToMassStorage:a];
+}
+
 - (void) persistItemsToMassStorage:(NSArray*) items;
 {
 	NSMutableDictionary* pathsToItemInfo = [NSMutableDictionary dictionary];
