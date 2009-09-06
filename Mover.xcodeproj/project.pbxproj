@@ -62,6 +62,7 @@
 		1561891C0FE2E4ED005AA908 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1561891B0FE2E4ED005AA908 /* libxml2.dylib */; };
 		156189210FE2E504005AA908 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156189200FE2E504005AA908 /* CoreLocation.framework */; };
 		15618A910FE2E7D1005AA908 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15618A900FE2E7D1005AA908 /* libsqlite3.dylib */; };
+		1565B7991053AFBC00F1AF8D /* L0MoverAppDelegate+MvrTransferManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1565B7981053AFBC00F1AF8D /* L0MoverAppDelegate+MvrTransferManagement.m */; };
 		1566CB0B10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1566CB0A10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m */; };
 		1572DE8D0F82BE83006BEEC0 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1572DE880F82BE7A006BEEC0 /* libMuiKit.a */; };
 		1572DE8E0F82BE8B006BEEC0 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1572DE8A0F82BE7A006BEEC0 /* MuiKit.bundle */; };
@@ -312,6 +313,8 @@
 		1561891B0FE2E4ED005AA908 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		156189200FE2E504005AA908 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		15618A900FE2E7D1005AA908 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		1565B7971053AFBC00F1AF8D /* L0MoverAppDelegate+MvrTransferManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+MvrTransferManagement.h"; sourceTree = "<group>"; };
+		1565B7981053AFBC00F1AF8D /* L0MoverAppDelegate+MvrTransferManagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+MvrTransferManagement.m"; sourceTree = "<group>"; };
 		1566CB0910492E7F002F8478 /* MvrWiFiOutgoingTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiOutgoingTransfer.h; sourceTree = "<group>"; };
 		1566CB0A10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiOutgoingTransfer.m; sourceTree = "<group>"; };
 		157CAF910FD16B18003E35C3 /* L0MoverTellAFriend.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0MoverTellAFriend.alert; sourceTree = "<group>"; };
@@ -551,6 +554,8 @@
 		15270DD610369D76006858C0 /* App Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				1565B7971053AFBC00F1AF8D /* L0MoverAppDelegate+MvrTransferManagement.h */,
+				1565B7981053AFBC00F1AF8D /* L0MoverAppDelegate+MvrTransferManagement.m */,
 				1D3623240D0F684500981E51 /* L0MoverAppDelegate.h */,
 				1D3623250D0F684500981E51 /* L0MoverAppDelegate.m */,
 				153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */,
@@ -1304,6 +1309,7 @@
 				15EAD05B1045D6210004EF12 /* MvrWiFiChannel.m in Sources */,
 				1566CB0B10492E7F002F8478 /* MvrWiFiOutgoingTransfer.m in Sources */,
 				15DC6E46104AB7F30094C09A /* MvrWiFiScanner.m in Sources */,
+				1565B7991053AFBC00F1AF8D /* L0MoverAppDelegate+MvrTransferManagement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

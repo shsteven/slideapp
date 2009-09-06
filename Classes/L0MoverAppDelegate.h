@@ -23,7 +23,7 @@
 
 #define L0Mover ((L0MoverAppDelegate*) UIApp.delegate)
 
-@interface L0MoverAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0MoverPeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
+@interface L0MoverAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
     UIWindow *window;
 	
 	L0MoverItemsTableController* tableController;
@@ -45,6 +45,8 @@
 	UILabel* shieldViewLabel;
 	
 	UIBarStyle barStyleBeforeShowingShieldView;
+	
+	L0KVODispatcher* dispatcher;
 }
 
 @property(retain) IBOutlet UIWindow* window;

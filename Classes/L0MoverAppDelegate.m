@@ -13,6 +13,7 @@
 
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
+#import "L0MoverAppDelegate+MvrTransferManagement.h"
 #import "MvrNetworkExchange.h"
 #import "L0MoverWiFiScanner.h"
 #import "L0MoverBluetoothScanner.h"
@@ -108,7 +109,9 @@ enum {
 	
 	[self startCrashReporting];
 	
+	// A few thingies...
 	self.tableHostController.cacheViewsDuringFlip = YES;
+	dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 	
 	// Registering item subclasses.
 	[L0ImageItem registerClass];
@@ -318,45 +321,6 @@ enum {
 	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
 	
 	[self persistItemsToMassStorage:[self.tableController items]];	
-}
-
-- (void) moverPeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
-{
-	L0Log(@"About to send item %@", item);
-	[UIApp beginNetworkUse];
-}
-
-- (void) moverPeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
-{
-	L0Log(@"Sent %@", item);
-	[self.tableController returnItemToTableAfterSend:item toPeer:peer];
-	[UIApp endNetworkUse];
-}
-
-- (void) moverPeerWillSendUsItem:(L0MoverPeer*) peer;
-{
-	L0Log(@"Receiving from %@", peer);
-	[self.tableController beginShowingPeerAsBusy:peer];
-	[UIApp beginNetworkUse];
-}
-- (void) moverPeer:(L0MoverPeer*) peer didSendUsItem:(L0MoverItem*) item;
-{
-	L0Log(@"Received %@", item);
-	[item storeToAppropriateApplication];
-	[self.tableController addItem:item comingFromPeer:peer];
-	[self persistItemsToMassStorage:[self.tableController items]];
-
-	[UIApp endNetworkUse];
-	
-	if ([item isKindOfClass:[L0ImageItem class]])
-		[self showAlertIfNotShownBeforeNamedForiPhone:@"L0ImageReceived_iPhone" foriPodTouch:@"L0ImageReceived_iPod"];
-	else if ([item isKindOfClass:[L0AddressBookPersonItem class]])
-		[self showAlertIfNotShownBeforeNamed:@"L0ContactReceived"];
-}
-- (void) moverPeerDidCancelSendingUsItem:(L0MoverPeer*) peer;
-{
-	[self.tableController endShowingPeerAsBusy:peer];
-	[UIApp endNetworkUse];
 }
 
 - (void) peerFound:(L0MoverPeer*) peer;

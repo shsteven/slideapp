@@ -26,14 +26,21 @@
 
 @end
 
+@protocol MvrIncoming <NSObject>
+
+@property(readonly) CGFloat progress;
+@property(readonly) L0MoverItem* item;
+
+@optional
+- (void) cancel;
+
+@end
 
 @protocol L0MoverPeerDelegate <NSObject>
 
 - (void) moverPeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
 - (void) moverPeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
 
-- (void) moverPeerWillSendUsItem:(L0MoverPeer*) peer;
-- (void) moverPeer:(L0MoverPeer*) peer didSendUsItem:(L0MoverItem*) item;
-- (void) moverPeerDidCancelSendingUsItem:(L0MoverPeer*) peer;
-
+- (void) moverPeer:(L0MoverPeer*) peer didStartReceiving:(id <MvrIncoming>) incomingTransfer;
+- (void) moverPeer:(L0MoverPeer*) peer didStopReceiving:(id <MvrIncoming>) incomingTransfer;
 @end
