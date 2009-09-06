@@ -61,10 +61,15 @@ static NSMutableDictionary* classes = nil;
 
 - (NSData*) externalRepresentation;
 {
+	NSData* result;
+	
 	if (self.allowsSendingFromOffloadedFile && self.offloadingFile)
-		return [NSData dataWithContentsOfMappedFile:self.offloadingFile];
+		result = [NSData dataWithContentsOfMappedFile:self.offloadingFile];
 	else
-		return [self produceExternalRepresentation];
+		result = [self produceExternalRepresentation];
+	
+	NSAssert(result, [NSString stringWithFormat:@"An object, %@, tried to produce a nil external representation. This shouldn't have happened.", self]);
+	return result;
 }
 
 - (NSData*) produceExternalRepresentation;
