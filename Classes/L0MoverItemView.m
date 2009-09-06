@@ -203,8 +203,6 @@
 	BOOL wasTransferring = transferring;
 	transferring = t;
 	
-	[self updateProgress];
-
 	if (t && !wasTransferring) {
 		self.progressBar.alpha = 0.0;
 		self.progressBar.hidden = NO;
@@ -217,6 +215,8 @@
 		
 		[UIView commitAnimations];
 		
+		[self updateProgress];
+		
 	} else {
 		[self stopProgress];
 		
@@ -228,7 +228,7 @@
 		self.spinner.alpha = 0.0;
 		
 		[UIView commitAnimations];
-	}
+	}	
 }
 
 @synthesize progress;
@@ -242,7 +242,7 @@
 {
 	L0Log(@"Progress update: %f", progress);
 	
-	if (self.transferring && progress == kMvrPacketIndeterminateProgress) {
+	if (self.transferring && (progress == kMvrPacketIndeterminateProgress || progress == 0.0)) {
 		[UIView beginAnimations:nil context:NULL];
 		self.progressBar.alpha = 0.0;
 		[UIView commitAnimations];
