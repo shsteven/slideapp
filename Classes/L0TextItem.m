@@ -32,6 +32,14 @@
 	return [self.text dataUsingEncoding:NSUTF8StringEncoding];
 }
 
+- (id) initWithStorage:(MvrItemStorage *)s type:(NSString *)ty title:(NSString *)ti
+{
+	if (self = [super initWithStorage:s type:ty title:ti])
+		self.representingImage = [UIImage imageNamed:@"TextIcon.png"];
+		
+	return self;
+}
+
 - (id) initWithText:(NSString*) t;
 {
 	if (self = [super init]) {
