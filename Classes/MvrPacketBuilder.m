@@ -225,16 +225,15 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	}
 }
 
-#define kMvrPacketBuilderStackBufferSize 10240
+#define kMvrPacketBuilderBufferSize 500 * 1024
 
 - (void) producePayloadFromAvailableBytesOfStream:(NSInputStream*) aStream;
 {
 	uint8_t* buffer; NSUInteger bufferSize;
-	uint8_t stackBuffer[kMvrPacketBuilderStackBufferSize];
 	
 	if (![aStream getBuffer:&buffer length:&bufferSize]) {
-		buffer = stackBuffer;
-		bufferSize = [aStream read:buffer maxLength:kMvrPacketBuilderStackBufferSize];
+		buffer = malloc(kMvrPacketBuilderBufferSize);
+		bufferSize = [aStream read:buffer maxLength:kMvrPacketBuilderBufferSize];
 	}
 	
 	bufferSize = MIN(bufferSize, toBeRead);
@@ -243,7 +242,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 	sent += bufferSize;
 	self.progress = 0.95 * MvrProgressFromTo(sent, payloadsLength);
 	
-	[delegate packetBuilder:self didProduceData:[NSData dataWithBytesNoCopy:buffer length:bufferSize freeWhenDone:NO]];
+	[delegate packetBuilder:self didProduceData:[NSData dataWithBytesNoCopy:buffer length:bufferSize freeWhenDone:YES]];
 	if (cancelled) return;
 	
 	if (toBeRead == 0) {

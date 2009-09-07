@@ -90,20 +90,15 @@
 	
 	L0Log(@"%@", e);
 	
-	if (!e)
-		[socket disconnectAfterReadingAndWriting];
-	else
-		[socket disconnect];
+	[[MvrNetworkExchange sharedExchange] channel:channel didSendItemToOtherEndpoint:item];
 
-	[socket setDelegate:nil];
-	[socket release]; socket = nil;
-	
 	[builder stop];
 	[builder release]; builder = nil;
 	
-	[[MvrNetworkExchange sharedExchange] channel:channel didSendItemToOtherEndpoint:item];
-	
-	[self release];
+	[socket setDelegate:nil];
+	[socket release]; socket = nil;
+		
+	[self autorelease];
 }
 
 - (void) onSocket:(AsyncSocket*) sock didConnectToHost:(NSString*) host port:(UInt16) port;
@@ -114,18 +109,20 @@
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err;
 {
-	[self endWithError:err];
+	if (err)
+		[self endWithError:err];
 }
 
-- (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag;
+- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag;
 {
-	chunksPending--;
-	L0Log(@"%u chunks still pending", chunksPending);
-	
-	if (chunksPending == 0 && canFinish) {
-		L0Log(@"Ending without error (delayed).");
-		[self endWithError:nil];
-	}
+	L0Note();
+	[self endWithError:nil];
+}
+
+- (void) onSocketDidDisconnect:(AsyncSocket *)sock;
+{
+	L0Note();
+	[self endWithError:nil];
 }
 
 #pragma mark -
@@ -137,7 +134,7 @@
 	[builder setMetadataValue:item.title forKey:kMvrProtocolMetadataTitleKey];
 	[builder setMetadataValue:item.type forKey:kMvrProtocolMetadataTypeKey];
 	
-	[builder addPayloadWithData:[item.storage preferredContentObject] forKey:kMvrProtocolExternalRepresentationPayloadKey];
+	[builder addPayload:[item.storage preferredContentObject] length:item.storage.contentLength forKey:kMvrProtocolExternalRepresentationPayloadKey];
 	
 	[builder start];
 }
@@ -150,8 +147,7 @@
 - (void) packetBuilder:(MvrPacketBuilder*) b didProduceData:(NSData*) d;
 {
 	[socket writeData:d withTimeout:-1 tag:0];
-	chunksPending++;
-	self.progress = builder.progress;	
+	self.progress = builder.progress;
 
 	L0Log(@"Writing %llu bytes, %u chunks now pending", (unsigned long long) [d length], chunksPending);
 }
@@ -161,14 +157,8 @@
 	L0Log(@"%@", e);
 	
 	self.progress = builder.progress;
-
-	if (!e && chunksPending > 0) {
-		L0Log(@"Delaying the end signal until all chunks are confirmed written");
-		canFinish = YES;
-	} else {
-		L0Log(@"Ending now.");
-		[self endWithError:e];
-	}
+	
+	[socket readDataToLength:1 withTimeout:120 tag:0];
 }
 
 @end

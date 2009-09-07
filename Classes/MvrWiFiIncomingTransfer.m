@@ -80,11 +80,9 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	[metadata release]; metadata = nil;
 	
 	if (itemStorageStream) {
-		if ([itemStorageStream streamStatus] != NSStreamStatusNotOpen) {
-			[itemStorageStream close];
-			[itemStorage endUsingOutputStream];
-		}
-		
+		[itemStorageStream close];
+		[itemStorage endUsingOutputStream];
+		[itemStorageStream release];
 		itemStorageStream = nil;
 	}
 	
@@ -124,9 +122,6 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	
 	[parser appendData:d isKnownStartOfNewPacket:isNewPacket];
 	isNewPacket = NO;
-
-	// keep alive
-	[sock writeData:[AsyncSocket LFData] withTimeout:-1 tag:0];
 	
 	unsigned long long size = parser.expectedSize;
 	L0Log(@"Now expecting %llu bytes. (0 == no limit)", size);
@@ -139,7 +134,9 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err;
 {
 	L0Log(@"%@: %@", self, err);
-	[self cancel];
+	
+	if (err)
+		[self cancel];
 }
 
 #pragma mark -
@@ -167,7 +164,7 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	NSAssert(!itemStorageStream, @"No item storage stream must have been created");
 	
 	itemStorage = [[MvrItemStorage itemStorage] retain];
-	itemStorageStream = [itemStorage outputStreamForContentOfAssumedSize:size];
+	itemStorageStream = [[itemStorage outputStreamForContentOfAssumedSize:size] retain];
 	[itemStorageStream open];
 }
 
@@ -224,10 +221,15 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 - (void) produceItem;
 {
 	self.progress = 1.0;
+	[socket writeData:[AsyncSocket LFData] withTimeout:-1 tag:0];
+	[socket disconnectAfterWriting];
+	
 	NSString* title = [metadata objectForKey:kMvrProtocolMetadataTitleKey], 
 		* type = [metadata objectForKey:kMvrProtocolMetadataTypeKey];
 	
 	[itemStorageStream close];
+	[itemStorageStream release];
+	itemStorageStream = nil;
 	[itemStorage endUsingOutputStream];
 	
 	L0MoverItem* i = [L0MoverItem itemWithStorage:itemStorage type:type title:title];

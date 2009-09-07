@@ -10,7 +10,7 @@
 #import "L0MoverItem.h"
 
 @interface MvrStorageCentral : NSObject {
-	NSMutableSet* storedItems;
+	NSMutableSet* mutableStoredItems;
 	NSMutableDictionary* metadata;
 }
 
@@ -41,6 +41,7 @@ typedef NSUInteger MvrStorageDestination;
 	NSString* path;
 	
 	NSOutputStream* lastOutputStream;
+	NSString* outputStreamPath;
 }
 
 // Creating a new item storage.

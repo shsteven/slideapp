@@ -20,6 +20,8 @@
 @property(copy, setter=private_setPath:) NSString* path;
 @property(assign, setter=private_setPersistent:) BOOL persistent;
 
+@property(copy, getter=private_outputStreamPath, setter=private_setOutputStreamPath:) NSString* outputStreamPath;
+
 @end
 
 @interface MvrStorageCentral ()
@@ -65,7 +67,7 @@ L0ObjCSingletonMethod(sharedCentral)
 - (void) dealloc;
 {
 	[metadata release];
-	[storedItems release];
+	[mutableStoredItems release];
 	[super dealloc];
 }
 
@@ -89,15 +91,15 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (NSSet*) storedItems;
 {
-	if (storedItems)
-		return storedItems;
+	if (mutableStoredItems)
+		return mutableStoredItems;
 	
-	storedItems = [NSMutableSet new];
+	mutableStoredItems = [NSMutableSet new];
 	[metadata removeAllObjects];
 
 	NSDictionary* storedMetadata = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"L0SlidePersistedItems"];
 	if (!storedMetadata)
-		return storedItems; // empty
+		return mutableStoredItems; // empty
 	
 	NSString* docs = [L0Mover documentsDirectory];
 	
@@ -121,7 +123,7 @@ L0ObjCSingletonMethod(sharedCentral)
 		} else {
 			L0MoverItem* item = [L0MoverItem itemWithStorage:itemStorage type:type title:title];
 			if (item) {
-				[storedItems addObject:item];
+				[mutableStoredItems addObject:item];
 				[metadata setObject:[NSDictionary dictionaryWithObjectsAndKeys:
 									 title, @"Title",
 									 type, @"Type",
@@ -130,7 +132,7 @@ L0ObjCSingletonMethod(sharedCentral)
 		}
 	}
 	
-	return storedItems;
+	return mutableStoredItems;
 }
 
 - (void) addStoredItemsObject:(L0MoverItem *)item;
@@ -141,6 +143,8 @@ L0ObjCSingletonMethod(sharedCentral)
 	MvrItemStorage* storage = [item storage];
 	NSString* path, * name;
 	path = [[self class] unusedPathInDirectory:[L0Mover documentsDirectory] fileName:&name];
+	
+	L0Log(@"Older path of storage about to be made persistent: %@", storage.hasPath? @"(none)" : storage.path);
 	
 	NSError* e;
 	BOOL done = [[NSFileManager defaultManager] moveItemAtPath:storage.path toPath:path error:&e];
@@ -158,15 +162,17 @@ L0ObjCSingletonMethod(sharedCentral)
 	storage.path = path;
 	storage.persistent = YES;
 	
-	[storedItems addObject:item];
+	L0Log(@"Item made persistent: %@ (%@)", item, storage);
+	
+	[mutableStoredItems addObject:item];
 }
 
 - (void) removeStoredItemsObject:(L0MoverItem*) item;
 {
-	if (![storedItems containsObject:item])
+	if (![self.storedItems containsObject:item])
 		return;
 	
-	[storedItems removeObject:item];
+	[mutableStoredItems removeObject:item];
 
 	MvrItemStorage* storage = [item storage];
 	if (storage.hasPath) {
@@ -298,6 +304,24 @@ L0ObjCSingletonMethod(sharedCentral)
 	return path;
 }
 
+- (void) private_setPath:(NSString*) p;
+{
+	if (p != path) {
+		NSError* e;
+		id contentLengthObject = [[[NSFileManager defaultManager] attributesOfItemAtPath:p error:&e] objectForKey:NSFileSize];
+		
+		if (!contentLengthObject)
+			[NSException raise:@"MvrStorageException" format:@"Could not find out the new size for the offloading file. Error: %@", e];
+		
+		contentLength = [contentLengthObject unsignedLongLongValue];
+
+		[path release];
+		path = [p copy];
+		
+		L0Log(@"path now = '%@', length = %llu", path, contentLength);
+	}
+}
+
 - (NSInputStream*) inputStream;
 {
 	if (data)
@@ -335,8 +359,8 @@ L0ObjCSingletonMethod(sharedCentral)
 		lastOutputStream = [[NSOutputStream outputStreamToMemory] retain];
 		return lastOutputStream;
 	} else {
-		self.path = [MvrStorageCentral unusedTemporaryFileName];
-		return [NSOutputStream outputStreamToFileAtPath:self.path append:NO];
+		self.outputStreamPath = [MvrStorageCentral unusedTemporaryFileName];
+		return [NSOutputStream outputStreamToFileAtPath:self.outputStreamPath append:NO];
 	}
 }
 
@@ -346,12 +370,8 @@ L0ObjCSingletonMethod(sharedCentral)
 		self.data = [lastOutputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
 		[lastOutputStream release]; lastOutputStream = nil;
 	} else {
-		NSError* e;
-		id contentLengthObject = [[[NSFileManager defaultManager] attributesOfItemAtPath:path error:&e] objectForKey:NSFileSize];
-		if (!contentLengthObject)
-			[NSException raise:@"MvrStorageException" format:@"Could not find out the new size for the offloading file. Error: %@", e];
-		
-		contentLength = [contentLengthObject unsignedLongLongValue];
+		self.path = self.outputStreamPath;
+		self.outputStreamPath = nil;
 	}
 }
 
@@ -359,13 +379,17 @@ L0ObjCSingletonMethod(sharedCentral)
 {
 	if (!data) return;
 	
-	if (!path) // we'd have a path if we had been made persistant by the storage central.
-		self.path = [MvrStorageCentral unusedTemporaryFileName];
+	NSString* thePath = path;
+	if (!thePath) // we'd have a path if we had been made persistant by the storage central.
+		thePath = [MvrStorageCentral unusedTemporaryFileName];
 	
 	NSError* e;
-	BOOL done = [data writeToFile:path options:NSAtomicWrite error:&e];
+	BOOL done = [data writeToFile:thePath options:NSAtomicWrite error:&e];
 	if (!done)
 		[NSException raise:@"MvrStorageException" format:@"Could not clear cache for this storage item: %@ (error: %@)", self ,e];
+
+	if (!path)
+		self.path = thePath;
 	
 	[data release]; data = nil;
 }
@@ -382,7 +406,7 @@ L0ObjCSingletonMethod(sharedCentral)
 	}
 }
 
-@synthesize contentLength, path;
+@synthesize contentLength, path, outputStreamPath;
 
 - (BOOL) hasPath;
 {
@@ -391,7 +415,7 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (NSString*) description;
 {
-	return [NSString stringWithFormat:@"%@ { path = '%@', data = %@, length = %llu, pending output stream = %@ }", [super description], path, data? @"not nil" : @"nil", self.contentLength, lastOutputStream];
+	return [NSString stringWithFormat:@"%@ { path = '%@', data = %@, length = %llu, pending output stream = %@, persistent? = %d }", [super description], path, data? @"not nil" : @"nil", self.contentLength, lastOutputStream, persistent];
 }
 
 @end
