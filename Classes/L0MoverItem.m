@@ -68,7 +68,8 @@ static NSMutableDictionary* classes = nil;
 	else
 		result = [self produceExternalRepresentation];
 	
-	NSAssert(result, [NSString stringWithFormat:@"An object, %@, tried to produce a nil external representation. This shouldn't have happened.", self]);
+	if (!result)
+		[NSException raise:@"MvrConsistencyException" format:@"An object, %@, tried to produce a nil external representation. This shouldn't have happened.", self];
 	return result;
 }
 
