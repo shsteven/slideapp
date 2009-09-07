@@ -7,6 +7,7 @@
 //
 
 #import "L0AddressBookPersonItem.h"
+#import "MvrStorageCentral.h"
 
 #define kL0AddressBookValue @"L0AddressBookValue"
 #define kL0AddressBookLabel @"L0AddressBookLabel"
@@ -101,15 +102,15 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 
 - (NSDictionary*) personInfo;
 {
-	if (!personInfo && self.offloadingFile)
-		NSAssert([self loadPersonInfoFromData:[self contentsOfOffloadingFile]], @"Must have been able to load from the offloading file.");
+	if (!personInfo)
+		NSAssert([self loadPersonInfoFromData:self.storage.data], @"Must have been able to load from the offloading file.");
 	return personInfo;
 }
 
-- (id) initWithExternalRepresentation:(NSData*) payload type:(NSString*) ty title:(NSString*) ti;
+- (id) initWithStorage:(MvrItemStorage *)s type:(NSString *)ty title:(NSString *)ti;
 {
-	if (self = [super init]) {
-		if (![self loadPersonInfoFromData:payload]) {
+	if (self = [super initWithStorage:s type:ty title:ti]) {
+		if (![self loadPersonInfoFromData:s.data]) {
 			[self release];
 			return nil;
 		}
@@ -122,8 +123,6 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 			CFRelease(ab);
 			didCallAddressBookCreate = YES;
 		}
-		
-		self.type = kL0AddressBookPersonDataInPropertyListType;
 		
 		NSString* nameKey = [NSString stringWithFormat:@"%d", kABPersonFirstNameProperty];
 		NSString* surnameKey = [NSString stringWithFormat:@"%d", kABPersonLastNameProperty];

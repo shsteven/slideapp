@@ -14,7 +14,7 @@
 - (void) startCrashReporting;
 - (void) processPendingCrashReportIfRequired;
 
-#if DEBUG
+#if DEBUG && kMvrCrashReportingInsertCrashTests
 - (void) testByInducingCrash;
 - (void) testByRaisingException;
 #endif

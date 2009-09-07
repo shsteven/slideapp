@@ -7,7 +7,9 @@
 //
 
 #import "MvrWiFiOutgoingTransfer.h"
+
 #import <MuiKit/MuiKit.h>
+#import "MvrStorageCentral.h"
 
 @interface MvrWiFiOutgoingTransfer ()
 
@@ -135,9 +137,7 @@
 	[builder setMetadataValue:item.title forKey:kMvrProtocolMetadataTitleKey];
 	[builder setMetadataValue:item.type forKey:kMvrProtocolMetadataTypeKey];
 	
-	// TODO allow use of NSStreams alongside NSData in items.
-	NSData* exp = [item externalRepresentation];
-	[builder addPayloadWithData:exp forKey:kMvrProtocolExternalRepresentationPayloadKey];
+	[builder addPayloadWithData:[item.storage preferredContentObject] forKey:kMvrProtocolExternalRepresentationPayloadKey];
 	
 	[builder start];
 }

@@ -12,6 +12,8 @@
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
+#import "MvrStorageCentral.h"
+
 const CGAffineTransform L0CounterclockwiseQuarterTurnTransform = {
 	0, -1,
 	1, 0,
@@ -123,16 +125,6 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	[delegate startAdvertisementsInView:self.advertisementStratum];
 }
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	for (L0MoverItem* i in [self items]) {
-		if (i.offloadingFile)
-			[i clearCache];
-	}
-}
-
 @synthesize northArrowView, eastArrowView, westArrowView;
 @synthesize northLabel, eastLabel, westLabel;
 @synthesize northSpinner, eastSpinner, westSpinner;
@@ -221,6 +213,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	[self animateItemView:view withAddAnimation:a];
 	
 	self.editButtonItem.enabled = YES;
+	
+	[[MvrStorageCentral sharedCentral] addStoredItemsObject:item];
 }
 
 - (L0MoverItemView*) makeItemView;
@@ -369,7 +363,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	if (!view)
 		return;
 	
-	[self removeItemView:view animation:ani];	
+	[self removeItemView:view animation:ani];
+	[[MvrStorageCentral sharedCentral] removeStoredItemsObject:item];
 }
 
 - (void) removeItemView:(L0MoverItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
@@ -399,12 +394,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		}
 	}
 	
-	if (view.item) {
-		// TODO make file lifecycle not dependant on item object lifecycle.
-		view.item.shouldDisposeOfOffloadingFileOnDealloc = YES;
-
+	if (view.item)
 		CFDictionaryRemoveValue(itemsToViews, view.item);
-	}
 	
 	if (CFDictionaryGetCount(itemsToViews) == 0) {
 		[self setEditing:NO animated:ani != kL0SlideItemsTableNoRemoveAnimation];

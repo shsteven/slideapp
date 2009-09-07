@@ -19,7 +19,8 @@
 	BOOL isCancelled;
 	BOOL hasCheckedForMetadata;
 	
-	NSMutableData* data; // TODO to file
+	MvrItemStorage* itemStorage;
+	NSOutputStream* itemStorageStream;
 	
 	NSMutableDictionary* metadata;
 	id <L0MoverPeerChannel> channel;

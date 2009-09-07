@@ -19,7 +19,7 @@
 #import "L0MoverBluetoothScanner.h"
 #import "MvrModernWiFiScanner.h"
 
-#import "L0MoverAppDelegate+L0ItemPersistance.h"
+#import "MvrStorageCentral.h"
 #import "L0BookmarkItem.h"
 #import "L0ImageItem.h"
 #import "L0TextItem.h"
@@ -329,7 +329,8 @@ enum {
 
 - (void) addPersistedItemsToTable;
 {
-	for (L0MoverItem* i in [self loadItemsFromMassStorage])
+	NSSet* items = [NSSet setWithSet:[[MvrStorageCentral sharedCentral] storedItems]];
+	for (L0MoverItem* i in items)
 		[self.tableController addItem:i animation:kL0SlideItemsTableNoAddAnimation];
 }
 
@@ -339,8 +340,6 @@ enum {
 	[[L0MoverBluetoothScanner sharedScanner] setEnabled:NO];
 	
 	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
-	
-	[self persistItemsToMassStorage:[self.tableController items]];	
 }
 
 - (void) peerFound:(L0MoverPeer*) peer;
@@ -787,10 +786,14 @@ enum {
 
 - (void) clearTable;
 {
-	NSArray* a = [NSArray arrayWithArray:[self.tableController items]];
+	MvrStorageCentral* sc = [MvrStorageCentral sharedCentral];
+	
+	NSSet* a = [NSSet setWithSet:sc.storedItems];
 	for (L0MoverItem* i in a) {
-		i.shouldDisposeOfOffloadingFileOnDealloc = YES;
+	
 		[self.tableController removeItem:i animation:kL0SlideItemsTableRemoveByFadingAway];
+		[sc removeStoredItemsObject:i];
+		
 	}
 }
 

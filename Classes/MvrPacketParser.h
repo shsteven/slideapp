@@ -39,6 +39,8 @@ enum {
 
 - (void) packetParserDidStartReceiving:(MvrPacketParser*) p;
 - (void) packetParser:(MvrPacketParser*) p didReceiveMetadataItemWithKey:(NSString*) key value:(NSString*) value;
+
+- (void) packetParser:(MvrPacketParser*) p willReceivePayloadForKey:(NSString*) key size:(unsigned long long) size;
 - (void) packetParser:(MvrPacketParser*) p didReceivePayloadPart:(NSData*) d forKey:(NSString*) key;
 
 // e == nil if no error.

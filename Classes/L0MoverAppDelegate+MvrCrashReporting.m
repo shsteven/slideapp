@@ -104,7 +104,7 @@
 
 @implementation L0MoverAppDelegate (MvrCrashReporting)
 
-#if DEBUG
+#if DEBUG && kMvrCrashReportingInsertCrashTests
 - (void) testByInducingCrash;
 {
 	char* nowhere = NULL;

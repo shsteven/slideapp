@@ -9,6 +9,8 @@
 #import "L0BookmarkItem.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#import "MvrStorageCentral.h"
+
 @implementation L0BookmarkItem
 
 static id <L0BookmarkItemStorage> L0BookmarkItemCurrentStorage = nil;
@@ -56,13 +58,17 @@ static id <L0BookmarkItemStorage> L0BookmarkItemCurrentStorage = nil;
 	return [[self.address absoluteString] dataUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (id) initWithExternalRepresentation:(NSData*) payload type:(NSString*) ty title:(NSString*) t;
+- (id) initWithStorage:(MvrItemStorage*) s type:(NSString*) ty title:(NSString*) ti;
 {
-	NSString* str = [[NSString alloc] initWithData:payload encoding:NSUTF8StringEncoding];
-	NSURL* theURL = [NSURL URLWithString:str];
-	[str release];
-
-	return [self initWithAddress:theURL title:t];
+	if (self = [super initWithStorage:s type:ty title:ti]) {
+		NSString* str = [[NSString alloc] initWithData:s.data encoding:NSUTF8StringEncoding];
+		NSURL* theURL = [NSURL URLWithString:str];
+		[str release];
+		
+		self.address = theURL;
+	}
+	
+	return self;
 }
 
 - (void) storeToAppropriateApplication;

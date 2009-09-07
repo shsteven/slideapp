@@ -135,6 +135,9 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (void) addStoredItemsObject:(L0MoverItem *)item;
 {
+	if ([self.storedItems containsObject:item])
+		return;
+	
 	MvrItemStorage* storage = [item storage];
 	NSString* path, * name;
 	path = [[self class] unusedPathInDirectory:[L0Mover documentsDirectory] fileName:&name];
@@ -189,6 +192,11 @@ L0ObjCSingletonMethod(sharedCentral)
 	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
 	[ud setObject:metadata forKey:@"L0SlidePersistedItems"];
 	[ud synchronize];
+}
+
+- (void) clearCache;
+{
+	[self.storedItems makeObjectsPerformSelector:@selector(clearCache)];
 }
 
 @end
@@ -263,10 +271,10 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (NSData*) data;
 {
-	if (data)
-		return data;
-	
-	return [NSData dataWithContentsOfMappedFile:path];
+	if (!data)
+		data = [[NSData dataWithContentsOfMappedFile:path] retain];
+
+	return data;
 }
 
 - (void) setData:(NSData*) d;
@@ -358,6 +366,8 @@ L0ObjCSingletonMethod(sharedCentral)
 	BOOL done = [data writeToFile:path options:NSAtomicWrite error:&e];
 	if (!done)
 		[NSException raise:@"MvrStorageException" format:@"Could not clear cache for this storage item: %@ (error: %@)", self ,e];
+	
+	[data release]; data = nil;
 }
 
 - (void) resetData;
@@ -377,6 +387,11 @@ L0ObjCSingletonMethod(sharedCentral)
 - (BOOL) hasPath;
 {
 	return path != nil;
+}
+
+- (NSString*) description;
+{
+	return [NSString stringWithFormat:@"%@ { path = '%@', data = %@, length = %llu, pending output stream = %@ }", [super description], path, data? @"not nil" : @"nil", self.contentLength, lastOutputStream];
 }
 
 @end

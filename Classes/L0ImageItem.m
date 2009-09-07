@@ -7,9 +7,9 @@
 //
 
 #import "L0ImageItem.h"
+#import "MvrStorageCentral.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
-
 #import <MuiKit/MuiKit.h>
 
 @implementation L0ImageItem
@@ -58,12 +58,10 @@
 	return storedImage;
 }
 
-- (id) initWithExternalRepresentation:(NSData*) payload type:(NSString*) ty title:(NSString*) ti;
+- (id) initWithStorage:(MvrItemStorage *)s type:(NSString *)ty title:(NSString *)ti;
 {
-	if (self = [super init]) {
-		self.title = ti;
-		self.type = (id) kUTTypeJPEG;
-		UIImage* img = [UIImage imageWithData:payload];
+	if (self = [super initWithStorage:s type:ty title:ti]) {
+		UIImage* img = [UIImage imageWithContentsOfFile:storage.path];
 		
 		if (!img) {
 			[self release];
@@ -83,22 +81,17 @@
 
 - (void) clearCache;
 {
-	L0Log(@"Done to %@", self);
+	L0Log(@"%@", self);
 	self.image = nil;
-}
-
-- (void) offloadToFile:(NSString*) file;
-{
-	(void) [self image]; // ensures it's loaded.
-	[super offloadToFile:file];
+	[super clearCache];
 }
 
 @synthesize image;
 - (UIImage*) image;
 {
-	if (!image && self.offloadingFile) {
-		L0Log(@"Caching from contents of offloading file: %@", self.offloadingFile);
-		self.image = [UIImage imageWithContentsOfFile:self.offloadingFile];
+	if (!image) {
+		L0Log(@"Caching from storage: %@", self.storage);
+		self.image = [UIImage imageWithContentsOfFile:self.storage.path];
 	}
 	
 	return image;

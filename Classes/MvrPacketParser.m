@@ -372,12 +372,15 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	if ([self.payloadStops count] == 1 && [[self.payloadStops objectAtIndex:0] isEqual:[NSNumber numberWithInt:0]]) {
 		// we'd grab the body here, but since the body is empty, we go on.
 		self.progress = 1.0;
-		[delegate packetParser:self didReceivePayloadPart:[NSData data] forKey:[self.payloadKeys objectAtIndex:0]];
+		NSString* key = [self.payloadKeys objectAtIndex:0];
+		[delegate packetParser:self willReceivePayloadForKey:key size:[[self.payloadStops objectAtIndex:0] unsignedLongLongValue]];
+		[delegate packetParser:self didReceivePayloadPart:[NSData data] forKey:key];
 		[self resetAndReportError:kMvrPacketParserNoError];
 	} else {
 		currentStop = 0;
 		toReadForCurrentStop = [[self.payloadStops objectAtIndex:currentStop] longLongValue];
 		self.state = kMvrPacketParserExpectingBody;
+		[delegate packetParser:self willReceivePayloadForKey:[self.payloadKeys objectAtIndex:0] size:toReadForCurrentStop];
 	}
 }
 
@@ -408,6 +411,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 			[self resetAndReportError:kMvrPacketParserNoError];
 		} else {
 			toReadForCurrentStop = [[self.payloadStops objectAtIndex:currentStop] unsignedLongLongValue] - [[self.payloadStops objectAtIndex:currentStop - 1] unsignedLongLongValue];
+			[delegate packetParser:self willReceivePayloadForKey:[self.payloadKeys objectAtIndex:currentStop] size:toReadForCurrentStop];
 			L0Log(@"Now expecting payload with key %@, long %llu", [self.payloadKeys objectAtIndex:currentStop], toReadForCurrentStop);
 		}
 	}

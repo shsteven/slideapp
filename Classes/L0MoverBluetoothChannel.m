@@ -10,6 +10,7 @@
 #import <MuiKit/MuiKit.h>
 
 #import "MvrProtocol.h"
+#import "MvrStorageCentral.h"
 
 static const size_t kL0MoverBluetoothMessageHeaderLength = sizeof(char) * 5;
 
@@ -135,7 +136,7 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 		dataToBeSent = [NSMutableData new];
 		[dataToBeSent appendBytes:kL0MoverBluetoothMessageHeader_ItemTransfer length:kL0MoverBluetoothMessageHeaderLength];
 		
-		NSData* externalRep = [itemToBeSent externalRepresentation];
+		NSData* externalRep = itemToBeSent.storage.data;
 		NSString* title = itemToBeSent.title;
 		NSString* type = itemToBeSent.type;
 		
@@ -309,7 +310,8 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 	}
 	
 	if (title && type && externalRep) {
-		i = [[[[L0MoverItem classForType:type] alloc] initWithExternalRepresentation:externalRep type:type title:title] autorelease];
+		MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:externalRep];
+		i = [L0MoverItem itemWithStorage:storage type:type title:title];
 	}
 	
 	[self endReceivingItem:i];

@@ -10,6 +10,8 @@
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
+#import "MvrStorageCentral.h"
+
 #import "L0ImageItem.h"
 #import "L0AddressBookPersonItem.h"
 
@@ -50,7 +52,6 @@
 	L0Log(@"Did receive an item: %@", item);
 	
 	[item storeToAppropriateApplication];
-	[self persistItemToMassStorage:item];
 	
 	if ([item isKindOfClass:[L0ImageItem class]])
 		[self showAlertIfNotShownBeforeNamedForiPhone:@"L0ImageReceived_iPhone" foriPodTouch:@"L0ImageReceived_iPod"];

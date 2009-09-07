@@ -8,6 +8,7 @@
 
 #import "MvrWiFiIncomingTransfer.h"
 #import "L0MoverItem.h"
+#import "MvrStorageCentral.h"
 
 @interface MvrWiFiIncomingTransfer ()
 
@@ -21,6 +22,30 @@
 
 @end
 
+static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSData* data, NSError** e) {
+	
+	NSInteger written = 0; const void* bytes = [data bytes];
+	while (written < [data length]) {
+		
+		if ([stream hasSpaceAvailable]) {
+			NSInteger newlyWritten = [stream write:(bytes + written) maxLength:([data length] - written)];
+			
+			if (newlyWritten == -1) {
+				if (e) *e = [stream streamError];
+				return NO;
+			}
+			
+			written += newlyWritten;
+			
+		}
+		
+		usleep(50 * 1000);
+	}
+	
+	return YES;
+	
+}
+
 
 @implementation MvrWiFiIncomingTransfer
 
@@ -33,7 +58,6 @@
 		parser = [[MvrPacketParser alloc] initWithDelegate:self];
 		isNewPacket = YES;
 		
-		data = [NSMutableData new];
 		scanner = sc; // It owns us.
 		metadata = [NSMutableDictionary new];
 	}
@@ -54,6 +78,20 @@
 	[socket release]; socket = nil;
 	
 	[metadata release]; metadata = nil;
+	
+	if (itemStorageStream) {
+		if ([itemStorageStream streamStatus] != NSStreamStatusNotOpen) {
+			[itemStorageStream close];
+			[itemStorage endUsingOutputStream];
+		}
+		
+		itemStorageStream = nil;
+	}
+	
+	if (itemStorage) {
+		[itemStorage release];
+		itemStorage = nil;
+	}
 }
 
 - (void) dealloc;
@@ -120,6 +158,19 @@
 	[metadata setObject:value forKey:key];
 }
 
+- (void) packetParser:(MvrPacketParser*) p willReceivePayloadForKey:(NSString*) key size:(unsigned long long) size;
+{
+	if (![key isEqual:kMvrProtocolExternalRepresentationPayloadKey])
+		return;
+	
+	NSAssert(!itemStorage, @"No item storage must have been created");
+	NSAssert(!itemStorageStream, @"No item storage stream must have been created");
+	
+	itemStorage = [[MvrItemStorage itemStorage] retain];
+	itemStorageStream = [itemStorage outputStreamForContentOfAssumedSize:size];
+	[itemStorageStream open];
+}
+
 - (void) packetParser:(MvrPacketParser*) p didReceivePayloadPart:(NSData*) d forKey:(NSString*) key;
 {
 	if (isCancelled) return;
@@ -131,7 +182,13 @@
 		return;
 	
 	self.progress = p.progress;
-	[data appendData:d];
+	NSAssert(itemStorageStream && [itemStorageStream streamStatus] != NSStreamStatusNotOpen, @"We have a stream and it's open.");
+	
+	NSError* e;
+	if (!MvrWriteDataToOutputStreamSynchronously(itemStorageStream, d, &e)) {
+		L0LogAlways(@"Got an error while writing to the offloading stream: %@", e);
+		[self cancel];
+	}
 }
 
 // e == nil if no error.
@@ -169,7 +226,12 @@
 	self.progress = 1.0;
 	NSString* title = [metadata objectForKey:kMvrProtocolMetadataTitleKey], 
 		* type = [metadata objectForKey:kMvrProtocolMetadataTypeKey];
-	L0MoverItem* i = [[[[L0MoverItem classForType:type] alloc] initWithExternalRepresentation:data type:type title:title] autorelease];
+	
+	[itemStorageStream close];
+	[itemStorage endUsingOutputStream];
+	
+	L0MoverItem* i = [L0MoverItem itemWithStorage:itemStorage type:type title:title];
+	
 	[self setItem:i];
 	[self setCancelled:(i == nil)];
 

@@ -7,7 +7,9 @@
 //
 
 #import "L0TextItem.h"
+
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "MvrStorageCentral.h"
 
 @interface L0TextItem ()
 
@@ -42,18 +44,12 @@
 	return self;
 }
 
-- (id) initWithExternalRepresentation:(NSData*) payload type:(NSString*) ty title:(NSString*) ti;
-{
-	NSString* str = [[[NSString alloc] initWithData:payload encoding:NSUTF8StringEncoding] autorelease];	
-	return [self initWithText:str];
-}
-
 @synthesize text;
 - (NSString*) text;
 {
-	if (!text && self.offloadingFile) {
-		L0Log(@"Caching from contents of offloading file: %@", self.offloadingFile);
-		self.text = [[[NSString alloc] initWithContentsOfFile:self.offloadingFile encoding:NSUTF8StringEncoding error:NULL] autorelease];
+	if (!text) {
+		L0Log(@"Caching from contents of offloading file: %@", self.storage.path);
+		self.text = [[[NSString alloc] initWithContentsOfFile:self.storage.path encoding:NSUTF8StringEncoding error:NULL] autorelease];
 	}
 	
 	return text;

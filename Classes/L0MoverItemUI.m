@@ -12,6 +12,8 @@
 #import "L0AddressBookPersonItem.h"
 #import "L0MoverAppDelegate.h"
 
+#import "MvrStorageCentral.h"
+
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface L0MoverItemUI () <L0MoverItemUIAsynchronousMailDelegate>
@@ -142,7 +144,7 @@ static NSMutableDictionary* L0ItemClassesToUIs = nil;
 	BOOL allDone = YES;
 	
 	if (d) {
-		NSData* externalRep = [i externalRepresentation];
+		NSData* externalRep = i.storage.data;
 		if (!externalRep) allDone = NO;
 		*d = externalRep;
 	}
