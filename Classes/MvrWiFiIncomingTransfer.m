@@ -209,12 +209,8 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 
 - (void) cancel;
 {
-	if (channel) {
-		[self setItem:nil];
-		[self setCancelled:YES];
-	}
-	
-	isCancelled = YES;
+	[self setItem:nil];	
+	[self setCancelled:YES];
 	[self clear];
 }
 
