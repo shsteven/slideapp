@@ -278,14 +278,27 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (unsigned long long) contentLength;
 {
+	NSAssert(data || path, @"Either we have data in memory or we have a file on disk.");
+
 	if (data)
 		return [data length];
+	else if (path) {
+		NSError* e;
+		id contentLengthObject = [[[NSFileManager defaultManager] attributesOfItemAtPath:path error:&e] objectForKey:NSFileSize];
+		
+		if (!contentLengthObject)
+			[NSException raise:@"MvrStorageException" format:@"Could not find out the new size for the offloading file. Error: %@", e];
+		
+		return [contentLengthObject unsignedLongLongValue];
+	}
 	
-	return contentLength;
+	return 0; // Should never happen due to the assert.
 }
 
 - (NSData*) data;
 {
+	NSAssert(data || path, @"Either we have data in memory or we have a file on disk.");
+	
 	if (!data)
 		data = [[NSData dataWithContentsOfMappedFile:path] retain];
 
@@ -307,6 +320,8 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (NSString*) path;
 {
+	NSAssert(data || path, @"Either we have data in memory or we have a file on disk.");
+	
 	if (!path)
 		[self clearCache];
 	
@@ -316,23 +331,17 @@ L0ObjCSingletonMethod(sharedCentral)
 - (void) private_setPath:(NSString*) p;
 {
 	if (p != path) {
-		NSError* e;
-		id contentLengthObject = [[[NSFileManager defaultManager] attributesOfItemAtPath:p error:&e] objectForKey:NSFileSize];
-		
-		if (!contentLengthObject)
-			[NSException raise:@"MvrStorageException" format:@"Could not find out the new size for the offloading file. Error: %@", e];
-		
-		contentLength = [contentLengthObject unsignedLongLongValue];
-
 		[path release];
 		path = [p copy];
 		
-		L0Log(@"path now = '%@', length = %llu", path, contentLength);
+		L0Log(@"path now = '%@', length = %llu", path, self.contentLength);
 	}
 }
 
 - (NSInputStream*) inputStream;
 {
+	NSAssert(data || path, @"Either we have data in memory or we have a file on disk.");
+	
 	if (data)
 		return [NSInputStream inputStreamWithData:data];
 	else
@@ -341,6 +350,8 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (id) preferredContentObject;
 {
+	NSAssert(data || path, @"Either we have data in memory or we have a file on disk.");
+	
 	if (path && !data)
 		return [self inputStream];
 	else
@@ -364,6 +375,8 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (NSOutputStream*) outputStreamForStorageIn:(MvrStorageDestination) destination;
 {
+	NSAssert(!persistent, @"Persistent item storage cannot be altered. Remove the item from the storage central first.");
+	
 	if (destination == kMvrStorageDestinationMemory) {
 		lastOutputStream = [[NSOutputStream outputStreamToMemory] retain];
 		return lastOutputStream;
@@ -405,6 +418,8 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (void) resetData;
 {
+	NSAssert(!persistent, @"Persistent item storage cannot be altered. Remove the item from the storage central first.");
+
 	if (path) {
 		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
 		self.path = nil;
@@ -415,7 +430,7 @@ L0ObjCSingletonMethod(sharedCentral)
 	}
 }
 
-@synthesize contentLength, path, outputStreamPath;
+@synthesize path, outputStreamPath;
 
 - (BOOL) hasPath;
 {

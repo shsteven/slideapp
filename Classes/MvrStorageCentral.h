@@ -37,7 +37,6 @@ typedef NSUInteger MvrStorageDestination;
 
 @interface MvrItemStorage : NSObject {
 	BOOL persistent;
-	unsigned long long contentLength;
 	
 	NSData* data;
 	NSString* path;
@@ -57,7 +56,7 @@ typedef NSUInteger MvrStorageDestination;
 @property(readonly, getter=isPersistent) BOOL persistent;
 
 // The size in bytes of the content of this storage. (See 'Writing' for caveats.)
-@property unsigned long long contentLength;
+@property(readonly) unsigned long long contentLength;
 
 // Causes the item storage to clear its cache and remove all in-memory content by offloading it to disk.
 - (void) clearCache;
@@ -94,6 +93,7 @@ typedef NSUInteger MvrStorageDestination;
 // All writing methods clear whatever contents the item storage previously held when called.
 
 // Returns an unopened output stream. Write to this stream to set the contents of the item storage. The size for ...OfAssumedSize: will be used as a hint to the item storage to choose where to store what is written to the stream. Otherwise, if the size is unknown but the order of magnitude is, you can use ...ForStorageIn: to choose where to save the stream yourself.
+// Note that being wrong about the size passed to ...OfAssumedSize: may lead to out-of-memory crashes if more data is written on the stream than what was given, so it's important to get it right or at least overestimate conservatively.
 // When you have finished writing to the stream and closed it, you MUST call the -endUsingOutputStream method to let the item storage take ownership of the data you wrote.
 // It's a programmer error to use ANY method or access ANY property of this object before using -endUsingOutputStream OR to call it before closing the stream. Behavior is undefined in either case.
 - (NSOutputStream*) outputStreamForContentOfAssumedSize:(unsigned long long) size;
