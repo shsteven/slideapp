@@ -58,14 +58,23 @@ L0ObjCSingletonMethod(sharedCentral)
 
 - (id) init;
 {
-	if (self = [super init])
+	if (self = [super init]) {
 		metadata = [NSMutableDictionary new];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+	}
 	
 	return self;
 }
 
+- (void) didReceiveMemoryWarning:(NSNotification*) n;
+{
+	[self clearCache];
+}
+
 - (void) dealloc;
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	[metadata release];
 	[mutableStoredItems release];
 	[super dealloc];

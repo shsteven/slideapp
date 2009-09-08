@@ -22,6 +22,8 @@
 - (void) removeStoredItemsObject:(L0MoverItem*) item;
 @property(readonly) NSSet* storedItems;
 
+- (void) clearCache;
+
 @end
 
 
