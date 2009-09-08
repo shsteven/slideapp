@@ -127,6 +127,11 @@ L0ObjCSingletonMethod(sharedScanner)
 	[servicesBeingResolved release]; servicesBeingResolved = nil;
 	
 	[self stopMonitoringReachability];
+	
+	[selfWarmer disconnect];
+	[selfWarmer release]; selfWarmer = nil;
+	
+	[[self mutableSetValueForKey:@"availableChannels"] removeAllObjects];
 }
 
 - (void) dealloc;
@@ -190,6 +195,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	
 	BOOL isSelf = NO;
 	struct ifaddrs* interface;
+	struct sockaddr_in selfAddress;
 	
 	if (getifaddrs(&interface) == 0) {
 		struct ifaddrs* allInterfaces = interface;
@@ -203,7 +209,9 @@ L0ObjCSingletonMethod(sharedScanner)
 				
 				const struct sockaddr_in* senderIPAddress = (const struct sockaddr_in*) senderAddress;
 				if (address->sin_addr.s_addr == senderIPAddress->sin_addr.s_addr) {
-					isSelf = YES; break;
+					isSelf = YES;
+					selfAddress = *address;
+					break;
 				}
 			}
 			
@@ -214,11 +222,21 @@ L0ObjCSingletonMethod(sharedScanner)
 		freeifaddrs(allInterfaces);
 	}
 	
-	if (isSelf) return;
+	if (isSelf && !selfWarmer) {
+		selfAddress.sin_port = 65525; // a port we hope isn't used.
+		selfWarmer = [[AsyncSocket alloc] initWithDelegate:self];
+		[selfWarmer connectToAddress:[NSData dataWithBytes:&selfAddress length:selfAddress.sin_len] error:NULL];
+		return;
+	}
 	
 	MvrWiFiChannel* channel = [[MvrWiFiChannel alloc] initWithNetService:sender];
 	[[self mutableSetValueForKey:@"availableChannels"] addObject:channel];
 	[channel release];
+}
+
+- (void) onSocketDidDisconnect:(AsyncSocket *)sock;
+{
+	[selfWarmer release]; selfWarmer = nil;
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict;

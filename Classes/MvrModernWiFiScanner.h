@@ -28,6 +28,8 @@
 	NSNetServiceBrowser* browser;
 	
 	NSMutableSet* servicesBeingResolved;
+	
+	AsyncSocket* selfWarmer;
 }
 
 + sharedScanner;
