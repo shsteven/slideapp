@@ -375,8 +375,6 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender;
 {
-	[sender autorelease];
-	
 	L0Log(@"For service %@:", sender);
 	for (NSData* d in [sender addresses])
 		L0Log(@"Found address: %@", [d socketAddressStringValue]);
