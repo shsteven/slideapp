@@ -74,7 +74,7 @@ static NSString* MvrChannelMedium(id <L0MoverPeerChannel> c) {
 	// return [[self.channels anyObject] sendItemToOtherEndpoint:item];
 	id <L0MoverPeerChannel> selectedChan = nil;
 	for (id <L0MoverPeerChannel> chan in self.channels) {
-		if (!MvrChannelIsDeprecated(selectedChan) && MvrChannelIsDeprecated(chan))
+		if (selectedChan && !MvrChannelIsDeprecated(selectedChan) && MvrChannelIsDeprecated(chan))
 			continue;
 		
 		selectedChan = chan;
@@ -207,14 +207,6 @@ L0ObjCSingletonMethod(sharedExchange);
 	if (peer)
 		[peer.delegate moverPeer:peer didStartReceiving:transfer];
 }
-//
-//- (void) channel:(id <L0MoverPeerChannel>) channel didStopReceiving:(id <MvrIncoming>) transfer;
-//{
-//	L0Log(@"%@ --> %@ -X-> us", channel, transfer);
-//	L0MoverSynthesizedPeer* peer = [self peerWithChannel:channel];
-//	if (peer)
-//		[peer.delegate moverPeer:peer didStopReceiving:transfer];
-//}
 
 - (void) channel:(id <L0MoverPeerChannel>) channel willSendItemToOtherEndpoint:(L0MoverItem*) i;
 {
