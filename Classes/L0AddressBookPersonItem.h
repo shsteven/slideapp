@@ -14,7 +14,7 @@
 #define kL0AddressBookPersonDataInPropertyListType @"net.infinite-labs.Slide.AddressBookPersonPropertyList"
 
 @interface L0AddressBookPersonItem : L0MoverItem {
-	NSDictionary* personInfo;
+
 }
 
 - (id) initWithAddressBookRecord:(ABRecordRef) personRecord;

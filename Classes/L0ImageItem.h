@@ -14,6 +14,6 @@
 }
 
 - (id) initWithTitle:(NSString*) title image:(UIImage*) image;
-@property(retain) UIImage* image;
+@property(readonly) UIImage* image;
 
 @end

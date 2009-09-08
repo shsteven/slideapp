@@ -40,7 +40,7 @@
 {
 	if (self = [super init]) {
 		self.title = ti;
-		self.image = img;
+		[self setCachedObject:img forKey:@"image"];
 		self.type = (id) kUTTypeJPEG;
 	}
 	
@@ -60,15 +60,11 @@
 
 - (id) initWithStorage:(MvrItemStorage *)s type:(NSString *)ty title:(NSString *)ti;
 {
-	if (self = [super initWithStorage:s type:ty title:ti]) {
-		UIImage* img = [UIImage imageWithContentsOfFile:storage.path];
-		
-		if (!img) {
+	if (self = [super initWithStorage:s type:ty title:ti]) {		
+		if (!self.image) {
 			[self release];
 			return nil;
 		}
-		
-		self.image = img;
 	}
 	
 	return self;
@@ -79,22 +75,14 @@
 	UIImageWriteToSavedPhotosAlbum(self.image, nil, nil, NULL);
 }
 
-- (void) clearCache;
-{
-	L0Log(@"%@", self);
-	self.image = nil;
-	[super clearCache];
-}
-
-@synthesize image;
 - (UIImage*) image;
 {
-	if (!image) {
-		L0Log(@"Caching from storage: %@", self.storage);
-		self.image = [UIImage imageWithContentsOfFile:self.storage.path];
-	}
-	
-	return image;
+	return [self cachedObjectForKey:@"image"];
+}
+
+- (id) objectForEmptyImageCacheKey;
+{
+	return [UIImage imageWithContentsOfFile:self.storage.path];
 }
 
 - (void) dealloc;

@@ -62,8 +62,8 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 
 @interface L0AddressBookPersonItem ()
 
-- (BOOL) loadPersonInfoFromData:(NSData*) payload;
-- (void) loadPersonInfoFromAddressBookRecord:(ABRecordRef) record;
+- (NSDictionary*) personInfoFromData:(NSData*) payload;
+- (NSDictionary*) personInfoFromAddressBookRecord:(ABRecordRef) record;
 
 - (NSString*) shortenedNameFromAddressBookRecord:(ABRecordRef) record;
 - (NSString*) shortenedNameFromNickname:(NSString*) nickname name:(NSString*) name surname:(NSString*) surname companyName:(NSString*) companyName;
@@ -94,27 +94,35 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	return d;
 }
 
-- (void) clearCache;
-{
-	[personInfo release];
-	personInfo = nil;
-	[super clearCache];
-}
+//- (NSDictionary*) personInfo;
+//{
+//	if (!personInfo)
+//		NSAssert([self loadPersonInfoFromData:self.storage.data], @"Must have been able to load from the offloading file.");
+//	return personInfo;
+//}
 
 - (NSDictionary*) personInfo;
 {
-	if (!personInfo)
-		NSAssert([self loadPersonInfoFromData:self.storage.data], @"Must have been able to load from the offloading file.");
-	return personInfo;
+	return [self cachedObjectForKey:@"personInfo"];
+}
+
+- (id) objectForEmptyPersonInfoCacheKey;
+{
+	id o = [self personInfoFromData:self.storage.data];
+	NSAssert(o, @"Must have been able to load from the offloading file");
+	return o;
 }
 
 - (id) initWithStorage:(MvrItemStorage *)s type:(NSString *)ty title:(NSString *)ti;
 {
 	if (self = [super initWithStorage:s type:ty title:ti]) {
-		if (![self loadPersonInfoFromData:s.data]) {
+		NSDictionary* info = [self personInfoFromData:s.data];
+		if (!info) {
 			[self release];
 			return nil;
 		}
+		
+		[self setCachedObject:info forKey:@"personInfo"];
 		
 		// There is a stupid bug where kABPersonLastNameProperty and other constants
 		// from AB are zero'd until I call an AB* function, so I'm doing that once now.
@@ -142,8 +150,8 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 		self.title = [self shortenedNameFromNickname:nickname name:name surname:surname companyName:companyName];
 		
 		UIImage* image;
-		if ([personInfo objectForKey:kL0AddressBookPersonInfoImageData])
-			image = [UIImage imageWithData:[personInfo objectForKey:kL0AddressBookPersonInfoImageData]];
+		if ([info objectForKey:kL0AddressBookPersonInfoImageData])
+			image = [UIImage imageWithData:[info objectForKey:kL0AddressBookPersonInfoImageData]];
 		else
 			image = [UIImage imageNamed:@"ContactWithoutImageIcon.png"];
 		self.representingImage = image;		
@@ -152,15 +160,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	return self;
 }
 
-
-- (void) dealloc;
-{
-	[personInfo release];
-	[super dealloc];
-}
-
-
-- (BOOL) loadPersonInfoFromData:(NSData*) payload;
+- (NSDictionary*) personInfoFromData:(NSData*) payload;
 {
 	NSString* error = nil;
 	
@@ -171,15 +171,12 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 		[error release]; error = nil;
 	}
 	
-	[personInfo release];
-	personInfo = [info copy];
-	
-	return personInfo != nil;
+	return info;
 }
 
 #define L0AddressBookIsMultiValueType(propertyType) (( (propertyType) & kABMultiValueMask ) != 0)
 
-- (void) loadPersonInfoFromAddressBookRecord:(ABRecordRef) record;
+- (NSDictionary*) personInfoFromAddressBookRecord:(ABRecordRef) record;
 {
 	NSMutableDictionary* info = [NSMutableDictionary dictionary];
 	
@@ -233,8 +230,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 		[data release];
 	}
 	
-	[personInfo release];
-	personInfo = [person retain];
+	return person;
 }
 
 
@@ -340,13 +336,14 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 - (id) initWithAddressBookRecord:(ABRecordRef) personRecord;
 {
 	if (self = [super init]) {
-		[self loadPersonInfoFromAddressBookRecord:personRecord];
+		NSDictionary* info = [self personInfoFromAddressBookRecord:personRecord];
+		[self setCachedObject:info forKey:@"personInfo"];
 		self.type = kL0AddressBookPersonDataInPropertyListType;
 		self.title = [self shortenedNameFromAddressBookRecord:personRecord];
 		
 		UIImage* image;
-		if ([personInfo objectForKey:kL0AddressBookPersonInfoImageData])
-			image = [UIImage imageWithData:[personInfo objectForKey:kL0AddressBookPersonInfoImageData]];
+		if ([info objectForKey:kL0AddressBookPersonInfoImageData])
+			image = [UIImage imageWithData:[info objectForKey:kL0AddressBookPersonInfoImageData]];
 		else
 			image = [UIImage imageNamed:@"ContactWithoutImageIcon.png"];
 		self.representingImage = image;

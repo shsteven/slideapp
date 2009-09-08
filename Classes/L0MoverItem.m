@@ -45,9 +45,17 @@ static NSMutableDictionary* classes = nil;
 	return [classes objectForKey:c];
 }
 
+- (id) init;
+{
+	if (self = [super init])
+		autocache = [NSMutableDictionary new];
+		
+	return self;
+}
+
 - (id) initWithStorage:(MvrItemStorage*) s type:(NSString*) ty title:(NSString*) ti;
 {
-	if (self = [super init]) {
+	if (self = [self init]) {
 		self.storage = s;
 		self.title = ti;
 		self.type = ty;
@@ -59,8 +67,10 @@ static NSMutableDictionary* classes = nil;
 @synthesize storage;
 - (MvrItemStorage*) storage;
 {
-	if (!storage)
+	if (!storage) {
+		L0Log(@"Producing a new item storage object for %@", self);
 		storage = [[MvrItemStorage itemStorageWithData:[self produceExternalRepresentation]] retain];
+	}
 	
 	return storage;
 }
@@ -92,7 +102,63 @@ static NSMutableDictionary* classes = nil;
 
 - (void) clearCache;
 {
-	[self.storage clearCache];
+	L0Log(@"Clearing for %@", self);
+	if (storage) {
+		[storage clearCache];
+		[autocache removeAllObjects];
+	}
+}
+
+- (id) cachedObjectForKey:(NSString*) key;
+{
+	L0Log(@"Accessing cached key '%@'", key);
+	
+	id object = [autocache objectForKey:key];
+	if (!object) {
+		L0Log(@"Reconstructing...");
+		object = [self objectForEmptyCacheKey:key];
+		if (object) {
+			L0Log(@"Added object of class %@ to the cache for key %@", [object class], key);
+			[autocache setObject:object forKey:key];
+		}
+	}
+	
+	return object;
+}
+
+- (void) setCachedObject:(id) object forKey:(NSString*) key;
+{
+	L0Log(@"Forcing object of class %@ in the cache for key %@", [object class], key);
+	[autocache setObject:object forKey:key];
+}
+
+- (void) removeCachedObjectForKey:(NSString*) key;
+{
+	L0Log(@"Invalidating object in cache for key %@", key);
+	[autocache removeObjectForKey:key];
+}
+
+- (id) objectForEmptyCacheKey:(NSString*) key;
+{
+	NSAssert([key length] > 0, @"Must be a nonempty key (that is, not '').");
+	NSString* capitalizedKey;
+	if ([key length] == 1)
+		capitalizedKey = [key uppercaseString];
+	else {
+		capitalizedKey = [NSString stringWithFormat:@"%@%@", [[key substringToIndex:1] uppercaseString], [key substringFromIndex:1]];
+	}
+	
+	NSString* selString = [NSString stringWithFormat:@"objectForEmpty%@CacheKey", capitalizedKey];
+	L0Log(@"Will look for method %@ in order to refill empty cache key %@", selString, key);
+	
+	SEL s = NSSelectorFromString(selString);
+	
+	if ([self respondsToSelector:s])
+		return [self performSelector:s];
+	else {
+		L0Log(@"No refill method found. Returning nil.");
+		return nil;
+	}
 }
 
 - (void) dealloc;
@@ -101,6 +167,7 @@ static NSMutableDictionary* classes = nil;
 	[title release];
 	[type release];
 	[representingImage release];
+	[autocache release];
 	[super dealloc];
 }
 

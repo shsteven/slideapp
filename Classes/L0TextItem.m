@@ -52,21 +52,19 @@
 	return self;
 }
 
-@synthesize text;
 - (NSString*) text;
 {
-	if (!text) {
-		L0Log(@"Caching from contents of offloading file: %@", self.storage.path);
-		self.text = [[[NSString alloc] initWithContentsOfFile:self.storage.path encoding:NSUTF8StringEncoding error:NULL] autorelease];
-	}
-	
-	return text;
+	return [self cachedObjectForKey:@"text"];
 }
 
-- (void) clearCache;
+- (void) setText:(NSString *) t;
 {
-	self.text = nil;
-	[super clearCache];
+	[self setCachedObject:t forKey:@"text"];
+}
+
+- (id) objectForEmptyTextCacheKey;
+{
+	return [[[NSString alloc] initWithContentsOfFile:self.storage.path encoding:NSUTF8StringEncoding error:NULL] autorelease];
 }
 
 - (void) dealloc;
