@@ -66,6 +66,7 @@ static id <L0BookmarkItemStorage> L0BookmarkItemCurrentStorage = nil;
 		[str release];
 		
 		self.address = theURL;
+		self.representingImage = [UIImage imageNamed:@"BookmarkIcon.png"];
 	}
 	
 	return self;

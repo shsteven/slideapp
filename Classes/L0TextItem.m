@@ -66,6 +66,7 @@
 - (void) clearCache;
 {
 	self.text = nil;
+	[super clearCache];
 }
 
 - (void) dealloc;

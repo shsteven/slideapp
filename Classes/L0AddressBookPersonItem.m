@@ -98,6 +98,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 {
 	[personInfo release];
 	personInfo = nil;
+	[super clearCache];
 }
 
 - (NSDictionary*) personInfo;
