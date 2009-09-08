@@ -243,6 +243,7 @@
 		15080B840FD901BB0065D5AC /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
 		15080B880FD901FE0065D5AC /* L0MoverNetworkCalloutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverNetworkCalloutController.h; sourceTree = "<group>"; };
 		15080B890FD901FE0065D5AC /* L0MoverNetworkCalloutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverNetworkCalloutController.m; sourceTree = "<group>"; };
+		15088A1B1056B87D00247FB9 /* MvrCapabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrCapabilities.h; sourceTree = "<group>"; };
 		15097B881033783A008DB9CC /* MvrApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrApplication.h; sourceTree = "<group>"; };
 		15097B891033783A008DB9CC /* MvrApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrApplication.m; sourceTree = "<group>"; };
 		15097BD310337B70008DB9CC /* MvrClearTable.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrClearTable.alert; sourceTree = "<group>"; };
@@ -893,6 +894,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				153D01C710416C6F00469C50 /* Mover+Tests-Info.plist */,
+				15088A1B1056B87D00247FB9 /* MvrCapabilities.h */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
