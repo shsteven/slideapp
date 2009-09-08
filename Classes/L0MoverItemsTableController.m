@@ -79,6 +79,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (UIActivityIndicatorView*) spinnerForPeer:(L0MoverPeer*) peer;
 
+- (void) itemOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
+- (void) cancelledOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
+
 @end
 
 
@@ -1022,6 +1025,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) trackIncomingTransfer:(id <MvrIncoming>) transfer fromPeer:(L0MoverPeer*) peer;
 {
+	if (CFDictionaryGetValue(transfersToViews, (const void*) transfer))
+		return;
+	
 	L0MoverItemView* view = [self makeItemView];
 	CFDictionarySetValue(transfersToViews, (const void*) transfer, view);
 	
@@ -1030,7 +1036,10 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	
 	[dispatcher observe:@"item" ofObject:transfer usingSelector:@selector(itemOfTransfer:changed:) options:0];
 	[dispatcher observe:@"progress" ofObject:transfer usingSelector:@selector(progressOfTransfer:changed:) options:NSKeyValueObservingOptionInitial];
-	[dispatcher observe:@"cancelled" ofObject:transfer usingSelector:@selector(cancelledOfTransfer:changed:) options:NSKeyValueObservingOptionInitial];
+	[dispatcher observe:@"cancelled" ofObject:transfer usingSelector:@selector(cancelledOfTransfer:changed:) options:0];
+	
+	[self itemOfTransfer:transfer changed:nil];
+	[self cancelledOfTransfer:transfer changed:nil];
 }
 
 - (void) itemOfTransfer:(id <MvrIncoming>) transfer changed:(NSDictionary*) change;
@@ -1066,6 +1075,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) endTrackingIncomingTransfer:(id <MvrIncoming>) transfer;
 {	
+	if (!CFDictionaryGetValue(transfersToViews, (const void*) transfer))
+		return;
+	
 	[dispatcher endObserving:@"item" ofObject:transfer];
 	[dispatcher endObserving:@"progress" ofObject:transfer];
 	[dispatcher endObserving:@"cancelled" ofObject:transfer];
