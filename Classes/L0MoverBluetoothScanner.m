@@ -224,7 +224,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	if ([chan.uniquePeerIdentifier isEqual:[[MvrNetworkExchange sharedExchange] uniquePeerIdentifierForSelf]])
 		return;
 	
-	[self addAvailableChannelsObject:chan];
+	[[self mutableSetValueForKey:@"availableChannels"] addObject:chan];
 }
 
 - (void) unmakeChannelForPeer:(NSString*) peerID;
@@ -232,7 +232,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	L0MoverBluetoothChannel* chan = [channelsByPeerID objectForKey:peerID];
 	[chan endCommunicationWithOtherEndpoint];
 	if (chan)
-		[self removeAvailableChannelsObject:chan];
+		[[self mutableSetValueForKey:@"availableChannels"] removeObject:chan];
 }
 
 - (void) stop;
