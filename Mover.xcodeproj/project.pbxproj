@@ -346,8 +346,8 @@
 		159F7BE60FE2DA03001A6B91 /* On.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = On.xcconfig; sourceTree = "<group>"; };
 		15AAEB7510441FF7002AC69D /* MvrModernWiFiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrModernWiFiScanner.h; sourceTree = "<group>"; };
 		15AAEB7610441FF7002AC69D /* MvrModernWiFiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrModernWiFiScanner.m; sourceTree = "<group>"; };
-		15AAEB7A10442721002AC69D /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncSocket.h; path = ../../Trunks/AsyncSocket/AsyncSocket.h; sourceTree = SOURCE_ROOT; };
-		15AAEB7B10442721002AC69D /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncSocket.m; path = ../../Trunks/AsyncSocket/AsyncSocket.m; sourceTree = SOURCE_ROOT; };
+		15AAEB7A10442721002AC69D /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncSocket.h; path = Classes/AsyncSocket.h; sourceTree = "<group>"; };
+		15AAEB7B10442721002AC69D /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncSocket.m; path = Classes/AsyncSocket.m; sourceTree = "<group>"; };
 		15AAEB7E10442DBE002AC69D /* MvrWiFiIncomingTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiIncomingTransfer.h; sourceTree = "<group>"; };
 		15AAEB7F10442DBE002AC69D /* MvrWiFiIncomingTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiIncomingTransfer.m; sourceTree = "<group>"; };
 		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
