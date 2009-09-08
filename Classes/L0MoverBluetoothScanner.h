@@ -13,7 +13,7 @@
 
 #define kL0MoverBTSessionIdentifier @"net.infinite-labs.Mover"
 
-@interface L0MoverBluetoothScanner : NSObject <L0MoverPeerScanner, GKSessionDelegate> {
+@interface L0MoverBluetoothScanner : NSObject <L0MoverPeerScanner, GKSessionDelegate, GKPeerPickerControllerDelegate> {
 	MvrNetworkExchange* service;
 	GKSession* bluetoothSession;
 	

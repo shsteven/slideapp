@@ -173,10 +173,7 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 {
 	if (!dataToBeSent) return;
 	// sanity check
-	if (![[scanner.bluetoothSession peersWithConnectionState:GKPeerStateConnected] containsObject:peerID]) {
-		[self endCommunicationWithOtherEndpoint];
-		return;
-	}
+	
 	L0Log(@"Sending block of data...");
 	
 	BOOL done = NO;
@@ -253,6 +250,8 @@ static BOOL L0MoverBluetoothStartsWithHeader(const char* packet, const char* wit
 	if (!dataReceived) {
 		L0Log(@"First data of new item.");
 		dataReceived = [NSMutableData new];
+		currentTransfer.item = nil;
+		currentTransfer.cancelled = NO;
 		[scanner.service channel:self didStartReceiving:currentTransfer];
 	}
 	

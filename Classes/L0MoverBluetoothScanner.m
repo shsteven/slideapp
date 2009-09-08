@@ -129,42 +129,65 @@ L0ObjCSingletonMethod(sharedScanner)
 	
 	L0Log(@"Model: %@ should support BT: %d", L0MoverCurrentModelName(), [[self class] modelAssumedToSupportBluetooth]);
 	
-	NSString* name = [UIDevice currentDevice].name;
-#if TARGET_IPHONE_SIMULATOR
-	name = [name stringByAppendingFormat:@" (%d)", getpid()];
-#endif
-	
-	name = [name stringByAppendingFormat:@"|%@", service.uniquePeerIdentifierForSelf];
-	
-	bluetoothSession = [[GKSession alloc] initWithSessionID:kL0MoverBTSessionIdentifier displayName:name sessionMode:GKSessionModePeer];
-	[bluetoothSession setDataReceiveHandler:self withContext:NULL];
-	bluetoothSession.delegate = self;
-	bluetoothSession.disconnectTimeout = 5.0;
-	
-	bluetoothSession.available = YES;
+//	NSString* name = [UIDevice currentDevice].name;
+//#if TARGET_IPHONE_SIMULATOR
+//	name = [name stringByAppendingFormat:@" (%d)", getpid()];
+//#endif
+//	
+//	name = [name stringByAppendingFormat:@"|%@", service.uniquePeerIdentifierForSelf];
 	
 	NSAssert(!channelsByPeerID, @"No channels-by-peer data must be present");
 	channelsByPeerID = [NSMutableDictionary new];
+	
+	GKPeerPickerController* picker = [GKPeerPickerController new];
+	picker.delegate = self;
+	picker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
+	[picker show];
+}
+
+- (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type;
+{
+	GKSession* session = [[[GKSession alloc] initWithSessionID:kL0MoverBTSessionIdentifier displayName:nil sessionMode:GKSessionModePeer] autorelease];
+	return session;
+}
+
+- (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session;
+{
+	[session setDataReceiveHandler:self withContext:NULL];
+	session.delegate = self;
+	
+	bluetoothSession = [session retain];
+	
+	[self makeChannelForPeer:peerID];
+	picker.delegate = nil;
+	[picker dismiss];
+	[picker autorelease];
+}
+
+- (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker;
+{
+	[picker autorelease];
+	picker.delegate = nil;
 }
 
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state;
 {
 	L0Log(@"%@ has peer %@ in state %d", session, peerID, state);
 	
-	NSMutableArray* peers = [NSMutableArray array];
+	NSMutableSet* peers = [NSMutableSet set];
 	[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateAvailable]];
 	[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateConnected]];
 	[peers addObjectsFromArray:[session peersWithConnectionState:GKPeerStateConnecting]];
 
-	NSArray* currentPeers = [[[channelsByPeerID allKeys] copy] autorelease];
+	NSSet* currentPeers = [NSSet setWithArray:[channelsByPeerID allKeys]];
 
 	L0Log(@"new peer collection = %@, previous peer collection = %@", peers, currentPeers);
 
-	for (NSString* peer in peers) {
-		if (![currentPeers containsObject:peer])
-			[self makeChannelForPeer:peer];
-	}
-	
+//	for (NSString* peer in peers) {
+//		if (![currentPeers containsObject:peer])
+//			[self makeChannelForPeer:peer];
+//	}
+//	
 	for (NSString* peer in currentPeers) {
 		if (![peers containsObject:peer])
 			[self unmakeChannelForPeer:peer];
@@ -188,7 +211,7 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error;
 {
-	[self unmakeChannelForPeer:peerID];
+	// um.
 }
 
 - (void) session:(GKSession*) session didFailWithError:(NSError*) error;
@@ -221,8 +244,8 @@ L0ObjCSingletonMethod(sharedScanner)
 - (void) makeChannelForPeer:(NSString*) peerID;
 {
 	L0MoverBluetoothChannel* chan = [[[L0MoverBluetoothChannel alloc] initWithScanner:self peerID:peerID] autorelease];
-	if ([chan.uniquePeerIdentifier isEqual:[[MvrNetworkExchange sharedExchange] uniquePeerIdentifierForSelf]])
-		return;
+	
+	[bluetoothSession connectToPeer:peerID withTimeout:15.0];
 	
 	[[self mutableSetValueForKey:@"availableChannels"] addObject:chan];
 }
@@ -241,6 +264,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	if (!bluetoothSession) return;
 	
 	bluetoothSession.delegate = nil;
+	[bluetoothSession setDataReceiveHandler:nil withContext:NULL];
 	bluetoothSession.available = NO;
 	[bluetoothSession disconnectFromAllPeers];
 	[bluetoothSession release];
