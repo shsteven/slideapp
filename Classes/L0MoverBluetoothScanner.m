@@ -237,7 +237,7 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) stop;
 {
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(start) object:nil];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(restart) object:nil];
 	if (!bluetoothSession) return;
 	
 	bluetoothSession.delegate = nil;
