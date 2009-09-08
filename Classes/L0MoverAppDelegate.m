@@ -378,10 +378,7 @@ enum {
 		case kL0MoverNewVersionAlertTag: {
 			if (buttonIndex != 1) return;
 			
-			NSString* appStoreURLString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"L0MoverAppStoreURL"];
-			if (!appStoreURLString)
-				appStoreURLString = @"http://infinite-labs.net/mover/download";
-			[UIApp openURL:[NSURL URLWithString:appStoreURLString]];
+			[[self appStoreURL] beginResolvingRedirectsWithDelegate:self selector:@selector(finishedResolvingAppStoreURL:)];
 			return;
 		}
 			
@@ -397,6 +394,22 @@ enum {
 			return;
 		}
 	}
+}
+
+- (NSURL*) appStoreURL;
+{
+	NSString* appStoreURLString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"L0MoverAppStoreURL"];
+	if (!appStoreURLString)
+		appStoreURLString = @"http://infinite-labs.net/mover/download";
+	
+	return [NSURL URLWithString:appStoreURLString];
+}
+
+- (void) finishedResolvingAppStoreURL:(NSURL*) u;
+{
+	if (!u)
+		u = [self appStoreURL];
+	[UIApp openURL:u];
 }
 
 - (IBAction) testBySendingItemToAnyPeer;

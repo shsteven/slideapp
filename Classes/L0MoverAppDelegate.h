@@ -100,6 +100,8 @@
 - (void) askWhetherToClearTable;
 - (void) clearTable;
 
+- (NSURL*) appStoreURL;
+
 @end
 
 #if L0MoverAppDelegateAllowFriendMethods
