@@ -46,7 +46,7 @@
 
 // Persistance methods.
 + itemWithStorage:(MvrItemStorage*) storage type:(NSString*) type title:(NSString*) title;
-@property(readonly, retain) MvrItemStorage* storage;
+@property(retain) MvrItemStorage* storage;
 
 - (void) clearCache;
 

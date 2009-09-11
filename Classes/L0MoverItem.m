@@ -9,13 +9,6 @@
 #import "L0MoverItem.h"
 #import "MvrStorageCentral.h"
 
-@interface L0MoverItem ()
-
-@property(retain, setter=private_setStorage:) MvrItemStorage* storage;
-
-@end
-
-
 @implementation L0MoverItem
 
 + (void) registerClass;

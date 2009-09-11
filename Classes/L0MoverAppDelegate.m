@@ -24,13 +24,15 @@
 #import "L0ImageItem.h"
 #import "L0TextItem.h"
 #import "L0AddressBookPersonItem.h"
+#import "MvrVideoItem.h"
 
 #import "L0MoverItemUI.h"
+#import "L0MoverItemAction.h"
 #import "L0MoverImageItemUI.h"
 #import "L0MoverAddressBookItemUI.h"
 #import "L0MoverTextItemUI.h"
 #import "L0MoverBookmarkItemUI.h"
-#import "L0MoverItemAction.h"
+#import "MvrVideoItemUI.h"
 
 #import "L0MoverNetworkSettingsPane.h"
 #import "L0MoverNetworkHelpPane.h"
@@ -119,12 +121,14 @@ enum {
 	[L0AddressBookPersonItem registerClass];
 	[L0BookmarkItem registerClass];
 	[L0TextItem registerClass];
+	[MvrVideoItem registerClass];
 	
 	// Registering UIs.
 	[L0MoverImageItemUI registerClass];
 	[L0MoverAddressBookItemUI registerClass];
 	[L0MoverBookmarkItemUI registerClass];
 	[L0MoverTextItemUI registerClass];
+	[MvrVideoItemUI registerClass];
 	
 	// Starting up peering services.
 	MvrNetworkExchange* peering = [MvrNetworkExchange sharedExchange];
@@ -412,8 +416,15 @@ enum {
 	[UIApp openURL:u];
 }
 
-- (IBAction) testBySendingItemToAnyPeer;
+- (void) testByAddingVideoItemWithPath:(NSString*) videoPath;
 {
+	NSError* e;
+	MvrVideoItem* item = [[MvrVideoItem alloc] initWithPath:videoPath error:&e];
+	if (!item) {
+		L0Log(@"%@", e); return;
+	}
+	
+	[self.tableController addItem:item animation:kL0SlideItemsTableAddByDropping];
 }
 
 - (void) peerLeft:(L0MoverPeer*) peer;
@@ -678,6 +689,19 @@ enum {
 	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	imagePicker.delegate = self;
 	[self.tableHostController presentModalViewController:imagePicker animated:YES];
+}
+
+- (void) testBySavingVideoToLibrary:(NSString*) videoPath;
+{
+	BOOL canSave = UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(videoPath);
+	L0Log(@"can save? = %d", canSave);
+	if (canSave)
+		UISaveVideoAtPathToSavedPhotosAlbum(videoPath, self, @selector(testVideo:didFinishSavingWithError:contextInfo:), NULL);
+}
+
+- (void) testVideo:(NSString*) path didFinishSavingWithError:(NSError*) e context:(void*) nothing;
+{
+	L0Log(@"%@, error if any = %@", path, e);
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;

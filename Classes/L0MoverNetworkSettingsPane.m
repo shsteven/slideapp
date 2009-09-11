@@ -259,7 +259,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 - (void) updateStateOfSwitch:(UISwitch*) enabledSwitch forScannerClass:(Class) c;
 {
 	// enable only if others are enabled.
-	enabledSwitch.enabled = [self areScannersEnabledForClassesOtherThan:c];	
+	// enabledSwitch.enabled = [self areScannersEnabledForClassesOtherThan:c];	
 	
 	// turn on if enabled, off if disabled.
 	enabledSwitch.on = [self areScannersEnabledForClass:c];
@@ -364,7 +364,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	
 	BOOL newValue = ![self areScannersEnabledForClass:c];
 	[self setEnabled:newValue forScannersOfClass:c];
-	[self setEnabled:!newValue forScannersOfClassesOtherThan:c];	
+	//[self setEnabled:!newValue forScannersOfClassesOtherThan:c];	
 }
 
 #pragma mark -

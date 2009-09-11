@@ -81,6 +81,9 @@
 		1592D6980FF2346500433F4B /* NetworkHelpPage in Resources */ = {isa = PBXBuildFile; fileRef = 1592D6970FF2346500433F4B /* NetworkHelpPage */; };
 		1592D6C10FF23E6500433F4B /* L0MoverItemsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1592D6C00FF23E6500433F4B /* L0MoverItemsTable.xib */; };
 		159B6A651036A84E00E79510 /* MvrCrashPending.alert in Resources */ = {isa = PBXBuildFile; fileRef = 159B6A641036A84E00E79510 /* MvrCrashPending.alert */; };
+		159D8C66105A6EF900FA517C /* MvrVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 159D8C65105A6EF900FA517C /* MvrVideoItem.m */; };
+		159D8CBC105A73A200FA517C /* MvrVideoItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 159D8CBB105A73A200FA517C /* MvrVideoItemUI.m */; };
+		159D8CBF105A73FB00FA517C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159D8CBE105A73FB00FA517C /* MediaPlayer.framework */; };
 		159F598F0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */; };
 		15AAEB7C10442721002AC69D /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AAEB7B10442721002AC69D /* AsyncSocket.m */; };
 		15AAEB7D10442728002AC69D /* MvrModernWiFiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AAEB7610441FF7002AC69D /* MvrModernWiFiScanner.m */; };
@@ -340,6 +343,11 @@
 		1592D6500FF22F0000433F4B /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = NetworkHelp/English.lproj/NetworkHelpPage; sourceTree = "<group>"; };
 		1592D6A30FF2392F00433F4B /* it */ = {isa = PBXFileReference; lastKnownFileType = folder; name = it; path = NetworkHelp/it.lproj/NetworkHelpPage; sourceTree = "<group>"; };
 		159B6A641036A84E00E79510 /* MvrCrashPending.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrCrashPending.alert; sourceTree = "<group>"; };
+		159D8C64105A6EF900FA517C /* MvrVideoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVideoItem.h; sourceTree = "<group>"; };
+		159D8C65105A6EF900FA517C /* MvrVideoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVideoItem.m; sourceTree = "<group>"; };
+		159D8CBA105A73A200FA517C /* MvrVideoItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVideoItemUI.h; sourceTree = "<group>"; };
+		159D8CBB105A73A200FA517C /* MvrVideoItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVideoItemUI.m; sourceTree = "<group>"; };
+		159D8CBE105A73FB00FA517C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		159F598E0FEA44D000A8F805 /* AboutPaneBackdrop-LightBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AboutPaneBackdrop-LightBlue.png"; sourceTree = "<group>"; };
 		159F7BBE0FE2D662001A6B91 /* L0MoverAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAdController.h; sourceTree = "<group>"; };
 		159F7BBF0FE2D662001A6B91 /* L0MoverAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAdController.m; sourceTree = "<group>"; };
@@ -512,6 +520,7 @@
 				15618A910FE2E7D1005AA908 /* libsqlite3.dylib in Frameworks */,
 				155ABBDC0FE6D36A0069B069 /* MessageUI.framework in Frameworks */,
 				15270DAF10369CCF006858C0 /* CrashReporter.framework in Frameworks */,
+				159D8CBF105A73FB00FA517C /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,7 +535,6 @@
 				15C0C0B10FDFA1EE005A75B6 /* Networking */,
 				15080B870FD901E00065D5AC /* Network UI */,
 				15C0C1CB0F759B7500E5BA2F /* Items */,
-				15E714410FBD92700037C439 /* Items UI */,
 				15270DD610369D76006858C0 /* App Delegate */,
 				15C0C16B0F75918800E5BA2F /* L0MoverItemView.h */,
 				15C0C16C0F75918800E5BA2F /* L0MoverItemView.m */,
@@ -703,6 +711,7 @@
 		15C0C1CB0F759B7500E5BA2F /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				15E714410FBD92700037C439 /* Items UI */,
 				15C0C1700F75938F00E5BA2F /* L0MoverItem.h */,
 				15C0C1710F75938F00E5BA2F /* L0MoverItem.m */,
 				15C0C1CC0F759B8700E5BA2F /* L0ImageItem.h */,
@@ -713,6 +722,8 @@
 				15E415130FB9882F0065E831 /* L0BookmarkItem.m */,
 				15277EA30FE633E20040F04D /* L0TextItem.h */,
 				15277EA40FE633E20040F04D /* L0TextItem.m */,
+				159D8C64105A6EF900FA517C /* MvrVideoItem.h */,
+				159D8C65105A6EF900FA517C /* MvrVideoItem.m */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -779,6 +790,8 @@
 				1510C55F0FBEEC6E003849A6 /* L0MoverAddressBookItemUI.h */,
 				1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */,
 				15C595C00FCAB5DC00991406 /* Bookmarks UI */,
+				159D8CBA105A73A200FA517C /* MvrVideoItemUI.h */,
+				159D8CBB105A73A200FA517C /* MvrVideoItemUI.m */,
 			);
 			name = "Items UI";
 			sourceTree = "<group>";
@@ -895,6 +908,7 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				153D01C710416C6F00469C50 /* Mover+Tests-Info.plist */,
 				15088A1B1056B87D00247FB9 /* MvrCapabilities.h */,
+				159D8CBE105A73FB00FA517C /* MediaPlayer.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1324,6 +1338,8 @@
 				15DC6E46104AB7F30094C09A /* MvrWiFiScanner.m in Sources */,
 				1565B7991053AFBC00F1AF8D /* L0MoverAppDelegate+MvrTransferManagement.m in Sources */,
 				15E1183A1054E58200420F34 /* MvrStorageCentral.m in Sources */,
+				159D8C66105A6EF900FA517C /* MvrVideoItem.m in Sources */,
+				159D8CBC105A73A200FA517C /* MvrVideoItemUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,9 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "L0MoverItem.h"
 
+enum {
+	kMvrItemStorageNoFilenameExtensionForTypeError = 1,
+};
+extern NSString* const kMvrItemStorageErrorDomain;
+
+@class L0KVODispatcher;
+
 @interface MvrStorageCentral : NSObject {
 	NSMutableSet* mutableStoredItems;
 	NSMutableDictionary* metadata;
+	L0KVODispatcher* dispatcher;
 }
 
 + sharedCentral;
@@ -102,5 +110,12 @@ typedef NSUInteger MvrStorageDestination;
 
 // Setting the .data property causes the whole content of the storage item to be reset to whatever you passed. Depending on the length of the data, it might immediately be written to disk rather than keeping a copy in memory (with similar size limits than those used for outputStreamForContentOfAssumedSize:).
 - (void) setData:(NSData*) data;
+
+// The first method below changes the path on disk so that it ends with the specified extension. This is useful for interacting with other libraries that expect the path to end in a certain way (I'm looking at you, MPMediaPlayerController!). Do not include the dot. (eg: @"mp4", @"txt".)
+// The extension is kept if the path changes due to some automatic operation of MvrItemStorage (for example, moving an item from temporary to persistent on-disk storage).
+// Note that this operation is equivalent to requesting the value of the .path property in terms of timing -- this means that if a path didn't exist yet, data will be written to disk to make one. Use with care.
+// The second method is a convenience method that calls the first with the default extension for the given UTI.
+- (BOOL) setPathExtension:(NSString*) ext error:(NSError**) e;
+- (BOOL) setPathExtensionAssumingType:(id) uti error:(NSError**) e;
 
 @end

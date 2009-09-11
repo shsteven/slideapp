@@ -74,8 +74,6 @@
 - (void) takeAPhotoAndAddImageItem;
 - (void) addAddressBookItem;
 
-- (IBAction) testBySendingItemToAnyPeer;
-
 @property(readonly, copy) NSString* documentsDirectory;
 
 - (void) tellAFriend;

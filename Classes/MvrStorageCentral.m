@@ -9,7 +9,11 @@
 #import "MvrStorageCentral.h"
 #import <MuiKit/MuiKit.h>
 
+#import <MobileCoreServices/MobileCoreServices.h>
+
 #import "L0MoverAppDelegate.h"
+
+NSString* const kMvrItemStorageErrorDomain = @"net.infinite-labs.Mover.MvrItemStorageErrorDomain";
 
 // 1 MB or more of data? go straight to disk whenever possible.
 #define kMvrItemStorageMaximumAmountOfDataBeforeOffloading 1024 * 1024
@@ -26,8 +30,8 @@
 
 @interface MvrStorageCentral ()
 
-+ (NSString*) unusedTemporaryFileName;
-+ (NSString*) unusedPathInDirectory:(NSString*) path fileName:(NSString**) name;
++ (NSString*) unusedTemporaryFileNameWithPathExtension:(NSString*) ext;
++ (NSString*) unusedPathInDirectory:(NSString*) path withPathExtension:(NSString*) ext fileName:(NSString**) name;
 - (void) saveMetadata;
 
 @end
@@ -60,6 +64,7 @@ L0ObjCSingletonMethod(sharedCentral)
 {
 	if (self = [super init]) {
 		metadata = [NSMutableDictionary new];
+		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 	}
 	
@@ -76,21 +81,24 @@ L0ObjCSingletonMethod(sharedCentral)
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[metadata release];
+	[dispatcher release];
 	[mutableStoredItems release];
 	[super dealloc];
 }
 
-+ (NSString*) unusedTemporaryFileName;
++ (NSString*) unusedTemporaryFileNameWithPathExtension:(NSString*) ext;
 {
-	return [self unusedPathInDirectory:NSTemporaryDirectory() fileName:NULL];
+	return [self unusedPathInDirectory:NSTemporaryDirectory() withPathExtension:ext fileName:NULL];
 }
 
-+ (NSString*) unusedPathInDirectory:(NSString*) path fileName:(NSString**) name;
++ (NSString*) unusedPathInDirectory:(NSString*) path withPathExtension:(NSString*) ext fileName:(NSString**) name;
 {
 	NSFileManager* fm = [NSFileManager defaultManager];
 	NSString* newPath, * uuidName;
 	do {
 		uuidName = [[L0UUID UUID] stringValue];
+		if (ext && ![ext isEqual:@""])
+			uuidName = [uuidName stringByAppendingPathExtension:ext];
 		newPath = [path stringByAppendingPathComponent:uuidName];
 	} while ([fm fileExistsAtPath:newPath]);
 	
@@ -151,7 +159,7 @@ L0ObjCSingletonMethod(sharedCentral)
 	
 	MvrItemStorage* storage = [item storage];
 	NSString* path, * name;
-	path = [[self class] unusedPathInDirectory:[L0Mover documentsDirectory] fileName:&name];
+	path = [[self class] unusedPathInDirectory:[L0Mover documentsDirectory] withPathExtension:[storage.path pathExtension] fileName:&name];
 	
 	L0Log(@"Older path of storage about to be made persistent: %@", storage.hasPath? @"(none)" : storage.path);
 	
@@ -174,6 +182,24 @@ L0ObjCSingletonMethod(sharedCentral)
 	L0Log(@"Item made persistent: %@ (%@)", item, storage);
 	
 	[mutableStoredItems addObject:item];
+	
+	[dispatcher observe:@"path" ofObject:storage usingSelector:@selector(pathOfItemStorage:changed:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
+}
+
+- (void) pathOfItemStorage:(MvrItemStorage*) storage changed:(NSDictionary*) change;
+{
+	NSString* oldPath = L0KVOPreviousValue(change);
+	
+	if (!storage.persistent || ![mutableStoredItems containsObject:storage] || !storage.path || !oldPath)
+		return;
+	
+	NSString* oldItemName = [oldPath lastPathComponent];
+	id oldMetadata;
+	if ((oldMetadata = [metadata objectForKey:oldItemName])) {
+		[metadata setObject:oldMetadata forKey:[storage.path lastPathComponent]];
+		[metadata removeObjectForKey:oldPath];
+		[self saveMetadata];
+	}
 }
 
 - (void) removeStoredItemsObject:(L0MoverItem*) item;
@@ -181,12 +207,14 @@ L0ObjCSingletonMethod(sharedCentral)
 	if (![self.storedItems containsObject:item])
 		return;
 	
+	[dispatcher endObserving:@"path" ofObject:item];
+	
 	[mutableStoredItems removeObject:item];
 
 	MvrItemStorage* storage = [item storage];
 	if (storage.hasPath) {
 		NSString* path = storage.path, * name = [path lastPathComponent],
-			* newPath = [[self class] unusedTemporaryFileName];
+			* newPath = [[self class] unusedTemporaryFileNameWithPathExtension:[storage.path pathExtension]];
 		
 		[metadata removeObjectForKey:name];
 		[self saveMetadata];
@@ -261,7 +289,7 @@ L0ObjCSingletonMethod(sharedCentral)
 	// if persistent == YES, we simply assume the file is already in persistent storage.
 	// Otherwise...
 	if (!persistent && !MvrFileIsInDirectory(path, NSTemporaryDirectory())) {
-		NSString* newPath = [MvrStorageCentral unusedTemporaryFileName];
+		NSString* newPath = [MvrStorageCentral unusedTemporaryFileNameWithPathExtension:[path pathExtension]];
 		
 		if (![fm copyItemAtPath:path toPath:newPath error:e])
 			return nil;
@@ -381,7 +409,7 @@ L0ObjCSingletonMethod(sharedCentral)
 		lastOutputStream = [[NSOutputStream outputStreamToMemory] retain];
 		return lastOutputStream;
 	} else {
-		self.outputStreamPath = [MvrStorageCentral unusedTemporaryFileName];
+		self.outputStreamPath = [MvrStorageCentral unusedTemporaryFileNameWithPathExtension:@""];
 		return [NSOutputStream outputStreamToFileAtPath:self.outputStreamPath append:NO];
 	}
 }
@@ -403,7 +431,7 @@ L0ObjCSingletonMethod(sharedCentral)
 	
 	NSString* thePath = path;
 	if (!thePath) // we'd have a path if we had been made persistant by the storage central.
-		thePath = [MvrStorageCentral unusedTemporaryFileName];
+		thePath = [MvrStorageCentral unusedTemporaryFileNameWithPathExtension:@""];
 	
 	NSError* e;
 	BOOL done = [data writeToFile:thePath options:NSAtomicWrite error:&e];
@@ -435,6 +463,37 @@ L0ObjCSingletonMethod(sharedCentral)
 - (BOOL) hasPath;
 {
 	return path != nil;
+}
+
+- (BOOL) setPathExtension:(NSString*) ext error:(NSError**) e;
+{
+	NSString* currentExt = [self.path pathExtension];
+	if ([currentExt isEqual:ext])
+		return YES;
+	
+	[self willChangeValueForKey:@"path"];
+	NSString* newPath = [[self.path stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
+	BOOL done = [[NSFileManager defaultManager] moveItemAtPath:self.path toPath:newPath error:e];
+	if (done)
+		self.path = newPath;
+	[self didChangeValueForKey:@"path"];
+	
+	return done;
+}
+
+- (BOOL) setPathExtensionAssumingType:(id) uti error:(NSError**) e;
+{
+	CFStringRef ext = UTTypeCopyPreferredTagWithClass((CFStringRef) uti, kUTTagClassFilenameExtension);
+
+	if (!ext) {
+		if (e) *e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageNoFilenameExtensionForTypeError userInfo:nil];
+		return NO;
+	}
+	
+	BOOL done = [self setPathExtension:(NSString*) ext error:e];
+	CFRelease(ext);
+	
+	return done;
 }
 
 - (NSString*) description;
