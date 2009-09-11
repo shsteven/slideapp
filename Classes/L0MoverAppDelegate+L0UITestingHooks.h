@@ -35,5 +35,9 @@
 // then we make the status bar flash between black opaque and normal to indicate it.
 - (void) beginTestingModeBannerAnimation;
 
+// Adds a video, specified as relative to the Documents directory of the sandbox, to the table as a MvrVideoItem.
+// This enqueues the call on the main run loop, allowing for breakpoints.
+- (void) testByEnqueuingVideoAddForFileNamed:(NSString*) videoFile;
+
 @end
 #endif

@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "L0MoverItem.h"
 
+enum {
+	kMvrVideoItemUnsupportedTypeForFileError = 1,
+};
+extern NSString* const kMvrVideoItemErrorDomain;
+
 @interface MvrVideoItem : L0MoverItem {}
 
 - (id) initWithPath:(NSString*) path error:(NSError**) e;

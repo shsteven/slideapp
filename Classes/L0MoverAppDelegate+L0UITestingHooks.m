@@ -12,6 +12,8 @@
 #import "L0MoverBluetoothScanner.h"
 #import "MvrNetworkExchange.h"
 
+#import "MvrVideoItem.h"
+
 #if DEBUG
 @implementation L0MoverAppDelegate (L0UITestingHooks)
 
@@ -130,6 +132,26 @@
 	UIStatusBarStyle style = black? UIStatusBarStyleDefault : UIStatusBarStyleBlackOpaque;
 	black = !black;
 	[UIApp setStatusBarStyle:style animated:YES];
+}
+
+- (void) testByEnqueuingVideoAddForFileNamed:(NSString*) videoFile;
+{
+	[self performSelector:@selector(performVideoAddForFileNamed:) withObject:videoFile afterDelay:0.05];
+}
+
+- (void) performVideoAddForFileNamed:(NSString*) videoFile;
+{
+	NSString* dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	videoFile = [dir stringByAppendingPathComponent:videoFile];
+	
+	NSError* e;
+	MvrVideoItem* item = [[MvrVideoItem alloc] initWithPath:videoFile error:&e];
+	if (!item) {
+		L0Log(@"%@", e);
+		return;
+	}
+	
+	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
 }
 
 @end
