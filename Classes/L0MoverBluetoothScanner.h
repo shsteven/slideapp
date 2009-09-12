@@ -27,6 +27,7 @@
 #endif
 	
 	GKSession* probeSession;
+	GKPeerPickerController* peerPicker;
 }
 
 + sharedScanner;
@@ -39,5 +40,7 @@
 #endif
 
 + (BOOL) modelAssumedToSupportBluetooth;
+
+- (void) beginShowingPeerPicker;
 
 @end

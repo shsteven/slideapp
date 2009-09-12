@@ -97,23 +97,24 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void) removeAvailableChannelsObject:(L0MoverBluetoothChannel*) c;
 {
+	[c endCommunicationWithOtherEndpoint];
+
 	if ([c isEqual:[channelsByPeerID objectForKey:c.peerID]])
 		[channelsByPeerID removeObjectForKey:c.peerID];	
 }
 
 - (BOOL) enabled;
 {
-	return bluetoothSession != nil;
+	return bluetoothSession != nil || peerPicker != nil;
 }
 
 - (void) setEnabled:(BOOL) enabled;
 {
-	if (enabled)
+	BOOL wasEnabled = self.enabled;
+	if (!wasEnabled && enabled)
 		[self start];
-	else {
+	else if (!enabled)
 		[self stop];
-		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(restart) object:nil];
-	}
 }
 
 - (void) restart;
@@ -139,10 +140,17 @@ L0ObjCSingletonMethod(sharedScanner)
 	NSAssert(!channelsByPeerID, @"No channels-by-peer data must be present");
 	channelsByPeerID = [NSMutableDictionary new];
 	
-	GKPeerPickerController* picker = [GKPeerPickerController new];
-	picker.delegate = self;
-	picker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
-	[picker show];
+	[self beginShowingPeerPicker];
+}
+
+- (void) beginShowingPeerPicker;
+{
+	if (peerPicker) return;
+	
+	peerPicker = [GKPeerPickerController new];
+	peerPicker.delegate = self;
+	peerPicker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
+	[peerPicker show];	
 }
 
 - (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type;
@@ -153,21 +161,31 @@ L0ObjCSingletonMethod(sharedScanner)
 
 - (void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session;
 {
+	[[self mutableSetValueForKey:@"availableChannels"] removeAllObjects];
+	
 	[session setDataReceiveHandler:self withContext:NULL];
 	session.delegate = self;
 	
-	bluetoothSession = [session retain];
+	if (bluetoothSession != session) {
+		[bluetoothSession release];
+		bluetoothSession = [session retain];
+	}
 	
 	[self makeChannelForPeer:peerID];
-	picker.delegate = nil;
-	[picker dismiss];
-	[picker autorelease];
+
+	[self willChangeValueForKey:@"enabled"];
+	
+	peerPicker.delegate = nil;
+	[peerPicker dismiss];
+	[peerPicker autorelease]; peerPicker = nil;
+	
+	[self didChangeValueForKey:@"enabled"];
 }
 
 - (void)peerPickerControllerDidCancel:(GKPeerPickerController *)picker;
 {
-	[picker autorelease];
-	picker.delegate = nil;
+	if ([self.availableChannels count] == 0)
+		[self stop];
 }
 
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state;
@@ -253,7 +271,6 @@ L0ObjCSingletonMethod(sharedScanner)
 - (void) unmakeChannelForPeer:(NSString*) peerID;
 {
 	L0MoverBluetoothChannel* chan = [channelsByPeerID objectForKey:peerID];
-	[chan endCommunicationWithOtherEndpoint];
 	if (chan)
 		[[self mutableSetValueForKey:@"availableChannels"] removeObject:chan];
 }
@@ -270,8 +287,7 @@ L0ObjCSingletonMethod(sharedScanner)
 	[bluetoothSession release];
 	bluetoothSession = nil;
 	
-	for (NSString* peerID in [NSArray arrayWithArray:[channelsByPeerID allKeys]])
-		[self unmakeChannelForPeer:peerID];
+	[[self mutableSetValueForKey:@"availableChannels"] removeAllObjects];
 	
 	[channelsByPeerID release];
 	channelsByPeerID = nil;

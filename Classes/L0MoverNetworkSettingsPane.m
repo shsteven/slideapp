@@ -44,7 +44,8 @@
 enum {
 	kL0MoverWiFiSection = 0,
 	kL0MoverBluetoothSection,
-
+	kL0MoverBluetoothReconnectSection,
+	
 	kMvrNetworkSettingsSectionCount,
 };
 typedef NSInteger L0MoverNetworkSettingsSection;
@@ -126,7 +127,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 - (void) loadView;
 {
 	UITableView* tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 10, 10) style:UITableViewStyleGrouped];
-
+	
 	tableView.delegate = self;
 	tableView.dataSource = self;
 	self.view = tableView;
@@ -139,8 +140,6 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 {
     [super viewWillAppear:animated];
 	self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-	
-	
 	
 	[self updateModel];
 	
@@ -173,7 +172,6 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 - (void) updateModel;
 {
 	isBluetoothAvailable = [self areScannersAvailableForClass:kMvrBluetoothClassFamily];
-	
 	[self.tableView reloadData];
 }
 
@@ -183,7 +181,9 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 - (NSInteger) numberOfSectionsInTableView:(UITableView*) tableView;
 {
 	NSInteger sections = kMvrNetworkSettingsSectionCount;
-	if (!isBluetoothAvailable)
+	if (!isBluetoothAvailable) {
+		sections -= 2;
+	} else 	if ([self areScannersJammedForClass:kMvrBluetoothClassFamily])
 		sections--;
 	
 	return sections;
@@ -271,20 +271,32 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 		return [self cellForWiFiSectionAtRow:[indexPath row]];
 	} else if ([indexPath section] == kL0MoverBluetoothSection) {
 		return [self cellForBluetoothSectionAtRow:[indexPath row]];
+	} else if ([indexPath section] == kL0MoverBluetoothReconnectSection) {
+		return [self bluetoothReconnectCell];
 	}
 	
 	NSAssert(NO, @"An unknown scanner was encountered");
 	return nil;
 }
 
+- (UITableViewCell*) bluetoothReconnectCell;
+{
+	UITableViewCell* cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	
+	cell.textLabel.text = NSLocalizedStringFromTable(@"Connect to a Bluetooth device", @"L0MoverNetworkUI", @"Button to reshow Bluetooth picker.");
+	cell.textLabel.textAlignment = UITextAlignmentCenter;
+	
+	return cell;
+}
+
 - (UITableViewCell*) statusCellForScannerClass:(Class) c withLabel:(NSString*) label;
 {
-	UITableViewCellStyle style = isBluetoothAvailable? UITableViewCellStyleValue1 : UITableViewCellStyleDefault;
+	UITableViewCellStyle style = !isBluetoothAvailable? UITableViewCellStyleValue1 : UITableViewCellStyleDefault;
 	
 	UITableViewCell* cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:nil] autorelease];
 	cell.textLabel.text = label;
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+	
 	[self prepareStatusCell:cell forScannerClass:c];
 	
 	return cell;
@@ -309,15 +321,27 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 		return [self titleForFooterInWiFiSection];
 	else if (section == kL0MoverBluetoothSection)
 		return [self titleForFooterInBluetoothSection];
+	else if (section == kL0MoverBluetoothReconnectSection) {
+		
+		NSString* connectedTo = nil;
+		NSSet* chans = [[L0MoverBluetoothScanner sharedScanner] availableChannels];
+		
+		if ([chans count] == 1) {
+			id <L0MoverPeerChannel> chan = [chans anyObject];
+			connectedTo = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Connected to %@", @"L0MoverNetworkUI", @"'Connected to' subtitle for the button that reshows the picker"), chan.name];
+		}
+		
+		return connectedTo;
+		
+	}
 	
-	NSAssert(NO, @"This is an unknown section index!");
 	return nil;
 }
 
 - (NSString*) titleForFooterInWiFiSection;
 {
 	BOOL jammed = [self areScannersJammedForClass:kMvrWiFiClassFamily],
-		enabled = [self areScannersEnabledForClass:kMvrWiFiClassFamily];
+	enabled = [self areScannersEnabledForClass:kMvrWiFiClassFamily];
 	
 	if (jammed) {
 		return NSLocalizedStringFromTable(@"Connect to a network to use Wi-Fi.",
@@ -334,7 +358,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 - (NSString*) titleForFooterInBluetoothSection;
 {
 	BOOL jammed = [self areScannersJammedForClass:kMvrBluetoothClassFamily],
-		enabled = [self areScannersEnabledForClass:kMvrBluetoothClassFamily];
+	enabled = [self areScannersEnabledForClass:kMvrBluetoothClassFamily];
 	
 	if (jammed) {
 		return NSLocalizedStringFromTable(@"Bluetooth is off. Turn it on in the Settings application to use it.",
@@ -364,7 +388,7 @@ typedef NSInteger L0MoverNetworkSettingsSection;
 	
 	BOOL newValue = ![self areScannersEnabledForClass:c];
 	[self setEnabled:newValue forScannersOfClass:c];
-	//[self setEnabled:!newValue forScannersOfClassesOtherThan:c];	
+	[self setEnabled:!newValue forScannersOfClassesOtherThan:c];	
 }
 
 #pragma mark -
