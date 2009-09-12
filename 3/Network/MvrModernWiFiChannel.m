@@ -47,4 +47,9 @@
 	return n == netService || ([n.name isEqual:netService.name] && [n.type isEqual:netService.type]);
 }
 
+- (BOOL) hasOutgoingTransfers;
+{
+	return NO; // TODO!
+}
+
 @end

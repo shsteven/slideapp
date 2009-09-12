@@ -164,6 +164,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		153AF16F105C144C00DD862F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2 /* libMuiKit-Mac.a */;
+			remoteInfo = "MuiKit (Library - Mac OS X)";
+		};
 		1572DE870F82BE7A006BEEC0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
@@ -653,6 +660,7 @@
 				1572DE880F82BE7A006BEEC0 /* libMuiKit.a */,
 				1572DE8A0F82BE7A006BEEC0 /* MuiKit.bundle */,
 				15D20614102B568600A09315 /* MuiKit+Test.octest */,
+				153AF170105C144C00DD862F /* libMuiKit-Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1099,6 +1107,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		153AF170105C144C00DD862F /* libMuiKit-Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libMuiKit-Mac.a";
+			remoteRef = 153AF16F105C144C00DD862F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		1572DE880F82BE7A006BEEC0 /* libMuiKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;

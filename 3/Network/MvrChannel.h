@@ -12,4 +12,12 @@
 // Can be KVO'd. Contains id <MvrIncoming>s.
 - (NSSet*) incomingTransfers;
 
+// Can be KVO'd.
+- (BOOL) hasOutgoingTransfers;
+
+@optional
+
+// Can be KVO'd. Contains id <MvrOutgoing>s.
+- (NSSet*) outgoingTransfers;
+
 @end
