@@ -1,0 +1,6 @@
+
+#include "Mover-Baseline-Release.xcconfig"
+
+PRODUCT_NAME = $(ILABS_MOVER_BUNDLE_NAME)
+
+#include "Local-Release.xcconfig"

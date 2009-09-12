@@ -1,18 +1,20 @@
-/.svn
-/Build
-/build
-/TemporaryItems
-/*.xcodeproj/*.mode2v3
-/*.xcodeproj/*.pbxuser
+.svn
+Build
+build
+TemporaryItems
+*.mode2v3
+*.pbxuser
 .DS_Store
-/Compiled Locales
-/Compiled Settings Locales
+Compiled Locales
+Compiled Settings Locales
 user.*.espressostorage
 /LabsPrivate
 /Local.xcconfig
 /Local-Debug.xcconfig
 /Local-Release.xcconfig
 /Applied
+
+3/Local-*
 
 Ads/CurrentSettings.xcconfig
 
@@ -23,4 +25,5 @@ Ads/CurrentSettings.xcconfig
 /iTunesArtwork
 
 # These I don't want to distribute and are not essential to building.
-/OCMock.framework
+OCMock.framework
+DDCli

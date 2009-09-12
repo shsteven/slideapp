@@ -1,0 +1,682 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		153B4205105BF36700DB8FB2 /* MvrWiFi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9B6105BBD4300220989 /* MvrWiFi.m */; };
+		153B4206105BF36700DB8FB2 /* MvrModernWiFi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9BB105BBDFB00220989 /* MvrModernWiFi.m */; };
+		153B4207105BF36700DB8FB2 /* MvrWiFiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */; };
+		153B4208105BF36700DB8FB2 /* mvr-wifi.m in Sources */ = {isa = PBXBuildFile; fileRef = 153B40A8105BEA2C00DB8FB2 /* mvr-wifi.m */; };
+		153B4209105BF36700DB8FB2 /* DDCliApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 153B40BA105BEAFC00DB8FB2 /* DDCliApplication.m */; };
+		153B420A105BF36700DB8FB2 /* DDCliParseException.m in Sources */ = {isa = PBXBuildFile; fileRef = 153B40BC105BEAFC00DB8FB2 /* DDCliParseException.m */; };
+		153B420B105BF36700DB8FB2 /* DDCliUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 153B40BE105BEAFC00DB8FB2 /* DDCliUtil.m */; };
+		153B420C105BF36700DB8FB2 /* DDGetoptLongParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 153B40C1105BEAFC00DB8FB2 /* DDGetoptLongParser.m */; };
+		153B420E105BF36700DB8FB2 /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 153B416F105BEFCA00DB8FB2 /* libMuiKit-Mac.a */; };
+		156CF115105BB356006D8E7A /* MvrPacketBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 156CF111105BB355006D8E7A /* MvrPacketBuilder.h */; };
+		156CF116105BB356006D8E7A /* MvrPacketBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF112105BB356006D8E7A /* MvrPacketBuilder.m */; };
+		156CF117105BB356006D8E7A /* MvrPacketParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 156CF113105BB356006D8E7A /* MvrPacketParser.h */; };
+		156CF118105BB356006D8E7A /* MvrPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF114105BB356006D8E7A /* MvrPacketParser.m */; };
+		1593E94C105BB73B00220989 /* MvrProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1593E94B105BB73B00220989 /* MvrProtocol.h */; };
+		1593E972105BBA3E00220989 /* MvrPacketBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E970105BBA3E00220989 /* MvrPacketBuilderTests.m */; };
+		1593E973105BBA3E00220989 /* MvrPacketParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E971105BBA3E00220989 /* MvrPacketParserTests.m */; };
+		1593E974105BBA4A00220989 /* MvrPacketBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF112105BB356006D8E7A /* MvrPacketBuilder.m */; };
+		1593E975105BBA4A00220989 /* MvrPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF114105BB356006D8E7A /* MvrPacketParser.m */; };
+		1593E97A105BBA7D00220989 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1593E979105BBA7D00220989 /* OCMock.framework */; };
+		1593E98C105BBB0800220989 /* OCMock.framework in Copy OCMock */ = {isa = PBXBuildFile; fileRef = 1593E979105BBA7D00220989 /* OCMock.framework */; };
+		1593E98F105BBB2600220989 /* OK-longer.data in Resources */ = {isa = PBXBuildFile; fileRef = 1593E983105BBACD00220989 /* OK-longer.data */; };
+		1593E990105BBB2600220989 /* OK.data in Resources */ = {isa = PBXBuildFile; fileRef = 1593E984105BBACD00220989 /* OK.data */; };
+		1593E991105BBB2600220989 /* WOW-longer.data in Resources */ = {isa = PBXBuildFile; fileRef = 1593E97D105BBAC500220989 /* WOW-longer.data */; };
+		1593E992105BBB2600220989 /* WOW-tooshort.data in Resources */ = {isa = PBXBuildFile; fileRef = 1593E97E105BBAC500220989 /* WOW-tooshort.data */; };
+		1593E993105BBB2600220989 /* WOW.data in Resources */ = {isa = PBXBuildFile; fileRef = 1593E97F105BBAC500220989 /* WOW.data */; };
+		1593E9B8105BBD4900220989 /* MvrWiFi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1593E9B5105BBD4300220989 /* MvrWiFi.h */; };
+		1593E9B9105BBD4900220989 /* MvrWiFi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9B6105BBD4300220989 /* MvrWiFi.m */; };
+		1593E9BD105BBE2700220989 /* MvrModernWiFi.h in Headers */ = {isa = PBXBuildFile; fileRef = 1593E9BA105BBDFB00220989 /* MvrModernWiFi.h */; };
+		1593E9BE105BBE2A00220989 /* MvrModernWiFi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9BB105BBDFB00220989 /* MvrModernWiFi.m */; };
+		1593E9C1105BBE4300220989 /* MvrWiFiScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 1593E9BF105BBE4300220989 /* MvrWiFiScanner.h */; };
+		1593E9C2105BBE4300220989 /* MvrWiFiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		153B416E105BEFCA00DB8FB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2;
+			remoteInfo = "MuiKit (Library) copy";
+		};
+		153B4203105BF36700DB8FB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2;
+			remoteInfo = "MuiKit (Mac OS X)";
+		};
+		15F603FF105BDE2800F73794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 154B01F00F78156D0082109B;
+			remoteInfo = "MuiKit (Library)";
+		};
+		15F60401105BDE2800F73794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 156FD76B0F7A25F900F83283;
+			remoteInfo = "MuiKit (Resources)";
+		};
+		15F60403105BDE2800F73794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 154635591011BD77000238EE;
+			remoteInfo = "MuiKit+Test";
+		};
+		15F6040B105BDE3900F73794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 156FD7720F7A261B00F83283;
+			remoteInfo = MuiKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1593E998105BBB4F00220989 /* Copy OCMock */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				1593E98C105BBB0800220989 /* OCMock.framework in Copy OCMock */,
+			);
+			name = "Copy OCMock";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		153B40A8105BEA2C00DB8FB2 /* mvr-wifi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "mvr-wifi.m"; sourceTree = "<group>"; };
+		153B40B9105BEAFC00DB8FB2 /* DDCliApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCliApplication.h; sourceTree = "<group>"; };
+		153B40BA105BEAFC00DB8FB2 /* DDCliApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCliApplication.m; sourceTree = "<group>"; };
+		153B40BB105BEAFC00DB8FB2 /* DDCliParseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCliParseException.h; sourceTree = "<group>"; };
+		153B40BC105BEAFC00DB8FB2 /* DDCliParseException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCliParseException.m; sourceTree = "<group>"; };
+		153B40BD105BEAFC00DB8FB2 /* DDCliUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCliUtil.h; sourceTree = "<group>"; };
+		153B40BE105BEAFC00DB8FB2 /* DDCliUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCliUtil.m; sourceTree = "<group>"; };
+		153B40BF105BEAFC00DB8FB2 /* DDCommandLineInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCommandLineInterface.h; sourceTree = "<group>"; };
+		153B40C0105BEAFC00DB8FB2 /* DDGetoptLongParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGetoptLongParser.h; sourceTree = "<group>"; };
+		153B40C1105BEAFC00DB8FB2 /* DDGetoptLongParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGetoptLongParser.m; sourceTree = "<group>"; };
+		153B40F4105BEC9500DB8FB2 /* TestTool.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = TestTool.xcconfig; sourceTree = "<group>"; };
+		153B4212105BF36700DB8FB2 /* mvr-wifi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mvr-wifi"; sourceTree = BUILT_PRODUCTS_DIR; };
+		156CF111105BB355006D8E7A /* MvrPacketBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPacketBuilder.h; sourceTree = "<group>"; };
+		156CF112105BB356006D8E7A /* MvrPacketBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketBuilder.m; sourceTree = "<group>"; };
+		156CF113105BB356006D8E7A /* MvrPacketParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPacketParser.h; sourceTree = "<group>"; };
+		156CF114105BB356006D8E7A /* MvrPacketParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketParser.m; sourceTree = "<group>"; };
+		156CF11B105BB36F006D8E7A /* Mover-Network.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network.xcconfig"; sourceTree = "<group>"; };
+		156CF142105BB61D006D8E7A /* Mover-Network-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-Debug.xcconfig"; sourceTree = "<group>"; };
+		156CF144105BB64D006D8E7A /* Mover-Network-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-Release.xcconfig"; sourceTree = "<group>"; };
+		1593E94B105BB73B00220989 /* MvrProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrProtocol.h; sourceTree = "<group>"; };
+		1593E964105BB9FB00220989 /* Network+Test.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Network+Test.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1593E965105BB9FB00220989 /* Network+Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Network+Test-Info.plist"; sourceTree = "<group>"; };
+		1593E970105BBA3E00220989 /* MvrPacketBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketBuilderTests.m; sourceTree = "<group>"; };
+		1593E971105BBA3E00220989 /* MvrPacketParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketParserTests.m; sourceTree = "<group>"; };
+		1593E979105BBA7D00220989 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = ../OCMock.framework; sourceTree = SOURCE_ROOT; };
+		1593E97C105BBAB500220989 /* MvrPacketTestsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPacketTestsCommon.h; sourceTree = "<group>"; };
+		1593E97D105BBAC500220989 /* WOW-longer.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "WOW-longer.data"; sourceTree = "<group>"; };
+		1593E97E105BBAC500220989 /* WOW-tooshort.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "WOW-tooshort.data"; sourceTree = "<group>"; };
+		1593E97F105BBAC500220989 /* WOW.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WOW.data; sourceTree = "<group>"; };
+		1593E983105BBACD00220989 /* OK-longer.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OK-longer.data"; sourceTree = "<group>"; };
+		1593E984105BBACD00220989 /* OK.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OK.data; sourceTree = "<group>"; };
+		1593E9B5105BBD4300220989 /* MvrWiFi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFi.h; sourceTree = "<group>"; };
+		1593E9B6105BBD4300220989 /* MvrWiFi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFi.m; sourceTree = "<group>"; };
+		1593E9BA105BBDFB00220989 /* MvrModernWiFi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrModernWiFi.h; sourceTree = "<group>"; };
+		1593E9BB105BBDFB00220989 /* MvrModernWiFi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrModernWiFi.m; sourceTree = "<group>"; };
+		1593E9BF105BBE4300220989 /* MvrWiFiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiScanner.h; sourceTree = "<group>"; };
+		1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiScanner.m; sourceTree = "<group>"; };
+		15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libMoverNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMoverNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		153B420D105BF36700DB8FB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				153B420E105BF36700DB8FB2 /* libMuiKit-Mac.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1593E961105BB9FB00220989 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1593E97A105BBA7D00220989 /* OCMock.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libMoverNetwork.a */,
+				1593E964105BB9FB00220989 /* Network+Test.octest */,
+				153B4212105BF36700DB8FB2 /* mvr-wifi */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */,
+				156CF11A105BB35D006D8E7A /* Configuration files */,
+				1557278C105BAD8400D9398F /* Sources */,
+				15F60468105BE58400F73794 /* Test Tools */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+				1593E965105BB9FB00220989 /* Network+Test-Info.plist */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1593E979105BBA7D00220989 /* OCMock.framework */,
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		153B40B8105BEAFC00DB8FB2 /* DDCommandLineInterface */ = {
+			isa = PBXGroup;
+			children = (
+				153B40B9105BEAFC00DB8FB2 /* DDCliApplication.h */,
+				153B40BA105BEAFC00DB8FB2 /* DDCliApplication.m */,
+				153B40BB105BEAFC00DB8FB2 /* DDCliParseException.h */,
+				153B40BC105BEAFC00DB8FB2 /* DDCliParseException.m */,
+				153B40BD105BEAFC00DB8FB2 /* DDCliUtil.h */,
+				153B40BE105BEAFC00DB8FB2 /* DDCliUtil.m */,
+				153B40BF105BEAFC00DB8FB2 /* DDCommandLineInterface.h */,
+				153B40C0105BEAFC00DB8FB2 /* DDGetoptLongParser.h */,
+				153B40C1105BEAFC00DB8FB2 /* DDGetoptLongParser.m */,
+			);
+			name = DDCommandLineInterface;
+			path = ../DDCli/DDCommandLineInterface;
+			sourceTree = SOURCE_ROOT;
+		};
+		1557278C105BAD8400D9398F /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1593E9B4105BBD3000220989 /* Wi-Fi Scanner Family */,
+				1593E969105BBA2100220989 /* Packet building */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		156CF11A105BB35D006D8E7A /* Configuration files */ = {
+			isa = PBXGroup;
+			children = (
+				156CF11B105BB36F006D8E7A /* Mover-Network.xcconfig */,
+				156CF142105BB61D006D8E7A /* Mover-Network-Debug.xcconfig */,
+				156CF144105BB64D006D8E7A /* Mover-Network-Release.xcconfig */,
+				153B40F4105BEC9500DB8FB2 /* TestTool.xcconfig */,
+			);
+			name = "Configuration files";
+			sourceTree = "<group>";
+		};
+		1593E969105BBA2100220989 /* Packet building */ = {
+			isa = PBXGroup;
+			children = (
+				1593E96A105BBA2C00220989 /* Unit tests */,
+				1593E94B105BB73B00220989 /* MvrProtocol.h */,
+				156CF111105BB355006D8E7A /* MvrPacketBuilder.h */,
+				156CF112105BB356006D8E7A /* MvrPacketBuilder.m */,
+				156CF113105BB356006D8E7A /* MvrPacketParser.h */,
+				156CF114105BB356006D8E7A /* MvrPacketParser.m */,
+			);
+			name = "Packet building";
+			sourceTree = "<group>";
+		};
+		1593E96A105BBA2C00220989 /* Unit tests */ = {
+			isa = PBXGroup;
+			children = (
+				1593E983105BBACD00220989 /* OK-longer.data */,
+				1593E984105BBACD00220989 /* OK.data */,
+				1593E97D105BBAC500220989 /* WOW-longer.data */,
+				1593E97E105BBAC500220989 /* WOW-tooshort.data */,
+				1593E97F105BBAC500220989 /* WOW.data */,
+				1593E97C105BBAB500220989 /* MvrPacketTestsCommon.h */,
+				1593E970105BBA3E00220989 /* MvrPacketBuilderTests.m */,
+				1593E971105BBA3E00220989 /* MvrPacketParserTests.m */,
+			);
+			name = "Unit tests";
+			sourceTree = "<group>";
+		};
+		1593E9B4105BBD3000220989 /* Wi-Fi Scanner Family */ = {
+			isa = PBXGroup;
+			children = (
+				1593E9B5105BBD4300220989 /* MvrWiFi.h */,
+				1593E9B6105BBD4300220989 /* MvrWiFi.m */,
+				1593E9BA105BBDFB00220989 /* MvrModernWiFi.h */,
+				1593E9BB105BBDFB00220989 /* MvrModernWiFi.m */,
+				1593E9BF105BBE4300220989 /* MvrWiFiScanner.h */,
+				1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */,
+			);
+			name = "Wi-Fi Scanner Family";
+			sourceTree = "<group>";
+		};
+		15F603F8105BDE2800F73794 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15F60400105BDE2800F73794 /* libMuiKit.a */,
+				15F60402105BDE2800F73794 /* MuiKit.bundle */,
+				15F60404105BDE2800F73794 /* MuiKit+Test.octest */,
+				153B416F105BEFCA00DB8FB2 /* libMuiKit-Mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15F60468105BE58400F73794 /* Test Tools */ = {
+			isa = PBXGroup;
+			children = (
+				153B40B8105BEAFC00DB8FB2 /* DDCommandLineInterface */,
+				153B40A8105BEA2C00DB8FB2 /* mvr-wifi.m */,
+			);
+			name = "Test Tools";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				156CF115105BB356006D8E7A /* MvrPacketBuilder.h in Headers */,
+				156CF117105BB356006D8E7A /* MvrPacketParser.h in Headers */,
+				1593E94C105BB73B00220989 /* MvrProtocol.h in Headers */,
+				1593E9B8105BBD4900220989 /* MvrWiFi.h in Headers */,
+				1593E9BD105BBE2700220989 /* MvrModernWiFi.h in Headers */,
+				1593E9C1105BBE4300220989 /* MvrWiFiScanner.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		153B4201105BF36700DB8FB2 /* mvr-wifi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 153B420F105BF36700DB8FB2 /* Build configuration list for PBXNativeTarget "mvr-wifi" */;
+			buildPhases = (
+				153B4204105BF36700DB8FB2 /* Sources */,
+				153B420D105BF36700DB8FB2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				153B4202105BF36700DB8FB2 /* PBXTargetDependency */,
+			);
+			name = "mvr-wifi";
+			productName = "mvr-wifi";
+			productReference = 153B4212105BF36700DB8FB2 /* mvr-wifi */;
+			productType = "com.apple.product-type.tool";
+		};
+		1593E963105BB9FB00220989 /* Network+Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1593E968105BB9FD00220989 /* Build configuration list for PBXNativeTarget "Network+Test" */;
+			buildPhases = (
+				1593E998105BBB4F00220989 /* Copy OCMock */,
+				1593E95F105BB9FB00220989 /* Resources */,
+				1593E960105BB9FB00220989 /* Sources */,
+				1593E961105BB9FB00220989 /* Frameworks */,
+				1593E962105BB9FB00220989 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Network+Test";
+			productName = "Network+Test";
+			productReference = 1593E964105BB9FB00220989 /* Network+Test.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		D2AAC07D0554694100DB518D /* Network */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Network" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15F6040C105BDE3900F73794 /* PBXTargetDependency */,
+			);
+			name = Network;
+			productName = Network;
+			productReference = D2AAC07E0554694100DB518D /* libMoverNetwork.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Network" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* Network */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 15F603F8105BDE2800F73794 /* Products */;
+					ProjectRef = 15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* Network */,
+				1593E963105BB9FB00220989 /* Network+Test */,
+				153B4201105BF36700DB8FB2 /* mvr-wifi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		153B416F105BEFCA00DB8FB2 /* libMuiKit-Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libMuiKit-Mac.a";
+			remoteRef = 153B416E105BEFCA00DB8FB2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15F60400105BDE2800F73794 /* libMuiKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMuiKit.a;
+			remoteRef = 15F603FF105BDE2800F73794 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15F60402105BDE2800F73794 /* MuiKit.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MuiKit.bundle;
+			remoteRef = 15F60401105BDE2800F73794 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15F60404105BDE2800F73794 /* MuiKit+Test.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MuiKit+Test.octest";
+			remoteRef = 15F60403105BDE2800F73794 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1593E95F105BB9FB00220989 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1593E98F105BBB2600220989 /* OK-longer.data in Resources */,
+				1593E990105BBB2600220989 /* OK.data in Resources */,
+				1593E991105BBB2600220989 /* WOW-longer.data in Resources */,
+				1593E992105BBB2600220989 /* WOW-tooshort.data in Resources */,
+				1593E993105BBB2600220989 /* WOW.data in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1593E962105BB9FB00220989 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		153B4204105BF36700DB8FB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				153B4205105BF36700DB8FB2 /* MvrWiFi.m in Sources */,
+				153B4206105BF36700DB8FB2 /* MvrModernWiFi.m in Sources */,
+				153B4207105BF36700DB8FB2 /* MvrWiFiScanner.m in Sources */,
+				153B4208105BF36700DB8FB2 /* mvr-wifi.m in Sources */,
+				153B4209105BF36700DB8FB2 /* DDCliApplication.m in Sources */,
+				153B420A105BF36700DB8FB2 /* DDCliParseException.m in Sources */,
+				153B420B105BF36700DB8FB2 /* DDCliUtil.m in Sources */,
+				153B420C105BF36700DB8FB2 /* DDGetoptLongParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1593E960105BB9FB00220989 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1593E972105BBA3E00220989 /* MvrPacketBuilderTests.m in Sources */,
+				1593E973105BBA3E00220989 /* MvrPacketParserTests.m in Sources */,
+				1593E974105BBA4A00220989 /* MvrPacketBuilder.m in Sources */,
+				1593E975105BBA4A00220989 /* MvrPacketParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				156CF116105BB356006D8E7A /* MvrPacketBuilder.m in Sources */,
+				156CF118105BB356006D8E7A /* MvrPacketParser.m in Sources */,
+				1593E9B9105BBD4900220989 /* MvrWiFi.m in Sources */,
+				1593E9BE105BBE2A00220989 /* MvrModernWiFi.m in Sources */,
+				1593E9C2105BBE4300220989 /* MvrWiFiScanner.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		153B4202105BF36700DB8FB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "MuiKit (Mac OS X)";
+			targetProxy = 153B4203105BF36700DB8FB2 /* PBXContainerItemProxy */;
+		};
+		15F6040C105BDE3900F73794 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MuiKit;
+			targetProxy = 15F6040B105BDE3900F73794 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		153B4210105BF36700DB8FB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 153B40F4105BEC9500DB8FB2 /* TestTool.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "mvr-wifi";
+			};
+			name = Debug;
+		};
+		153B4211105BF36700DB8FB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 153B40F4105BEC9500DB8FB2 /* TestTool.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "mvr-wifi";
+			};
+			name = Release;
+		};
+		1593E966105BB9FD00220989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)/..\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "Network+Test-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Network+Test";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1593E967105BB9FD00220989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)/..\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "Network+Test-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Network+Test";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156CF142105BB61D006D8E7A /* Mover-Network-Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156CF144105BB64D006D8E7A /* Mover-Network-Release.xcconfig */;
+			buildSettings = {
+				DSTROOT = /tmp/Network.dst;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Network_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = Network;
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156CF11B105BB36F006D8E7A /* Mover-Network.xcconfig */;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156CF11B105BB36F006D8E7A /* Mover-Network.xcconfig */;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		153B420F105BF36700DB8FB2 /* Build configuration list for PBXNativeTarget "mvr-wifi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				153B4210105BF36700DB8FB2 /* Debug */,
+				153B4211105BF36700DB8FB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1593E968105BB9FD00220989 /* Build configuration list for PBXNativeTarget "Network+Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1593E966105BB9FD00220989 /* Debug */,
+				1593E967105BB9FD00220989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Network" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Network" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

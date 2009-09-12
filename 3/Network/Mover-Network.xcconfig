@@ -1,0 +1,13 @@
+
+#include "../Mover-Baseline.xcconfig"
+
+OTHER_LDFLAGS = -ObjC -all_load
+
+PRODUCT_NAME = MoverNetwork
+
+GCC_PRECOMPILE_PREFIX_HEADER = YES
+GCC_PREFIX_HEADER = $(INFINITELABS_TOOLS)/Common/iPhone/Foundation.pch
+
+HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers"
+
+#include "../Variants/Current.xcconfig"
