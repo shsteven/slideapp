@@ -12,8 +12,10 @@
 #define kMvrModernWiFiBonjourServiceType @"_x-mover2._tcp."
 #define kMvrModernWiFiPort (25252)
 
-@interface MvrModernWiFi : MvrWiFiScanner {
+@class AsyncSocket;
 
+@interface MvrModernWiFi : MvrWiFiScanner {
+	AsyncSocket* serverSocket;
 }
 
 @end

@@ -38,16 +38,28 @@
    runWithArguments: (NSArray *) arguments;
 {
 	if (!self.name) {
-		ddprintf(@"Please specify a name with the --name (-n) option.");
+		ddprintf(@"Please specify a name with the --name <name> (-n <name>) option.");
 		return 1;
 	}
 	
+	L0KVODispatcher* kvo = [[L0KVODispatcher alloc] initWithTarget:self];
+	
 	MvrWiFi* wifi = [[MvrWiFi alloc] initWithBroadcastedName:self.name];
+	[kvo observe:@"channels" ofObject:wifi.modernWiFi usingSelector:@selector(channelsOfObject:changed:) options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
+	
 	wifi.modernWiFi.enabled = YES;
 	
 	[[NSRunLoop currentRunLoop] run];
 	
+	[kvo release];
+	[wifi release];
+	
 	return 0;
+}
+
+- (void) channelsOfObject:(id) modernWiFi changed:(NSDictionary*) change;
+{
+	L0Log(@"%@", change);
 }
 
 @synthesize name;

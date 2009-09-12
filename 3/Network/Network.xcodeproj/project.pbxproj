@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		153AF19A105C17B300DD862F /* MvrScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF199105C17B300DD862F /* MvrScanner.h */; };
+		153AF19F105C183200DD862F /* MvrPeer.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF19E105C183200DD862F /* MvrPeer.h */; };
+		153AF1A2105C18F800DD862F /* MvrChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF1A1105C18F800DD862F /* MvrChannel.h */; };
+		153AF1A5105C192300DD862F /* MvrIncoming.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF1A4105C192300DD862F /* MvrIncoming.h */; };
+		153AF1AA105C206000DD862F /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF1A8105C206000DD862F /* AsyncSocket.h */; };
+		153AF1AB105C206000DD862F /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 153AF1A9105C206000DD862F /* AsyncSocket.m */; };
+		153AF1AC105C206000DD862F /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 153AF1A9105C206000DD862F /* AsyncSocket.m */; };
+		153AF1B0105C217400DD862F /* MvrModernWiFiChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF1AE105C217400DD862F /* MvrModernWiFiChannel.h */; };
+		153AF1B1105C217400DD862F /* MvrModernWiFiChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 153AF1AF105C217400DD862F /* MvrModernWiFiChannel.m */; };
+		153AF1B2105C217400DD862F /* MvrModernWiFiChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 153AF1AF105C217400DD862F /* MvrModernWiFiChannel.m */; };
+		153AF1DD105C2ACC00DD862F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153AF1DC105C2ACC00DD862F /* SystemConfiguration.framework */; };
+		153AF1DF105C2AD800DD862F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153AF1DE105C2AD800DD862F /* Foundation.framework */; };
+		153AF1E0105C2ADF00DD862F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153AF1DE105C2AD800DD862F /* Foundation.framework */; };
+		153AF1E1105C2AE100DD862F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153AF1DE105C2AD800DD862F /* Foundation.framework */; };
+		153AF1E2105C2AE400DD862F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153AF1DC105C2ACC00DD862F /* SystemConfiguration.framework */; };
+		153AF1E3105C2AE500DD862F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153AF1DC105C2ACC00DD862F /* SystemConfiguration.framework */; };
+		153AF20F105C2B5600DD862F /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153AF20E105C2B5600DD862F /* OCMock.framework */; };
 		153B4205105BF36700DB8FB2 /* MvrWiFi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9B6105BBD4300220989 /* MvrWiFi.m */; };
 		153B4206105BF36700DB8FB2 /* MvrModernWiFi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9BB105BBDFB00220989 /* MvrModernWiFi.m */; };
 		153B4207105BF36700DB8FB2 /* MvrWiFiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */; };
@@ -25,8 +42,6 @@
 		1593E973105BBA3E00220989 /* MvrPacketParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E971105BBA3E00220989 /* MvrPacketParserTests.m */; };
 		1593E974105BBA4A00220989 /* MvrPacketBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF112105BB356006D8E7A /* MvrPacketBuilder.m */; };
 		1593E975105BBA4A00220989 /* MvrPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF114105BB356006D8E7A /* MvrPacketParser.m */; };
-		1593E97A105BBA7D00220989 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1593E979105BBA7D00220989 /* OCMock.framework */; };
-		1593E98C105BBB0800220989 /* OCMock.framework in Copy OCMock */ = {isa = PBXBuildFile; fileRef = 1593E979105BBA7D00220989 /* OCMock.framework */; };
 		1593E98F105BBB2600220989 /* OK-longer.data in Resources */ = {isa = PBXBuildFile; fileRef = 1593E983105BBACD00220989 /* OK-longer.data */; };
 		1593E990105BBB2600220989 /* OK.data in Resources */ = {isa = PBXBuildFile; fileRef = 1593E984105BBACD00220989 /* OK.data */; };
 		1593E991105BBB2600220989 /* WOW-longer.data in Resources */ = {isa = PBXBuildFile; fileRef = 1593E97D105BBAC500220989 /* WOW-longer.data */; };
@@ -38,7 +53,6 @@
 		1593E9BE105BBE2A00220989 /* MvrModernWiFi.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9BB105BBDFB00220989 /* MvrModernWiFi.m */; };
 		1593E9C1105BBE4300220989 /* MvrWiFiScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 1593E9BF105BBE4300220989 /* MvrWiFiScanner.h */; };
 		1593E9C2105BBE4300220989 /* MvrWiFiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */; };
-		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +107,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				1593E98C105BBB0800220989 /* OCMock.framework in Copy OCMock */,
 			);
 			name = "Copy OCMock";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +114,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		153AF199105C17B300DD862F /* MvrScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrScanner.h; sourceTree = "<group>"; };
+		153AF19E105C183200DD862F /* MvrPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPeer.h; sourceTree = "<group>"; };
+		153AF1A1105C18F800DD862F /* MvrChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrChannel.h; sourceTree = "<group>"; };
+		153AF1A4105C192300DD862F /* MvrIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrIncoming.h; sourceTree = "<group>"; };
+		153AF1A8105C206000DD862F /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		153AF1A9105C206000DD862F /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		153AF1AE105C217400DD862F /* MvrModernWiFiChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrModernWiFiChannel.h; sourceTree = "<group>"; };
+		153AF1AF105C217400DD862F /* MvrModernWiFiChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrModernWiFiChannel.m; sourceTree = "<group>"; };
+		153AF1DC105C2ACC00DD862F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		153AF1DE105C2AD800DD862F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		153AF20E105C2B5600DD862F /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = ../OCMock.framework; sourceTree = SOURCE_ROOT; };
 		153B40A8105BEA2C00DB8FB2 /* mvr-wifi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "mvr-wifi.m"; sourceTree = "<group>"; };
 		153B40B9105BEAFC00DB8FB2 /* DDCliApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCliApplication.h; sourceTree = "<group>"; };
 		153B40BA105BEAFC00DB8FB2 /* DDCliApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCliApplication.m; sourceTree = "<group>"; };
@@ -125,7 +149,6 @@
 		1593E965105BB9FB00220989 /* Network+Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Network+Test-Info.plist"; sourceTree = "<group>"; };
 		1593E970105BBA3E00220989 /* MvrPacketBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketBuilderTests.m; sourceTree = "<group>"; };
 		1593E971105BBA3E00220989 /* MvrPacketParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPacketParserTests.m; sourceTree = "<group>"; };
-		1593E979105BBA7D00220989 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = ../OCMock.framework; sourceTree = SOURCE_ROOT; };
 		1593E97C105BBAB500220989 /* MvrPacketTestsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPacketTestsCommon.h; sourceTree = "<group>"; };
 		1593E97D105BBAC500220989 /* WOW-longer.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "WOW-longer.data"; sourceTree = "<group>"; };
 		1593E97E105BBAC500220989 /* WOW-tooshort.data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "WOW-tooshort.data"; sourceTree = "<group>"; };
@@ -139,7 +162,6 @@
 		1593E9BF105BBE4300220989 /* MvrWiFiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiScanner.h; sourceTree = "<group>"; };
 		1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiScanner.m; sourceTree = "<group>"; };
 		15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
-		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libMoverNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMoverNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -149,6 +171,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				153B420E105BF36700DB8FB2 /* libMuiKit-Mac.a in Frameworks */,
+				153AF1DD105C2ACC00DD862F /* SystemConfiguration.framework in Frameworks */,
+				153AF1DF105C2AD800DD862F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +180,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1593E97A105BBA7D00220989 /* OCMock.framework in Frameworks */,
+				153AF1E1105C2AE100DD862F /* Foundation.framework in Frameworks */,
+				153AF1E2105C2AE400DD862F /* SystemConfiguration.framework in Frameworks */,
+				153AF20F105C2B5600DD862F /* OCMock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,7 +190,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+				153AF1E0105C2ADF00DD862F /* Foundation.framework in Frameworks */,
+				153AF1E3105C2AE500DD862F /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,20 +215,35 @@
 				156CF11A105BB35D006D8E7A /* Configuration files */,
 				1557278C105BAD8400D9398F /* Sources */,
 				15F60468105BE58400F73794 /* Test Tools */,
-				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 				1593E965105BB9FB00220989 /* Network+Test-Info.plist */,
+				153AF20E105C2B5600DD862F /* OCMock.framework */,
+				153AF1DC105C2ACC00DD862F /* SystemConfiguration.framework */,
+				153AF1DE105C2AD800DD862F /* Foundation.framework */,
 			);
 			name = Network;
 			sourceTree = "<group>";
 		};
-		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+		153AF19B105C17FF00DD862F /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				1593E979105BBA7D00220989 /* OCMock.framework */,
-				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+				153AF199105C17B300DD862F /* MvrScanner.h */,
+				153AF19E105C183200DD862F /* MvrPeer.h */,
+				153AF1A4105C192300DD862F /* MvrIncoming.h */,
+				153AF1A1105C18F800DD862F /* MvrChannel.h */,
 			);
-			name = Frameworks;
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		153AF1AD105C214C00DD862F /* Modern Wi-Fi */ = {
+			isa = PBXGroup;
+			children = (
+				1593E9BA105BBDFB00220989 /* MvrModernWiFi.h */,
+				1593E9BB105BBDFB00220989 /* MvrModernWiFi.m */,
+				153AF1AE105C217400DD862F /* MvrModernWiFiChannel.h */,
+				153AF1AF105C217400DD862F /* MvrModernWiFiChannel.m */,
+			);
+			name = "Modern Wi-Fi";
 			sourceTree = "<group>";
 		};
 		153B40B8105BEAFC00DB8FB2 /* DDCommandLineInterface */ = {
@@ -224,6 +266,7 @@
 		1557278C105BAD8400D9398F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				153AF19B105C17FF00DD862F /* Protocols */,
 				1593E9B4105BBD3000220989 /* Wi-Fi Scanner Family */,
 				1593E969105BBA2100220989 /* Packet building */,
 			);
@@ -272,10 +315,11 @@
 		1593E9B4105BBD3000220989 /* Wi-Fi Scanner Family */ = {
 			isa = PBXGroup;
 			children = (
+				153AF1A8105C206000DD862F /* AsyncSocket.h */,
+				153AF1A9105C206000DD862F /* AsyncSocket.m */,
+				153AF1AD105C214C00DD862F /* Modern Wi-Fi */,
 				1593E9B5105BBD4300220989 /* MvrWiFi.h */,
 				1593E9B6105BBD4300220989 /* MvrWiFi.m */,
-				1593E9BA105BBDFB00220989 /* MvrModernWiFi.h */,
-				1593E9BB105BBDFB00220989 /* MvrModernWiFi.m */,
 				1593E9BF105BBE4300220989 /* MvrWiFiScanner.h */,
 				1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */,
 			);
@@ -315,6 +359,12 @@
 				1593E9B8105BBD4900220989 /* MvrWiFi.h in Headers */,
 				1593E9BD105BBE2700220989 /* MvrModernWiFi.h in Headers */,
 				1593E9C1105BBE4300220989 /* MvrWiFiScanner.h in Headers */,
+				153AF19A105C17B300DD862F /* MvrScanner.h in Headers */,
+				153AF19F105C183200DD862F /* MvrPeer.h in Headers */,
+				153AF1A2105C18F800DD862F /* MvrChannel.h in Headers */,
+				153AF1A5105C192300DD862F /* MvrIncoming.h in Headers */,
+				153AF1AA105C206000DD862F /* AsyncSocket.h in Headers */,
+				153AF1B0105C217400DD862F /* MvrModernWiFiChannel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +526,8 @@
 				153B420A105BF36700DB8FB2 /* DDCliParseException.m in Sources */,
 				153B420B105BF36700DB8FB2 /* DDCliUtil.m in Sources */,
 				153B420C105BF36700DB8FB2 /* DDGetoptLongParser.m in Sources */,
+				153AF1AC105C206000DD862F /* AsyncSocket.m in Sources */,
+				153AF1B2105C217400DD862F /* MvrModernWiFiChannel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +551,8 @@
 				1593E9B9105BBD4900220989 /* MvrWiFi.m in Sources */,
 				1593E9BE105BBE2A00220989 /* MvrModernWiFi.m in Sources */,
 				1593E9C2105BBE4300220989 /* MvrWiFiScanner.m in Sources */,
+				153AF1AB105C206000DD862F /* AsyncSocket.m in Sources */,
+				153AF1B1105C217400DD862F /* MvrModernWiFiChannel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +613,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "Network+Test";
+				SDKROOT = iphonesimulator3.1;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
