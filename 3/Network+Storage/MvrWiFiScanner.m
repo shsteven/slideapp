@@ -23,6 +23,7 @@
 @interface MvrWiFiScanner ()
 
 - (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
+- (BOOL) isSelfPublishedService:(NSNetService*) sender;
 
 @end
 
@@ -147,39 +148,50 @@
 	[aNetService resolve];
 }
 
+- (BOOL) isSelfPublishedService:(NSNetService*) sender;
+{
+//	BOOL isSelf = NO;
+//	
+//	struct ifaddrs* interface;
+//	if (getifaddrs(&interface) == 0) {
+//		struct ifaddrs* allInterfaces = interface;
+//		while (interface != NULL) {
+//			const struct sockaddr_in* address = (const struct sockaddr_in*) interface->ifa_addr;
+//			
+//			for (NSData* senderAddressData in [sender addresses]) {
+//				const struct sockaddr* senderAddress = (const struct sockaddr*) [senderAddressData bytes];
+//				if (senderAddress->sa_family != AF_INET)
+//					continue;
+//				
+//				const struct sockaddr_in* senderIPAddress = (const struct sockaddr_in*) senderAddress;
+//				if (address->sin_addr.s_addr == senderIPAddress->sin_addr.s_addr) {
+//					isSelf = YES;
+//					break;
+//				}
+//			}
+//			
+//			if (isSelf) break;
+//			interface = interface->ifa_next;
+//		}
+//		
+//		freeifaddrs(allInterfaces);
+//	}
+	
+	for (NSNetService* s in netServices) {
+		if ([s.type isEqual:sender.type] && [s.name isEqual:sender.name])
+			return YES;
+	}
+	
+	return NO;
+}
+
 - (void)netServiceDidResolveAddress:(NSNetService *)sender;
 {
 	L0Log(@"For service %@:", sender);
 	for (NSData* d in [sender addresses])
 		L0Log(@"Found address: %@", [d socketAddressStringValue]);
 	
-	BOOL isSelf = NO;
-	
-	struct ifaddrs* interface;
-	if (getifaddrs(&interface) == 0) {
-		struct ifaddrs* allInterfaces = interface;
-		while (interface != NULL) {
-			const struct sockaddr_in* address = (const struct sockaddr_in*) interface->ifa_addr;
-			
-			for (NSData* senderAddressData in [sender addresses]) {
-				const struct sockaddr* senderAddress = (const struct sockaddr*) [senderAddressData bytes];
-				if (senderAddress->sa_family != AF_INET)
-					continue;
-				
-				const struct sockaddr_in* senderIPAddress = (const struct sockaddr_in*) senderAddress;
-				if (address->sin_addr.s_addr == senderIPAddress->sin_addr.s_addr) {
-					isSelf = YES;
-					break;
-				}
-			}
-			
-			if (isSelf) break;
-			interface = interface->ifa_next;
-		}
-		
-		freeifaddrs(allInterfaces);
-	}
-
+	BOOL isSelf = [self isSelfPublishedService:sender];
 	if (!isSelf)
 		[self foundService:sender];
 

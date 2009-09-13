@@ -41,6 +41,17 @@
 		157A1021105D3E7A0033B623 /* MvrItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A101F105D3E7A0033B623 /* MvrItem.m */; };
 		157A1022105D3E7A0033B623 /* MvrItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A101F105D3E7A0033B623 /* MvrItem.m */; };
 		157A1023105D3E7A0033B623 /* MvrItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A101F105D3E7A0033B623 /* MvrItem.m */; };
+		157A1125105D45BE0033B623 /* MvrWiFiOutgoingTransfer.h in Headers */ = {isa = PBXBuildFile; fileRef = 157A1123105D45BE0033B623 /* MvrWiFiOutgoingTransfer.h */; };
+		157A1126105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A1124105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m */; };
+		157A1127105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A1124105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m */; };
+		157A1128105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A1124105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m */; };
+		157A1157105D47560033B623 /* MvrPacketBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF112105BB356006D8E7A /* MvrPacketBuilder.m */; };
+		157A1158105D47560033B623 /* MvrPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF114105BB356006D8E7A /* MvrPacketParser.m */; };
+		157A11E9105D64530033B623 /* MvrGenericItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 157A11E7105D64530033B623 /* MvrGenericItem.h */; };
+		157A11EA105D64530033B623 /* MvrGenericItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A11E8105D64530033B623 /* MvrGenericItem.m */; };
+		157A11EB105D64530033B623 /* MvrGenericItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A11E8105D64530033B623 /* MvrGenericItem.m */; };
+		157A11EC105D64530033B623 /* MvrGenericItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A11E8105D64530033B623 /* MvrGenericItem.m */; };
+		157A11EF105D64B50033B623 /* MvrUTISupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 157A11EE105D64B50033B623 /* MvrUTISupport.h */; };
 		15865AED105CDD690041CE5F /* MvrItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15865AEC105CDD690041CE5F /* MvrItemStorage.m */; };
 		15865AEE105CDD690041CE5F /* MvrItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15865AEC105CDD690041CE5F /* MvrItemStorage.m */; };
 		15865AEF105CDD690041CE5F /* MvrItemStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 15865AEB105CDD690041CE5F /* MvrItemStorage.h */; };
@@ -165,6 +176,11 @@
 		156CF144105BB64D006D8E7A /* Mover-Network-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-Release.xcconfig"; sourceTree = "<group>"; };
 		157A101E105D3E7A0033B623 /* MvrItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItem.h; sourceTree = "<group>"; };
 		157A101F105D3E7A0033B623 /* MvrItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItem.m; sourceTree = "<group>"; };
+		157A1123105D45BE0033B623 /* MvrWiFiOutgoingTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiOutgoingTransfer.h; sourceTree = "<group>"; };
+		157A1124105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiOutgoingTransfer.m; sourceTree = "<group>"; };
+		157A11E7105D64530033B623 /* MvrGenericItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrGenericItem.h; sourceTree = "<group>"; };
+		157A11E8105D64530033B623 /* MvrGenericItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrGenericItem.m; sourceTree = "<group>"; };
+		157A11EE105D64B50033B623 /* MvrUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrUTISupport.h; sourceTree = "<group>"; };
 		15865AEB105CDD690041CE5F /* MvrItemStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItemStorage.h; sourceTree = "<group>"; };
 		15865AEC105CDD690041CE5F /* MvrItemStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItemStorage.m; sourceTree = "<group>"; };
 		15865AF8105CDE920041CE5F /* MvrStorageDirectoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrStorageDirectoryTests.h; sourceTree = "<group>"; };
@@ -253,15 +269,16 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
-		153AF19B105C17FF00DD862F /* Protocols */ = {
+		153AF19B105C17FF00DD862F /* Protocols & Utility Headers */ = {
 			isa = PBXGroup;
 			children = (
 				153AF199105C17B300DD862F /* MvrScanner.h */,
 				153AF19E105C183200DD862F /* MvrPeer.h */,
 				153AF1A4105C192300DD862F /* MvrIncoming.h */,
 				153AF1A1105C18F800DD862F /* MvrChannel.h */,
+				157A11EE105D64B50033B623 /* MvrUTISupport.h */,
 			);
-			name = Protocols;
+			name = "Protocols & Utility Headers";
 			sourceTree = "<group>";
 		};
 		153AF1AD105C214C00DD862F /* Modern Wi-Fi */ = {
@@ -271,6 +288,8 @@
 				1593E9BB105BBDFB00220989 /* MvrModernWiFi.m */,
 				153AF1AE105C217400DD862F /* MvrModernWiFiChannel.h */,
 				153AF1AF105C217400DD862F /* MvrModernWiFiChannel.m */,
+				157A1123105D45BE0033B623 /* MvrWiFiOutgoingTransfer.h */,
+				157A1124105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m */,
 			);
 			name = "Modern Wi-Fi";
 			sourceTree = "<group>";
@@ -278,6 +297,8 @@
 		153AF268105C3D6D00DD862F /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				157A11E7105D64530033B623 /* MvrGenericItem.h */,
+				157A11E8105D64530033B623 /* MvrGenericItem.m */,
 				15865AF7105CDE840041CE5F /* Unit Tests */,
 				15865AEB105CDD690041CE5F /* MvrItemStorage.h */,
 				15865AEC105CDD690041CE5F /* MvrItemStorage.m */,
@@ -307,7 +328,7 @@
 		1557278C105BAD8400D9398F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				153AF19B105C17FF00DD862F /* Protocols */,
+				153AF19B105C17FF00DD862F /* Protocols & Utility Headers */,
 				1593E9B4105BBD3000220989 /* Wi-Fi Scanner Family */,
 				1593E969105BBA2100220989 /* Packet building */,
 				153AF268105C3D6D00DD862F /* Storage */,
@@ -419,6 +440,9 @@
 				15865AEF105CDD690041CE5F /* MvrItemStorage.h in Headers */,
 				15865AFA105CDE920041CE5F /* MvrStorageDirectoryTests.h in Headers */,
 				157A1020105D3E7A0033B623 /* MvrItem.h in Headers */,
+				157A1125105D45BE0033B623 /* MvrWiFiOutgoingTransfer.h in Headers */,
+				157A11E9105D64530033B623 /* MvrGenericItem.h in Headers */,
+				157A11EF105D64B50033B623 /* MvrUTISupport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +609,10 @@
 				153AF1B2105C217400DD862F /* MvrModernWiFiChannel.m in Sources */,
 				15865AED105CDD690041CE5F /* MvrItemStorage.m in Sources */,
 				157A1023105D3E7A0033B623 /* MvrItem.m in Sources */,
+				157A1128105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m in Sources */,
+				157A1157105D47560033B623 /* MvrPacketBuilder.m in Sources */,
+				157A1158105D47560033B623 /* MvrPacketParser.m in Sources */,
+				157A11EC105D64530033B623 /* MvrGenericItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +627,8 @@
 				15865AEE105CDD690041CE5F /* MvrItemStorage.m in Sources */,
 				15865AFC105CDE920041CE5F /* MvrStorageDirectoryTests.m in Sources */,
 				157A1022105D3E7A0033B623 /* MvrItem.m in Sources */,
+				157A1127105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m in Sources */,
+				157A11EB105D64530033B623 /* MvrGenericItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +645,8 @@
 				153AF1B1105C217400DD862F /* MvrModernWiFiChannel.m in Sources */,
 				15865AF0105CDD690041CE5F /* MvrItemStorage.m in Sources */,
 				157A1021105D3E7A0033B623 /* MvrItem.m in Sources */,
+				157A1126105D45BE0033B623 /* MvrWiFiOutgoingTransfer.m in Sources */,
+				157A11EA105D64530033B623 /* MvrGenericItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

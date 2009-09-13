@@ -10,12 +10,7 @@
 #import "MvrItemStorage.h"
 
 #import <MuiKit/MuiKit.h>
-
-#if TARGET_OS_IPHONE
-#import <MobileCoreServices/MobileCoreServices.h>
-#else
-#import <CoreServices/CoreServices.h>
-#endif
+#import "MvrUTISupport.h"
 
 #pragma mark -
 #pragma mark Error stuff.

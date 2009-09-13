@@ -10,8 +10,13 @@
 
 #import "MvrChannel.h"
 
+@class L0KVODispatcher;
+
 @interface MvrModernWiFiChannel : NSObject <MvrChannel> {
 	NSNetService* netService;
+	NSMutableSet* outgoingTransfers;
+	
+	L0KVODispatcher* dispatcher;
 }
 
 - (id) initWithNetService:(NSNetService*) ns;

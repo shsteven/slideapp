@@ -50,7 +50,7 @@
 {
 	L0Log(@"%@", s);
 	
-	for (MvrModernWiFiChannel* chan in channels) {
+	for (MvrModernWiFiChannel* chan in [[channels copy] autorelease]) {
 		if ([chan hasSameServiceAs:s])
 			[self removeChannelsObject:chan];
 	}

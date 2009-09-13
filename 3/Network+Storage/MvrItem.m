@@ -7,12 +7,13 @@
 //
 
 #import "MvrItem.h"
+
 #import "MvrItemStorage.h"
+#import "MvrGenericItem.h"
 
 @interface MvrItem ()
 
 @property(retain) MvrItemStorage* storage;
-@property(copy) NSDictionary* metadata;
 
 - (MvrItemStorage*) storageFromExternalRepresentation;
 
@@ -25,27 +26,47 @@
 
 - (id) init;
 {
-	if (self = [super init])
+	if (self = [super init]) {
 		autocache = [NSMutableDictionary new];
-	
-	return self;
-}
-
-- (id) initWithStorage:(MvrItemStorage*) s metadata:(NSDictionary*) m;
-{
-	if (self = [self init]) {
-		self.storage = s;
-		self.metadata = m;
+		metadata = [NSMutableDictionary new];
 	}
 	
 	return self;
 }
 
-@synthesize storage, metadata;
+- (id) initWithStorage:(MvrItemStorage*) s type:(NSString*) t metadata:(NSDictionary*) m;
+{
+	if (self = [self init]) {
+		self.storage = s;
+		self.type = t;
+		
+		if (m)
+			[self.metadata setDictionary:m];
+	}
+	
+	return self;
+}
+
+@synthesize storage, metadata, type;
+
+- (NSString*) title;
+{
+	NSString* title = [self.metadata objectForKey:kMvrItemTitleMetadataKey];
+	if (!title)
+		title = @"";
+	
+	return title;
+}
+
+- (void) setTitle:(NSString *) t;
+{
+	[self.metadata setObject:[[t copy] autorelease] forKey:kMvrItemTitleMetadataKey];
+}
 
 - (void) dealloc;
 {
 	[storage release];
+	[type release];
 	[metadata release],
 	[autocache release];
 	[super dealloc];
@@ -115,7 +136,16 @@ static NSMutableDictionary* MvrItemTypesToClasses = nil;
 
 + (Class) classForType:(NSString*) c;
 {
-	return [MvrItemTypesToClasses objectForKey:c];
+	Class cls = [MvrItemTypesToClasses objectForKey:c];
+	if (!cls)
+		cls = [MvrGenericItem class];
+	
+	return cls;
+}
+
++ itemWithStorage:(MvrItemStorage*) s type:(NSString*) t metadata:(NSDictionary*) m;
+{
+	return [[[[self classForType:t] alloc] initWithStorage:s type:t metadata:m] autorelease];
 }
 
 #pragma mark Caching

@@ -8,6 +8,8 @@
 
 #import "MvrModernWiFiChannel.h"
 
+#import <MuiKit/MuiKit.h>
+#import "MvrWiFiOutgoingTransfer.h"
 
 @implementation MvrModernWiFiChannel
 
@@ -16,12 +18,16 @@
 	self = [super init];
 	if (self != nil) {
 		netService = [ns retain];
+		outgoingTransfers = [NSMutableSet new];
+		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 	}
 	return self;
 }
 
 - (void) dealloc
 {
+	[dispatcher release];
+	[outgoingTransfers release];
 	[netService release];
 	[super dealloc];
 }
@@ -29,11 +35,6 @@
 - (NSString*) displayName;
 {
 	return [netService name];
-}
-
-- (void) beginSendingItem:(MvrItem*) item;
-{
-	// TODO
 }
 
 // Can be KVO'd. Contains id <MvrIncoming>s.
@@ -47,9 +48,36 @@
 	return n == netService || ([n.name isEqual:netService.name] && [n.type isEqual:netService.type]);
 }
 
+#pragma mark Outgoing transfers
+
+- (void) beginSendingItem:(MvrItem*) item;
+{
+	MvrWiFiOutgoingTransfer* outgoing = [[MvrWiFiOutgoingTransfer alloc] initWithItem:item toAddresses:netService.addresses];
+	[dispatcher observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:finishedDidChange:) options:0];
+	
+	[outgoing start];
+	
+	[[self mutableSetValueForKey:@"outgoingTransfers"] addObject:outgoing];
+	[outgoing release];
+}
+
+- (void) outgoingTransfer:(MvrWiFiOutgoingTransfer*) transfer finishedDidChange:(NSDictionary*) change;
+{
+	if (!transfer.finished)
+		return;
+	
+	[dispatcher endObserving:@"finished" ofObject:transfer];
+	[[self mutableSetValueForKey:@"outgoingTransfers"] removeObject:transfer];
+}
+
++ keyPathsForValuesAffectingHasOutgoingTransfers;
+{
+	return [NSSet setWithObject:@"outgoingTransfers"];
+}
+
 - (BOOL) hasOutgoingTransfers;
 {
-	return NO; // TODO!
+	return [outgoingTransfers count] > 0;
 }
 
 @end

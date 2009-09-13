@@ -9,15 +9,18 @@
 #import <Foundation/Foundation.h>
 
 #define kMvrItemTitleMetadataKey @"MvrTitle"
-#define kMvrItemTypeMetadataKey @"MvrType"
 
 @class MvrItemStorage;
 
 @interface MvrItem : NSObject {
 	MvrItemStorage* storage;
-	NSDictionary* metadata;
+	NSString* type;
+	NSMutableDictionary* metadata;
 	NSMutableDictionary* autocache;
 }
+
+- (id) init;
+- (id) initWithStorage:(MvrItemStorage*) s type:(NSString*) type metadata:(NSDictionary*) m;
 
 + (void) registerClass;
 + (NSSet*) supportedTypes; // abstract
@@ -25,8 +28,13 @@
 + (void) registerClass:(Class) c forType:(NSString*) type;
 + (Class) classForType:(NSString*) c;
 
++ itemWithStorage:(MvrItemStorage*) s type:(NSString*) t metadata:(NSDictionary*) m;
+
 @property(readonly, retain) MvrItemStorage* storage;
-@property(readonly, copy) NSDictionary* metadata;
+
+@property(copy) NSString* title;
+@property(copy) NSString* type;
+@property(readonly) NSMutableDictionary* metadata;
 
 - (id) produceExternalRepresentation; // abstract
 
