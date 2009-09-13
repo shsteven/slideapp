@@ -37,6 +37,14 @@
 		156CF116105BB356006D8E7A /* MvrPacketBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF112105BB356006D8E7A /* MvrPacketBuilder.m */; };
 		156CF117105BB356006D8E7A /* MvrPacketParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 156CF113105BB356006D8E7A /* MvrPacketParser.h */; };
 		156CF118105BB356006D8E7A /* MvrPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF114105BB356006D8E7A /* MvrPacketParser.m */; };
+		15865AED105CDD690041CE5F /* MvrItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15865AEC105CDD690041CE5F /* MvrItemStorage.m */; };
+		15865AEE105CDD690041CE5F /* MvrItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15865AEC105CDD690041CE5F /* MvrItemStorage.m */; };
+		15865AEF105CDD690041CE5F /* MvrItemStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 15865AEB105CDD690041CE5F /* MvrItemStorage.h */; };
+		15865AF0105CDD690041CE5F /* MvrItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15865AEC105CDD690041CE5F /* MvrItemStorage.m */; };
+		15865AFA105CDE920041CE5F /* MvrStorageDirectoryTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 15865AF8105CDE920041CE5F /* MvrStorageDirectoryTests.h */; };
+		15865AFC105CDE920041CE5F /* MvrStorageDirectoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15865AF9105CDE920041CE5F /* MvrStorageDirectoryTests.m */; };
+		15865B38105CE3F00041CE5F /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F60400105BDE2800F73794 /* libMuiKit.a */; };
+		15865B3A105CE3FD0041CE5F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15865B39105CE3FD0041CE5F /* MobileCoreServices.framework */; };
 		1593E94C105BB73B00220989 /* MvrProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1593E94B105BB73B00220989 /* MvrProtocol.h */; };
 		1593E972105BBA3E00220989 /* MvrPacketBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E970105BBA3E00220989 /* MvrPacketBuilderTests.m */; };
 		1593E973105BBA3E00220989 /* MvrPacketParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1593E971105BBA3E00220989 /* MvrPacketParserTests.m */; };
@@ -69,6 +77,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2;
 			remoteInfo = "MuiKit (Mac OS X)";
+		};
+		15865B36105CE3E90041CE5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 156FD7720F7A261B00F83283 /* MuiKit */;
+			remoteInfo = MuiKit;
 		};
 		15F603FF105BDE2800F73794 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -144,6 +159,11 @@
 		156CF11B105BB36F006D8E7A /* Mover-Network.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network.xcconfig"; sourceTree = "<group>"; };
 		156CF142105BB61D006D8E7A /* Mover-Network-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-Debug.xcconfig"; sourceTree = "<group>"; };
 		156CF144105BB64D006D8E7A /* Mover-Network-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-Release.xcconfig"; sourceTree = "<group>"; };
+		15865AEB105CDD690041CE5F /* MvrItemStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItemStorage.h; sourceTree = "<group>"; };
+		15865AEC105CDD690041CE5F /* MvrItemStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItemStorage.m; sourceTree = "<group>"; };
+		15865AF8105CDE920041CE5F /* MvrStorageDirectoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrStorageDirectoryTests.h; sourceTree = "<group>"; };
+		15865AF9105CDE920041CE5F /* MvrStorageDirectoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrStorageDirectoryTests.m; sourceTree = "<group>"; };
+		15865B39105CE3FD0041CE5F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1593E94B105BB73B00220989 /* MvrProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrProtocol.h; sourceTree = "<group>"; };
 		1593E964105BB9FB00220989 /* Network+Test.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Network+Test.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1593E965105BB9FB00220989 /* Network+Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Network+Test-Info.plist"; sourceTree = "<group>"; };
@@ -180,9 +200,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15865B38105CE3F00041CE5F /* libMuiKit.a in Frameworks */,
 				153AF1E1105C2AE100DD862F /* Foundation.framework in Frameworks */,
 				153AF1E2105C2AE400DD862F /* SystemConfiguration.framework in Frameworks */,
 				153AF20F105C2B5600DD862F /* OCMock.framework in Frameworks */,
+				15865B3A105CE3FD0041CE5F /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +242,7 @@
 				153AF20E105C2B5600DD862F /* OCMock.framework */,
 				153AF1DC105C2ACC00DD862F /* SystemConfiguration.framework */,
 				153AF1DE105C2AD800DD862F /* Foundation.framework */,
+				15865B39105CE3FD0041CE5F /* MobileCoreServices.framework */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -249,6 +272,9 @@
 		153AF268105C3D6D00DD862F /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				15865AF7105CDE840041CE5F /* Unit Tests */,
+				15865AEB105CDD690041CE5F /* MvrItemStorage.h */,
+				15865AEC105CDD690041CE5F /* MvrItemStorage.m */,
 			);
 			name = Storage;
 			sourceTree = "<group>";
@@ -290,6 +316,15 @@
 				153B40F4105BEC9500DB8FB2 /* TestTool.xcconfig */,
 			);
 			name = "Configuration files";
+			sourceTree = "<group>";
+		};
+		15865AF7105CDE840041CE5F /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				15865AF8105CDE920041CE5F /* MvrStorageDirectoryTests.h */,
+				15865AF9105CDE920041CE5F /* MvrStorageDirectoryTests.m */,
+			);
+			name = "Unit Tests";
 			sourceTree = "<group>";
 		};
 		1593E969105BBA2100220989 /* Packet building */ = {
@@ -373,6 +408,8 @@
 				153AF1A5105C192300DD862F /* MvrIncoming.h in Headers */,
 				153AF1AA105C206000DD862F /* AsyncSocket.h in Headers */,
 				153AF1B0105C217400DD862F /* MvrModernWiFiChannel.h in Headers */,
+				15865AEF105CDD690041CE5F /* MvrItemStorage.h in Headers */,
+				15865AFA105CDE920041CE5F /* MvrStorageDirectoryTests.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +446,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				15865B37105CE3E90041CE5F /* PBXTargetDependency */,
 			);
 			name = "Network+Test";
 			productName = "Network+Test";
@@ -536,6 +574,7 @@
 				153B420C105BF36700DB8FB2 /* DDGetoptLongParser.m in Sources */,
 				153AF1AC105C206000DD862F /* AsyncSocket.m in Sources */,
 				153AF1B2105C217400DD862F /* MvrModernWiFiChannel.m in Sources */,
+				15865AED105CDD690041CE5F /* MvrItemStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +586,8 @@
 				1593E973105BBA3E00220989 /* MvrPacketParserTests.m in Sources */,
 				1593E974105BBA4A00220989 /* MvrPacketBuilder.m in Sources */,
 				1593E975105BBA4A00220989 /* MvrPacketParser.m in Sources */,
+				15865AEE105CDD690041CE5F /* MvrItemStorage.m in Sources */,
+				15865AFC105CDE920041CE5F /* MvrStorageDirectoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +602,7 @@
 				1593E9C2105BBE4300220989 /* MvrWiFiScanner.m in Sources */,
 				153AF1AB105C206000DD862F /* AsyncSocket.m in Sources */,
 				153AF1B1105C217400DD862F /* MvrModernWiFiChannel.m in Sources */,
+				15865AF0105CDD690041CE5F /* MvrItemStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +613,11 @@
 			isa = PBXTargetDependency;
 			name = "MuiKit (Mac OS X)";
 			targetProxy = 153B4203105BF36700DB8FB2 /* PBXContainerItemProxy */;
+		};
+		15865B37105CE3E90041CE5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MuiKit;
+			targetProxy = 15865B36105CE3E90041CE5F /* PBXContainerItemProxy */;
 		};
 		15F6040C105BDE3900F73794 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
