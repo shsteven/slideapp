@@ -246,6 +246,13 @@
 			name = "Modern Wi-Fi";
 			sourceTree = "<group>";
 		};
+		153AF268105C3D6D00DD862F /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Storage;
+			sourceTree = "<group>";
+		};
 		153B40B8105BEAFC00DB8FB2 /* DDCommandLineInterface */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +276,7 @@
 				153AF19B105C17FF00DD862F /* Protocols */,
 				1593E9B4105BBD3000220989 /* Wi-Fi Scanner Family */,
 				1593E969105BBA2100220989 /* Packet building */,
+				153AF268105C3D6D00DD862F /* Storage */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -430,7 +438,7 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Network" */;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Network+Storage" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
 			mainGroup = 0867D691FE84028FC02AAC07 /* Network */;
@@ -722,7 +730,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Network" */ = {
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Network+Storage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB922308733DC00010E9CD /* Debug */,
