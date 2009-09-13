@@ -37,6 +37,10 @@
 		156CF116105BB356006D8E7A /* MvrPacketBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF112105BB356006D8E7A /* MvrPacketBuilder.m */; };
 		156CF117105BB356006D8E7A /* MvrPacketParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 156CF113105BB356006D8E7A /* MvrPacketParser.h */; };
 		156CF118105BB356006D8E7A /* MvrPacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CF114105BB356006D8E7A /* MvrPacketParser.m */; };
+		157A1020105D3E7A0033B623 /* MvrItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 157A101E105D3E7A0033B623 /* MvrItem.h */; };
+		157A1021105D3E7A0033B623 /* MvrItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A101F105D3E7A0033B623 /* MvrItem.m */; };
+		157A1022105D3E7A0033B623 /* MvrItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A101F105D3E7A0033B623 /* MvrItem.m */; };
+		157A1023105D3E7A0033B623 /* MvrItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157A101F105D3E7A0033B623 /* MvrItem.m */; };
 		15865AED105CDD690041CE5F /* MvrItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15865AEC105CDD690041CE5F /* MvrItemStorage.m */; };
 		15865AEE105CDD690041CE5F /* MvrItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15865AEC105CDD690041CE5F /* MvrItemStorage.m */; };
 		15865AEF105CDD690041CE5F /* MvrItemStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 15865AEB105CDD690041CE5F /* MvrItemStorage.h */; };
@@ -82,7 +86,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 156FD7720F7A261B00F83283 /* MuiKit */;
+			remoteGlobalIDString = 156FD7720F7A261B00F83283;
 			remoteInfo = MuiKit;
 		};
 		15F603FF105BDE2800F73794 /* PBXContainerItemProxy */ = {
@@ -159,6 +163,8 @@
 		156CF11B105BB36F006D8E7A /* Mover-Network.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network.xcconfig"; sourceTree = "<group>"; };
 		156CF142105BB61D006D8E7A /* Mover-Network-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-Debug.xcconfig"; sourceTree = "<group>"; };
 		156CF144105BB64D006D8E7A /* Mover-Network-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-Release.xcconfig"; sourceTree = "<group>"; };
+		157A101E105D3E7A0033B623 /* MvrItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItem.h; sourceTree = "<group>"; };
+		157A101F105D3E7A0033B623 /* MvrItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItem.m; sourceTree = "<group>"; };
 		15865AEB105CDD690041CE5F /* MvrItemStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItemStorage.h; sourceTree = "<group>"; };
 		15865AEC105CDD690041CE5F /* MvrItemStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItemStorage.m; sourceTree = "<group>"; };
 		15865AF8105CDE920041CE5F /* MvrStorageDirectoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrStorageDirectoryTests.h; sourceTree = "<group>"; };
@@ -275,6 +281,8 @@
 				15865AF7105CDE840041CE5F /* Unit Tests */,
 				15865AEB105CDD690041CE5F /* MvrItemStorage.h */,
 				15865AEC105CDD690041CE5F /* MvrItemStorage.m */,
+				157A101E105D3E7A0033B623 /* MvrItem.h */,
+				157A101F105D3E7A0033B623 /* MvrItem.m */,
 			);
 			name = Storage;
 			sourceTree = "<group>";
@@ -360,11 +368,11 @@
 			children = (
 				153AF1A8105C206000DD862F /* AsyncSocket.h */,
 				153AF1A9105C206000DD862F /* AsyncSocket.m */,
-				153AF1AD105C214C00DD862F /* Modern Wi-Fi */,
 				1593E9B5105BBD4300220989 /* MvrWiFi.h */,
 				1593E9B6105BBD4300220989 /* MvrWiFi.m */,
 				1593E9BF105BBE4300220989 /* MvrWiFiScanner.h */,
 				1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */,
+				153AF1AD105C214C00DD862F /* Modern Wi-Fi */,
 			);
 			name = "Wi-Fi Scanner Family";
 			sourceTree = "<group>";
@@ -410,6 +418,7 @@
 				153AF1B0105C217400DD862F /* MvrModernWiFiChannel.h in Headers */,
 				15865AEF105CDD690041CE5F /* MvrItemStorage.h in Headers */,
 				15865AFA105CDE920041CE5F /* MvrStorageDirectoryTests.h in Headers */,
+				157A1020105D3E7A0033B623 /* MvrItem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +584,7 @@
 				153AF1AC105C206000DD862F /* AsyncSocket.m in Sources */,
 				153AF1B2105C217400DD862F /* MvrModernWiFiChannel.m in Sources */,
 				15865AED105CDD690041CE5F /* MvrItemStorage.m in Sources */,
+				157A1023105D3E7A0033B623 /* MvrItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +598,7 @@
 				1593E975105BBA4A00220989 /* MvrPacketParser.m in Sources */,
 				15865AEE105CDD690041CE5F /* MvrItemStorage.m in Sources */,
 				15865AFC105CDE920041CE5F /* MvrStorageDirectoryTests.m in Sources */,
+				157A1022105D3E7A0033B623 /* MvrItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +614,7 @@
 				153AF1AB105C206000DD862F /* AsyncSocket.m in Sources */,
 				153AF1B1105C217400DD862F /* MvrModernWiFiChannel.m in Sources */,
 				15865AF0105CDD690041CE5F /* MvrItemStorage.m in Sources */,
+				157A1021105D3E7A0033B623 /* MvrItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
