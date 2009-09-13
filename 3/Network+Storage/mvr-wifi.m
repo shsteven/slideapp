@@ -21,6 +21,8 @@
 	NSString* temporary, * persistent, * identifier;
 	MvrWiFi* wifi;
 	L0KVODispatcher* kvo;
+	
+	BOOL stopped;
 }
 
 @property(copy) NSString* name;
@@ -74,6 +76,10 @@
 	
 	self.wifi = [[MvrWiFi alloc] initWithBroadcastedName:self.name];
 	
+	[kvo observe:@"enabled" ofObject:wifi.modernWiFi options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld usingBlock:^(id obj, NSDictionary* change) {
+		L0Log(@"%@", change);
+	}];
+	
 	[kvo observe:@"channels" ofObject:wifi.modernWiFi usingSelector:@selector(channelsOfObject:changed:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
 	
 	[kvo observe:@"jammed" ofObject:wifi.modernWiFi options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld usingBlock:
@@ -85,12 +91,18 @@
 	
 	self.wifi.modernWiFi.enabled = YES;
 	
-	[[NSRunLoop currentRunLoop] run];
+	while (!stopped)
+		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:2.0]];
 	
 	[kvo release]; kvo = nil;
 	[c release];
 	
 	return 0;
+}
+
+- (void) stop;
+{
+	stopped = YES;
 }
 
 - (void) channelsOfObject:(id) modernWiFi changed:(NSDictionary*) change;
