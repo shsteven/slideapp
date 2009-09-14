@@ -145,7 +145,7 @@
 {
 	[servicesBeingResolved addObject:aNetService];
 	aNetService.delegate = self;
-	[aNetService resolve];
+	[aNetService resolveWithTimeout:20];
 }
 
 - (BOOL) isSelfPublishedService:(NSNetService*) sender;

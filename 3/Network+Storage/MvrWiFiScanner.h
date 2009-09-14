@@ -13,7 +13,11 @@
 #import "MvrScanner.h"
 #import "MvrChannel.h"
 
-@interface MvrWiFiScanner : NSObject <MvrScanner> {
+@interface MvrWiFiScanner : NSObject <MvrScanner
+#if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+	, NSNetServiceDelegate, NSNetServiceBrowserDelegate
+#endif
+> {
 	// NSNetService and NSNetServiceBrowser instances.
 	NSMutableSet* netServices;
 	NSMutableSet* soughtServices;
