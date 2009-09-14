@@ -15,6 +15,7 @@
 @interface MvrModernWiFiChannel : NSObject <MvrChannel> {
 	NSNetService* netService;
 	NSMutableSet* outgoingTransfers;
+	NSMutableSet* incomingTransfers;
 	
 	L0KVODispatcher* dispatcher;
 }

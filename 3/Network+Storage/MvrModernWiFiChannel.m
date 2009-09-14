@@ -10,6 +10,7 @@
 
 #import <MuiKit/MuiKit.h>
 #import "MvrModernWiFiOutgoing.h"
+#import "MvrModernWiFiIncoming.h"
 
 @implementation MvrModernWiFiChannel
 
@@ -19,6 +20,7 @@
 	if (self != nil) {
 		netService = [ns retain];
 		outgoingTransfers = [NSMutableSet new];
+		incomingTransfers = [NSMutableSet new];
 		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 	}
 	return self;
@@ -28,6 +30,7 @@
 {
 	[dispatcher release];
 	[outgoingTransfers release];
+	[incomingTransfers release];
 	[netService release];
 	[super dealloc];
 }
@@ -35,12 +38,6 @@
 - (NSString*) displayName;
 {
 	return [netService name];
-}
-
-// Can be KVO'd. Contains id <MvrIncoming>s.
-- (NSSet*) incomingTransfers;
-{
-	return [NSSet set]; // TODO
 }
 
 - (BOOL) hasSameServiceAs:(NSNetService*) n;
@@ -88,6 +85,25 @@
 - (BOOL) hasOutgoingTransfers;
 {
 	return [outgoingTransfers count] > 0;
+}
+
+#pragma mark Incoming transfers
+
+- (void) addIncomingTransfersObject:(MvrModernWiFiIncoming*) incoming;
+{
+	[incoming observeUsingDispatcher:dispatcher invokeAtItemOrCancelledChange:@selector(incomingTransfer:itemOrCancelledChanged:)];
+	[incomingTransfers addObject:incoming];
+}
+	 
+- (void) incomingTransfer:(MvrModernWiFiIncoming*) transfer itemOrCancelledChanged:(NSDictionary*) changed;
+{
+	[transfer endObservingUsingDispatcher:dispatcher];
+	[[self mutableSetValueForKey:@"incomingTransfers"] removeObject:transfer];
+}
+
+- (NSSet*) incomingTransfers;
+{
+	return incomingTransfers;
 }
 
 @end

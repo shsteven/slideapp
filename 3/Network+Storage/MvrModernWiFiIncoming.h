@@ -51,6 +51,7 @@
 @interface MvrModernWiFiIncoming (MvrKVOUtilityMethods)
 
 - (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemChange:(SEL) itemSel atCancelledChange:(SEL) cancelSel;
+- (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemOrCancelledChange:(SEL) itemAndCancelSel;
 - (void) endObservingUsingDispatcher:(L0KVODispatcher*) d;
 
 @end

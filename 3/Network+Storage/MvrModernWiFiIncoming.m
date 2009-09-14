@@ -95,6 +95,8 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 		[self cancel];
 	L0Log(@" => %@", channel);
 	
+	[[channel mutableSetValueForKey:@"incomingTransfers"] addObject:self];
+	
 	[sock readDataWithTimeout:120 tag:0];
 }
 
@@ -257,6 +259,11 @@ L0PrivateAssignSetterNamedForKey(private_setCancelled:, BOOL, isCancelled, @"can
 {
 	[d observe:@"item" ofObject:self usingSelector:itemSel options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
 	[d observe:@"cancelled" ofObject:self usingSelector:cancelSel options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
+}
+
+- (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemOrCancelledChange:(SEL) itemAndCancelSel;
+{
+	[self observeUsingDispatcher:d invokeAtItemChange:itemAndCancelSel atCancelledChange:itemAndCancelSel];
 }
 
 - (void) endObservingUsingDispatcher:(L0KVODispatcher*) d;

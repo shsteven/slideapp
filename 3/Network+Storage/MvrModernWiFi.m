@@ -25,15 +25,29 @@
 		
 		incomingTransfers = [NSMutableSet new];
 		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
+		
+		serverPort = kMvrModernWiFiPort;
  	}
 
 	return self;
+}
+
+@synthesize serverPort;
+- (void) setServerPort:(int) port;
+{
+	NSAssert(!self.enabled, @"Can only change port when the server is stopped");
+	serverPort = port;
 }
 
 - (void) start;
 {
 	[super start];	
 	serverSocket = [[AsyncSocket alloc] initWithDelegate:self];
+	
+	NSError* e;
+	if (![serverSocket acceptOnPort:serverPort error:&e]) {
+		[NSException raise:@"MvrModernWiFiServerException" format:@"Could not listen on the given port (%d). Error: %@", serverPort, e];
+	}
 }
 
 - (void) stop;

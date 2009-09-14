@@ -18,11 +18,14 @@
 
 @interface MvrModernWiFi : MvrWiFiScanner {
 	AsyncSocket* serverSocket;
+	int serverPort;
 	
 	NSMutableSet* incomingTransfers;
 	L0KVODispatcher* dispatcher;
 }
 
 - (MvrModernWiFiChannel*) channelForAddress:(NSData*) address;
+
+@property int serverPort;
 
 @end
