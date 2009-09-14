@@ -9,7 +9,7 @@
 #import "MvrModernWiFiChannel.h"
 
 #import <MuiKit/MuiKit.h>
-#import "MvrWiFiOutgoingTransfer.h"
+#import "MvrModernWiFiOutgoing.h"
 
 @implementation MvrModernWiFiChannel
 
@@ -62,7 +62,7 @@
 
 - (void) beginSendingItem:(MvrItem*) item;
 {
-	MvrWiFiOutgoingTransfer* outgoing = [[MvrWiFiOutgoingTransfer alloc] initWithItem:item toAddresses:netService.addresses];
+	MvrModernWiFiOutgoing* outgoing = [[MvrModernWiFiOutgoing alloc] initWithItem:item toAddresses:netService.addresses];
 	[dispatcher observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:finishedDidChange:) options:0];
 	
 	[outgoing start];
@@ -71,7 +71,7 @@
 	[outgoing release];
 }
 
-- (void) outgoingTransfer:(MvrWiFiOutgoingTransfer*) transfer finishedDidChange:(NSDictionary*) change;
+- (void) outgoingTransfer:(MvrModernWiFiOutgoing*) transfer finishedDidChange:(NSDictionary*) change;
 {
 	if (!transfer.finished)
 		return;

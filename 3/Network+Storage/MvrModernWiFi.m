@@ -10,7 +10,7 @@
 
 #import "MvrModernWiFiChannel.h"
 #import "AsyncSocket.h"
-#import "MvrWiFiIncomingTransfer.h"
+#import "MvrModernWiFiIncoming.h"
 
 #import <MuiKit/MuiKit.h>
 
@@ -88,7 +88,7 @@
 
 - (void) onSocket:(AsyncSocket *)sock didAcceptNewSocket:(AsyncSocket *)newSocket;
 {
-	MvrWiFiIncomingTransfer* incoming = [[MvrWiFiIncomingTransfer alloc] initWithSocket:newSocket scanner:self];
+	MvrModernWiFiIncoming* incoming = [[MvrModernWiFiIncoming alloc] initWithSocket:newSocket scanner:self];
 	[incomingTransfers addObject:incoming];
 	
 	[incoming observeUsingDispatcher:dispatcher invokeAtItemChange:@selector(itemOrCancelledOfTransfer:changed:) atCancelledChange:@selector(itemOrCancelledOfTransfer:changed:)];
@@ -96,7 +96,7 @@
 	[incoming release];
 }
 
-- (void) itemOrCancelledOfTransfer:(MvrWiFiIncomingTransfer*) transfer changed:(NSDictionary*) changed;
+- (void) itemOrCancelledOfTransfer:(MvrModernWiFiIncoming*) transfer changed:(NSDictionary*) changed;
 {
 	if (transfer.item || transfer.cancelled) {
 		[transfer endObservingUsingDispatcher:dispatcher];

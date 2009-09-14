@@ -13,7 +13,7 @@
 
 #import "MvrPacketBuilder.h"
 
-@interface MvrWiFiOutgoingTransfer : NSObject <MvrPacketBuilderDelegate> {
+@interface MvrModernWiFiOutgoing : NSObject <MvrPacketBuilderDelegate> {
 	MvrItem* item;
 	NSArray* addresses;
 	

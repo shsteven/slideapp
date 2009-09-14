@@ -18,7 +18,7 @@
 
 @class L0KVODispatcher;
 
-@interface MvrWiFiIncomingTransfer : NSObject <MvrPacketParserDelegate, MvrIncoming> {
+@interface MvrModernWiFiIncoming : NSObject <MvrPacketParserDelegate, MvrIncoming> {
 	AsyncSocket* socket;
 	BOOL finished;
 	MvrPacketParser* parser;
@@ -48,7 +48,7 @@
 
 @end
 
-@interface MvrWiFiIncomingTransfer (MvrKVOUtilityMethods)
+@interface MvrModernWiFiIncoming (MvrKVOUtilityMethods)
 
 - (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemChange:(SEL) itemSel atCancelledChange:(SEL) cancelSel;
 - (void) endObservingUsingDispatcher:(L0KVODispatcher*) d;

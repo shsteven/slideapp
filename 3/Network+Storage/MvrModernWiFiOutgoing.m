@@ -6,7 +6,7 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "MvrWiFiOutgoingTransfer.h"
+#import "MvrModernWiFiOutgoing.h"
 
 #import <MuiKit/MuiKit.h>
 
@@ -16,7 +16,7 @@
 #import "MvrModernWiFiChannel.h"
 #import "MvrItemStorage.h"
 
-@interface MvrWiFiOutgoingTransfer ()
+@interface MvrModernWiFiOutgoing ()
 
 - (void) cancel;
 - (void) endWithError:(NSError *)e;
@@ -31,7 +31,7 @@
 @end
 
 
-@implementation MvrWiFiOutgoingTransfer
+@implementation MvrModernWiFiOutgoing
 
 - (id) initWithItem:(MvrItem*) i toAddresses:(NSArray*) a;
 {

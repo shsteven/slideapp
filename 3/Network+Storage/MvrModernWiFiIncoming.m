@@ -6,7 +6,7 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "MvrWiFiIncomingTransfer.h"
+#import "MvrModernWiFiIncoming.h"
 
 #import "AsyncSocket.h"
 #import "MvrItemStorage.h"
@@ -17,7 +17,7 @@
 
 #import <MuiKit/MuiKit.h>
 
-@interface MvrWiFiIncomingTransfer ()
+@interface MvrModernWiFiIncoming ()
 
 - (void) checkMetadataIfNeeded;
 - (void) cancel;
@@ -56,7 +56,7 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 }
 
 
-@implementation MvrWiFiIncomingTransfer
+@implementation MvrModernWiFiIncoming
 
 - (id) initWithSocket:(AsyncSocket*) s scanner:(MvrModernWiFi*) sc;
 {
@@ -251,7 +251,7 @@ L0PrivateAssignSetterNamedForKey(private_setCancelled:, BOOL, isCancelled, @"can
 
 @end
 
-@implementation MvrWiFiIncomingTransfer (MvrKVOUtilityMethods)
+@implementation MvrModernWiFiIncoming (MvrKVOUtilityMethods)
 
 - (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemChange:(SEL) itemSel atCancelledChange:(SEL) cancelSel;
 {
