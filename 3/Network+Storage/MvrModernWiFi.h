@@ -12,10 +12,17 @@
 #define kMvrModernWiFiBonjourServiceType @"_x-mover2._tcp."
 #define kMvrModernWiFiPort (25252)
 
-@class AsyncSocket;
+@class L0KVODispatcher;
+
+@class AsyncSocket, MvrModernWiFiChannel;
 
 @interface MvrModernWiFi : MvrWiFiScanner {
 	AsyncSocket* serverSocket;
+	
+	NSMutableSet* incomingTransfers;
+	L0KVODispatcher* dispatcher;
 }
+
+- (MvrModernWiFiChannel*) channelForAddress:(NSData*) address;
 
 @end

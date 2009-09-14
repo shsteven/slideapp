@@ -22,5 +22,6 @@
 - (id) initWithNetService:(NSNetService*) ns;
 
 - (BOOL) hasSameServiceAs:(NSNetService*) n;
+- (BOOL) isReachableThroughAddress:(NSData*) address;
 
 @end

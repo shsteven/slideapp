@@ -48,6 +48,16 @@
 	return n == netService || ([n.name isEqual:netService.name] && [n.type isEqual:netService.type]);
 }
 
+- (BOOL) isReachableThroughAddress:(NSData*) address;
+{
+	for (NSData* d in netService.addresses) {
+		if ([d socketAddressIsEqualToAddress:address])
+			return YES;
+	}
+	
+	return NO;
+}
+
 #pragma mark Outgoing transfers
 
 - (void) beginSendingItem:(MvrItem*) item;
