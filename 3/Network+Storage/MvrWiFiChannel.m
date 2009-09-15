@@ -7,12 +7,13 @@
 //
 
 #import "MvrWiFiChannel.h"
+#import "MvrIncoming.h"
 
 #import <MuiKit/MuiKit.h>
 
 @implementation MvrWiFiChannel
 
-- (id) initWithNetService:(NSNetService*) ns;
+- (id) initWithNetService:(NSNetService*) ns identifier:(NSString*) ident;
 {
 	self = [super init];
 	if (self != nil) {
@@ -20,9 +21,12 @@
 		outgoingTransfers = [NSMutableSet new];
 		incomingTransfers = [NSMutableSet new];
 		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
+		identifier = [ident copy];
 	}
 	return self;
 }
+
+@synthesize identifier;
 
 - (void) dealloc
 {
@@ -30,6 +34,7 @@
 	[outgoingTransfers release];
 	[incomingTransfers release];
 	[netService release];
+	[identifier release];
 	[super dealloc];
 }
 
@@ -98,6 +103,7 @@
 
 - (void) removeIncomingTransfersObject:(id) transfer;
 {
+	L0Log(@"%@ will be removed from this channel with result: cancelled = %d, item = %@", transfer, [transfer cancelled], [transfer item]);
 	[incomingTransfers removeObject:transfer];
 }
 

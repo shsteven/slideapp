@@ -175,20 +175,13 @@ L0ObjCSingletonMethod(sharedInfo)
 	
 	self.wifi = [[MvrWiFi alloc] initWithPlatformInfo:[MvrWiFiToolPlatform sharedInfo] modernPort:port legacyPort:legacyPort];
 	
-	[kvo observe:@"enabled" ofObject:wifi.modernWiFi options:kMvrKVOOptions usingBlock:MvrBlockForLoggingPropertyChange(@"enabled")];
+	[kvo observe:@"enabled" ofObject:wifi options:kMvrKVOOptions usingBlock:MvrBlockForLoggingPropertyChange(@"enabled")];
 	
-	[kvo observe:@"channels" ofObject:wifi.modernWiFi usingSelector:@selector(channelsOfObject:changed:) options:kMvrKVOOptions];
+	[kvo observe:@"channels" ofObject:wifi usingSelector:@selector(channelsOfObject:changed:) options:kMvrKVOOptions];
 	
-	[kvo observe:@"jammed" ofObject:wifi.modernWiFi  options:kMvrKVOOptions usingBlock:MvrBlockForLoggingPropertyChange(@"jammed")];
+	[kvo observe:@"jammed" ofObject:wifi  options:kMvrKVOOptions usingBlock:MvrBlockForLoggingPropertyChange(@"jammed")];
 	
-	[kvo observe:@"enabled" ofObject:wifi.legacyWiFi options:kMvrKVOOptions usingBlock:MvrBlockForLoggingPropertyChange(@"enabled")];
-	
-	[kvo observe:@"channels" ofObject:wifi.legacyWiFi usingSelector:@selector(channelsOfObject:changed:) options:kMvrKVOOptions];
-	
-	[kvo observe:@"jammed" ofObject:wifi.legacyWiFi  options:kMvrKVOOptions usingBlock:MvrBlockForLoggingPropertyChange(@"jammed")];
-	
-	self.wifi.modernWiFi.enabled = YES;
-	self.wifi.legacyWiFi.enabled = YES;
+	self.wifi.enabled = YES;
 	
 	while (!stopped)
 		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:2.0]];

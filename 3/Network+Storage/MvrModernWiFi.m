@@ -20,7 +20,12 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourServiceType port:port TXTRecord:[NSDictionary dictionary] /* TODO */];
+		NSDictionary* record = [NSDictionary dictionaryWithObjectsAndKeys:
+								/* TODO */
+								[info.identifierForSelf stringValue], kMvrModernWiFiPeerIdentifierKey,
+								nil];
+		
+		[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourServiceType port:port TXTRecord:record];
 		[self addBrowserForServicesWithType:kMvrModernWiFiBonjourServiceType];
 		
 		incomingTransfers = [NSMutableSet new];
@@ -75,7 +80,15 @@
 {
 	L0Log(@"%@", s);
 	
-	MvrModernWiFiChannel* chan = [[MvrModernWiFiChannel alloc] initWithNetService:s];
+	NSDictionary* idents = [self stringsForKeys:[NSSet setWithObject:kMvrModernWiFiPeerIdentifierKey] inTXTRecordData:[s TXTRecordData] encoding:NSASCIIStringEncoding];
+	NSString* ident = [idents objectForKey:kMvrModernWiFiPeerIdentifierKey];
+	
+	if (!ident) {
+		L0Log(@"Service %@ has its UUID missing, so we don't display it.", s);
+		return;
+	}
+	
+	MvrModernWiFiChannel* chan = [[MvrModernWiFiChannel alloc] initWithNetService:s identifier:ident];
 	[self.mutableChannels addObject:chan];
 	[chan release];
 }

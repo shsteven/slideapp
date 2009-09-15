@@ -13,6 +13,8 @@
 #define kMvrModernWiFiBonjourServiceType @"_x-mover2._tcp."
 #define kMvrModernWiFiPort (25252)
 
+#define kMvrModernWiFiPeerIdentifierKey @"MvrID"
+
 @class L0KVODispatcher;
 
 @class AsyncSocket, MvrModernWiFiChannel;

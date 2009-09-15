@@ -46,6 +46,9 @@
 - (void) foundService:(NSNetService*) s;
 - (void) lostService:(NSNetService*) s;
 
+// Parsing TXT dictionaries.
+- (NSDictionary*) stringsForKeys:(NSSet*) keys inTXTRecordData:(NSData*) data encoding:(NSStringEncoding) enc;
+
 // Reachability. Gets automatically enabled or stopped when .enabled changes. -check forces a check.
 - (void) startMonitoringReachability;
 - (void) stopMonitoringReachability;

@@ -19,12 +19,16 @@
 	NSMutableSet* incomingTransfers;
 	
 	L0KVODispatcher* dispatcher;
+	
+	NSString* identifier;
 }
 
-- (id) initWithNetService:(NSNetService*) ns;
+- (id) initWithNetService:(NSNetService*) ns identifier:(NSString*) ident;
 
 - (BOOL) hasSameServiceAs:(NSNetService*) n;
 - (BOOL) isReachableThroughAddress:(NSData*) address;
+
+@property(readonly) NSString* identifier;
 
 // Subclasses only past this point.
 

@@ -226,6 +226,27 @@
 	L0AbstractMethod();
 }
 
+- (NSDictionary*) stringsForKeys:(NSSet*) keys inTXTRecordData:(NSData*) data encoding:(NSStringEncoding) enc;
+{
+	NSDictionary* d = [NSNetService dictionaryFromTXTRecordData:data];
+	NSMutableDictionary* result = [NSMutableDictionary dictionary];
+	
+	for (NSString* key in keys) {
+		id o = [d objectForKey:key];
+		if ([o isKindOfClass:[NSString class]])
+			[result setObject:o forKey:key];
+		else if ([o isKindOfClass:[NSData class]]) {
+			NSString* s = [[NSString alloc] initWithData:o encoding:enc];
+			if (s) {
+				[result setObject:s forKey:key];
+				[s release];
+			}
+		}
+	}
+	
+	return result;
+}
+
 
 #pragma mark -
 #pragma mark Publishing

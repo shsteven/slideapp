@@ -133,7 +133,15 @@
 
 - (void) foundService:(NSNetService *)s;
 {
-	MvrLegacyWiFiChannel* chan = [[MvrLegacyWiFiChannel alloc] initWithNetService:s];
+	NSDictionary* idents = [self stringsForKeys:[NSSet setWithObject:kMvrLegacyWiFiUniqueIdentifierKey] inTXTRecordData:[s TXTRecordData] encoding:NSASCIIStringEncoding];
+	NSString* ident = [idents objectForKey:kMvrLegacyWiFiUniqueIdentifierKey];
+	
+	if (!ident) {
+		L0Log(@"Service %@ has its UUID missing, generating one for this session.", s);
+		ident = [[L0UUID UUID] stringValue];
+	}
+	
+	MvrLegacyWiFiChannel* chan = [[MvrLegacyWiFiChannel alloc] initWithNetService:s identifier:ident];
 	[self.mutableChannels addObject:chan];
 	[chan release];
 }
