@@ -16,11 +16,11 @@
 
 @implementation MvrModernWiFi
 
-- (id) initWithBroadcastedName:(NSString*) name;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
 {
 	self = [super init];
 	if (self != nil) {
-		[self addServiceWithName:name type:kMvrModernWiFiBonjourServiceType port:kMvrModernWiFiPort TXTRecord:[NSDictionary dictionary] /* TODO */];
+		[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourServiceType port:kMvrModernWiFiPort TXTRecord:[NSDictionary dictionary] /* TODO */];
 		[self addBrowserForServicesWithType:kMvrModernWiFiBonjourServiceType];
 		
 		incomingTransfers = [NSMutableSet new];

@@ -16,6 +16,8 @@
 #import "MvrItem.h"
 #import "MvrUTISupport.h"
 
+#import "MvrPlatformInfo.h"
+
 #import <MuiKit/MuiKit.h>
 
 static const NSKeyValueObservingOptions kMvrKVOOptions = NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld|NSKeyValueObservingOptionInitial;
@@ -56,6 +58,65 @@ static id MvrBlockForLoggingPropertyChange(NSString* propertyName) {
 
 @end
 
+#pragma mark -
+#pragma mark Platform info
+
+@interface MvrWiFiToolPlatform : NSObject <MvrPlatformInfo> {
+	L0UUID* identifierForSelf;
+}
+
++ sharedInfo;
+
+@property(copy) NSString* displayNameForSelf;
+@property(readonly) L0UUID* identifierForSelf;
+
+@end
+
+@implementation MvrWiFiToolPlatform
+
+L0ObjCSingletonMethod(sharedInfo)
+
+- (id) init
+{
+	self = [super init];
+	if (self != nil) {
+		identifierForSelf = [L0UUID new];
+	}
+	return self;
+}
+
+@synthesize displayNameForSelf, identifierForSelf;
+
+- (void) dealloc;
+{
+	[identifierForSelf release];
+	self.displayNameForSelf = nil;
+	[super dealloc];
+}
+
+// -----
+
+- (MvrAppVariant) variant;
+{
+	return kMvrAppVariantNotMover;
+}
+
+- (NSString*) variantDisplayName;
+{
+	return @"mvr-wifi";
+}
+
+- (id) platform { return kMvrAppleMacOSXPlatform; }
+- (double) version { return kMvrUnknownVersion; }
+- (NSString*) userVisibleVersion { return @"n/a"; }
+
+@end
+
+
+
+#pragma mark -
+#pragma mark Implementation.
+
 @implementation MvrWiFiTool
 
 - (void) setPort:(NSString *) portString;
@@ -87,6 +148,8 @@ static id MvrBlockForLoggingPropertyChange(NSString* propertyName) {
 		return 1;
 	}
 	
+	[[MvrWiFiToolPlatform sharedInfo] setDisplayNameForSelf:self.name];
+	
 	if (!self.identifier)
 		self.identifier = @"net.infinite-labs.Mover.TestTools.WiFi";
 		
@@ -98,7 +161,7 @@ static id MvrBlockForLoggingPropertyChange(NSString* propertyName) {
 	
 	kvo = [[L0KVODispatcher alloc] initWithTarget:self];
 	
-	self.wifi = [[MvrWiFi alloc] initWithBroadcastedName:self.name];
+	self.wifi = [[MvrWiFi alloc] initWithPlatformInfo:[MvrWiFiToolPlatform sharedInfo]];
 	
 	if (port != 0)
 		self.wifi.modernWiFi.serverPort = port;
@@ -141,14 +204,12 @@ static id MvrBlockForLoggingPropertyChange(NSString* propertyName) {
 			   [self updateLoggingForChangesOfKeys:[NSSet setWithObjects:@"progress", @"cancelled", @"item", nil] inSetChanges:change]; 
 		   }];
 		 
-		 [kvo observe:@"hasOutgoingTransfers" ofObject:added options:kMvrKVOOptions usingBlock:MvrBlockForLoggingPropertyChange(@"hasOutgoingTransfers")];
 	 }
 	  removal:
 	 ^(id removed) {
 		 
 		 [kvo endObserving:@"outgoingTransfers" ofObject:removed];
 		 [kvo endObserving:@"incomingTransfers" ofObject:removed];
-		 [kvo endObserving:@"hasOutgoingTransfers" ofObject:removed];
 		 
 	 }];
 }

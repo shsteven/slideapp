@@ -11,11 +11,11 @@
 
 @implementation MvrWiFi
 
-- (id) initWithBroadcastedName:(NSString*) name;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
 {
 	self = [super init];
 	if (self != nil) {
-		self.modernWiFi = [[[MvrModernWiFi alloc] initWithBroadcastedName:name] autorelease];
+		self.modernWiFi = [[[MvrModernWiFi alloc] initWithPlatformInfo:info] autorelease];
 	}
 	return self;
 }

@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 
 #import "MvrModernWiFi.h"
+#import "MvrPlatformInfo.h"
 
 @interface MvrWiFi : NSObject {
 	MvrModernWiFi* modernWiFi;
 }
 
-- (id) initWithBroadcastedName:(NSString*) name;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
 
 @property(retain) MvrModernWiFi* modernWiFi;
 

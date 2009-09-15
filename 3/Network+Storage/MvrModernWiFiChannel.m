@@ -77,14 +77,9 @@
 	[[self mutableSetValueForKey:@"outgoingTransfers"] removeObject:transfer];
 }
 
-+ keyPathsForValuesAffectingHasOutgoingTransfers;
+- (NSSet*) outgoingTransfers;
 {
-	return [NSSet setWithObject:@"outgoingTransfers"];
-}
-
-- (BOOL) hasOutgoingTransfers;
-{
-	return [outgoingTransfers count] > 0;
+	return outgoingTransfers;
 }
 
 #pragma mark Incoming transfers

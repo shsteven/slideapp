@@ -68,17 +68,20 @@
 {
 	BOOL wasEnabled = enabled;
 	
-	if (!wasEnabled && e)
+	if (!wasEnabled && e) {
 		[self start];
-	else if (wasEnabled && !e)
+		[self startMonitoringReachability];
+	} else if (wasEnabled && !e) {
+		[self stopMonitoringReachability];
 		[self stop];
+	}
 	
 	enabled = e;
 }
 
 - (void) start;
 {
-	if (enabled)
+	if (enabled && !jammed)
 		return;
 	
 	for (NSNetService* n in netServices)
@@ -90,8 +93,6 @@
 		[browser searchForServicesOfType:type inDomain:@""];
 		[browsers setObject:type forKey:browser];
 	}
-	
-	[self startMonitoringReachability];
 }
 
 - (void) stop;
@@ -114,8 +115,6 @@
 	for (NSNetServiceBrowser* browser in [browsers allKeys])
 		[browser stop];
 	[browsers removeAllObjects];
-	
-	[self stopMonitoringReachability];
 }
 
 - (void) dealloc;
@@ -318,5 +317,18 @@ static void L0MoverWiFiNetworkStateChanged(SCNetworkReachabilityRef reach, SCNet
 }
 
 @synthesize jammed;
+- (void) setJammed:(BOOL) j;
+{
+	BOOL wasJammed = jammed;
+	
+	if (self.enabled) {
+		if (j && !wasJammed)
+			[self stop];
+		else if (!j && wasJammed)
+			[self start];
+	}
+	
+	jammed = j;
+}
 
 @end

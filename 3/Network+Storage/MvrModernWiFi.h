@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MvrWiFiScanner.h"
+#import "MvrPlatformInfo.h"
 
 #define kMvrModernWiFiBonjourServiceType @"_x-mover2._tcp."
 #define kMvrModernWiFiPort (25252)
@@ -24,6 +25,7 @@
 	L0KVODispatcher* dispatcher;
 }
 
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
 - (MvrModernWiFiChannel*) channelForAddress:(NSData*) address;
 
 @property int serverPort;
