@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MvrOutgoing.h"
 
 @class MvrItem;
 @class AsyncSocket;
 
 #import "MvrPacketBuilder.h"
 
-@interface MvrModernWiFiOutgoing : NSObject <MvrPacketBuilderDelegate> {
+@interface MvrModernWiFiOutgoing : NSObject <MvrPacketBuilderDelegate, MvrOutgoing> {
 	MvrItem* item;
 	NSArray* addresses;
 	

@@ -19,6 +19,8 @@
 #import <MuiKit/MuiKit.h>
 
 #import "MvrProtocol.h"
+#import "MvrItem.h"
+#import "MvrItemStorage.h"
 
 #import "MvrLegacyWiFiChannel.h"
 
@@ -189,7 +191,9 @@
 		return nil;
 	
 	MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:req.body];
-	return [[[c alloc] initWithStorage:storage type:type title:title] autorelease];
+	NSDictionary* metadata = [NSDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey];
+	
+	return [[[c alloc] initWithStorage:storage type:type metadata:metadata] autorelease];
 }
 
 @end
