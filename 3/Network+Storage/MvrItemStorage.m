@@ -204,12 +204,14 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 
 - (void) private_setPath:(NSString*) p;
 {
+	[self willChangeValueForKey:@"path"];
 	if (p != path) {
 		[path release];
 		path = [p copy];
 		
 		L0Log(@"path now = '%@', length = %llu", path, self.contentLength);
 	}
+	[self didChangeValueForKey:@"path"];
 }
 
 - (NSInputStream*) inputStream;
@@ -337,14 +339,12 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	if ([currentExt isEqual:ext])
 		return YES;
 	
-	[self willChangeValueForKey:@"path"];
 	NSString* storageDir = [self.path stringByDeletingPathExtension];
 	NSString* newPath = MvrUnusedPathInDirectoryWithExtension(storageDir, ext, NULL);
 	
 	BOOL done = [[NSFileManager defaultManager] moveItemAtPath:self.path toPath:newPath error:e];
 	if (done)
 		self.path = newPath;
-	[self didChangeValueForKey:@"path"];
 	
 	return done;
 }
