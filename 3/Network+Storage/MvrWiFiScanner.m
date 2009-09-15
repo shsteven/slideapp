@@ -229,6 +229,11 @@
 #pragma mark -
 #pragma mark Publishing
 
+- (NSMutableSet*) mutableChannels;
+{
+	return [self mutableSetValueForKey:@"channels"];
+}
+
 - (void) addChannelsObject:(id <MvrChannel>) chan;
 {
 	[channels addObject:chan];

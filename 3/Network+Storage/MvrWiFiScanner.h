@@ -55,6 +55,8 @@
 @property BOOL jammed;
 
 // Channels.
+@property(readonly) NSMutableSet* mutableChannels;
+
 - (void) addChannelsObject:(id <MvrChannel>) chan;
 - (void) removeChannelsObject:(id <MvrChannel>) chan;
 

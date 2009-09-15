@@ -20,14 +20,16 @@
 
 #import "MvrProtocol.h"
 
+#import "MvrLegacyWiFiChannel.h"
+
 #pragma mark -
 #pragma mark IPAddress additions
 
-@interface IPAddress (L0BonjourPeerFinder_NetServicesMatching)
-- (BOOL) _l0_comesFromAddressOfService:(NSNetService*) s;
+@interface IPAddress (MvrLegacyWiFiAdditions)
+- (BOOL) _l0_comesFromAnyAddressIn:(NSArray*) s;
 @end
 
-@implementation IPAddress (L0BonjourPeerFinder_NetServicesMatching)
+@implementation IPAddress (MvrLegacyWiFiAdditions)
 
 #define L0IPv6AddressIsEqual(a, b) (\
 (a).__u6_addr.__u6_addr32[0] == (b).__u6_addr.__u6_addr32[0] && \
@@ -35,9 +37,9 @@
 (a).__u6_addr.__u6_addr32[2] == (b).__u6_addr.__u6_addr32[2] && \
 (a).__u6_addr.__u6_addr32[3] == (b).__u6_addr.__u6_addr32[3])
 
-- (BOOL) _l0_comesFromAddressOfService:(NSNetService*) s;
+- (BOOL) _l0_comesFromAnyAddressIn:(NSArray*) s;
 {
-	for (NSData* addressData in [s addresses]) {
+	for (NSData* addressData in s) {
 		const struct sockaddr* s = [addressData bytes];
 		if (s->sa_family == AF_INET) {
 			const struct sockaddr_in* sIPv4 = (const struct sockaddr_in*) s;
@@ -100,6 +102,37 @@
 	[listener release]; listener = nil;
 	
 	[super stop];
+}
+
+#pragma mark -
+#pragma mark Peer management.
+
+- (MvrLegacyWiFiChannel*) channelForService:(NSNetService*) s;
+{
+	for (MvrLegacyWiFiChannel* channel in self.channels) {
+		if ([channel hasSameServiceAs:s])
+			return channel;
+	}
+	
+	return nil;
+}
+
+- (void) foundService:(NSNetService *)s;
+{
+	// TODO
+}
+
+- (void) lostService:(NSNetService *)s;
+{
+	// TODO
+}
+
+#pragma mark -
+#pragma mark Incoming transfers.
+
+- (void) listener: (TCPListener*)listener didAcceptConnection: (TCPConnection*)connection;
+{
+	// TODO
 }
 
 @end

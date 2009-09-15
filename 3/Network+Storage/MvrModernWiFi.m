@@ -83,7 +83,7 @@
 	L0Log(@"%@", s);
 	
 	MvrModernWiFiChannel* chan = [[MvrModernWiFiChannel alloc] initWithNetService:s];
-	[self addChannelsObject:chan];
+	[self.mutableChannels addObject:chan];
 	[chan release];
 }
 
@@ -93,7 +93,7 @@
 	
 	for (MvrModernWiFiChannel* chan in [[channels copy] autorelease]) {
 		if ([chan hasSameServiceAs:s])
-			[self removeChannelsObject:chan];
+			[self.mutableChannels removeObject:chan];
 	}
 }
 

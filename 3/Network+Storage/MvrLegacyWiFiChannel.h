@@ -1,17 +1,16 @@
 //
-//  MvrModernWiFiChannel.h
-//  Network
+//  MvrLegacyWiFiChannel.h
+//  Network+Storage
 //
-//  Created by ∞ on 12/09/09.
+//  Created by ∞ on 15/09/09.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
 #import "MvrWiFiChannel.h"
 
-@interface MvrModernWiFiChannel : MvrWiFiChannel {
-	
+@interface MvrLegacyWiFiChannel : MvrWiFiChannel {
+
 }
 
 @end

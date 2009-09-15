@@ -14,57 +14,16 @@
 
 @implementation MvrModernWiFiChannel
 
-- (id) initWithNetService:(NSNetService*) ns;
-{
-	self = [super init];
-	if (self != nil) {
-		netService = [ns retain];
-		outgoingTransfers = [NSMutableSet new];
-		incomingTransfers = [NSMutableSet new];
-		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
-	}
-	return self;
-}
-
-- (void) dealloc
-{
-	[dispatcher release];
-	[outgoingTransfers release];
-	[incomingTransfers release];
-	[netService release];
-	[super dealloc];
-}
-
-- (NSString*) displayName;
-{
-	return [netService name];
-}
-
-- (BOOL) hasSameServiceAs:(NSNetService*) n;
-{
-	return n == netService || ([n.name isEqual:netService.name] && [n.type isEqual:netService.type]);
-}
-
-- (BOOL) isReachableThroughAddress:(NSData*) address;
-{
-	for (NSData* d in netService.addresses) {
-		if ([d socketAddressIsEqualToAddress:address])
-			return YES;
-	}
-	
-	return NO;
-}
-
 #pragma mark Outgoing transfers
 
 - (void) beginSendingItem:(MvrItem*) item;
 {
-	MvrModernWiFiOutgoing* outgoing = [[MvrModernWiFiOutgoing alloc] initWithItem:item toAddresses:netService.addresses];
-	[dispatcher observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:finishedDidChange:) options:0];
+	MvrModernWiFiOutgoing* outgoing = [[MvrModernWiFiOutgoing alloc] initWithItem:item toAddresses:self.netService.addresses];
+
+	[self.dispatcher observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:finishedDidChange:) options:0];
 	
 	[outgoing start];
-	
-	[[self mutableSetValueForKey:@"outgoingTransfers"] addObject:outgoing];
+	[self.mutableOutgoingTransfers addObject:outgoing];
 	[outgoing release];
 }
 
@@ -73,32 +32,22 @@
 	if (!transfer.finished)
 		return;
 	
-	[dispatcher endObserving:@"finished" ofObject:transfer];
-	[[self mutableSetValueForKey:@"outgoingTransfers"] removeObject:transfer];
-}
-
-- (NSSet*) outgoingTransfers;
-{
-	return outgoingTransfers;
+	[self.dispatcher endObserving:@"finished" ofObject:transfer];
+	[self.mutableOutgoingTransfers removeObject:transfer];
 }
 
 #pragma mark Incoming transfers
 
 - (void) addIncomingTransfersObject:(MvrModernWiFiIncoming*) incoming;
 {
-	[incoming observeUsingDispatcher:dispatcher invokeAtItemOrCancelledChange:@selector(incomingTransfer:itemOrCancelledChanged:)];
-	[incomingTransfers addObject:incoming];
+	[incoming observeUsingDispatcher:self.dispatcher invokeAtItemOrCancelledChange:@selector(incomingTransfer:itemOrCancelledChanged:)];
+	[super addIncomingTransfersObject:incoming];
 }
 	 
 - (void) incomingTransfer:(MvrModernWiFiIncoming*) transfer itemOrCancelledChanged:(NSDictionary*) changed;
 {
-	[transfer endObservingUsingDispatcher:dispatcher];
-	[[self mutableSetValueForKey:@"incomingTransfers"] removeObject:transfer];
-}
-
-- (NSSet*) incomingTransfers;
-{
-	return incomingTransfers;
+	[transfer endObservingUsingDispatcher:self.dispatcher];
+	[self.mutableIncomingTransfers removeObject:transfer];
 }
 
 @end
