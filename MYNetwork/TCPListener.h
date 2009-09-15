@@ -23,6 +23,9 @@
     code, and set an instance as the listener's delegate property, in order to be informed
     of important events such as incoming connections. */
 @interface TCPListener : TCPEndpoint 
+#if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+<NSNetServiceDelegate, NSNetServiceBrowserDelegate>
+#endif
 {
     @private
     uint16_t _port;

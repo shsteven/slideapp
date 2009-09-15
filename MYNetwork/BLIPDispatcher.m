@@ -38,7 +38,7 @@
 
 @synthesize parent=_parent;
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
+#if !TARGET_OS_IPHONE || __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 - (void) addTarget: (MYTarget*)target forPredicate: (NSPredicate*)predicate
 {
     [_targets addObject: target];
@@ -59,7 +59,7 @@
 
 - (void) addTarget: (MYTarget*)target forValueOfProperty: (NSString*)value forKey: (NSString*)key
 {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED <= 30000
     Assert(target);
     [_predicates addObject: $array(key,value)];
     [_targets addObject: target];

@@ -12,6 +12,9 @@
 
 /** Abstract superclass for data streams, used by TCPConnection. */
 @interface TCPStream : NSObject 
+#if !TARGET_OS_IPHONE && MAC_OS_X_VERSION_10_6 <= MAC_OS_X_VERSION_MAX_ALLOWED
+<NSStreamDelegate>
+#endif
 {
     TCPConnection *_conn;
     NSStream *_stream;
