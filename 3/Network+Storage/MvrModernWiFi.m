@@ -16,27 +16,20 @@
 
 @implementation MvrModernWiFi
 
-- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port;
 {
 	self = [super init];
 	if (self != nil) {
-		[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourServiceType port:kMvrModernWiFiPort TXTRecord:[NSDictionary dictionary] /* TODO */];
+		[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourServiceType port:port TXTRecord:[NSDictionary dictionary] /* TODO */];
 		[self addBrowserForServicesWithType:kMvrModernWiFiBonjourServiceType];
 		
 		incomingTransfers = [NSMutableSet new];
 		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 		
-		serverPort = kMvrModernWiFiPort;
+		serverPort = port;
  	}
 
 	return self;
-}
-
-@synthesize serverPort;
-- (void) setServerPort:(int) port;
-{
-	NSAssert(!self.enabled, @"Can only change port when the server is stopped");
-	serverPort = port;
 }
 
 - (void) start;

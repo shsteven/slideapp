@@ -25,9 +25,7 @@
 	L0KVODispatcher* dispatcher;
 }
 
-- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port;
 - (MvrModernWiFiChannel*) channelForAddress:(NSData*) address;
-
-@property int serverPort;
 
 @end

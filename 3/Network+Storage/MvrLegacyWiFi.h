@@ -23,9 +23,10 @@
 
 @interface MvrLegacyWiFi : MvrWiFiScanner <TCPListenerDelegate> {
 	BLIPListener* listener;
+	int serverPort;
 }
 
-- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port;
 
 @end
 

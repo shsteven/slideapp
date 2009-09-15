@@ -8,15 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MvrModernWiFi.h"
 #import "MvrPlatformInfo.h"
+
+@class MvrModernWiFi, MvrLegacyWiFi;
 
 @interface MvrWiFi : NSObject {
 	MvrModernWiFi* modernWiFi;
+	MvrLegacyWiFi* legacyWiFi;
 }
 
-- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info modernPort:(int) port legacyPort:(int) legacyPort;
 
 @property(retain) MvrModernWiFi* modernWiFi;
+@property(retain) MvrLegacyWiFi* legacyWiFi;
 
 @end

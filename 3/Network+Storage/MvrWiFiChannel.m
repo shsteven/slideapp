@@ -66,7 +66,7 @@
 
 - (NSMutableSet*) mutableIncomingTransfers;
 {
-	return [self mutableSetValueForKey:@"outgoingTransfers"];
+	return [self mutableSetValueForKey:@"incomingTransfers"];
 }
 
 - (NSSet*) incomingTransfers;

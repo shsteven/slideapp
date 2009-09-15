@@ -65,7 +65,7 @@
 
 @implementation MvrLegacyWiFi
 
-- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port;
 {
 	if (self = [super init]) {
 		NSString* name = [info displayNameForSelf];
@@ -76,11 +76,13 @@
 								   [[info identifierForSelf] stringValue], kMvrLegacyWiFiUniqueIdentifierKey,
 								   nil];
 		
-		[self addServiceWithName:name type:kMvrLegacyWiFiServiceName_1_0 port:kMvrLegacyWiFiPort TXTRecord:txtRecord];
-		[self addServiceWithName:name type:kMvrLegacyWiFiServiceName_2_0 port:kMvrLegacyWiFiPort TXTRecord:txtRecord];
+		[self addServiceWithName:name type:kMvrLegacyWiFiServiceName_1_0 port:port TXTRecord:txtRecord];
+		[self addServiceWithName:name type:kMvrLegacyWiFiServiceName_2_0 port:port TXTRecord:txtRecord];
 		
 		[self addBrowserForServicesWithType:kMvrLegacyWiFiServiceName_1_0];
 		[self addBrowserForServicesWithType:kMvrLegacyWiFiServiceName_2_0];
+		
+		serverPort = port;
 	}
 	
 	return self;
@@ -90,7 +92,7 @@
 {
 	[super start];
 	
-	listener = [[BLIPListener alloc] initWithPort:kMvrLegacyWiFiPort];
+	listener = [[BLIPListener alloc] initWithPort:serverPort];
 	listener.delegate = self;
 	
 	NSError* e;

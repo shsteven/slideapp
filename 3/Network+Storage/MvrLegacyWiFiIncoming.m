@@ -32,6 +32,9 @@
 
 - (void) connection: (BLIPConnection*)connection receivedRequest: (BLIPRequest*)request;
 {
+	// we could get released soon!
+	[[self retain] autorelease];
+	
 	MvrItem* item = [MvrItem itemWithContentsOfBLIPRequest:request];
 	self.item = item;
 	self.cancelled = (item == nil);

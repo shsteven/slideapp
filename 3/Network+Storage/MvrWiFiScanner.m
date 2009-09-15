@@ -110,7 +110,7 @@
 	for (NSNetService* s in servicesBeingResolved)
 		[s stop];
 	
-	[servicesBeingResolved release];
+	[servicesBeingResolved removeAllObjects];
 	
 	for (NSNetServiceBrowser* browser in [browsers allKeys])
 		[browser stop];
@@ -133,6 +133,7 @@
 
 	[browsers release];
 	[channels release];
+	[servicesBeingResolved release];
 	
 	[super dealloc];
 }
