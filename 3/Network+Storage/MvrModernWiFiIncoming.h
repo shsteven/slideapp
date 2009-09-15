@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MvrWiFiIncoming.h"
 
 #import "MvrChannel.h"
 #import "MvrPacketParser.h"
@@ -18,12 +19,10 @@
 
 @class L0KVODispatcher;
 
-@interface MvrModernWiFiIncoming : NSObject <MvrPacketParserDelegate, MvrIncoming> {
+@interface MvrModernWiFiIncoming : MvrWiFiIncoming <MvrPacketParserDelegate> {
 	AsyncSocket* socket;
-	BOOL finished;
 	MvrPacketParser* parser;
 	BOOL isNewPacket;
-	BOOL isCancelled;
 	BOOL hasCheckedForMetadata;
 	
 	MvrItemStorage* itemStorage;
@@ -31,27 +30,9 @@
 	
 	NSMutableDictionary* metadata;
 	MvrModernWiFiChannel* channel;
-	MvrModernWiFi* scanner;
-	
-	float progress;
-	
-	MvrItem* item;
+	MvrModernWiFi* scanner;	
 }
 
 - (id) initWithSocket:(AsyncSocket*) s scanner:(MvrModernWiFi*) scanner;
-
-@property(readonly) BOOL finished;
-@property(readonly) float progress;
-
-@property(readonly, retain) MvrItem* item;
-@property(readonly) BOOL cancelled;
-
-@end
-
-@interface MvrModernWiFiIncoming (MvrKVOUtilityMethods)
-
-- (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemChange:(SEL) itemSel atCancelledChange:(SEL) cancelSel;
-- (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemOrCancelledChange:(SEL) itemAndCancelSel;
-- (void) endObservingUsingDispatcher:(L0KVODispatcher*) d;
 
 @end

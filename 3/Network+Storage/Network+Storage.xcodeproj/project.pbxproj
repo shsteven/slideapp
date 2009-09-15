@@ -15,6 +15,14 @@
 		15071826105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 15071824105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m */; };
 		15071827105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 15071824105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m */; };
 		15071828105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 15071824105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m */; };
+		15071861105FC36800FA0BF4 /* MvrWiFiIncoming.h in Headers */ = {isa = PBXBuildFile; fileRef = 1507185F105FC36800FA0BF4 /* MvrWiFiIncoming.h */; };
+		15071862105FC36800FA0BF4 /* MvrWiFiIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 15071860105FC36800FA0BF4 /* MvrWiFiIncoming.m */; };
+		15071863105FC36800FA0BF4 /* MvrWiFiIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 15071860105FC36800FA0BF4 /* MvrWiFiIncoming.m */; };
+		15071864105FC36800FA0BF4 /* MvrWiFiIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 15071860105FC36800FA0BF4 /* MvrWiFiIncoming.m */; };
+		15071872105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.h in Headers */ = {isa = PBXBuildFile; fileRef = 15071870105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.h */; };
+		15071873105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 15071871105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m */; };
+		15071874105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 15071871105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m */; };
+		15071875105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m in Sources */ = {isa = PBXBuildFile; fileRef = 15071871105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m */; };
 		153AF19A105C17B300DD862F /* MvrScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF199105C17B300DD862F /* MvrScanner.h */; };
 		153AF1A2105C18F800DD862F /* MvrChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF1A1105C18F800DD862F /* MvrChannel.h */; };
 		153AF1A5105C192300DD862F /* MvrIncoming.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF1A4105C192300DD862F /* MvrIncoming.h */; };
@@ -253,6 +261,10 @@
 		150717C7105FAE4700FA0BF4 /* MvrWiFiChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiChannel.m; sourceTree = "<group>"; };
 		15071823105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrLegacyWiFiChannel.h; sourceTree = "<group>"; };
 		15071824105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrLegacyWiFiChannel.m; sourceTree = "<group>"; };
+		1507185F105FC36800FA0BF4 /* MvrWiFiIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrWiFiIncoming.h; sourceTree = "<group>"; };
+		15071860105FC36800FA0BF4 /* MvrWiFiIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrWiFiIncoming.m; sourceTree = "<group>"; };
+		15071870105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrLegacyWiFiIncoming.h; sourceTree = "<group>"; };
+		15071871105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrLegacyWiFiIncoming.m; sourceTree = "<group>"; };
 		153AF199105C17B300DD862F /* MvrScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrScanner.h; sourceTree = "<group>"; };
 		153AF1A1105C18F800DD862F /* MvrChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrChannel.h; sourceTree = "<group>"; };
 		153AF1A4105C192300DD862F /* MvrIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrIncoming.h; sourceTree = "<group>"; };
@@ -560,6 +572,8 @@
 				1593E9C0105BBE4300220989 /* MvrWiFiScanner.m */,
 				150717C6105FAE4700FA0BF4 /* MvrWiFiChannel.h */,
 				150717C7105FAE4700FA0BF4 /* MvrWiFiChannel.m */,
+				1507185F105FC36800FA0BF4 /* MvrWiFiIncoming.h */,
+				15071860105FC36800FA0BF4 /* MvrWiFiIncoming.m */,
 				15F09613105E55DD0016E2B6 /* Legacy Wi-Fi */,
 				153AF1AD105C214C00DD862F /* Modern Wi-Fi */,
 			);
@@ -575,6 +589,8 @@
 				15F096C1105E57690016E2B6 /* MvrLegacyWiFi.m */,
 				15071823105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.h */,
 				15071824105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m */,
+				15071870105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.h */,
+				15071871105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m */,
 			);
 			name = "Legacy Wi-Fi";
 			sourceTree = "<group>";
@@ -718,6 +734,8 @@
 				15833F10105F6F890015388E /* MvrPlatformInfo.h in Headers */,
 				150717C8105FAE4700FA0BF4 /* MvrWiFiChannel.h in Headers */,
 				15071825105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.h in Headers */,
+				15071861105FC36800FA0BF4 /* MvrWiFiIncoming.h in Headers */,
+				15071872105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -915,6 +933,8 @@
 				15833F15105F739E0015388E /* MvrPlatformInfo.m in Sources */,
 				150717CB105FAE4700FA0BF4 /* MvrWiFiChannel.m in Sources */,
 				15071828105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m in Sources */,
+				15071863105FC36800FA0BF4 /* MvrWiFiIncoming.m in Sources */,
+				15071875105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,6 +976,8 @@
 				15833F14105F739E0015388E /* MvrPlatformInfo.m in Sources */,
 				150717CA105FAE4700FA0BF4 /* MvrWiFiChannel.m in Sources */,
 				15071827105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m in Sources */,
+				15071864105FC36800FA0BF4 /* MvrWiFiIncoming.m in Sources */,
+				15071874105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,6 +1021,8 @@
 				15833F13105F739E0015388E /* MvrPlatformInfo.m in Sources */,
 				150717C9105FAE4700FA0BF4 /* MvrWiFiChannel.m in Sources */,
 				15071826105FB1CE00FA0BF4 /* MvrLegacyWiFiChannel.m in Sources */,
+				15071862105FC36800FA0BF4 /* MvrWiFiIncoming.m in Sources */,
+				15071873105FC48600FA0BF4 /* MvrLegacyWiFiIncoming.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "MvrWiFiChannel.h"
 
+@class BLIPConnection;
+
 @interface MvrLegacyWiFiChannel : MvrWiFiChannel {
 
 }
+
+- (void) addIncomingTransferWithConnection:(BLIPConnection*) conn;
 
 @end

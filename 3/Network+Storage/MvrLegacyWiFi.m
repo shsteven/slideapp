@@ -107,6 +107,16 @@
 #pragma mark -
 #pragma mark Peer management.
 
+- (MvrLegacyWiFiChannel*) channelForIPAddress:(IPAddress*) addr;
+{
+	for (MvrLegacyWiFiChannel* channel in self.channels) {
+		if ([addr _l0_comesFromAnyAddressIn:channel.netService.addresses])
+			return channel;
+	}
+	
+	return nil;
+}
+
 - (MvrLegacyWiFiChannel*) channelForService:(NSNetService*) s;
 {
 	for (MvrLegacyWiFiChannel* channel in self.channels) {
@@ -119,12 +129,16 @@
 
 - (void) foundService:(NSNetService *)s;
 {
-	// TODO
+	MvrLegacyWiFiChannel* chan = [[MvrLegacyWiFiChannel alloc] initWithNetService:s];
+	[self.mutableChannels addObject:chan];
+	[chan release];
 }
 
 - (void) lostService:(NSNetService *)s;
 {
-	// TODO
+	MvrLegacyWiFiChannel* chan = [self channelForService:s];
+	if (chan)
+		[self.mutableChannels removeObject:chan];
 }
 
 #pragma mark -
@@ -132,7 +146,50 @@
 
 - (void) listener: (TCPListener*)listener didAcceptConnection: (TCPConnection*)connection;
 {
-	// TODO
+	[[self channelForIPAddress:connection.address] addIncomingTransferWithConnection:(BLIPConnection*)connection];
+}
+
+@end
+
+#pragma mark -
+#pragma mark BLIP additions to MvrItem.
+
+@implementation MvrItem (MvrLegacyWiFi)
+
+- (BLIPRequest*) contentsAsBLIPRequest;
+{
+	NSDictionary* properties = [NSDictionary dictionaryWithObjectsAndKeys:
+								self.title, @"L0SlideItemTitle",
+								self.type, @"L0SlideItemType",
+								@"1", @"L0SlideItemWireProtocolVersion",
+								nil];
+	
+	
+	return [BLIPRequest requestWithBody:self.storage.data
+							 properties:properties];
+}
+
++ (id) itemWithContentsOfBLIPRequest:(BLIPRequest*) req;
+{
+	NSString* version = [req valueOfProperty:@"L0SlideItemWireProtocolVersion"];
+	if (![version isEqualToString:@"1"])
+		return nil;
+	
+	NSString* type = [req valueOfProperty:@"L0SlideItemType"];
+	if (!type)
+		return nil;
+	
+	
+	NSString* title = [req valueOfProperty:@"L0SlideItemTitle"];
+	if (!title)
+		return nil;
+	
+	Class c = [self classForType:type];
+	if (!c)
+		return nil;
+	
+	MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:req.body];
+	return [[[c alloc] initWithStorage:storage type:type title:title] autorelease];
 }
 
 @end

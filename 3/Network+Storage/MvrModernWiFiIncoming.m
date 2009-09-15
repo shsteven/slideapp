@@ -24,11 +24,6 @@
 - (void) produceItem;
 - (void) clear;
 
-@property(assign) float progress;
-
-@property(setter=private_setItem:, retain) MvrItem* item;
-@property(setter=private_setCancelled:) BOOL cancelled;
-
 @end
 
 static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSData* data, NSError** e) {
@@ -73,8 +68,6 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	
 	return self;
 }
-
-@synthesize finished, progress;
 
 - (void) dealloc;
 {
@@ -133,7 +126,7 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 
 - (void) packetParser:(MvrPacketParser*) p didReceiveMetadataItemWithKey:(NSString*) key value:(NSString*) value;
 {
-	if (isCancelled) return;
+	if (self.cancelled) return;
 	
 	self.progress = p.progress;
 	[metadata setObject:value forKey:key];
@@ -154,10 +147,10 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 
 - (void) packetParser:(MvrPacketParser*) p didReceivePayloadPart:(NSData*) d forKey:(NSString*) key;
 {
-	if (isCancelled) return;
+	if (self.cancelled) return;
 	
 	[self checkMetadataIfNeeded];
-	if (isCancelled) return; // could cancel in checkMetadata...
+	if (self.cancelled) return; // could cancel in checkMetadata...
 	
 	if (![key isEqual:kMvrProtocolExternalRepresentationPayloadKey])
 		return;
@@ -243,33 +236,6 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 		[itemStorage release];
 		itemStorage = nil;
 	}
-}
-
-@synthesize item;
-L0PrivateSetter(private_setItem:, MvrItem*, item)
-
-@synthesize cancelled = isCancelled;
-L0PrivateAssignSetterNamedForKey(private_setCancelled:, BOOL, isCancelled, @"cancelled")
-
-@end
-
-@implementation MvrModernWiFiIncoming (MvrKVOUtilityMethods)
-
-- (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemChange:(SEL) itemSel atCancelledChange:(SEL) cancelSel;
-{
-	[d observe:@"item" ofObject:self usingSelector:itemSel options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
-	[d observe:@"cancelled" ofObject:self usingSelector:cancelSel options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
-}
-
-- (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemOrCancelledChange:(SEL) itemAndCancelSel;
-{
-	[self observeUsingDispatcher:d invokeAtItemChange:itemAndCancelSel atCancelledChange:itemAndCancelSel];
-}
-
-- (void) endObservingUsingDispatcher:(L0KVODispatcher*) d;
-{
-	[d endObserving:@"cancelled" ofObject:self];
-	[d endObserving:@"item" ofObject:self];
 }
 
 @end

@@ -28,3 +28,15 @@
 - (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info;
 
 @end
+
+#pragma mark -
+#pragma mark BLIP additions to MvrItem.
+
+#import "MvrItem.h"
+
+@interface MvrItem (MvrLegacyWiFi)
+
+- (BLIPRequest*) contentsAsBLIPRequest;
++ (id) itemWithContentsOfBLIPRequest:(BLIPRequest*) req;
+
+@end
