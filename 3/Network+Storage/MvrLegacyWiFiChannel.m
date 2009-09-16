@@ -7,9 +7,11 @@
 //
 
 #import "MvrLegacyWiFiChannel.h"
-#import "MvrLegacyWiFiIncoming.h"
 
 #import <MuiKit/MuiKit.h>
+
+#import "MvrLegacyWiFiIncoming.h"
+#import "MvrLegacyWiFiOutgoing.h"
 
 @implementation MvrLegacyWiFiChannel
 
@@ -36,6 +38,23 @@
 #pragma mark -
 #pragma mark Outgoing
 
+- (void) beginSendingItem:(MvrItem *)item;
+{
+	MvrLegacyWiFiOutgoing* outgoing = [[MvrLegacyWiFiOutgoing alloc] initWithItem:item toNetService:self.netService];
+	[self.dispatcher observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:didChangeFinishedKey:) options:0];
+	
+	[outgoing start];
+	[self.mutableOutgoingTransfers addObject:outgoing];
+	
+	[outgoing release];
+}
 
+- (void) outgoingTransfer:(MvrLegacyWiFiOutgoing*) outgoing didChangeFinishedKey:(NSDictionary*) d;
+{
+	if (outgoing.finished) {
+		[self.dispatcher endObserving:@"finished" ofObject:outgoing];
+		[self.mutableOutgoingTransfers removeObject:outgoing];
+	}
+}
 
 @end

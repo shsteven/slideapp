@@ -46,6 +46,7 @@
 {
 	connection = [[BLIPConnection alloc] initToNetService:service];
 	connection.delegate = self;
+	[connection open];
 }
 
 - (void) finish;

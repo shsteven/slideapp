@@ -19,6 +19,7 @@
 	BLIPConnection* connection;
 }
 
+- (id) initWithItem:(MvrItem*) i toNetService:(NSNetService*) s;
 - (void) start;
 
 @end
