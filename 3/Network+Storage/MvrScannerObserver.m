@@ -133,6 +133,25 @@
 	[self endObservingIncomingTransfer:incoming];
 }
 
+
+- (void) channel:(id <MvrChannel>) chan didChangeOutgoingTransfersKey:(NSDictionary*) change;
+{
+	[kvo forEachSetChange:change forObject:chan invokeSelectorForInsertion:@selector(channel:didAddOutgoingTransfer:) removal:@selector(channel:didRemoveOutgoingTransfer:)];
+}
+
+- (void) channel:(id <MvrChannel>) chan didAddOutgoingTransfer:(id <MvrOutgoing>) outgoing;
+{
+	L0Log(@"%@.outgoingTransfers += %@", chan, outgoing);
+	[self beginObservingOutgoingTransfer:outgoing ofChannel:chan];
+}
+
+- (void) channel:(id <MvrChannel>) chan didRemoveOutgoingTransfer:(id <MvrOutgoing>) outgoing;
+{
+	L0Log(@"%@.outgoingTransfers -= %@", chan, outgoing);
+	[self endObservingOutgoingTransfer:outgoing];
+}
+
+
 - (void) beginObservingChannel:(id <MvrChannel>) chan;
 {
 	L0Log(@"%@", chan);
@@ -200,7 +219,7 @@
 
 - (void) outgoingTransfer:(id <MvrOutgoing>) outgoing didChangeFinishedKey:(NSDictionary*) d;
 {
-	L0Log(@"%@.finished == %d", outgoing.finished);
+	L0Log(@"%@.finished == %d", outgoing, outgoing.finished);
 	if (outgoing.finished) {
 		[delegate outgoingTransferDidEndSending:outgoing];
 		[self endObservingOutgoingTransfer:outgoing];
