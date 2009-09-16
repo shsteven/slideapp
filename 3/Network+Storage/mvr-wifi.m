@@ -290,6 +290,16 @@ L0ObjCSingletonMethod(sharedInfo)
 	stopped = YES;
 }
 
+- (NSArray*) channels;
+{
+	return [self.wifi.channels allObjects];
+}
+
+- (NSArray*) items;
+{
+	return [self.central.storedItems allObjects];
+}
+
 - (id) makeItemWithFile:(NSString*) f type:(NSString*) type;
 {
 	NSError* e;
@@ -300,10 +310,42 @@ L0ObjCSingletonMethod(sharedInfo)
 	return [MvrItem itemWithStorage:s type:type metadata:[NSDictionary dictionary]];
 }
 
+- (id) storeItemWithFile:(NSString*) f type:(NSString*) type;
+{
+	MvrItem* item = [self makeItemWithFile:f type:type];
+	[self.central.mutableStoredItems addObject:item];
+	return item;
+}
+
 - (id) makeItemWithFile:(NSString *)f;
 {
 	return [self makeItemWithFile:f type:(id) kUTTypeData];
 }
+
+// KVO array proxies and DO interact badly.
+
+- (void) addStoredItem:(MvrItem*) i;
+{
+	[self.central.mutableStoredItems addObject:i];
+}
+
+- (void) removeStoredItem:(MvrItem*) i;
+{
+	[self.central.mutableStoredItems removeObject:i];
+}
+
+- (void) removeAllStoredItems;
+{
+	[self.central.mutableStoredItems removeAllObjects];
+}
+
+// Access to UTI constants.
+
+// These correspond to Mover2 L0MoverItem subclasses.
+- textType { return (id) kUTTypeUTF8PlainText; }
+- URLType { return (id) kUTTypeURL; }
+- PNGImageType { return (id) kUTTypePNG; }
+- addressBookAsDictType { return @"net.infinite-labs.Slide.AddressBookPersonPropertyList"; }
 
 #pragma mark Boilerplate
 
