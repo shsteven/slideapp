@@ -130,7 +130,7 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 
 - (void) start;
 {
-	L0Log(@"%@", self);
+	L0Note();
 	
 	if (sealed) return;
 	NSAssert(self.runLoop == [NSRunLoop currentRunLoop], @"Do not call -start on a thread other than the one where you scheduled the builder. Either call -start on the thread where you created the object, or use the .runLoop property to change what run loop to use to schedule stuff.");

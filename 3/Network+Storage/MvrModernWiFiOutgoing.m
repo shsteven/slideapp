@@ -113,7 +113,7 @@
 
 - (void) onSocket:(AsyncSocket*) sock didConnectToHost:(NSString*) host port:(UInt16) port;
 {
-	L0Log(@"%@: %@:%d", self, host, port);
+	L0Log(@"%@:%d", host, port);
 	[self buildPacket];
 }
 

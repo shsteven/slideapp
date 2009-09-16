@@ -10,16 +10,14 @@
 
 #pragma mark Directories
 
+// The temporary directory where to store stuff for nonpersistent MvrItemStorage objects.
 // Process-wide. Ick but things got ugly quickly otherwise.
-
 // Defaults to NSTemporaryDirectory(). Calling ...Set...(nil) resets to default.
 extern NSString* MvrStorageTemporaryDirectory();
 extern void MvrStorageSetTemporaryDirectory(NSString* path);
 
-// No default. Calling the first function before calling the second raises an exception.
-// Calling ...Set...(nil) resets to default.
-extern NSString* MvrStoragePersistentDirectory();
-extern void MvrStorageSetPersistentDirectory(NSString* path);
+extern NSString* MvrUnusedPathInDirectoryWithExtension(NSString* path, NSString* ext, NSString** name);
+extern NSString* MvrUnusedTemporaryFileNameWithPathExtension(NSString* ext);
 
 #pragma mark -
 #pragma mark Item storage
@@ -48,7 +46,7 @@ typedef NSUInteger MvrStorageDestination;
 // Creating a new item storage.
 + itemStorage; // a new empty one.
 + itemStorageWithData:(NSData*) data;
-+ itemStorageFromFileAtPath:(NSString*) path error:(NSError**) e; // If not in NSTemporaryDirectory(), it might be copied.
++ itemStorageFromFileAtPath:(NSString*) path error:(NSError**) e; // If not in MvrStorageTemporaryDirectory(), it might be copied.
 // + itemStorageWithContentsOfStream:(NSInputStream*) stream;
 
 // If NO, the contents will be lost when the item storage is deallocated.

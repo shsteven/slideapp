@@ -82,7 +82,7 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;
 {
-	L0Log(@"%@: %@:%d", self, host, port);
+	L0Log(@"%@:%d", host, port);
 	channel = [[scanner channelForAddress:[sock connectedHostAddress]] retain];
 	if (!channel)
 		[self cancel];
@@ -110,7 +110,7 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err;
 {
-	L0Log(@"%@: %@", self, err);
+	L0Log(@"%@", err);
 	
 	if (err)
 		[self cancel];

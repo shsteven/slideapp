@@ -152,7 +152,7 @@ static NSMutableDictionary* MvrItemTypesToClasses = nil;
 
 - (void) clearCache;
 {
-	L0Log(@"Clearing for %@", self);
+	L0Note();
 	if (storage) {
 		[storage clearCache];
 		[autocache removeAllObjects];

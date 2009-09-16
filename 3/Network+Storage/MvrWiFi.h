@@ -10,15 +10,16 @@
 #import "MvrScanner.h"
 
 #import "MvrPlatformInfo.h"
+#import "MvrScannerObserver.h"
 
 @class MvrModernWiFi, MvrLegacyWiFi, L0KVODispatcher;
 
-@interface MvrWiFi : NSObject <MvrScanner> {
+@interface MvrWiFi : NSObject <MvrScanner, MvrScannerObserverDelegate> {
 	MvrModernWiFi* modernWiFi;
 	MvrLegacyWiFi* legacyWiFi;
 
 	NSMutableDictionary* channelsByIdentifier;
-	L0KVODispatcher* dispatcher;
+	MvrScannerObserver* modernObserver, * legacyObserver;
 }
 
 - (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info modernPort:(int) port legacyPort:(int) legacyPort;

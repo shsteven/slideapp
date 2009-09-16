@@ -32,8 +32,6 @@
 - (void) addChannel:(id) chan;
 - (BOOL) removeChannelAndReturnIfEmpty:(id) chan;
 
-- (void) changeKey:(NSString*) key withKVOChange:(NSDictionary*) change;
-
 - askChannelsForKey:(NSString*) key;
 
 @end
@@ -61,42 +59,6 @@
 	[super dealloc];
 }
 
-- (void) setModernChannel:(MvrModernWiFiChannel *) chan;
-{
-	if (chan != modernChannel) {
-		if (modernChannel) {
-			[dispatcher endObserving:@"incomingTransfers" ofObject:modernChannel];
-			[dispatcher endObserving:@"outgoingTransfers" ofObject:modernChannel];
-		}
-		
-		[modernChannel release];
-		modernChannel = [chan retain];
-		
-		if (modernChannel) {
-			[dispatcher observe:@"incomingTransfers" ofObject:modernChannel usingSelector:@selector(channel:didChangeIncomingTransfers:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
-			[dispatcher observe:@"outgoingTransfers" ofObject:modernChannel usingSelector:@selector(channel:didChangeOutgoingTransfers:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
-		}
-	}
-}
-
-- (void) setLegacyChannel:(MvrLegacyWiFiChannel *) chan;
-{
-	if (chan != legacyChannel) {
-		if (legacyChannel) {
-			[dispatcher endObserving:@"incomingTransfers" ofObject:legacyChannel];
-			[dispatcher endObserving:@"outgoingTransfers" ofObject:legacyChannel];
-		}
-		
-		[legacyChannel release];
-		legacyChannel = [chan retain];
-		
-		if (legacyChannel) {
-			[dispatcher observe:@"incomingTransfers" ofObject:legacyChannel usingSelector:@selector(channel:didChangeIncomingTransfers:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
-			[dispatcher observe:@"outgoingTransfers" ofObject:legacyChannel usingSelector:@selector(channel:didChangeOutgoingTransfers:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
-		}
-	}
-}
-
 - (void) addChannel:(id) chan;
 {
 	if ([chan isKindOfClass:[MvrModernWiFiChannel class]])
@@ -115,29 +77,6 @@
 		self.legacyChannel = chan;
 
 	return !self.modernChannel && !self.legacyChannel;
-}
-
-- (void) channel:(id) chan didChangeIncomingTransfers:(NSDictionary*) change;
-{
-	[self changeKey:@"incomingTransfers" withKVOChange:change];
-}
-
-- (void) channel:(id) chan didChangeOutgoingTransfers:(NSDictionary*) change;
-{
-	[self changeKey:@"outgoingTransfers" withKVOChange:change];
-}
-
-- (void) changeKey:(NSString*) key withKVOChange:(NSDictionary*) change;
-{
-	NSMutableSet* set = [self mutableSetValueForKey:@"incomingTransfers"];
-	
-	NSSet* objects;
-	
-	if ((objects = L0KVOPreviousValue(change)))
-		[set minusSet:objects];
-	
-	if ((objects = L0KVOChangedValue(change)))
-		[set unionSet:objects];
 }
 
 - (NSSet*) incomingTransfers;
@@ -186,15 +125,8 @@
 		self.legacyWiFi = [[[MvrLegacyWiFi alloc] initWithPlatformInfo:info serverPort:legacyPort] autorelease];
 		
 		channelsByIdentifier = [NSMutableDictionary new];
-		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
-		
-		[dispatcher observe:@"channels" ofObject:self.modernWiFi usingSelector:@selector(scanner:didChangeChannels:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
-		[dispatcher observe:@"channels" ofObject:self.legacyWiFi usingSelector:@selector(scanner:didChangeChannels:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
-		
-		[dispatcher observe:@"enabled" ofObject:self.modernWiFi usingSelector:@selector(scanner:didChangeEnabledKey:) options:NSKeyValueObservingOptionPrior];
-		[dispatcher observe:@"jammed" ofObject:self.modernWiFi usingSelector:@selector(scanner:didChangeEnabledKey:) options:NSKeyValueObservingOptionPrior];
-		[dispatcher observe:@"enabled" ofObject:self.legacyWiFi usingSelector:@selector(scanner:didChangeJammedKey:) options:NSKeyValueObservingOptionPrior];
-		[dispatcher observe:@"jammed" ofObject:self.legacyWiFi usingSelector:@selector(scanner:didChangeJammedKey:) options:NSKeyValueObservingOptionPrior];
+		modernObserver = [[MvrScannerObserver alloc] initWithScanner:self.modernWiFi delegate:self];
+		legacyObserver = [[MvrScannerObserver alloc] initWithScanner:self.legacyWiFi delegate:self];
 	}
 	
 	return self;
@@ -204,7 +136,8 @@
 
 - (void) dealloc;
 {
-	[dispatcher release];
+	[modernObserver release];
+	[legacyObserver release];
 	
 	self.modernWiFi = nil;
 	self.legacyWiFi = nil;
@@ -219,6 +152,11 @@
 	return self.modernWiFi.enabled || self.legacyWiFi.enabled;
 }
 
++ (NSSet *) keyPathsForValuesAffectingEnabled;
+{
+	return [NSSet setWithObjects:@"modernWiFi.enabled", @"legacyWiFi.enabled", nil];
+}
+
 - (void) setEnabled:(BOOL) e;
 {
 	self.modernWiFi.enabled = e;
@@ -230,62 +168,86 @@
 	return self.modernWiFi.jammed && self.legacyWiFi.jammed;
 }
 
-- (void) scanner:(id)mwf didChangeEnabledKey:(NSDictionary *)change;
++ (NSSet *) keyPathsForValuesAffectingJammed;
 {
-	if (L0KVOIsPrior(change))
-		[self willChangeValueForKey:@"enabled"];
-	else
-		[self didChangeValueForKey:@"enabled"];
+	return [NSSet setWithObjects:@"modernWiFi.jammed", @"legacyWiFi.jammed", nil];
 }
-
-- (void) scanner:(id)mwf didChangeJammedKey:(NSDictionary *)change;
-{
-	if (L0KVOIsPrior(change))
-		[self willChangeValueForKey:@"jammed"];
-	else
-		[self didChangeValueForKey:@"jammed"];
-}
-
-#pragma mark Channel synthesis.
 
 - (NSSet*) channels;
 {
 	return [NSSet setWithArray:[channelsByIdentifier allValues]];
 }
 
-- (void) scanner:(id) mwf didChangeChannels:(NSDictionary*) change;
-{
-	[dispatcher forEachSetChange:change forObject:mwf invokeSelectorForInsertion:@selector(scanner:didAddChannel:) removal:@selector(scanner:didRemoveChannel:)];
-}
+#pragma mark Observer methods
 
-- (void) scanner:(id) mwf didAddChannel:(id) chan;
+- (void) scanner:(id <MvrScanner>) s didChangeJammedKey:(BOOL) jammed {}
+- (void) scanner:(id <MvrScanner>) s didChangeEnabledKey:(BOOL) enabled {}
+
+- (void) scanner:(id <MvrScanner>) s didAddChannel:(id <MvrChannel>) channel;
 {
-	MvrSyntheticWiFiChannel* syn = [channelsByIdentifier objectForKey:[chan identifier]];
-	if (syn)
-		[syn addChannel:chan];
-	else {
+	NSString* ident = [(id)channel identifier];
+	MvrSyntheticWiFiChannel* syn = [channelsByIdentifier objectForKey:ident];
+	
+	if (!syn) {		
 		syn = [[MvrSyntheticWiFiChannel new] autorelease];
 		
 		[self willChangeValueForKey:@"channels" withSetMutation:NSKeyValueUnionSetMutation usingObjects:[NSSet setWithObject:syn]];
-		[channelsByIdentifier setObject:syn forKey:[chan identifier]];
+		
+		[syn addChannel:channel];
+		[channelsByIdentifier setObject:syn forKey:ident];
+		
 		[self didChangeValueForKey:@"channels" withSetMutation:NSKeyValueUnionSetMutation usingObjects:[NSSet setWithObject:syn]];
+	} else
+		[syn addChannel:channel];
+}
+
+- (void) scanner:(id <MvrScanner>) s didRemoveChannel:(id <MvrChannel>) channel;			
+{
+	NSString* ident = [(id)channel identifier];
+	MvrSyntheticWiFiChannel* syn = [channelsByIdentifier objectForKey:ident];
+	
+	if (syn) {
+		
+		BOOL deleteMe = [syn removeChannelAndReturnIfEmpty:channel];
+		if (deleteMe) {
+			[self willChangeValueForKey:@"channels" withSetMutation:NSKeyValueMinusSetMutation usingObjects:[NSSet setWithObject:syn]];
+			
+			[channelsByIdentifier removeObjectForKey:ident];
+
+			[self didChangeValueForKey:@"channels" withSetMutation:NSKeyValueMinusSetMutation usingObjects:[NSSet setWithObject:syn]];
+		}
+		
 	}
 }
 
-- (void) scanner:(id) mwf didRemoveChannel:(id) chan;
+- (void) channel:(id <MvrChannel>) channel didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>) incoming;
 {
-	MvrSyntheticWiFiChannel* syn = [channelsByIdentifier objectForKey:[chan identifier]];
-	if (syn) {
-		
-		BOOL shouldRemove = [syn removeChannelAndReturnIfEmpty:chan];
-		
-		if (shouldRemove) {
-		
-			[self willChangeValueForKey:@"channels" withSetMutation:NSKeyValueMinusSetMutation usingObjects:[NSSet setWithObject:syn]];
-			[channelsByIdentifier removeObjectForKey:[chan identifier]];
-			[self didChangeValueForKey:@"channels" withSetMutation:NSKeyValueMinusSetMutation usingObjects:[NSSet setWithObject:syn]];
-			
-		}
+	NSString* ident = [(id)channel identifier];
+	MvrSyntheticWiFiChannel* syn = [channelsByIdentifier objectForKey:ident];
+	[[syn mutableSetValueForKey:@"incomingTransfers"] addObject:incoming];
+}
+
+- (void) channel:(id <MvrChannel>) channel didBeginSendingWithOutgoingTransfer:(id <MvrOutgoing>) outgoing;
+{
+	NSString* ident = [(id)channel identifier];
+	MvrSyntheticWiFiChannel* syn = [channelsByIdentifier objectForKey:ident];
+	[[syn mutableSetValueForKey:@"outgoingTransfers"] addObject:outgoing];
+}
+
+- (void) outgoingTransferDidEndSending:(id <MvrOutgoing>) outgoing;
+{
+	for (NSString* ident in channelsByIdentifier) {
+		MvrSyntheticWiFiChannel* syn = [channelsByIdentifier objectForKey:ident];
+		[[syn mutableSetValueForKey:@"outgoingTransfers"] removeObject:outgoing];
+	}
+}
+
+// i == nil if cancelled.
+- (void) incomingTransfer:(id <MvrIncoming>) incoming didEndReceivingItem:(MvrItem*) i;
+{
+	for (NSString* ident in channelsByIdentifier) {
+		MvrSyntheticWiFiChannel* syn = [channelsByIdentifier objectForKey:ident];
+		[[syn mutableSetValueForKey:@"incomingTransfers"] removeObject:incoming];
 	}
 }
 

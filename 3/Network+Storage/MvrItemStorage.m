@@ -38,25 +38,7 @@ void MvrStorageSetTemporaryDirectory(NSString* path)
 	}
 }
 
-static NSString* MvrStoragePersistentDirectoryPath = nil;
-
-NSString* MvrStoragePersistentDirectory()
-{
-	if (!MvrStoragePersistentDirectoryPath)
-		[NSException raise:@"MvrInconsistencyException" format:@"No persistent directory path is set. One must be set via MvrStorageSetTemporaryDirectory() before using this function: %s.", __func__];
-	
-	return MvrStoragePersistentDirectoryPath;
-}
-
-void MvrStorageSetPersistentDirectory(NSString* path)
-{
-	if (MvrStoragePersistentDirectoryPath != path) {
-		[MvrStoragePersistentDirectoryPath release];
-		MvrStoragePersistentDirectoryPath = [path copy];
-	}
-}
-
-static NSString* MvrUnusedPathInDirectoryWithExtension(NSString* path, NSString* ext, NSString** name)
+NSString* MvrUnusedPathInDirectoryWithExtension(NSString* path, NSString* ext, NSString** name)
 {
 	NSFileManager* fm = [NSFileManager defaultManager];
 	NSString* newPath, * uuidName;
@@ -71,7 +53,7 @@ static NSString* MvrUnusedPathInDirectoryWithExtension(NSString* path, NSString*
 	return newPath;
 }
 
-static NSString* MvrUnusedTemporaryFileNameWithPathExtension(NSString* ext)
+NSString* MvrUnusedTemporaryFileNameWithPathExtension(NSString* ext)
 {
 	return MvrUnusedPathInDirectoryWithExtension(MvrStorageTemporaryDirectory(), ext, NULL);
 }
