@@ -7,15 +7,104 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3623260D0F684500981E51 /* Mover3AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* Mover3AppDelegate.m */; };
+		1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567510510620DAD006EC706 /* libMoverNetwork.a */; };
+		1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
+		1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
+		1567511810620E01006EC706 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511710620E01006EC706 /* CFNetwork.framework */; };
+		1567511A10620E08006EC706 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511910620E08006EC706 /* MobileCoreServices.framework */; };
+		1567514910620E49006EC706 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514010620E3C006EC706 /* libMuiKit.a */; };
+		1567514A10620E4F006EC706 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1567514210620E3C006EC706 /* MuiKit.bundle */; };
+		1567514E10620E75006EC706 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514D10620E75006EC706 /* Foundation.framework */; };
+		1567515010620E78006EC706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514F10620E78006EC706 /* UIKit.framework */; };
+		1567515210620E7A006EC706 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567515110620E7A006EC706 /* CoreGraphics.framework */; };
+		1567516610620F26006EC706 /* Mover-Baseline-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1567516410620F26006EC706 /* Mover-Baseline-Debug.xcconfig */; };
+		1567516710620F26006EC706 /* Mover-Baseline-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1567516510620F26006EC706 /* Mover-Baseline-Release.xcconfig */; };
+		156751B91062176E006EC706 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
+		1D3623260D0F684500981E51 /* MvrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MvrAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1567510410620DAD006EC706 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D /* libMoverNetwork.a */;
+			remoteInfo = Network;
+		};
+		1567510610620DAD006EC706 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1593E964105BB9FB00220989 /* Network+Test.octest */;
+			remoteInfo = "Network+Test";
+		};
+		1567510810620DAD006EC706 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 153B4212105BF36700DB8FB2 /* mvr-wifi */;
+			remoteInfo = "mvr-wifi";
+		};
+		1567513410620E38006EC706 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D /* Network */;
+			remoteInfo = Network;
+		};
+		1567513F10620E3C006EC706 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 154B01F00F78156D0082109B /* libMuiKit.a */;
+			remoteInfo = "MuiKit (Library)";
+		};
+		1567514110620E3C006EC706 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 156FD76B0F7A25F900F83283 /* MuiKit.bundle */;
+			remoteInfo = "MuiKit (Resources)";
+		};
+		1567514310620E3C006EC706 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 154635591011BD77000238EE /* MuiKit+Test.octest */;
+			remoteInfo = "MuiKit+Test";
+		};
+		1567514510620E3C006EC706 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2 /* libMuiKit-Mac.a */;
+			remoteInfo = "MuiKit (Library - Mac OS X)";
+		};
+		1567514710620E42006EC706 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 156FD7720F7A261B00F83283 /* MuiKit */;
+			remoteInfo = MuiKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "Network+Storage/Network+Storage.xcodeproj"; sourceTree = "<group>"; };
+		1567511310620DF7006EC706 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		1567511510620DFC006EC706 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1567511710620E01006EC706 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		1567511910620E08006EC706 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		1567512210620E27006EC706 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
+		1567514D10620E75006EC706 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1567514F10620E78006EC706 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1567515110620E7A006EC706 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1567516410620F26006EC706 /* Mover-Baseline-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Baseline-Debug.xcconfig"; sourceTree = "<group>"; };
+		1567516510620F26006EC706 /* Mover-Baseline-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Baseline-Release.xcconfig"; sourceTree = "<group>"; };
+		156751B71062176E006EC706 /* MvrItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItemUI.h; sourceTree = "<group>"; };
+		156751B81062176E006EC706 /* MvrItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItemUI.m; sourceTree = "<group>"; };
 		156CF0D4105BAEC3006D8E7A /* Local-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-Debug.xcconfig"; sourceTree = "<group>"; };
 		156CF0D5105BAEC3006D8E7A /* Local-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-Release.xcconfig"; sourceTree = "<group>"; };
 		156CF0D6105BAEC3006D8E7A /* Local.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Local.xcconfig; sourceTree = "<group>"; };
@@ -24,12 +113,9 @@
 		156CF0D9105BAECB006D8E7A /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
 		156CF0E0105BAF47006D8E7A /* Open.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Open.xcconfig; sourceTree = "<group>"; };
 		156CF0F8105BB127006D8E7A /* Mover-Baseline.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Baseline.xcconfig"; sourceTree = "<group>"; };
-		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* Mover3AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mover3AppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* Mover3AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mover3AppDelegate.m; sourceTree = "<group>"; };
+		1D3623240D0F684500981E51 /* MvrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* MvrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Mover3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mover3.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Mover3_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mover3_Prefix.pch; sourceTree = "<group>"; };
@@ -41,9 +127,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
-				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				1567514910620E49006EC706 /* libMuiKit.a in Frameworks */,
+				1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */,
+				1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */,
+				1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */,
+				1567511810620E01006EC706 /* CFNetwork.framework in Frameworks */,
+				1567511A10620E08006EC706 /* MobileCoreServices.framework in Frameworks */,
+				1567514E10620E75006EC706 /* Foundation.framework in Frameworks */,
+				1567515010620E78006EC706 /* UIKit.framework in Frameworks */,
+				1567515210620E7A006EC706 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,16 +145,49 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1D3623240D0F684500981E51 /* Mover3AppDelegate.h */,
-				1D3623250D0F684500981E51 /* Mover3AppDelegate.m */,
+				156751B610621758006EC706 /* Item UI */,
+				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
+				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		156750FF10620DAD006EC706 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1567510510620DAD006EC706 /* libMoverNetwork.a */,
+				1567510710620DAD006EC706 /* Network+Test.octest */,
+				1567510910620DAD006EC706 /* mvr-wifi */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1567513610620E3C006EC706 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1567514010620E3C006EC706 /* libMuiKit.a */,
+				1567514210620E3C006EC706 /* MuiKit.bundle */,
+				1567514410620E3C006EC706 /* MuiKit+Test.octest */,
+				1567514610620E3C006EC706 /* libMuiKit-Mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		156751B610621758006EC706 /* Item UI */ = {
+			isa = PBXGroup;
+			children = (
+				156751B71062176E006EC706 /* MvrItemUI.h */,
+				156751B81062176E006EC706 /* MvrItemUI.m */,
+			);
+			name = "Item UI";
 			sourceTree = "<group>";
 		};
 		156CF0D3105BAEB5006D8E7A /* Configuration files */ = {
 			isa = PBXGroup;
 			children = (
 				156CF0F8105BB127006D8E7A /* Mover-Baseline.xcconfig */,
+				1567516410620F26006EC706 /* Mover-Baseline-Debug.xcconfig */,
+				1567516510620F26006EC706 /* Mover-Baseline-Release.xcconfig */,
 				156CF0D9105BAECB006D8E7A /* Mover.xcconfig */,
 				156CF0D4105BAEC3006D8E7A /* Local-Debug.xcconfig */,
 				156CF0DF105BAF47006D8E7A /* Variants */,
@@ -101,12 +226,20 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				1567512210620E27006EC706 /* MuiKit.xcodeproj */,
+				156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */,
 				156CF0D3105BAEB5006D8E7A /* Configuration files */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				1567511310620DF7006EC706 /* libz.1.1.3.dylib */,
+				1567511510620DFC006EC706 /* SystemConfiguration.framework */,
+				1567511710620E01006EC706 /* CFNetwork.framework */,
+				1567511910620E08006EC706 /* MobileCoreServices.framework */,
+				1567514D10620E75006EC706 /* Foundation.framework */,
+				1567514F10620E78006EC706 /* UIKit.framework */,
+				1567515110620E7A006EC706 /* CoreGraphics.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -129,16 +262,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
-				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -153,6 +276,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				1567513510620E38006EC706 /* PBXTargetDependency */,
+				1567514810620E42006EC706 /* PBXTargetDependency */,
 			);
 			name = Mover3;
 			productName = Mover3;
@@ -169,6 +294,16 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1567513610620E3C006EC706 /* Products */;
+					ProjectRef = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 156750FF10620DAD006EC706 /* Products */;
+					ProjectRef = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* Mover3 */,
@@ -176,12 +311,67 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		1567510510620DAD006EC706 /* libMoverNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMoverNetwork.a;
+			remoteRef = 1567510410620DAD006EC706 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1567510710620DAD006EC706 /* Network+Test.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Network+Test.octest";
+			remoteRef = 1567510610620DAD006EC706 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1567510910620DAD006EC706 /* mvr-wifi */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "mvr-wifi";
+			remoteRef = 1567510810620DAD006EC706 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1567514010620E3C006EC706 /* libMuiKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMuiKit.a;
+			remoteRef = 1567513F10620E3C006EC706 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1567514210620E3C006EC706 /* MuiKit.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MuiKit.bundle;
+			remoteRef = 1567514110620E3C006EC706 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1567514410620E3C006EC706 /* MuiKit+Test.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MuiKit+Test.octest";
+			remoteRef = 1567514310620E3C006EC706 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1567514610620E3C006EC706 /* libMuiKit-Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libMuiKit-Mac.a";
+			remoteRef = 1567514510620E3C006EC706 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1567514A10620E4F006EC706 /* MuiKit.bundle in Resources */,
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				1567516610620F26006EC706 /* Mover-Baseline-Debug.xcconfig in Resources */,
+				1567516710620F26006EC706 /* Mover-Baseline-Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,11 +383,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				1D3623260D0F684500981E51 /* Mover3AppDelegate.m in Sources */,
+				1D3623260D0F684500981E51 /* MvrAppDelegate.m in Sources */,
+				156751B91062176E006EC706 /* MvrItemUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1567513510620E38006EC706 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Network;
+			targetProxy = 1567513410620E38006EC706 /* PBXContainerItemProxy */;
+		};
+		1567514810620E42006EC706 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MuiKit;
+			targetProxy = 1567514710620E42006EC706 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
