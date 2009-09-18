@@ -11,6 +11,8 @@
 #pragma mark -
 #pragma mark Item sources.
 
+static NSMutableArray* MvrItemSources = nil;
+
 @interface MvrItemSource ()
 
 - (id) initWithDisplayName:(NSString*) name correspondingUI:(MvrItemUI*) ui;
@@ -22,6 +24,14 @@
 
 
 @implementation MvrItemSource
+
++ registeredItemSources;
+{
+	if (MvrItemSources)
+		return MvrItemSources;
+	
+	return [NSArray array];
+}
 
 + itemSourceWithDisplayName:(NSString*) name;
 {
@@ -66,7 +76,6 @@
 @implementation MvrItemUI
 
 static NSMutableDictionary* MvrItemClassesToUIs = nil;
-static NSMutableArray* MvrItemSources = nil;
 
 + (void) registerUI:(MvrItemUI*) ui forItemClass:(Class) c;
 {

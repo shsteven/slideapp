@@ -34,6 +34,8 @@
 	MvrItemUI* correspondingUI;
 }
 
++ registeredItemSources;
+
 // For sources that subclass MvrItemSource and override -beginAddingItem;
 + itemSourceWithDisplayName:(NSString*) name;
 

@@ -7,6 +7,7 @@
 //
 
 #import "MvrAppDelegate.h"
+#import "MvrItemUI.h"
 
 #import "Network+Storage/MvrItemStorage.h"
 
@@ -16,7 +17,9 @@
 
 @end
 
-
+enum {
+	kMvrAppDelegateAddSheetTag,
+};
 
 @implementation MvrAppDelegate
 
@@ -24,10 +27,15 @@
 {	
 	[self setUpStorageCentral];
 	
-    [window makeKeyAndVisible];
+	[self.topViewController viewWillAppear:NO];
+	self.topViewController.view.frame = self.window.bounds;
+	[self.window addSubview:self.topViewController.view];
+	[self.topViewController viewDidAppear:NO];
+	
+    [self.window makeKeyAndVisible];
 }
 
-@synthesize window;
+@synthesize window, topViewController;
 
 - (void) dealloc;
 {
@@ -38,6 +46,7 @@
 	[identifierForSelf release];
 	
 	[window release];
+	[topViewController release];
     [super dealloc];
 }
 
@@ -139,6 +148,34 @@
 - (NSString*) displayNameForSelf;
 {
 	return [UIDevice currentDevice].name;
+}
+
+#pragma mark -
+#pragma mark Adding
+
+#define kMvrCancelButtonIdentifier @"Cancel"
+
+- (IBAction) add;
+{
+	L0ActionSheet* sheet = [[L0ActionSheet new] autorelease];
+	sheet.tag =	kMvrAppDelegateAddSheetTag;
+	
+	for (MvrItemSource* source in [MvrItemSource registeredItemSources])
+		 [sheet addButtonWithTitle:source.displayName identifier:source];
+	
+	NSInteger index = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on Add sheet") identifier:kMvrCancelButtonIdentifier];
+	sheet.cancelButtonIndex = index;
+	
+	sheet.delegate = self;
+	[sheet showInView:self.window];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	if (buttonIndex == actionSheet.cancelButtonIndex)
+		return;
+	
+	[[(L0ActionSheet*)actionSheet identifierForButtonAtIndex:buttonIndex] beginAddingItem];
 }
 
 @end

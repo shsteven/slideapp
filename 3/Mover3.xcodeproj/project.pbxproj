@@ -20,6 +20,15 @@
 		1567516610620F26006EC706 /* Mover-Baseline-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1567516410620F26006EC706 /* Mover-Baseline-Debug.xcconfig */; };
 		1567516710620F26006EC706 /* Mover-Baseline-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1567516510620F26006EC706 /* Mover-Baseline-Release.xcconfig */; };
 		156751B91062176E006EC706 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
+		1591A7051063EA0F00C5A5BD /* MvrTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A7041063EA0F00C5A5BD /* MvrTableController.m */; };
+		1591A7071063EC4000C5A5BD /* Backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7061063EC4000C5A5BD /* Backdrop.png */; };
+		1591A70E1063ED2900C5A5BD /* MvrSlidesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A70D1063ED2900C5A5BD /* MvrSlidesView.m */; };
+		1591A7111063EDA100C5A5BD /* MvrSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A7101063EDA100C5A5BD /* MvrSlide.m */; };
+		1591A7131063EEF700C5A5BD /* MvrSlide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7121063EEF700C5A5BD /* MvrSlide.xib */; };
+		1591A7171063EF2900C5A5BD /* Frame-Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7151063EF2900C5A5BD /* Frame-Highlighted.png */; };
+		1591A7181063EF2900C5A5BD /* Frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7161063EF2900C5A5BD /* Frame.png */; };
+		1591A7481063EF8A00C5A5BD /* ActionButton-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7461063EF8A00C5A5BD /* ActionButton-Pressed.png */; };
+		1591A7491063EF8A00C5A5BD /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7471063EF8A00C5A5BD /* ActionButton.png */; };
 		1D3623260D0F684500981E51 /* MvrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MvrAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
@@ -30,63 +39,63 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D /* libMoverNetwork.a */;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
 			remoteInfo = Network;
 		};
 		1567510610620DAD006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 1593E964105BB9FB00220989 /* Network+Test.octest */;
+			remoteGlobalIDString = 1593E964105BB9FB00220989;
 			remoteInfo = "Network+Test";
 		};
 		1567510810620DAD006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 153B4212105BF36700DB8FB2 /* mvr-wifi */;
+			remoteGlobalIDString = 153B4212105BF36700DB8FB2;
 			remoteInfo = "mvr-wifi";
 		};
 		1567513410620E38006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D /* Network */;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = Network;
 		};
 		1567513F10620E3C006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 154B01F00F78156D0082109B /* libMuiKit.a */;
+			remoteGlobalIDString = 154B01F00F78156D0082109B;
 			remoteInfo = "MuiKit (Library)";
 		};
 		1567514110620E3C006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 156FD76B0F7A25F900F83283 /* MuiKit.bundle */;
+			remoteGlobalIDString = 156FD76B0F7A25F900F83283;
 			remoteInfo = "MuiKit (Resources)";
 		};
 		1567514310620E3C006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 154635591011BD77000238EE /* MuiKit+Test.octest */;
+			remoteGlobalIDString = 154635591011BD77000238EE;
 			remoteInfo = "MuiKit+Test";
 		};
 		1567514510620E3C006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2 /* libMuiKit-Mac.a */;
+			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2;
 			remoteInfo = "MuiKit (Library - Mac OS X)";
 		};
 		1567514710620E42006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 156FD7720F7A261B00F83283 /* MuiKit */;
+			remoteGlobalIDString = 156FD7720F7A261B00F83283;
 			remoteInfo = MuiKit;
 		};
 /* End PBXContainerItemProxy section */
@@ -113,6 +122,18 @@
 		156CF0D9105BAECB006D8E7A /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
 		156CF0E0105BAF47006D8E7A /* Open.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Open.xcconfig; sourceTree = "<group>"; };
 		156CF0F8105BB127006D8E7A /* Mover-Baseline.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Baseline.xcconfig"; sourceTree = "<group>"; };
+		1591A7031063EA0F00C5A5BD /* MvrTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTableController.h; sourceTree = "<group>"; };
+		1591A7041063EA0F00C5A5BD /* MvrTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTableController.m; sourceTree = "<group>"; };
+		1591A7061063EC4000C5A5BD /* Backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Backdrop.png; path = Theme/Backdrop.png; sourceTree = "<group>"; };
+		1591A70C1063ED2900C5A5BD /* MvrSlidesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrSlidesView.h; sourceTree = "<group>"; };
+		1591A70D1063ED2900C5A5BD /* MvrSlidesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrSlidesView.m; sourceTree = "<group>"; };
+		1591A70F1063EDA100C5A5BD /* MvrSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrSlide.h; sourceTree = "<group>"; };
+		1591A7101063EDA100C5A5BD /* MvrSlide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrSlide.m; sourceTree = "<group>"; };
+		1591A7121063EEF700C5A5BD /* MvrSlide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrSlide.xib; sourceTree = "<group>"; };
+		1591A7151063EF2900C5A5BD /* Frame-Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Frame-Highlighted.png"; path = "Theme/Frame-Highlighted.png"; sourceTree = "<group>"; };
+		1591A7161063EF2900C5A5BD /* Frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Frame.png; path = Theme/Frame.png; sourceTree = "<group>"; };
+		1591A7461063EF8A00C5A5BD /* ActionButton-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionButton-Pressed.png"; path = "Theme/ActionButton-Pressed.png"; sourceTree = "<group>"; };
+		1591A7471063EF8A00C5A5BD /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionButton.png; path = Theme/ActionButton.png; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* MvrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MvrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Mover3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mover3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +169,7 @@
 				156751B610621758006EC706 /* Item UI */,
 				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
+				1591A7081063ECE200C5A5BD /* The Table */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -215,6 +237,31 @@
 			path = Variants;
 			sourceTree = "<group>";
 		};
+		1591A7081063ECE200C5A5BD /* The Table */ = {
+			isa = PBXGroup;
+			children = (
+				1591A7031063EA0F00C5A5BD /* MvrTableController.h */,
+				1591A7041063EA0F00C5A5BD /* MvrTableController.m */,
+				1591A70C1063ED2900C5A5BD /* MvrSlidesView.h */,
+				1591A70D1063ED2900C5A5BD /* MvrSlidesView.m */,
+				1591A70F1063EDA100C5A5BD /* MvrSlide.h */,
+				1591A7101063EDA100C5A5BD /* MvrSlide.m */,
+			);
+			name = "The Table";
+			sourceTree = "<group>";
+		};
+		1591A7191063EF2C00C5A5BD /* Slide view */ = {
+			isa = PBXGroup;
+			children = (
+				1591A7121063EEF700C5A5BD /* MvrSlide.xib */,
+				1591A7151063EF2900C5A5BD /* Frame-Highlighted.png */,
+				1591A7161063EF2900C5A5BD /* Frame.png */,
+				1591A7461063EF8A00C5A5BD /* ActionButton-Pressed.png */,
+				1591A7471063EF8A00C5A5BD /* ActionButton.png */,
+			);
+			name = "Slide view";
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,8 +303,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1591A7061063EC4000C5A5BD /* Backdrop.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Mover3-Info.plist */,
+				1591A7191063EF2C00C5A5BD /* Slide view */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -372,6 +421,12 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				1567516610620F26006EC706 /* Mover-Baseline-Debug.xcconfig in Resources */,
 				1567516710620F26006EC706 /* Mover-Baseline-Release.xcconfig in Resources */,
+				1591A7071063EC4000C5A5BD /* Backdrop.png in Resources */,
+				1591A7131063EEF700C5A5BD /* MvrSlide.xib in Resources */,
+				1591A7171063EF2900C5A5BD /* Frame-Highlighted.png in Resources */,
+				1591A7181063EF2900C5A5BD /* Frame.png in Resources */,
+				1591A7481063EF8A00C5A5BD /* ActionButton-Pressed.png in Resources */,
+				1591A7491063EF8A00C5A5BD /* ActionButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +440,9 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MvrAppDelegate.m in Sources */,
 				156751B91062176E006EC706 /* MvrItemUI.m in Sources */,
+				1591A7051063EA0F00C5A5BD /* MvrTableController.m in Sources */,
+				1591A70E1063ED2900C5A5BD /* MvrSlidesView.m in Sources */,
+				1591A7111063EDA100C5A5BD /* MvrSlide.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

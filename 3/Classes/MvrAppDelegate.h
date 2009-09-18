@@ -13,10 +13,14 @@
 
 #import "Network+Storage/MvrStorageCentral.h"
 
-@interface MvrAppDelegate : NSObject <UIApplicationDelegate,
-	MvrMetadataStorage, MvrPlatformInfo>
+@interface MvrAppDelegate : NSObject <
+	UIApplicationDelegate,
+	UIActionSheetDelegate,
+	MvrMetadataStorage, 
+	MvrPlatformInfo>
 {
     UIWindow *window;
+	UIViewController* topViewController;
 	
 	NSString* itemsDirectory;
 	MvrStorageCentral* storageCentral;
@@ -25,10 +29,13 @@
 	L0UUID* identifierForSelf;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property(nonatomic, retain) IBOutlet UIWindow *window;
+@property(nonatomic, retain) IBOutlet UIViewController* topViewController;
 
 @property(readonly) NSString* itemsDirectory;
 @property(readonly) MvrStorageCentral* storageCentral;
+
+- (IBAction) add;
 
 @end
 
