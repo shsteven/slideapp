@@ -13,6 +13,8 @@
 
 #import "MvrItemUI.h"
 #import "Network+Storage/MvrItem.h"
+#import "Network+Storage/MvrItemStorage.h"
+#import "Network+Storage/MvrUTISupport.h"
 
 static CGPoint MvrCenterOf(CGRect r) {
 	return CGPointMake(r.size.width / 2, r.size.height / 2);
@@ -31,8 +33,10 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	itemsToViews = [L0Map new];
 	
-	// TODO remove me
-	[self.slidesStratum testByAddingEmptySlide];
+	MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:[@"Ciao, mondo!" dataUsingEncoding:NSUTF8StringEncoding]];
+	MvrItem* i = [MvrItem itemWithStorage:storage type:(id) kUTTypeUTF8PlainText metadata:[NSDictionary dictionaryWithObject:@"Ciao" forKey:kMvrItemTitleMetadataKey]];
+	
+	[self addItem:i];
 }
 
 @synthesize hostView, backdropStratum, slidesStratum;
@@ -59,7 +63,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	slide.imageView.image = [[MvrItemUI UIForItem:i] representingImageWithSize:slide.imageView.bounds.size forItem:i];
 	
 	[itemsToViews setObject:slide forKey:i];
-	[self.slidesStratum addSubview:slide];
+	[self.slidesStratum addDraggableSubview:slide];
 	[slide release];
 }
 

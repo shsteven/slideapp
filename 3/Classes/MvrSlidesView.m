@@ -46,16 +46,6 @@
 	return CGRectInset(self.bounds, kMvrSafeRectDistanceDelta, kMvrSafeRectDistanceDelta);
 }
 
-
-- (void) testByAddingEmptySlide;
-{	
-	MvrSlide* slide = [[MvrSlide alloc] initWithFrame:CGRectZero];
-	[slide sizeToFit];
-	slide.center = CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2);
-	slide.delegate = self;
-	[self addSubview:slide];
-}
-
 - (void) draggableViewDidEndDragging:(L0DraggableView *)view continuesWithSlide:(BOOL)slide;
 {
 	if (!slide)
@@ -108,6 +98,12 @@
 	v.center = [self centerForBouncebackFromPoint:v.center];
 	
 	[UIView commitAnimations];
+}
+
+- (void) addDraggableSubview:(L0DraggableView*) view;
+{
+	view.delegate = self;
+	[self addSubview:view];
 }
 
 @end

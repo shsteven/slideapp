@@ -19,9 +19,9 @@
 
 - (id) initWithFrame:(CGRect) frame delegate:(id <MvrSlidesViewDelegate>) delegate;
 
-- (void) testByAddingEmptySlide;
-
 @property(readonly) CGRect safeArea;
+
+- (void) addDraggableSubview:(L0DraggableView*) view;
 
 @end
 
