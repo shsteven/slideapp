@@ -18,6 +18,7 @@
 
 - (void) setUpItemClassesAndUIs;
 - (void) setUpStorageCentral;
+- (void) setUpTableController;
 
 @end
 
@@ -31,8 +32,7 @@ enum {
 {	
 	[self setUpItemClassesAndUIs];
 	[self setUpStorageCentral];
-	
-	[self.tableController setUp];
+	[self setUpTableController];
 	
 	[self.topViewController viewWillAppear:NO];
 	self.topViewController.view.frame = self.window.bounds;
@@ -196,4 +196,14 @@ enum {
 	[[(L0ActionSheet*)actionSheet identifierForButtonAtIndex:buttonIndex] beginAddingItem];
 }
 
+#pragma mark -
+#pragma mark Table controller
+
+- (void) setUpTableController;
+{
+	[self.tableController setUp];
+	
+	for (MvrItem* i in self.storageCentral.storedItems)
+		[self.tableController addItem:i];
+}
 @end

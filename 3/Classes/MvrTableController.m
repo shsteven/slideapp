@@ -11,8 +11,7 @@
 #import "MvrSlidesView.h"
 #import "MvrSlide.h"
 
-#import "MvrAppDelegate.h"
-#import "Network+Storage/MvrStorageCentral.h"
+#import "MvrItemUI.h"
 #import "Network+Storage/MvrItem.h"
 
 static CGPoint MvrCenterOf(CGRect r) {
@@ -30,26 +29,10 @@ static CGPoint MvrCenterOf(CGRect r) {
 	self.slidesStratum = [[MvrSlidesView alloc] initWithFrame:self.hostView.bounds delegate:self];
 	[self.hostView addSubview:self.slidesStratum];
 	
-	kvo = [[L0KVODispatcher alloc] initWithTarget:self];
-	[kvo observe:@"storedItems" ofObject:MvrApp().storageCentral usingSelector:@selector(storageCentral:didChangeStoredItemsKey:) options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
+	itemsToViews = [L0Map new];
 	
 	// TODO remove me
 	[self.slidesStratum testByAddingEmptySlide];
-}
-
-- (void) storageCentral:(MvrStorageCentral*) central didChangeStoredItemsKey:(NSDictionary*) change;
-{
-	[kvo forEachSetChange:change forObject:central invokeSelectorForInsertion:@selector(storageCentral:didAddStoredItem:) removal:@selector(storageCentral:didRemoveStoredItem:)];
-}
-
-- (void) storageCentral:(MvrStorageCentral*)central didAddStoredItem:(MvrItem*) i;
-{
-
-}
-
-- (void) storageCentral:(MvrStorageCentral*)central didRemoveStoredItem:(MvrItem*) i;
-{
-	
 }
 
 @synthesize hostView, backdropStratum, slidesStratum;
@@ -61,6 +44,23 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[slidesStratum release];
 	
 	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark Adding items
+
+- (void) addItem:(MvrItem*) i;
+{
+	MvrSlide* slide = [[MvrSlide alloc] initWithFrame:CGRectZero];
+	[slide sizeToFit];
+	
+	NSString* title = i.title ?: @"";
+	slide.titleLabel.text = title;
+	slide.imageView.image = [[MvrItemUI UIForItem:i] representingImageWithSize:slide.imageView.bounds.size forItem:i];
+	
+	[itemsToViews setObject:slide forKey:i];
+	[self.slidesStratum addSubview:slide];
+	[slide release];
 }
 
 @end

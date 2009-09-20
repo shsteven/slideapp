@@ -22,7 +22,7 @@
 @implementation MvrSlide
 
 
-@synthesize contentView, label, imageView, highlightView, backdropView;
+@synthesize contentView, titleLabel, imageView, highlightView, backdropView;
 @synthesize spinner, progressBar;
 
 - (id) initWithFrame:(CGRect) frame;
@@ -144,7 +144,7 @@
 		[UIView setAnimationDuration:0.0];
 	
 	highlightView.alpha = h? 1.0 : 0.0;
-	label.highlighted = h;
+	titleLabel.highlighted = h;
 	
 	[UIView commitAnimations];
 	
@@ -189,7 +189,7 @@
 		
 		[UIView beginAnimations:nil context:NULL];
 		
-		self.label.alpha = 0.0;
+		self.titleLabel.alpha = 0.0;
 		self.imageView.alpha = 0.0;
 		self.spinner.alpha = 1.0;
 		
@@ -203,7 +203,7 @@
 		
 		[UIView beginAnimations:nil context:NULL];
 		
-		self.label.alpha = 1.0;
+		self.titleLabel.alpha = 1.0;
 		self.imageView.alpha = 1.0;
 		self.progressBar.alpha = 0.0;
 		self.spinner.alpha = 0.0;

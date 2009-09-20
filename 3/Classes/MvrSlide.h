@@ -15,7 +15,7 @@
 @interface MvrSlide : L0DraggableView {
 	UIView* contentView;
 	
-	UILabel* label;
+	UILabel* titleLabel;
 	UIImageView* imageView;
 	UIButton* actionButton;
 	UIImageView* highlightView;
@@ -33,7 +33,7 @@
 }
 
 @property(retain) IBOutlet UIView* contentView;
-@property(assign) IBOutlet UILabel* label;
+@property(assign) IBOutlet UILabel* titleLabel;
 @property(assign) IBOutlet UIImageView* imageView;
 @property(assign) IBOutlet UIImageView* backdropView;
 @property(assign) IBOutlet UIButton* actionButton;
