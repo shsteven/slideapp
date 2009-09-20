@@ -25,6 +25,8 @@
 
 - (void) beginAddingItemForSource:(MvrItemSource*) source;
 
+- (UIImage*) representingImageWithSize:(CGSize) size forItem:(id) i;
+
 @end
 
 

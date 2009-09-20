@@ -7,18 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MuiKit/MuiKit.h>
 
+#import "MvrSlidesView.h"
 
-@interface MvrTableController : NSObject {
+@interface MvrTableController : NSObject <MvrSlidesViewDelegate> {
 	UIView* hostView;
 	
 	UIView* backdropStratum;
-	UIView* slidesStratum;
+	MvrSlidesView* slidesStratum;
+	
+	L0Map* itemsToViews;
+	L0KVODispatcher* kvo;
 }
+
+- (void) setUp;
 
 @property(retain) IBOutlet UIView* hostView;
 
 @property(retain) IBOutlet UIView* backdropStratum;
-@property(retain) UIView* slidesStratum;
+@property(retain) MvrSlidesView* slidesStratum;
 
 @end

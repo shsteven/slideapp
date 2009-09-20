@@ -20,6 +20,7 @@
 		1567516610620F26006EC706 /* Mover-Baseline-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1567516410620F26006EC706 /* Mover-Baseline-Debug.xcconfig */; };
 		1567516710620F26006EC706 /* Mover-Baseline-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1567516510620F26006EC706 /* Mover-Baseline-Release.xcconfig */; };
 		156751B91062176E006EC706 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
+		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		1591A7051063EA0F00C5A5BD /* MvrTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A7041063EA0F00C5A5BD /* MvrTableController.m */; };
 		1591A7071063EC4000C5A5BD /* Backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7061063EC4000C5A5BD /* Backdrop.png */; };
 		1591A70E1063ED2900C5A5BD /* MvrSlidesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A70D1063ED2900C5A5BD /* MvrSlidesView.m */; };
@@ -122,6 +123,8 @@
 		156CF0D9105BAECB006D8E7A /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
 		156CF0E0105BAF47006D8E7A /* Open.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Open.xcconfig; sourceTree = "<group>"; };
 		156CF0F8105BB127006D8E7A /* Mover-Baseline.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Baseline.xcconfig"; sourceTree = "<group>"; };
+		156E7FD710662C4A00315D0C /* MvrGenericItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrGenericItemUI.h; sourceTree = "<group>"; };
+		156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrGenericItemUI.m; sourceTree = "<group>"; };
 		1591A7031063EA0F00C5A5BD /* MvrTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTableController.h; sourceTree = "<group>"; };
 		1591A7041063EA0F00C5A5BD /* MvrTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTableController.m; sourceTree = "<group>"; };
 		1591A7061063EC4000C5A5BD /* Backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Backdrop.png; path = Theme/Backdrop.png; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 			children = (
 				156751B71062176E006EC706 /* MvrItemUI.h */,
 				156751B81062176E006EC706 /* MvrItemUI.m */,
+				156E7FD710662C4A00315D0C /* MvrGenericItemUI.h */,
+				156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */,
 			);
 			name = "Item UI";
 			sourceTree = "<group>";
@@ -443,6 +448,7 @@
 				1591A7051063EA0F00C5A5BD /* MvrTableController.m in Sources */,
 				1591A70E1063ED2900C5A5BD /* MvrSlidesView.m in Sources */,
 				1591A7111063EDA100C5A5BD /* MvrSlide.m in Sources */,
+				156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

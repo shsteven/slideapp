@@ -8,9 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
+#import <MuiKit/MuiKit.h>
 
-@interface MvrSlidesView : UIView {
+@protocol MvrSlidesViewDelegate;
 
+
+@interface MvrSlidesView : UIView <L0DraggableViewDelegate> {
+	id <MvrSlidesViewDelegate> delegate;
 }
+
+- (id) initWithFrame:(CGRect) frame delegate:(id <MvrSlidesViewDelegate>) delegate;
+
+- (void) testByAddingEmptySlide;
+
+@property(readonly) CGRect safeArea;
+
+@end
+
+
+@protocol MvrSlidesViewDelegate <NSObject>
+@optional
+
+- (BOOL) slidesView:(MvrSlidesView*) v shouldBounceBackView:(UIView*) view;
 
 @end

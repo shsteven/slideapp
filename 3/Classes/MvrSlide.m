@@ -53,7 +53,7 @@
 - (void) sizeToFit;
 {
 	CGRect frame = self.frame;
-	frame.size = CGSizeMake(179, 179);
+	frame.size = CGSizeMake(179, 179); // TODO variable size
 	self.frame = frame;
 	
 	self.contentView.frame = self.bounds;

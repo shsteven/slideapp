@@ -138,4 +138,10 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	L0AbstractMethod();
 }
 
+- (UIImage*) representingImageWithSize:(CGSize) size forItem:(id) i;
+{
+	L0AbstractMethod();
+	return nil;
+}
+
 @end

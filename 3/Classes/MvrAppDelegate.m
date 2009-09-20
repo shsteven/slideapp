@@ -11,8 +11,12 @@
 
 #import "Network+Storage/MvrItemStorage.h"
 
+#import "Network+Storage/MvrGenericItem.h"
+#import "MvrGenericItemUI.h"
+
 @interface MvrAppDelegate ()
 
+- (void) setUpItemClassesAndUIs;
 - (void) setUpStorageCentral;
 
 @end
@@ -25,7 +29,10 @@ enum {
 
 - (void) applicationDidFinishLaunching:(UIApplication*) application;
 {	
+	[self setUpItemClassesAndUIs];
 	[self setUpStorageCentral];
+	
+	[self.tableController setUp];
 	
 	[self.topViewController viewWillAppear:NO];
 	self.topViewController.view.frame = self.window.bounds;
@@ -35,7 +42,7 @@ enum {
     [self.window makeKeyAndVisible];
 }
 
-@synthesize window, topViewController;
+@synthesize window, topViewController, tableController;
 
 - (void) dealloc;
 {
@@ -47,7 +54,18 @@ enum {
 	
 	[window release];
 	[topViewController release];
+	[tableController release];
+	
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Item classes and UIs.
+
+- (void) setUpItemClassesAndUIs;
+{
+	[MvrGenericItem registerClass];
+	[MvrGenericItemUI registerClass];
 }
 
 #pragma mark -

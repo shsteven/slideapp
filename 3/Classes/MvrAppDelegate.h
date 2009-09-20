@@ -13,6 +13,8 @@
 
 #import "Network+Storage/MvrStorageCentral.h"
 
+#import "MvrTableController.h"
+
 @interface MvrAppDelegate : NSObject <
 	UIApplicationDelegate,
 	UIActionSheetDelegate,
@@ -21,6 +23,8 @@
 {
     UIWindow *window;
 	UIViewController* topViewController;
+	
+	MvrTableController* tableController;
 	
 	NSString* itemsDirectory;
 	MvrStorageCentral* storageCentral;
@@ -31,6 +35,7 @@
 
 @property(nonatomic, retain) IBOutlet UIWindow *window;
 @property(nonatomic, retain) IBOutlet UIViewController* topViewController;
+@property(nonatomic, retain) IBOutlet MvrTableController* tableController;
 
 @property(readonly) NSString* itemsDirectory;
 @property(readonly) MvrStorageCentral* storageCentral;
