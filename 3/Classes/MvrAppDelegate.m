@@ -14,6 +14,9 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemUI.h"
 
+#import "MvrImageItem.h"
+#import "MvrImageItemUI.h"
+
 @interface MvrAppDelegate ()
 
 - (void) setUpItemClassesAndUIs;
@@ -34,15 +37,15 @@ enum {
 	[self setUpStorageCentral];
 	[self setUpTableController];
 	
-	[self.topViewController viewWillAppear:NO];
-	self.topViewController.view.frame = self.window.bounds;
-	[self.window addSubview:self.topViewController.view];
-	[self.topViewController viewDidAppear:NO];
+	[self.tableController viewWillAppear:NO];
+	self.tableController.view.frame = self.window.bounds;
+	[self.window addSubview:self.tableController.view];
+	[self.tableController viewDidAppear:NO];
 	
     [self.window makeKeyAndVisible];
 }
 
-@synthesize window, topViewController, tableController;
+@synthesize window, tableController;
 
 - (void) dealloc;
 {
@@ -53,7 +56,6 @@ enum {
 	[identifierForSelf release];
 	
 	[window release];
-	[topViewController release];
 	[tableController release];
 	
     [super dealloc];
@@ -66,6 +68,9 @@ enum {
 {
 	[MvrGenericItem registerClass];
 	[MvrGenericItemUI registerClass];
+	
+	[MvrImageItem registerClass];
+	[MvrImageItemUI registerClass];
 }
 
 #pragma mark -
@@ -109,6 +114,8 @@ enum {
 		metadata = [[NSUserDefaults standardUserDefaults] objectForKey:kMvrItemsMetadataUserDefaultsKey];
 		if (![metadata isKindOfClass:[NSDictionary class]])
 			metadata = [NSDictionary dictionary];
+		
+		[metadata retain];
 	}
 	
 	return metadata;
@@ -196,6 +203,12 @@ enum {
 	[[(L0ActionSheet*)actionSheet identifierForButtonAtIndex:buttonIndex] beginAddingItem];
 }
 
+- (void) addItemFromSelf:(MvrItem*) item;
+{
+	[self.tableController addItem:item animated:YES]; // TODO
+	[self.storageCentral.mutableStoredItems addObject:item];
+}
+
 #pragma mark -
 #pragma mark Table controller
 
@@ -204,6 +217,15 @@ enum {
 	[self.tableController setUp];
 	
 	for (MvrItem* i in self.storageCentral.storedItems)
-		[self.tableController addItem:i];
+		[self.tableController addItem:i animated:NO];
 }
+
+#pragma mark -
+#pragma mark Utility methods
+
+- (void) presentModalViewController:(UIViewController*) ctl;
+{
+	[self.tableController presentModalViewController:ctl animated:YES];
+}
+
 @end

@@ -20,7 +20,7 @@
 + (MvrItemUI*) UIForItemClass:(Class) i;
 + (MvrItemUI*) UIForItem:(MvrItem*) i;
 
-+ (NSArray*) supportedItemClasses;
++ (NSSet*) supportedItemClasses;
 + (NSArray*) supportedItemSources;
 
 - (void) beginAddingItemForSource:(MvrItemSource*) source;
@@ -40,6 +40,7 @@
 
 // For sources that subclass MvrItemSource and override -beginAddingItem;
 + itemSourceWithDisplayName:(NSString*) name;
+- (id) initWithDisplayName:(NSString*) name;
 
 // For UI controllers that make vanilla MvrItemSources and want to get -beginAddingItemForSource:
 + itemSourceWithDisplayName:(NSString*) name correspondingUI:(MvrItemUI*) ui;

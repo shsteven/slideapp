@@ -35,7 +35,12 @@ static NSMutableArray* MvrItemSources = nil;
 
 + itemSourceWithDisplayName:(NSString*) name;
 {
-	return [[[self alloc] initWithDisplayName:name correspondingUI:nil] autorelease];
+	return [[[self alloc] initWithDisplayName:name] autorelease];
+}
+
+- (id) initWithDisplayName:(NSString *)name;
+{
+	return [self initWithDisplayName:name correspondingUI:nil];
 }
 
 + itemSourceWithDisplayName:(NSString*) name correspondingUI:(MvrItemUI*) ui;
@@ -127,7 +132,7 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	return [NSArray array];
 }
 
-+ (NSArray*) supportedItemClasses;
++ (NSSet*) supportedItemClasses;
 {
 	L0AbstractMethod();
 	return nil;

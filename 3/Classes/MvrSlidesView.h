@@ -15,13 +15,22 @@
 
 @interface MvrSlidesView : UIView <L0DraggableViewDelegate> {
 	id <MvrSlidesViewDelegate> delegate;
+	
+#if DEBUG
+	UIView* shownArea;
+#endif
 }
 
 - (id) initWithFrame:(CGRect) frame delegate:(id <MvrSlidesViewDelegate>) delegate;
 
-@property(readonly) CGRect safeArea;
+- (void) addDraggableSubviewWithoutAnimation:(L0DraggableView*)view;
+- (void) addDraggableSubviewFromSouth:(L0DraggableView *)view;
 
-- (void) addDraggableSubview:(L0DraggableView*) view;
+- (void) setEditing:(BOOL) editing animated:(BOOL) animated;
+
+#if DEBUG
+- (void) showArea:(CGRect) area;
+#endif
 
 @end
 

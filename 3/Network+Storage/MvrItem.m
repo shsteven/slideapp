@@ -93,11 +93,11 @@
 	NSError* e;
 	
 	id rep = [self produceExternalRepresentation];
-	if ([[rep class] isEqual:[NSData class]]) {
+	if ([rep isKindOfClass:[NSData class]]) {
 		
 		return [MvrItemStorage itemStorageWithData:rep];
 
-	} else if ([[rep class] isEqual:[NSString class]]) {
+	} else if ([rep isKindOfClass:[NSString class]]) {
 
 		MvrItemStorage* s = [MvrItemStorage itemStorageFromFileAtPath:rep error:&e];
 		if (!s)

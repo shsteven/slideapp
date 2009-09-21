@@ -12,6 +12,7 @@
 #import "Network+Storage/MvrPlatformInfo.h"
 
 #import "Network+Storage/MvrStorageCentral.h"
+#import "Network+Storage/MvrItem.h"
 
 #import "MvrTableController.h"
 
@@ -22,10 +23,8 @@
 	MvrPlatformInfo>
 {
     UIWindow *window;
-	UIViewController* topViewController;
-	
 	MvrTableController* tableController;
-	
+		
 	NSString* itemsDirectory;
 	MvrStorageCentral* storageCentral;
 	NSDictionary* metadata;
@@ -34,13 +33,15 @@
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow *window;
-@property(nonatomic, retain) IBOutlet UIViewController* topViewController;
 @property(nonatomic, retain) IBOutlet MvrTableController* tableController;
 
 @property(readonly) NSString* itemsDirectory;
 @property(readonly) MvrStorageCentral* storageCentral;
 
 - (IBAction) add;
+- (void) addItemFromSelf:(MvrItem*) item;
+
+- (void) presentModalViewController:(UIViewController*) ctl;
 
 @end
 

@@ -12,7 +12,7 @@
 @implementation MvrGenericItemUI
 
 + supportedItemClasses {
-	return [NSArray arrayWithObject:[MvrGenericItem class]];
+	return [NSSet setWithObject:[MvrGenericItem class]];
 }
 
 - (UIImage*) representingImageWithSize:(CGSize) size forItem:(id) i;

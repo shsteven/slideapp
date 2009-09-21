@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
+		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
+		151E02231067683400C6CDFF /* MvrPhotoLibrarySource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrPhotoLibrarySource.m */; };
 		1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567510510620DAD006EC706 /* libMoverNetwork.a */; };
 		1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
 		1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
@@ -103,6 +106,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		151E01FF1067652E00C6CDFF /* MvrImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageItem.h; sourceTree = "<group>"; };
+		151E02001067652E00C6CDFF /* MvrImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItem.m; sourceTree = "<group>"; };
+		151E021E106767A900C6CDFF /* MvrImageItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageItemUI.h; sourceTree = "<group>"; };
+		151E021F106767A900C6CDFF /* MvrImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemUI.m; sourceTree = "<group>"; };
+		151E02211067683400C6CDFF /* MvrPhotoLibrarySource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPhotoLibrarySource.h; sourceTree = "<group>"; };
+		151E02221067683400C6CDFF /* MvrPhotoLibrarySource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPhotoLibrarySource.m; sourceTree = "<group>"; };
 		156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "Network+Storage/Network+Storage.xcodeproj"; sourceTree = "<group>"; };
 		1567511310620DF7006EC706 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		1567511510620DFC006EC706 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -171,12 +180,26 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				156751B610621758006EC706 /* Item UI */,
 				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
+				151E01FE1067652600C6CDFF /* Items */,
+				156751B610621758006EC706 /* Item UI */,
 				1591A7081063ECE200C5A5BD /* The Table */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		151E01FE1067652600C6CDFF /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				151E01FF1067652E00C6CDFF /* MvrImageItem.h */,
+				151E02001067652E00C6CDFF /* MvrImageItem.m */,
+				151E021E106767A900C6CDFF /* MvrImageItemUI.h */,
+				151E021F106767A900C6CDFF /* MvrImageItemUI.m */,
+				151E02211067683400C6CDFF /* MvrPhotoLibrarySource.h */,
+				151E02221067683400C6CDFF /* MvrPhotoLibrarySource.m */,
+			);
+			name = Items;
 			sourceTree = "<group>";
 		};
 		156750FF10620DAD006EC706 /* Products */ = {
@@ -453,6 +476,9 @@
 				1591A70E1063ED2900C5A5BD /* MvrSlidesView.m in Sources */,
 				1591A7111063EDA100C5A5BD /* MvrSlide.m in Sources */,
 				156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */,
+				151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */,
+				151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */,
+				151E02231067683400C6CDFF /* MvrPhotoLibrarySource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

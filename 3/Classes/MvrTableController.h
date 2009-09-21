@@ -12,22 +12,25 @@
 #import "MvrSlidesView.h"
 #import "Network+Storage/MvrItem.h"
 
-@interface MvrTableController : NSObject <MvrSlidesViewDelegate> {
+@interface MvrTableController : UIViewController <MvrSlidesViewDelegate> {
 	UIView* hostView;
-	
 	UIView* backdropStratum;
 	MvrSlidesView* slidesStratum;
+	UIToolbar* toolbar;
 	
-	L0Map* itemsToViews;
+	L0Map* itemsToViews, * viewsToItems;
 }
 
 - (void) setUp;
 
-@property(retain) IBOutlet UIView* hostView;
-
 @property(retain) IBOutlet UIView* backdropStratum;
+@property(retain) IBOutlet UIView* hostView;
+@property(retain) IBOutlet UIToolbar* toolbar;
+
 @property(retain) MvrSlidesView* slidesStratum;
 
-- (void) addItem:(MvrItem*) i;
+- (void) addItem:(MvrItem*) i animated:(BOOL) ani;
+
+- (void) setEditing:(BOOL) editing animated:(BOOL) animated;
 
 @end
