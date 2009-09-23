@@ -10,7 +10,47 @@
 
 #import "MvrArrowsView.h"
 
+@interface MvrUIMode ()
+
+@property(retain) id northDestination;
+@property(retain) id eastDestination;
+@property(retain) id westDestination;
+
+- (NSString*) keyForDestination:(id) o;
+- (NSArray*) unassignedDestinationKeys;
+
+@end
+
+
 @implementation MvrUIMode
+
+- (id) init
+{
+	self = [super init];
+	if (self != nil) {
+		destinations = [NSMutableArray new];
+	}
+	return self;
+}
+
+@synthesize arrowsStratum, backdropStratum;
+@synthesize northDestination, eastDestination, westDestination;
+
+- (void) dealloc;
+{
+	[backdropStratum release];
+	[arrowsStratum release];
+	
+	[destinations release];
+	[northDestination release];
+	[eastDestination release];
+	[westDestination release];
+	
+	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark Arrows stratum
 
 - (UIView*) arrowsStratum;
 {
@@ -27,14 +67,111 @@
 	return [x isKindOfClass:[MvrArrowsView class]]? x : nil;
 }
 
-@synthesize arrowsStratum, backdropStratum;
+#pragma mark -
+#pragma mark Destinations
 
-- (void) dealloc;
+- (NSString*) displayNameForDestination:(id) destination;
 {
-	[backdropStratum release];
-	[arrowsStratum release];
+	L0AbstractMethod();
+	return nil;
+}
+
+- (NSArray*) unassignedDestinationKeys;
+{
+	NSMutableArray* keys = [NSMutableArray arrayWithCapacity:3];
+	if (!northDestination)
+		[keys addObject:@"northDestination"];
+	if (!eastDestination)
+		[keys addObject:@"eastDestination"];
+	if (!westDestination)
+		[keys addObject:@"westDestination"];
 	
-	[super dealloc];
+	return keys;
+}
+
+- (NSString*) keyForDestination:(id) dest;
+{
+	if ([northDestination isEqual:dest])
+		return @"northDestination";
+	else if ([eastDestination isEqual:dest])
+		return @"eastDestination";
+	else if ([westDestination isEqual:dest])
+		return @"westDestination";
+	
+	return nil;
+}
+
+- (NSMutableArray*) mutableDestinations;
+{
+	return [self mutableArrayValueForKey:@"destinations"];
+}
+
+- (NSArray*) destinations;
+{
+	return [[destinations copy] autorelease];
+}
+
+- (void) insertObject:(id) dest inDestinationsAtIndex:(NSUInteger) i;
+{
+	[destinations insertObject:dest atIndex:i];
+	
+	NSArray* keys = [self unassignedDestinationKeys];
+	if ([keys count] > 0) {
+		srandomdev();
+		NSString* key = [keys objectAtIndex:random() % [keys count]];
+		[self setValue:dest forKey:key];
+	}
+}
+
+- (void) removeObjectFromDestinationsAtIndex:(NSUInteger) i;
+{
+	id o = [destinations objectAtIndex:i];
+	[[o retain] autorelease];
+	[destinations removeObjectAtIndex:i];
+	
+	NSString* key = [self keyForDestination:o];
+	if (key) {
+		id replacement = nil;
+		
+		for (id candidate in destinations) {
+			if (![self keyForDestination:candidate]) {
+				replacement = candidate;
+				break;
+			}
+		}
+		
+		[self setValue:replacement forKey:key];
+	}	
+}
+
+- (void) setNorthDestination:(id) dest;
+{
+	if (dest != northDestination) {
+		[northDestination release];
+		northDestination = [dest retain];
+		
+		[self.arrowsView setNorthViewLabel:dest? [self displayNameForDestination:dest] : nil];
+	}
+}
+
+- (void) setEastDestination:(id) dest;
+{
+	if (dest != eastDestination) {
+		[eastDestination release];
+		eastDestination = [dest retain];
+		
+		[self.arrowsView setEastViewLabel:dest? [self displayNameForDestination:dest] : nil];
+	}
+}
+
+- (void) setWestDestination:(id) dest;
+{
+	if (dest != westDestination) {
+		[westDestination release];
+		westDestination = [dest retain];
+		
+		[self.arrowsView setWestViewLabel:dest? [self displayNameForDestination:dest] : nil];
+	}
 }
 
 @end

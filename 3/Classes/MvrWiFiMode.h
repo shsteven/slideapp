@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import "MvrUIMode.h"
+#import "Network+Storage/MvrScannerObserver.h"
+#import "Network+Storage/MvrWiFi.h"
 
-@interface MvrWiFiMode : MvrUIMode {
-
+@interface MvrWiFiMode : MvrUIMode <MvrScannerObserverDelegate> {
+	MvrWiFi* wifi;
+	MvrScannerObserver* observer;
 }
 
 @end

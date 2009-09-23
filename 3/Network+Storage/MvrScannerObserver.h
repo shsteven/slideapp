@@ -28,6 +28,7 @@
 @end
 
 @protocol MvrScannerObserverDelegate <NSObject>
+@optional
 
 - (void) scanner:(id <MvrScanner>) s didChangeJammedKey:(BOOL) jammed;
 - (void) scanner:(id <MvrScanner>) s didChangeEnabledKey:(BOOL) enabled;

@@ -11,10 +11,10 @@
 
 @class BLIPConnection;
 
-@interface MvrLegacyWiFiChannel : MvrWiFiChannel {
-
-}
+@interface MvrLegacyWiFiChannel : MvrWiFiChannel {}
 
 - (void) addIncomingTransferWithConnection:(BLIPConnection*) conn;
+
+@property(readonly, getter=isLegacyLegacy) BOOL legacyLegacy;
 
 @end

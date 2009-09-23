@@ -6,6 +6,7 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
+#import "MvrLegacyWiFi.h"
 #import "MvrLegacyWiFiChannel.h"
 
 #import <MuiKit/MuiKit.h>
@@ -14,6 +15,11 @@
 #import "MvrLegacyWiFiOutgoing.h"
 
 @implementation MvrLegacyWiFiChannel
+
+- (BOOL) isLegacyLegacy;
+{
+	return [self.netService.type isEqual:kMvrLegacyWiFiServiceName_1_0];
+}
 
 #pragma mark -
 #pragma mark Incoming transfers.

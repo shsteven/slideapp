@@ -19,6 +19,7 @@
 @interface MvrSyntheticWiFiChannel : NSObject <MvrChannel> {
 	MvrModernWiFiChannel* modernChannel;
 	MvrLegacyWiFiChannel* legacyChannel;
+	MvrLegacyWiFiChannel* legacyLegacyChannel;
 	
 	NSMutableSet* incomingTransfers;
 	NSMutableSet* outgoingTransfers;
@@ -28,6 +29,7 @@
 
 @property(retain) MvrModernWiFiChannel* modernChannel;
 @property(retain) MvrLegacyWiFiChannel* legacyChannel;
+@property(retain) MvrLegacyWiFiChannel* legacyLegacyChannel; // ridiculous, yet.
 
 - (void) addChannel:(id) chan;
 - (BOOL) removeChannelAndReturnIfEmpty:(id) chan;
@@ -47,14 +49,15 @@
 	return self;
 }
 
-@synthesize modernChannel, legacyChannel;
+@synthesize modernChannel, legacyChannel, legacyLegacyChannel;
 
 - (void) dealloc;
 {
-	[dispatcher release]; dispatcher = nil;
+	[dispatcher release];
 	
 	self.modernChannel = nil;
 	self.legacyChannel = nil;
+	self.legacyLegacyChannel = nil;
 	
 	[super dealloc];
 }
@@ -63,9 +66,12 @@
 {
 	if ([chan isKindOfClass:[MvrModernWiFiChannel class]])
 		self.modernChannel = chan;
-	else if ([chan isKindOfClass:[MvrLegacyWiFiChannel class]])
-		self.legacyChannel = chan;
-	else
+	else if ([chan isKindOfClass:[MvrLegacyWiFiChannel class]]) {
+		if ([chan isLegacyLegacy])
+			self.legacyChannel = chan;
+		else
+			self.legacyLegacyChannel = chan;
+	} else
 		return;
 }
 
@@ -74,9 +80,11 @@
 	if ([chan isEqual:self.modernChannel])
 		self.modernChannel = nil;
 	else if ([chan isEqual:self.legacyChannel])
-		self.legacyChannel = chan;
+		self.legacyChannel = nil;
+	else if ([chan isEqual:self.legacyLegacyChannel])
+		self.legacyLegacyChannel = nil;
 
-	return !self.modernChannel && !self.legacyChannel;
+	return !self.modernChannel && !self.legacyChannel && !self.legacyLegacyChannel;
 }
 
 - (NSSet*) incomingTransfers;
@@ -93,9 +101,10 @@
 {
 	if (self.modernChannel)
 		return [self.modernChannel valueForKey:key];
-	else 
+	else if (self.legacyChannel)
 		return [self.legacyChannel valueForKey:key];
-
+	else
+		return [self.legacyLegacyChannel valueForKey:key];
 }
 
 - (NSString*) displayName;
@@ -107,8 +116,10 @@
 {
 	if (self.modernChannel)
 		[self.modernChannel beginSendingItem:item];
-	else
+	else if (self.legacyChannel)
 		[self.legacyChannel beginSendingItem:item];
+	else
+		[self.legacyLegacyChannel beginSendingItem:item];
 }
 
 @end
