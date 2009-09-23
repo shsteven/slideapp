@@ -26,11 +26,23 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (void) setUp;
 {
-	CGRect r = [self.hostView convertRect:[UIScreen mainScreen].bounds fromView:nil];
-	self.backdropStratum.frame = r;
-	[self.hostView addSubview:self.backdropStratum];
+	NSAssert(self.currentMode, @"A mode must be made current before the table controller is set up.");
 	
-	self.slidesStratum = [[MvrSlidesView alloc] initWithFrame:self.hostView.bounds delegate:self];
+	CGRect r = [self.hostView convertRect:[UIScreen mainScreen].bounds fromView:nil];
+	UIView* backdrop = self.currentMode.backdropStratum;
+	backdrop.frame = r;
+	backdrop.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+	[self.hostView addSubview:backdrop];
+	
+	r = [self.hostView convertRect:[UIScreen mainScreen].applicationFrame fromView:nil];
+	r.size.height -= self.toolbar.bounds.size.height;
+	UIView* arrows = self.currentMode.arrowsStratum;
+	arrows.frame = r;
+	arrows.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	
+	[self.hostView insertSubview:arrows aboveSubview:backdrop];
+	
+	self.slidesStratum = [[[MvrSlidesView alloc] initWithFrame:self.hostView.bounds delegate:self] autorelease];
 	[self.hostView addSubview:self.slidesStratum];
 	
 	itemsToViews = [L0Map new];
@@ -47,7 +59,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[self addItem:i animated:NO];
 }
 
-@synthesize hostView, toolbar, backdropStratum, slidesStratum;
+@synthesize hostView, toolbar, currentMode, slidesStratum;
 
 - (void) viewDidUnload;
 {
@@ -58,7 +70,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (void) dealloc;
 {
 	[self viewDidUnload];
-	[backdropStratum release];
+	[currentMode release];
 	[slidesStratum release];
 	
 	[super dealloc];
@@ -110,6 +122,9 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	[viewsToItems removeObjectForKey:view];
 	[view removeFromSuperview];
+	
+	if ([itemsToViews count] == 0)
+		[self setEditing:NO animated:YES];
 }
 
 @end

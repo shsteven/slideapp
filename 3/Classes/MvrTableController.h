@@ -12,18 +12,21 @@
 #import "MvrSlidesView.h"
 #import "Network+Storage/MvrItem.h"
 
+#import "MvrUIMode.h"
+
 @interface MvrTableController : UIViewController <MvrSlidesViewDelegate> {
 	UIView* hostView;
-	UIView* backdropStratum;
 	MvrSlidesView* slidesStratum;
 	UIToolbar* toolbar;
+	MvrUIMode* currentMode;
 	
 	L0Map* itemsToViews, * viewsToItems;
 }
 
 - (void) setUp;
 
-@property(retain) IBOutlet UIView* backdropStratum;
+@property(retain) IBOutlet MvrUIMode* currentMode;
+
 @property(retain) IBOutlet UIView* hostView;
 @property(retain) IBOutlet UIToolbar* toolbar;
 

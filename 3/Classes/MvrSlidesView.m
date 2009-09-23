@@ -13,6 +13,14 @@
 #define MvrClampValueBetween(value, min, max) \
 	(MAX((min), MIN((max), (value))))
 
+#define kMvrMaximumAngleRange (30)
+static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransform transform)
+{
+	srandomdev();
+	CGFloat angle = ((random() % kMvrMaximumAngleRange) - kMvrMaximumAngleRange / 2.0) * M_PI/180.0;
+	return CGAffineTransformRotate(transform, angle);
+}
+
 @interface MvrSlidesView ()
 
 @property(readonly) CGRect safeArea;
@@ -196,6 +204,7 @@
 - (void) addDraggableSubview:(L0DraggableView*) view;
 {
 	view.delegate = self;
+	view.transform = MvrConcatenateRandomRotationToTransform(view.transform);
 	[self addSubview:view];
 }
 

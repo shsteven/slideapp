@@ -184,6 +184,7 @@ enum {
 {
 	L0ActionSheet* sheet = [[L0ActionSheet new] autorelease];
 	sheet.tag =	kMvrAppDelegateAddSheetTag;
+	sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
 	
 	for (MvrItemSource* source in [MvrItemSource registeredItemSources])
 		 [sheet addButtonWithTitle:source.displayName identifier:source];
