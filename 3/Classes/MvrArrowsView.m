@@ -121,4 +121,16 @@ typedef enum {
 	}
 }
 
+- (MvrArrowView*) viewAtDirection:(MvrDirection) d;
+{
+	if (d == kMvrDirectionNorth)
+		return self.northView;
+	else if (d == kMvrDirectionEast)
+		return self.eastView;
+	else if (d == kMvrDirectionWest)
+		return self.westView;
+	else
+		return nil;
+}
+
 @end

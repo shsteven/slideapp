@@ -14,13 +14,15 @@
 
 #import "MvrUIMode.h"
 
-@interface MvrTableController : UIViewController <MvrSlidesViewDelegate> {
+@interface MvrTableController : UIViewController <MvrSlidesViewDelegate, MvrUIModeDelegate> {
 	UIView* hostView;
 	MvrSlidesView* slidesStratum;
 	UIToolbar* toolbar;
 	MvrUIMode* currentMode;
 	
 	L0Map* itemsToViews, * viewsToItems;
+	
+	BOOL didCancelSending;
 }
 
 - (void) setUp;

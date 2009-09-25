@@ -157,14 +157,13 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 }
 
 #define kMvrBoundsStartOfBouncebackArea (-20)
-- (void) didComeToRest:(UIView*) v;
+- (void) didComeToRest:(L0DraggableView*) v;
 {
 	CGRect bounceback = CGRectInset(self.bounds, kMvrBoundsStartOfBouncebackArea, kMvrBoundsStartOfBouncebackArea);
 	
 	// for now we just bounce back if needed.
 	if (!CGRectContainsPoint(bounceback, v.center)) {
-		if (![delegate respondsToSelector:@selector(slidesView:shouldBounceBackView:)] || [delegate slidesView:self shouldBounceBackView:v])
-			[self bounceBack:v];
+		[delegate slidesView:self subviewDidMove:v inBounceBackAreaInDirection:[self directionForCurrentPositionOfView:v]];
 	}
 	
 }
@@ -206,6 +205,25 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 	view.delegate = self;
 	view.transform = MvrConcatenateRandomRotationToTransform(view.transform);
 	[self addSubview:view];
+}
+
+- (MvrDirection) directionForCurrentPositionOfView:(L0DraggableView*) v;
+{
+	if (v.superview != self)
+		return kMvrDirectionNone;
+	
+	CGPoint c = v.center;
+	CGRect me = self.bounds;
+	if (c.y < CGRectGetMinY(me))
+		return kMvrDirectionNorth;
+	else if (c.y > CGRectGetMaxY(me))
+		return kMvrDirectionSouth;
+	else if (c.x < CGRectGetMinX(me))
+		return kMvrDirectionWest;
+	else if (c.x > CGRectGetMaxX(me))
+		return kMvrDirectionEast;
+	else
+		return kMvrDirectionNone;
 }
 
 @end

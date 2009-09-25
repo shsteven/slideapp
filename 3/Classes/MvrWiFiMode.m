@@ -10,6 +10,7 @@
 
 #import "Network+Storage/MvrModernWiFi.h"
 #import "Network+Storage/MvrLegacyWiFi.h"
+#import "Network+Storage/MvrChannel.h"
 
 #import "MvrAppDelegate.h"
 
@@ -35,6 +36,35 @@
 - (NSString*) displayNameForDestination:(id) dest;
 {
 	return [dest displayName];
+}
+
+#pragma mark Sending items
+
+- (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) dest;
+{
+	[[self destinationAtDirection:dest] beginSendingItem:i];
+}
+
+- (void) channel:(id <MvrChannel>)c didBeginSendingWithOutgoingTransfer:(id <MvrOutgoing>)outgoing;
+{
+	MvrDirection dir = [self directionForDestination:c];
+	if (dir == kMvrDirectionNone)
+		return;
+	
+	[[self.arrowsView viewAtDirection:dir] setBusy:YES];
+}
+
+- (void) outgoingTransferDidEndSending:(id <MvrOutgoing>) outgoing;
+{
+	for (NSString* s in [NSArray arrayWithObjects:@"northDestination", @"eastDestination", @"westDestination", nil]) {
+		
+		id dest = [self valueForKey:s];
+		if (!dest)
+			continue;
+		
+		[[self.arrowsView viewAtDirection:[self directionForDestination:dest]] setBusy:([[dest outgoingTransfers] count] > 0)];
+		
+	}
 }
 
 @end

@@ -12,10 +12,6 @@
 
 @interface MvrUIMode ()
 
-@property(retain) id northDestination;
-@property(retain) id eastDestination;
-@property(retain) id westDestination;
-
 - (NSString*) keyForDestination:(id) o;
 - (NSArray*) unassignedDestinationKeys;
 
@@ -35,6 +31,7 @@
 
 @synthesize arrowsStratum, backdropStratum;
 @synthesize northDestination, eastDestination, westDestination;
+@synthesize delegate;
 
 - (void) dealloc;
 {
@@ -172,6 +169,38 @@
 		
 		[self.arrowsView setWestViewLabel:dest? [self displayNameForDestination:dest] : nil];
 	}
+}
+
+- (id) destinationAtDirection:(MvrDirection) d;
+{
+	if (d == kMvrDirectionNorth)
+		return self.northDestination;
+	else if (d == kMvrDirectionEast)
+		return self.eastDestination;
+	else if (d == kMvrDirectionWest)
+		return self.westDestination;
+	else
+		return nil;
+}
+
+- (MvrDirection) directionForDestination:(id) d;
+{
+	if ([northDestination isEqual:d])
+		return kMvrDirectionNorth;
+	else if ([eastDestination isEqual:d])
+		return kMvrDirectionEast;
+	else if ([westDestination isEqual:d])
+		return kMvrDirectionWest;
+	
+	return kMvrDirectionNone;
+}
+
+#pragma mark -
+#pragma mark Sending and receiving.
+
+- (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) dest;
+{
+	L0AbstractMethod();
 }
 
 @end

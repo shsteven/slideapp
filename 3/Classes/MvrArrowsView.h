@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "MvrArrowView.h"
+#import "MvrSlidesView.h" // for MvrDirection
 
 @interface MvrArrowsView : UIView {
 	MvrArrowView* northView;
@@ -26,5 +27,7 @@
 @property(readonly, retain) MvrArrowView* northView;
 @property(readonly, retain) MvrArrowView* eastView;
 @property(readonly, retain) MvrArrowView* westView;
+
+- (MvrArrowView*) viewAtDirection:(MvrDirection) d;
 
 @end

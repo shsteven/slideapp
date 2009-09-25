@@ -12,6 +12,15 @@
 
 @protocol MvrSlidesViewDelegate;
 
+enum {
+	kMvrDirectionNone,
+	kMvrDirectionNorth,
+	kMvrDirectionEast,
+	kMvrDirectionWest,
+	kMvrDirectionSouth,
+};
+typedef NSUInteger MvrDirection;
+
 
 @interface MvrSlidesView : UIView <L0DraggableViewDelegate> {
 	id <MvrSlidesViewDelegate> delegate;
@@ -32,12 +41,14 @@
 - (void) showArea:(CGRect) area;
 #endif
 
+- (MvrDirection) directionForCurrentPositionOfView:(L0DraggableView*) v;
+- (void) bounceBack:(UIView*) v;
+
 @end
 
 
 @protocol MvrSlidesViewDelegate <NSObject>
-@optional
 
-- (BOOL) slidesView:(MvrSlidesView*) v shouldBounceBackView:(UIView*) view;
+- (void) slidesView:(MvrSlidesView*) v subviewDidMove:(L0DraggableView*) view inBounceBackAreaInDirection:(MvrDirection) d;
 
 @end

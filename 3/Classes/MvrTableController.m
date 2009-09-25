@@ -59,6 +59,18 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[self addItem:i animated:NO];
 }
 
+- (void) setCurrentMode:(MvrUIMode *) m;
+{
+	if (m != currentMode) {
+		currentMode.delegate = nil;
+		
+		[currentMode release];
+		currentMode = [m retain];
+		
+		m.delegate = self;
+	}
+}
+
 @synthesize hostView, toolbar, currentMode, slidesStratum;
 
 - (void) viewDidUnload;
@@ -125,6 +137,35 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	if ([itemsToViews count] == 0)
 		[self setEditing:NO animated:YES];
+}
+
+#pragma mark -
+#pragma mark Sending items
+
+- (void) slidesView:(MvrSlidesView*) v subviewDidMove:(L0DraggableView*) view inBounceBackAreaInDirection:(MvrDirection) d;
+{
+	MvrItem* item = [viewsToItems objectForKey:view];
+	
+	// TODO fadeout della slide
+	if (item && d != kMvrDirectionSouth && d != kMvrDirectionNone)
+		[self.currentMode sendItem:item toDestinationAtDirection:d];
+	
+	[v performSelector:@selector(bounceBack:) withObject:view afterDelay:0.7];
+}
+
+- (void) UIMode:(MvrUIMode*) mode didFinishSendingItem:(MvrItem*) i;
+{
+	L0DraggableView* view = [itemsToViews objectForKey:i];
+	if (view)
+		[self.slidesStratum bounceBack:view];
+}
+
+#pragma mark -
+#pragma mark Receiving items
+
+- (void) UIMode:(MvrUIMode*) mode willBeginReceivingItemWithTransfer:(id <MvrIncoming>) i;
+{
+	L0AbstractMethod();
 }
 
 @end

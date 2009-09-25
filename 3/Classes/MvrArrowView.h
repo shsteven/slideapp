@@ -13,6 +13,9 @@
 	UIImageView* arrowView;
 	UILabel* nameLabel;
 	CGSize preferredSize;
+	
+	UIColor* busyColor, * normalColor;
+	BOOL busy;
 }
 
 + (CGAffineTransform) clockwiseHalfTurn;
@@ -21,5 +24,10 @@
 @property(retain) IBOutlet UIView* contentView;
 @property(retain) IBOutlet UIImageView* arrowView;
 @property(retain) IBOutlet UILabel* nameLabel;
+
+@property(retain) UIColor* busyColor;
+@property(retain) UIColor* normalColor;
+
+@property BOOL busy;
 
 @end
