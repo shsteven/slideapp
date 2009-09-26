@@ -56,14 +56,17 @@
 
 - (void) outgoingTransferDidEndSending:(id <MvrOutgoing>) outgoing;
 {
-	for (NSString* s in [NSArray arrayWithObjects:@"northDestination", @"eastDestination", @"westDestination", nil]) {
+	const MvrDirection directions[] = { kMvrDirectionNorth, kMvrDirectionEast, kMvrDirectionWest };
+	const size_t directionsCount = 3;
+	
+	int i;
+	for (i = 0; i < directionsCount; i++) {
 		
-		id dest = [self valueForKey:s];
+		id dest = [self destinationAtDirection:directions[i]];
 		if (!dest)
 			continue;
 		
-		[[self.arrowsView viewAtDirection:[self directionForDestination:dest]] setBusy:([[dest outgoingTransfers] count] > 0)];
-		
+		[[self.arrowsView viewAtDirection:directions[i]] setBusy:([[dest outgoingTransfers] count] > 0)];
 	}
 }
 
