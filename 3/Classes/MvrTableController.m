@@ -150,7 +150,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	if (item && d != kMvrDirectionSouth && d != kMvrDirectionNone)
 		[self.currentMode sendItem:item toDestinationAtDirection:d];
 	
-	[v performSelector:@selector(bounceBack:) withObject:view afterDelay:0.7];
+	[v performSelector:@selector(bounceBack:) withObject:view afterDelay:1.5];
 }
 
 - (void) UIMode:(MvrUIMode*) mode didFinishSendingItem:(MvrItem*) i;
