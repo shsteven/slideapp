@@ -77,12 +77,12 @@ typedef enum {
 
 - (void) setWestViewLabel:(NSString*) label;
 {
-	[self setLabel:label forViewOfKey:@"eastView"];
+	[self setLabel:label forViewOfKey:@"westView"];
 }
 
 - (void) setEastViewLabel:(NSString*) label;
 {
-	[self setLabel:label forViewOfKey:@"westView"];	
+	[self setLabel:label forViewOfKey:@"eastView"];	
 }
 
 #define kMvrArrowsViewMargin (10)
