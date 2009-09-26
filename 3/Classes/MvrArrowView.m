@@ -44,7 +44,7 @@
     return self;
 }
 
-@synthesize nameLabel, contentView, arrowView, busyColor, normalColor;
+@synthesize nameLabel, contentView, arrowView, busyColor, normalColor, spinner;
 
 - (void)dealloc {
 	[contentView release];
@@ -52,6 +52,7 @@
 	[nameLabel release];
 	[normalColor release];
 	[busyColor release];
+	[spinner release];
     [super dealloc];
 }
 
@@ -80,6 +81,8 @@
 		self.nameLabel.textColor = self.busyColor;
 
 		[UIView commitAnimations];
+		
+		[self.spinner startAnimating];
 	} else if (wasBusy && !nowBusy) {
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:1.0];
@@ -92,6 +95,8 @@
 		self.nameLabel.textColor = self.normalColor;
 		
 		[UIView commitAnimations];
+		
+		[self.spinner stopAnimating];
 	}
 }
 

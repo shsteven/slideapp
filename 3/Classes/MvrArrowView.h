@@ -13,6 +13,7 @@
 	UIImageView* arrowView;
 	UILabel* nameLabel;
 	CGSize preferredSize;
+	UIActivityIndicatorView* spinner;
 	
 	UIColor* busyColor, * normalColor;
 	BOOL busy;
@@ -24,6 +25,7 @@
 @property(retain) IBOutlet UIView* contentView;
 @property(retain) IBOutlet UIImageView* arrowView;
 @property(retain) IBOutlet UILabel* nameLabel;
+@property(retain) IBOutlet UIActivityIndicatorView* spinner;
 
 @property(retain) UIColor* busyColor;
 @property(retain) UIColor* normalColor;
