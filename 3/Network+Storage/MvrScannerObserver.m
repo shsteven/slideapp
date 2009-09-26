@@ -37,6 +37,8 @@
 		delegate = d; // it owns us
 		scanner = [s retain];
 		
+		observedObjects = [NSMutableSet new];
+		
 		[self beginObservingScanner];
 	}
 	
@@ -45,8 +47,13 @@
 
 - (void) dealloc;
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+
 	[self endObservingScanner];
 	[kvo release];
+	
+	[observedObjects release];
+	
 	[super dealloc];
 }
 
@@ -84,7 +91,7 @@
 - (void) scanner:(id <MvrScanner>)s didRemoveChannel:(id <MvrChannel>) chan;
 {
 	L0Log(@"%@.channels -= %@", s, chan);
-	[self endObservingChannel:chan];
+	[self performSelector:@selector(endObservingChannel:) withObject:chan afterDelay:0.1];
 }
 
 - (void) beginObservingScanner;
@@ -135,7 +142,6 @@
 - (void) channel:(id <MvrChannel>) chan didRemoveIncomingTransfer:(id <MvrIncoming>) incoming;
 {
 	L0Log(@"%@.incomingTransfers -= %@", chan, incoming);
-	[self endObservingIncomingTransfer:incoming];
 }
 
 
@@ -153,9 +159,7 @@
 - (void) channel:(id <MvrChannel>) chan didRemoveOutgoingTransfer:(id <MvrOutgoing>) outgoing;
 {
 	L0Log(@"%@.outgoingTransfers -= %@", chan, outgoing);
-	[self endObservingOutgoingTransfer:outgoing];
 }
-
 
 - (void) beginObservingChannel:(id <MvrChannel>) chan;
 {
@@ -210,6 +214,7 @@
 {
 	[kvo endObserving:@"item" ofObject:incoming];
 	[kvo endObserving:@"cancelled" ofObject:incoming];
+	[observedObjects removeObject:incoming];
 }
 
 - (void) beginObservingIncomingTransfer:(id <MvrIncoming>) incoming ofChannel:(id <MvrChannel>) chan;
@@ -222,13 +227,14 @@
 		if ([delegate respondsToSelector:@selector(incomingTransfer:didEndReceivingItem:)])
 			[delegate incomingTransfer:incoming didEndReceivingItem:(incoming.cancelled? nil : incoming.item)];
 	} else {
+		[observedObjects addObject:incoming];
 		[kvo observe:@"item" ofObject:incoming usingSelector:@selector(incomingTransfer:didChangeItemOrCancelledKey:) options:0];
 		[kvo observe:@"cancelled" ofObject:incoming usingSelector:@selector(incomingTransfer:didChangeItemOrCancelledKey:) options:0];
 	}
 }
 
 #pragma mark -
-#pragma mark Observing incoming transfers.
+#pragma mark Observing outgoing transfers.
 
 - (void) outgoingTransfer:(id <MvrOutgoing>) outgoing didChangeFinishedKey:(NSDictionary*) d;
 {
@@ -244,19 +250,22 @@
 {
 	L0Log(@"%@", outgoing);
 	[kvo endObserving:@"finished" ofObject:outgoing];
+	[observedObjects removeObject:outgoing];
 }
 
 - (void) beginObservingOutgoingTransfer:(id <MvrOutgoing>) outgoing ofChannel:(id <MvrChannel>) chan;
 {
-	L0Log(@"%@ (from %@.outgoingTransfers", outgoing, chan);
+	L0Log(@"%@ (from %@.outgoingTransfers)", outgoing, chan);
 	if ([delegate respondsToSelector:@selector(channel:didBeginSendingWithOutgoingTransfer:)])
 		[delegate channel:chan didBeginSendingWithOutgoingTransfer:outgoing];
 	
 	if (outgoing.finished) {
 		if ([delegate respondsToSelector:@selector(outgoingTransferDidEndSending:)])
 			[delegate outgoingTransferDidEndSending:outgoing];
-	} else
+	} else {
+		[observedObjects addObject:outgoing];
 		[kvo observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:didChangeFinishedKey:) options:0];
+	}
 }
 
 @end

@@ -21,6 +21,8 @@
 	L0KVODispatcher* kvo;
 	id <MvrScanner> scanner;
 	id <MvrScannerObserverDelegate> delegate;
+	
+	NSMutableSet* observedObjects;
 }
 
 - (id) initWithScanner:(id <MvrScanner>) scanner delegate:(id <MvrScannerObserverDelegate>) delegate;
