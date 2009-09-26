@@ -31,4 +31,9 @@
 	return [original imageByRenderingRotationAndScalingWithMaximumSide:MAX(size.width, size.height)];
 }
 
+- (void) didReceiveItem:(MvrItem*) i;
+{
+	UIImageWriteToSavedPhotosAlbum(((MvrImageItem*)i).image, nil, NULL, NULL);
+}
+
 @end

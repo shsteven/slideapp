@@ -20,9 +20,9 @@
 	UIToolbar* toolbar;
 	MvrUIMode* currentMode;
 	
-	L0Map* itemsToViews, * viewsToItems;
+	L0Map* itemsToViews, * viewsToItems, * transfersToViews;
 	
-	BOOL didCancelSending;
+	L0KVODispatcher* kvo;
 }
 
 - (void) setUp;

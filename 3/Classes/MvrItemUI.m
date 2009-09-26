@@ -149,4 +149,9 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	return nil;
 }
 
+- (void) didReceiveItem:(MvrItem*) i;
+{
+	L0AbstractMethod();
+}
+
 @end

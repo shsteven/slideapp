@@ -9,6 +9,8 @@
 #import "MvrSlidesView.h"
 #import "MvrSlide.h"
 
+typedef CGPoint (*MvrCGRectInspector)(CGRect rect);
+
 
 #define MvrClampValueBetween(value, min, max) \
 	(MAX((min), MIN((max), (value))))
@@ -30,7 +32,7 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 - (void) didComeToRest:(UIView *)v;
 - (void) bounceBack:(UIView*) v;
 
-- (CGPoint) southEntrancePointForView:(UIView*) v;
+- (CGPoint) entrancePointForView:(UIView*) view fromDirection:(MvrDirection) d;
 
 - (void) enterView:(UIView*) v inArea:(CGRect) area randomness:(CGSize) randomness;
 - (CGPoint) arrivalPointStartingFromPoint:(CGPoint) point inArea:(CGRect) area randomness:(CGSize) randomness;
@@ -78,9 +80,9 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 #pragma mark Adding items
 
 #define kMvrAdditionRandomnessLimit CGSizeMake(50, 0)
-- (void) addDraggableSubviewFromSouth:(L0DraggableView *)view;
+- (void) addDraggableSubview:(L0DraggableView *)view enteringFromDirection:(MvrDirection) d;
 {
-	view.center = [self southEntrancePointForView:view];
+	view.center = [self entrancePointForView:view fromDirection:d];
 	[self addDraggableSubview:view];
 	[self enterView:view inArea:self.additionArrivalArea randomness:kMvrAdditionRandomnessLimit];
 }
@@ -88,24 +90,39 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 - (void) addDraggableSubviewWithoutAnimation:(L0DraggableView*)view;
 {
 	// simulate an entrance without actually animating anything.
-	CGPoint cen = [self southEntrancePointForView:view];
+	CGPoint cen = [self entrancePointForView:view fromDirection:kMvrDirectionSouth];
 	cen = [self arrivalPointStartingFromPoint:cen inArea:self.additionArrivalArea randomness:kMvrAdditionRandomnessLimit];
 	view.center = cen;
 	[self addDraggableSubview:view];	
 }
 
-- (CGPoint) southEntrancePointForView:(UIView*) v;
+#define kMvrEntrancePointForViewMargin (10.0)
+- (CGPoint) entrancePointForView:(UIView*) v fromDirection:(MvrDirection) d;
 {
 	CGRect r = self.bounds;
-	CGPoint point;
-	point.x = CGRectGetMidX(r);
-	
-	// Hi Pythagoras!
 	CGRect viewBounds = v.bounds;
 	CGFloat diagonal = sqrt(pow(viewBounds.size.width, 2) + pow(viewBounds.size.height, 2));
-	point.y = CGRectGetMaxY(r) + diagonal + 10;
-	
-	return point;
+
+	switch (d) {
+		case kMvrDirectionNone:
+			return CGPointMake(CGRectGetMidX(r), CGRectGetMidY(r));
+		
+		case kMvrDirectionNorth:
+			return CGPointMake(CGRectGetMidX(r), -(diagonal + kMvrEntrancePointForViewMargin));
+		
+		case kMvrDirectionWest:
+			return CGPointMake(-(diagonal + kMvrEntrancePointForViewMargin), CGRectGetMidY(r));
+			
+		case kMvrDirectionSouth:
+			return CGPointMake(CGRectGetMidX(r), r.size.height + (diagonal + kMvrEntrancePointForViewMargin));
+
+		case kMvrDirectionEast:
+			return CGPointMake(r.size.width + (diagonal + kMvrEntrancePointForViewMargin), CGRectGetMidY(r));
+			
+		default:
+			NSAssert(NO, @"Unhandled direction while trying to determine an entrance point!");
+			return CGPointZero;
+	}
 }
 
 - (CGRect) additionArrivalArea;
@@ -224,6 +241,29 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 		return kMvrDirectionEast;
 	else
 		return kMvrDirectionNone;
+}
+
+- (void) removeDraggableSubviewByFadingAway:(L0DraggableView *)view;
+{
+	if (view.superview != self)
+		return;
+	
+	CFRetain(view); // in case the iPhone ever goes GC in the future (please please please). balanced in removeAnimation:didEndByFinishing:context:.
+	[UIView beginAnimations:nil context:(void*) view];
+	[UIView setAnimationDuration:0.5];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(removeAnimation:didEndByFinishing:context:)];
+	
+	view.alpha = 0.0;
+	
+	[UIView commitAnimations];
+}
+
+- (void) removeAnimation:(NSString*) ani didEndByFinishing:(BOOL) finished context:(void*) context;
+{
+	L0DraggableView* view = (id) context; 
+	[view removeFromSuperview];
+	CFRelease(view); // balances the one in removeDraggableSubviewByFadingAway:.
 }
 
 @end

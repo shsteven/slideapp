@@ -33,7 +33,9 @@ typedef NSUInteger MvrDirection;
 - (id) initWithFrame:(CGRect) frame delegate:(id <MvrSlidesViewDelegate>) delegate;
 
 - (void) addDraggableSubviewWithoutAnimation:(L0DraggableView*)view;
-- (void) addDraggableSubviewFromSouth:(L0DraggableView *)view;
+- (void) addDraggableSubview:(L0DraggableView *)view enteringFromDirection:(MvrDirection) d;
+
+- (void) removeDraggableSubviewByFadingAway:(L0DraggableView *)view;
 
 - (void) setEditing:(BOOL) editing animated:(BOOL) animated;
 

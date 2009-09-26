@@ -22,6 +22,14 @@ static CGPoint MvrCenterOf(CGRect r) {
 	return CGPointMake(r.size.width / 2, r.size.height / 2);
 }
 
+@interface MvrTableController ()
+
+- (void) receiveItem:(MvrItem*) item withSlide:(MvrSlide*) slide;
+
+@end
+
+
+
 @implementation MvrTableController
 
 - (void) setUp;
@@ -47,10 +55,13 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	itemsToViews = [L0Map new];
 	viewsToItems = [L0Map new];
+	transfersToViews = [L0Map new];
 	
 	NSMutableArray* a = [NSMutableArray arrayWithArray:self.toolbar.items];
 	[a addObject:self.editButtonItem];
 	self.toolbar.items = a;
+	
+	kvo = [[L0KVODispatcher alloc] initWithTarget:self];
 	
 	// TODO remove me!
 	MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:[@"Ciao, mondo!" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -89,12 +100,10 @@ static CGPoint MvrCenterOf(CGRect r) {
 }
 
 #pragma mark -
-#pragma mark Adding items
+#pragma mark Adding and removing slides from the table
 
-- (void) addItem:(MvrItem*) i animated:(BOOL) ani;
+- (void) setItem:(MvrItem*) i forSlide:(MvrSlide*) slide;
 {
-	MvrSlide* slide = [[MvrSlide alloc] initWithFrame:CGRectZero];
-	[slide sizeToFit];
 	[slide setActionButtonTarget:self selector:@selector(displayActionMenuForItemOfView:)];
 	
 	NSString* title = i.title ?: @"";
@@ -103,9 +112,20 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	[itemsToViews setObject:slide forKey:i];
 	[viewsToItems setObject:i forKey:slide];
+}
+
+#pragma mark -
+#pragma mark Adding items
+
+- (void) addItem:(MvrItem*) i animated:(BOOL) ani;
+{
+	MvrSlide* slide = [[MvrSlide alloc] initWithFrame:CGRectZero];
+	[slide sizeToFit];
+	
+	[self setItem:i forSlide:slide];
 	
 	if (ani)
-		[self.slidesStratum addDraggableSubviewFromSouth:slide];
+		[self.slidesStratum addDraggableSubview:slide enteringFromDirection:kMvrDirectionSouth];
 	else
 		[self.slidesStratum addDraggableSubviewWithoutAnimation:slide];
 	
@@ -163,9 +183,58 @@ static CGPoint MvrCenterOf(CGRect r) {
 #pragma mark -
 #pragma mark Receiving items
 
-- (void) UIMode:(MvrUIMode*) mode willBeginReceivingItemWithTransfer:(id <MvrIncoming>) i;
+- (void) UIMode:(MvrUIMode*) mode willBeginReceivingItemWithTransfer:(id <MvrIncoming>) i fromDirection:(MvrDirection) d;
 {
-	L0AbstractMethod();
+	if (i.cancelled) return;
+	
+	MvrSlide* slide = [[MvrSlide alloc] initWithFrame:CGRectZero];
+	[slide sizeToFit];
+	slide.transferring = YES;
+	[self.slidesStratum addDraggableSubview:slide enteringFromDirection:d];
+	
+	if (i.item) {
+		[self receiveItem:i.item withSlide:slide];
+	} else {
+		[transfersToViews setObject:slide forKey:i];
+		[kvo observe:@"cancelled" ofObject:i usingSelector:@selector(incomingTransfer:mayHaveFinishedWithChange:) options:0];
+		[kvo observe:@"item" ofObject:i usingSelector:@selector(incomingTransfer:mayHaveFinishedWithChange:) options:0];
+		[kvo observe:@"progress" ofObject:i usingSelector:@selector(incomingTransfer:didChangeProgress:) options:0];
+	}
+	
+	[slide release];
+}
+
+- (void) receiveItem:(MvrItem*) item withSlide:(MvrSlide*) slide;
+{
+	[self setItem:item forSlide:slide];
+	slide.transferring = NO;
+	
+	[[MvrItemUI UIForItem:item] didReceiveItem:item];
+	[MvrApp().storageCentral.mutableStoredItems addObject:item];
+}
+
+- (void) incomingTransfer:(id <MvrIncoming>) i mayHaveFinishedWithChange:(NSDictionary*) change;
+{
+	if (!i.cancelled && !i.item) return;
+
+	MvrSlide* slide = [transfersToViews objectForKey:i];
+	NSAssert(slide, @"We are receiving transfer updates for a phantom transfer! Pull the brake!");
+	
+	if (i.cancelled)
+		[self.slidesStratum removeDraggableSubviewByFadingAway:slide];
+	else if (i.item)
+		[self receiveItem:i.item withSlide:slide];
+	
+	[kvo endObserving:@"item" ofObject:i];
+	[kvo endObserving:@"cancelled" ofObject:i];
+	[kvo endObserving:@"progress" ofObject:i];
+	[transfersToViews removeObjectForKey:i];
+}
+
+- (void) incomingTransfer:(id <MvrIncoming>)i didChangeProgress:(NSDictionary *)change;
+{
+	[[transfersToViews objectForKey:i] setProgress:i.progress];
 }
 
 @end
+

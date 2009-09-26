@@ -70,4 +70,11 @@
 	}
 }
 
+#pragma mark Receiving items
+
+- (void) channel:(id <MvrChannel>) c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>) incoming;
+{
+	[self.delegate UIMode:self willBeginReceivingItemWithTransfer:incoming fromDirection:[self directionForDestination:c]];
+}
+
 @end

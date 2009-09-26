@@ -20,4 +20,9 @@
 	return [UIImage imageNamed:@"GenericItemIcon.png"];
 }
 
+- (void) didReceiveItem:(MvrItem*) i;
+{
+	// Does nothing.
+}
+
 @end

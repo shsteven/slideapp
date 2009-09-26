@@ -27,6 +27,8 @@
 
 - (UIImage*) representingImageWithSize:(CGSize) size forItem:(id) i;
 
+- (void) didReceiveItem:(MvrItem*) i;
+
 @end
 
 

@@ -50,6 +50,6 @@
 @protocol MvrUIModeDelegate <NSObject>
 
 - (void) UIMode:(MvrUIMode*) mode didFinishSendingItem:(MvrItem*) i;
-- (void) UIMode:(MvrUIMode*) mode willBeginReceivingItemWithTransfer:(id <MvrIncoming>) i;
+- (void) UIMode:(MvrUIMode*) mode willBeginReceivingItemWithTransfer:(id <MvrIncoming>) i fromDirection:(MvrDirection) d;
 
 @end
