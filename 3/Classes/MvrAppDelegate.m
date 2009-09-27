@@ -25,8 +25,13 @@
 
 @end
 
+#define kMvrAppDelegateRemoveButtonIdentifier @"kMvrAppDelegateRemoveButtonIdentifier"
+#define kMvrAppDelegateDeleteButtonIdentifier @"kMvrAppDelegateDeleteButtonIdentifier"
+
 enum {
 	kMvrAppDelegateAddSheetTag,
+	kMvrAppDelegateItemActionSheetTag,
+	kMvrAppDelegateDeleteConfirmationSheetTag,
 };
 
 @implementation MvrAppDelegate
@@ -178,7 +183,7 @@ enum {
 #pragma mark -
 #pragma mark Adding
 
-#define kMvrCancelButtonIdentifier @"Cancel"
+#define kMvrAppDelegateCancelButtonIdentifier @"Cancel"
 
 - (IBAction) add;
 {
@@ -189,25 +194,109 @@ enum {
 	for (MvrItemSource* source in [MvrItemSource registeredItemSources])
 		 [sheet addButtonWithTitle:source.displayName identifier:source];
 	
-	NSInteger index = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on Add sheet") identifier:kMvrCancelButtonIdentifier];
+	NSInteger index = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on action sheet") identifier:kMvrAppDelegateCancelButtonIdentifier];
 	sheet.cancelButtonIndex = index;
 	
 	sheet.delegate = self;
 	[sheet showInView:self.window];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
-{
-	if (buttonIndex == actionSheet.cancelButtonIndex)
-		return;
-	
-	[[(L0ActionSheet*)actionSheet identifierForButtonAtIndex:buttonIndex] beginAddingItem];
-}
 
 - (void) addItemFromSelf:(MvrItem*) item;
 {
 	[self.tableController addItem:item animated:YES]; // TODO
 	[self.storageCentral.mutableStoredItems addObject:item];
+}
+
+#pragma mark -
+#pragma mark Displaying an action menu.
+
+- (void) displayActionMenuForItem:(MvrItem*) i withRemove:(BOOL) remove withMainAction:(BOOL) mainAction;
+{
+	MvrItemUI* ui = [MvrItemUI UIForItem:i];
+	
+	L0ActionSheet* as = [[L0ActionSheet new] autorelease];
+	as.tag = kMvrAppDelegateItemActionSheetTag;
+	as.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+	[as setValue:i forKey:@"MvrItem"];
+	
+	if (mainAction) {
+		MvrItemAction* main = [ui mainActionForItem:i];
+		if (main)
+			[as addButtonWithTitle:main.displayName identifier:main];
+	}
+	
+	for (MvrItemAction* a in [ui additionalActionsForItem:i])
+		[as addButtonWithTitle:a.displayName identifier:a];
+	
+	if (remove && [ui isItemRemovable:i]) {
+		
+		if ([ui isItemSavedElsewhere:i])
+			[as addButtonWithTitle:NSLocalizedString(@"Remove from Table", @"Remove button in item actions menu") identifier:kMvrAppDelegateRemoveButtonIdentifier];
+		else 
+			as.destructiveButtonIndex = [as addButtonWithTitle:NSLocalizedString(@"Delete", @"Delete button in item actions menu") identifier:kMvrAppDelegateDeleteButtonIdentifier];
+		
+	}
+	
+	as.cancelButtonIndex = [as addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on action sheet") identifier:kMvrAppDelegateCancelButtonIdentifier];
+
+	as.delegate = self;
+	[as showInView:self.window];
+}
+
+#pragma mark -
+#pragma mark Managing action sheets.
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	L0ActionSheet* as = (L0ActionSheet*) actionSheet;
+	switch (as.tag) {
+		case kMvrAppDelegateAddSheetTag:
+			if (buttonIndex != actionSheet.cancelButtonIndex)
+				[[as identifierForButtonAtIndex:buttonIndex] beginAddingItem];
+			break;
+			
+		case kMvrAppDelegateItemActionSheetTag: {
+			id identifier = [as identifierForButtonAtIndex:buttonIndex];
+			MvrItem* item = [as valueForKey:@"MvrItem"];
+			
+			if ([identifier isEqual:kMvrAppDelegateRemoveButtonIdentifier])
+				[self.tableController removeItem:item];
+			else if ([identifier isEqual:kMvrAppDelegateDeleteButtonIdentifier]) {
+
+				L0ActionSheet* deleteConfirm = [[L0ActionSheet new] autorelease];
+				deleteConfirm.tag = kMvrAppDelegateDeleteConfirmationSheetTag;
+				deleteConfirm.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+				[deleteConfirm setValue:item forKey:@"MvrItem"];
+				
+				deleteConfirm.title = NSLocalizedString(@"This item is only saved on Mover's table. If you delete it, there will be no way to recover it.", @"Prompt on unsafe delete confirmation sheet");
+				
+				deleteConfirm.destructiveButtonIndex = [deleteConfirm addButtonWithTitle:NSLocalizedString(@"Delete", @"Delete button in the unsafe delete confirmation sheet") identifier:kMvrAppDelegateDeleteButtonIdentifier];
+				
+				deleteConfirm.cancelButtonIndex = [deleteConfirm addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on action sheet") identifier:kMvrAppDelegateCancelButtonIdentifier];
+				
+				deleteConfirm.delegate = self;
+				[deleteConfirm showInView:self.window];
+			
+			} else if (buttonIndex != actionSheet.cancelButtonIndex) {
+				[[as identifierForButtonAtIndex:buttonIndex] performActionWithItem:item];
+			}
+			
+			if (![identifier isEqual:kMvrAppDelegateDeleteButtonIdentifier])
+				[self.tableController didEndDisplayingActionMenuForItem:item];
+		}
+			break;
+			
+		case kMvrAppDelegateDeleteConfirmationSheetTag: {
+			MvrItem* item = [as valueForKey:@"MvrItem"];
+			
+			if ([[as identifierForButtonAtIndex:buttonIndex] isEqual:kMvrAppDelegateDeleteButtonIdentifier])
+				[self.tableController removeItem:item];
+			else
+				[self.tableController didEndDisplayingActionMenuForItem:item];
+		}
+			break;
+	}
 }
 
 #pragma mark -

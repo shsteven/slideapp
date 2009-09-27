@@ -7,8 +7,63 @@
 //
 
 #import "MvrItemUI.h"
+#import "Network+Storage/MvrItemStorage.h"
 
 #pragma mark -
+#pragma mark Item actions.
+
+@interface MvrItemAction ()
+
+- (id) initWithDisplayName:(NSString *)string target:(id) target selector:(SEL) selector;
+
+@property(copy, setter=private_setDisplayName:) NSString* displayName;
+
+@end
+
+
+@implementation MvrItemAction
+
+- (id) initWithDisplayName:(NSString*) string;
+{
+	if (self = [super init])
+		self.displayName = string;
+	
+	return self;
+}
+
+- (id) initWithDisplayName:(NSString *)string target:(id) t selector:(SEL) s;
+{
+	if (self = [self initWithDisplayName:string]) {
+		target = t; selector = s;
+	}
+	
+	return self;
+}
+
+@synthesize displayName;
+
+- (void) dealloc
+{
+	self.displayName = nil;
+	[super dealloc];
+}
+
++ actionWithDisplayName:(NSString*) name target:(id) target selector:(SEL) selector;
+{
+	return [[[self alloc] initWithDisplayName:name target:target selector:selector] autorelease];
+}
+
+- (void) performActionWithItem:(MvrItem*) i;
+{
+	if (!target || !selector)
+		L0AbstractMethod();
+	
+	// -performAction:self withItem:i
+	[target performSelector:selector withObject:self withObject:i];
+}
+
+@end
+
 #pragma mark Item sources.
 
 static NSMutableArray* MvrItemSources = nil;
@@ -82,6 +137,8 @@ static NSMutableArray* MvrItemSources = nil;
 
 static NSMutableDictionary* MvrItemClassesToUIs = nil;
 
+#pragma mark Registering and retrieving
+
 + (void) registerUI:(MvrItemUI*) ui forItemClass:(Class) c;
 {
 	if (!MvrItemClassesToUIs)
@@ -127,6 +184,8 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	return [self UIForItemClass:[i class]];
 }
 
+#pragma mark Funnels
+
 + (NSArray*) supportedItemSources;
 {
 	return [NSArray array];
@@ -137,6 +196,8 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	L0AbstractMethod();
 	return nil;
 }
+
+#pragma mark Working with items
 
 - (void) beginAddingItemForSource:(MvrItemSource*) s;
 {
@@ -152,6 +213,66 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 - (void) didReceiveItem:(MvrItem*) i;
 {
 	L0AbstractMethod();
+}
+
+#pragma mark Actions
+
+- (MvrItemAction*) mainActionForItem:(MvrItem*) i;
+{
+	return nil;
+}
+
+// Additional actions, which are shown on the action menu.
+- (NSArray*) additionalActionsForItem:(MvrItem*) i;
+{
+	return [NSArray array];
+}
+
+- (MvrItemAction*) showAction;
+{
+	return [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Show", @"Title for the 'Show' action") target:self selector:@selector(performShowOrOpenAction:withItem:)];
+}
+- (MvrItemAction*) openAction;
+{
+	return [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Open", @"Title for the 'Open' action") target:self selector:@selector(performShowOrOpenAction:withItem:)];
+}
+
+// Copies the item to the clipboard.
+- (MvrItemAction*) copyAction;
+{
+	return [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Copy", @"Title for the 'Copy' action") target:self selector:@selector(performCopyAction:withItem:)];
+}
+
+// Send the item via e-mail.
+- (MvrItemAction*) sendByEmailAction;
+{
+	return [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Send by E-mail", @"Title for the 'Send by E-mail' action") target:self selector:@selector(performShowOrOpenAction:withItem:)];
+}
+
+- (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(MvrItem*) i;
+{
+	L0AbstractMethod();
+}
+
+- (void) performCopyAction:(MvrItemAction*) copy withItem:(MvrItem*) i;
+{
+	[[UIPasteboard generalPasteboard] setData:i.storage.data forPasteboardType:i.type];
+}
+
+- (void) performSendByEmail:(MvrItemAction*) send withItem:(MvrItem*) i;
+{
+	// TODO
+	L0AbstractMethod();
+}
+
+- (BOOL) isItemRemovable:(MvrItem*) i;
+{
+	return YES;
+}
+
+- (BOOL) isItemSavedElsewhere:(MvrItem*) i;
+{
+	return NO;
 }
 
 @end

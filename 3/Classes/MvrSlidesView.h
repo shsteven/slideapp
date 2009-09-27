@@ -53,4 +53,10 @@ typedef NSUInteger MvrDirection;
 
 - (void) slidesView:(MvrSlidesView*) v subviewDidMove:(L0DraggableView*) view inBounceBackAreaInDirection:(MvrDirection) d;
 
+- (void) slidesView:(MvrSlidesView*) v didDoubleTapSubview:(L0DraggableView*) view;
+
+- (void) slidesView:(MvrSlidesView*) v didStartHolding:(L0DraggableView*) view;
+- (void) slidesView:(MvrSlidesView*) v didCancelHolding:(L0DraggableView*) view;
+- (BOOL) slidesView:(MvrSlidesView*) v shouldAllowDraggingAfterHold:(L0DraggableView*) view;
+
 @end

@@ -266,4 +266,30 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 	CFRelease(view); // balances the one in removeDraggableSubviewByFadingAway:.
 }
 
+- (void) draggableView:(L0DraggableView *)view didTapMultipleTimesWithTouch:(UITouch *)t;
+{
+	if ([t tapCount] == 2)
+		[delegate slidesView:self didDoubleTapSubview:view];
+}
+
+- (void) draggableView:(L0DraggableView*) view didTouch:(UITouch*) t;
+{
+	[delegate slidesView:self didStartHolding:view];
+}
+
+- (BOOL) draggableViewShouldBeginDraggingAfterPressAndHold:(L0DraggableView *)view;
+{
+	return [delegate slidesView:self shouldAllowDraggingAfterHold:view];
+}
+
+- (void) draggableViewDidBeginDragging:(L0DraggableView *)view;
+{
+	[delegate slidesView:self didCancelHolding:view];
+}
+
+- (void) draggableViewDidPress:(L0DraggableView*) view;
+{
+	[delegate slidesView:self didCancelHolding:view];	
+}
+
 @end

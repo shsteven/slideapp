@@ -40,6 +40,7 @@
 
 - (IBAction) add;
 - (void) addItemFromSelf:(MvrItem*) item;
+- (void) displayActionMenuForItem:(MvrItem*) i withRemove:(BOOL) remove withMainAction:(BOOL) mainAction;
 
 - (void) presentModalViewController:(UIViewController*) ctl;
 

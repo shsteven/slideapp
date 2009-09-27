@@ -15,6 +15,22 @@
 
 @implementation MvrImageItemUI
 
+- (id) init
+{
+	self = [super init];
+	if (self != nil) {
+		itemsBeingSaved = [NSMutableSet new];
+	}
+	return self;
+}
+
+- (void) dealloc
+{
+	[itemsBeingSaved release];
+	[super dealloc];
+}
+
+
 + supportedItemClasses;
 {
 	return [NSSet setWithObject:[MvrImageItem class]];
@@ -33,7 +49,28 @@
 
 - (void) didReceiveItem:(MvrItem*) i;
 {
-	UIImageWriteToSavedPhotosAlbum(((MvrImageItem*)i).image, nil, NULL, NULL);
+	[itemsBeingSaved addObject:i];
+	
+	CFRetain(i); // balanced in image:didFinishSavingWithError:context:
+	UIImageWriteToSavedPhotosAlbum(((MvrImageItem*)i).image, self, @selector(image:didFinishSavingWithError:context:), (void*) i);
+}
+
+- (void) image:(UIImage*) image didFinishSavingWithError:(NSError*) e context:(void*) context;
+{
+	MvrItem* i = (MvrItem*) context;
+	
+	if (e) {
+		// TODO
+		L0LogAlways(@"%@", e);
+	}
+	
+	[itemsBeingSaved removeObject:i];
+	CFRelease(i); // balances didReceiveItem:
+}
+
+- (BOOL) isItemSavedElsewhere:(MvrItem *)i;
+{
+	return ![itemsBeingSaved containsObject:i];
 }
 
 @end

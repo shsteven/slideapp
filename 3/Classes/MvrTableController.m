@@ -63,6 +63,8 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	kvo = [[L0KVODispatcher alloc] initWithTarget:self];
 	
+	self.editButtonItem.enabled = NO;
+	
 	// TODO remove me!
 	MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:[@"Ciao, mondo!" dataUsingEncoding:NSUTF8StringEncoding]];
 	MvrItem* i = [MvrItem itemWithStorage:storage type:(id) kUTTypeUTF8PlainText metadata:[NSDictionary dictionaryWithObject:@"Ciao" forKey:kMvrItemTitleMetadataKey]];
@@ -92,6 +94,8 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (void) dealloc;
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+	
 	[self viewDidUnload];
 	[currentMode release];
 	[slidesStratum release];
@@ -112,6 +116,8 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	[itemsToViews setObject:slide forKey:i];
 	[viewsToItems setObject:i forKey:slide];
+	
+	self.editButtonItem.enabled = YES;
 }
 
 #pragma mark -
@@ -130,6 +136,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 		[self.slidesStratum addDraggableSubviewWithoutAnimation:slide];
 	
 	[slide release];
+	self.editButtonItem.enabled = YES;
 }
 
 #pragma mark -
@@ -143,20 +150,73 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (void) displayActionMenuForItemOfView:(id) view;
 {
-	// TODO
-	[[view retain] autorelease];
 	MvrItem* item = [viewsToItems objectForKey:view];
 	
-	if (item) {
-		[MvrApp().storageCentral.mutableStoredItems removeObject:item];
-		[itemsToViews removeObjectForKey:item];
-	}
+	if (item)
+		[MvrApp() displayActionMenuForItem:item withRemove:YES withMainAction:YES];
+}
+
+- (void) slidesView:(MvrSlidesView *)v didDoubleTapSubview:(L0DraggableView *)view;
+{
+	MvrItem* item = [viewsToItems objectForKey:view];
+	[[[MvrItemUI UIForItem:item] mainActionForItem:item] performActionWithItem:item];
+}
+
+- (void) slidesView:(MvrSlidesView*) v didStartHolding:(L0DraggableView*) view;
+{
+	if (self.editing) return;
 	
+	MvrItem* item = [viewsToItems objectForKey:view];
+	if (!item)
+		return;
+	
+	[self performSelector:@selector(beginHighlightingView:) withObject:view afterDelay:0.2];
+}
+
+- (void) beginHighlightingView:(L0DraggableView*) view;
+{
+	if ([view isKindOfClass:[MvrSlide class]])
+		[((MvrSlide*)view) setHighlighted:YES animated:YES animationDuration:view.pressAndHoldDelay - 0.2];
+	
+	[self performSelector:@selector(displayActionMenuForItemOfView:) withObject:view afterDelay:view.pressAndHoldDelay - 0.2];
+}
+
+- (void) slidesView:(MvrSlidesView*) v didCancelHolding:(L0DraggableView*) view;
+{
+	if ([view isKindOfClass:[MvrSlide class]])
+		[((MvrSlide*)view) setHighlighted:NO animated:YES animationDuration:0.5];
+
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(beginHighlightingView:) object:view];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(displayActionMenuForItemOfView:) object:view];
+}
+
+- (BOOL) slidesView:(MvrSlidesView*) v shouldAllowDraggingAfterHold:(L0DraggableView*) view;
+{
+	MvrItem* item = [viewsToItems objectForKey:view];
+	return item == nil;
+}
+
+- (void) didEndDisplayingActionMenuForItem:(MvrItem*) i;
+{
+	L0DraggableView* view = [itemsToViews objectForKey:i];
+	if ([view isKindOfClass:[MvrSlide class]])
+		[((MvrSlide*)view) setHighlighted:NO animated:YES animationDuration:0.5];
+}
+
+- (void) removeItem:(MvrItem*) item;
+{
+	// avoid premature dealloc.
+	L0DraggableView* view = [[[itemsToViews objectForKey:item] retain] autorelease];
+	
+	[MvrApp().storageCentral.mutableStoredItems removeObject:item];
+	[itemsToViews removeObjectForKey:item];
 	[viewsToItems removeObjectForKey:view];
-	[view removeFromSuperview];
+	[self.slidesStratum removeDraggableSubviewByFadingAway:view];
 	
-	if ([itemsToViews count] == 0)
+	if ([itemsToViews count] == 0) {
 		[self setEditing:NO animated:YES];
+		self.editButtonItem.enabled = NO;
+	}
 }
 
 #pragma mark -

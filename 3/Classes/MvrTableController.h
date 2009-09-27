@@ -35,6 +35,9 @@
 @property(retain) MvrSlidesView* slidesStratum;
 
 - (void) addItem:(MvrItem*) i animated:(BOOL) ani;
+- (void) removeItem:(MvrItem*) item;
+
+- (void) didEndDisplayingActionMenuForItem:(MvrItem*) i;
 
 - (void) setEditing:(BOOL) editing animated:(BOOL) animated;
 

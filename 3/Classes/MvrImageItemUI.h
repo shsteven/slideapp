@@ -11,7 +11,7 @@
 #import "MvrItemUI.h"
 
 @interface MvrImageItemUI : MvrItemUI {
-
+	NSMutableSet* itemsBeingSaved;
 }
 
 @end
