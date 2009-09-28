@@ -30,6 +30,10 @@ typedef NSUInteger MvrDirection;
 #endif
 }
 
+#if DEBUG
++ (void) allowShowingAreas;
+#endif
+
 - (id) initWithFrame:(CGRect) frame delegate:(id <MvrSlidesViewDelegate>) delegate;
 
 - (void) addDraggableSubviewWithoutAnimation:(L0DraggableView*)view;

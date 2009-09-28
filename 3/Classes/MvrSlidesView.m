@@ -66,8 +66,17 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 }
 
 #if DEBUG
+static BOOL MvrSlidesViewAllowsShowingAreas = NO;
+
++ (void) allowShowingAreas;
+{
+	MvrSlidesViewAllowsShowingAreas = YES;
+}
+
 - (void) showArea:(CGRect)area;
 {
+	if (!MvrSlidesViewAllowsShowingAreas) return;
+	
 	if (!shownArea) {
 		shownArea = [[UIView alloc] initWithFrame:area];
 		[self insertSubview:shownArea atIndex:0];
