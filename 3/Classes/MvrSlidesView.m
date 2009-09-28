@@ -50,6 +50,7 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
     if (self = [super initWithFrame:frame]) {
         srandomdev();
 		delegate = d;
+		self.clipsToBounds = YES;
     }
 	
     return self;
@@ -204,6 +205,14 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 	v.center = [self arrivalPointStartingFromPoint:v.center inArea:area randomness:randomness];
 	
 	[UIView commitAnimations];
+}
+
+- (void) bounceBackAll;
+{
+	for (L0DraggableView* v in self.subviews) {
+		if ([v isKindOfClass:[L0DraggableView class]] && [self directionForCurrentPositionOfView:v] != kMvrDirectionNone)
+			[self bounceBack:v];
+	}
 }
 
 #pragma mark -

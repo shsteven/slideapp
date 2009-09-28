@@ -26,31 +26,60 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (void) receiveItem:(MvrItem*) item withSlide:(MvrSlide*) slide;
 
+@property(readonly) CGRect regularBackdropFrame, regularArrowsStratumFrame, regularSlidesStratumBounds, shadowFrameWithClosedDrawer;
+- (CGRect) backdropFrameWithDrawerHeight:(CGFloat) h;
+- (CGRect) arrowsStratumFrameWithDrawerHeight:(CGFloat) h;
+- (CGRect) shadowFrameWithDrawerHeight:(CGFloat) h;
+
+- (void) slideDownAndRemoveDrawerView;
+- (void) slideDownAndRemoveDrawerViewThenReplaceWith:(UIView*) newOne;
+- (void) slideUpToRevealDrawerView:(UIView*) v;
+
+@property(retain) UIView* currentDrawerView;
+
 @end
 
 
 
 @implementation MvrTableController
 
+- (CGRect) regularBackdropFrame;
+{
+	return [self.hostView convertRect:[UIScreen mainScreen].bounds fromView:nil];
+}
+
+- (CGRect) regularArrowsStratumFrame;
+{
+	CGRect r = [self.hostView convertRect:[UIScreen mainScreen].applicationFrame fromView:nil];
+	r.size.height -= self.toolbar.bounds.size.height;
+	return r;
+}
+
+- (CGRect) regularSlidesStratumBounds;
+{
+	return self.hostView.bounds;
+}
+
 - (void) setUp;
 {
 	NSAssert(self.currentMode, @"A mode must be made current before the table controller is set up.");
 	
-	CGRect r = [self.hostView convertRect:[UIScreen mainScreen].bounds fromView:nil];
+	self.hostView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
+	
+	CGRect r = self.regularBackdropFrame;
 	UIView* backdrop = self.currentMode.backdropStratum;
 	backdrop.frame = r;
 	backdrop.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 	[self.hostView addSubview:backdrop];
 	
-	r = [self.hostView convertRect:[UIScreen mainScreen].applicationFrame fromView:nil];
-	r.size.height -= self.toolbar.bounds.size.height;
+	r = self.regularArrowsStratumFrame;
 	UIView* arrows = self.currentMode.arrowsStratum;
 	arrows.frame = r;
 	arrows.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
 	[self.hostView insertSubview:arrows aboveSubview:backdrop];
 	
-	self.slidesStratum = [[[MvrSlidesView alloc] initWithFrame:self.hostView.bounds delegate:self] autorelease];
+	self.slidesStratum = [[[MvrSlidesView alloc] initWithFrame:self.regularSlidesStratumBounds delegate:self] autorelease];
 	[self.hostView addSubview:self.slidesStratum];
 	
 	itemsToViews = [L0Map new];
@@ -70,6 +99,18 @@ static CGPoint MvrCenterOf(CGRect r) {
 	MvrItem* i = [MvrItem itemWithStorage:storage type:(id) kUTTypeUTF8PlainText metadata:[NSDictionary dictionaryWithObject:@"Ciao" forKey:kMvrItemTitleMetadataKey]];
 	
 	[self addItem:i animated:NO];
+	
+	// TODO remove me again!
+	
+	UIView* red = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 250)] autorelease];
+	UIView* transparent = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 250)] autorelease];
+	red.backgroundColor = [UIColor redColor];
+	transparent.backgroundColor = [UIColor clearColor];
+	transparent.opaque = NO;
+	
+	[self performSelector:@selector(setCurrentDrawerViewAnimating:) withObject:red afterDelay:5.0];
+	[self performSelector:@selector(setCurrentDrawerViewAnimating:) withObject:transparent afterDelay:10.0];
+	[self performSelector:@selector(setCurrentDrawerViewAnimating:) withObject:nil afterDelay:15.0];
 }
 
 - (void) setCurrentMode:(MvrUIMode *) m;
@@ -84,7 +125,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	}
 }
 
-@synthesize hostView, toolbar, currentMode, slidesStratum;
+@synthesize hostView, toolbar, currentMode, slidesStratum, shadowView;
 
 - (void) viewDidUnload;
 {
@@ -99,6 +140,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[self viewDidUnload];
 	[currentMode release];
 	[slidesStratum release];
+	[shadowView release];
 	
 	[super dealloc];
 }
@@ -294,6 +336,129 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (void) incomingTransfer:(id <MvrIncoming>)i didChangeProgress:(NSDictionary *)change;
 {
 	[[transfersToViews objectForKey:i] setProgress:i.progress];
+}
+
+#pragma mark -
+#pragma mark The Drawer.
+
+- (CGRect) backdropFrameWithDrawerHeight:(CGFloat) h;
+{
+	CGRect r = self.regularBackdropFrame;
+	r.origin.y -= h;
+	return r;
+}
+
+- (CGRect) arrowsStratumFrameWithDrawerHeight:(CGFloat) h;
+{
+	CGRect r = self.regularArrowsStratumFrame;
+	r.size.height -= h;
+	return r;
+}
+
+- (CGRect) slidesStratumFrameWithDrawerHeight:(CGFloat) h;
+{
+	CGRect r = self.regularSlidesStratumBounds;
+	r.size.height -= h;
+	return r;
+}
+
+- (CGRect) shadowFrameWithClosedDrawer;
+{
+	return [self shadowFrameWithDrawerHeight:0];
+}
+
+- (CGRect) shadowFrameWithDrawerHeight:(CGFloat) h;
+{
+	CGRect b = [self backdropFrameWithDrawerHeight:h];
+	CGRect r;
+	r.origin = CGPointMake(b.origin.x, b.origin.y + b.size.height);
+	r.size.width = b.size.width;
+	r.size.height = self.shadowView.frame.size.height;
+	return r;
+}
+
+@synthesize currentDrawerView;
+- (void) setCurrentDrawerViewAnimating:(UIView*) v;
+{
+	if (currentDrawerView == v) return;
+	
+	if (!currentDrawerView && v)
+		[self slideUpToRevealDrawerView:v];
+	else if (currentDrawerView && !v)
+		[self slideDownAndRemoveDrawerView];
+	else if (currentDrawerView && v)
+		[self slideDownAndRemoveDrawerViewThenReplaceWith:v];
+}
+
+- (void) slideDownAndRemoveDrawerView;
+{
+	[self slideDownAndRemoveDrawerViewThenReplaceWith:nil];
+}
+
+- (void) slideDownAndRemoveDrawerViewThenReplaceWith:(UIView*) newOne;
+{
+	NSArray* a = newOne ? [NSArray arrayWithObjects:currentDrawerView, newOne, nil] : [NSArray arrayWithObject:currentDrawerView];
+	CFRetain(a); // balanced in the stop selector below.
+
+	[UIView beginAnimations:nil context:(void*) a];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.2];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(slideDownAnimation:didEndByFinishing:context:)];
+	
+	self.currentMode.backdropStratum.frame = self.regularBackdropFrame;
+	self.currentMode.arrowsStratum.frame = self.regularArrowsStratumFrame;
+	self.slidesStratum.frame = self.regularSlidesStratumBounds;
+	self.shadowView.frame = self.shadowFrameWithClosedDrawer;
+	self.shadowView.alpha = 0.0;
+	
+	[UIView commitAnimations];
+	
+	self.currentDrawerView = nil;
+}
+
+- (void) slideDownAnimation:(NSString*) s didEndByFinishing:(BOOL) end context:(void*) context;
+{
+	NSArray* oldAndNew = (NSArray*) context;
+	[/* the old view*/ [oldAndNew objectAtIndex:0] removeFromSuperview];
+	
+	if ([oldAndNew count] > 1)
+		[self performSelector:@selector(slideUpToRevealDrawerView:) withObject:[oldAndNew objectAtIndex:1] afterDelay:0.4];
+	
+	CFRelease(oldAndNew); // balances the one in -slideDownAndRemoveDrawerViewThenReplaceWith
+}
+
+- (void) slideUpToRevealDrawerView:(UIView*) v;
+{	
+	CGRect backdropFrame = [self backdropFrameWithDrawerHeight:v.bounds.size.height];
+	CGRect arrowsFrame = [self arrowsStratumFrameWithDrawerHeight:v.bounds.size.height];
+	CGRect slidesStratumFrame = [self slidesStratumFrameWithDrawerHeight:v.bounds.size.height];
+	
+	CGRect frame = v.frame;
+	frame.origin = CGPointMake(0, self.view.frame.size.height - frame.size.height - self.toolbar.frame.size.height);
+	frame.size.width = self.view.frame.size.width;
+	v.frame = frame;
+	
+	[self.hostView insertSubview:v belowSubview:self.currentMode.backdropStratum];
+	
+	self.shadowView.frame = self.shadowFrameWithClosedDrawer;
+	self.shadowView.alpha = 0.0;
+	[self.hostView insertSubview:self.shadowView aboveSubview:v];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:1.0];
+	
+	self.currentMode.backdropStratum.frame = backdropFrame;
+	self.currentMode.arrowsStratum.frame = arrowsFrame;
+	self.slidesStratum.frame = slidesStratumFrame;
+	self.shadowView.frame = [self shadowFrameWithDrawerHeight:v.bounds.size.height];
+	self.shadowView.alpha = 1.0;
+	
+	[UIView commitAnimations];
+	
+	[self.slidesStratum bounceBackAll];
+	self.currentDrawerView = v;
 }
 
 @end

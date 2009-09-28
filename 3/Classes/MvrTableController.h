@@ -19,10 +19,13 @@
 	MvrSlidesView* slidesStratum;
 	UIToolbar* toolbar;
 	MvrUIMode* currentMode;
+	UIImageView* shadowView;
 	
 	L0Map* itemsToViews, * viewsToItems, * transfersToViews;
 	
 	L0KVODispatcher* kvo;
+	
+	UIView* currentDrawerView;
 }
 
 - (void) setUp;
@@ -33,6 +36,8 @@
 @property(retain) IBOutlet UIToolbar* toolbar;
 
 @property(retain) MvrSlidesView* slidesStratum;
+
+@property(retain) IBOutlet UIImageView* shadowView;
 
 - (void) addItem:(MvrItem*) i animated:(BOOL) ani;
 - (void) removeItem:(MvrItem*) item;

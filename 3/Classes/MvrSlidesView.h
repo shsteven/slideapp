@@ -45,6 +45,7 @@ typedef NSUInteger MvrDirection;
 
 - (MvrDirection) directionForCurrentPositionOfView:(L0DraggableView*) v;
 - (void) bounceBack:(UIView*) v;
+- (void) bounceBackAll;
 
 @end
 
