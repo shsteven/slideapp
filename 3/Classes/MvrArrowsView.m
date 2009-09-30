@@ -7,6 +7,7 @@
 //
 
 #import "MvrArrowsView.h"
+#import <QuartzCore/QuartzCore.h>
 
 typedef enum {
 	kMvrSlideDown,
@@ -22,6 +23,8 @@ typedef enum {
 @property(retain) MvrArrowView* eastView;
 @property(retain) MvrArrowView* westView;
 
+- (void) fadeAway:(UIView *)v;
+
 @end
 
 
@@ -33,6 +36,7 @@ typedef enum {
         self.opaque = NO;
 		self.backgroundColor = [UIColor clearColor];
 		self.autoresizesSubviews = NO;
+		self.contentMode = UIViewContentModeCenter;
     }
 	
     return self;
@@ -60,7 +64,7 @@ typedef enum {
 	MvrArrowView* view = [self valueForKey:key];
 	
 	if (!label) {
-		[view removeFromSuperview]; // TODO
+		[self fadeAway:view];
 		[self setValue:nil forKey:key];
 	} else if (!view) {
 		view = [[[MvrArrowView alloc] initWithFrame:CGRectZero] autorelease];
@@ -69,10 +73,45 @@ typedef enum {
 		[self layoutSubviews];
 		
 		view.nameLabel.text = label;
-
+		
+		view.alpha = 0.0;
 		[self addSubview:view];
-	} else
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+		
+		view.alpha = 1.0;
+		
+		[UIView commitAnimations];
+	} else {
+		CATransition* fade = [CATransition animation];
+		fade.type = kCATransitionFade;
+		[view.nameLabel.layer addAnimation:fade forKey:@"MvrFadeTransitionKey"];
 		view.nameLabel.text = label;
+	}
+}
+
+- (void) fadeAway:(UIView*) v;
+{
+	CFRetain(v); // balanced in the did stop selector
+	[UIView beginAnimations:nil context:(void*) v];
+	
+	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationDelay:0.3];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+	
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(fadeAway:didEndByFinishing:context:)];
+	
+	v.alpha = 0.0;
+	
+	[UIView commitAnimations];
+}
+
+- (void) fadeAway:(NSString*) fade didEndByFinishing:(BOOL) finished context:(void*) context;
+{
+	UIView* v = (id) context;
+	[v removeFromSuperview];
+	CFRelease(v); // balances the one in -fadeAway:
 }
 
 - (void) setWestViewLabel:(NSString*) label;
@@ -131,6 +170,12 @@ typedef enum {
 		return self.westView;
 	else
 		return nil;
+}
+
+- (void) setFrame:(CGRect) r;
+{
+	[super setFrame:r];
+	[self layoutSubviews];
 }
 
 @end
