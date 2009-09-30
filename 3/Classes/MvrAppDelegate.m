@@ -43,7 +43,8 @@ enum {
 	[self setUpTableController];
 	
 	[self.tableController viewWillAppear:NO];
-	self.tableController.view.frame = self.window.bounds;
+	CGRect bounds = [self.window convertRect:[UIScreen mainScreen].applicationFrame fromWindow:nil];
+	self.tableController.view.frame = bounds;
 	[self.window addSubview:self.tableController.view];
 	[self.tableController viewDidAppear:NO];
 	

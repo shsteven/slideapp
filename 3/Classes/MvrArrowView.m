@@ -23,8 +23,13 @@
 
 - (id)initWithFrame:(CGRect) frame {
 	if (self = [super initWithFrame:frame]) {
+		self.contentMode = UIViewContentModeCenter;
+		
         [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
 		preferredSize = contentView.frame.size;
+		
+		self.nameLabel.contentMode = UIViewContentModeCenter;
+		self.arrowView.contentMode = UIViewContentModeCenter;
 		
 		if (CGRectIsEmpty(frame)) {
 			if (CGRectIsNull(frame))

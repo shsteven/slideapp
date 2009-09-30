@@ -46,4 +46,6 @@
 
 - (void) setEditing:(BOOL) editing animated:(BOOL) animated;
 
+- (IBAction) testByRemovingDrawer;
+
 @end

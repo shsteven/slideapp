@@ -25,6 +25,8 @@
 		156751B91062176E006EC706 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
 		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		156E804210663AEB00315D0C /* GenericItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156E804110663AEB00315D0C /* GenericItemIcon.png */; };
+		157B68B21072548600E25E96 /* GreenDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 157B68B11072548600E25E96 /* GreenDot.png */; };
+		157B68B41072548D00E25E96 /* RedDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 157B68B31072548D00E25E96 /* RedDot.png */; };
 		1591A7051063EA0F00C5A5BD /* MvrTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A7041063EA0F00C5A5BD /* MvrTableController.m */; };
 		1591A7071063EC4000C5A5BD /* Backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7061063EC4000C5A5BD /* Backdrop.png */; };
 		1591A70E1063ED2900C5A5BD /* MvrSlidesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A70D1063ED2900C5A5BD /* MvrSlidesView.m */; };
@@ -34,6 +36,7 @@
 		1591A7181063EF2900C5A5BD /* Frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7161063EF2900C5A5BD /* Frame.png */; };
 		1591A7481063EF8A00C5A5BD /* ActionButton-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7461063EF8A00C5A5BD /* ActionButton-Pressed.png */; };
 		1591A7491063EF8A00C5A5BD /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7471063EF8A00C5A5BD /* ActionButton.png */; };
+		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
 		15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
 		15C1C8531068DAAA000C9CDE /* MvrArrowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */; };
 		15C1C86B1068DB92000C9CDE /* MvrWiFiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86A1068DB92000C9CDE /* MvrWiFiMode.m */; };
@@ -42,6 +45,8 @@
 		15CFDB2210710B2D00FAB245 /* TopShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB2110710B2D00FAB245 /* TopShadow.png */; };
 		15CFDB41107112C800FAB245 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB3F107112C800FAB245 /* Arrow.png */; };
 		15CFDB42107112C800FAB245 /* DrawerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB40107112C800FAB245 /* DrawerBackdrop.png */; };
+		15D46D0E10724C5A00DA8260 /* DrawerButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D46D0C10724C5A00DA8260 /* DrawerButton.png */; };
+		15D46D0F10724C5A00DA8260 /* DrawerLabelHolder.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */; };
 		1D3623260D0F684500981E51 /* MvrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MvrAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
@@ -144,6 +149,8 @@
 		156E7FD710662C4A00315D0C /* MvrGenericItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrGenericItemUI.h; sourceTree = "<group>"; };
 		156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrGenericItemUI.m; sourceTree = "<group>"; };
 		156E804110663AEB00315D0C /* GenericItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericItemIcon.png; sourceTree = "<group>"; };
+		157B68B11072548600E25E96 /* GreenDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenDot.png; sourceTree = "<group>"; };
+		157B68B31072548D00E25E96 /* RedDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedDot.png; sourceTree = "<group>"; };
 		1591A7031063EA0F00C5A5BD /* MvrTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTableController.h; sourceTree = "<group>"; };
 		1591A7041063EA0F00C5A5BD /* MvrTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTableController.m; sourceTree = "<group>"; };
 		1591A7061063EC4000C5A5BD /* Backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Backdrop.png; path = Theme/Backdrop.png; sourceTree = "<group>"; };
@@ -156,6 +163,7 @@
 		1591A7161063EF2900C5A5BD /* Frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Frame.png; path = Theme/Frame.png; sourceTree = "<group>"; };
 		1591A7461063EF8A00C5A5BD /* ActionButton-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionButton-Pressed.png"; path = "Theme/ActionButton-Pressed.png"; sourceTree = "<group>"; };
 		1591A7471063EF8A00C5A5BD /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionButton.png; path = Theme/ActionButton.png; sourceTree = "<group>"; };
+		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15C1C8491068D8AA000C9CDE /* MvrArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView.h; sourceTree = "<group>"; };
 		15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrArrowView.m; sourceTree = "<group>"; };
 		15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrArrowView.xib; sourceTree = "<group>"; };
@@ -168,6 +176,8 @@
 		15CFDB2110710B2D00FAB245 /* TopShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TopShadow.png; path = Theme/TopShadow.png; sourceTree = "<group>"; };
 		15CFDB3F107112C800FAB245 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Arrow.png; path = Theme/Arrow.png; sourceTree = "<group>"; };
 		15CFDB40107112C800FAB245 /* DrawerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DrawerBackdrop.png; path = Theme/DrawerBackdrop.png; sourceTree = "<group>"; };
+		15D46D0C10724C5A00DA8260 /* DrawerButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DrawerButton.png; sourceTree = "<group>"; };
+		15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DrawerLabelHolder.png; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* MvrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MvrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Mover3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mover3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +201,7 @@
 				1567514E10620E75006EC706 /* Foundation.framework in Frameworks */,
 				1567515010620E78006EC706 /* UIKit.framework in Frameworks */,
 				1567515210620E7A006EC706 /* CoreGraphics.framework in Frameworks */,
+				15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +377,7 @@
 				1567514D10620E75006EC706 /* Foundation.framework */,
 				1567514F10620E78006EC706 /* UIKit.framework */,
 				1567515110620E7A006EC706 /* CoreGraphics.framework */,
+				15AD032E1073F57200D92F5E /* QuartzCore.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -385,6 +397,10 @@
 				15C1C8621068DABC000C9CDE /* The Table */,
 				8D1107310486CEB800E47090 /* Mover3-Info.plist */,
 				156E804110663AEB00315D0C /* GenericItemIcon.png */,
+				15D46D0C10724C5A00DA8260 /* DrawerButton.png */,
+				15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */,
+				157B68B11072548600E25E96 /* GreenDot.png */,
+				157B68B31072548D00E25E96 /* RedDot.png */,
 				1591A7191063EF2C00C5A5BD /* Slide view */,
 			);
 			name = Resources;
@@ -511,6 +527,10 @@
 				15CFDB2210710B2D00FAB245 /* TopShadow.png in Resources */,
 				15CFDB41107112C800FAB245 /* Arrow.png in Resources */,
 				15CFDB42107112C800FAB245 /* DrawerBackdrop.png in Resources */,
+				15D46D0E10724C5A00DA8260 /* DrawerButton.png in Resources */,
+				15D46D0F10724C5A00DA8260 /* DrawerLabelHolder.png in Resources */,
+				157B68B21072548600E25E96 /* GreenDot.png in Resources */,
+				157B68B41072548D00E25E96 /* RedDot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

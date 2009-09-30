@@ -16,6 +16,14 @@
 
 @implementation MvrWiFiMode
 
+@synthesize connectionStateDrawerView;
+
+- (void) dealloc;
+{
+	[connectionStateDrawerView release];
+	[super dealloc];
+}
+
 - (void) awakeFromNib;
 {
 	wifi = [[MvrWiFi alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort];

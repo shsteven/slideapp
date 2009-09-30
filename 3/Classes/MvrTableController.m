@@ -45,12 +45,12 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (CGRect) regularBackdropFrame;
 {
-	return [self.hostView convertRect:[UIScreen mainScreen].bounds fromView:nil];
+	return self.hostView.bounds;
 }
 
 - (CGRect) regularArrowsStratumFrame;
 {
-	CGRect r = [self.hostView convertRect:[UIScreen mainScreen].applicationFrame fromView:nil];
+	CGRect r = self.hostView.bounds;
 	r.size.height -= self.toolbar.bounds.size.height;
 	return r;
 }
@@ -108,9 +108,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	transparent.backgroundColor = [UIColor clearColor];
 	transparent.opaque = NO;
 	
-	[self performSelector:@selector(setCurrentDrawerViewAnimating:) withObject:red afterDelay:5.0];
-	[self performSelector:@selector(setCurrentDrawerViewAnimating:) withObject:transparent afterDelay:10.0];
-	[self performSelector:@selector(setCurrentDrawerViewAnimating:) withObject:nil afterDelay:15.0];
+	[self performSelector:@selector(setCurrentDrawerViewAnimating:) withObject:[(id)self.currentMode connectionStateDrawerView] afterDelay:5.0];
 }
 
 - (void) setCurrentMode:(MvrUIMode *) m;
@@ -344,21 +342,21 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (CGRect) backdropFrameWithDrawerHeight:(CGFloat) h;
 {
 	CGRect r = self.regularBackdropFrame;
-	r.origin.y -= h;
+	r.origin.y -= (h + self.toolbar.frame.size.height);
 	return r;
 }
 
 - (CGRect) arrowsStratumFrameWithDrawerHeight:(CGFloat) h;
 {
-	CGRect r = self.regularArrowsStratumFrame;
-	r.size.height -= h;
+	CGRect r = self.regularBackdropFrame;
+	r.size.height -= (h + self.toolbar.frame.size.height);
 	return r;
 }
 
 - (CGRect) slidesStratumFrameWithDrawerHeight:(CGFloat) h;
 {
 	CGRect r = self.regularSlidesStratumBounds;
-	r.size.height -= h;
+	r.size.height -= (h + self.toolbar.frame.size.height);
 	return r;
 }
 
@@ -448,6 +446,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationDelay:0.5];
 	
 	self.currentMode.backdropStratum.frame = backdropFrame;
 	self.currentMode.arrowsStratum.frame = arrowsFrame;
@@ -459,6 +458,11 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	[self.slidesStratum bounceBackAll];
 	self.currentDrawerView = v;
+}
+
+- (IBAction) testByRemovingDrawer;
+{
+	[self setCurrentDrawerViewAnimating:nil];
 }
 
 @end

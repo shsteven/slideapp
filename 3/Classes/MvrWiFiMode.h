@@ -15,6 +15,10 @@
 @interface MvrWiFiMode : MvrUIMode <MvrScannerObserverDelegate> {
 	MvrWiFi* wifi;
 	MvrScannerObserver* observer;
+	
+	UIView* connectionStateDrawerView;
 }
+
+@property(retain) IBOutlet UIView* connectionStateDrawerView;
 
 @end
