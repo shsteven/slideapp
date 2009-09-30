@@ -67,14 +67,18 @@
 
 - (void) scanner:(id <MvrScanner>) s didChangeJammedKey:(NSDictionary*) d;
 {
-	if ([delegate respondsToSelector:@selector(scanner:didChangeJammedKey:)])
+	if ([delegate respondsToSelector:@selector(scanner:didChangeJammedKey:)]) {
+		L0Log(@"Dispatching scanner:%@ didChangeJammedKey:%d", s, s.jammed);
 		[delegate scanner:s didChangeJammedKey:s.jammed];
+	}
 }
 
 - (void) scanner:(id <MvrScanner>) s didChangeEnabledKey:(NSDictionary*) d;
 {
-	if ([delegate respondsToSelector:@selector(scanner:didChangeEnabledKey:)])
+	if ([delegate respondsToSelector:@selector(scanner:didChangeEnabledKey:)]) {
+		L0Log(@"Dispatching scanner:%@ didChangeEnabledKey:%d", s, s.enabled);
 		[delegate scanner:s didChangeEnabledKey:s.enabled];
+	}
 }
 
 - (void) scanner:(id <MvrScanner>)s didChangeChannelsKey:(NSDictionary *)d;
@@ -98,14 +102,18 @@
 {
 	L0Log(@"%@", scanner);
 	
-	if ([delegate respondsToSelector:@selector(scanner:didChangeJammedKey:)])
+	if ([delegate respondsToSelector:@selector(scanner:didChangeJammedKey:)]) {
+		L0Log(@"Dispatching initial scanner:%@ didChangeJammedKey:%d", scanner, scanner.jammed);
 		[delegate scanner:scanner didChangeJammedKey:scanner.jammed];
+	}
 	
-	if ([delegate respondsToSelector:@selector(scanner:didChangeEnabledKey:)])
+	if ([delegate respondsToSelector:@selector(scanner:didChangeEnabledKey:)]) {
+		L0Log(@"Dispatching initial scanner:%@ didChangeEnabledKey:%d", scanner, scanner.enabled);
 		[delegate scanner:scanner didChangeEnabledKey:scanner.enabled];
+	}
 	
-	[kvo observe:@"enabled" ofObject:scanner usingSelector:@selector(scanner:didChangeJammedKey:) options:0];
-	[kvo observe:@"jammed" ofObject:scanner usingSelector:@selector(scanner:didChangeEnabledKey:) options:0];
+	[kvo observe:@"enabled" ofObject:scanner usingSelector:@selector(scanner:didChangeEnabledKey:) options:0];
+	[kvo observe:@"jammed" ofObject:scanner usingSelector:@selector(scanner:didChangeJammedKey:) options:0];
 	
 	for (id <MvrChannel> chan in scanner.channels)
 		[self beginObservingChannel:chan];
@@ -165,8 +173,10 @@
 {
 	L0Log(@"%@", chan);
 	
-	if ([delegate respondsToSelector:@selector(scanner:didAddChannel:)])
+	if ([delegate respondsToSelector:@selector(scanner:didAddChannel:)]) {
+		L0Log(@"Dispatching scanner:%@ didAddChannel:%@", scanner, chan);
 		[delegate scanner:scanner didAddChannel:chan];
+	}
 	
 	for (id <MvrIncoming> incoming in chan.incomingTransfers)
 		[self beginObservingIncomingTransfer:incoming ofChannel:chan];
@@ -191,8 +201,10 @@
 	[kvo endObserving:@"incomingTransfers" ofObject:chan];
 	[kvo endObserving:@"outgoingTransfers" ofObject:chan];
 	
-	if ([delegate respondsToSelector:@selector(scanner:didRemoveChannel:)])
+	if ([delegate respondsToSelector:@selector(scanner:didRemoveChannel:)]) {
+		L0Log(@"Dispatching scanner:%@ didRemoveChannel:%@", scanner, chan);
 		[delegate scanner:scanner didRemoveChannel:chan];
+	}
 }
 
 #pragma mark -
@@ -203,8 +215,11 @@
 	if (incoming.cancelled || incoming.item) {
 		L0Log(@"%@.cancelled == %d, %@.item == %@", incoming, incoming.cancelled, incoming, incoming.item);
 
-		if ([delegate respondsToSelector:@selector(incomingTransfer:didEndReceivingItem:)])
-			[delegate incomingTransfer:incoming didEndReceivingItem:(incoming.cancelled? nil : incoming.item)];
+		if ([delegate respondsToSelector:@selector(incomingTransfer:didEndReceivingItem:)]) {
+			MvrItem* item = (incoming.cancelled? nil : incoming.item);
+			L0Log(@"Dispatching incomingTransfer:%@ didEndReceivingItem:%@", incoming, item);
+			[delegate incomingTransfer:incoming didEndReceivingItem:item];
+		}
 		
 		[self endObservingIncomingTransfer:incoming];
 	}
@@ -220,12 +235,17 @@
 - (void) beginObservingIncomingTransfer:(id <MvrIncoming>) incoming ofChannel:(id <MvrChannel>) chan;
 {
 	L0Log(@"%@ (from %@.incomingTransfers)", incoming, chan);
-	if ([delegate respondsToSelector:@selector(channel:didBeginReceivingWithIncomingTransfer:)])
+	if ([delegate respondsToSelector:@selector(channel:didBeginReceivingWithIncomingTransfer:)]) {
+		L0Log(@"Dispatching channel:%@ didBeginReceivingWithIncomingTransfer:%@", chan, incoming);
 		[delegate channel:chan didBeginReceivingWithIncomingTransfer:incoming];
+	}
 	
 	if (incoming.cancelled || incoming.item) {
-		if ([delegate respondsToSelector:@selector(incomingTransfer:didEndReceivingItem:)])
-			[delegate incomingTransfer:incoming didEndReceivingItem:(incoming.cancelled? nil : incoming.item)];
+		if ([delegate respondsToSelector:@selector(incomingTransfer:didEndReceivingItem:)]) {
+			MvrItem* item = (incoming.cancelled? nil : incoming.item);
+			L0Log(@"Dispatching (immediate) incomingTransfer:%@ didEndReceivingItem:%@", incoming, item);
+			[delegate incomingTransfer:incoming didEndReceivingItem:item];
+		}
 	} else {
 		[observedObjects addObject:incoming];
 		[kvo observe:@"item" ofObject:incoming usingSelector:@selector(incomingTransfer:didChangeItemOrCancelledKey:) options:0];
@@ -240,8 +260,11 @@
 {
 	L0Log(@"%@.finished == %d", outgoing, outgoing.finished);
 	if (outgoing.finished) {
-		if ([delegate respondsToSelector:@selector(outgoingTransferDidEndSending:)])
+		if ([delegate respondsToSelector:@selector(outgoingTransferDidEndSending:)]) {
+			L0Log(@"Dispatching outgoingTransferDidEndSending:%@", outgoing);
 			[delegate outgoingTransferDidEndSending:outgoing];
+		}
+		
 		[self endObservingOutgoingTransfer:outgoing];
 	}
 }
@@ -256,12 +279,16 @@
 - (void) beginObservingOutgoingTransfer:(id <MvrOutgoing>) outgoing ofChannel:(id <MvrChannel>) chan;
 {
 	L0Log(@"%@ (from %@.outgoingTransfers)", outgoing, chan);
-	if ([delegate respondsToSelector:@selector(channel:didBeginSendingWithOutgoingTransfer:)])
+	if ([delegate respondsToSelector:@selector(channel:didBeginSendingWithOutgoingTransfer:)]) {
+		L0Log(@"Dispatching channel:%@ didBeginSendingWithOutgoingTransfer:%@", chan, outgoing);
 		[delegate channel:chan didBeginSendingWithOutgoingTransfer:outgoing];
+	}
 	
 	if (outgoing.finished) {
-		if ([delegate respondsToSelector:@selector(outgoingTransferDidEndSending:)])
+		if ([delegate respondsToSelector:@selector(outgoingTransferDidEndSending:)]) {
+			L0Log(@"Dispatching (immediate) outgoingTransferDidEndSending:%@", outgoing);
 			[delegate outgoingTransferDidEndSending:outgoing];
+		}
 	} else {
 		[observedObjects addObject:outgoing];
 		[kvo observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:didChangeFinishedKey:) options:0];

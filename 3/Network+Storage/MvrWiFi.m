@@ -84,7 +84,14 @@
 	else if ([chan isEqual:self.legacyLegacyChannel])
 		self.legacyLegacyChannel = nil;
 
-	return !self.modernChannel && !self.legacyChannel && !self.legacyLegacyChannel;
+	BOOL willRemove = !self.modernChannel && !self.legacyChannel && !self.legacyLegacyChannel;
+	L0Log(@"Empty? = %d", willRemove);
+	return willRemove;
+}
+
+- (NSString*) description;
+{
+	return [NSString stringWithFormat:@"%@ { legacy = (%@, %@); modern = %@ }", [super description], self.legacyLegacyChannel, self.legacyChannel, self.modernChannel];
 }
 
 - (NSSet*) incomingTransfers;
@@ -160,28 +167,34 @@
 
 - (BOOL) enabled;
 {
-	return self.modernWiFi.enabled || self.legacyWiFi.enabled;
+	return enabled;
 }
 
-+ (NSSet *) keyPathsForValuesAffectingEnabled;
+- (void) scanner:(id <MvrScanner>)s didChangeEnabledKey:(BOOL)en;
 {
-	return [NSSet setWithObjects:@"modernWiFi.enabled", @"legacyWiFi.enabled", nil];
+	[self willChangeValueForKey:@"enabled"];
+	enabled = self.modernWiFi.enabled || self.legacyWiFi.enabled;
+	[self didChangeValueForKey:@"enabled"];
 }
 
 - (void) setEnabled:(BOOL) e;
 {
 	self.modernWiFi.enabled = e;
 	self.legacyWiFi.enabled = e;
+	enabled = e;
 }
 
 - (BOOL) jammed;
 {
-	return self.modernWiFi.jammed && self.legacyWiFi.jammed;
+	return jammed;
 }
 
-+ (NSSet *) keyPathsForValuesAffectingJammed;
+- (void) scanner:(id <MvrScanner>)s didChangeJammedKey:(BOOL)ja;
 {
-	return [NSSet setWithObjects:@"modernWiFi.jammed", @"legacyWiFi.jammed", nil];
+	// ick.
+	[self willChangeValueForKey:@"jammed"];
+	jammed = self.modernWiFi.jammed && self.legacyWiFi.jammed;
+	[self didChangeValueForKey:@"jammed"];
 }
 
 - (NSSet*) channels;
@@ -190,9 +203,6 @@
 }
 
 #pragma mark Observer methods
-
-- (void) scanner:(id <MvrScanner>) s didChangeJammedKey:(BOOL) jammed {}
-- (void) scanner:(id <MvrScanner>) s didChangeEnabledKey:(BOOL) enabled {}
 
 - (void) scanner:(id <MvrScanner>) s didAddChannel:(id <MvrChannel>) channel;
 {

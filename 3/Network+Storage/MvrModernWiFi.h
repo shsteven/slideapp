@@ -10,7 +10,7 @@
 #import "MvrWiFiScanner.h"
 #import "MvrPlatformInfo.h"
 
-#define kMvrModernWiFiBonjourServiceType @"_x-mover2._tcp."
+#define kMvrModernWiFiBonjourServiceType @"_x-mover3._tcp."
 #define kMvrModernWiFiPort (25252)
 
 #define kMvrModernWiFiPeerIdentifierKey @"MvrID"

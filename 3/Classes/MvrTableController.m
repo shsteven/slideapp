@@ -64,8 +64,10 @@ static CGPoint MvrCenterOf(CGRect r) {
 {
 	NSAssert(self.currentMode, @"A mode must be made current before the table controller is set up.");
 	
+	// Set up the host view
 	self.hostView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
 	
+	// Set up the backdrop and arrows stratum
 	CGRect r = self.regularBackdropFrame;
 	UIView* backdrop = self.currentMode.backdropStratum;
 	backdrop.frame = r;
@@ -79,21 +81,25 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	[self.hostView insertSubview:arrows aboveSubview:backdrop];
 	
+	// Create and show the slides stratum
 	self.slidesStratum = [[[MvrSlidesView alloc] initWithFrame:self.regularSlidesStratumBounds delegate:self] autorelease];
 	[self.hostView addSubview:self.slidesStratum];
 	
+	// Create the correspondence maps
 	itemsToViews = [L0Map new];
 	viewsToItems = [L0Map new];
 	transfersToViews = [L0Map new];
 	
+	// Put the edit button in the proper position in the toolbar
 	NSMutableArray* a = [NSMutableArray arrayWithArray:self.toolbar.items];
-	[a addObject:self.editButtonItem];
+	[a insertObject:self.editButtonItem atIndex:2]; // see NIB.
 	self.toolbar.items = a;
+	self.editButtonItem.enabled = NO; // overridden by the first addItem: call.
 	
+	// Set up KVO
 	kvo = [[L0KVODispatcher alloc] initWithTarget:self];
 	
-	self.editButtonItem.enabled = NO;
-	
+	// -------- TESTING STUFF ---------
 	// TODO remove me!
 	MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:[@"Ciao, mondo!" dataUsingEncoding:NSUTF8StringEncoding]];
 	MvrItem* i = [MvrItem itemWithStorage:storage type:(id) kUTTypeUTF8PlainText metadata:[NSDictionary dictionaryWithObject:@"Ciao" forKey:kMvrItemTitleMetadataKey]];
@@ -106,9 +112,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	UIView* transparent = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 250)] autorelease];
 	red.backgroundColor = [UIColor redColor];
 	transparent.backgroundColor = [UIColor clearColor];
-	transparent.opaque = NO;
-	
-	[self performSelector:@selector(setCurrentDrawerViewAnimating:) withObject:[(id)self.currentMode connectionStateDrawerView] afterDelay:5.0];
+	transparent.opaque = NO;	
 }
 
 - (void) setCurrentMode:(MvrUIMode *) m;
@@ -463,6 +467,15 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (IBAction) testByRemovingDrawer;
 {
 	[self setCurrentDrawerViewAnimating:nil];
+}
+
+- (IBAction) toggleConnectionDrawerVisible;
+{
+	UIView* current = self.currentDrawerView, * newOne = self.currentMode.connectionStateDrawerView;
+	if (current != newOne)
+		[self setCurrentDrawerViewAnimating:newOne];
+	else
+		[self setCurrentDrawerViewAnimating:nil];
 }
 
 @end

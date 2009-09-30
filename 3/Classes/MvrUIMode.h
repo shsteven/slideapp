@@ -44,6 +44,8 @@
 - (id) destinationAtDirection:(MvrDirection) d;
 - (MvrDirection) directionForDestination:(id) d;
 
+@property(readonly, retain) UIView* connectionStateDrawerView;
+
 @end
 
 

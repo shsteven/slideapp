@@ -37,6 +37,7 @@
 		1591A7481063EF8A00C5A5BD /* ActionButton-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7461063EF8A00C5A5BD /* ActionButton-Pressed.png */; };
 		1591A7491063EF8A00C5A5BD /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7471063EF8A00C5A5BD /* ActionButton.png */; };
 		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
+		15AD035B1073F83200D92F5E /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */; };
 		15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
 		15C1C8531068DAAA000C9CDE /* MvrArrowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */; };
 		15C1C86B1068DB92000C9CDE /* MvrWiFiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86A1068DB92000C9CDE /* MvrWiFiMode.m */; };
@@ -164,6 +165,7 @@
 		1591A7461063EF8A00C5A5BD /* ActionButton-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionButton-Pressed.png"; path = "Theme/ActionButton-Pressed.png"; sourceTree = "<group>"; };
 		1591A7471063EF8A00C5A5BD /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActionButton.png; path = Theme/ActionButton.png; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
 		15C1C8491068D8AA000C9CDE /* MvrArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView.h; sourceTree = "<group>"; };
 		15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrArrowView.m; sourceTree = "<group>"; };
 		15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrArrowView.xib; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */,
 				15C1C8621068DABC000C9CDE /* The Table */,
 				8D1107310486CEB800E47090 /* Mover3-Info.plist */,
 				156E804110663AEB00315D0C /* GenericItemIcon.png */,
@@ -531,6 +534,7 @@
 				15D46D0F10724C5A00DA8260 /* DrawerLabelHolder.png in Resources */,
 				157B68B21072548600E25E96 /* GreenDot.png in Resources */,
 				157B68B41072548D00E25E96 /* RedDot.png in Resources */,
+				15AD035B1073F83200D92F5E /* NetworkToolbarIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

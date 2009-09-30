@@ -203,4 +203,12 @@
 	L0AbstractMethod();
 }
 
+#pragma mark -
+#pragma mark Default implementations.
+
+- (UIView*) connectionStateDrawerView;
+{
+	return nil;
+}
+
 @end

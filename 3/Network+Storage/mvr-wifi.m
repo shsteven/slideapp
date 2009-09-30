@@ -235,6 +235,8 @@ L0ObjCSingletonMethod(sharedInfo)
 	[testObserverForLegacy release];
 	[testObserverForModern release];
 	
+	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:5.0]];
+	
 	return 0;
 }
 

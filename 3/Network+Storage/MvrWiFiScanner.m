@@ -102,7 +102,7 @@
 	
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	
-	[[self mutableSetValueForKey:@"channels"] removeAllObjects];
+	[self.mutableChannels removeAllObjects];
 	
 	for (NSNetService* n in netServices)
 		[n stop];

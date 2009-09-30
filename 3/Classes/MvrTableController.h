@@ -48,4 +48,7 @@
 
 - (IBAction) testByRemovingDrawer;
 
+// @property(getter=isConnectionDrawerAlwaysVisible) BOOL connectionDrawerAlwaysVisible;
+- (IBAction) toggleConnectionDrawerVisible;
+
 @end

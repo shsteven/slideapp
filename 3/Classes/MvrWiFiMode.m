@@ -16,7 +16,7 @@
 
 @implementation MvrWiFiMode
 
-@synthesize connectionStateDrawerView;
+@synthesize connectionStateDrawerView, connectionStateInfo, connectionStateImage;
 
 - (void) dealloc;
 {
@@ -29,6 +29,21 @@
 	wifi = [[MvrWiFi alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort];
 	observer = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
 	wifi.enabled = YES;
+}
+
+- (void) scanner:(id <MvrScanner>)s didChangeJammedKey:(BOOL)jammed;
+{
+	if (!jammed) {
+		
+		self.connectionStateInfo.text = NSLocalizedString(@"Wi-Fi On", @"Wi-Fi unjammed text");
+		self.connectionStateImage.image = [UIImage imageNamed:@"GreenDot.png"];
+		
+	} else {
+		
+		self.connectionStateInfo.text = NSLocalizedString(@"Wi-Fi Disconnected", @"Wi-Fi jammed text");
+		self.connectionStateImage.image = [UIImage imageNamed:@"RedDot.png"];
+		
+	}
 }
 
 - (void) scanner:(id <MvrScanner>) s didAddChannel:(id <MvrChannel>) channel;

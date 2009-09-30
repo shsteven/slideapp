@@ -39,20 +39,29 @@
 
 - (void) start;
 {
-	[super start];	
 	serverSocket = [[AsyncSocket alloc] initWithDelegate:self];
 	
 	NSError* e;
-	if (![serverSocket acceptOnPort:serverPort error:&e]) {
-		[NSException raise:@"MvrModernWiFiServerException" format:@"Could not listen on the given port (%d). Error: %@", serverPort, e];
-	}
+	
+	int attempts = 0; const int maximumAttempts = 30;
+	
+	do {
+		if (![serverSocket acceptOnPort:serverPort error:&e]) {
+			L0LogAlways(@"Having difficulty accepting modern connections on port %d, retrying shortly: %@", serverPort, e);
+			attempts++;
+			usleep(500 * 1000);
+		} else
+			break;
+	} while (attempts < maximumAttempts);
+	
+	[super start];	
 }
 
 - (void) stop;
 {
+	[super stop];
 	[serverSocket disconnect];
 	[serverSocket release]; serverSocket = nil;
-	[super stop];
 }
 
 - (void) dealloc

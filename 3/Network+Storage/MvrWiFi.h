@@ -20,6 +20,8 @@
 
 	NSMutableDictionary* channelsByIdentifier;
 	MvrScannerObserver* modernObserver, * legacyObserver;
+	
+	BOOL jammed, enabled;
 }
 
 - (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info modernPort:(int) port legacyPort:(int) legacyPort;

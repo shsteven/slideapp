@@ -17,8 +17,13 @@
 	MvrScannerObserver* observer;
 	
 	UIView* connectionStateDrawerView;
+	UILabel* connectionStateInfo;
+	UIImageView* connectionStateImage;
 }
 
 @property(retain) IBOutlet UIView* connectionStateDrawerView;
+
+@property(assign) IBOutlet UILabel* connectionStateInfo;
+@property(assign) IBOutlet UIImageView* connectionStateImage;
 
 @end
