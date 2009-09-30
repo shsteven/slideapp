@@ -91,6 +91,9 @@
 - (void) beginAddingItem;
 @property(readonly, retain) MvrItemUI* correspondingUI;
 
+// If NO, temporarily unavailable (won't be shown)
+@property(readonly) BOOL available;
+
 @end
 
 // Item actions correspond to the choices available when pressing the action button on an item (or press-and-holding).

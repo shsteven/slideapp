@@ -128,6 +128,11 @@ static NSMutableArray* MvrItemSources = nil;
 	[self.correspondingUI beginAddingItemForSource:self];
 }
 
+- (BOOL) available;
+{
+	return YES;
+}
+
 @end
 
 #pragma mark -
