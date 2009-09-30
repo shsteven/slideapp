@@ -319,4 +319,13 @@ enum {
 	[self.tableController presentModalViewController:ctl animated:YES];
 }
 
+#pragma mark -
+#pragma mark Termination
+
+- (void) applicationWillTerminate:(UIApplication *)application;
+{
+	[self.tableController tearDown];
+	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:2.0]];
+}
+
 @end

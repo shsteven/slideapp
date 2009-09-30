@@ -29,6 +29,7 @@
 }
 
 - (void) setUp;
+- (void) tearDown;
 
 @property(retain) IBOutlet MvrUIMode* currentMode;
 

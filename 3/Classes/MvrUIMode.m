@@ -211,4 +211,18 @@
 	return nil;
 }
 
+- (void) modeWillBecomeCurrent:(BOOL) animated;
+{
+}
+- (void) modeDidBecomeCurrent:(BOOL) animated;
+{
+}
+
+- (void) modeWillStopBeingCurrent:(BOOL) animated;
+{
+}
+- (void) modeDidStopBeingCurrent:(BOOL) animated;
+{
+}
+
 @end

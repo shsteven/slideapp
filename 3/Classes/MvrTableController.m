@@ -118,12 +118,20 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (void) setCurrentMode:(MvrUIMode *) m;
 {
 	if (m != currentMode) {
+		MvrUIMode* oldMode = currentMode;
+		[oldMode modeWillStopBeingCurrent:NO]; // TODO animation
+		[m modeWillBecomeCurrent:NO];
+		
 		currentMode.delegate = nil;
 		
+		[[currentMode retain] autorelease];
 		[currentMode release];
 		currentMode = [m retain];
 		
 		m.delegate = self;
+		
+		[currentMode modeDidBecomeCurrent:NO];
+		[oldMode modeDidStopBeingCurrent:NO];
 	}
 }
 
@@ -476,6 +484,14 @@ static CGPoint MvrCenterOf(CGRect r) {
 		[self setCurrentDrawerViewAnimating:newOne];
 	else
 		[self setCurrentDrawerViewAnimating:nil];
+}
+
+#pragma mark -
+#pragma mark Termination
+
+- (void) tearDown;
+{
+	self.currentMode = nil;
 }
 
 @end

@@ -18,17 +18,22 @@
 
 @synthesize connectionStateDrawerView, connectionStateInfo, connectionStateImage;
 
-- (void) dealloc;
-{
-	[connectionStateDrawerView release];
-	[super dealloc];
-}
-
 - (void) awakeFromNib;
 {
 	wifi = [[MvrWiFi alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort];
 	observer = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
-	wifi.enabled = YES;
+	
+	if (self.delegate) // we're on!
+		wifi.enabled = YES;
+}
+
+- (void) dealloc;
+{
+	[observer release];
+
+	[wifi release];
+	[connectionStateDrawerView release];
+	[super dealloc];
 }
 
 - (void) scanner:(id <MvrScanner>)s didChangeJammedKey:(BOOL)jammed;
@@ -98,6 +103,18 @@
 - (void) channel:(id <MvrChannel>) c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>) incoming;
 {
 	[self.delegate UIMode:self willBeginReceivingItemWithTransfer:incoming fromDirection:[self directionForDestination:c]];
+}
+
+#pragma mark Enabling/disabling
+
+- (void) modeDidBecomeCurrent:(BOOL) ani;
+{
+	wifi.enabled = YES;
+}
+
+- (void) modeWillStopBeingCurrent:(BOOL)animated;
+{
+	wifi.enabled = NO;
 }
 
 @end
