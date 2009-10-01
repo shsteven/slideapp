@@ -6,13 +6,15 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "MvrPhotoLibrarySource.h"
+#import "MvrImagePickerSource.h"
 #import "Network+Storage/MvrItemStorage.h"
 #import "Network+Storage/MvrUTISupport.h"
 
 #import "MvrImageItem.h"
 
-@interface MvrPhotoLibrarySource ()
+@interface MvrImagePickerSource ()
+
+- (id) initWithDisplayName:(NSString*) dn displayNameWithoutVideo:(NSString*) dnNoVideo sourceType:(UIImagePickerControllerSourceType) s;
 
 - (void) performAddingImage:(UIImage*) i;
 - (void) performAddingImageAtPath:(NSString*) path type:(NSString*) type;
@@ -20,30 +22,30 @@
 @end
 
 
-@implementation MvrPhotoLibrarySource
+@implementation MvrImagePickerSource
 
-L0ObjCSingletonMethod(sharedSource)
-
-- (id) init
+- (id) initWithDisplayName:(NSString*) dn displayNameWithoutVideo:(NSString*) dnNoVideo sourceType:(UIImagePickerControllerSourceType) s;
 {
 	// UIImagePicker has two possible display names:
 	// "Add Photo" -- if no available video, or
 	// "Add Photo or Video" if video.
 	
-	BOOL isVideoAvailable = [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(id) kUTTypeMovie];
+	BOOL isVideoAvailable = [UIImagePickerController isSourceTypeAvailable:sourceType] && [[UIImagePickerController availableMediaTypesForSourceType:s] containsObject:(id) kUTTypeMovie];
 	
-	NSString* dN = isVideoAvailable?
-		NSLocalizedString(@"Add Photo or Video", @"Add photo button when video is available.") :
-		NSLocalizedString(@"Add Photo", @"Add photo button (no video).");
+	NSString* name = isVideoAvailable?
+		dn : dnNoVideo;
 	
-	return [super initWithDisplayName:dN];
+	if (self = [super initWithDisplayName:name])
+		sourceType = s;
+	
+	return self;
 }
 
 - (void) beginAddingItem;
 {
 	UIImagePickerController* picker = [[UIImagePickerController alloc] init];
 	picker.delegate = self;
-	picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+	picker.sourceType = sourceType;
 	picker.mediaTypes = [NSArray arrayWithObjects:(id) kUTTypeImage, (id) kUTTypeMovie, nil];
 	[MvrApp() presentModalViewController:picker];
 	[picker release];
@@ -65,7 +67,7 @@ L0ObjCSingletonMethod(sharedSource)
 			}
 			
 		} else if (UTTypeConformsTo((CFStringRef) uti, kUTTypeMovie)) {
-			L0AbstractMethod();
+			L0AbstractMethod(); // TODO
 		}
 		
 	}
@@ -102,6 +104,33 @@ L0ObjCSingletonMethod(sharedSource)
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker;
 {
 	[picker dismissModalViewControllerAnimated:YES];
+}
+
+- (BOOL) available;
+{
+	return [UIImagePickerController isSourceTypeAvailable:sourceType];
+}
+
+@end
+
+@implementation MvrPhotoLibrarySource
+
+L0ObjCSingletonMethod(sharedSource)
+
+- (id) init;
+{
+	return [self initWithDisplayName:NSLocalizedString(@"Add Photo or Video", @"Add photo button when video is available.") displayNameWithoutVideo:NSLocalizedString(@"Add Photo", @"Add photo button (no video).") sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+@end
+
+@implementation MvrCameraSource
+
+L0ObjCSingletonMethod(sharedSource)
+
+- (id) init;
+{
+	return [self initWithDisplayName:NSLocalizedString(@"Capture Photo or Video", @"Add photo button when video is available.") displayNameWithoutVideo:NSLocalizedString(@"Take Photo", @"Add photo button (no video).") sourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 @end

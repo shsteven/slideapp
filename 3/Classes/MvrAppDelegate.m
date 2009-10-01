@@ -192,8 +192,10 @@ enum {
 	sheet.tag =	kMvrAppDelegateAddSheetTag;
 	sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
 	
-	for (MvrItemSource* source in [MvrItemSource registeredItemSources])
-		 [sheet addButtonWithTitle:source.displayName identifier:source];
+	for (MvrItemSource* source in [MvrItemSource registeredItemSources]) {
+		if (source.available)
+			[sheet addButtonWithTitle:source.displayName identifier:source];
+	}
 	
 	NSInteger index = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on action sheet") identifier:kMvrAppDelegateCancelButtonIdentifier];
 	sheet.cancelButtonIndex = index;

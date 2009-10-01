@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
-		151E02231067683400C6CDFF /* MvrPhotoLibrarySource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrPhotoLibrarySource.m */; };
+		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
 		1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567510510620DAD006EC706 /* libMoverNetwork.a */; };
 		1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
 		1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
@@ -124,8 +124,8 @@
 		151E02001067652E00C6CDFF /* MvrImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItem.m; sourceTree = "<group>"; };
 		151E021E106767A900C6CDFF /* MvrImageItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageItemUI.h; sourceTree = "<group>"; };
 		151E021F106767A900C6CDFF /* MvrImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemUI.m; sourceTree = "<group>"; };
-		151E02211067683400C6CDFF /* MvrPhotoLibrarySource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPhotoLibrarySource.h; sourceTree = "<group>"; };
-		151E02221067683400C6CDFF /* MvrPhotoLibrarySource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPhotoLibrarySource.m; sourceTree = "<group>"; };
+		151E02211067683400C6CDFF /* MvrImagePickerSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImagePickerSource.h; sourceTree = "<group>"; };
+		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
 		156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "Network+Storage/Network+Storage.xcodeproj"; sourceTree = "<group>"; };
 		1567511310620DF7006EC706 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		1567511510620DFC006EC706 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -226,12 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				156751B610621758006EC706 /* Item UI */,
-				151E01FF1067652E00C6CDFF /* MvrImageItem.h */,
-				151E02001067652E00C6CDFF /* MvrImageItem.m */,
-				151E021E106767A900C6CDFF /* MvrImageItemUI.h */,
-				151E021F106767A900C6CDFF /* MvrImageItemUI.m */,
-				151E02211067683400C6CDFF /* MvrPhotoLibrarySource.h */,
-				151E02221067683400C6CDFF /* MvrPhotoLibrarySource.m */,
+				15E94B6710741BDD009DA076 /* Images & Video */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -352,6 +347,27 @@
 				15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */,
 			);
 			name = "The Table";
+			sourceTree = "<group>";
+		};
+		15E94B6710741BDD009DA076 /* Images & Video */ = {
+			isa = PBXGroup;
+			children = (
+				15E94B6810741BED009DA076 /* Image picker sources */,
+				151E01FF1067652E00C6CDFF /* MvrImageItem.h */,
+				151E02001067652E00C6CDFF /* MvrImageItem.m */,
+				151E021E106767A900C6CDFF /* MvrImageItemUI.h */,
+				151E021F106767A900C6CDFF /* MvrImageItemUI.m */,
+			);
+			name = "Images & Video";
+			sourceTree = "<group>";
+		};
+		15E94B6810741BED009DA076 /* Image picker sources */ = {
+			isa = PBXGroup;
+			children = (
+				151E02211067683400C6CDFF /* MvrImagePickerSource.h */,
+				151E02221067683400C6CDFF /* MvrImagePickerSource.m */,
+			);
+			name = "Image picker sources";
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -554,7 +570,7 @@
 				156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */,
 				151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */,
 				151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */,
-				151E02231067683400C6CDFF /* MvrPhotoLibrarySource.m in Sources */,
+				151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */,
 				15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */,
 				15C1C86B1068DB92000C9CDE /* MvrWiFiMode.m in Sources */,
 				15C1C86F1068DBDB000C9CDE /* MvrUIMode.m in Sources */,

@@ -11,7 +11,7 @@
 #import <MuiKit/MuiKit.h>
 
 #import "MvrImageItem.h"
-#import "MvrPhotoLibrarySource.h"
+#import "MvrImagePickerSource.h"
 
 @implementation MvrImageItemUI
 
@@ -38,7 +38,10 @@
 
 + supportedItemSources;
 {
-	return [NSArray arrayWithObject:[MvrPhotoLibrarySource sharedSource]];
+	return [NSArray arrayWithObjects:
+			[MvrPhotoLibrarySource sharedSource],
+			[MvrCameraSource sharedSource],
+			nil];
 }
 
 - (UIImage*) representingImageWithSize:(CGSize) size forItem:(id) i;
