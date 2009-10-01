@@ -195,6 +195,11 @@
 	return kMvrDirectionNone;
 }
 
+- (MvrArrowView*) arrowViewForDestination:(id) d;
+{
+	return [self.arrowsView viewAtDirection:[self directionForDestination:d]];
+}
+
 #pragma mark -
 #pragma mark Sending and receiving.
 

@@ -25,6 +25,7 @@
 		156751B91062176E006EC706 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
 		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		156E804210663AEB00315D0C /* GenericItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156E804110663AEB00315D0C /* GenericItemIcon.png */; };
+		1577006A10748D0100907F62 /* MvrVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1577006910748D0100907F62 /* MvrVideoItem.m */; };
 		157B68B21072548600E25E96 /* GreenDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 157B68B11072548600E25E96 /* GreenDot.png */; };
 		157B68B41072548D00E25E96 /* RedDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 157B68B31072548D00E25E96 /* RedDot.png */; };
 		1591A7051063EA0F00C5A5BD /* MvrTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A7041063EA0F00C5A5BD /* MvrTableController.m */; };
@@ -150,6 +151,8 @@
 		156E7FD710662C4A00315D0C /* MvrGenericItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrGenericItemUI.h; sourceTree = "<group>"; };
 		156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrGenericItemUI.m; sourceTree = "<group>"; };
 		156E804110663AEB00315D0C /* GenericItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericItemIcon.png; sourceTree = "<group>"; };
+		1577006810748D0100907F62 /* MvrVideoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVideoItem.h; sourceTree = "<group>"; };
+		1577006910748D0100907F62 /* MvrVideoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVideoItem.m; sourceTree = "<group>"; };
 		157B68B11072548600E25E96 /* GreenDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenDot.png; sourceTree = "<group>"; };
 		157B68B31072548D00E25E96 /* RedDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedDot.png; sourceTree = "<group>"; };
 		1591A7031063EA0F00C5A5BD /* MvrTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTableController.h; sourceTree = "<group>"; };
@@ -296,6 +299,17 @@
 			path = Variants;
 			sourceTree = "<group>";
 		};
+		1577006710748CF400907F62 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				151E01FF1067652E00C6CDFF /* MvrImageItem.h */,
+				151E02001067652E00C6CDFF /* MvrImageItem.m */,
+				151E021E106767A900C6CDFF /* MvrImageItemUI.h */,
+				151E021F106767A900C6CDFF /* MvrImageItemUI.m */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		158A5F09106A6659008C6801 /* Modes */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,10 +367,9 @@
 			isa = PBXGroup;
 			children = (
 				15E94B6810741BED009DA076 /* Image picker sources */,
-				151E01FF1067652E00C6CDFF /* MvrImageItem.h */,
-				151E02001067652E00C6CDFF /* MvrImageItem.m */,
-				151E021E106767A900C6CDFF /* MvrImageItemUI.h */,
-				151E021F106767A900C6CDFF /* MvrImageItemUI.m */,
+				1577006710748CF400907F62 /* Images */,
+				1577006810748D0100907F62 /* MvrVideoItem.h */,
+				1577006910748D0100907F62 /* MvrVideoItem.m */,
 			);
 			name = "Images & Video";
 			sourceTree = "<group>";
@@ -575,6 +588,7 @@
 				15C1C86B1068DB92000C9CDE /* MvrWiFiMode.m in Sources */,
 				15C1C86F1068DBDB000C9CDE /* MvrUIMode.m in Sources */,
 				15C1C8901068DCDB000C9CDE /* MvrArrowsView.m in Sources */,
+				1577006A10748D0100907F62 /* MvrVideoItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

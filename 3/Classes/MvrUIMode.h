@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "MvrArrowsView.h"
+#import "MvrArrowView.h"
 #import "MvrSlidesView.h" // for MvrDirection
 
 #import "Network+Storage/MvrIncoming.h"
@@ -43,6 +44,7 @@
 - (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) dest;
 - (id) destinationAtDirection:(MvrDirection) d;
 - (MvrDirection) directionForDestination:(id) d;
+- (MvrArrowView*) arrowViewForDestination:(id) d;
 
 @property(readonly, retain) UIView* connectionStateDrawerView;
 

@@ -8,6 +8,8 @@
 
 #import "MvrWiFiMode.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "Network+Storage/MvrModernWiFi.h"
 #import "Network+Storage/MvrLegacyWiFi.h"
 #import "Network+Storage/MvrChannel.h"
@@ -36,6 +38,8 @@
 	[super dealloc];
 }
 
+#pragma mark Jamming
+
 - (void) scanner:(id <MvrScanner>)s didChangeJammedKey:(BOOL)jammed;
 {
 	if (!jammed) {
@@ -51,6 +55,8 @@
 	}
 }
 
+#pragma mark Channels
+
 - (void) scanner:(id <MvrScanner>) s didAddChannel:(id <MvrChannel>) channel;
 {
 	[self.mutableDestinations addObject:channel];
@@ -64,6 +70,16 @@
 - (NSString*) displayNameForDestination:(id) dest;
 {
 	return [dest displayName];
+}
+
+- (void) channel:(id <MvrChannel>)c didChangeSupportsStreamsKey:(BOOL)supportsStreams;
+{
+	MvrArrowView* arrow = [self arrowViewForDestination:c];
+	
+	CATransition* fade = [CATransition animation];
+	fade.type = kCATransitionFade;
+	[arrow.nameLabel.layer addAnimation:fade forKey:@"MvrWiFiModeStreamSupportFade"];
+	arrow.nameLabel.textColor = supportsStreams? [UIColor blackColor] : [UIColor grayColor];
 }
 
 #pragma mark Sending items
