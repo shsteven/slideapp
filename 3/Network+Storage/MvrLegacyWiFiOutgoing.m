@@ -10,9 +10,12 @@
 
 #import "MvrLegacyWiFi.h"
 
+NSString* const kMvrLegacyWiFiOutgoingErrorDomain = @"MvrLegacyWiFiOutgoingErrorDomain";
+
 @interface MvrLegacyWiFiOutgoing ()
 
-- (void) finish;
+- (void) endWithError:(NSError*) e;
+@property(retain) NSError* error;
 
 @property BOOL finished;
 
@@ -31,11 +34,14 @@
 	return self;
 }
 
-@synthesize finished;
+@synthesize finished, error;
 
 - (void) dealloc
 {
-	[self finish];
+	[self endWithError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil]];
+	[error release];
+	[item release];
+	[service release];
 	[super dealloc];
 }
 
@@ -44,13 +50,22 @@
 
 - (void) start;
 {
+	if (item.requiresStreamSupport) {
+		[self endWithError:[NSError errorWithDomain:kMvrLegacyWiFiOutgoingErrorDomain code:kMvrLegacyWiFiOutgoingItemRequiresStreamError userInfo:nil]];
+		return;
+	}
+	
 	connection = [[BLIPConnection alloc] initToNetService:service];
 	connection.delegate = self;
 	[connection open];
 }
 
-- (void) finish;
+- (void) endWithError:(NSError*) e;
 {
+	if (self.finished) return;
+	
+	self.error = e;
+	
 	[connection closeWithTimeout:5.0];
 	connection.delegate = nil;
 	[connection release]; connection = nil;
@@ -68,12 +83,12 @@
 
 - (void) connection: (BLIPConnection*)connection receivedResponse: (BLIPResponse*)response;
 {
-	[self finish];
+	[self endWithError:nil];
 }
 
 - (BOOL) connectionReceivedCloseRequest: (BLIPConnection*)connection;
 {
-	[self finish];
+	[self endWithError:nil];
 	return YES;
 }
 

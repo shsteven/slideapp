@@ -38,6 +38,10 @@
 
 - (id) produceExternalRepresentation; // abstract
 
+// If YES, this item requires stream support -- that is, it's (potentially) so large that it requires modern channels and scanners to send. Legacy channels should refuse to send items that require stream support.
+// Defaults to NO. Objects that say NO may still be sent through a item storage's -inputStream if this is desirable and supported by the channel.
+@property(readonly) BOOL requiresStreamSupport;
+
 // -- - --
 // Autocache support
 

@@ -211,4 +211,11 @@ static NSMutableDictionary* MvrItemTypesToClasses = nil;
 	}
 }
 
+#pragma mark Legacy support
+
+- (BOOL) requiresStreamSupport;
+{
+	return NO;
+}
+
 @end

@@ -22,8 +22,8 @@
 	MvrPacketBuilder* builder;
 	
 	BOOL finished;
-	
 	float progress;
+	NSError* error;
 	
 	unsigned long chunksPending;
 	BOOL canFinish;
@@ -33,6 +33,7 @@
 
 @property(readonly, assign) BOOL finished;
 @property(readonly, assign) float progress;
+@property(readonly, retain) NSError* error;
 
 - (void) start;
 

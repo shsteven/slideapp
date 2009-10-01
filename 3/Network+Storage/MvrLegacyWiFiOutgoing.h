@@ -10,6 +10,12 @@
 #import "BLIP.h"
 #import "MvrOutgoing.h"
 
+enum {
+	kMvrLegacyWiFiOutgoingItemRequiresStreamError = 1,
+};
+
+extern NSString* const kMvrLegacyWiFiOutgoingErrorDomain;
+
 @interface MvrLegacyWiFiOutgoing : NSObject <BLIPConnectionDelegate, MvrOutgoing> {
 	BOOL finished;
 	
@@ -17,9 +23,13 @@
 	NSNetService* service;
 	
 	BLIPConnection* connection;
+	
+	NSError* error;
 }
 
 - (id) initWithItem:(MvrItem*) i toNetService:(NSNetService*) s;
 - (void) start;
+
+@property(readonly, retain) NSError* error;
 
 @end

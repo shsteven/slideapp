@@ -25,6 +25,7 @@
 
 @property(assign) BOOL finished;
 @property(assign) float progress;
+@property(retain) NSError* error;
 
 - (NSData*) bestCandidateAddress;
 
@@ -43,15 +44,16 @@
 	return self;
 }
 
+@synthesize finished, progress, error;
+
 - (void) dealloc;
 {
 	[self cancel];
 	[item release];
 	[addresses release];
+	[error release];
 	[super dealloc];
 }
-
-@synthesize finished, progress;
 
 #pragma mark -
 #pragma mark Socket and state management.
@@ -85,7 +87,7 @@
 	BOOL done = [socket connectToAddress:address withTimeout:15 error:&e];
 	if (!done) {
 		L0Log(@"Did not connect: %@", e);
-		[self cancel];
+		[self endWithError:e];
 		return;
 	}
 }
@@ -100,6 +102,7 @@
 	if (self.finished) return;
 	
 	L0Log(@"%@", e);
+	self.error = e;
 	
 	[builder stop];
 	[builder release]; builder = nil;
@@ -164,10 +167,10 @@
 }
 
 - (void) packetBuilder:(MvrPacketBuilder*) b didEndWithError:(NSError*) e;
-{
-	L0Log(@"%@", e);
-	
+{	
 	self.progress = builder.progress;
+	if (e)
+		[self endWithError:e];
 	
 	[socket readDataToLength:1 withTimeout:120 tag:0];
 }
