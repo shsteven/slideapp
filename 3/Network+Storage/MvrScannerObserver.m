@@ -187,6 +187,21 @@
 		[self beginObservingOutgoingTransfer:outgoing ofChannel:chan];
 	
 	[kvo observe:@"outgoingTransfers" ofObject:chan usingSelector:@selector(channel:didChangeOutgoingTransfersKey:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld];
+	
+	if ([delegate respondsToSelector:@selector(channel:didChangeSupportsStreamsKey:)]) {
+		L0Log(@"Dispatching (initial) channel:%@ didChangeSupportsStreamsKey:%d", chan, [chan supportsStreams]);
+		[delegate channel:chan didChangeSupportsStreamsKey:[chan supportsStreams]];
+	}
+	
+	[kvo observe:@"supportsStreams" ofObject:chan usingSelector:@selector(channel:didChangeSupportsStreamsKey:) options:0];
+}
+
+- (void) channel:(id <MvrChannel>) channel didChangeSupportsStreamsKey:(NSDictionary*) change;
+{
+	if ([delegate respondsToSelector:@selector(channel:didChangeSupportsStreamsKey:)]) {
+		L0Log(@"Dispatching channel:%@ didChangeSupportsStreamsKey:%d", channel, [channel supportsStreams]);
+		[delegate channel:channel didChangeSupportsStreamsKey:[channel supportsStreams]];
+	}
 }
 
 - (void) endObservingChannel:(id <MvrChannel>) chan;
@@ -200,6 +215,7 @@
 
 	[kvo endObserving:@"incomingTransfers" ofObject:chan];
 	[kvo endObserving:@"outgoingTransfers" ofObject:chan];
+	[kvo endObserving:@"supportsStreams" ofObject:chan];
 	
 	if ([delegate respondsToSelector:@selector(scanner:didRemoveChannel:)]) {
 		L0Log(@"Dispatching scanner:%@ didRemoveChannel:%@", scanner, chan);

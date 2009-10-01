@@ -112,4 +112,9 @@
 	L0AbstractMethod();
 }
 
+- (BOOL) supportsStreams;
+{
+	return NO;
+}
+
 @end

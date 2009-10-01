@@ -40,6 +40,7 @@
 
 - (void) channel:(id <MvrChannel>) c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>) incoming;
 - (void) channel:(id <MvrChannel>) c didBeginSendingWithOutgoingTransfer:(id <MvrOutgoing>) outgoing;
+- (void) channel:(id <MvrChannel>) c didChangeSupportsStreamsKey:(BOOL) supportsStreams;
 
 - (void) outgoingTransferDidEndSending:(id <MvrOutgoing>) outgoing;
 

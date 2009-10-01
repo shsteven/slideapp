@@ -36,6 +36,11 @@
 	[self.mutableOutgoingTransfers removeObject:transfer];
 }
 
+- (BOOL) supportsStreams;
+{
+	return YES;
+}
+
 #pragma mark Incoming transfers
 
 - (void) addIncomingTransfersObject:(MvrModernWiFiIncoming*) incoming;

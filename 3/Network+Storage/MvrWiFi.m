@@ -64,9 +64,11 @@
 
 - (void) addChannel:(id) chan;
 {
-	if ([chan isKindOfClass:[MvrModernWiFiChannel class]])
+	if ([chan isKindOfClass:[MvrModernWiFiChannel class]]) {
+		[self willChangeValueForKey:@"supportsStreams"];
 		self.modernChannel = chan;
-	else if ([chan isKindOfClass:[MvrLegacyWiFiChannel class]]) {
+		[self didChangeValueForKey:@"supportsStreams"];
+	} else if ([chan isKindOfClass:[MvrLegacyWiFiChannel class]]) {
 		if ([chan isLegacyLegacy])
 			self.legacyChannel = chan;
 		else
@@ -77,9 +79,11 @@
 
 - (BOOL) removeChannelAndReturnIfEmpty:(id) chan;
 {
-	if ([chan isEqual:self.modernChannel])
+	if ([chan isEqual:self.modernChannel]) {
+		[self willChangeValueForKey:@"supportsStreams"];
 		self.modernChannel = nil;
-	else if ([chan isEqual:self.legacyChannel])
+		[self didChangeValueForKey:@"supportsStreams"];
+	} else if ([chan isEqual:self.legacyChannel])
 		self.legacyChannel = nil;
 	else if ([chan isEqual:self.legacyLegacyChannel])
 		self.legacyLegacyChannel = nil;
@@ -127,6 +131,11 @@
 		[self.legacyChannel beginSendingItem:item];
 	else
 		[self.legacyLegacyChannel beginSendingItem:item];
+}
+
+- (BOOL) supportsStreams;
+{
+	return self.modernChannel && [self.modernChannel supportsStreams];
 }
 
 @end
