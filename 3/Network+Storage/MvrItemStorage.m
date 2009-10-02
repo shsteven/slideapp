@@ -321,7 +321,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	if ([currentExt isEqual:ext])
 		return YES;
 	
-	NSString* storageDir = [self.path stringByDeletingPathExtension];
+	NSString* storageDir = [self.path stringByDeletingLastPathComponent];
 	NSString* newPath = MvrUnusedPathInDirectoryWithExtension(storageDir, ext, NULL);
 	
 	BOOL done = [[NSFileManager defaultManager] moveItemAtPath:self.path toPath:newPath error:e];

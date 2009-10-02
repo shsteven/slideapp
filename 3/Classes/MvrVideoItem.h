@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Network+Storage/MvrItem.h"
 
+#define kMvrVideoItemDidSave @"MvrVideoItemDidSave"
+
 @interface MvrVideoItem : MvrItem {
 
 }
 
-- (id) initWithVideoAtPath:(NSString*) p type:(NSString*) t error:(NSError**) e;
++ itemWithVideoAtPath:(NSString*) p type:(NSString*) t error:(NSError**) e;
 
 @end

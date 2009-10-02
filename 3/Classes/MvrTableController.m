@@ -323,6 +323,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	[[MvrItemUI UIForItem:item] didReceiveItem:item];
 	[MvrApp().storageCentral.mutableStoredItems addObject:item];
+	[[MvrItemUI UIForItem:item] didStoreItem:item];
 }
 
 - (void) incomingTransfer:(id <MvrIncoming>) i mayHaveFinishedWithChange:(NSDictionary*) change;

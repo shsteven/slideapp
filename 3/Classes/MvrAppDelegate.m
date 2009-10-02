@@ -17,6 +17,9 @@
 #import "MvrImageItem.h"
 #import "MvrImageItemUI.h"
 
+#import "MvrVideoItem.h"
+#import "MvrVideoItemUI.h"
+
 @interface MvrAppDelegate ()
 
 - (void) setUpItemClassesAndUIs;
@@ -77,6 +80,9 @@ enum {
 	
 	[MvrImageItem registerClass];
 	[MvrImageItemUI registerClass];
+	
+	[MvrVideoItem registerClass];
+	[MvrVideoItemUI registerClass];
 }
 
 #pragma mark -

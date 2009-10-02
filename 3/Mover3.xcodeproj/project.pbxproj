@@ -26,6 +26,8 @@
 		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		156E804210663AEB00315D0C /* GenericItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156E804110663AEB00315D0C /* GenericItemIcon.png */; };
 		1577006A10748D0100907F62 /* MvrVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1577006910748D0100907F62 /* MvrVideoItem.m */; };
+		15779EF91075D80B00FF2018 /* MvrVideoItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 15779EF81075D80B00FF2018 /* MvrVideoItemUI.m */; };
+		15779F111075DC8300FF2018 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15779F101075DC8300FF2018 /* MediaPlayer.framework */; };
 		157B68B21072548600E25E96 /* GreenDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 157B68B11072548600E25E96 /* GreenDot.png */; };
 		157B68B41072548D00E25E96 /* RedDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 157B68B31072548D00E25E96 /* RedDot.png */; };
 		1591A7051063EA0F00C5A5BD /* MvrTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A7041063EA0F00C5A5BD /* MvrTableController.m */; };
@@ -153,6 +155,9 @@
 		156E804110663AEB00315D0C /* GenericItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericItemIcon.png; sourceTree = "<group>"; };
 		1577006810748D0100907F62 /* MvrVideoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVideoItem.h; sourceTree = "<group>"; };
 		1577006910748D0100907F62 /* MvrVideoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVideoItem.m; sourceTree = "<group>"; };
+		15779EF71075D80B00FF2018 /* MvrVideoItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVideoItemUI.h; sourceTree = "<group>"; };
+		15779EF81075D80B00FF2018 /* MvrVideoItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVideoItemUI.m; sourceTree = "<group>"; };
+		15779F101075DC8300FF2018 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		157B68B11072548600E25E96 /* GreenDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenDot.png; sourceTree = "<group>"; };
 		157B68B31072548D00E25E96 /* RedDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedDot.png; sourceTree = "<group>"; };
 		1591A7031063EA0F00C5A5BD /* MvrTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTableController.h; sourceTree = "<group>"; };
@@ -207,6 +212,7 @@
 				1567515010620E78006EC706 /* UIKit.framework in Frameworks */,
 				1567515210620E7A006EC706 /* CoreGraphics.framework in Frameworks */,
 				15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */,
+				15779F111075DC8300FF2018 /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +376,8 @@
 				1577006710748CF400907F62 /* Images */,
 				1577006810748D0100907F62 /* MvrVideoItem.h */,
 				1577006910748D0100907F62 /* MvrVideoItem.m */,
+				15779EF71075D80B00FF2018 /* MvrVideoItemUI.h */,
+				15779EF81075D80B00FF2018 /* MvrVideoItemUI.m */,
 			);
 			name = "Images & Video";
 			sourceTree = "<group>";
@@ -409,6 +417,7 @@
 				1567514F10620E78006EC706 /* UIKit.framework */,
 				1567515110620E7A006EC706 /* CoreGraphics.framework */,
 				15AD032E1073F57200D92F5E /* QuartzCore.framework */,
+				15779F101075DC8300FF2018 /* MediaPlayer.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -589,6 +598,7 @@
 				15C1C86F1068DBDB000C9CDE /* MvrUIMode.m in Sources */,
 				15C1C8901068DCDB000C9CDE /* MvrArrowsView.m in Sources */,
 				1577006A10748D0100907F62 /* MvrVideoItem.m in Sources */,
+				15779EF91075D80B00FF2018 /* MvrVideoItemUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

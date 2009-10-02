@@ -32,6 +32,9 @@
 // Called to postprocess (usually, store) the item just before it gets added to the storage central.
 - (void) didReceiveItem:(MvrItem*) i;
 
+// As above but just after adding to the storage central.
+- (void) didStoreItem:(MvrItem*) i;
+
 // -- - -- Actions support -- - --
 
 // The main action, which is executed on double-tapping and is the first shown on the actions menu. nil == do nothing on double tap.
@@ -56,8 +59,8 @@
 - (MvrItemAction*) showAction;
 - (MvrItemAction*) openAction;
 
-// Copies the item to the clipboard.
-- (MvrItemAction*) copyAction;
+// Copies the item to the clipboard. It's 'copy', but 'copy' is a significant name in objc, so.
+- (MvrItemAction*) clipboardAction;
 
 // Send the item via e-mail.
 - (MvrItemAction*) sendByEmailAction;

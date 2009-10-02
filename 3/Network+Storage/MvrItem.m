@@ -29,6 +29,7 @@
 	if (self = [super init]) {
 		autocache = [NSMutableDictionary new];
 		metadata = [NSMutableDictionary new];
+		itemNotes = [NSMutableDictionary new];
 	}
 	
 	return self;
@@ -47,7 +48,22 @@
 	return self;
 }
 
-@synthesize storage, metadata, type;
+@synthesize storage, metadata, type, itemNotes;
+
+- (void) dealloc;
+{
+	[storage release];
+	[type release];
+	[metadata release],
+	[autocache release];
+	[itemNotes release];
+	[super dealloc];
+}
+
+- (NSString*) description;
+{
+	return [NSString stringWithFormat:@"%@ { storage = %@ }", [super description], self.storage];
+}
 
 - (NSString*) title;
 {
@@ -61,15 +77,6 @@
 - (void) setTitle:(NSString *) t;
 {
 	[self.metadata setObject:[[t copy] autorelease] forKey:kMvrItemTitleMetadataKey];
-}
-
-- (void) dealloc;
-{
-	[storage release];
-	[type release];
-	[metadata release],
-	[autocache release];
-	[super dealloc];
 }
 
 #pragma mark Storage
@@ -216,6 +223,25 @@ static NSMutableDictionary* MvrItemTypesToClasses = nil;
 - (BOOL) requiresStreamSupport;
 {
 	return NO;
+}
+
+#pragma mark Item notes
+
+- (void) setItemNotes:(NSDictionary *) d;
+{
+	[itemNotes setDictionary:d];
+}
+
+- (void) setObject:(id) o forItemNotesKey:(NSString*) key;
+{
+	[self willChangeValueForKey:@"itemNotes"];
+	[itemNotes setObject:o forKey:key];
+	[self didChangeValueForKey:@"itemNotes"];
+}
+
+- (id) objectForItemNotesKey:(id) o;
+{
+	return [itemNotes objectForKey:o];
 }
 
 @end

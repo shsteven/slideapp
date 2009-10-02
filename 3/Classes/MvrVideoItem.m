@@ -12,12 +12,17 @@
 
 @interface MvrVideoItem ()
 
-- (NSString*) extensionForType:(NSString *)type;
++ (NSString*) extensionForType:(NSString *)type;
++ (NSString*) typeForPath:(NSString*) path;
++ (BOOL) fixExtensionOfPathOfStorage:(MvrItemStorage*) s type:(NSString*) t error:(NSError**) e;
 
 @end
 
 
 @implementation MvrVideoItem
+
+L0LogAtRetain()
+L0LogAtRelease()
 
 + supportedTypes;
 {
@@ -27,37 +32,75 @@
 			nil];
 }
 
-- (id) initWithVideoAtPath:(NSString*) p type:(NSString*) t error:(NSError**) e;
++ itemWithVideoAtPath:(NSString*) p type:(NSString*) t error:(NSError**) e;
 {
 	MvrItemStorage* s = [MvrItemStorage itemStorageFromFileAtPath:p error:e];
-	if (!s) return nil;
+	if (!s)
+		return nil;
 	
-	if (self = [self initWithStorage:s type:t metadata:nil]) {
-		if (![self.storage setPathExtensionAssumingType:t error:e]) {
-			BOOL didNotGetExtension = ([[*e domain] isEqual:kMvrItemStorageErrorDomain] && [*e code] == kMvrItemStorageNoFilenameExtensionForTypeError),
-				shouldContinue = didNotGetExtension;
-			
-			if (didNotGetExtension) {
-				NSString* ext = [self extensionForType:t];
-				
-				if (!ext) {
-					*e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageNoFilenameExtensionForTypeError userInfo:nil];
-					shouldContinue = NO;
-				} else 				
-					shouldContinue = [self.storage setPathExtension:ext error:e];
-			}
-			
-			if (!shouldContinue) {
-				[self release];
-				return nil;
-			}
+	if ([t isEqual:(id) kUTTypeMovie])
+		t = [self typeForPath:p];
+	if (!t)
+		return nil;
+	
+	if (![self fixExtensionOfPathOfStorage:s type:t error:e])
+		return nil;
+	
+	id me = [[[self alloc] initWithStorage:s type:t metadata:nil] autorelease];
+	[me setObject:[NSNumber numberWithBool:YES] forItemNotesKey:kMvrVideoItemDidSave];
+	return me;
+}
+
+- (id) initWithStorage:(MvrItemStorage *)s type:(NSString *)t metadata:(NSDictionary *)m;
+{
+	if (self = [super initWithStorage:s type:t metadata:m]) {
+		if (![[self class] fixExtensionOfPathOfStorage:self.storage type:t error:NULL]) {
+			[self release];
+			return nil;
 		}
 	}
 	
 	return self;
 }
 
-- (NSString*) extensionForType:(NSString*) t;
++ (BOOL) fixExtensionOfPathOfStorage:(MvrItemStorage*) s type:(NSString*) t error:(NSError**) e;
+{
+	if (![[s.path pathExtension] isEqual:@""])
+		return YES;
+	
+	NSError* errorHandledByUs;
+	if (![s setPathExtensionAssumingType:t error:&errorHandledByUs]) {
+		if (e) *e = errorHandledByUs;
+		BOOL didNotGetExtension = ([[errorHandledByUs domain] isEqual:kMvrItemStorageErrorDomain] && [errorHandledByUs code] == kMvrItemStorageNoFilenameExtensionForTypeError),
+		shouldContinue = didNotGetExtension;
+		
+		if (didNotGetExtension) {
+			NSString* ext = [self extensionForType:t];
+			
+			if (!ext) {
+				if (e) *e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageNoFilenameExtensionForTypeError userInfo:nil];
+				shouldContinue = NO;
+			} else 				
+				shouldContinue = [s setPathExtension:ext error:e];
+		}
+		
+		return shouldContinue;
+	} else
+		return YES;
+}
+
++ (NSString*) typeForPath:(NSString*) path;
+{
+	NSString* ext = [path pathExtension];
+	if ([ext isEqual:@""])
+		return nil;
+	
+	CFStringRef uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef) ext, kUTTypeMovie);
+	
+	return uti? [NSMakeCollectable(uti) autorelease] : nil;
+}
+
++ (NSString*) extensionForType:(NSString*) t;
 {
 	if ([t isEqual:(id) kUTTypeQuickTimeMovie])
 		return @"mov";

@@ -11,6 +11,7 @@
 #import "Network+Storage/MvrUTISupport.h"
 
 #import "MvrImageItem.h"
+#import "MvrVideoItem.h"
 
 @interface MvrImagePickerSource ()
 
@@ -18,6 +19,7 @@
 
 - (void) performAddingImage:(UIImage*) i;
 - (void) performAddingImageAtPath:(NSString*) path type:(NSString*) type;
+- (void) performAddingVideoAtPath:(NSString *)path type:(NSString *)type;
 
 @end
 
@@ -53,13 +55,16 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 {
+	L0Log(@"Picked: %@", info);
+	
 	NSString* uti = [info objectForKey:UIImagePickerControllerMediaType];
 	if (uti) {
 	
+		NSURL* url = [info objectForKey:UIImagePickerControllerMediaURL];
+		
 		if (UTTypeConformsTo((CFStringRef) uti, kUTTypeImage)) {
 			
-			NSURL* url;
-			if ((url = [info objectForKey:UIImagePickerControllerMediaURL]) && [url isFileURL]) {
+			if (url && [url isFileURL]) {
 				[self performAddingImageAtPath:[url path] type:uti];
 			} else {
 				UIImage* i = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -67,12 +72,26 @@
 			}
 			
 		} else if (UTTypeConformsTo((CFStringRef) uti, kUTTypeMovie)) {
-			L0AbstractMethod(); // TODO
+			
+			if (url && [url isFileURL])
+				[self performAddingVideoAtPath:[url path] type:uti];
+			
 		}
 		
 	}
 	
 	[picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void) performAddingVideoAtPath:(NSString *)path type:(NSString *)type;
+{
+	NSError* e;
+	MvrVideoItem* video = [MvrVideoItem itemWithVideoAtPath:path type:type error:&e];
+	
+	if (video)
+		[MvrApp() addItemFromSelf:video];
+	else
+		L0Log(@"Could not add video, there was an error: %@", e);
 }
 
 - (void) performAddingImage:(UIImage *)i;

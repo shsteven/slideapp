@@ -217,7 +217,10 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 
 - (void) didReceiveItem:(MvrItem*) i;
 {
-	L0AbstractMethod();
+}
+
+- (void) didStoreItem:(MvrItem*) i;
+{	
 }
 
 #pragma mark Actions
@@ -243,7 +246,7 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 }
 
 // Copies the item to the clipboard.
-- (MvrItemAction*) copyAction;
+- (MvrItemAction*) clipboardAction;
 {
 	return [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Copy", @"Title for the 'Copy' action") target:self selector:@selector(performCopyAction:withItem:)];
 }

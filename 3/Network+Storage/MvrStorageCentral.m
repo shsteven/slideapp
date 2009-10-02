@@ -92,7 +92,6 @@
 				moreMeta = [NSDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey];
 		}
 
-			
 		if (!moreMeta || !type)
 			continue;
 		
@@ -105,10 +104,15 @@
 		} else {
 			MvrItem* item = [MvrItem itemWithStorage:itemStorage type:type metadata:moreMeta];
 			if (item) {
+				NSDictionary* d = [itemInfo objectForKey:@"Notes"];
+				if (d && [d isKindOfClass:[NSDictionary class]])
+					item.itemNotes = d;
+				
 				[storedItems addObject:item];
 				[metadata setObject:[NSDictionary dictionaryWithObjectsAndKeys:
 									 type, @"Type",
 									 moreMeta, @"Metadata",
+									 d, @"Notes",
 									 nil] forKey:name];
 			}
 		}
@@ -138,6 +142,7 @@
 	[metadata setObject:[NSDictionary dictionaryWithObjectsAndKeys:
 						 item.metadata, @"Metadata",
 						 item.type, @"Type",
+						 item.itemNotes, @"Notes",
 						 nil] forKey:name];
 	[self saveMetadata];
 	
@@ -174,8 +179,6 @@
 	
 	[dispatcher endObserving:@"path" ofObject:item];
 	
-	[storedItems removeObject:item];
-	
 	MvrItemStorage* storage = [item storage];
 	if (storage.hasPath) {
 		NSString* path = storage.path, * name = [path lastPathComponent],
@@ -193,6 +196,8 @@
 	}
 	
 	storage.persistent = NO;
+	
+	[storedItems removeObject:item];
 }
 
 - (void) saveMetadata;
