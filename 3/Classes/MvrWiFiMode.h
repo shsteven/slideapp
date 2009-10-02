@@ -19,11 +19,13 @@
 	UIView* connectionStateDrawerView;
 	UILabel* connectionStateInfo;
 	UIImageView* connectionStateImage;
+	UIView* connectionStateContainer;
 }
 
 @property(retain) IBOutlet UIView* connectionStateDrawerView;
 
 @property(assign) IBOutlet UILabel* connectionStateInfo;
 @property(assign) IBOutlet UIImageView* connectionStateImage;
+@property(assign) IBOutlet UIView* connectionStateContainer;
 
 @end

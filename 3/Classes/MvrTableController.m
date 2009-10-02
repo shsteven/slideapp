@@ -90,9 +90,17 @@ static CGPoint MvrCenterOf(CGRect r) {
 	viewsToItems = [L0Map new];
 	transfersToViews = [L0Map new];
 	
+#define kMvrEditButtonPlacement 2
+#define kMvrNetworkButtonPlacement 4 // after inserting Edit
+	
 	// Put the edit button in the proper position in the toolbar
 	NSMutableArray* a = [NSMutableArray arrayWithArray:self.toolbar.items];
-	[a insertObject:self.editButtonItem atIndex:2]; // see NIB.
+	[a insertObject:self.editButtonItem atIndex:kMvrEditButtonPlacement]; // see NIB.
+	
+	id network = [a objectAtIndex:kMvrNetworkButtonPlacement];
+	if ([network respondsToSelector:@selector(setAccessibilityLabel:)])
+		[network setAccessibilityLabel:NSLocalizedString(@"Network state", @"Accessibility label for the network toolbar button")];
+	
 	self.toolbar.items = a;
 	self.editButtonItem.enabled = NO; // overridden by the first addItem: call.
 	
@@ -100,6 +108,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	kvo = [[L0KVODispatcher alloc] initWithTarget:self];
 	
 	// -------- TESTING STUFF ---------
+	
 	// TODO remove me!
 	MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:[@"Ciao, mondo!" dataUsingEncoding:NSUTF8StringEncoding]];
 	MvrItem* i = [MvrItem itemWithStorage:storage type:(id) kUTTypeUTF8PlainText metadata:[NSDictionary dictionaryWithObject:@"Ciao" forKey:kMvrItemTitleMetadataKey]];
@@ -168,6 +177,8 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	[itemsToViews setObject:slide forKey:i];
 	[viewsToItems setObject:i forKey:slide];
+	
+	[slide setAccessibilityLabel:[[MvrItemUI UIForItem:i] accessibilityLabelForItem:i]];
 	
 	self.editButtonItem.enabled = YES;
 }
@@ -399,6 +410,8 @@ static CGPoint MvrCenterOf(CGRect r) {
 		[self slideDownAndRemoveDrawerView];
 	else if (currentDrawerView && v)
 		[self slideDownAndRemoveDrawerViewThenReplaceWith:v];
+	
+	UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
 - (void) slideDownAndRemoveDrawerView;

@@ -76,4 +76,9 @@
 	return ![itemsBeingSaved containsObject:i];
 }
 
+- (NSString*) accessibilityLabelForItem:(id)i;
+{
+	return @"Image";
+}
+
 @end

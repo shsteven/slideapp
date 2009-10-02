@@ -70,6 +70,9 @@
 - (void) performCopyAction:(MvrItemAction*) copy withItem:(id) i; // by default, replaces general pasteboard with [ (item type) => (item storage's data) ].
 - (void) performSendByEmail:(MvrItemAction*) send withItem:(id) i;
 
+// Description of an item for accessibility purposes.
+- (NSString*) accessibilityLabelForItem:(id) i;
+
 @end
 
 

@@ -18,7 +18,7 @@
 
 @implementation MvrWiFiMode
 
-@synthesize connectionStateDrawerView, connectionStateInfo, connectionStateImage;
+@synthesize connectionStateDrawerView, connectionStateInfo, connectionStateImage, connectionStateContainer;
 
 - (void) awakeFromNib;
 {
@@ -53,6 +53,8 @@
 		self.connectionStateImage.image = [UIImage imageNamed:@"RedDot.png"];
 		
 	}
+	
+	[self.connectionStateContainer setAccessibilityValue:self.connectionStateInfo.text];
 }
 
 #pragma mark Channels
@@ -79,7 +81,8 @@
 	CATransition* fade = [CATransition animation];
 	fade.type = kCATransitionFade;
 	[arrow.nameLabel.layer addAnimation:fade forKey:@"MvrWiFiModeStreamSupportFade"];
-	arrow.nameLabel.textColor = supportsStreams? [UIColor blackColor] : [UIColor grayColor];
+	arrow.normalColor = supportsStreams? [UIColor blackColor] : [UIColor grayColor];
+	arrow.nameLabel.textColor = arrow.normalColor;
 }
 
 #pragma mark Sending items

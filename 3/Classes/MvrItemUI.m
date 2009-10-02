@@ -283,4 +283,10 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	return NO;
 }
 
+- (NSString*) accessibilityLabelForItem:(id) i;
+{
+	L0AbstractMethod();
+	return nil;
+}
+
 @end

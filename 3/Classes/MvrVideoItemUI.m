@@ -92,4 +92,9 @@
 	return nil; // TODO
 }
 
+- (NSString*) accessibilityLabelForItem:(id) i;
+{
+	return @"Video"; // TODO
+}
+
 @end

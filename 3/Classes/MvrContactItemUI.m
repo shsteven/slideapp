@@ -83,6 +83,11 @@
 #pragma mark -
 #pragma mark Displaying.
 
+- (NSString*) accessibilityLabelForItem:(id)i;
+{
+	return [NSString stringWithFormat:NSLocalizedString(@"%@, Contact", @"Template for the accessibility label of contact items"), [i title]];
+}
+
 - (MvrItemAction*) mainActionForItem:(MvrItem*) i;
 {
 	return [self showAction];

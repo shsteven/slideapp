@@ -60,11 +60,6 @@
 	[super dealloc];
 }
 
-- (NSString*) description;
-{
-	return [NSString stringWithFormat:@"%@ { storage = %@ }", [super description], self.storage];
-}
-
 - (NSString*) title;
 {
 	NSString* title = [self.metadata objectForKey:kMvrItemTitleMetadataKey];

@@ -137,9 +137,12 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 
 - (CGRect) additionArrivalArea;
 {
-	CGRect safe = self.safeArea;
-	safe.size.height = self.bounds.size.height * (2.0/3.0);
-	return safe;
+	CGRect selfBounds = self.bounds;
+	CGFloat
+		horizontalDelta = selfBounds.size.width * 1.0/3.0,
+		verticalDelta = selfBounds.size.height * 1.0/3.0;
+	
+	return CGRectInset(selfBounds, horizontalDelta, verticalDelta);
 }
 
 #pragma mark -
@@ -161,11 +164,14 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 {
 	if (!slide)
 		[self didComeToRest:view];
+	
+	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
 }
 
 - (void) draggableView:(L0DraggableView *)view didEndInertialSlideByFinishing:(BOOL)finished;
 {
 	[self didComeToRest:view];
+	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
 }
 
 - (CGPoint) arrivalPointStartingFromPoint:(CGPoint) point inArea:(CGRect) safe randomness:(CGSize) randomness;
@@ -183,13 +189,10 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 	return point;
 }
 
-#define kMvrBoundsStartOfBouncebackArea (-20)
 - (void) didComeToRest:(L0DraggableView*) v;
-{
-	CGRect bounceback = CGRectInset(self.bounds, kMvrBoundsStartOfBouncebackArea, kMvrBoundsStartOfBouncebackArea);
-	
+{	
 	// for now we just bounce back if needed.
-	if (!CGRectContainsPoint(bounceback, v.center)) {
+	if (!CGRectContainsPoint(self.bounds, v.center)) {
 		[delegate slidesView:self subviewDidMove:v inBounceBackAreaInDirection:[self directionForCurrentPositionOfView:v]];
 	}
 	
@@ -214,6 +217,12 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 	v.center = [self arrivalPointStartingFromPoint:v.center inArea:area randomness:randomness];
 	
 	[UIView commitAnimations];
+	[self performSelector:@selector(postAccessibilityNotificationForAddition) withObject:nil afterDelay:0.7];
+}
+
+- (void) postAccessibilityNotificationForAddition;
+{
+	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
 }
 
 - (void) bounceBackAll;
@@ -303,6 +312,7 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 - (void) draggableViewDidBeginDragging:(L0DraggableView *)view;
 {
 	[delegate slidesView:self didCancelHolding:view];
+	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
 }
 
 - (void) draggableViewDidPress:(L0DraggableView*) view;

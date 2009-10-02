@@ -72,7 +72,7 @@ typedef enum {
 		
 		[self layoutSubviews];
 		
-		view.nameLabel.text = label;
+		view.name = label;
 		
 		view.alpha = 0.0;
 		[self addSubview:view];
@@ -86,8 +86,10 @@ typedef enum {
 		CATransition* fade = [CATransition animation];
 		fade.type = kCATransitionFade;
 		[view.nameLabel.layer addAnimation:fade forKey:@"MvrFadeTransitionKey"];
-		view.nameLabel.text = label;
+		view.name = label;
 	}
+	
+	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
 }
 
 - (void) fadeAway:(UIView*) v;

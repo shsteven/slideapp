@@ -61,6 +61,17 @@
     [super dealloc];
 }
 
+- (NSString*) name;
+{
+	return self.nameLabel.text;
+}
+
+- (void) setName:(NSString *) s;
+{
+	self.nameLabel.text = s;
+	[self.nameLabel setAccessibilityLabel:[NSString stringWithFormat:NSLocalizedString(@"%@, other device on the network", @"Template for arrow view's accessibility label"), s]];
+}
+
 - (void) sizeToFit;
 {
 	CGRect frame;

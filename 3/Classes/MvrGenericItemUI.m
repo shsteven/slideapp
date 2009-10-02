@@ -25,4 +25,12 @@
 	// Does nothing.
 }
 
+- (NSString*) accessibilityLabelForItem:(id)i;
+{
+	if ([i title])
+		return [i title];
+	else
+		return NSLocalizedString(@"Untitled item", @"The accessibility label of a generic item without a title");
+}
+
 @end

@@ -43,11 +43,18 @@
 		self.slideSpeedDampeningFactor = 0.6;
 		
 		self.isAccessibilityElement = YES;
+		self.actionButton.isAccessibilityElement = YES;
 		
 		progress = kMvrIndeterminateProgress;
 	}
 	
     return self;
+}
+
+- (void) setAccessibilityLabel:(NSString *)label;
+{
+	[super setAccessibilityLabel:label];
+	[self.actionButton setAccessibilityLabel:[NSString stringWithFormat:NSLocalizedString(@"Actions for %@", @"Template for accessibility label of action button"), label]];
 }
 
 - (void) sizeToFit;
@@ -121,6 +128,8 @@
 			[UIView commitAnimations];
 		
 	}
+	
+	self.isAccessibilityElement = !editing;
 }
 
 - (void) setHighlighted:(BOOL) h animated:(BOOL) animated animationDuration:(NSTimeInterval) duration;

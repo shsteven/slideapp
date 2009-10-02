@@ -22,6 +22,8 @@
 + (CGAffineTransform) clockwiseHalfTurn;
 + (CGAffineTransform) counterclockwiseHalfTurn;
 
+@property(copy) NSString* name;
+
 @property(retain) IBOutlet UIView* contentView;
 @property(retain) IBOutlet UIImageView* arrowView;
 @property(retain) IBOutlet UILabel* nameLabel;
