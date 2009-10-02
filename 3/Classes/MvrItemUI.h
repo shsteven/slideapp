@@ -21,7 +21,7 @@
 + (MvrItemUI*) UIForItem:(MvrItem*) i;
 
 + (NSSet*) supportedItemClasses;
-+ (NSArray*) supportedItemSources;
+- (NSArray*) supportedItemSources;
 
 // Called by item sources constructed with +[L0ItemSource itemSourceWithDisplayName:correspondingUI:].
 - (void) beginAddingItemForSource:(MvrItemSource*) source;
@@ -30,27 +30,27 @@
 - (UIImage*) representingImageWithSize:(CGSize) size forItem:(id) i;
 
 // Called to postprocess (usually, store) the item just before it gets added to the storage central.
-- (void) didReceiveItem:(MvrItem*) i;
+- (void) didReceiveItem:(id) i;
 
 // As above but just after adding to the storage central.
-- (void) didStoreItem:(MvrItem*) i;
+- (void) didStoreItem:(id) i;
 
 // -- - -- Actions support -- - --
 
 // The main action, which is executed on double-tapping and is the first shown on the actions menu. nil == do nothing on double tap.
-- (MvrItemAction*) mainActionForItem:(MvrItem*) i;
+- (MvrItemAction*) mainActionForItem:(id) i;
 
 // Additional actions, which are shown on the action menu.
 // This does not include the Remove action, which is instead added automatically by the app delegate.
-- (NSArray*) additionalActionsForItem:(MvrItem*) i;
+- (NSArray*) additionalActionsForItem:(id) i;
 
 // These control the Remove menu item.
 
 // If NO, the user isn't offered the option to remove the item.
-- (BOOL) isItemRemovable:(MvrItem*) i;
+- (BOOL) isItemRemovable:(id) i;
 
 // If NO, Mover's got the only copy of the item and presents a much harsher message to the user on removal. If YES, it allows removal without a confirmation.
-- (BOOL) isItemSavedElsewhere:(MvrItem*) i;
+- (BOOL) isItemSavedElsewhere:(id) i;
 
 
 // These standard actions call the methods at the end of the list. You can return them from -additionalActions... or -mainAction... to exploit common localizations and implementations and such.
@@ -66,9 +66,9 @@
 - (MvrItemAction*) sendByEmailAction;
 
 // Methods called by the above actions:
-- (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(MvrItem*) i; // abstract!
-- (void) performCopyAction:(MvrItemAction*) copy withItem:(MvrItem*) i; // by default, replaces general pasteboard with [ (item type) => (item storage's data) ].
-- (void) performSendByEmail:(MvrItemAction*) send withItem:(MvrItem*) i;
+- (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(id) i; // abstract!
+- (void) performCopyAction:(MvrItemAction*) copy withItem:(id) i; // by default, replaces general pasteboard with [ (item type) => (item storage's data) ].
+- (void) performSendByEmail:(MvrItemAction*) send withItem:(id) i;
 
 @end
 

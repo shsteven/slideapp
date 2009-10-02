@@ -47,11 +47,10 @@
 - (void) beginSendingItem:(MvrItem *)item;
 {
 	MvrLegacyWiFiOutgoing* outgoing = [[MvrLegacyWiFiOutgoing alloc] initWithItem:item toNetService:self.netService];
-	[self.dispatcher observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:didChangeFinishedKey:) options:0];
-	
-	[outgoing start];
+	[self.dispatcher observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:didChangeFinishedKey:) options:0];	
 	[self.mutableOutgoingTransfers addObject:outgoing];
 	
+	[outgoing start];
 	[outgoing release];
 }
 

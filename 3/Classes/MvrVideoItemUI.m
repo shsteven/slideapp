@@ -25,7 +25,7 @@
 	return [NSSet setWithObject:[MvrVideoItem class]];
 }
 
-+ (NSArray*) supportedItemSources;
+- (NSArray*) supportedItemSources;
 {
 	return [NSArray arrayWithObjects:
 			[MvrPhotoLibrarySource sharedSource],

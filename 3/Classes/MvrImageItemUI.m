@@ -36,7 +36,7 @@
 	return [NSSet setWithObject:[MvrImageItem class]];
 }
 
-+ supportedItemSources;
+- supportedItemSources;
 {
 	return [NSArray arrayWithObjects:
 			[MvrPhotoLibrarySource sharedSource],

@@ -53,7 +53,7 @@
 	return [[[self alloc] initWithDisplayName:name target:target selector:selector] autorelease];
 }
 
-- (void) performActionWithItem:(MvrItem*) i;
+- (void) performActionWithItem:(id) i;
 {
 	if (!target || !selector)
 		L0AbstractMethod();
@@ -164,7 +164,7 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	
 	// [MvrItemSources addObjectsFromArray:[self supportedItemSources]];
 	// we don't do the above because we may have item sources shared between different item UIs. For example, the camera item source can produce either videos or photos, so both item ui controllers claim it as their own and we display it only once.
-	for (id source in [self supportedItemSources]) {
+	for (id source in [myself supportedItemSources]) {
 		if (![MvrItemSources containsObject:source])
 			[MvrItemSources addObject:source];
 	}
@@ -191,7 +191,7 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 
 #pragma mark Funnels
 
-+ (NSArray*) supportedItemSources;
+- (NSArray*) supportedItemSources;
 {
 	return [NSArray array];
 }
@@ -215,23 +215,23 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	return nil;
 }
 
-- (void) didReceiveItem:(MvrItem*) i;
+- (void) didReceiveItem:(id) i;
 {
 }
 
-- (void) didStoreItem:(MvrItem*) i;
+- (void) didStoreItem:(id) i;
 {	
 }
 
 #pragma mark Actions
 
-- (MvrItemAction*) mainActionForItem:(MvrItem*) i;
+- (MvrItemAction*) mainActionForItem:(id) i;
 {
 	return nil;
 }
 
 // Additional actions, which are shown on the action menu.
-- (NSArray*) additionalActionsForItem:(MvrItem*) i;
+- (NSArray*) additionalActionsForItem:(id) i;
 {
 	return [NSArray array];
 }
@@ -257,28 +257,28 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	return [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Send by E-mail", @"Title for the 'Send by E-mail' action") target:self selector:@selector(performShowOrOpenAction:withItem:)];
 }
 
-- (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(MvrItem*) i;
+- (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(id) i;
 {
 	L0AbstractMethod();
 }
 
-- (void) performCopyAction:(MvrItemAction*) copy withItem:(MvrItem*) i;
+- (void) performCopyAction:(MvrItemAction*) copy withItem:(id) i;
 {
-	[[UIPasteboard generalPasteboard] setData:i.storage.data forPasteboardType:i.type];
+	[[UIPasteboard generalPasteboard] setData:((MvrItem*)i).storage.data forPasteboardType:((MvrItem*)i).type];
 }
 
-- (void) performSendByEmail:(MvrItemAction*) send withItem:(MvrItem*) i;
+- (void) performSendByEmail:(MvrItemAction*) send withItem:(id) i;
 {
 	// TODO
 	L0AbstractMethod();
 }
 
-- (BOOL) isItemRemovable:(MvrItem*) i;
+- (BOOL) isItemRemovable:(id) i;
 {
 	return YES;
 }
 
-- (BOOL) isItemSavedElsewhere:(MvrItem*) i;
+- (BOOL) isItemSavedElsewhere:(id) i;
 {
 	return NO;
 }

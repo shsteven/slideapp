@@ -30,6 +30,10 @@
 		15779F111075DC8300FF2018 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15779F101075DC8300FF2018 /* MediaPlayer.framework */; };
 		157B68B21072548600E25E96 /* GreenDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 157B68B11072548600E25E96 /* GreenDot.png */; };
 		157B68B41072548D00E25E96 /* RedDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 157B68B31072548D00E25E96 /* RedDot.png */; };
+		157B96BD1076586100F1A1A8 /* MvrContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B96BC1076586100F1A1A8 /* MvrContactItem.m */; };
+		157B96BF1076589800F1A1A8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96BE1076589800F1A1A8 /* AddressBook.framework */; };
+		157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96C01076589B00F1A1A8 /* AddressBookUI.framework */; };
+		157B96D810765F5800F1A1A8 /* MvrContactItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */; };
 		1591A7051063EA0F00C5A5BD /* MvrTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A7041063EA0F00C5A5BD /* MvrTableController.m */; };
 		1591A7071063EC4000C5A5BD /* Backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591A7061063EC4000C5A5BD /* Backdrop.png */; };
 		1591A70E1063ED2900C5A5BD /* MvrSlidesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A70D1063ED2900C5A5BD /* MvrSlidesView.m */; };
@@ -160,6 +164,12 @@
 		15779F101075DC8300FF2018 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		157B68B11072548600E25E96 /* GreenDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenDot.png; sourceTree = "<group>"; };
 		157B68B31072548D00E25E96 /* RedDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedDot.png; sourceTree = "<group>"; };
+		157B96BB1076586100F1A1A8 /* MvrContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrContactItem.h; sourceTree = "<group>"; };
+		157B96BC1076586100F1A1A8 /* MvrContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrContactItem.m; sourceTree = "<group>"; };
+		157B96BE1076589800F1A1A8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		157B96C01076589B00F1A1A8 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		157B96D610765F5800F1A1A8 /* MvrContactItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrContactItemUI.h; sourceTree = "<group>"; };
+		157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrContactItemUI.m; sourceTree = "<group>"; };
 		1591A7031063EA0F00C5A5BD /* MvrTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTableController.h; sourceTree = "<group>"; };
 		1591A7041063EA0F00C5A5BD /* MvrTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTableController.m; sourceTree = "<group>"; };
 		1591A7061063EC4000C5A5BD /* Backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Backdrop.png; path = Theme/Backdrop.png; sourceTree = "<group>"; };
@@ -213,6 +223,8 @@
 				1567515210620E7A006EC706 /* CoreGraphics.framework in Frameworks */,
 				15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */,
 				15779F111075DC8300FF2018 /* MediaPlayer.framework in Frameworks */,
+				157B96BF1076589800F1A1A8 /* AddressBook.framework in Frameworks */,
+				157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +248,7 @@
 			children = (
 				156751B610621758006EC706 /* Item UI */,
 				15E94B6710741BDD009DA076 /* Images & Video */,
+				157B96D910765F5F00F1A1A8 /* Contacts */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -316,6 +329,28 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		157B96BA107657F500F1A1A8 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				1577006810748D0100907F62 /* MvrVideoItem.h */,
+				1577006910748D0100907F62 /* MvrVideoItem.m */,
+				15779EF71075D80B00FF2018 /* MvrVideoItemUI.h */,
+				15779EF81075D80B00FF2018 /* MvrVideoItemUI.m */,
+			);
+			name = Videos;
+			sourceTree = "<group>";
+		};
+		157B96D910765F5F00F1A1A8 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				157B96BB1076586100F1A1A8 /* MvrContactItem.h */,
+				157B96BC1076586100F1A1A8 /* MvrContactItem.m */,
+				157B96D610765F5800F1A1A8 /* MvrContactItemUI.h */,
+				157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
 		158A5F09106A6659008C6801 /* Modes */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,10 +409,7 @@
 			children = (
 				15E94B6810741BED009DA076 /* Image picker sources */,
 				1577006710748CF400907F62 /* Images */,
-				1577006810748D0100907F62 /* MvrVideoItem.h */,
-				1577006910748D0100907F62 /* MvrVideoItem.m */,
-				15779EF71075D80B00FF2018 /* MvrVideoItemUI.h */,
-				15779EF81075D80B00FF2018 /* MvrVideoItemUI.m */,
+				157B96BA107657F500F1A1A8 /* Videos */,
 			);
 			name = "Images & Video";
 			sourceTree = "<group>";
@@ -418,6 +450,8 @@
 				1567515110620E7A006EC706 /* CoreGraphics.framework */,
 				15AD032E1073F57200D92F5E /* QuartzCore.framework */,
 				15779F101075DC8300FF2018 /* MediaPlayer.framework */,
+				157B96BE1076589800F1A1A8 /* AddressBook.framework */,
+				157B96C01076589B00F1A1A8 /* AddressBookUI.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -599,6 +633,8 @@
 				15C1C8901068DCDB000C9CDE /* MvrArrowsView.m in Sources */,
 				1577006A10748D0100907F62 /* MvrVideoItem.m in Sources */,
 				15779EF91075D80B00FF2018 /* MvrVideoItemUI.m in Sources */,
+				157B96BD1076586100F1A1A8 /* MvrContactItem.m in Sources */,
+				157B96D810765F5800F1A1A8 /* MvrContactItemUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
