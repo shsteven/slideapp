@@ -106,22 +106,6 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	// Set up KVO
 	kvo = [[L0KVODispatcher alloc] initWithTarget:self];
-	
-	// -------- TESTING STUFF ---------
-	
-	// TODO remove me!
-	MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:[@"Ciao, mondo!" dataUsingEncoding:NSUTF8StringEncoding]];
-	MvrItem* i = [MvrItem itemWithStorage:storage type:(id) kUTTypeUTF8PlainText metadata:[NSDictionary dictionaryWithObject:@"Ciao" forKey:kMvrItemTitleMetadataKey]];
-	
-	[self addItem:i animated:NO];
-	
-	// TODO remove me again!
-	
-	UIView* red = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 250)] autorelease];
-	UIView* transparent = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 250)] autorelease];
-	red.backgroundColor = [UIColor redColor];
-	transparent.backgroundColor = [UIColor clearColor];
-	transparent.opaque = NO;	
 }
 
 - (void) setCurrentMode:(MvrUIMode *) m;
