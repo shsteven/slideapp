@@ -48,7 +48,10 @@
 	NSData* imageData = [[i contactPropertyList] objectForKey:kMvrContactImageData];
 	UIImage* image = imageData? [UIImage imageWithData:imageData] : nil;
 	
-	return [image imageByRenderingRotationAndScalingWithMaximumSide:MAX(size.width, size.height)];
+	if (image)
+		return [image imageByRenderingRotationAndScalingWithMaximumSide:MAX(size.width, size.height)];
+	else
+		return [UIImage imageNamed:@"ContactWithoutImageIcon.png"];
 }
 
 #pragma mark -
