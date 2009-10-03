@@ -25,12 +25,16 @@
 	wifi = [[MvrWiFi alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort];
 	observer = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+	
 	if (self.delegate) // we're on!
 		wifi.enabled = YES;
 }
 
 - (void) dealloc;
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[observer release];
 
 	[wifi release];
@@ -134,6 +138,17 @@
 - (void) modeWillStopBeingCurrent:(BOOL)animated;
 {
 	wifi.enabled = NO;
+}
+
+- (void) willResignActive:(NSNotification*) n;
+{
+	wifi.enabled = NO;
+}
+
+- (void) didBecomeActive:(NSNotification*) n;
+{
+	if (self.delegate)
+		wifi.enabled = YES;
 }
 
 @end
