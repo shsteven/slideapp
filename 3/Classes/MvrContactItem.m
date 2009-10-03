@@ -347,7 +347,11 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 	
 	NSString* name = [props objectForKey:[NSString stringWithFormat:@"%d", kABPersonFirstNameProperty]];					  
 	NSString* surname = [props objectForKey:[NSString stringWithFormat:@"%d", kABPersonLastNameProperty]];
-
+	NSString* companyName = [props objectForKey:[NSString stringWithFormat:@"%d", kABPersonOrganizationProperty]];
+	
+	if (!name && !surname)
+		return companyName;
+	
 	if (!name && surname)
 		return surname;
 	

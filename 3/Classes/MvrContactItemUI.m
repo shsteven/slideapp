@@ -236,8 +236,8 @@ enum {
 - (void) didReceiveItem:(id)i;
 {
 	ABAddressBookRef addressBook = ABAddressBookCreate();
-	CFArrayRef people = ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef) [i nameAndSurnameForSearching]);
-	
+	NSString* searchString = [i nameAndSurnameForSearching];
+	CFArrayRef people = searchString? ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef) searchString) : NULL;
 	BOOL foundDupe = people && CFArrayGetCount(people) > 0;
 	if (people)
 		CFRelease(people);
