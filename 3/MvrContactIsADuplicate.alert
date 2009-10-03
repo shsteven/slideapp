@@ -9,9 +9,9 @@
 		<string>Don't save</string>
 	</array>
 	<key>L0AlertInformativeText</key>
-	<string>You can review it to add its data to another contact, or save it as a new contact.</string>
+	<string>You can review the received contact to add its data to another one, or save it as an entirely new address card.</string>
 	<key>L0AlertMessage</key>
-	<string>“%@” was received, but it seems to be already in your address book.</string>
+	<string>“%@” was received, but seems to be already in your address book.</string>
 	<key>L0AlertShowsSuppressionButton</key>
 	<false/>
 </dict>
