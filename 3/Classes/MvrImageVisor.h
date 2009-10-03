@@ -8,21 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class MvrImageItem;
+#import "MvrVisor.h"
 
-@interface MvrImageVisor : UIViewController <UIScrollViewDelegate> {
+@interface MvrImageVisor : MvrVisor <UIScrollViewDelegate> {
 	IBOutlet UIImageView* imageView;
 	IBOutlet UIScrollView* scrollView;
-	
-	MvrImageItem* item;
-	
-	BOOL changesStatusBarStyleOnAppearance;
-	UIBarStyle previousStatusBarStyle;
 }
-
-+ visorWithImageItem:(MvrImageItem*) i;
-+ modalVisorWithImageItem:(MvrImageItem*) i;
-
-- (id) initWithImageItem:(MvrImageItem*) i;
 
 @end

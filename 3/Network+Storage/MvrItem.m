@@ -82,6 +82,11 @@
 	return nil;
 }
 
+- (BOOL) hasStorage;
+{
+	return storage != nil;
+}
+
 - (MvrItemStorage*) storage;
 {
 	if (!storage)

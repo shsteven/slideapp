@@ -50,6 +50,11 @@
 		1595583110775E6300FBC9B4 /* MvrBookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1595583010775E6300FBC9B4 /* MvrBookmarkItem.m */; };
 		159559121077602800FBC9B4 /* MvrBookmarkItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 159559111077602800FBC9B4 /* MvrBookmarkItemUI.m */; };
 		15955935107760EE00FBC9B4 /* BookmarkIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15955934107760EE00FBC9B4 /* BookmarkIcon.png */; };
+		159559D5107767C100FBC9B4 /* MvrTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 159559D4107767C100FBC9B4 /* MvrTextItem.m */; };
+		159559DE107768EF00FBC9B4 /* MvrTextItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 159559DD107768EF00FBC9B4 /* MvrTextItemUI.m */; };
+		159559E5107769F500FBC9B4 /* TextIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 159559E4107769F500FBC9B4 /* TextIcon.png */; };
+		15955A1D10776B2200FBC9B4 /* MvrTextVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */; };
+		15955A2110776B7D00FBC9B4 /* MvrVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A2010776B7D00FBC9B4 /* MvrVisor.m */; };
 		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
 		15AD035B1073F83200D92F5E /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */; };
 		15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
@@ -199,6 +204,15 @@
 		159559101077602800FBC9B4 /* MvrBookmarkItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBookmarkItemUI.h; sourceTree = "<group>"; };
 		159559111077602800FBC9B4 /* MvrBookmarkItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBookmarkItemUI.m; sourceTree = "<group>"; };
 		15955934107760EE00FBC9B4 /* BookmarkIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BookmarkIcon.png; sourceTree = "<group>"; };
+		159559D3107767C100FBC9B4 /* MvrTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTextItem.h; sourceTree = "<group>"; };
+		159559D4107767C100FBC9B4 /* MvrTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTextItem.m; sourceTree = "<group>"; };
+		159559DC107768EF00FBC9B4 /* MvrTextItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTextItemUI.h; sourceTree = "<group>"; };
+		159559DD107768EF00FBC9B4 /* MvrTextItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTextItemUI.m; sourceTree = "<group>"; };
+		159559E4107769F500FBC9B4 /* TextIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextIcon.png; sourceTree = "<group>"; };
+		15955A1B10776B2200FBC9B4 /* MvrTextVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTextVisor.h; sourceTree = "<group>"; };
+		15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTextVisor.m; sourceTree = "<group>"; };
+		15955A1F10776B7D00FBC9B4 /* MvrVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVisor.h; sourceTree = "<group>"; };
+		15955A2010776B7D00FBC9B4 /* MvrVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVisor.m; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
 		15C1C8491068D8AA000C9CDE /* MvrArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView.h; sourceTree = "<group>"; };
@@ -265,6 +279,7 @@
 			children = (
 				156751B610621758006EC706 /* Item UI */,
 				1595582610775E5700FBC9B4 /* Bookmarks */,
+				159559D2107767B100FBC9B4 /* Text clippings */,
 				15E94B6710741BDD009DA076 /* Images & Video */,
 				157B96D910765F5F00F1A1A8 /* Contacts */,
 			);
@@ -299,6 +314,8 @@
 				156751B81062176E006EC706 /* MvrItemUI.m */,
 				156E7FD710662C4A00315D0C /* MvrGenericItemUI.h */,
 				156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */,
+				15955A1F10776B7D00FBC9B4 /* MvrVisor.h */,
+				15955A2010776B7D00FBC9B4 /* MvrVisor.m */,
 			);
 			name = "Item UI";
 			sourceTree = "<group>";
@@ -430,6 +447,19 @@
 			name = Bookmarks;
 			sourceTree = "<group>";
 		};
+		159559D2107767B100FBC9B4 /* Text clippings */ = {
+			isa = PBXGroup;
+			children = (
+				159559D3107767C100FBC9B4 /* MvrTextItem.h */,
+				159559D4107767C100FBC9B4 /* MvrTextItem.m */,
+				159559DC107768EF00FBC9B4 /* MvrTextItemUI.h */,
+				159559DD107768EF00FBC9B4 /* MvrTextItemUI.m */,
+				15955A1B10776B2200FBC9B4 /* MvrTextVisor.h */,
+				15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */,
+			);
+			name = "Text clippings";
+			sourceTree = "<group>";
+		};
 		15C1C8621068DABC000C9CDE /* The Table */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +545,7 @@
 				158CBFE210775816006813A7 /* VideoItemIcon.png */,
 				158CBFE41077583F006813A7 /* ContactWithoutImageIcon.png */,
 				15955934107760EE00FBC9B4 /* BookmarkIcon.png */,
+				159559E4107769F500FBC9B4 /* TextIcon.png */,
 				15D46D0C10724C5A00DA8260 /* DrawerButton.png */,
 				15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */,
 				157B68B11072548600E25E96 /* GreenDot.png */,
@@ -654,6 +685,7 @@
 				158CBFE310775816006813A7 /* VideoItemIcon.png in Resources */,
 				158CBFE51077583F006813A7 /* ContactWithoutImageIcon.png in Resources */,
 				15955935107760EE00FBC9B4 /* BookmarkIcon.png in Resources */,
+				159559E5107769F500FBC9B4 /* TextIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,6 +717,10 @@
 				158CBF7310774EEE006813A7 /* MvrImageVisor.m in Sources */,
 				1595583110775E6300FBC9B4 /* MvrBookmarkItem.m in Sources */,
 				159559121077602800FBC9B4 /* MvrBookmarkItemUI.m in Sources */,
+				159559D5107767C100FBC9B4 /* MvrTextItem.m in Sources */,
+				159559DE107768EF00FBC9B4 /* MvrTextItemUI.m in Sources */,
+				15955A1D10776B2200FBC9B4 /* MvrTextVisor.m in Sources */,
+				15955A2110776B7D00FBC9B4 /* MvrVisor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

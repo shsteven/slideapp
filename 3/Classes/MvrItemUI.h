@@ -24,10 +24,16 @@
 - (NSArray*) supportedItemSources;
 
 // Called by item sources constructed with +[L0ItemSource itemSourceWithDisplayName:correspondingUI:].
+// ABSTRACT! If you use an item source declared like that you MUST override this.
 - (void) beginAddingItemForSource:(MvrItemSource*) source;
 
 // Called to make a representing image for the item (shown on the slide). Should be as fast as humanly possible.
+// ABSTRACT! MUST BE OVERRIDEN!
 - (UIImage*) representingImageWithSize:(CGSize) size forItem:(id) i;
+
+// Description of an item for accessibility purposes.
+// ABSTRACT! MUST BE OVERRIDDEN!
+- (NSString*) accessibilityLabelForItem:(id) i;
 
 // Called to postprocess (usually, store) the item just before it gets added to the storage central.
 - (void) didReceiveItem:(id) i;
@@ -38,18 +44,21 @@
 // -- - -- Actions support -- - --
 
 // The main action, which is executed on double-tapping and is the first shown on the actions menu. nil == do nothing on double tap.
+// Default impl returns nil.
 - (MvrItemAction*) mainActionForItem:(id) i;
 
 // Additional actions, which are shown on the action menu.
 // This does not include the Remove action, which is instead added automatically by the app delegate.
+// Default impl returns empty array.
 - (NSArray*) additionalActionsForItem:(id) i;
 
-// These control the Remove menu item.
-
+// These control the Remove menu item:
 // If NO, the user isn't offered the option to remove the item.
+// Default impl returns YES.
 - (BOOL) isItemRemovable:(id) i;
 
 // If NO, Mover's got the only copy of the item and presents a much harsher message to the user on removal. If YES, it allows removal without a confirmation.
+// Default impl returns NO.
 - (BOOL) isItemSavedElsewhere:(id) i;
 
 
@@ -66,12 +75,9 @@
 - (MvrItemAction*) sendByEmailAction;
 
 // Methods called by the above actions:
-- (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(id) i; // abstract!
+- (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(id) i; // ABSTRACT!
 - (void) performCopyAction:(MvrItemAction*) copy withItem:(id) i; // by default, replaces general pasteboard with [ (item type) => (item storage's data) ].
 - (void) performSendByEmail:(MvrItemAction*) send withItem:(id) i;
-
-// Description of an item for accessibility purposes.
-- (NSString*) accessibilityLabelForItem:(id) i;
 
 @end
 

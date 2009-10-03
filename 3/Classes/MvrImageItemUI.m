@@ -94,7 +94,7 @@
 
 - (void) performShowOrOpenAction:(MvrItemAction *)showOrOpen withItem:(id)i;
 {
-	MvrImageVisor* visor = [MvrImageVisor modalVisorWithImageItem:i];
+	MvrImageVisor* visor = [MvrImageVisor modalVisorWithItem:i];
 	[MvrApp() presentModalViewController:visor];
 }
 

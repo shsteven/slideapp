@@ -22,6 +22,8 @@
 #import "MvrContactItemUI.h"
 #import "MvrBookmarkItem.h"
 #import "MvrBookmarkItemUI.h"
+#import "MvrTextItem.h"
+#import "MvrTextItemUI.h"
 
 #import <MuiKit/MuiKit.h>
 
@@ -56,7 +58,7 @@ enum {
 	[self.window addSubview:self.tableController.view];
 	[self.tableController viewDidAppear:NO];
 	
-    [self.window makeKeyAndVisible];
+    [self.window makeKeyAndVisible];	
 }
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
@@ -119,6 +121,9 @@ enum {
 	
 	[MvrBookmarkItem registerClass];
 	[MvrBookmarkItemUI registerClass];
+	
+	[MvrTextItem registerClass];
+	[MvrTextItemUI registerClass];
 }
 
 #pragma mark -

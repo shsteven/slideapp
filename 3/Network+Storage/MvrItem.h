@@ -38,7 +38,8 @@
 		return [self cachedObjectForKey:@#name];\
 	}\
 
-@class MvrItemStorage;
+#import "MvrItemStorage.h"
+#import "MvrUTISupport.h"
 
 @interface MvrItem : NSObject {
 	MvrItemStorage* storage;
@@ -60,6 +61,7 @@
 + itemWithStorage:(MvrItemStorage*) s type:(NSString*) t metadata:(NSDictionary*) m;
 
 @property(readonly, retain) MvrItemStorage* storage;
+@property(readonly) BOOL hasStorage;
 
 @property(copy) NSString* title;
 @property(copy) NSString* type;
