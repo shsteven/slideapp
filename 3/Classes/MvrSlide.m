@@ -15,6 +15,8 @@
 - (void) stopProgress;
 - (void) updateProgress;
 
+- (void) showOrHideEditingUI:(BOOL) animated;
+
 @end
 
 
@@ -93,8 +95,16 @@
 		return;
 	
 	editing = newEditing;
+	
+	if (!self.transferring)
+		[self showOrHideEditingUI:animated];
+}
+
+- (void) showOrHideEditingUI:(BOOL) animated;
+{
 	self.pressAndHoldDelay = editing? 0.1 : 0.7;
 	L0Log(@"press and hold delay of %@ now %f", self, self.pressAndHoldDelay);
+
 	if (editing) {
 		
 		actionButton.userInteractionEnabled = YES;
@@ -193,6 +203,7 @@
 	transferring = t;
 	
 	if (t && !wasTransferring) {
+		self.editing = NO;
 		self.progressBar.alpha = 0.0;
 		self.progressBar.hidden = NO;
 		
@@ -218,6 +229,8 @@
 		self.spinner.alpha = 0.0;
 		
 		[UIView commitAnimations];
+		
+		[self showOrHideEditingUI:YES];
 	}	
 }
 
