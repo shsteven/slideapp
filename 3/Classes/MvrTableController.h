@@ -14,7 +14,7 @@
 
 #import "MvrUIMode.h"
 
-@interface MvrTableController : UIViewController <MvrSlidesViewDelegate, MvrUIModeDelegate> {
+@interface MvrTableController : UIViewController <MvrSlidesViewDelegate, MvrUIModeDelegate, UITextFieldDelegate> {
 	UIView* hostView;
 	MvrSlidesView* slidesStratum;
 	UIToolbar* toolbar;
@@ -26,6 +26,8 @@
 	L0KVODispatcher* kvo;
 	
 	UIView* currentDrawerView;
+	
+	IBOutlet UIView* testDrawerViewWithTextField;
 }
 
 - (void) setUp;

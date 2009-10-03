@@ -11,10 +11,10 @@
 			<string key="NS.object.0">62</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="2"/>
-			<integer value="24"/>
 			<integer value="41"/>
-			<integer value="10"/>
+			<integer value="26"/>
+			<integer value="24"/>
+			<integer value="2"/>
 			<integer value="43"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -580,7 +580,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">62</int>
+			<int key="maxID">73</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -619,6 +619,7 @@
 						<string key="currentMode">MvrUIMode</string>
 						<string key="hostView">UIView</string>
 						<string key="shadowView">UIImageView</string>
+						<string key="testDrawerViewWithTextField">UIView</string>
 						<string key="toolbar">UIToolbar</string>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

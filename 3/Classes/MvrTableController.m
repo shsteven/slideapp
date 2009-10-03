@@ -83,6 +83,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	// Create and show the slides stratum
 	self.slidesStratum = [[[MvrSlidesView alloc] initWithFrame:self.regularSlidesStratumBounds delegate:self] autorelease];
+	self.slidesStratum.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[self.hostView addSubview:self.slidesStratum];
 	
 	// Create the correspondence maps
@@ -106,6 +107,10 @@ static CGPoint MvrCenterOf(CGRect r) {
 	
 	// Set up KVO
 	kvo = [[L0KVODispatcher alloc] initWithTarget:self];
+	
+	// Set up keyboard notifications
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void) setCurrentMode:(MvrUIMode *) m;
@@ -413,6 +418,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[UIView setAnimationDuration:0.2];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(slideDownAnimation:didEndByFinishing:context:)];
+	[UIView setAnimationBeginsFromCurrentState:YES];
 	
 	self.currentMode.backdropStratum.frame = self.regularBackdropFrame;
 	self.currentMode.arrowsStratum.frame = self.regularArrowsStratumFrame;
@@ -490,6 +496,39 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (void) tearDown;
 {
 	self.currentMode = nil;
+}
+
+#pragma mark -
+#pragma mark Keyboard management
+
+- (void) keyboardWillAppear:(NSNotification*) n;
+{
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:[[[n userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue]];
+	[UIView setAnimationDuration:[[[n userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	
+	CGPoint p = L0UIKeyboardGetOriginForKeyInView(n, UIKeyboardCenterEndUserInfoKey, self.view);
+	
+	CGRect frame = self.hostView.frame;
+	frame.size.height = p.y + self.toolbar.frame.size.height;
+	self.hostView.frame = frame;
+	
+	[UIView commitAnimations];
+	
+	[self.slidesStratum bounceBackAll];
+}
+
+- (void) keyboardWillDisappear:(NSNotification*) n;
+{
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:[[[n userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue]];
+	[UIView setAnimationDuration:[[[n userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	
+	self.hostView.frame = self.view.bounds;
+	
+	[UIView commitAnimations];
 }
 
 @end
