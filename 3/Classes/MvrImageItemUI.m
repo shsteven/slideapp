@@ -12,6 +12,7 @@
 
 #import "MvrImageItem.h"
 #import "MvrImagePickerSource.h"
+#import "MvrImageVisor.h"
 
 @implementation MvrImageItemUI
 
@@ -79,6 +80,20 @@
 - (NSString*) accessibilityLabelForItem:(id)i;
 {
 	return @"Image";
+}
+
+#pragma mark -
+#pragma mark Visor
+
+- (MvrItemAction*) mainActionForItem:(id)i;
+{
+	return [self showAction];
+}
+
+- (void) performShowOrOpenAction:(MvrItemAction *)showOrOpen withItem:(id)i;
+{
+	MvrImageVisor* visor = [MvrImageVisor modalVisorWithImageItem:i];
+	[MvrApp() presentModalViewController:visor];
 }
 
 @end
