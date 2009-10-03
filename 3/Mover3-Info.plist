@@ -26,6 +26,10 @@
 	<string>${ILABS_MOVER_USER_VISIBLE_VERSION}</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIViewEdgeAntialiasing</key>
+	<true/>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 </dict>
