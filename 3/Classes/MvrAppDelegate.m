@@ -365,6 +365,7 @@ enum {
 
 - (void) presentModalViewController:(UIViewController*) ctl;
 {
+	ctl.view.frame = self.window.bounds;
 	[self.tableController presentModalViewController:ctl animated:YES];
 }
 

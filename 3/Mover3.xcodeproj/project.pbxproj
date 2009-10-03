@@ -55,6 +55,7 @@
 		159559E5107769F500FBC9B4 /* TextIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 159559E4107769F500FBC9B4 /* TextIcon.png */; };
 		15955A1D10776B2200FBC9B4 /* MvrTextVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */; };
 		15955A2110776B7D00FBC9B4 /* MvrVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A2010776B7D00FBC9B4 /* MvrVisor.m */; };
+		15955A621077700200FBC9B4 /* MvrTextVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15955A611077700200FBC9B4 /* MvrTextVisor.xib */; };
 		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
 		15AD035B1073F83200D92F5E /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */; };
 		15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
@@ -213,6 +214,7 @@
 		15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTextVisor.m; sourceTree = "<group>"; };
 		15955A1F10776B7D00FBC9B4 /* MvrVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVisor.h; sourceTree = "<group>"; };
 		15955A2010776B7D00FBC9B4 /* MvrVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVisor.m; sourceTree = "<group>"; };
+		15955A611077700200FBC9B4 /* MvrTextVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTextVisor.xib; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
 		15C1C8491068D8AA000C9CDE /* MvrArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView.h; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				158CBF7510774F13006813A7 /* MvrImageVisor.xib */,
+				15955A611077700200FBC9B4 /* MvrTextVisor.xib */,
 			);
 			name = Visors;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 				158CBFE51077583F006813A7 /* ContactWithoutImageIcon.png in Resources */,
 				15955935107760EE00FBC9B4 /* BookmarkIcon.png in Resources */,
 				159559E5107769F500FBC9B4 /* TextIcon.png in Resources */,
+				15955A621077700200FBC9B4 /* MvrTextVisor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

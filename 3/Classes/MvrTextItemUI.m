@@ -8,6 +8,8 @@
 
 #import "MvrTextItemUI.h"
 #import "MvrTextItem.h"
+#import "MvrAppDelegate.h"
+#import "MvrTextVisor.h"
 
 @implementation MvrTextItemUI
 
@@ -24,6 +26,27 @@
 - (NSString*) accessibilityLabelForItem:(id)i;
 {
 	return [NSString stringWithFormat:NSLocalizedString(@"Text clipping titled '%@'", @"Template for text item accessibiity label"), [i title]];
+}
+
+#pragma mark -
+#pragma mark Visor
+
+- (MvrItemAction*) mainActionForItem:(id)i;
+{
+	return [self showAction];
+}
+
+- (void) performShowOrOpenAction:(MvrItemAction *)showOrOpen withItem:(id)i;
+{
+	[MvrApp() presentModalViewController:[MvrTextVisor modalVisorWithItem:i]];
+}
+
+#pragma mark -
+#pragma mark Additional actions
+
+- (NSArray*) additionalActionsForItem:(id)i;
+{
+	return [NSArray arrayWithObject:[self clipboardAction]];
 }
 
 @end

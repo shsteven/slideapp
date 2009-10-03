@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 #import "MvrTextItem.h"
+#import "MvrVisor.h"
 
-@interface MvrTextVisor : UIViewController {
-
+@interface MvrTextVisor : MvrVisor {
+	IBOutlet UITextView* textView;
 }
 
 @end
