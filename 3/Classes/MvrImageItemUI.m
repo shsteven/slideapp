@@ -14,6 +14,8 @@
 #import "MvrImagePickerSource.h"
 #import "MvrImageVisor.h"
 
+#import "Network+Storage/MvrUTISupport.h"
+
 @implementation MvrImageItemUI
 
 - (id) init
@@ -94,6 +96,20 @@
 {
 	MvrImageVisor* visor = [MvrImageVisor modalVisorWithImageItem:i];
 	[MvrApp() presentModalViewController:visor];
+}
+
+#pragma mark -
+#pragma mark More actions
+
+- (NSArray*) additionalActionsForItem:(id)i;
+{
+	return [NSArray arrayWithObject:[self clipboardAction]];
+}
+
+- (void) performCopyAction:(MvrItemAction *)copy withItem:(MvrImageItem*)i;
+{
+	UIPasteboard* p = [UIPasteboard generalPasteboard];
+	[p setData:UIImagePNGRepresentation(i.image) forPasteboardType:(id) kUTTypePNG];
 }
 
 @end

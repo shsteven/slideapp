@@ -10,6 +10,34 @@
 
 #define kMvrItemTitleMetadataKey @"MvrTitle"
 
+// These macros produce accessors that provide data from the autocache for the given key. The cache key is the same as the getter's name.
+
+#define MvrItemSynthesizeRetainFromAutocache(type, name, setterName) \
+	- (type) name;\
+	{\
+		return [self cachedObjectForKey:@#name];\
+	}\
+	- (void) setterName (type) newValue_;\
+	{\
+		[self setCachedObject:newValue_ forKey:@#name];\
+	}
+
+#define MvrItemSynthesizeCopyFromAutocache(type, name, setterName) \
+	- (type) name;\
+	{\
+		return [self cachedObjectForKey:@#name];\
+	}\
+	- (void) setterName (type) newValue_;\
+	{\
+		[self setCachedObject:[[newValue_ copy] autorelease] forKey:@#name];\
+	}
+
+#define MvrItemSynthesizeReadOnlyFromAutocache(type, name) \
+	- (type) name;\
+	{\
+		return [self cachedObjectForKey:@#name];\
+	}\
+
 @class MvrItemStorage;
 
 @interface MvrItem : NSObject {

@@ -20,6 +20,10 @@
 #import "MvrVideoItemUI.h"
 #import "MvrContactItem.h"
 #import "MvrContactItemUI.h"
+#import "MvrBookmarkItem.h"
+#import "MvrBookmarkItemUI.h"
+
+#import <MuiKit/MuiKit.h>
 
 @interface MvrAppDelegate ()
 
@@ -55,6 +59,31 @@ enum {
     [self.window makeKeyAndVisible];
 }
 
+- (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
+{
+	NSString* scheme = [url scheme];
+	if ([scheme isEqual:@"x-infinitelabs-mover"]) {
+		if (![[url resourceSpecifier] hasPrefix:@"add?"])
+			return NO;
+		
+		NSDictionary* query = [url dictionaryByDecodingQueryString];
+		NSString* urlString;
+		if (!(urlString = [query objectForKey:@"url"]))
+			return NO;
+		
+		NSURL* bookmarkedURL = [NSURL URLWithString:urlString];
+		if (!bookmarkedURL)
+			return NO;
+		
+		MvrBookmarkItem* item = [[[MvrBookmarkItem alloc] initWithAddress:bookmarkedURL] autorelease];
+		if (item)
+			[self performSelector:@selector(addItemFromSelf:) withObject:item afterDelay:0.7];
+		return item != nil;
+	}
+	
+	return NO;
+}
+
 @synthesize window, tableController;
 
 - (void) dealloc;
@@ -87,6 +116,9 @@ enum {
 	
 	[MvrContactItem registerClass];
 	[MvrContactItemUI registerClass];
+	
+	[MvrBookmarkItem registerClass];
+	[MvrBookmarkItemUI registerClass];
 }
 
 #pragma mark -
