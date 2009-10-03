@@ -48,6 +48,8 @@
 		self.actionButton.isAccessibilityElement = YES;
 		
 		progress = kMvrIndeterminateProgress;
+		
+		self.pressAndHoldDelay = 0.7;
 	}
 	
     return self;
