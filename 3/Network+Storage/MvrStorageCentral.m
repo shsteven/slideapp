@@ -114,6 +114,9 @@
 									 moreMeta, @"Metadata",
 									 d, @"Notes",
 									 nil] forKey:name];
+				[dispatcher observe:@"path" ofObject:itemStorage usingSelector:@selector(pathOfItemStorage:changed:) options:0];
+				[dispatcher observe:@"metadata" ofObject:item usingSelector:@selector(metadataOfItem:changed:) options:0];
+				[dispatcher observe:@"itemNotes" ofObject:item usingSelector:@selector(metadataOfItem:changed:) options:0];
 			}
 		}
 	}
@@ -172,13 +175,26 @@
 	}
 }
 
+- (void) metadataOfItem:(MvrItem*) item changed:(NSDictionary*) change;
+{
+	NSString* name = [item.storage.path lastPathComponent];
+	[metadata setObject:[NSDictionary dictionaryWithObjectsAndKeys:
+						 item.metadata, @"Metadata",
+						 item.type, @"Type",
+						 item.itemNotes, @"Notes",
+						 nil] forKey:name];
+	[self saveMetadata];
+}
+
 - (void) removeStoredItemsObject:(MvrItem*) item;
 {
+	[dispatcher endObserving:@"path" ofObject:item.storage];
+	[dispatcher endObserving:@"metadata" ofObject:item];
+	[dispatcher endObserving:@"itemNotes" ofObject:item];
+	
 	if (![self.storedItems containsObject:item])
 		return;
-	
-	[dispatcher endObserving:@"path" ofObject:item];
-	
+		
 	MvrItemStorage* storage = [item storage];
 	if (storage.hasPath) {
 		NSString* path = storage.path, * name = [path lastPathComponent],
@@ -191,8 +207,8 @@
 		BOOL done = [[NSFileManager defaultManager] moveItemAtPath:path toPath:newPath error:&e];
 		if (!done)
 			L0LogAlways(@"%@", e);
-		
-		storage.path = newPath;
+		else
+			storage.path = newPath;
 	}
 	
 	storage.persistent = NO;
