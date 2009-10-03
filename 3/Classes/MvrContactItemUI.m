@@ -14,12 +14,97 @@
 #import "MvrContactItem.h"
 #import "MvrAppDelegate.h"
 
+#define kMvrContactWasSaved @"MvrContactWasSaved"
+
+@class MvrDuplicateContactHandler;
 
 @interface MvrContactItemUI ()
 
 - (IBAction) hideDisplay;
+- (void) saveItem:(MvrContactItem*) i inAddressBook:(ABAddressBookRef) addressBook;
+
+- (void) warnAboutDuplicateForItem:(MvrContactItem*) i;
+
+- (void) saveItem:(MvrContactItem*) i inAddressBook:(ABAddressBookRef) addressBook;
+- (void) didEndResolvingDuplicate:(MvrDuplicateContactHandler*) dupe;
 
 @end
+
+
+
+enum {
+	kMvrDuplicateContactReview = 0,
+	kMvrDuplicateContactSaveAsNew = 1,
+	kMvrDuplicateContactDontSave = 2,	
+};
+
+@interface MvrDuplicateContactHandler : NSObject <UIAlertViewDelegate>
+{
+	MvrContactItem* item;
+	MvrContactItemUI* ui;
+}
+
+- (id) initWithContact:(MvrContactItem*) item UI:(MvrContactItemUI*) ui;
+- (void) start;
+
+@end
+
+@implementation MvrDuplicateContactHandler
+
+- (id) initWithContact:(MvrContactItem*) i UI:(MvrContactItemUI*) u;
+{
+	if (self = [super init]) {
+		item = [i retain];
+		ui = u; // it owns us
+	}
+	
+	return self;
+}
+
+- (void) dealloc
+{
+	[item release];
+	[super dealloc];
+}
+
+
+- (void) start;
+{
+	UIAlertView* alert = [UIAlertView alertNamed:@"MvrContactIsADuplicate"];
+	[alert setTitleFormat:nil, item.title];
+	
+	alert.cancelButtonIndex = kMvrDuplicateContactDontSave;
+	alert.delegate = self;
+	
+	[alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	switch (buttonIndex) {
+		case kMvrDuplicateContactReview: {
+			[ui performShowOrOpenAction:nil withItem:item];
+		}
+			break;
+			
+		case kMvrDuplicateContactSaveAsNew: {
+			ABAddressBookRef ab = ABAddressBookCreate();
+			[ui saveItem:item inAddressBook:ab];
+			CFRelease(ab);
+		}
+			break;
+			
+		case kMvrDuplicateContactDontSave:
+		default:
+			break;
+	}
+	
+	alertView.delegate = nil;
+	[ui didEndResolvingDuplicate:self];
+}
+
+@end
+
 
 
 @implementation MvrContactItemUI
@@ -36,8 +121,19 @@
 			];
 }
 
+- (id) init
+{
+	self = [super init];
+	if (self != nil) {
+		duplicateContactHandlers = [NSMutableSet new];
+	}
+	return self;
+}
+
+
 - (void) dealloc
 {
+	[duplicateContactHandlers release];
 	[shownPerson release];
 	[super dealloc];
 }
@@ -134,12 +230,28 @@
 
 - (BOOL) isItemSavedElsewhere:(id) i;
 {
-	return YES;
+	return [[i objectForItemNotesKey:kMvrContactWasSaved] boolValue];
 }
 
 - (void) didReceiveItem:(id)i;
 {
 	ABAddressBookRef addressBook = ABAddressBookCreate();
+	CFArrayRef people = ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef) [i nameAndSurnameForSearching]);
+	
+	BOOL foundDupe = people && CFArrayGetCount(people) > 0;
+	if (people)
+		CFRelease(people);
+	
+	if (foundDupe)
+		[self warnAboutDuplicateForItem:i];
+	else
+		[self saveItem:i inAddressBook:addressBook];
+	
+	CFRelease(addressBook);
+}
+
+- (void) saveItem:(MvrContactItem*) i inAddressBook:(ABAddressBookRef) addressBook;
+{
 	ABRecordRef person = [i copyPersonRecord];
 	NSAssert(person, @"Did copy a person off the item");
 	
@@ -147,7 +259,7 @@
 	if (!ABAddressBookAddRecord(addressBook, person, &error)) {
 		CFRelease(addressBook);
 		CFRelease(person);
-
+		
 		[NSException raise:@"MvrContactItemUICouldNotSave" format:@"An error occurred while adding an item to the address book: %@", [NSMakeCollectable(error) autorelease]];
 		return;
 	}
@@ -160,8 +272,23 @@
 		return;
 	}
 	
-	CFRelease(addressBook);
 	CFRelease(person);
+	
+	[i setObject:[NSNumber numberWithBool:YES] forItemNotesKey:kMvrContactWasSaved];
+}
+
+- (void) warnAboutDuplicateForItem:(MvrContactItem*) i;
+{
+	MvrDuplicateContactHandler* dupe = [[[MvrDuplicateContactHandler alloc] initWithContact:i UI:self] autorelease];
+	[duplicateContactHandlers addObject:dupe];
+	
+	[dupe start];
+}
+
+- (void) didEndResolvingDuplicate:(MvrDuplicateContactHandler*) dupe;
+{
+	[[dupe retain] autorelease];
+	[duplicateContactHandlers removeObject:dupe];
 }
 
 @end

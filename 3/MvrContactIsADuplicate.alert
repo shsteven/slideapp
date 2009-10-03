@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array>
+		<string>Review</string>
+		<string>Save as new</string>
+		<string>Don't save</string>
+	</array>
+	<key>L0AlertInformativeText</key>
+	<string>You can review it to add its data to another contact, or save it as a new contact.</string>
+	<key>L0AlertMessage</key>
+	<string>“%@” was received, but it seems to be already in your address book.</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

@@ -341,4 +341,26 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 	return plistData;
 }
 
+- (NSString*) nameAndSurnameForSearching;
+{
+	NSDictionary* props = [self.contactPropertyList objectForKey:kMvrContactProperties];
+	
+	NSString* name = [props objectForKey:[NSString stringWithFormat:@"%d", kABPersonFirstNameProperty]];					  
+	NSString* surname = [props objectForKey:[NSString stringWithFormat:@"%d", kABPersonLastNameProperty]];
+
+	if (!name && surname)
+		return surname;
+	
+	if (!surname && name)
+		return name;
+	
+	NSString* result;
+	if (ABPersonGetCompositeNameFormat() == kABPersonCompositeNameFormatFirstNameFirst)
+		result = [NSString stringWithFormat:@"%@ %@", name, surname];
+	else
+		result = [NSString stringWithFormat:@"%@ %@", surname, name];
+	
+	return result;
+}
+
 @end

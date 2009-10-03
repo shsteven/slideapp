@@ -14,7 +14,7 @@
 @interface MvrContactItemUI : MvrItemUI <ABPeoplePickerNavigationControllerDelegate, ABUnknownPersonViewControllerDelegate> {
 	
 	UINavigationController* shownPerson;
-	
+	NSMutableSet* duplicateContactHandlers;
 }
 
 @end

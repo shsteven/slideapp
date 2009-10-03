@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		151D0AC11077A289009DAE07 /* MvrContactIsADuplicate.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */; };
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
@@ -140,6 +141,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrContactIsADuplicate.alert; sourceTree = "<group>"; };
 		151E01FF1067652E00C6CDFF /* MvrImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageItem.h; sourceTree = "<group>"; };
 		151E02001067652E00C6CDFF /* MvrImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItem.m; sourceTree = "<group>"; };
 		151E021E106767A900C6CDFF /* MvrImageItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageItemUI.h; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */,
 				157B68B11072548600E25E96 /* GreenDot.png */,
 				157B68B31072548D00E25E96 /* RedDot.png */,
+				151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */,
 				1591A7191063EF2C00C5A5BD /* Slide view */,
 			);
 			name = Resources;
@@ -690,6 +693,7 @@
 				15955935107760EE00FBC9B4 /* BookmarkIcon.png in Resources */,
 				159559E5107769F500FBC9B4 /* TextIcon.png in Resources */,
 				15955A621077700200FBC9B4 /* MvrTextVisor.xib in Resources */,
+				151D0AC11077A289009DAE07 /* MvrContactIsADuplicate.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

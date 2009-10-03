@@ -30,4 +30,6 @@
 @property(readonly, copy) NSDictionary* contactPropertyList;
 - (ABRecordRef) copyPersonRecord;
 
+@property(readonly) NSString* nameAndSurnameForSearching;
+
 @end
