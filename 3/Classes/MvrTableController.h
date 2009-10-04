@@ -14,7 +14,7 @@
 
 #import "MvrUIMode.h"
 
-@interface MvrTableController : UIViewController <MvrSlidesViewDelegate, MvrUIModeDelegate, UITextFieldDelegate> {
+@interface MvrTableController : UIViewController <MvrSlidesViewDelegate, MvrUIModeDelegate, UITextFieldDelegate, UIAlertViewDelegate> {
 	UIView* hostView;
 	MvrSlidesView* slidesStratum;
 	UIToolbar* toolbar;

@@ -22,6 +22,21 @@ static CGPoint MvrCenterOf(CGRect r) {
 	return CGPointMake(r.size.width / 2, r.size.height / 2);
 }
 
+@interface MvrTableControllerView : UIView
+{
+}
+@end
+
+@implementation MvrTableControllerView
+
+- (BOOL) canBecomeFirstResponder;
+{
+	return YES;
+}
+
+@end
+
+
 @interface MvrTableController ()
 
 - (void) receiveItem:(MvrItem*) item withSlide:(MvrSlide*) slide;
@@ -36,6 +51,8 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (void) slideUpToRevealDrawerView:(UIView*) v;
 
 @property(retain) UIView* currentDrawerView;
+
+- (void) removeAllItems;
 
 @end
 
@@ -134,6 +151,11 @@ static CGPoint MvrCenterOf(CGRect r) {
 }
 
 @synthesize hostView, toolbar, currentMode, slidesStratum, shadowView;
+
+- (void) viewDidAppear:(BOOL)animated;
+{
+	[self.view becomeFirstResponder];
+}
 
 - (void) viewDidUnload;
 {
@@ -529,6 +551,35 @@ static CGPoint MvrCenterOf(CGRect r) {
 	self.hostView.frame = self.view.bounds;
 	
 	[UIView commitAnimations];
+}
+
+#pragma mark -
+#pragma mark Clear on shake
+
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event;
+{
+	if ([MvrApp().storageCentral.storedItems count] == 0)
+		return;
+	
+	UIAlertView* alert = [UIAlertView alertNamed:@"MvrClearTableOnShake"];
+	alert.cancelButtonIndex = 0;
+	alert.delegate = self;
+	[alert show];
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	if (buttonIndex != alertView.cancelButtonIndex)
+		[self removeAllItems];
+}
+
+- (void) removeAllItems;
+{
+	NSSet* items = [[MvrApp().storageCentral.storedItems copy] autorelease];
+	for (MvrItem* i in items) {
+		[self removeItem:i];
+		[MvrApp().storageCentral.mutableStoredItems removeObject:i];
+	}
 }
 
 @end
