@@ -68,13 +68,22 @@
 				[self performAddingImageAtPath:[url path] type:uti];
 			} else {
 				UIImage* i = [info objectForKey:UIImagePickerControllerOriginalImage];
-				if (i) [self performAddingImage:i];
+				if (i) {
+					[self performAddingImage:i];
+				
+					if (sourceType == UIImagePickerControllerSourceTypeCamera)
+						UIImageWriteToSavedPhotosAlbum(i, nil, NULL, NULL);
+				}
 			}
 			
 		} else if (UTTypeConformsTo((CFStringRef) uti, kUTTypeMovie)) {
 			
-			if (url && [url isFileURL])
+			if (url && [url isFileURL]) {
 				[self performAddingVideoAtPath:[url path] type:uti];
+				
+				if (sourceType == UIImagePickerControllerSourceTypeCamera)
+					UISaveVideoAtPathToSavedPhotosAlbum([url path], nil, NULL, NULL);
+			}
 			
 		}
 		
