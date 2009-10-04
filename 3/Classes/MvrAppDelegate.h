@@ -30,6 +30,10 @@
 	NSDictionary* metadata;
 	
 	L0UUID* identifierForSelf;
+	
+	UIWindow* overlayWindow;
+	UILabel* overlayLabel;
+	UIActivityIndicatorView* overlaySpinner;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow *window;
@@ -38,11 +42,18 @@
 @property(readonly) NSString* itemsDirectory;
 @property(readonly) MvrStorageCentral* storageCentral;
 
+@property(nonatomic, retain) IBOutlet UIWindow* overlayWindow;
+@property(nonatomic, retain) IBOutlet UILabel* overlayLabel;
+@property(nonatomic, retain) IBOutlet UIActivityIndicatorView* overlaySpinner;
+
 - (IBAction) add;
 - (void) addItemFromSelf:(MvrItem*) item;
 - (void) displayActionMenuForItem:(MvrItem*) i withRemove:(BOOL) remove withMainAction:(BOOL) mainAction;
 
 - (void) presentModalViewController:(UIViewController*) ctl;
+
+- (void) beginDisplayingOverlayViewWithLabel:(NSString*) label;
+- (void) endDisplayingOverlayView;
 
 @end
 

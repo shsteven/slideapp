@@ -26,6 +26,7 @@
 #import "MvrTextItemUI.h"
 
 #import <MuiKit/MuiKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface MvrAppDelegate ()
 
@@ -58,7 +59,8 @@ enum {
 	[self.window addSubview:self.tableController.view];
 	[self.tableController viewDidAppear:NO];
 	
-    [self.window makeKeyAndVisible];	
+	self.overlayWindow.hidden = YES;
+    [self.window makeKeyAndVisible];
 }
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
@@ -98,6 +100,10 @@ enum {
 	
 	[window release];
 	[tableController release];
+	
+	[overlayWindow release];
+	[overlayLabel release];
+	[overlaySpinner release];
 	
     [super dealloc];
 }
@@ -377,5 +383,62 @@ enum {
 	[self.tableController tearDown];
 	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:2.0]];
 }
+
+#pragma mark -
+#pragma mark Overlay view
+
+@synthesize overlayWindow, overlayLabel, overlaySpinner;
+
+- (void) beginDisplayingOverlayViewWithLabel:(NSString*) label;
+{
+	if (!overlayWindow.hidden) {
+		CATransition* fade; fade.type = kCATransitionFade;
+		[overlayLabel.layer addAnimation:fade forKey:@"MvrAppDelegateFadeAnimation"];
+	}
+	
+	overlayLabel.text = label;
+	
+	if (!overlayWindow.hidden) return;
+	
+	overlayWindow.windowLevel = UIWindowLevelStatusBar + 1;
+	overlayWindow.frame = CGRectInset([UIScreen mainScreen].bounds, -100, -100);
+	overlayWindow.alpha = 0.0;
+	overlayWindow.transform = CGAffineTransformMakeScale(1.2, 1.2);
+	[overlaySpinner startAnimating];
+	[overlayWindow makeKeyAndVisible];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	[UIView setAnimationDuration:0.5];
+	
+	overlayWindow.alpha = 1.0;
+	overlayWindow.transform = CGAffineTransformIdentity;
+	
+	[UIView commitAnimations];
+	
+	UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+}
+
+- (void) endDisplayingOverlayView;
+{
+	if (overlayWindow.hidden) return;
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDuration:0.3];
+	[UIView setAnimationDidStopSelector:@selector(endDisplayingOverlayViewAnimation:didEnd:context:)];
+	
+	overlayWindow.transform = CGAffineTransformMakeScale(0.9, 0.9);
+	overlayWindow.alpha = 0.0;
+	
+	[UIView commitAnimations];
+}
+
+- (void) endDisplayingOverlayViewAnimation:(NSString*) ani didEnd:(BOOL) finished context:(void*) context;
+{
+	[overlaySpinner stopAnimating];
+	overlayWindow.hidden = YES;
+}	
 
 @end
