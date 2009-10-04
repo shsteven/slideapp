@@ -46,7 +46,17 @@
 
 - (NSArray*) additionalActionsForItem:(id)i;
 {
-	return [NSArray arrayWithObject:[self clipboardAction]];
+	return [NSArray arrayWithObjects:
+			[self clipboardAction],
+			[self sendByEmailAction],
+			nil];
+}
+
+- (void) fromItem:(MvrTextItem*)i getData:(NSData **)data mimeType:(NSString **)mimeType fileName:(NSString **)fileName messageBody:(NSString **)body isHTML:(BOOL *)html;
+{
+	*data = nil;
+	*body = i.text;
+	*html = NO;
 }
 
 @end

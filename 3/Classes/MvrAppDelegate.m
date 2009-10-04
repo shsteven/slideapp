@@ -372,7 +372,11 @@ enum {
 - (void) presentModalViewController:(UIViewController*) ctl;
 {
 	ctl.view.frame = self.window.bounds;
-	[self.tableController presentModalViewController:ctl animated:YES];
+	UIViewController* vc = self.tableController;
+	while (vc.modalViewController != nil)
+		vc = vc.modalViewController;
+	
+	[vc presentModalViewController:ctl animated:YES];
 }
 
 #pragma mark -
@@ -381,7 +385,7 @@ enum {
 - (void) applicationWillTerminate:(UIApplication *)application;
 {
 	[self.tableController tearDown];
-	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:2.0]];
+	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:4.0]];
 }
 
 #pragma mark -

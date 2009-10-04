@@ -85,6 +85,10 @@
 
 // E-mail support.
 
+// If YES, shows an overlay view while preparing stuff. Good if you have to keep the main thread busy for a long time in fromItem:getData:etc.etc.
+// Defaults to NO.
+- (BOOL) showsOverlayWhilePreparingEmailForItem:(id) i;
+
 // This method extracts e-mail-relevant data from the given item. None of the arguments can be NULL; they must all point to valid memory locations. The method must do the following:
 // - Either set *data to nil, to indicate the e-mail message must have no attachment, or set *data, *mimeType and *fileName to valid attachment data, MIME type and filename for e-mail sending.
 // - Either set *body to nil, to indicate the e-mail message will have no default body, or set *body to the default body and *html to whether the default body is HTML or not.

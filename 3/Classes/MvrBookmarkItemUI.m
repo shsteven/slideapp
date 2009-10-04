@@ -33,12 +33,22 @@
 
 - (NSArray*) additionalActionsForItem:(id)i;
 {
-	return [NSArray arrayWithObject:[self clipboardAction]];
+	return [NSArray arrayWithObjects:
+			[self clipboardAction],
+			[self sendByEmailAction],
+			nil];
 }
 
 - (void) performShowOrOpenAction:(MvrItemAction*) a withItem:(MvrBookmarkItem*) item;
 {
 	[[UIApplication sharedApplication] openURL:item.address];
+}
+
+- (void) fromItem:(MvrBookmarkItem*)i getData:(NSData **)data mimeType:(NSString **)mimeType fileName:(NSString **)fileName messageBody:(NSString **)body isHTML:(BOOL *)html;
+{
+	*data = nil;
+	*body = [i.address absoluteString];
+	*html = NO;
 }
 
 - (void) performCopyAction:(MvrItemAction *)copy withItem:(MvrBookmarkItem*)i;

@@ -20,7 +20,6 @@
 
 - (id) initWithDisplayName:(NSString *)string target:(id) target selector:(SEL) selector;
 
-
 @property(copy, setter=private_setDisplayName:) NSString* displayName;
 
 @end
@@ -142,6 +141,11 @@ static NSMutableArray* MvrItemSources = nil;
 
 #pragma mark -
 #pragma mark Item UI controllers
+
+@interface MvrItemUI ()
+- (void) sendItemByEmail:(id) i;
+@end
+
 
 @implementation MvrItemUI
 
@@ -286,10 +290,18 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	[[UIPasteboard generalPasteboard] setData:((MvrItem*)i).storage.data forPasteboardType:((MvrItem*)i).type];
 }
 
+- (BOOL) showsOverlayWhilePreparingEmailForItem:(id) i;
+{
+	return NO;
+}
+
 - (void) performSendByEmail:(MvrItemAction*) send withItem:(id) i;
 {
-	[MvrApp() beginDisplayingOverlayViewWithLabel:NSLocalizedString(@"Preparing e-mail...", @"Overlay view label while preparing e-mail")];
-	[self performSelector:@selector(sendItemByEmail:) withObject:i afterDelay:0.01];
+	if ([self showsOverlayWhilePreparingEmailForItem:i]) { 
+		[MvrApp() beginDisplayingOverlayViewWithLabel:NSLocalizedString(@"Preparing e-mail...", @"Overlay view label while preparing e-mail")];
+		[self performSelector:@selector(sendItemByEmail:) withObject:i afterDelay:0.01];
+	} else
+		[self sendItemByEmail:i];
 }
 
 - (void) sendItemByEmail:(id) i;
