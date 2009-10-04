@@ -103,7 +103,10 @@
 
 - (NSArray*) additionalActionsForItem:(id)i;
 {
-	return [NSArray arrayWithObject:[self clipboardAction]];
+	return [NSArray arrayWithObjects:
+			[self clipboardAction],
+			[self sendByEmailAction],
+			nil];
 }
 
 - (void) performCopyAction:(MvrItemAction *)copy withItem:(MvrImageItem*)i;

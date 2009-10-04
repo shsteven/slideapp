@@ -7,7 +7,11 @@
 //
 
 #import "MvrItemUI.h"
+#import "Network+Storage/MvrItem.h"
 #import "Network+Storage/MvrItemStorage.h"
+#import "Network+Storage/MvrUTISupport.h"
+
+#import "MvrAppDelegate.h"
 
 #pragma mark -
 #pragma mark Item actions.
@@ -15,6 +19,7 @@
 @interface MvrItemAction ()
 
 - (id) initWithDisplayName:(NSString *)string target:(id) target selector:(SEL) selector;
+
 
 @property(copy, setter=private_setDisplayName:) NSString* displayName;
 
@@ -40,7 +45,7 @@
 	return self;
 }
 
-@synthesize displayName;
+@synthesize displayName, available;
 
 - (void) dealloc
 {
@@ -236,6 +241,18 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	return [NSArray array];
 }
 
+- (BOOL) hasAdditionalActionsAvailableForItem:(id) i;
+{
+	NSArray* as = [self additionalActionsForItem:i];
+	if ([as count] == 0) return NO;
+	
+	for (MvrItemAction* a in as) {
+		if (a.available) return YES;
+	}
+	
+	return NO;
+}
+
 - (MvrItemAction*) showAction;
 {
 	return [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Show", @"Title for the 'Show' action") target:self selector:@selector(performShowOrOpenAction:withItem:)];
@@ -254,7 +271,9 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 // Send the item via e-mail.
 - (MvrItemAction*) sendByEmailAction;
 {
-	return [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Send by E-mail", @"Title for the 'Send by E-mail' action") target:self selector:@selector(performShowOrOpenAction:withItem:)];
+	MvrItemAction* a = [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Send by E-mail", @"Title for the 'Send by E-mail' action") target:self selector:@selector(performSendByEmail:withItem:)];
+	a.available = [MFMailComposeViewController canSendMail];
+	return a;
 }
 
 - (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(id) i;
@@ -269,8 +288,63 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 
 - (void) performSendByEmail:(MvrItemAction*) send withItem:(id) i;
 {
-	// TODO
+	[MvrApp() beginDisplayingOverlayViewWithLabel:NSLocalizedString(@"Preparing e-mail...", @"Overlay view label while preparing e-mail")];
+	[self performSelector:@selector(sendItemByEmail:) withObject:i afterDelay:0.01];
+}
+
+- (void) sendItemByEmail:(id) i;
+{
+	MFMailComposeViewController* ctl = [[MFMailComposeViewController new] autorelease];
+	NSData* data; NSString* mimeType, * fileName, * body; BOOL isHTML;
+	[self fromItem:i getData:&data mimeType:&mimeType fileName:&fileName messageBody:&body isHTML:&isHTML];
+	
+	if (data && mimeType && fileName)
+		[ctl addAttachmentData:data mimeType:mimeType fileName:fileName];
+	
+	if (body)
+		[ctl setMessageBody:body isHTML:isHTML];
+	
+	ctl.mailComposeDelegate = self;
+	
+	[MvrApp() presentModalViewController:ctl];
+	[MvrApp() endDisplayingOverlayView];
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
+{
+	[controller dismissModalViewControllerAnimated:YES];
+}
+
+- (void) fromItem:(id) i getData:(NSData**) data mimeType:(NSString**) mimeType fileName:(NSString**) fileName messageBody:(NSString**) body isHTML:(BOOL*) html;
+{
+	NSAssert(data != nil && mimeType != nil && fileName != nil && body != nil && html != nil, @"All pointer args must be nonnil");
+	
+	*data = [i storage].data; // !!!
+	
+	CFStringRef mime = UTTypeCopyPreferredTagWithClass((CFStringRef) [i type], kUTTagClassMIMEType);
+	if (mime)
+		*mimeType = [NSMakeCollectable(mime) autorelease];
+	else
+		*mimeType = @"application/octet-stream";
+	
+	NSString* ext = [[i storage].path pathExtension];
+	if ([ext isEqual:@""]) {
+		ext = (NSString*) UTTypeCopyPreferredTagWithClass((CFStringRef) [i type], kUTTagClassFilenameExtension);
+		ext = [NSMakeCollectable(ext) autorelease];
+		
+		if (!ext)
+			ext = [self pathExtensionForItem:i];
+	}
+	
+	*fileName = [NSString stringWithFormat:NSLocalizedString(@"Shared.%@", @"Template for e-mail attachment name"), ext];
+	
+	*body = nil;
+}
+
+- (NSString*) pathExtensionForItem:(id) i;
+{
 	L0AbstractMethod();
+	return nil;
 }
 
 - (BOOL) isItemRemovable:(id) i;

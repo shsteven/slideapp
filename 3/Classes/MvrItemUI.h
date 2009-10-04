@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MessageUI/MessageUI.h>
 
 #import "Network+Storage/MvrItem.h"
 
 @class MvrItemSource, MvrItemAction;
 
-@interface MvrItemUI : NSObject {}
+@interface MvrItemUI : NSObject <MFMailComposeViewControllerDelegate> {}
 
 + (void) registerUI:(MvrItemUI*) ui forItemClass:(Class) c;
 + (void) registerClass;
@@ -52,6 +53,9 @@
 // Default impl returns empty array.
 - (NSArray*) additionalActionsForItem:(id) i;
 
+// YES if there is at least one action returned by additionalActionsForItem: that is available.
+- (BOOL) hasAdditionalActionsAvailableForItem:(id) i;
+
 // These control the Remove menu item:
 // If NO, the user isn't offered the option to remove the item.
 // Default impl returns YES.
@@ -78,6 +82,18 @@
 - (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(id) i; // ABSTRACT!
 - (void) performCopyAction:(MvrItemAction*) copy withItem:(id) i; // by default, replaces general pasteboard with [ (item type) => (item storage's data) ].
 - (void) performSendByEmail:(MvrItemAction*) send withItem:(id) i;
+
+// E-mail support.
+
+// This method extracts e-mail-relevant data from the given item. None of the arguments can be NULL; they must all point to valid memory locations. The method must do the following:
+// - Either set *data to nil, to indicate the e-mail message must have no attachment, or set *data, *mimeType and *fileName to valid attachment data, MIME type and filename for e-mail sending.
+// - Either set *body to nil, to indicate the e-mail message will have no default body, or set *body to the default body and *html to whether the default body is HTML or not.
+// The default implementation returns the item storage's data, retrieves the MIME type from UTType* functions for the item's type (using application/octet-stream if that fails), and retrieves the extension from the item path if available, from UTType* functions for the item's type if that fails, and finally tries calling -pathExtensionForItem: if that fails too. It provides no default body.
+- (void) fromItem:(id) i getData:(NSData**) data mimeType:(NSString**) mimeType fileName:(NSString**) fileName messageBody:(NSString**) body isHTML:(BOOL*) html;
+
+// ABSTRACT!
+// Used by the default impl of -fromItem:getData:mimeType:fileName:messageBody:isHTML: if it can't determine the path extension for an item (because its path has none and CoreServices doesn't know).
+- (NSString*) pathExtensionForItem:(id) i;
 
 @end
 
@@ -113,6 +129,7 @@
 @interface MvrItemAction : NSObject {
 	NSString* displayName;
 	id target; SEL selector;
+	BOOL available;
 }
 
 // Uses the default impl.
@@ -127,5 +144,8 @@
 
 // Display name.
 @property(readonly, copy) NSString* displayName;
+
+// If NO, temporarily unavailable (won't be shown)
+@property BOOL available;
 
 @end

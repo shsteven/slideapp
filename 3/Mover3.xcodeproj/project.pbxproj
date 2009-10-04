@@ -11,6 +11,7 @@
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
+		154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567510510620DAD006EC706 /* libMoverNetwork.a */; };
 		1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
 		1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
@@ -148,6 +149,7 @@
 		151E021F106767A900C6CDFF /* MvrImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemUI.m; sourceTree = "<group>"; };
 		151E02211067683400C6CDFF /* MvrImagePickerSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImagePickerSource.h; sourceTree = "<group>"; };
 		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
+		154FA54810790FD1004DF675 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "Network+Storage/Network+Storage.xcodeproj"; sourceTree = "<group>"; };
 		1567511310620DF7006EC706 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		1567511510620DFC006EC706 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -260,6 +262,7 @@
 				15779F111075DC8300FF2018 /* MediaPlayer.framework in Frameworks */,
 				157B96BF1076589800F1A1A8 /* AddressBook.framework in Frameworks */,
 				157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */,
+				154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +529,7 @@
 				15779F101075DC8300FF2018 /* MediaPlayer.framework */,
 				157B96BE1076589800F1A1A8 /* AddressBook.framework */,
 				157B96C01076589B00F1A1A8 /* AddressBookUI.framework */,
+				154FA54810790FD1004DF675 /* MessageUI.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";

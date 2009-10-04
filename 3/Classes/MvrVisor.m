@@ -70,7 +70,7 @@
 	// The Done button
 	me.navigationItem.leftBarButtonItem = me.doneButton;
 	// The action button
-	if (me.item && [[[MvrItemUI UIForItem:me.item] additionalActionsForItem:i] count] > 0)
+	if (me.item && [[MvrItemUI UIForItem:me.item] hasAdditionalActionsAvailableForItem:i] > 0)
 		me.navigationItem.rightBarButtonItem = me.actionButton;
 	
 	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:me] autorelease];
