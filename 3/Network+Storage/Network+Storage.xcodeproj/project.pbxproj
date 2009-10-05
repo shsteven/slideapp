@@ -28,6 +28,9 @@
 		150718CD105FD55900FA0BF4 /* MvrLegacyWiFiOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 150718CA105FD55900FA0BF4 /* MvrLegacyWiFiOutgoing.m */; };
 		150718CE105FD55900FA0BF4 /* MvrLegacyWiFiOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 150718CA105FD55900FA0BF4 /* MvrLegacyWiFiOutgoing.m */; };
 		150718D2105FD5AA00FA0BF4 /* MvrOutgoing.h in Headers */ = {isa = PBXBuildFile; fileRef = 150718D1105FD5AA00FA0BF4 /* MvrOutgoing.h */; };
+		1537A7DA107A598300B16B88 /* MvrBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1537A7D8107A598300B16B88 /* MvrBuffer.h */; };
+		1537A7DB107A598300B16B88 /* MvrBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A7D9107A598300B16B88 /* MvrBuffer.m */; };
+		1537A7DC107A598300B16B88 /* MvrBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A7D9107A598300B16B88 /* MvrBuffer.m */; };
 		153AF19A105C17B300DD862F /* MvrScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF199105C17B300DD862F /* MvrScanner.h */; };
 		153AF1A2105C18F800DD862F /* MvrChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF1A1105C18F800DD862F /* MvrChannel.h */; };
 		153AF1A5105C192300DD862F /* MvrIncoming.h in Headers */ = {isa = PBXBuildFile; fileRef = 153AF1A4105C192300DD862F /* MvrIncoming.h */; };
@@ -280,6 +283,8 @@
 		150718C9105FD55900FA0BF4 /* MvrLegacyWiFiOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrLegacyWiFiOutgoing.h; sourceTree = "<group>"; };
 		150718CA105FD55900FA0BF4 /* MvrLegacyWiFiOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrLegacyWiFiOutgoing.m; sourceTree = "<group>"; };
 		150718D1105FD5AA00FA0BF4 /* MvrOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrOutgoing.h; sourceTree = "<group>"; };
+		1537A7D8107A598300B16B88 /* MvrBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBuffer.h; sourceTree = "<group>"; };
+		1537A7D9107A598300B16B88 /* MvrBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBuffer.m; sourceTree = "<group>"; };
 		153AF199105C17B300DD862F /* MvrScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrScanner.h; sourceTree = "<group>"; };
 		153AF1A1105C18F800DD862F /* MvrChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrChannel.h; sourceTree = "<group>"; };
 		153AF1A4105C192300DD862F /* MvrIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrIncoming.h; sourceTree = "<group>"; };
@@ -557,6 +562,8 @@
 				156CF112105BB356006D8E7A /* MvrPacketBuilder.m */,
 				156CF113105BB356006D8E7A /* MvrPacketParser.h */,
 				156CF114105BB356006D8E7A /* MvrPacketParser.m */,
+				1537A7D8107A598300B16B88 /* MvrBuffer.h */,
+				1537A7D9107A598300B16B88 /* MvrBuffer.m */,
 			);
 			name = "Packet building";
 			sourceTree = "<group>";
@@ -764,6 +771,7 @@
 				159AF9111060FE3B0070141A /* MvrStorageCentral.h in Headers */,
 				159AF91F1060FF4F0070141A /* MvrMetadataStorage.h in Headers */,
 				159AF99110610AB70070141A /* MvrScannerObserver.h in Headers */,
+				1537A7DA107A598300B16B88 /* MvrBuffer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,6 +974,7 @@
 				150718CB105FD55900FA0BF4 /* MvrLegacyWiFiOutgoing.m in Sources */,
 				159AF90F1060FE3B0070141A /* MvrStorageCentral.m in Sources */,
 				159AF98F10610AB70070141A /* MvrScannerObserver.m in Sources */,
+				1537A7DC107A598300B16B88 /* MvrBuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,6 +1068,7 @@
 				150718CD105FD55900FA0BF4 /* MvrLegacyWiFiOutgoing.m in Sources */,
 				159AF9121060FE3B0070141A /* MvrStorageCentral.m in Sources */,
 				159AF99210610AB70070141A /* MvrScannerObserver.m in Sources */,
+				1537A7DB107A598300B16B88 /* MvrBuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

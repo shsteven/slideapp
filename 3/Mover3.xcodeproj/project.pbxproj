@@ -11,6 +11,10 @@
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
+		1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1537A6E0107A388000B16B88 /* GameKit.framework */; };
+		1537A6E6107A394000B16B88 /* MvrBluetoothScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E5107A394000B16B88 /* MvrBluetoothScanner.m */; };
+		1537A6E9107A3CC900B16B88 /* MvrBluetoothMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */; };
+		1537A71B107A41F400B16B88 /* MvrBluetoothChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A71A107A41F400B16B88 /* MvrBluetoothChannel.m */; };
 		154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		154FA62C10792232004DF675 /* MvrClearTableOnShake.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */; };
 		1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567510510620DAD006EC706 /* libMoverNetwork.a */; };
@@ -150,6 +154,13 @@
 		151E021F106767A900C6CDFF /* MvrImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemUI.m; sourceTree = "<group>"; };
 		151E02211067683400C6CDFF /* MvrImagePickerSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImagePickerSource.h; sourceTree = "<group>"; };
 		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
+		1537A6E0107A388000B16B88 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		1537A6E4107A394000B16B88 /* MvrBluetoothScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBluetoothScanner.h; sourceTree = "<group>"; };
+		1537A6E5107A394000B16B88 /* MvrBluetoothScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBluetoothScanner.m; sourceTree = "<group>"; };
+		1537A6E7107A3CC900B16B88 /* MvrBluetoothMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBluetoothMode.h; sourceTree = "<group>"; };
+		1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBluetoothMode.m; sourceTree = "<group>"; };
+		1537A719107A41F400B16B88 /* MvrBluetoothChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBluetoothChannel.h; sourceTree = "<group>"; };
+		1537A71A107A41F400B16B88 /* MvrBluetoothChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBluetoothChannel.m; sourceTree = "<group>"; };
 		154FA54810790FD1004DF675 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrClearTableOnShake.alert; sourceTree = "<group>"; };
 		156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "Network+Storage/Network+Storage.xcodeproj"; sourceTree = "<group>"; };
@@ -265,6 +276,7 @@
 				157B96BF1076589800F1A1A8 /* AddressBook.framework in Frameworks */,
 				157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */,
 				154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */,
+				1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +305,19 @@
 				157B96D910765F5F00F1A1A8 /* Contacts */,
 			);
 			name = Items;
+			sourceTree = "<group>";
+		};
+		1537A6E3107A391300B16B88 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				1537A6E4107A394000B16B88 /* MvrBluetoothScanner.h */,
+				1537A6E5107A394000B16B88 /* MvrBluetoothScanner.m */,
+				1537A719107A41F400B16B88 /* MvrBluetoothChannel.h */,
+				1537A71A107A41F400B16B88 /* MvrBluetoothChannel.m */,
+				1537A6E7107A3CC900B16B88 /* MvrBluetoothMode.h */,
+				1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */,
+			);
+			name = Bluetooth;
 			sourceTree = "<group>";
 		};
 		156750FF10620DAD006EC706 /* Products */ = {
@@ -400,6 +425,7 @@
 		158A5F09106A6659008C6801 /* Modes */ = {
 			isa = PBXGroup;
 			children = (
+				1537A6E3107A391300B16B88 /* Bluetooth */,
 				15C1C86D1068DBDB000C9CDE /* MvrUIMode.h */,
 				15C1C86E1068DBDB000C9CDE /* MvrUIMode.m */,
 				15C1C8691068DB92000C9CDE /* MvrWiFiMode.h */,
@@ -532,6 +558,7 @@
 				157B96BE1076589800F1A1A8 /* AddressBook.framework */,
 				157B96C01076589B00F1A1A8 /* AddressBookUI.framework */,
 				154FA54810790FD1004DF675 /* MessageUI.framework */,
+				1537A6E0107A388000B16B88 /* GameKit.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -737,6 +764,9 @@
 				159559DE107768EF00FBC9B4 /* MvrTextItemUI.m in Sources */,
 				15955A1D10776B2200FBC9B4 /* MvrTextVisor.m in Sources */,
 				15955A2110776B7D00FBC9B4 /* MvrVisor.m in Sources */,
+				1537A6E6107A394000B16B88 /* MvrBluetoothScanner.m in Sources */,
+				1537A6E9107A3CC900B16B88 /* MvrBluetoothMode.m in Sources */,
+				1537A71B107A41F400B16B88 /* MvrBluetoothChannel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
