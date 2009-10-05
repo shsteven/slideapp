@@ -59,6 +59,7 @@
 	}
 	
 	[self.connectionStateContainer setAccessibilityValue:self.connectionStateInfo.text];
+	self.delegate.shouldKeepConnectionDrawerVisible = jammed;
 }
 
 #pragma mark Channels

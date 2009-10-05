@@ -19,7 +19,7 @@
 #import "MvrAppDelegate.h"
 
 static CGPoint MvrCenterOf(CGRect r) {
-	return CGPointMake(r.size.width / 2, r.size.height / 2);
+	return CGPointMake(CGRectGetMidX(r), CGRectGetMidY(r));
 }
 
 @interface MvrTableControllerView : UIView
@@ -50,7 +50,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (void) slideDownAndRemoveDrawerViewThenReplaceWith:(UIView*) newOne;
 - (void) slideUpToRevealDrawerView:(UIView*) v;
 
-@property(retain) UIView* currentDrawerView;
+@property(retain) UIView* currentDrawerView, * stickyDrawerView;
 
 - (void) removeAllItems;
 
@@ -128,6 +128,12 @@ static CGPoint MvrCenterOf(CGRect r) {
 	// Set up keyboard notifications
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
+	
+	wasSetUp = YES; // we're fully functional!
+	
+	// Set up any premature sticky that was set.
+	if (self.stickyDrawerView)
+		[self performSelector:@selector(setCurrentDrawerViewAnimating:) withObject:self.stickyDrawerView afterDelay:0.5];
 }
 
 - (void) setCurrentMode:(MvrUIMode *) m;
@@ -171,6 +177,8 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[currentMode release];
 	[slidesStratum release];
 	[shadowView release];
+	[currentDrawerView release];
+	[stickyDrawerView release];
 	
 	[super dealloc];
 }
@@ -374,6 +382,18 @@ static CGPoint MvrCenterOf(CGRect r) {
 #pragma mark -
 #pragma mark The Drawer.
 
+@synthesize stickyDrawerView;
+- (void) setStickyDrawerViewAnimating:(UIView*) v;
+{
+	UIView* currentSticky = [[self.stickyDrawerView retain] autorelease];
+	self.stickyDrawerView = v;
+	
+	if (!self.currentDrawerView)
+		[self setCurrentDrawerViewAnimating:v];
+	else if (!v && self.currentDrawerView == currentSticky)
+		[self setCurrentDrawerViewAnimating:nil];
+}
+
 - (CGRect) backdropFrameWithDrawerHeight:(CGFloat) h;
 {
 	CGRect r = self.regularBackdropFrame;
@@ -413,6 +433,12 @@ static CGPoint MvrCenterOf(CGRect r) {
 @synthesize currentDrawerView;
 - (void) setCurrentDrawerViewAnimating:(UIView*) v;
 {
+	if (!wasSetUp)
+		return;
+	
+	if (!v)
+		v = self.stickyDrawerView;
+	
 	if (currentDrawerView == v) return;
 	
 	if (!currentDrawerView && v)
@@ -505,11 +531,21 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (IBAction) toggleConnectionDrawerVisible;
 {
+	if (self.stickyDrawerView == self.currentMode.connectionStateDrawerView)
+		return;
+	
 	UIView* current = self.currentDrawerView, * newOne = self.currentMode.connectionStateDrawerView;
 	if (current != newOne)
 		[self setCurrentDrawerViewAnimating:newOne];
 	else
 		[self setCurrentDrawerViewAnimating:nil];
+}
+
+@synthesize shouldKeepConnectionDrawerVisible;
+- (void) setShouldKeepConnectionDrawerVisible:(BOOL) v;
+{
+	shouldKeepConnectionDrawerVisible = v;
+	[self setStickyDrawerViewAnimating:v? self.currentMode.connectionStateDrawerView : nil];
 }
 
 #pragma mark -

@@ -25,9 +25,13 @@
 	
 	L0KVODispatcher* kvo;
 	
+	UIView* stickyDrawerView;
 	UIView* currentDrawerView;
 	
 	IBOutlet UIView* testDrawerViewWithTextField;
+	BOOL shouldKeepConnectionDrawerVisible;
+	
+	BOOL wasSetUp;
 }
 
 - (void) setUp;
@@ -53,5 +57,8 @@
 
 // @property(getter=isConnectionDrawerAlwaysVisible) BOOL connectionDrawerAlwaysVisible;
 - (IBAction) toggleConnectionDrawerVisible;
+
+- (void) setCurrentDrawerViewAnimating:(UIView*) v;
+- (void) setStickyDrawerViewAnimating:(UIView*) v;
 
 @end

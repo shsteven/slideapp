@@ -62,4 +62,6 @@
 - (void) UIMode:(MvrUIMode*) mode didFinishSendingItem:(MvrItem*) i;
 - (void) UIMode:(MvrUIMode*) mode willBeginReceivingItemWithTransfer:(id <MvrIncoming>) i fromDirection:(MvrDirection) d;
 
+@property BOOL shouldKeepConnectionDrawerVisible;
+
 @end
