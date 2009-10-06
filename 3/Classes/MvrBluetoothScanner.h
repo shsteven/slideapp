@@ -23,6 +23,10 @@
 }
 
 @property(retain) MvrBluetoothChannel* channel;
-@property(readonly) GKSession* session;
+
+- (GKSession*) configuredSession;
+@property(retain) GKSession* session;
+
+- (void) acceptPeerWithIdentifier:(NSString*) peerID;
 
 @end

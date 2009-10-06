@@ -21,9 +21,6 @@
 
 @implementation MvrVideoItem
 
-L0LogAtRetain()
-L0LogAtRelease()
-
 + supportedTypes;
 {
 	return [NSSet setWithObjects:

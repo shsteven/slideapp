@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MvrWiFiIncoming.h"
+#import "MvrGenericIncoming.h"
 
 #import "MvrChannel.h"
 #import "MvrPacketParser.h"
@@ -19,16 +19,10 @@
 
 @class L0KVODispatcher;
 
-@interface MvrModernWiFiIncoming : MvrWiFiIncoming <MvrPacketParserDelegate> {
+#import "MvrStreamedIncoming.h"
+
+@interface MvrModernWiFiIncoming : MvrStreamedIncoming {
 	AsyncSocket* socket;
-	MvrPacketParser* parser;
-	BOOL isNewPacket;
-	BOOL hasCheckedForMetadata;
-	
-	MvrItemStorage* itemStorage;
-	NSOutputStream* itemStorageStream;
-	
-	NSMutableDictionary* metadata;
 	MvrModernWiFiChannel* channel;
 	MvrModernWiFi* scanner;	
 }

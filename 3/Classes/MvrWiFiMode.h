@@ -16,13 +16,10 @@
 	MvrWiFi* wifi;
 	MvrScannerObserver* observer;
 	
-	UIView* connectionStateDrawerView;
 	UILabel* connectionStateInfo;
 	UIImageView* connectionStateImage;
 	UIView* connectionStateContainer;
 }
-
-@property(retain) IBOutlet UIView* connectionStateDrawerView;
 
 @property(assign) IBOutlet UILabel* connectionStateInfo;
 @property(assign) IBOutlet UIImageView* connectionStateImage;

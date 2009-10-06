@@ -26,6 +26,7 @@
 	NSMutableArray* destinations;
 	id northDestination, eastDestination, westDestination;
 	id <MvrUIModeDelegate> delegate;
+  UIView * connectionStateDrawerView;
 }
 
 @property(assign) id <MvrUIModeDelegate> delegate;
@@ -33,6 +34,8 @@
 @property(retain) IBOutlet UIView* backdropStratum;
 @property(retain) IBOutlet UIView* arrowsStratum;
 @property(readonly) MvrArrowsView* arrowsView;
+
+@property(retain) IBOutlet UIView* connectionStateDrawerView;
 
 @property(readonly) NSMutableArray* mutableDestinations;
 - (NSString*) displayNameForDestination:(id) destination;
@@ -45,8 +48,6 @@
 - (id) destinationAtDirection:(MvrDirection) d;
 - (MvrDirection) directionForDestination:(id) d;
 - (MvrArrowView*) arrowViewForDestination:(id) d;
-
-@property(readonly, retain) UIView* connectionStateDrawerView;
 
 - (void) modeWillBecomeCurrent:(BOOL) animated;
 - (void) modeDidBecomeCurrent:(BOOL) animated;

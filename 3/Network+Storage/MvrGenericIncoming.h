@@ -11,7 +11,7 @@
 
 @class MvrItem, L0KVODispatcher;
 
-@interface MvrWiFiIncoming : NSObject <MvrIncoming> {
+@interface MvrGenericIncoming : NSObject <MvrIncoming> {
 @private
 	float progress;
 	
@@ -26,7 +26,7 @@
 
 @end
 
-@interface MvrWiFiIncoming (MvrKVOUtilityMethods)
+@interface MvrGenericIncoming (MvrKVOUtilityMethods)
 
 - (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemChange:(SEL) itemSel atCancelledChange:(SEL) cancelSel;
 - (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemOrCancelledChange:(SEL) itemAndCancelSel;

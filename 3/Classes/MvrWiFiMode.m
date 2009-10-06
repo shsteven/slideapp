@@ -38,7 +38,6 @@
 	[observer release];
 
 	[wifi release];
-	[connectionStateDrawerView release];
 	[super dealloc];
 }
 
@@ -134,6 +133,7 @@
 - (void) modeDidBecomeCurrent:(BOOL) ani;
 {
 	wifi.enabled = YES;
+	delegate.shouldKeepConnectionDrawerVisible = wifi.jammed;
 }
 
 - (void) modeWillStopBeingCurrent:(BOOL)animated;

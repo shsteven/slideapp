@@ -88,7 +88,7 @@ enum {
 	return NO;
 }
 
-@synthesize window, tableController;
+@synthesize window, tableController, wifiMode, bluetoothMode;
 
 - (void) dealloc;
 {
@@ -231,7 +231,11 @@ enum {
 
 - (NSString*) displayNameForSelf;
 {
+#if TARGET_IPHONE_SIMULATOR
+	return [[NSProcessInfo processInfo] hostName];
+#else
 	return [UIDevice currentDevice].name;
+#endif
 }
 
 #pragma mark -
@@ -396,7 +400,7 @@ enum {
 - (void) beginDisplayingOverlayViewWithLabel:(NSString*) label;
 {
 	if (!overlayWindow.hidden) {
-		CATransition* fade; fade.type = kCATransitionFade;
+		CATransition* fade = [CATransition animation]; fade.type = kCATransitionFade;
 		[overlayLabel.layer addAnimation:fade forKey:@"MvrAppDelegateFadeAnimation"];
 	}
 	
@@ -444,5 +448,18 @@ enum {
 	[overlaySpinner stopAnimating];
 	overlayWindow.hidden = YES;
 }	
+
+#pragma mark -
+#pragma mark Blueototh
+
+- (IBAction) moveToBluetoothMode;
+{
+	self.tableController.currentMode = self.bluetoothMode;
+}
+
+- (IBAction) moveToWiFiMode;
+{
+	self.tableController.currentMode = self.wifiMode;
+}
 
 @end

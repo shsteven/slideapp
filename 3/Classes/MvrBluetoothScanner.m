@@ -11,26 +11,9 @@
 #import "Network+Storage/MvrItem.h"
 #import "Network+Storage/MvrItemStorage.h"
 
-static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSData* data, NSError** e) {
-	NSInteger written = 0; const void* bytes = [data bytes];
-	while (written < [data length]) {
-		
-		if ([stream hasSpaceAvailable]) {
-			NSInteger newlyWritten = [stream write:(bytes + written) maxLength:([data length] - written)];
-			
-			if (newlyWritten == -1) {
-				if (e) *e = [stream streamError];
-				return NO;
-			}
-			
-			written += newlyWritten;
-		}
-		
-		usleep(50 * 1000);
-	}
-	
-	return YES;	
-}
+#import "MvrAppDelegate.h"
+
+#import <stdio.h>
 
 // We have the code here for channels because they're intrinsically tied to the scanner (which holds the single GKSession we want to have).
 
@@ -40,28 +23,36 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 
 @synthesize enabled, channel, session;
 
-- (id) init
-{
-	self = [super init];
-	if (self != nil) {
-		session = [[GKSession alloc] initWithSessionID:kMvrBluetoothSessionID displayName:[UIDevice currentDevice].name sessionMode:GKSessionModePeer];
-		session.delegate = self;
-		[session setDataReceiveHandler:self withContext:NULL];
-	}
-	return self;
-}
-
 - (void) dealloc
 {
 	self.enabled = NO;
-	session.delegate = nil;
-	[session setDataReceiveHandler:nil withContext:NULL];
-	[session release];
+	self.session = nil;
 	[channel release];
 	[super dealloc];
 }
 
+- (GKSession*) configuredSession;
+{
+	GKSession* s = [[GKSession alloc] initWithSessionID:kMvrBluetoothSessionID displayName:[MvrApp() displayNameForSelf] sessionMode:GKSessionModePeer];
+	return [s autorelease];
+}
 
+- (void) setSession:(GKSession *) s;
+{
+	if (s != session) {
+		session.delegate = nil;
+		[session setDataReceiveHandler:nil withContext:NULL];
+		
+		[session release];
+		session = [s retain];
+		
+		session.delegate = self;
+		[session setDataReceiveHandler:self withContext:NULL];
+		
+		self.channel = nil;
+		session.available = self.enabled;
+	}
+}
 
 - (void) setEnabled:(BOOL) e;
 {
@@ -81,13 +72,22 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 
 - (NSSet*) channels;
 {
+	L0Log(@"Returning a set of channel: %@ (empty if nil)", self.channel);
 	return self.channel? [NSSet setWithObject:self.channel] : [NSSet set];
 }
 
-+ (NSSet *) keyPathsForValuesAffectingChannels;
+- (void) setChannel:(MvrBluetoothChannel *) c;
 {
-	return [NSSet setWithObject:@"channel"];
+	if (channel != c) {
+		[self willChangeValueForKey:@"channels" withSetMutation:NSKeyValueSetSetMutation usingObjects:c? [NSSet setWithObject:c] : [NSSet set]];
+		
+		[channel release];
+		channel = [c retain];
+		
+		[self didChangeValueForKey:@"channels" withSetMutation:NSKeyValueSetSetMutation usingObjects:c? [NSSet setWithObject:c] : [NSSet set]];
+	}
 }
+
 
 - (void) receiveData:(NSData*) data fromPeer:(NSString*) peerID inSession:(GKSession*) s context:(void*) context;
 {
@@ -110,142 +110,39 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	[session sendData:[NSData dataWithBytesNoCopy:(void*) acknowledger length:acknowledgerLength freeWhenDone:NO] toPeers:[NSArray arrayWithObject:peerID] withDataMode:GKSendDataReliable error:NULL];
 }
 
-- (void) session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state;
+- (void) session:(GKSession *)s peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state;
 {
+#if DEBUG
+	fflush(stdout);
+	fflush(stderr);
+#endif
+	
+	L0Log(@"Observed: %@'s peer %@ changed state to %d", s, peerID, state);
 	if ([self.channel.peerIdentifier isEqual:peerID] && state == GKPeerStateDisconnected || state == GKPeerStateUnavailable)
 		self.channel = nil;
+}
+
+- (void) acceptPeerWithIdentifier:(NSString*) peerID;
+{
+	if (![[session peersWithConnectionState:GKPeerStateConnected] containsObject:peerID]) {
+		L0Log(@"Cannot accept peer %@ because it's not connected to our session!", peerID);
+		return;
+	}
+	
+	L0Log(@"Accepted peer %@ as our channel.", peerID);
+	self.channel = [[[MvrBluetoothChannel alloc] initWithScanner:self peerIdentifier:peerID] autorelease];
+}
+
+- (void) session:(GKSession *)s didReceiveConnectionRequestFromPeer:(NSString *)peerID;
+{
+	[s acceptConnectionFromPeer:peerID error:NULL];
 }
 
 @end
 
 @implementation MvrBluetoothIncoming
 
-- (id) init
-{
-	self = [super init];
-	if (self != nil) {
-		storage = [[MvrItemStorage itemStorage] retain];
-		parser = [[MvrPacketParser alloc] initWithDelegate:self];
-		metadata = [NSMutableDictionary new];
-	}
-	return self;
-}
-
-@synthesize progress, item, cancelled;
-
-- (void) dealloc
-{
-	[self clear];
-	[super dealloc];
-}
-
-
-- (void) appendData:(NSData*) data;
-{
-	[parser appendData:data];
-}
-
-- (void) packetParserDidStartReceiving:(MvrPacketParser*) p;
-{
-	self.progress = p.progress;
-}
-
-- (void) packetParser:(MvrPacketParser*) p didReceiveMetadataItemWithKey:(NSString*) key value:(NSString*) value;
-{
-	if (self.cancelled) return;
-	
-	self.progress = p.progress;
-	[metadata setObject:value forKey:key];
-}
-
-- (void) packetParser:(MvrPacketParser*) p willReceivePayloadForKey:(NSString*) key size:(unsigned long long) size;
-{
-	if (![key isEqual:kMvrProtocolExternalRepresentationPayloadKey])
-		return;
-	
-	itemStorageStream = [[storage outputStreamForContentOfAssumedSize:size] retain];
-	[itemStorageStream open];
-}
-
-- (void) packetParser:(MvrPacketParser*) p didReceivePayloadPart:(NSData*) d forKey:(NSString*) key;
-{
-	if (self.cancelled) return;
-	
-	[self checkMetadataIfNeeded];
-	if (self.cancelled) return; // could cancel in checkMetadata...
-	
-	if (![key isEqual:kMvrProtocolExternalRepresentationPayloadKey])
-		return;
-	
-	self.progress = p.progress;
-	NSAssert(itemStorageStream && [itemStorageStream streamStatus] != NSStreamStatusNotOpen, @"We have a stream and it's open.");
-	
-	NSError* e;
-	if (!MvrWriteDataToOutputStreamSynchronously(itemStorageStream, d, &e)) {
-		L0LogAlways(@"Got an error while writing to the offloading stream: %@", e);
-		[self cancel];
-	}
-}
-
-- (void) checkMetadataIfNeeded;
-{
-	if (![metadata objectForKey:kMvrProtocolMetadataTitleKey] || ![metadata objectForKey:kMvrProtocolMetadataTypeKey])
-		[self cancel];
-}
-
-// e == nil if no error.
-- (void) packetParser:(MvrPacketParser*) p didReturnToStartingStateWithError:(NSError*) e;
-{
-	if (e) {
-		L0Log(@"An error happened while parsing: %@", e);
-		[self cancel];
-	} else
-		[self produceItem];
-}
-
-
-- (void) cancel;
-{
-	self.item = nil;
-	self.cancelled = YES;
-	[self clear];
-}
-
-- (void) produceItem;
-{
-	self.progress = 1.0;
-	
-	NSString* title = [metadata objectForKey:kMvrProtocolMetadataTitleKey], 
-		* type = [metadata objectForKey:kMvrProtocolMetadataTypeKey];
-	
-	[itemStorageStream close];
-	[itemStorageStream release]; itemStorageStream = nil;
-	[storage endUsingOutputStream];
-	
-	MvrItem* i = [MvrItem itemWithStorage:storage type:type metadata:[NSDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey]];
-	
-	self.item = i;
-	self.cancelled = (i == nil);
-	
-	[self clear];
-}
-
-- (void) clear;
-{
-	self.progress = kMvrIndeterminateProgress;
-	
-	[metadata release]; metadata = nil;
-	
-	if (itemStorageStream) {
-		[itemStorageStream close];
-		[storage endUsingOutputStream];
-		[itemStorageStream release]; itemStorageStream = nil;
-	}
-	
-	if (storage) {
-		[storage release]; storage = nil;
-	}
-}
+// Here if we ever need customizing it.
 
 @end
 

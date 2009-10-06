@@ -6,12 +6,12 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "MvrWiFiIncoming.h"
+#import "MvrGenericIncoming.h"
 
 #import <MuiKit/MuiKit.h>
 #import "MvrItem.h"
 
-@implementation MvrWiFiIncoming
+@implementation MvrGenericIncoming
 
 @synthesize progress, item, cancelled;
 
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation MvrWiFiIncoming (MvrKVOUtilityMethods)
+@implementation MvrGenericIncoming (MvrKVOUtilityMethods)
 
 - (void) observeUsingDispatcher:(L0KVODispatcher*) d invokeAtItemChange:(SEL) itemSel atCancelledChange:(SEL) cancelSel;
 {

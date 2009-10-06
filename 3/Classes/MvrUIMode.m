@@ -30,6 +30,7 @@
 }
 
 @synthesize arrowsStratum, backdropStratum;
+@synthesize connectionStateDrawerView;
 @synthesize northDestination, eastDestination, westDestination;
 @synthesize delegate;
 
@@ -38,6 +39,8 @@
 	[backdropStratum release];
 	[arrowsStratum release];
 	
+	[connectionStateDrawerView release];
+
 	[destinations release];
 	[northDestination release];
 	[eastDestination release];
@@ -210,11 +213,6 @@
 
 #pragma mark -
 #pragma mark Default implementations.
-
-- (UIView*) connectionStateDrawerView;
-{
-	return nil;
-}
 
 - (void) modeWillBecomeCurrent:(BOOL) animated;
 {

@@ -8,6 +8,8 @@
 
 #import "MvrTableController.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "MvrSlidesView.h"
 #import "MvrSlide.h"
 
@@ -54,6 +56,8 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (void) removeAllItems;
 
+- (void) animateUIAwayFromMode:(MvrUIMode*) oldOne toMode:(MvrUIMode*) newOne;
+
 @end
 
 
@@ -81,27 +85,16 @@ static CGPoint MvrCenterOf(CGRect r) {
 {
 	NSAssert(self.currentMode, @"A mode must be made current before the table controller is set up.");
 	
-	// Set up the host view
-	self.hostView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
-	
-	// Set up the backdrop and arrows stratum
-	CGRect r = self.regularBackdropFrame;
-	UIView* backdrop = self.currentMode.backdropStratum;
-	backdrop.frame = r;
-	backdrop.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-	[self.hostView addSubview:backdrop];
-	
-	r = self.regularArrowsStratumFrame;
-	UIView* arrows = self.currentMode.arrowsStratum;
-	arrows.frame = r;
-	arrows.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	
-	[self.hostView insertSubview:arrows aboveSubview:backdrop];
-	
 	// Create and show the slides stratum
 	self.slidesStratum = [[[MvrSlidesView alloc] initWithFrame:self.regularSlidesStratumBounds delegate:self] autorelease];
 	self.slidesStratum.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[self.hostView addSubview:self.slidesStratum];
+	
+	// Add the backdrop and arrows strata
+	[self animateUIAwayFromMode:nil toMode:self.currentMode];
+	
+	// Set up the host view
+	self.hostView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
 	
 	// Create the correspondence maps
 	itemsToViews = [L0Map new];
@@ -139,20 +132,57 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (void) setCurrentMode:(MvrUIMode *) m;
 {
 	if (m != currentMode) {
-		MvrUIMode* oldMode = currentMode;
-		[oldMode modeWillStopBeingCurrent:NO]; // TODO animation
+		MvrUIMode* oldMode = [[currentMode retain] autorelease];
+		[oldMode modeWillStopBeingCurrent:NO];
 		[m modeWillBecomeCurrent:NO];
 		
 		currentMode.delegate = nil;
 		
-		[[currentMode retain] autorelease];
 		[currentMode release];
 		currentMode = [m retain];
-		
+				
 		m.delegate = self;
+		
+		// TODO much better animation
+		
+		[self animateUIAwayFromMode:oldMode toMode:currentMode];
 		
 		[currentMode modeDidBecomeCurrent:NO];
 		[oldMode modeDidStopBeingCurrent:NO];
+	}
+}
+
+- (void) animateUIAwayFromMode:(MvrUIMode*) oldOne toMode:(MvrUIMode*) newOne;
+{
+	CATransition* fade = [CATransition animation]; fade.type = kCATransitionFade;
+	[self.hostView.layer addAnimation:fade forKey:@"MvrTableControllerModeChangeFade"];
+	
+	if (oldOne) {
+		[oldOne.backdropStratum removeFromSuperview];
+		[oldOne.arrowsStratum removeFromSuperview];
+		
+		if (self.stickyDrawerView == oldOne.connectionStateDrawerView)
+			self.stickyDrawerView = nil;
+		
+		if (self.currentDrawerView == oldOne.connectionStateDrawerView)
+			[self setCurrentDrawerViewAnimating:nil];
+	}
+	
+	if (newOne) {
+	
+		// Set up the backdrop and arrows stratum
+		CGRect r = self.regularBackdropFrame;
+		UIView* backdrop = newOne.backdropStratum;
+		backdrop.frame = r;
+		backdrop.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+		[self.hostView insertSubview:backdrop belowSubview:self.slidesStratum];
+		
+		r = self.regularArrowsStratumFrame;
+		UIView* arrows = newOne.arrowsStratum;
+		arrows.frame = r;
+		arrows.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		
+		[self.hostView insertSubview:arrows aboveSubview:backdrop];
 	}
 }
 

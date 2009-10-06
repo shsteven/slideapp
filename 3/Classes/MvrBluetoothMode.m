@@ -8,6 +8,7 @@
 
 #import "MvrBluetoothMode.h"
 
+#import "MvrAppDelegate.h"
 
 @implementation MvrBluetoothMode
 
@@ -29,10 +30,37 @@
 }
 
 
+- (void) modeDidBecomeCurrent:(BOOL)animated;
+{
+	scanner.enabled = YES;
+	didPickAfterSwitch = NO;
+	
+	[self performSelector:@selector(setDrawerAsSticky) withObject:nil afterDelay:0.7];
+	
+	if (!scanner.channel)
+		[self beginPickingPeer];
+}
+
+- (void) modeWillStopBeingCurrent:(BOOL)animated;
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setDrawerAsSticky) object:nil];
+	
+	[self stopPickingPeer];
+	scanner.enabled = NO;
+	scanner.session = nil;
+}
+
+- (void) setDrawerAsSticky;
+{
+	delegate.shouldKeepConnectionDrawerVisible = YES;
+}
+
 - (void) beginPickingPeer;
 {
 	if (peerPicker)
 		return;
+	
+	scanner.session = nil;
 	
 	peerPicker = [GKPeerPickerController new];
 	peerPicker.delegate = self;
@@ -45,34 +73,57 @@
 	if (!peerPicker)
 		return;
 	
-	[peerPicker dismiss];
+	peerPicker.delegate = nil;
 	[peerPicker autorelease]; peerPicker = nil;
 }
 
 - (GKSession*) peerPickerController:(GKPeerPickerController*) picker sessionForConnectionType:(GKPeerPickerConnectionType) type;
 {
-	return scanner.session;
+	return [scanner configuredSession];
 }
 
 - (void) peerPickerController:(GKPeerPickerController*) picker didConnectPeer:(NSString*) peerID toSession:(GKSession*) session;
 {
+	scanner.session = session;
+	[scanner acceptPeerWithIdentifier:peerID];
+	didPickAfterSwitch = YES;
+	
+	[picker dismiss];
 	[self stopPickingPeer];
 }
 
 - (void) peerPickerControllerDidCancel:(GKPeerPickerController*) picker;
 {
-	[self stopPickingPeer];	
+	[self stopPickingPeer];
+	
+	if (!didPickAfterSwitch)
+		[MvrApp() moveToWiFiMode];
 }
 
-- (NSString*) displayNameForDestination:(id) destination;
+- (NSString*) displayNameForDestination:(MvrBluetoothChannel*) destination;
 {
-	return [scanner.session displayNameForPeer:[destination peerIdentifier]];
+	return [scanner.session displayNameForPeer:destination.peerIdentifier];
 }
 
 - (void) scanner:(id <MvrScanner>) s didAddChannel:(id <MvrChannel>) channel;
 {
 	if (!self.northDestination)
 		self.northDestination = channel;
+	self.arrowsView.northView.nameLabel.textColor = [UIColor whiteColor];
+}
+
+- (void) scanner:(id <MvrScanner>) s didRemoveChannel:(id <MvrChannel>) channel;
+{
+	if (self.northDestination == channel)
+		self.northDestination = nil;
+}
+
+- (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) d;
+{
+	if (!self.northDestination || d != kMvrDirectionNorth)
+		return;
+	
+	[self.northDestination beginSendingItem:i];
 }
 
 @end

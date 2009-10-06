@@ -16,6 +16,9 @@
 
 #import "MvrTableController.h"
 
+#import "MvrWiFiMode.h"
+#import "MvrBluetoothMode.h"
+
 @interface MvrAppDelegate : NSObject <
 	UIApplicationDelegate,
 	UIActionSheetDelegate,
@@ -34,6 +37,9 @@
 	UIWindow* overlayWindow;
 	UILabel* overlayLabel;
 	UIActivityIndicatorView* overlaySpinner;
+	
+	MvrWiFiMode* wifiMode;
+	MvrBluetoothMode* bluetoothMode;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow *window;
@@ -46,6 +52,9 @@
 @property(nonatomic, retain) IBOutlet UILabel* overlayLabel;
 @property(nonatomic, retain) IBOutlet UIActivityIndicatorView* overlaySpinner;
 
+@property(nonatomic, retain) IBOutlet MvrWiFiMode* wifiMode;
+@property(nonatomic, retain) IBOutlet MvrBluetoothMode* bluetoothMode;
+
 - (IBAction) add;
 - (void) addItemFromSelf:(MvrItem*) item;
 - (void) displayActionMenuForItem:(MvrItem*) i withRemove:(BOOL) remove withMainAction:(BOOL) mainAction;
@@ -54,6 +63,9 @@
 
 - (void) beginDisplayingOverlayViewWithLabel:(NSString*) label;
 - (void) endDisplayingOverlayView;
+
+- (IBAction) moveToBluetoothMode;
+- (IBAction) moveToWiFiMode;
 
 @end
 

@@ -134,7 +134,7 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 	NSCharacterSet* latinLetters = [NSCharacterSet characterSetWithRange:NSMakeRange(0, 0x250)];
 	NSCharacterSet* notLatinLetters = [latinLetters invertedSet];
 	
-	BOOL shouldShorten = ([name rangeOfCharacterFromSet:notLatinLetters].location == NSNotFound) && ([surname rangeOfCharacterFromSet:notLatinLetters].location == NSNotFound);
+	BOOL shouldShorten = (!name || [name rangeOfCharacterFromSet:notLatinLetters].location == NSNotFound) && (!surname || [surname rangeOfCharacterFromSet:notLatinLetters].location == NSNotFound);
 	
 	if (!shouldShorten) {
 		if (ABPersonGetCompositeNameFormat() == kABPersonCompositeNameFormatFirstNameFirst) {

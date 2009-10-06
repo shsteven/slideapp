@@ -17,9 +17,11 @@
 	MvrBluetoothScanner* scanner;
 	GKPeerPickerController* peerPicker;
 	MvrScannerObserver* observer;
+	
+	BOOL didPickAfterSwitch;
 }
 
-- (void) beginPickingPeer;
+- (IBAction) beginPickingPeer;
 - (void) stopPickingPeer;
 
 @end

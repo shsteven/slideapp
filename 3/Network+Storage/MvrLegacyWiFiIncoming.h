@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MvrWiFiIncoming.h"
+#import "MvrGenericIncoming.h"
 #import "BLIP.h"
 
-@interface MvrLegacyWiFiIncoming : MvrWiFiIncoming <BLIPConnectionDelegate> {
+@interface MvrLegacyWiFiIncoming : MvrGenericIncoming <BLIPConnectionDelegate> {
 	BLIPConnection* connection;
 }
 

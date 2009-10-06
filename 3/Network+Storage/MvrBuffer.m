@@ -46,7 +46,7 @@
 	} else {
 		NSRange range = NSMakeRange(0, self.consumptionSize);
 		NSData* part = [backingStore subdataWithRange:range];
-		[backingStore replaceBytesInRange:range withBytes:NULL];
+		[backingStore replaceBytesInRange:range withBytes:NULL length:0];
 		return part;
 	}
 }

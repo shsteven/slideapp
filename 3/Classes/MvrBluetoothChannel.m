@@ -36,18 +36,32 @@
 {
 	return self.incomingTransfer? [NSSet setWithObject:self.incomingTransfer] : [NSSet set];
 }
-+ (NSSet*) keyPathsForValuesAffectingIncomingTransfers;
+- (void) setIncomingTransfer:(MvrBluetoothIncoming *) i;
 {
-	return [NSSet setWithObject:@"incomingTransfer"];
+	if (incomingTransfer != i) {
+		[self willChangeValueForKey:@"incomingTransfers" withSetMutation:NSKeyValueSetSetMutation usingObjects:i? [NSSet setWithObject:i] : [NSSet set]];
+		
+		[incomingTransfer release];
+		incomingTransfer = [i retain];
+		
+		[self didChangeValueForKey:@"incomingTransfers" withSetMutation:NSKeyValueSetSetMutation usingObjects:i? [NSSet setWithObject:i] : [NSSet set]];
+	}
 }
 
 - (NSSet*) outgoingTransfers;
 {
 	return self.outgoingTransfer? [NSSet setWithObject:self.outgoingTransfer] : [NSSet set];
 }
-+ (NSSet*) keyPathsForValuesAffectingOutgoingTransfers;
+- (void) setOutgoingTransfer:(MvrBluetoothOutgoing *) i;
 {
-	return [NSSet setWithObject:@"outgoingTransfer"];
+	if (outgoingTransfer != i) {
+		[self willChangeValueForKey:@"outgoingTransfers" withSetMutation:NSKeyValueSetSetMutation usingObjects:i? [NSSet setWithObject:i] : [NSSet set]];
+		
+		[outgoingTransfer release];
+		outgoingTransfer = [i retain];
+		
+		[self didChangeValueForKey:@"outgoingTransfers" withSetMutation:NSKeyValueSetSetMutation usingObjects:i? [NSSet setWithObject:i] : [NSSet set]];
+	}
 }
 
 - (NSString*) displayName;
