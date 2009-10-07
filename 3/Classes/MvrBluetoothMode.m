@@ -109,7 +109,9 @@
 {
 	if (!self.northDestination)
 		self.northDestination = channel;
+	self.arrowsView.northView.normalColor = [UIColor whiteColor];
 	self.arrowsView.northView.nameLabel.textColor = [UIColor whiteColor];
+	self.arrowsView.northView.busyColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.820 alpha:1.000];
 }
 
 - (void) scanner:(id <MvrScanner>) s didRemoveChannel:(id <MvrChannel>) channel;
@@ -124,6 +126,24 @@
 		return;
 	
 	[self.northDestination beginSendingItem:i];
+}
+
+#pragma mark Receiving items
+
+
+- (void) channel:(id <MvrChannel>)c didBeginSendingWithOutgoingTransfer:(id <MvrOutgoing>)outgoing;
+{	
+	[self.arrowsView.northView setBusy:YES];
+}
+
+- (void) outgoingTransferDidEndSending:(id <MvrOutgoing>) outgoing;
+{
+	[self.arrowsView.northView setBusy:NO];
+}
+
+- (void) channel:(id <MvrChannel>) c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>) incoming;
+{
+	[self.delegate UIMode:self willBeginReceivingItemWithTransfer:incoming fromDirection:kMvrDirectionNorth];
 }
 
 @end

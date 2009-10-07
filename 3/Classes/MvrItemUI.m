@@ -92,6 +92,15 @@ static NSMutableArray* MvrItemSources = nil;
 	return [NSArray array];
 }
 
+- (void) registerSource;
+{
+	if (!MvrItemSources)
+		MvrItemSources = [NSMutableArray new];
+	
+	if (![MvrItemSources containsObject:self])
+		[MvrItemSources addObject:self];
+}
+
 + itemSourceWithDisplayName:(NSString*) name;
 {
 	return [[[self alloc] initWithDisplayName:name] autorelease];
@@ -168,15 +177,10 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	for (Class c in [self supportedItemClasses])
 		[self registerUI:myself forItemClass:c];
 	
-	if (!MvrItemSources)
-		MvrItemSources = [NSMutableArray new];
-	
 	// [MvrItemSources addObjectsFromArray:[self supportedItemSources]];
 	// we don't do the above because we may have item sources shared between different item UIs. For example, the camera item source can produce either videos or photos, so both item ui controllers claim it as their own and we display it only once.
-	for (id source in [myself supportedItemSources]) {
-		if (![MvrItemSources containsObject:source])
-			[MvrItemSources addObject:source];
-	}
+	for (id source in [myself supportedItemSources])
+		[source registerSource];
 }
 
 + (MvrItemUI*) UIForItemClass:(Class) i;

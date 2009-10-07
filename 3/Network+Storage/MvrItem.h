@@ -51,6 +51,7 @@
 
 - (id) init;
 - (id) initWithStorage:(MvrItemStorage*) s type:(NSString*) type metadata:(NSDictionary*) m;
+- (NSDictionary*) defaultMetadata;
 
 + (void) registerClass;
 + (NSSet*) supportedTypes; // abstract

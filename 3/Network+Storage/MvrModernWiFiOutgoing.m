@@ -68,6 +68,7 @@
 		}
 	}
 	
+	L0Log(@"Using %@ (%@) as the best candidate address", address, [address socketAddressStringValue]);
 	return address;
 }
 

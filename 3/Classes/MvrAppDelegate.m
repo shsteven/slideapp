@@ -25,6 +25,8 @@
 #import "MvrTextItem.h"
 #import "MvrTextItemUI.h"
 
+#import "MvrPasteboardItemSource.h"
+
 #import <MuiKit/MuiKit.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -130,6 +132,8 @@ enum {
 	
 	[MvrTextItem registerClass];
 	[MvrTextItemUI registerClass];
+	
+	[[MvrPasteboardItemSource sharedSource] registerSource];
 }
 
 #pragma mark -

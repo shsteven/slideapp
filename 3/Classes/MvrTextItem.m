@@ -27,10 +27,16 @@
 	if (self = [super init]) {
 		self.text = text;
 		self.type = (id) kUTTypeUTF8PlainText;
-		self.title = [text length] > 40? [NSString stringWithFormat:@"%@\u2026", [text substringToIndex:40]] : text;
+		[self.metadata setDictionary:[self defaultMetadata]];
 	}
 	
 	return self;
+}
+
+- (NSDictionary*) defaultMetadata;
+{
+	NSString* title = [self.text length] > 40? [NSString stringWithFormat:@"%@\u2026", [self.text substringToIndex:40]] : self.text;
+	return [NSDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey];
 }
 
 MvrItemSynthesizeCopyFromAutocache(NSString*, text, private_setText:)

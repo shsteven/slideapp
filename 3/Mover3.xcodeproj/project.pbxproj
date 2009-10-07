@@ -75,6 +75,7 @@
 		15CFDB42107112C800FAB245 /* DrawerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB40107112C800FAB245 /* DrawerBackdrop.png */; };
 		15D46D0E10724C5A00DA8260 /* DrawerButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D46D0C10724C5A00DA8260 /* DrawerButton.png */; };
 		15D46D0F10724C5A00DA8260 /* DrawerLabelHolder.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */; };
+		15D881F0107CC78C000832F5 /* MvrPasteboardItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D881EF107CC78C000832F5 /* MvrPasteboardItemSource.m */; };
 		15F036E1107B46720094D21E /* Backdrop-Bluetooth.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */; };
 		1D3623260D0F684500981E51 /* MvrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MvrAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -249,6 +250,8 @@
 		15CFDB40107112C800FAB245 /* DrawerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DrawerBackdrop.png; path = Theme/DrawerBackdrop.png; sourceTree = "<group>"; };
 		15D46D0C10724C5A00DA8260 /* DrawerButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DrawerButton.png; sourceTree = "<group>"; };
 		15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DrawerLabelHolder.png; sourceTree = "<group>"; };
+		15D881EE107CC78C000832F5 /* MvrPasteboardItemSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPasteboardItemSource.h; sourceTree = "<group>"; };
+		15D881EF107CC78C000832F5 /* MvrPasteboardItemSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPasteboardItemSource.m; sourceTree = "<group>"; };
 		15F036B9107B3D770094D21E /* MvrBluetoothIncomingOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBluetoothIncomingOutgoing.h; sourceTree = "<group>"; };
 		15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Backdrop-Bluetooth.png"; path = "Theme/Backdrop-Bluetooth.png"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* MvrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate.h; sourceTree = "<group>"; };
@@ -306,6 +309,8 @@
 				159559D2107767B100FBC9B4 /* Text clippings */,
 				15E94B6710741BDD009DA076 /* Images & Video */,
 				157B96D910765F5F00F1A1A8 /* Contacts */,
+				15D881EE107CC78C000832F5 /* MvrPasteboardItemSource.h */,
+				15D881EF107CC78C000832F5 /* MvrPasteboardItemSource.m */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -781,6 +786,7 @@
 				1537A6E6107A394000B16B88 /* MvrBluetoothScanner.m in Sources */,
 				1537A6E9107A3CC900B16B88 /* MvrBluetoothMode.m in Sources */,
 				1537A71B107A41F400B16B88 /* MvrBluetoothChannel.m in Sources */,
+				15D881F0107CC78C000832F5 /* MvrPasteboardItemSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

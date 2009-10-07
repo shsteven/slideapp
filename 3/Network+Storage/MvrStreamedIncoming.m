@@ -45,6 +45,7 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	self = [super init];
 	if (self != nil) {
 		parser = [[MvrPacketParser alloc] initWithDelegate:self];
+		metadata = [NSMutableDictionary new];
 	}
 	return self;
 }

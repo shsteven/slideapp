@@ -49,7 +49,7 @@
 		if (![serverSocket acceptOnPort:serverPort error:&e]) {
 			L0LogAlways(@"Having difficulty accepting modern connections on port %d, retrying shortly: %@", serverPort, e);
 			attempts++;
-			usleep(500 * 1000);
+			[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.25]];
 		} else
 			break;
 	} while (attempts < maximumAttempts);

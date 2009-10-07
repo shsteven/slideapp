@@ -10,12 +10,17 @@
 #import "Network+Storage/MvrUTISupport.h"
 #import "Network+Storage/MvrItemStorage.h"
 
+#import "MvrAppDelegate.h"
+
 @interface MvrBookmarkItem ()
 
 @property(setter=private_setAddress:, copy) NSURL* address;
 
 @end
 
+static BOOL MvrBookmarkURLSeemsSafe(NSURL* url) {
+	return [[url scheme] isEqual:@"http"] || [[url scheme] isEqual:@"https"] || [[url scheme] isEqual:@"ftp"];
+}
 
 @implementation MvrBookmarkItem
 
@@ -27,17 +32,35 @@
 - (id) initWithAddress:(NSURL*) url;
 {
 	if (self = [super init]) {
-		if (![[url scheme] isEqual:@"http"] && ![[url scheme] isEqual:@"https"] && ![[url scheme] isEqual:@"ftp"]) {
+		if (!MvrBookmarkURLSeemsSafe(url)) {
 			[self release];
 			return nil;
 		}
 		
 		self.type = (id) kUTTypeURL;
 		self.address = url;
-		self.title = [url host];
+		[self.metadata setDictionary:[self defaultMetadata]];
 	}
 	
 	return self;
+}
+
+- (id) initWithStorage:(MvrItemStorage *)s type:(NSString *)t metadata:(NSDictionary *)m;
+{
+	if (self = [super initWithStorage:s type:t metadata:m]) {
+		if (!MvrBookmarkURLSeemsSafe(self.address)) {
+			[self release];
+			return nil;
+		}
+	}
+	
+	return self;
+}
+
+- (NSDictionary*) defaultMetadata;
+{
+	NSString* host = [self.address host];
+	return host? [NSDictionary dictionaryWithObject:host forKey:kMvrItemTitleMetadataKey] : [NSDictionary dictionary];
 }
 
 MvrItemSynthesizeCopyFromAutocache(NSURL*, address, private_setAddress:)

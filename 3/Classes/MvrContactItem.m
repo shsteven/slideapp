@@ -66,6 +66,10 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 	return L0AddressBookProperties[idx];
 }
 
+static id MvrKeyForABProperty(ABPropertyID prop) {
+	return [NSString stringWithFormat:@"%d", prop];
+}
+
 #pragma mark -
 #pragma mark The item itself.
 
@@ -74,7 +78,9 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 @property(copy) NSDictionary* contactPropertyList;
 
 - (NSDictionary*) propertyListFromAddressBookRecord:(ABRecordRef) record;
+
 - (NSString*) shortenedNameFromAddressBookRecord:(ABRecordRef) record;
+- (NSString*) shortenedNameFromContactPropertyList;
 - (NSString*) shortenedNameFromNickname:(NSString*) nickname name:(NSString*) name surname:(NSString*) surname companyName:(NSString*) companyName;
 
 - (ABRecordRef) copyPersonRecordFromPropertyList:(NSDictionary*) personInfoDictionary;
@@ -97,10 +103,16 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 		
 		self.contactPropertyList = [self propertyListFromAddressBookRecord:ref];
 		self.type = kMvrContactAsPropertyListType;
-		self.title = [self shortenedNameFromAddressBookRecord:ref];
+		[self.metadata setDictionary:[self defaultMetadata]];
 	}
 	
 	return self;
+}
+
+- (NSDictionary*) defaultMetadata;
+{
+	NSString* title = [self shortenedNameFromContactPropertyList];
+	return [NSDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey];
 }
 
 #pragma mark -
@@ -112,6 +124,18 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 	NSString* name = [NSMakeCollectable(ABRecordCopyValue(record, kABPersonFirstNameProperty)) autorelease];
 	NSString* surname = [NSMakeCollectable(ABRecordCopyValue(record, kABPersonLastNameProperty)) autorelease];
 	NSString* companyName = [NSMakeCollectable(ABRecordCopyValue(record, kABPersonOrganizationProperty)) autorelease];
+	
+	return [self shortenedNameFromNickname:nickname name:name surname:surname companyName:companyName];
+}
+
+- (NSString*) shortenedNameFromContactPropertyList;
+{
+	NSDictionary* props = [self.contactPropertyList objectForKey:kMvrContactProperties];
+	
+	NSString* nickname = [props objectForKey:MvrKeyForABProperty(kABPersonNicknameProperty)];
+	NSString* name = [props objectForKey:MvrKeyForABProperty(kABPersonFirstNameProperty)];
+	NSString* surname = [props objectForKey:MvrKeyForABProperty(kABPersonLastNameProperty)];
+	NSString* companyName = [props objectForKey:MvrKeyForABProperty(kABPersonOrganizationProperty)];
 	
 	return [self shortenedNameFromNickname:nickname name:name surname:surname companyName:companyName];
 }
@@ -198,7 +222,7 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 			
 			id value = (id) ABRecordCopyValue(record, propertyID);
 			if (value)
-				[info setObject:value forKey:[NSString stringWithFormat:@"%d", propertyID]];
+				[info setObject:value forKey:MvrKeyForABProperty(propertyID)];
 			
 			[value release];
 		} else {
@@ -224,7 +248,7 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 			}
 			[values release];
 			
-			[info setObject:multiTransposed forKey:[NSString stringWithFormat:@"%d", propertyID]];
+			[info setObject:multiTransposed forKey:MvrKeyForABProperty(propertyID)];
 			CFRelease(multi);
 		}
 	}
@@ -345,9 +369,9 @@ static ABPropertyID MvrGetABPropertyAtIndex(int idx) {
 {
 	NSDictionary* props = [self.contactPropertyList objectForKey:kMvrContactProperties];
 	
-	NSString* name = [props objectForKey:[NSString stringWithFormat:@"%d", kABPersonFirstNameProperty]];					  
-	NSString* surname = [props objectForKey:[NSString stringWithFormat:@"%d", kABPersonLastNameProperty]];
-	NSString* companyName = [props objectForKey:[NSString stringWithFormat:@"%d", kABPersonOrganizationProperty]];
+	NSString* name = [props objectForKey:MvrKeyForABProperty(kABPersonFirstNameProperty)];					  
+	NSString* surname = [props objectForKey:MvrKeyForABProperty(kABPersonLastNameProperty)];
+	NSString* companyName = [props objectForKey:MvrKeyForABProperty(kABPersonOrganizationProperty)];
 	
 	if (!name && !surname)
 		return companyName;

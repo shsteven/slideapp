@@ -43,6 +43,8 @@
 		
 		if (m)
 			[self.metadata setDictionary:m];
+		else
+			[self.metadata setDictionary:[self defaultMetadata]];
 	}
 	
 	return self;
@@ -58,6 +60,11 @@
 	[autocache release];
 	[itemNotes release];
 	[super dealloc];
+}
+
+- (NSDictionary*) defaultMetadata;
+{
+	return [NSDictionary dictionary];
 }
 
 - (NSString*) title;

@@ -31,6 +31,8 @@
 	IBOutlet UIView* testDrawerViewWithTextField;
 	BOOL shouldKeepConnectionDrawerVisible;
 	
+	IBOutlet UIBarButtonItem* networkBarButton;
+	
 	BOOL wasSetUp;
 }
 

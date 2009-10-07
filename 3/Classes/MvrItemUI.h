@@ -110,6 +110,7 @@
 }
 
 + registeredItemSources;
+- (void) registerSource;
 
 // For sources that subclass MvrItemSource and override -beginAddingItem;
 + itemSourceWithDisplayName:(NSString*) name;

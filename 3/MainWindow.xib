@@ -11,14 +11,14 @@
 			<string key="NS.object.0">62</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="41"/>
-			<integer value="83"/>
-			<integer value="74"/>
+			<integer value="16"/>
 			<integer value="2"/>
+			<integer value="74"/>
+			<integer value="83"/>
 			<integer value="43"/>
 			<integer value="24"/>
+			<integer value="41"/>
 			<integer value="86"/>
-			<integer value="26"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -237,7 +237,7 @@
 					<object class="IBUIImageView" id="808545404">
 						<reference key="NSNextResponder" ref="87973870"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrame">{{284, 24}, {16, 16}}</string>
+						<string key="NSFrame">{{284, 23}, {16, 16}}</string>
 						<reference key="NSSuperview" ref="87973870"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -691,6 +691,14 @@
 					</object>
 					<int key="connectionID">101</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">networkBarButton</string>
+						<reference key="source" ref="805714353"/>
+						<reference key="destination" ref="27729059"/>
+					</object>
+					<int key="connectionID">102</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -962,7 +970,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">101</int>
+			<int key="maxID">102</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1018,6 +1026,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="currentMode">MvrUIMode</string>
 						<string key="hostView">UIView</string>
+						<string key="networkBarButton">UIBarButtonItem</string>
 						<string key="shadowView">UIImageView</string>
 						<string key="testDrawerViewWithTextField">UIView</string>
 						<string key="toolbar">UIToolbar</string>

@@ -26,8 +26,9 @@
 
 - (void) dealloc
 {
-	[incomingTransfer release];
-	[outgoingTransfer release];
+	self.incomingTransfer = nil;
+	self.outgoingTransfer = nil;
+	
 	[peerIdentifier release];
 	[super dealloc];
 }

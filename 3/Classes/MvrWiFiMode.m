@@ -18,7 +18,7 @@
 
 @implementation MvrWiFiMode
 
-@synthesize connectionStateDrawerView, connectionStateInfo, connectionStateImage, connectionStateContainer;
+@synthesize connectionStateInfo, connectionStateImage, connectionStateContainer;
 
 - (void) awakeFromNib;
 {

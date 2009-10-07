@@ -209,6 +209,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[shadowView release];
 	[currentDrawerView release];
 	[stickyDrawerView release];
+	[networkBarButton release];
 	
 	[super dealloc];
 }
@@ -540,7 +541,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:1.0];
-	[UIView setAnimationDelay:0.5];
+	[UIView setAnimationDelay:0.2];
 	
 	self.currentMode.backdropStratum.frame = backdropFrame;
 	self.currentMode.arrowsStratum.frame = arrowsFrame;
@@ -576,6 +577,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 {
 	shouldKeepConnectionDrawerVisible = v;
 	[self setStickyDrawerViewAnimating:v? self.currentMode.connectionStateDrawerView : nil];
+	networkBarButton.enabled = !v;
 }
 
 #pragma mark -
