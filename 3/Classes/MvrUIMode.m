@@ -214,6 +214,13 @@
 
 - (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) dest;
 {
+	id destination = [self destinationAtDirection:dest];
+	if (destination)
+		[self sendItem:i toDestination:destination];
+}
+
+- (void) sendItem:(MvrItem*) i toDestination:(id) destination;
+{
 	L0AbstractMethod();
 }
 

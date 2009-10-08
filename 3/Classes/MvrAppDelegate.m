@@ -42,11 +42,13 @@
 
 #define kMvrAppDelegateRemoveButtonIdentifier @"kMvrAppDelegateRemoveButtonIdentifier"
 #define kMvrAppDelegateDeleteButtonIdentifier @"kMvrAppDelegateDeleteButtonIdentifier"
+#define kMvrAppDelegateSendButtonIdentifier @"kMvrAppDelegateSendButtonIdentifier"
 
 enum {
 	kMvrAppDelegateAddSheetTag,
 	kMvrAppDelegateItemActionSheetTag,
 	kMvrAppDelegateDeleteConfirmationSheetTag,
+	kMvrAppDelegateSendActionSheetTag,
 };
 
 @implementation MvrAppDelegate
@@ -277,7 +279,7 @@ enum {
 #pragma mark -
 #pragma mark Displaying an action menu.
 
-- (void) displayActionMenuForItem:(MvrItem*) i withRemove:(BOOL) remove withMainAction:(BOOL) mainAction;
+- (void) displayActionMenuForItem:(MvrItem*) i withRemove:(BOOL) remove withSend:(BOOL) send withMainAction:(BOOL) mainAction;
 {
 	MvrItemUI* ui = [MvrItemUI UIForItem:i];
 	
@@ -291,6 +293,9 @@ enum {
 		if (main)
 			[as addButtonWithTitle:main.displayName identifier:main];
 	}
+	
+	if (send && [self.tableController.currentMode.mutableDestinations count] > 0)
+		[as addButtonWithTitle:NSLocalizedString(@"Send", @"Send button in action menu") identifier:kMvrAppDelegateSendButtonIdentifier];
 	
 	for (MvrItemAction* a in [ui additionalActionsForItem:i])
 		[as addButtonWithTitle:a.displayName identifier:a];
@@ -306,6 +311,27 @@ enum {
 	
 	as.cancelButtonIndex = [as addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on action sheet") identifier:kMvrAppDelegateCancelButtonIdentifier];
 
+	as.delegate = self;
+	[as showInView:self.window];
+}
+
+- (void) displaySendActionSheetForItem:(MvrItem*) i;
+{
+	L0ActionSheet* as = [[L0ActionSheet new] autorelease];
+	as.tag = kMvrAppDelegateSendActionSheetTag;
+	as.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+	[as setValue:i forKey:@"MvrItem"];
+	
+	as.title = NSLocalizedString(@"Send this item to:", @"Prompt for send action menu");
+	
+	MvrUIMode* mode = self.tableController.currentMode;
+	
+	for (id destination in mode.mutableDestinations) {
+		[as addButtonWithTitle:[mode displayNameForDestination:destination] identifier:destination];
+	}
+	
+	as.cancelButtonIndex = [as addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on action sheet") identifier:kMvrAppDelegateCancelButtonIdentifier];
+	
 	as.delegate = self;
 	[as showInView:self.window];
 }
@@ -344,12 +370,23 @@ enum {
 				deleteConfirm.delegate = self;
 				[deleteConfirm showInView:self.window];
 			
-			} else if (buttonIndex != actionSheet.cancelButtonIndex) {
-				[[as identifierForButtonAtIndex:buttonIndex] performActionWithItem:item];
-			}
+			} else if ([identifier isEqual:kMvrAppDelegateSendButtonIdentifier])
+				[self displaySendActionSheetForItem:item];
+			else if (buttonIndex != actionSheet.cancelButtonIndex)
+				[identifier performActionWithItem:item];
 			
 			if (![identifier isEqual:kMvrAppDelegateDeleteButtonIdentifier])
 				[self.tableController didEndDisplayingActionMenuForItem:item];
+		}
+			break;
+			
+		case kMvrAppDelegateSendActionSheetTag: {
+			MvrItem* item = [as valueForKey:@"MvrItem"];
+			
+			if (buttonIndex != as.cancelButtonIndex) {
+				id identifier = [as identifierForButtonAtIndex:buttonIndex];
+				[self.tableController.currentMode sendItem:item toDestination:identifier];
+			}
 		}
 			break;
 			

@@ -96,6 +96,14 @@
 	[[self destinationAtDirection:dest] beginSendingItem:i];
 }
 
+- (void) sendItem:(MvrItem*) i toDestination:(id) destination;
+{
+	if (![self.mutableDestinations containsObject:destination])
+		return;
+	
+	[destination beginSendingItem:i];
+}
+
 - (void) channel:(id <MvrChannel>)c didBeginSendingWithOutgoingTransfer:(id <MvrOutgoing>)outgoing;
 {
 	MvrDirection dir = [self directionForDestination:c];

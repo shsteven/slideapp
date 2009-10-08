@@ -62,6 +62,10 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (void) animateUIAwayFromMode:(MvrUIMode*) oldOne toMode:(MvrUIMode*) newOne;
 
+- (void) displayActionMenuForItemOfView:(id) view withSend:(BOOL) send;
+- (void) displayActionMenuForItemOfView:(id) view;
+- (void) displayActionMenuForItemOfViewNoSend:(id) view;
+
 @end
 
 
@@ -267,10 +271,20 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (void) displayActionMenuForItemOfView:(id) view;
 {
+	[self displayActionMenuForItemOfView:view withSend:YES];
+}
+
+- (void) displayActionMenuForItemOfViewNoSend:(id) view;
+{
+	[self displayActionMenuForItemOfView:view withSend:NO];
+}
+
+- (void) displayActionMenuForItemOfView:(id) view withSend:(BOOL) send;
+{
 	MvrItem* item = [viewsToItems objectForKey:view];
 	
 	if (item)
-		[MvrApp() displayActionMenuForItem:item withRemove:YES withMainAction:YES];
+		[MvrApp() displayActionMenuForItem:item withRemove:YES withSend:send withMainAction:YES];
 }
 
 - (void) slidesView:(MvrSlidesView *)v didDoubleTapSubview:(L0DraggableView *)view;
@@ -295,7 +309,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	if ([view isKindOfClass:[MvrSlide class]])
 		[((MvrSlide*)view) setHighlighted:YES animated:YES animationDuration:view.pressAndHoldDelay - 0.2];
 	
-	[self performSelector:@selector(displayActionMenuForItemOfView:) withObject:view afterDelay:view.pressAndHoldDelay - 0.2];
+	[self performSelector:@selector(displayActionMenuForItemOfViewNoSend:) withObject:view afterDelay:view.pressAndHoldDelay - 0.2];
 }
 
 - (void) slidesView:(MvrSlidesView*) v didCancelHolding:(L0DraggableView*) view;
@@ -304,7 +318,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 		[((MvrSlide*)view) setHighlighted:NO animated:YES animationDuration:0.5];
 
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(beginHighlightingView:) object:view];
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(displayActionMenuForItemOfView:) object:view];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(displayActionMenuForItemOfViewNoSend:) object:view];
 }
 
 - (BOOL) slidesView:(MvrSlidesView*) v shouldAllowDraggingAfterHold:(L0DraggableView*) view;

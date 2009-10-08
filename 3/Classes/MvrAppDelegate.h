@@ -57,7 +57,7 @@
 
 - (IBAction) add;
 - (void) addItemFromSelf:(MvrItem*) item;
-- (void) displayActionMenuForItem:(MvrItem*) i withRemove:(BOOL) remove withMainAction:(BOOL) mainAction;
+- (void) displayActionMenuForItem:(MvrItem*) i withRemove:(BOOL) remove withSend:(BOOL) send withMainAction:(BOOL) mainAction;
 
 - (void) presentModalViewController:(UIViewController*) ctl;
 
@@ -66,6 +66,8 @@
 
 - (IBAction) moveToBluetoothMode;
 - (IBAction) moveToWiFiMode;
+
+- (void) displaySendActionSheetForItem:(MvrItem*) i;
 
 @end
 

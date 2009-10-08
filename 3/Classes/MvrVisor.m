@@ -98,7 +98,7 @@
 
 - (IBAction) action;
 {
-	[MvrApp() displayActionMenuForItem:item withRemove:NO withMainAction:NO];
+	[MvrApp() displayActionMenuForItem:item withRemove:NO withSend:YES withMainAction:NO];
 }
 
 @end

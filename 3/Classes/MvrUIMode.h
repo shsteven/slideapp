@@ -45,6 +45,7 @@
 @property(retain) id westDestination;
 
 - (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) dest;
+- (void) sendItem:(MvrItem*) i toDestination:(id) destination;
 - (id) destinationAtDirection:(MvrDirection) d;
 - (MvrDirection) directionForDestination:(id) d;
 - (MvrArrowView*) arrowViewForDestination:(id) d;

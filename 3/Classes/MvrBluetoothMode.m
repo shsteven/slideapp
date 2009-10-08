@@ -128,6 +128,15 @@
 	[self.northDestination beginSendingItem:i];
 }
 
+- (void) sendItem:(MvrItem*) i toDestination:(id) destination;
+{
+	if (self.northDestination != destination)
+		return;
+	
+	[destination beginSendingItem:i];
+}
+
+
 #pragma mark Receiving items
 
 
