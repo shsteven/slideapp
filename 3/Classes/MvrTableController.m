@@ -66,6 +66,8 @@ static CGPoint MvrCenterOf(CGRect r) {
 - (void) displayActionMenuForItemOfView:(id) view;
 - (void) displayActionMenuForItemOfViewNoSend:(id) view;
 
+- (void) updateAccessibilityInSlidesStratum;
+
 @end
 
 
@@ -404,6 +406,10 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[[MvrItemUI UIForItem:item] didReceiveItem:item];
 	[MvrApp().storageCentral.mutableStoredItems addObject:item];
 	[[MvrItemUI UIForItem:item] didStoreItem:item];
+	
+	MvrAccessibilityShowToast([NSString stringWithFormat:
+							   NSLocalizedString(@"%@ has been received.", @"Template for 'has been received' accessibility toast."),
+							   [[MvrItemUI UIForItem:item] accessibilityLabelForItem:item]]);
 }
 
 - (void) incomingTransfer:(id <MvrIncoming>) i mayHaveFinishedWithChange:(NSDictionary*) change;
@@ -670,9 +676,23 @@ static CGPoint MvrCenterOf(CGRect r) {
 }
 
 #pragma mark -
-#pragma mark 
+#pragma mark Accessibility
 
-- (void) UIModeDidChangeDestinations:(MvrUIMode*) m;
+- (void) UIMode:(MvrUIMode*) mode didAddDestination:(id) destination atDirection:(MvrDirection) d;
+{
+	[self updateAccessibilityInSlidesStratum];
+	
+	MvrAccessibilityShowToast([NSString stringWithFormat:NSLocalizedString(@"%@ connected.", @"Template for 'was found'"), [mode displayNameForDestination:destination]]);
+}
+
+- (void) UIMode:(MvrUIMode*) mode didRemoveDestination:(id) destination atDirection:(MvrDirection) d;
+{
+	[self updateAccessibilityInSlidesStratum];
+	
+	MvrAccessibilityShowToast([NSString stringWithFormat:NSLocalizedString(@"%@ disconnected.", @"Template for 'was lost'"), [mode displayNameForDestination:destination]]);
+}
+
+- (void) updateAccessibilityInSlidesStratum;
 {
 	MvrArrowsView* view = self.currentMode.arrowsView;
 	if (view) {

@@ -8,8 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MvrAppDelegate.h"
+
+#define kMvrDefaultsKeyAreToastsEnabled @"MvrAreToastsEnabled"
+
 #define kMvrAccessibilityDidChangeLayoutNotification @"MvrAccessibilityDidChangeLayoutNotification"
 #define kMvrAccessibilityDidChangeScreenNotification @"MvrAccessibilityDidChangeScreenNotification"
 
 extern void MvrAccessibilityDidChangeLayout();
 extern void MvrAccessibilityDidChangeScreen();
+
+extern void MvrAccessibilityShowToast(NSString* toast);
+
+@interface MvrAppDelegate (MvrAccessibility)
+
+- (void) didChangeLayout;
+- (void) didChangeScreen;
+- (void) showToast:(NSString*) toast;
+
+@end

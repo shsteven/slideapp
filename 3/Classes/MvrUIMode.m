@@ -147,36 +147,51 @@
 - (void) setNorthDestination:(id) dest;
 {
 	if (dest != northDestination) {
+		id oldDest = [[northDestination retain] autorelease];
+		
 		[northDestination release];
 		northDestination = [dest retain];
 		
 		[self.arrowsView setNorthViewLabel:dest? [self displayNameForDestination:dest] : nil];
 		
-		[self.delegate UIModeDidChangeDestinations:self];
+		if (oldDest)
+			[self.delegate UIMode:self didRemoveDestination:oldDest atDirection:kMvrDirectionNorth];
+		if (dest)
+			[self.delegate UIMode:self didRemoveDestination:dest atDirection:kMvrDirectionNorth];
 	}
 }
 
 - (void) setEastDestination:(id) dest;
 {
 	if (dest != eastDestination) {
+		id oldDest = [[eastDestination retain] autorelease];
+		
 		[eastDestination release];
 		eastDestination = [dest retain];
 		
 		[self.arrowsView setEastViewLabel:dest? [self displayNameForDestination:dest] : nil];
 		
-		[self.delegate UIModeDidChangeDestinations:self];
+		if (oldDest)
+			[self.delegate UIMode:self didRemoveDestination:oldDest atDirection:kMvrDirectionEast];
+		if (dest)
+			[self.delegate UIMode:self didRemoveDestination:dest atDirection:kMvrDirectionEast];
 	}
 }
 
 - (void) setWestDestination:(id) dest;
 {
 	if (dest != westDestination) {
+		id oldDest = [[westDestination retain] autorelease];
+		
 		[westDestination release];
 		westDestination = [dest retain];
 		
 		[self.arrowsView setWestViewLabel:dest? [self displayNameForDestination:dest] : nil];
-		
-		[self.delegate UIModeDidChangeDestinations:self];
+				
+		if (oldDest)
+			[self.delegate UIMode:self didRemoveDestination:oldDest atDirection:kMvrDirectionWest];
+		if (dest)
+			[self.delegate UIMode:self didRemoveDestination:dest atDirection:kMvrDirectionWest];
 	}
 }
 
