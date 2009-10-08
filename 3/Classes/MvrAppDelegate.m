@@ -27,6 +27,8 @@
 
 #import "MvrPasteboardItemSource.h"
 
+#import "MvrAccessibility.h"
+
 #import <MuiKit/MuiKit.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -428,7 +430,7 @@ enum {
 	
 	[UIView commitAnimations];
 	
-	UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+	MvrAccessibilityDidChangeScreen();
 }
 
 - (void) endDisplayingOverlayView;

@@ -15,6 +15,7 @@
 		1537A6E6107A394000B16B88 /* MvrBluetoothScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E5107A394000B16B88 /* MvrBluetoothScanner.m */; };
 		1537A6E9107A3CC900B16B88 /* MvrBluetoothMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */; };
 		1537A71B107A41F400B16B88 /* MvrBluetoothChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A71A107A41F400B16B88 /* MvrBluetoothChannel.m */; };
+		154D0AF1107DD945009BAF92 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		154FA62C10792232004DF675 /* MvrClearTableOnShake.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */; };
 		1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567510510620DAD006EC706 /* libMoverNetwork.a */; };
@@ -163,6 +164,8 @@
 		1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBluetoothMode.m; sourceTree = "<group>"; };
 		1537A719107A41F400B16B88 /* MvrBluetoothChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBluetoothChannel.h; sourceTree = "<group>"; };
 		1537A71A107A41F400B16B88 /* MvrBluetoothChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBluetoothChannel.m; sourceTree = "<group>"; };
+		154D0AEF107DD945009BAF92 /* MvrAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAccessibility.h; sourceTree = "<group>"; };
+		154D0AF0107DD945009BAF92 /* MvrAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAccessibility.m; sourceTree = "<group>"; };
 		154FA54810790FD1004DF675 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrClearTableOnShake.alert; sourceTree = "<group>"; };
 		156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "Network+Storage/Network+Storage.xcodeproj"; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				151E01FE1067652600C6CDFF /* Items */,
 				1591A7081063ECE200C5A5BD /* The Table */,
 				158A5F09106A6659008C6801 /* Modes */,
+				154D0AEF107DD945009BAF92 /* MvrAccessibility.h */,
+				154D0AF0107DD945009BAF92 /* MvrAccessibility.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -787,6 +792,7 @@
 				1537A6E9107A3CC900B16B88 /* MvrBluetoothMode.m in Sources */,
 				1537A71B107A41F400B16B88 /* MvrBluetoothChannel.m in Sources */,
 				15D881F0107CC78C000832F5 /* MvrPasteboardItemSource.m in Sources */,
+				154D0AF1107DD945009BAF92 /* MvrAccessibility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

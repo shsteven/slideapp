@@ -8,6 +8,7 @@
 
 #import "MvrSlidesView.h"
 #import "MvrSlide.h"
+#import "MvrAccessibility.h"
 
 typedef CGPoint (*MvrCGRectInspector)(CGRect rect);
 
@@ -39,6 +40,12 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 
 - (void) addDraggableSubview:(L0DraggableView*) view;
 
+// Accessibility
+
+- (void) clearAccessibility;
+- (void) updateAccessibility;
+- (void) makeAccessibilityElementForView:(UIView*) v;
+
 @end
 
 
@@ -51,6 +58,11 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
         srandomdev();
 		delegate = d;
 		self.clipsToBounds = YES;
+		subviewsToAccessibilityElements = [L0Map new];
+		accessibilityElements = [NSMutableArray new];
+		additionalViews = [NSMutableArray new];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeLayout:) name:kMvrAccessibilityDidChangeLayoutNotification object:nil];
     }
 	
     return self;
@@ -58,6 +70,11 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 
 - (void) dealloc;
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[subviewsToAccessibilityElements release];
+	[accessibilityElements release];
+	[additionalViews release];
+	
 #if DEBUG
 	[shownArea release];
 #endif
@@ -165,13 +182,13 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 	if (!slide)
 		[self didComeToRest:view];
 	
-	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
+	MvrAccessibilityDidChangeLayout();
 }
 
 - (void) draggableView:(L0DraggableView *)view didEndInertialSlideByFinishing:(BOOL)finished;
 {
 	[self didComeToRest:view];
-	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
+	MvrAccessibilityDidChangeLayout();
 }
 
 - (CGPoint) arrivalPointStartingFromPoint:(CGPoint) point inArea:(CGRect) safe randomness:(CGSize) randomness;
@@ -222,7 +239,7 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 
 - (void) postAccessibilityNotificationForAddition;
 {
-	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
+	MvrAccessibilityDidChangeLayout();
 }
 
 - (void) bounceBackAll;
@@ -312,12 +329,126 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 - (void) draggableViewDidBeginDragging:(L0DraggableView *)view;
 {
 	[delegate slidesView:self didCancelHolding:view];
-	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
+	MvrAccessibilityDidChangeLayout();
 }
 
 - (void) draggableViewDidPress:(L0DraggableView*) view;
 {
 	[delegate slidesView:self didCancelHolding:view];	
+}
+
+#pragma mark -
+#pragma mark Accessibility
+
+- (BOOL) isAccessibilityElement;
+{
+	return NO;
+}
+
+- (void) clearAccessibility;
+{
+	[accessibilityElements removeAllObjects];
+	[subviewsToAccessibilityElements removeAllObjects];
+	isAccessibilityUpToDate = NO;
+}
+
+- (void) updateAccessibility;
+{
+	if (isAccessibilityUpToDate)
+		return;
+	
+	[self clearAccessibility];
+	
+	for (UIView* view in self.subviews) {
+		[self makeAccessibilityElementForView:view];
+		[accessibilityElements addObject:[subviewsToAccessibilityElements objectForKey:view]];
+	}
+	
+	for (UIView* view in additionalViews) {
+		[self makeAccessibilityElementForView:view];
+		[accessibilityElements addObject:[subviewsToAccessibilityElements objectForKey:view]];
+	}
+	
+	isAccessibilityUpToDate = YES;
+}
+
+- (void) makeAccessibilityElementForView:(UIView*) v;
+{
+	UIAccessibilityElement* el = [[[UIAccessibilityElement alloc] initWithAccessibilityContainer:self] autorelease];
+	el.isAccessibilityElement = YES;
+	el.accessibilityLabel = v.accessibilityLabel;
+	el.accessibilityHint = v.accessibilityHint;
+	el.accessibilityValue = v.accessibilityValue;
+	el.accessibilityFrame = v.accessibilityFrame;
+	el.accessibilityTraits = v.accessibilityTraits;
+	
+	[subviewsToAccessibilityElements setObject:el forKey:v];
+}
+
+- (void) addSubview:(UIView *)view;
+{
+	[self clearAccessibility];
+	[super addSubview:view];
+}
+
+- (void) insertSubview:(UIView *)view atIndex:(NSInteger)index;
+{
+	[self clearAccessibility];
+	[self insertSubview:view atIndex:index];
+}
+
+- (void) insertSubview:(UIView *)view aboveSubview:(UIView *)siblingSubview;
+{
+	[self clearAccessibility];
+	[self insertSubview:view aboveSubview:siblingSubview];
+}
+
+- (void) insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview;
+{
+	[self clearAccessibility];
+	[self insertSubview:view belowSubview:siblingSubview];
+}
+
+- (void) addAccessibilityView:(UIView*) v;
+{
+	[additionalViews addObject:v];
+	[self clearAccessibility];
+}
+
+- (void) removeAccessibilityView:(UIView*) v;
+{
+	[additionalViews removeObject:v];
+	[self clearAccessibility];
+}
+
+- (void) setAccessibilityViews:(NSArray*) a;
+{
+	[additionalViews setArray:a];
+	[self clearAccessibility];
+}
+
+- (NSInteger) accessibilityElementCount;
+{
+	[self updateAccessibility];
+	return [accessibilityElements count];
+}
+
+- (id) accessibilityElementAtIndex:(NSInteger)index;
+{
+	[self updateAccessibility];
+	return [accessibilityElements objectAtIndex:index];
+}
+
+- (NSInteger) indexOfAccessibilityElement:(id)element;
+{
+	[self updateAccessibility];
+	return [accessibilityElements indexOfObject:element];
+}
+
+- (void) didChangeLayout:(NSNotification*) n;
+{
+	if (self.superview)
+		[self clearAccessibility];
 }
 
 @end

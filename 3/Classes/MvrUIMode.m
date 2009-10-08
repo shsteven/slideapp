@@ -151,6 +151,8 @@
 		northDestination = [dest retain];
 		
 		[self.arrowsView setNorthViewLabel:dest? [self displayNameForDestination:dest] : nil];
+		
+		[self.delegate UIModeDidChangeDestinations:self];
 	}
 }
 
@@ -161,6 +163,8 @@
 		eastDestination = [dest retain];
 		
 		[self.arrowsView setEastViewLabel:dest? [self displayNameForDestination:dest] : nil];
+		
+		[self.delegate UIModeDidChangeDestinations:self];
 	}
 }
 
@@ -171,6 +175,8 @@
 		westDestination = [dest retain];
 		
 		[self.arrowsView setWestViewLabel:dest? [self displayNameForDestination:dest] : nil];
+		
+		[self.delegate UIModeDidChangeDestinations:self];
 	}
 }
 

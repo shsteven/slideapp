@@ -9,6 +9,8 @@
 #import "MvrArrowsView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "MvrAccessibility.h"
+
 typedef enum {
 	kMvrSlideDown,
 	kMvrSlideRight,
@@ -54,11 +56,6 @@ typedef enum {
 #pragma mark -
 #pragma mark Adding and removing arrowed labels.
 
-- (void) setNorthViewLabel:(NSString*) label;
-{
-	[self setLabel:label forViewOfKey:@"northView"];
-}
-
 - (void) setLabel:(NSString*) label forViewOfKey:(NSString*) key;
 {
 	MvrArrowView* view = [self valueForKey:key];
@@ -89,11 +86,11 @@ typedef enum {
 		view.name = label;
 	}
 	
-	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
+	MvrAccessibilityDidChangeLayout();
 }
 
 - (void) fadeAway:(UIView*) v;
-{
+{	
 	CFRetain(v); // balanced in the did stop selector
 	[UIView beginAnimations:nil context:(void*) v];
 	
@@ -114,6 +111,11 @@ typedef enum {
 	UIView* v = (id) context;
 	[v removeFromSuperview];
 	CFRelease(v); // balances the one in -fadeAway:
+}
+
+- (void) setNorthViewLabel:(NSString*) label;
+{
+	[self setLabel:label forViewOfKey:@"northView"];
 }
 
 - (void) setWestViewLabel:(NSString*) label;

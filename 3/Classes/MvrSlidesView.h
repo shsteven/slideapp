@@ -24,6 +24,10 @@ typedef NSUInteger MvrDirection;
 
 @interface MvrSlidesView : UIView <L0DraggableViewDelegate> {
 	id <MvrSlidesViewDelegate> delegate;
+	L0Map* subviewsToAccessibilityElements;
+	NSMutableArray* accessibilityElements;
+	NSMutableArray* additionalViews;
+	BOOL isAccessibilityUpToDate;
 	
 #if DEBUG
 	UIView* shownArea;
@@ -50,6 +54,11 @@ typedef NSUInteger MvrDirection;
 - (MvrDirection) directionForCurrentPositionOfView:(L0DraggableView*) v;
 - (void) bounceBack:(UIView*) v;
 - (void) bounceBackAll;
+
+// Adds accessibility with "foreign" views.
+- (void) addAccessibilityView:(UIView*) v;
+- (void) removeAccessibilityView:(UIView*) v;
+- (void) setAccessibilityViews:(NSArray*) a;
 
 @end
 

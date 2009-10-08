@@ -20,6 +20,10 @@
 
 #import "MvrAppDelegate.h"
 
+#import "MvrAccessibility.h"
+
+#import "MvrArrowsView.h"
+
 static CGPoint MvrCenterOf(CGRect r) {
 	return CGPointMake(CGRectGetMidX(r), CGRectGetMidY(r));
 }
@@ -479,7 +483,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	else if (currentDrawerView && v)
 		[self slideDownAndRemoveDrawerViewThenReplaceWith:v];
 	
-	UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+	MvrAccessibilityDidChangeScreen();
 }
 
 - (void) slideDownAndRemoveDrawerView;
@@ -647,6 +651,28 @@ static CGPoint MvrCenterOf(CGRect r) {
 	for (MvrItem* i in items) {
 		[self removeItem:i];
 		[MvrApp().storageCentral.mutableStoredItems removeObject:i];
+	}
+}
+
+#pragma mark -
+#pragma mark 
+
+- (void) UIModeDidChangeDestinations:(MvrUIMode*) m;
+{
+	MvrArrowsView* view = self.currentMode.arrowsView;
+	if (view) {
+		NSMutableArray* a = [NSMutableArray array];
+		
+		if (view.northView)
+			[a addObject:view.northView];
+		
+		if (view.eastView)
+			[a addObject:view.eastView];
+		
+		if (view.westView)
+			[a addObject:view.westView];
+		
+		[self.slidesStratum setAccessibilityViews:a];
 	}
 }
 

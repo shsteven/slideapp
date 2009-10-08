@@ -65,4 +65,6 @@
 
 @property BOOL shouldKeepConnectionDrawerVisible;
 
+- (void) UIModeDidChangeDestinations:(MvrUIMode*) mode;
+
 @end

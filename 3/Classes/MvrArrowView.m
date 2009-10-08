@@ -44,6 +44,8 @@
 		
 		self.normalColor = self.nameLabel.textColor;
 		self.busyColor = [UIColor colorWithRed:33.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0];
+		
+		self.isAccessibilityElement = YES;
     }
 
     return self;
@@ -69,7 +71,7 @@
 - (void) setName:(NSString *) s;
 {
 	self.nameLabel.text = s;
-	[self.nameLabel setAccessibilityLabel:[NSString stringWithFormat:NSLocalizedString(@"%@, other device on the network", @"Template for arrow view's accessibility label"), s]];
+	[self setAccessibilityLabel:[NSString stringWithFormat:NSLocalizedString(@"%@, other device on the network", @"Template for arrow view's accessibility label"), s]];
 }
 
 - (void) sizeToFit;
