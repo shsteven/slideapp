@@ -63,6 +63,7 @@ static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransfo
 		additionalViews = [NSMutableArray new];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeLayout:) name:kMvrAccessibilityDidChangeLayoutNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeLayout:) name:kMvrAccessibilityDidChangeScreenNotification object:nil];
     }
 	
     return self;
@@ -359,15 +360,15 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 	
 	[self clearAccessibility];
 	
-	for (UIView* view in self.subviews) {
-		[self makeAccessibilityElementForView:view];
-		[accessibilityElements addObject:[subviewsToAccessibilityElements objectForKey:view]];
+	for (id view in self.subviews) {
+		if ([view isKindOfClass:[MvrSlide class]] && [view isEditing])
+			[self makeAccessibilityElementForView:[view actionButton]];
+		else
+			[self makeAccessibilityElementForView:view];
 	}
 	
-	for (UIView* view in additionalViews) {
+	for (id view in additionalViews)
 		[self makeAccessibilityElementForView:view];
-		[accessibilityElements addObject:[subviewsToAccessibilityElements objectForKey:view]];
-	}
 	
 	isAccessibilityUpToDate = YES;
 }
@@ -383,6 +384,7 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 	el.accessibilityTraits = v.accessibilityTraits;
 	
 	[subviewsToAccessibilityElements setObject:el forKey:v];
+	[accessibilityElements addObject:el];
 }
 
 - (void) addSubview:(UIView *)view;

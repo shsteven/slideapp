@@ -267,6 +267,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 {
 	[self.slidesStratum setEditing:editing animated:animated];
 	[super setEditing:editing animated:animated];
+	MvrAccessibilityDidChangeScreen();
 }
 
 - (void) displayActionMenuForItemOfView:(id) view;
