@@ -10,8 +10,11 @@
 
 #import "Network+Storage/MvrItem.h"
 
+@class L0KVODispatcher;
+
 @interface MvrImageItem : MvrItem {
-	
+	BOOL observingPath;
+	L0KVODispatcher* dispatcher;
 }
 
 - (id) initWithImage:(UIImage*) image type:(NSString*) t;

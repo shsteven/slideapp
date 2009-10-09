@@ -11,6 +11,8 @@
 #import "Network+Storage/MvrUTISupport.h"
 #import "Network+Storage/MvrItemStorage.h"
 
+#import <MuiKit/MuiKit.h>
+
 @implementation MvrImageItem
 
 - (id) initWithImage:(UIImage*) image type:(NSString*) t;
@@ -24,15 +26,34 @@
 	return self;
 }
 
-- (UIImage*) image;
+- (void) dealloc
 {
-	return [self cachedObjectForKey:@"image"];
+	[dispatcher release];
+	[super dealloc];
 }
 
-- (void) setImage:(UIImage *) i;
+
+- (MvrItemStorage*) storage;
 {
-	[self setCachedObject:i forKey:@"image"];
+	MvrItemStorage* s = [super storage];
+	
+	if (!observingPath) {
+		if (!dispatcher)
+			dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
+		[dispatcher observe:@"path" ofObject:s usingSelector:@selector(pathOfStorage:changed:) options:0];
+		observingPath = YES;
+	}
+	
+	return s;
 }
+
+- (void) pathOfStorage:(MvrItemStorage*) s changed:(NSDictionary*) d;
+{
+	L0Log(@"Path has changed, so we're killing the old UIImage object that might be primed to start with the previous path.");
+	[self removeCachedObjectForKey:@"image"];
+}
+
+MvrItemSynthesizeRetainFromAutocache(UIImage*, image, setImage:)
 
 - objectForEmptyImageCacheKey;
 {
