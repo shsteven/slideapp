@@ -21,6 +21,8 @@
 #define kMvrContactProperties @"L0AddressBookPersonInfoProperties"
 #define kMvrContactImageData @"L0AddressBookPersonInfoImageData"
 
+#define kMvrContactWasSaved @"MvrContactWasSaved"
+
 @interface MvrContactItem : MvrItem {
 	NSDictionary* contactPropertyList;
 }

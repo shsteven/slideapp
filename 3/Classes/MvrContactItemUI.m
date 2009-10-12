@@ -14,8 +14,6 @@
 #import "MvrContactItem.h"
 #import "MvrAppDelegate.h"
 
-#define kMvrContactWasSaved @"MvrContactWasSaved"
-
 @class MvrDuplicateContactHandler;
 
 @interface MvrContactItemUI ()

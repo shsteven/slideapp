@@ -104,6 +104,8 @@ static id MvrKeyForABProperty(ABPropertyID prop) {
 		self.contactPropertyList = [self propertyListFromAddressBookRecord:ref];
 		self.type = kMvrContactAsPropertyListType;
 		[self.metadata setDictionary:[self defaultMetadata]];
+		
+		[self setObject:[NSNumber numberWithBool:YES] forItemNotesKey:kMvrContactWasSaved];
 	}
 	
 	return self;
