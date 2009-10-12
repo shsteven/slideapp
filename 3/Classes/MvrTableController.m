@@ -122,6 +122,11 @@ static CGPoint MvrCenterOf(CGRect r) {
 	[infoButton sizeToFit];
 	[infoButton addTarget:MvrApp() action:@selector(showAboutPane) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem* infoButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
+	
+	NSString* infoButtonAccessibilityLabel = NSLocalizedString(@"About & More", @"Accessibility label for the info button");
+	infoButton.accessibilityLabel = infoButtonAccessibilityLabel;
+	infoButtonItem.accessibilityLabel = infoButtonAccessibilityLabel;
+	
 	[a addObject:infoButtonItem];
 	
 	// Set up the network button.
