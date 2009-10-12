@@ -15,8 +15,7 @@
 
 - (BOOL) canTellAFriend;
 {
-//	return [MFMailComposeViewController canSendMail];
-	return NO;
+	return [MFMailComposeViewController canSendMail];
 }
 
 - (void) start;
