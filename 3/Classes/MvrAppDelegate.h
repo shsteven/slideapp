@@ -19,6 +19,8 @@
 #import "MvrWiFiMode.h"
 #import "MvrBluetoothMode.h"
 
+#import "MvrTellAFriendController.h"
+
 @interface MvrAppDelegate : NSObject <
 	UIApplicationDelegate,
 	UIActionSheetDelegate,
@@ -40,6 +42,8 @@
 	
 	MvrWiFiMode* wifiMode;
 	MvrBluetoothMode* bluetoothMode;
+	
+	MvrTellAFriendController* tellAFriend;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow *window;
@@ -54,6 +58,8 @@
 
 @property(nonatomic, retain) IBOutlet MvrWiFiMode* wifiMode;
 @property(nonatomic, retain) IBOutlet MvrBluetoothMode* bluetoothMode;
+
+@property(readonly) MvrTellAFriendController* tellAFriend;
 
 - (IBAction) add;
 - (void) addItemFromSelf:(MvrItem*) item;

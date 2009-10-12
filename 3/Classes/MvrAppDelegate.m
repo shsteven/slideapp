@@ -61,6 +61,8 @@ enum {
 	[self setUpStorageCentral];
 	[self setUpTableController];
 	
+	tellAFriend = [MvrTellAFriendController new];
+	
 	[self.tableController viewWillAppear:NO];
 	CGRect bounds = [self.window convertRect:[UIScreen mainScreen].applicationFrame fromWindow:nil];
 	self.tableController.view.frame = bounds;
@@ -96,7 +98,7 @@ enum {
 	return NO;
 }
 
-@synthesize window, tableController, wifiMode, bluetoothMode;
+@synthesize window, tableController, wifiMode, bluetoothMode, tellAFriend;
 
 - (void) dealloc;
 {
@@ -112,6 +114,8 @@ enum {
 	[overlayWindow release];
 	[overlayLabel release];
 	[overlaySpinner release];
+	
+	[tellAFriend release];
 	
     [super dealloc];
 }
@@ -513,7 +517,9 @@ enum {
 - (IBAction) showAboutPane;
 {
 	MvrAboutPane* pane = [[MvrAboutPane new] autorelease];
-	[self presentModalViewController:pane];
+	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:pane] autorelease];
+	nav.navigationBarHidden = YES;
+	[self presentModalViewController:nav];
 }
 
 @end
