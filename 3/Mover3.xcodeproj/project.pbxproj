@@ -14,6 +14,8 @@
 		153131881083757700D28022 /* MvrAboutPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153131871083757700D28022 /* MvrAboutPane.xib */; };
 		1531319110837AC100D28022 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		1531319910837C2C00D28022 /* AboutPaneHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531319810837C2C00D28022 /* AboutPaneHeader.png */; };
+		1531323510838F3400D28022 /* inflabs_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531323310838F3400D28022 /* inflabs_dark.png */; };
+		1531323610838F3400D28022 /* inflabs.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531323410838F3400D28022 /* inflabs.png */; };
 		1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1537A6E0107A388000B16B88 /* GameKit.framework */; };
 		1537A6E6107A394000B16B88 /* MvrBluetoothScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E5107A394000B16B88 /* MvrBluetoothScanner.m */; };
 		1537A6E9107A3CC900B16B88 /* MvrBluetoothMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */; };
@@ -164,6 +166,8 @@
 		1531318F10837AC100D28022 /* MvrAboutPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAboutPane.h; sourceTree = "<group>"; };
 		1531319010837AC100D28022 /* MvrAboutPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAboutPane.m; sourceTree = "<group>"; };
 		1531319810837C2C00D28022 /* AboutPaneHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AboutPaneHeader.png; path = Theme/AboutPaneHeader.png; sourceTree = "<group>"; };
+		1531323310838F3400D28022 /* inflabs_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inflabs_dark.png; sourceTree = "<group>"; };
+		1531323410838F3400D28022 /* inflabs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inflabs.png; sourceTree = "<group>"; };
 		1537A6E0107A388000B16B88 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		1537A6E4107A394000B16B88 /* MvrBluetoothScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBluetoothScanner.h; sourceTree = "<group>"; };
 		1537A6E5107A394000B16B88 /* MvrBluetoothScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBluetoothScanner.m; sourceTree = "<group>"; };
@@ -340,6 +344,8 @@
 		1531319210837C1F00D28022 /* About pane */ = {
 			isa = PBXGroup;
 			children = (
+				1531323310838F3400D28022 /* inflabs_dark.png */,
+				1531323410838F3400D28022 /* inflabs.png */,
 				1531319810837C2C00D28022 /* AboutPaneHeader.png */,
 				153131871083757700D28022 /* MvrAboutPane.xib */,
 			);
@@ -782,6 +788,8 @@
 				15F036E1107B46720094D21E /* Backdrop-Bluetooth.png in Resources */,
 				153131881083757700D28022 /* MvrAboutPane.xib in Resources */,
 				1531319910837C2C00D28022 /* AboutPaneHeader.png in Resources */,
+				1531323510838F3400D28022 /* inflabs_dark.png in Resources */,
+				1531323610838F3400D28022 /* inflabs.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

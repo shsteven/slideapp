@@ -12,6 +12,7 @@
 @interface MvrAboutPane : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	IBOutlet UITableView* tableView;
 	IBOutlet UIView* headerView;
+	IBOutlet UIView* footerView;
 	
 	IBOutlet UILabel* versionLabel;
 }

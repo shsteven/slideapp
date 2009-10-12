@@ -8,6 +8,17 @@
 
 #import "MvrAboutPane.h"
 
+enum {
+	// Top section
+	kMvrAboutEntry_TellAFriend = 0,
+	kMvrAboutEntry_Bookmarklet,
+	kMvrAboutSectionOneEntriesCount,
+	
+	// Middle section
+	kMvrAboutEntry_Licenses = 0,
+	kMvrAboutSectionTwoEntriesCount,
+};
+
 
 @implementation MvrAboutPane
 
@@ -25,6 +36,7 @@
 {
     [super viewDidLoad];
 	tableView.tableHeaderView = headerView;
+	tableView.tableFooterView = footerView;
 	tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
 	tableView.delegate = self;
 	tableView.dataSource = self;
@@ -35,6 +47,7 @@
 - (void) viewDidUnload;
 {
 	[headerView release]; headerView = nil;
+	[footerView release]; footerView = nil;
 	[tableView release]; tableView = nil;
 	[versionLabel release]; versionLabel = nil;
 	
@@ -77,27 +90,59 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tv {
-    return 1;
+    return 2;
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section {
-    return 100;
+	switch (section) {
+		case 0:
+			return kMvrAboutSectionOneEntriesCount;
+		case 1:
+			return kMvrAboutSectionTwoEntriesCount;
+		default:
+			return 0;
+	}
 }
-
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString* cellIdentifier = @"MvrRegularCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
     }
     
-    cell.textLabel.text = @"OOO";
+
+	switch ([indexPath section]) {
+		case 0:
+			switch ([indexPath row]) {
+				case kMvrAboutEntry_TellAFriend:
+					cell.textLabel.text = NSLocalizedString(@"Tell a Friend", @"Tell a Friend entry in about box");
+					break;
+				case kMvrAboutEntry_Bookmarklet:
+					cell.textLabel.text = NSLocalizedString(@"Add Bookmarks from Safari", @"Bookmarklet entry in about box");
+					break;
+			}
+			
+			cell.textLabel.textAlignment = UITextAlignmentCenter;
+			
+			break;
+
+		case 1:
+			switch ([indexPath row]) {
+				case kMvrAboutEntry_Licenses:
+					cell.textLabel.text = NSLocalizedString(@"Licenses & Copyright", @"Licenses entry in about box");
+					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+					break;
+			}
+			
+			break;
+	}
+	
 	
     return cell;
 }
