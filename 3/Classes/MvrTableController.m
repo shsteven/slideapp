@@ -118,6 +118,13 @@ static CGPoint MvrCenterOf(CGRect r) {
 	NSMutableArray* a = [NSMutableArray arrayWithArray:self.toolbar.items];
 	[a insertObject:self.editButtonItem atIndex:kMvrEditButtonPlacement]; // see NIB.
 	
+	UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+	[infoButton sizeToFit];
+	[infoButton addTarget:MvrApp() action:@selector(showAboutPane) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem* infoButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
+	[a addObject:infoButtonItem];
+	
+	// Set up the network button.
 	id network = [a objectAtIndex:kMvrNetworkButtonPlacement];
 	if ([network respondsToSelector:@selector(setAccessibilityLabel:)])
 		[network setAccessibilityLabel:NSLocalizedString(@"Network state", @"Accessibility label for the network toolbar button")];

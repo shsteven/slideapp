@@ -29,6 +29,8 @@
 
 #import "MvrAccessibility.h"
 
+#import "MvrAboutPane.h"
+
 #import <MuiKit/MuiKit.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -503,6 +505,15 @@ enum {
 - (IBAction) moveToWiFiMode;
 {
 	self.tableController.currentMode = self.wifiMode;
+}
+
+#pragma mark -
+#pragma mark About pane
+
+- (IBAction) showAboutPane;
+{
+	MvrAboutPane* pane = [[MvrAboutPane new] autorelease];
+	[self presentModalViewController:pane];
 }
 
 @end

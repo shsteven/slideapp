@@ -69,6 +69,8 @@
 
 - (void) displaySendActionSheetForItem:(MvrItem*) i;
 
+- (IBAction) showAboutPane;
+
 @end
 
 // -----
