@@ -211,11 +211,7 @@
 
 - (void) packetBuilder:(MvrPacketBuilder *)b didEndWithError:(NSError *)e;
 {
-	if (self.finished)
-		return;
-	
-	if (e)
-		[self endWithError:e];
+	[self endWithError:e];
 }
 
 - (void) endWithError:(NSError*) e;
