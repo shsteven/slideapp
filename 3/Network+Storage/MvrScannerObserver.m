@@ -241,8 +241,17 @@
 	}
 }
 
+- (void) incomingTransfer:(id <MvrIncoming>)incoming didChangeProgressKey:(NSDictionary *)change;
+{
+	if ([delegate respondsToSelector:@selector(incomingTransfer:didProgress:)]) {
+		L0Log(@"Dispatching incomingTransfer:%@ didProgress:%f", incoming, [incoming progress]);
+		[delegate incomingTransfer:incoming didProgress:[incoming progress]];
+	}
+}
+
 - (void) endObservingIncomingTransfer:(id <MvrIncoming>) incoming;
 {
+	[kvo endObserving:@"progress" ofObject:incoming];
 	[kvo endObserving:@"item" ofObject:incoming];
 	[kvo endObserving:@"cancelled" ofObject:incoming];
 	[observedObjects removeObject:incoming];
@@ -264,6 +273,13 @@
 		}
 	} else {
 		[observedObjects addObject:incoming];
+		
+		if ([delegate respondsToSelector:@selector(incomingTransfer:didProgress:)]) {
+			L0Log(@"Dispatching (immediate) incomingTransfer:%@ didProgress:%f", incoming, [incoming progress]);
+			[delegate incomingTransfer:incoming didProgress:[incoming progress]];
+		}
+		
+		[kvo observe:@"progress" ofObject:incoming usingSelector:@selector(incomingTransfer:didChangeProgressKey:) options:0];
 		[kvo observe:@"item" ofObject:incoming usingSelector:@selector(incomingTransfer:didChangeItemOrCancelledKey:) options:0];
 		[kvo observe:@"cancelled" ofObject:incoming usingSelector:@selector(incomingTransfer:didChangeItemOrCancelledKey:) options:0];
 	}
@@ -285,10 +301,20 @@
 	}
 }
 
+- (void) outgoingTransfer:(id <MvrOutgoing>) outgoing didChangeProgressKey:(NSDictionary*) d;
+{
+	L0Log(@"%@.progress == %f (-1 == indeterminate)", outgoing, [outgoing progress]);
+	if ([delegate respondsToSelector:@selector(outgoingTransfer:didProgress:)]) {
+		L0Log(@"Dispatching outgoingTransfer:%@ didProgress:%f", outgoing, [outgoing progress]);
+		[delegate outgoingTransfer:outgoing didProgress:[outgoing progress]];
+	}
+}
+
 - (void) endObservingOutgoingTransfer:(id <MvrOutgoing>) outgoing;
 {
 	L0Log(@"%@", outgoing);
 	[kvo endObserving:@"finished" ofObject:outgoing];
+	[kvo endObserving:@"progress" ofObject:outgoing];
 	[observedObjects removeObject:outgoing];
 }
 
@@ -308,6 +334,15 @@
 	} else {
 		[observedObjects addObject:outgoing];
 		[kvo observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:didChangeFinishedKey:) options:0];
+		
+		if ([outgoing respondsToSelector:@selector(progress)]) {
+			if ([delegate respondsToSelector:@selector(outgoingTransfer:didProgress:)]) {
+				L0Log(@"Dispatching (initial) outgoingTransfer:%@ didProgress:%f", outgoing, [outgoing progress]);
+				[delegate outgoingTransfer:outgoing didProgress:[outgoing progress]];
+			}
+			
+			[kvo observe:@"progress" ofObject:outgoing usingSelector:@selector(outgoingTransfer:didChangeProgressKey:) options:0];
+		}
 	}
 }
 

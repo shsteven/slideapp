@@ -29,6 +29,7 @@
 	BOOL canFinish;
 }
 
++ (void) allowIPv6;
 - (id) initWithItem:(MvrItem*) i toAddresses:(NSArray*) a;
 
 @property(readonly, assign) BOOL finished;

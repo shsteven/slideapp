@@ -42,9 +42,11 @@
 - (void) channel:(id <MvrChannel>) c didBeginSendingWithOutgoingTransfer:(id <MvrOutgoing>) outgoing;
 - (void) channel:(id <MvrChannel>) c didChangeSupportsStreamsKey:(BOOL) supportsStreams;
 
+- (void) outgoingTransfer:(id <MvrOutgoing>) outgoing didProgress:(float) progress;
 - (void) outgoingTransferDidEndSending:(id <MvrOutgoing>) outgoing;
 
 // i == nil if cancelled.
 - (void) incomingTransfer:(id <MvrIncoming>) incoming didEndReceivingItem:(MvrItem*) i;
+- (void) incomingTransfer:(id <MvrIncoming>) incoming didProgress:(float) progress;
 
 @end

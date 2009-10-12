@@ -43,16 +43,20 @@
 	
 	NSError* e;
 	
-	int attempts = 0; const int maximumAttempts = 30;
+	int attempts = 0; const int maximumAttempts = 30; BOOL done = NO;
 	
 	do {
 		if (![serverSocket acceptOnPort:serverPort error:&e]) {
 			L0LogAlways(@"Having difficulty accepting modern connections on port %d, retrying shortly: %@", serverPort, e);
 			attempts++;
 			[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.25]];
-		} else
+		} else {
+			done = YES;
 			break;
+		}
 	} while (attempts < maximumAttempts);
+	
+	NSAssert(done, @"We should've managed to accept sockets!"); // TODO
 	
 	[super start];	
 }

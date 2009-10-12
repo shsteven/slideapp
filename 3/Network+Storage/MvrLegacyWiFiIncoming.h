@@ -12,6 +12,7 @@
 
 @interface MvrLegacyWiFiIncoming : MvrGenericIncoming <BLIPConnectionDelegate> {
 	BLIPConnection* connection;
+	BOOL didEnd;
 }
 
 - (id) initWithConnection:(BLIPConnection*) connection;

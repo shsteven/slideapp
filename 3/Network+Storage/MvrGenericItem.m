@@ -28,4 +28,9 @@
 	return [self.storage preferredContentObject];
 }
 
+- (BOOL) requiresStreamSupport;
+{
+	return YES;
+}
+
 @end

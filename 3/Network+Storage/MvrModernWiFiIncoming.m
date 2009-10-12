@@ -57,7 +57,7 @@
 	
 	[[channel mutableSetValueForKey:@"incomingTransfers"] addObject:self];
 	
-	[sock readDataWithTimeout:120 tag:0];
+	[sock readDataWithTimeout:30 tag:0];
 }
 
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)d withTag:(long)tag;
@@ -70,17 +70,15 @@
 	unsigned long long size = parser.expectedSize;
 	L0Log(@"Now expecting %llu bytes. (0 == no limit)", size);
 	if (size == 0)
-		[sock readDataWithTimeout:120 tag:0];
+		[sock readDataWithTimeout:15 tag:0];
 	else
-		[sock readDataToLength:size withTimeout:120 tag:0];
+		[sock readDataToLength:size withTimeout:15 tag:0];
 }
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err;
 {
 	L0Log(@"%@", err);
-	
-	if (err)
-		[self cancel];
+	[self cancel];
 }
 
 #pragma mark -

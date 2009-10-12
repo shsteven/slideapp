@@ -14,4 +14,8 @@
 // When finished == YES, the item was sent.
 - (BOOL) finished;
 
+@optional
+// Can be 0.0..1.0 or kMvrIndeterminateProgress. KVOable.
+- (float) progress;
+
 @end

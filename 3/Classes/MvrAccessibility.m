@@ -52,18 +52,18 @@ void MvrAccessibilityDidChangeScreen() {
 }
 
 void MvrAccessibilityShowToast(NSString* toast) {
-	static BOOL isEnabled, didCheckEnabled = NO;
-	
-	if (!didCheckEnabled) {
-		isEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kMvrDefaultsKeyAreToastsEnabled];
-		didCheckEnabled = YES;
-	}
-	
-	if (!isEnabled)
-		return;
-	
-	UIAlertView* a = [[UIAlertView new] autorelease];
-	a.title = toast;
-	[a show];
-	[a performSelector:@selector(mvrDismissToast) withObject:nil afterDelay:4.0];
+//	static BOOL isEnabled, didCheckEnabled = NO;
+//	
+//	if (!didCheckEnabled) {
+//		isEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kMvrDefaultsKeyAreToastsEnabled];
+//		didCheckEnabled = YES;
+//	}
+//	
+//	if (!isEnabled)
+//		return;
+//	
+//	UIAlertView* a = [[UIAlertView new] autorelease];
+//	a.title = toast;
+//	[a show];
+//	[a performSelector:@selector(mvrDismissToast) withObject:nil afterDelay:4.0];
 }

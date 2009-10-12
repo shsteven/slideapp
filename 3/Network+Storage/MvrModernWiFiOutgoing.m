@@ -58,17 +58,38 @@
 #pragma mark -
 #pragma mark Socket and state management.
 
+static BOOL MvrIPv6Allowed = NO;
+
++ (void) allowIPv6;
+{
+	MvrIPv6Allowed = YES;
+}
+
 - (NSData*) bestCandidateAddress;
 {
-	NSData* address = nil;
+	// We try to avoid using the BT PAN network interface by looking for an address that does NOT begin with 169.254. (that is, auto-assigned); we only use addresses like that if there's nothing else good available.
+	// Also: iPhone OS 3.0 does NOT support IPv6 so we simply ignore all IPv6 addresses. This is, um, questionable for a number of reasons, but it's a thing I don't want to fix right now. This can be changed by using [MvrModernWiFiOutgoing allowIPv6].
+	
+	NSData* address = nil, * secondBestAddress = nil;
 	for (NSData* potentialAddress in addresses) {
-		if ([potentialAddress socketAddressIsIPAddressOfVersion:kL0IPAddressVersion4]) {
+		if (!MvrIPv6Allowed && ![potentialAddress socketAddressIsIPAddressOfVersion:kL0IPAddressVersion4])
+			continue;
+		
+		if (!secondBestAddress)
+			secondBestAddress = potentialAddress;
+		
+		// I know it's icky, and yet.
+		if (!address && ![[potentialAddress socketAddressStringValue] hasPrefix:@"169.254."])
 			address = potentialAddress;
-			break;
-		}
+		
+		if (address && secondBestAddress) break;
 	}
 	
-	L0Log(@"Using %@ (%@) as the best candidate address", address, [address socketAddressStringValue]);
+	L0Log(@"Picked candidate addresses %@ (best, nil = no best), %@ (second best)", [address socketAddressStringValue], [secondBestAddress socketAddressStringValue]);
+	
+	if (!address)
+		address = secondBestAddress;
+	
 	return address;
 }
 
@@ -156,20 +177,28 @@
 
 - (void) packetBuilderWillStart:(MvrPacketBuilder *)b;
 {
+	[self willChangeValueForKey:@"progress"];
 	self.progress = builder.progress;
+	[self didChangeValueForKey:@"progress"];
 }
 
 - (void) packetBuilder:(MvrPacketBuilder*) b didProduceData:(NSData*) d;
 {
 	[socket writeData:d withTimeout:-1 tag:0];
-	self.progress = builder.progress;
 
 	L0Log(@"Writing %llu bytes, %u chunks now pending", (unsigned long long) [d length], chunksPending);
+	
+	[self willChangeValueForKey:@"progress"];
+	self.progress = builder.progress;
+	[self didChangeValueForKey:@"progress"];	
 }
 
 - (void) packetBuilder:(MvrPacketBuilder*) b didEndWithError:(NSError*) e;
 {	
+	[self willChangeValueForKey:@"progress"];
 	self.progress = builder.progress;
+	[self didChangeValueForKey:@"progress"];
+	
 	if (e)
 		[self endWithError:e];
 	

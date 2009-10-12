@@ -18,7 +18,9 @@
 #import "MvrUTISupport.h"
 #import "MvrStorageCentral.h"
 
+#import "MvrProtocol.h"
 #import "MvrIncoming.h"
+#import "MvrModernWiFiOutgoing.h" // for allowIPv6.
 
 #import "MvrPlatformInfo.h"
 #import "MvrMetadataStorage.h"
@@ -40,7 +42,7 @@ static id MvrBlockForLoggingPropertyChange(NSString* propertyName) {
 @interface MvrWiFiTool : NSObject <DDCliApplicationDelegate, MvrScannerObserverDelegate>
 {
 	NSString* name;
-	NSString* temporary, * persistent, * identifier;
+	NSString* temporary, * persistent, * identifier, * sendFile, * sendType;
 	MvrWiFi* wifi;
 	L0KVODispatcher* kvo;
 	
@@ -49,6 +51,8 @@ static id MvrBlockForLoggingPropertyChange(NSString* propertyName) {
 	int port, legacyPort;
 	
 	BOOL stopped;
+	
+	MvrItem* toBeSent; BOOL cancel, cancelAbort;
 }
 
 @property(copy) NSString* name;
@@ -185,6 +189,10 @@ L0ObjCSingletonMethod(sharedInfo)
         {@"persistent", 'P', DDGetoptRequiredArgument},
         {@"metadata", 'm', DDGetoptRequiredArgument},
         {@"identifier", 'I', DDGetoptRequiredArgument},
+        {@"sendFile", 's', DDGetoptRequiredArgument},
+        {@"sendType", 't', DDGetoptRequiredArgument},
+        {@"cancel", 0, DDGetoptNoArgument},
+        {@"cancelAbort", 0, DDGetoptNoArgument},
 		{nil, 0, 0}
     };
     [optionParser addOptionsFromTable:optionTable];
@@ -193,6 +201,8 @@ L0ObjCSingletonMethod(sharedInfo)
 - (int) application: (DDCliApplication *) app
    runWithArguments: (NSArray *) arguments;
 {
+	// [MvrModernWiFiOutgoing allowIPv6];
+	
 	if (!self.name) {
 		ddprintf(@"Please specify a name with the --name <name> (-n <name>) option.");
 		return 1;
@@ -212,6 +222,19 @@ L0ObjCSingletonMethod(sharedInfo)
 	if (self.persistent) {
 		central = [[MvrStorageCentral alloc] initWithPersistentDirectory:self.persistent metadataStorage:[MvrWiFiToolPlatform sharedInfo]];
 		L0Log(@" == Will store data that arrives during this section in %@ using %@", self.persistent, central);
+	}
+	
+	if (sendFile && sendType) {
+		
+		NSError* e;
+		MvrItemStorage* storage = [MvrItemStorage itemStorageFromFileAtPath:sendFile error:&e];
+		if (!storage) {
+			L0Log(@"Could not create an item storage for file at path %@. Error: %@", sendFile, e);
+			return 1;
+		}
+		
+		toBeSent = [[MvrItem itemWithStorage:storage type:sendType metadata:nil] retain];
+		L0Log(@"We'll send item %@ (of type %@, with storage %@) to all channels we see", toBeSent, toBeSent.type, toBeSent.storage);
 	}
 	
 	
@@ -253,6 +276,9 @@ L0ObjCSingletonMethod(sharedInfo)
 - (void) scanner:(id <MvrScanner>) s didAddChannel:(id <MvrChannel>) channel;
 {
 	L0Log(@"%@.channels += %@", s, channel);
+	
+	if (toBeSent)
+		[(id) channel performSelector:@selector(beginSendingItem:) withObject:toBeSent afterDelay:1.0];
 }
 
 - (void) scanner:(id <MvrScanner>) s didRemoveChannel:(id <MvrChannel>) channel;			
@@ -282,6 +308,20 @@ L0ObjCSingletonMethod(sharedInfo)
 	
 	if (i)
 		[central.mutableStoredItems addObject:i];
+}
+
+- (void) outgoingTransfer:(id <MvrOutgoing>)outgoing didProgress:(float)progress;
+{
+	if ((cancel || cancelAbort) && progress != kMvrIndeterminateProgress && progress >= 0.5) {
+		
+		if (cancel) {
+			[self stop];
+			return;
+		}
+		
+		if (cancelAbort)
+			abort();
+	}
 }
 
 #pragma mark -
@@ -359,6 +399,7 @@ L0ObjCSingletonMethod(sharedInfo)
 	self.identifier = nil;
 	self.name = nil;
 	self.wifi = nil;
+	[toBeSent release];
 	[super dealloc];
 }
 
