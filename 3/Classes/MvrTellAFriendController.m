@@ -32,6 +32,7 @@
 											  @"Subject of 'Email a Friend' message");
 	
 	MFMailComposeViewController* mail = [[MFMailComposeViewController new] autorelease];
+	mail.navigationBar.barStyle = UIBarStyleBlack;
 	mail.mailComposeDelegate = self;
 	[mail setSubject:mailSubject];
 	[mail setMessageBody:mailMessage isHTML:NO];
