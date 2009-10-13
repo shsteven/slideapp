@@ -20,6 +20,7 @@
 #import "MvrBluetoothMode.h"
 
 #import "MvrTellAFriendController.h"
+#import "MvrCrashReporting.h"
 
 @interface MvrAppDelegate : NSObject <
 	UIApplicationDelegate,
@@ -44,6 +45,7 @@
 	MvrBluetoothMode* bluetoothMode;
 	
 	MvrTellAFriendController* tellAFriend;
+	MvrCrashReporting* crashReporting;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow *window;

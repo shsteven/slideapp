@@ -62,7 +62,9 @@ enum {
 	[self setUpTableController];
 	
 	tellAFriend = [MvrTellAFriendController new];
-	
+	crashReporting = [MvrCrashReporting new];
+	[crashReporting checkForPendingReports];
+
 	[self.tableController viewWillAppear:NO];
 	CGRect bounds = [self.window convertRect:[UIScreen mainScreen].applicationFrame fromWindow:nil];
 	self.tableController.view.frame = bounds;
@@ -71,6 +73,8 @@ enum {
 	
 	self.overlayWindow.hidden = YES;
     [self.window makeKeyAndVisible];
+	
+	[crashReporting enableReporting];
 }
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
@@ -116,6 +120,7 @@ enum {
 	[overlaySpinner release];
 	
 	[tellAFriend release];
+	[crashReporting release];
 	
     [super dealloc];
 }

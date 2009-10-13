@@ -73,6 +73,9 @@
 		15955A621077700200FBC9B4 /* MvrTextVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15955A611077700200FBC9B4 /* MvrTextVisor.xib */; };
 		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
 		15AD035B1073F83200D92F5E /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */; };
+		15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFE6D9108460C000CBCB35 /* CrashReporter.framework */; };
+		15AFE6ED108460F200CBCB35 /* MvrCrashReporting.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */; };
+		15AFE6EF1084623300CBCB35 /* MvrAskAboutCrash.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */; };
 		15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
 		15C1C8531068DAAA000C9CDE /* MvrArrowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */; };
 		15C1C86B1068DB92000C9CDE /* MvrWiFiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86A1068DB92000C9CDE /* MvrWiFiMode.m */; };
@@ -255,6 +258,10 @@
 		15955A611077700200FBC9B4 /* MvrTextVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTextVisor.xib; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
+		15AFE6D9108460C000CBCB35 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		15AFE6EB108460F200CBCB35 /* MvrCrashReporting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrCrashReporting.h; sourceTree = "<group>"; };
+		15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrCrashReporting.m; sourceTree = "<group>"; };
+		15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrAskAboutCrash.alert; sourceTree = "<group>"; };
 		15C1C8491068D8AA000C9CDE /* MvrArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView.h; sourceTree = "<group>"; };
 		15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrArrowView.m; sourceTree = "<group>"; };
 		15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrArrowView.xib; sourceTree = "<group>"; };
@@ -302,6 +309,7 @@
 				157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */,
 				154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */,
 				1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */,
+				15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +319,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				15AFE6EA108460E400CBCB35 /* Crash Reporting */,
 				1531326D1083A7B000D28022 /* Tell a Friend */,
 				1531318E10837AB100D28022 /* About Pane */,
 				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
@@ -553,6 +562,15 @@
 			name = "Text clippings";
 			sourceTree = "<group>";
 		};
+		15AFE6EA108460E400CBCB35 /* Crash Reporting */ = {
+			isa = PBXGroup;
+			children = (
+				15AFE6EB108460F200CBCB35 /* MvrCrashReporting.h */,
+				15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */,
+			);
+			name = "Crash Reporting";
+			sourceTree = "<group>";
+		};
 		15B391F0107B5A2A0005B97E /* Transfers */ = {
 			isa = PBXGroup;
 			children = (
@@ -617,6 +635,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				1567511310620DF7006EC706 /* libz.1.1.3.dylib */,
+				15AFE6D9108460C000CBCB35 /* CrashReporter.framework */,
 				1567511510620DFC006EC706 /* SystemConfiguration.framework */,
 				1567511710620E01006EC706 /* CFNetwork.framework */,
 				1567511910620E08006EC706 /* MobileCoreServices.framework */,
@@ -661,6 +680,7 @@
 				151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */,
 				154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */,
 				1531338C1083AAFA00D28022 /* MvrNoEmail.alert */,
+				15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */,
 				1591A7191063EF2C00C5A5BD /* Slide view */,
 				1531319210837C1F00D28022 /* About pane */,
 			);
@@ -807,6 +827,7 @@
 				1531323510838F3400D28022 /* inflabs_dark.png in Resources */,
 				1531323610838F3400D28022 /* inflabs.png in Resources */,
 				1531338D1083AAFA00D28022 /* MvrNoEmail.alert in Resources */,
+				15AFE6EF1084623300CBCB35 /* MvrAskAboutCrash.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -849,6 +870,7 @@
 				154D0AF1107DD945009BAF92 /* MvrAccessibility.m in Sources */,
 				1531319110837AC100D28022 /* MvrAboutPane.m in Sources */,
 				153132701083A7C700D28022 /* MvrTellAFriendController.m in Sources */,
+				15AFE6ED108460F200CBCB35 /* MvrCrashReporting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -872,6 +894,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF0D7105BAECB006D8E7A /* Mover-Debug.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 			};
 			name = Debug;
 		};
@@ -879,6 +905,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF0D8105BAECB006D8E7A /* Mover-Release.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 			};
 			name = Release;
 		};
