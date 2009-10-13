@@ -8,6 +8,8 @@
 
 #import "MvrBluetoothMode.h"
 
+#import <MuiKit/MuiKit.h>
+
 #import "MvrAppDelegate.h"
 
 @implementation MvrBluetoothMode
@@ -153,6 +155,14 @@
 - (void) channel:(id <MvrChannel>) c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>) incoming;
 {
 	[self.delegate UIMode:self willBeginReceivingItemWithTransfer:incoming fromDirection:kMvrDirectionNorth];
+}
+
+#pragma mark Availability
+
+- (BOOL) isAvailable;
+{
+	NSString* model = [UIDevice currentDevice].internalModelName;
+	return ![model isEqual:@"iPod1,1"] && ![model isEqual:@"iPhone1,1"];
 }
 
 @end

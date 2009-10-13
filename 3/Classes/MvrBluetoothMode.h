@@ -24,4 +24,6 @@
 - (IBAction) beginPickingPeer;
 - (void) stopPickingPeer;
 
+@property(readonly, getter=isAvailable) BOOL available;
+
 @end

@@ -504,11 +504,12 @@ enum {
 }	
 
 #pragma mark -
-#pragma mark Blueototh
+#pragma mark Mode availability & switches
 
 - (IBAction) moveToBluetoothMode;
 {
-	self.tableController.currentMode = self.bluetoothMode;
+	if (self.bluetoothMode.available)
+		self.tableController.currentMode = self.bluetoothMode;
 }
 
 - (IBAction) moveToWiFiMode;

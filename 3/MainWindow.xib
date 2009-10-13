@@ -11,13 +11,13 @@
 			<string key="NS.object.0">62</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="10"/>
-			<integer value="41"/>
-			<integer value="24"/>
+			<integer value="83"/>
 			<integer value="2"/>
 			<integer value="86"/>
-			<integer value="83"/>
 			<integer value="43"/>
+			<integer value="41"/>
+			<integer value="24"/>
+			<integer value="10"/>
 			<integer value="74"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -170,21 +170,6 @@
 							<string key="NSResourceName">DrawerLabelHolder.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="244218547">
-						<reference key="NSNextResponder" ref="87973870"/>
-						<int key="NSvFlags">258</int>
-						<string key="NSFrame">{{7, 63}, {305, 47}}</string>
-						<reference key="NSSuperview" ref="87973870"/>
-						<reference key="IBUIBackgroundColor" ref="857366566"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<string key="IBUIContentStretch">{{0.2, 1.38778e-17}, {0, 1}}</string>
-						<object class="NSCustomResource" key="IBUIImage" id="539982745">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">DrawerButton.png</string>
-						</object>
-					</object>
 					<object class="IBUILabel" id="686004889">
 						<reference key="NSNextResponder" ref="87973870"/>
 						<int key="NSvFlags">292</int>
@@ -253,38 +238,65 @@
 							<string key="NSResourceName">GreenDot.png</string>
 						</object>
 					</object>
-					<object class="IBUIButton" id="493849469">
+					<object class="IBUIView" id="371591545">
 						<reference key="NSNextResponder" ref="87973870"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{7, 63}, {305, 47}}</string>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIImageView" id="244218547">
+								<reference key="NSNextResponder" ref="371591545"/>
+								<int key="NSvFlags">258</int>
+								<string key="NSFrame">{{20, 0}, {305, 47}}</string>
+								<reference key="NSSuperview" ref="371591545"/>
+								<reference key="IBUIBackgroundColor" ref="857366566"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<bool key="IBUIMultipleTouchEnabled">YES</bool>
+								<string key="IBUIContentStretch">{{0.2, 1.38778e-17}, {0, 1}}</string>
+								<object class="NSCustomResource" key="IBUIImage" id="539982745">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">DrawerButton.png</string>
+								</object>
+							</object>
+							<object class="IBUIButton" id="493849469">
+								<reference key="NSNextResponder" ref="371591545"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{20, 0}, {305, 47}}</string>
+								<reference key="NSSuperview" ref="371591545"/>
+								<reference key="IBUIBackgroundColor" ref="857366566"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<object class="NSFont" key="IBUIFont" id="349353703">
+									<string key="NSName">Helvetica-Bold</string>
+									<double key="NSSize">15</double>
+									<int key="NSfFlags">16</int>
+								</object>
+								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
+								<string key="IBUITitleShadowOffset">{0, 1}</string>
+								<string key="IBUINormalTitle">Turn Bluetooth On</string>
+								<reference key="IBUIHighlightedTitleColor" ref="485013192"/>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MyAwLjMwOTgwMzkzIDAuNTIxNTY4NjYAA</bytes>
+								</object>
+								<reference key="IBUINormalTitleShadowColor" ref="250759091"/>
+							</object>
+						</array>
+						<string key="NSFrame">{{-13, 63}, {325, 54}}</string>
 						<reference key="NSSuperview" ref="87973870"/>
-						<reference key="IBUIBackgroundColor" ref="857366566"/>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MSAwAA</bytes>
+							<reference key="NSCustomColorSpace" ref="678626741"/>
+						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont" id="349353703">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
-						<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
-						<string key="IBUITitleShadowOffset">{0, 1}</string>
-						<string key="IBUINormalTitle">Turn Bluetooth On</string>
-						<reference key="IBUIHighlightedTitleColor" ref="485013192"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MyAwLjMwOTgwMzkzIDAuNTIxNTY4NjYAA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="250759091"/>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 118}</string>
+				<string key="NSFrameSize">{320, 117}</string>
 				<reference key="NSSuperview"/>
-				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMC4yMDAwMDAwMDMgMAA</bytes>
-				</object>
+				<reference key="IBUIBackgroundColor" ref="485013192"/>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 			</object>
 			<object class="IBUIWindow" id="343334732">
@@ -704,6 +716,14 @@
 					</object>
 					<int key="connectionID">102</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">bluetoothButtonView</string>
+						<reference key="source" ref="954637339"/>
+						<reference key="destination" ref="371591545"/>
+					</object>
+					<int key="connectionID">105</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -799,12 +819,11 @@
 						<int key="objectID">43</int>
 						<reference key="object" ref="87973870"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="244218547"/>
 							<reference ref="808545404"/>
 							<reference ref="739409769"/>
 							<reference ref="686004889"/>
 							<reference ref="182694598"/>
-							<reference ref="493849469"/>
+							<reference ref="371591545"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Wi-Fi Drawer View</string>
@@ -812,11 +831,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">46</int>
 						<reference key="object" ref="182694598"/>
-						<reference key="parent" ref="87973870"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">49</int>
-						<reference key="object" ref="244218547"/>
 						<reference key="parent" ref="87973870"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -832,11 +846,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">53</int>
 						<reference key="object" ref="808545404"/>
-						<reference key="parent" ref="87973870"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">55</int>
-						<reference key="object" ref="493849469"/>
 						<reference key="parent" ref="87973870"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -933,6 +942,25 @@
 						<reference key="object" ref="174018697"/>
 						<reference key="parent" ref="202550775"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">104</int>
+						<reference key="object" ref="371591545"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="244218547"/>
+							<reference ref="493849469"/>
+						</array>
+						<reference key="parent" ref="87973870"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">49</int>
+						<reference key="object" ref="244218547"/>
+						<reference key="parent" ref="371591545"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">55</int>
+						<reference key="object" ref="493849469"/>
+						<reference key="parent" ref="371591545"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -957,7 +985,7 @@
 				<string key="37.CustomClassName">MvrWiFiMode</string>
 				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="41.IBEditorWindowLastContentRect">{{375, 666}, {221, 25}}</string>
-				<string key="43.IBEditorWindowLastContentRect">{{375, 589}, {320, 118}}</string>
+				<string key="43.IBEditorWindowLastContentRect">{{375, 590}, {320, 117}}</string>
 				<string key="43.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="52.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -982,7 +1010,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">103</int>
+			<int key="maxID">105</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1077,6 +1105,7 @@
 					<string key="className">MvrWiFiMode</string>
 					<string key="superclassName">MvrUIMode</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="bluetoothButtonView">UIView</string>
 						<string key="connectionStateContainer">UIView</string>
 						<string key="connectionStateImage">UIImageView</string>
 						<string key="connectionStateInfo">UILabel</string>

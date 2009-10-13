@@ -18,7 +18,7 @@
 
 @implementation MvrWiFiMode
 
-@synthesize connectionStateInfo, connectionStateImage, connectionStateContainer;
+@synthesize connectionStateInfo, connectionStateImage, connectionStateContainer, bluetoothButtonView;
 
 - (void) awakeFromNib;
 {
@@ -27,6 +27,14 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+	
+	if (!MvrApp().bluetoothMode.available) {
+		CGRect frame = connectionStateDrawerView.frame;
+		frame.size.height -= bluetoothButtonView.frame.size.height;
+		connectionStateDrawerView.frame = frame;
+		[bluetoothButtonView removeFromSuperview];
+		bluetoothButtonView = nil;
+	}
 	
 	if (self.delegate) // we're on!
 		wifi.enabled = YES;

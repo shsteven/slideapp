@@ -19,10 +19,12 @@
 	UILabel* connectionStateInfo;
 	UIImageView* connectionStateImage;
 	UIView* connectionStateContainer;
+	UIView* bluetoothButtonView;
 }
 
 @property(assign) IBOutlet UILabel* connectionStateInfo;
 @property(assign) IBOutlet UIImageView* connectionStateImage;
 @property(assign) IBOutlet UIView* connectionStateContainer;
+@property(assign) IBOutlet UIView* bluetoothButtonView;
 
 @end
