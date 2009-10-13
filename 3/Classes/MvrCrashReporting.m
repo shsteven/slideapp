@@ -47,6 +47,8 @@
 		alert.delegate = self;
 		[alert show];
 	}
+	
+	[rep purgePendingCrashReport];
 }
 
 NSUncaughtExceptionHandler* defaultExceptionHandler = NULL;
