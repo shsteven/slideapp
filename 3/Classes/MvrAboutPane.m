@@ -8,6 +8,7 @@
 
 #import "MvrAboutPane.h"
 #import "MvrAppDelegate.h"
+#import "MvrLegalitiesPane.h"
 
 enum {
 	// Top section
@@ -57,6 +58,7 @@ enum {
 
 - (IBAction) dismiss;
 {
+	[UIApp setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -64,12 +66,9 @@ enum {
 {
     [super viewWillAppear:animated];
 	[UIApp setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
-}
 
-- (void)viewWillDisappear:(BOOL)animated;
-{
-    [super viewDidDisappear:animated];
-	[UIApp setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
+	if (!self.navigationController.navigationBarHidden)
+		[self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 /*
@@ -173,7 +172,10 @@ enum {
 		case 1:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_Licenses:
-					// TODO
+					{
+						MvrLegalitiesPane* legalities = [[MvrLegalitiesPane new] autorelease];
+						[self.navigationController pushViewController:legalities animated:YES];
+					}					
 					break;
 			}
 			
@@ -187,13 +189,14 @@ enum {
 }
 
 
-//- (NSIndexPath*) tableView:(UITableView *)tv willSelectRowAtIndexPath:(NSIndexPath *)indexPath;
-//{
-//	if ([indexPath section] == 0 && [indexPath row] == kMvrAboutEntry_TellAFriend)
-//		return MvrApp().tellAFriend.canTellAFriend? indexPath : nil;
-//	
-//	return indexPath;
-//}
++ modalPane;
+{
+	MvrAboutPane* pane = [[MvrAboutPane new] autorelease];
+	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:pane] autorelease];
+	nav.navigationBarHidden = YES;
+	nav.navigationBar.barStyle = UIBarStyleBlack;
+	return nav;
+}
 
 @end
 

@@ -20,4 +20,6 @@
 - (IBAction) dismiss;
 - (IBAction) openSite;
 
++ modalPane;
+
 @end

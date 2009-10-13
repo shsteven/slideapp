@@ -522,10 +522,8 @@ enum {
 
 - (IBAction) showAboutPane;
 {
-	MvrAboutPane* pane = [[MvrAboutPane new] autorelease];
-	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:pane] autorelease];
-	nav.navigationBarHidden = YES;
-	[self presentModalViewController:nav];
+	MvrAboutPane* about = [MvrAboutPane modalPane];
+	[self presentModalViewController:about];
 }
 
 @end

@@ -81,6 +81,8 @@
 		15C1C86B1068DB92000C9CDE /* MvrWiFiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86A1068DB92000C9CDE /* MvrWiFiMode.m */; };
 		15C1C86F1068DBDB000C9CDE /* MvrUIMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86E1068DBDB000C9CDE /* MvrUIMode.m */; };
 		15C1C8901068DCDB000C9CDE /* MvrArrowsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C88F1068DCDB000C9CDE /* MvrArrowsView.m */; };
+		15C34BFF1084FB3300CEA68A /* MvrLegalitiesPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34BFE1084FB3300CEA68A /* MvrLegalitiesPane.m */; };
+		15C34C8E108502A000CEA68A /* Legalities in Resources */ = {isa = PBXBuildFile; fileRef = 15C34C8A108502A000CEA68A /* Legalities */; };
 		15CFDB2210710B2D00FAB245 /* TopShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB2110710B2D00FAB245 /* TopShadow.png */; };
 		15CFDB41107112C800FAB245 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB3F107112C800FAB245 /* Arrow.png */; };
 		15CFDB42107112C800FAB245 /* DrawerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB40107112C800FAB245 /* DrawerBackdrop.png */; };
@@ -271,6 +273,9 @@
 		15C1C86E1068DBDB000C9CDE /* MvrUIMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrUIMode.m; sourceTree = "<group>"; };
 		15C1C88E1068DCDB000C9CDE /* MvrArrowsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowsView.h; sourceTree = "<group>"; };
 		15C1C88F1068DCDB000C9CDE /* MvrArrowsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrArrowsView.m; sourceTree = "<group>"; };
+		15C34BFD1084FB3300CEA68A /* MvrLegalitiesPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrLegalitiesPane.h; sourceTree = "<group>"; };
+		15C34BFE1084FB3300CEA68A /* MvrLegalitiesPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrLegalitiesPane.m; sourceTree = "<group>"; };
+		15C34C8A108502A000CEA68A /* Legalities */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Legalities; path = AboutPane/Legalities; sourceTree = "<group>"; };
 		15CFDB2110710B2D00FAB245 /* TopShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TopShadow.png; path = Theme/TopShadow.png; sourceTree = "<group>"; };
 		15CFDB3F107112C800FAB245 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Arrow.png; path = Theme/Arrow.png; sourceTree = "<group>"; };
 		15CFDB40107112C800FAB245 /* DrawerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DrawerBackdrop.png; path = Theme/DrawerBackdrop.png; sourceTree = "<group>"; };
@@ -351,6 +356,8 @@
 			children = (
 				1531318F10837AC100D28022 /* MvrAboutPane.h */,
 				1531319010837AC100D28022 /* MvrAboutPane.m */,
+				15C34BFD1084FB3300CEA68A /* MvrLegalitiesPane.h */,
+				15C34BFE1084FB3300CEA68A /* MvrLegalitiesPane.m */,
 			);
 			name = "About Pane";
 			sourceTree = "<group>";
@@ -358,6 +365,7 @@
 		1531319210837C1F00D28022 /* About pane */ = {
 			isa = PBXGroup;
 			children = (
+				15C34C8A108502A000CEA68A /* Legalities */,
 				1531323310838F3400D28022 /* inflabs_dark.png */,
 				1531323410838F3400D28022 /* inflabs.png */,
 				1531319810837C2C00D28022 /* AboutPaneHeader.png */,
@@ -852,6 +860,7 @@
 				1531323610838F3400D28022 /* inflabs.png in Resources */,
 				1531338D1083AAFA00D28022 /* MvrNoEmail.alert in Resources */,
 				15AFE6EF1084623300CBCB35 /* MvrAskAboutCrash.alert in Resources */,
+				15C34C8E108502A000CEA68A /* Legalities in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -895,6 +904,7 @@
 				1531319110837AC100D28022 /* MvrAboutPane.m in Sources */,
 				153132701083A7C700D28022 /* MvrTellAFriendController.m in Sources */,
 				15AFE6ED108460F200CBCB35 /* MvrCrashReporting.m in Sources */,
+				15C34BFF1084FB3300CEA68A /* MvrLegalitiesPane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
