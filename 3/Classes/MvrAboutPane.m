@@ -181,6 +181,11 @@ enum {
 	}
 }
 
+- (IBAction) openSite;
+{
+	[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net"]];
+}
+
 
 //- (NSIndexPath*) tableView:(UITableView *)tv willSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 //{

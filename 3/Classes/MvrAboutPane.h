@@ -18,5 +18,6 @@
 }
 
 - (IBAction) dismiss;
+- (IBAction) openSite;
 
 @end
