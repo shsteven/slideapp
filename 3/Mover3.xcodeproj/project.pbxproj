@@ -319,16 +319,15 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
+				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
 				15AFE6EA108460E400CBCB35 /* Crash Reporting */,
 				1531326D1083A7B000D28022 /* Tell a Friend */,
 				1531318E10837AB100D28022 /* About Pane */,
-				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
-				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
 				151E01FE1067652600C6CDFF /* Items */,
 				1591A7081063ECE200C5A5BD /* The Table */,
 				158A5F09106A6659008C6801 /* Modes */,
-				154D0AEF107DD945009BAF92 /* MvrAccessibility.h */,
-				154D0AF0107DD945009BAF92 /* MvrAccessibility.m */,
+				15CB30901084C76D00CB285F /* Accessibility */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -597,6 +596,42 @@
 			name = "The Table";
 			sourceTree = "<group>";
 		};
+		15CB30901084C76D00CB285F /* Accessibility */ = {
+			isa = PBXGroup;
+			children = (
+				154D0AEF107DD945009BAF92 /* MvrAccessibility.h */,
+				154D0AF0107DD945009BAF92 /* MvrAccessibility.m */,
+			);
+			name = Accessibility;
+			sourceTree = "<group>";
+		};
+		15CB30971084C7ED00CB285F /* More images */ = {
+			isa = PBXGroup;
+			children = (
+				156E804110663AEB00315D0C /* GenericItemIcon.png */,
+				158CBFE210775816006813A7 /* VideoItemIcon.png */,
+				158CBFE41077583F006813A7 /* ContactWithoutImageIcon.png */,
+				15955934107760EE00FBC9B4 /* BookmarkIcon.png */,
+				159559E4107769F500FBC9B4 /* TextIcon.png */,
+				15D46D0C10724C5A00DA8260 /* DrawerButton.png */,
+				15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */,
+				157B68B11072548600E25E96 /* GreenDot.png */,
+				157B68B31072548D00E25E96 /* RedDot.png */,
+			);
+			name = "More images";
+			sourceTree = "<group>";
+		};
+		15CB30981084C7F300CB285F /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */,
+				154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */,
+				1531338C1083AAFA00D28022 /* MvrNoEmail.alert */,
+				15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */,
+			);
+			name = Alerts;
+			sourceTree = "<group>";
+		};
 		15E94B6710741BDD009DA076 /* Images & Video */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,19 +703,8 @@
 				15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */,
 				15C1C8621068DABC000C9CDE /* The Table */,
 				8D1107310486CEB800E47090 /* Mover3-Info.plist */,
-				156E804110663AEB00315D0C /* GenericItemIcon.png */,
-				158CBFE210775816006813A7 /* VideoItemIcon.png */,
-				158CBFE41077583F006813A7 /* ContactWithoutImageIcon.png */,
-				15955934107760EE00FBC9B4 /* BookmarkIcon.png */,
-				159559E4107769F500FBC9B4 /* TextIcon.png */,
-				15D46D0C10724C5A00DA8260 /* DrawerButton.png */,
-				15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */,
-				157B68B11072548600E25E96 /* GreenDot.png */,
-				157B68B31072548D00E25E96 /* RedDot.png */,
-				151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */,
-				154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */,
-				1531338C1083AAFA00D28022 /* MvrNoEmail.alert */,
-				15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */,
+				15CB30971084C7ED00CB285F /* More images */,
+				15CB30981084C7F300CB285F /* Alerts */,
 				1591A7191063EF2C00C5A5BD /* Slide view */,
 				1531319210837C1F00D28022 /* About pane */,
 			);
