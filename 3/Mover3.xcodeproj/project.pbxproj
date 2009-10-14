@@ -22,6 +22,10 @@
 		1537A6E6107A394000B16B88 /* MvrBluetoothScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E5107A394000B16B88 /* MvrBluetoothScanner.m */; };
 		1537A6E9107A3CC900B16B88 /* MvrBluetoothMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */; };
 		1537A71B107A41F400B16B88 /* MvrBluetoothChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A71A107A41F400B16B88 /* MvrBluetoothChannel.m */; };
+		15464A281085A9F1005E5642 /* MvrMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A271085A9F1005E5642 /* MvrMessage.m */; };
+		15464A321085AFF2005E5642 /* MvrMessage+Showing.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A311085AFF2005E5642 /* MvrMessage+Showing.m */; };
+		15464A3D1085B169005E5642 /* MvrMessageAction+ActingUpon.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A3C1085B169005E5642 /* MvrMessageAction+ActingUpon.m */; };
+		15464A491085B47B005E5642 /* MvrNoInternet_MessageAction.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15464A481085B47B005E5642 /* MvrNoInternet_MessageAction.alert */; };
 		154D0AF1107DD945009BAF92 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		154FA62C10792232004DF675 /* MvrClearTableOnShake.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */; };
@@ -185,6 +189,13 @@
 		1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBluetoothMode.m; sourceTree = "<group>"; };
 		1537A719107A41F400B16B88 /* MvrBluetoothChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBluetoothChannel.h; sourceTree = "<group>"; };
 		1537A71A107A41F400B16B88 /* MvrBluetoothChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBluetoothChannel.m; sourceTree = "<group>"; };
+		15464A261085A9F1005E5642 /* MvrMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMessage.h; sourceTree = "<group>"; };
+		15464A271085A9F1005E5642 /* MvrMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMessage.m; sourceTree = "<group>"; };
+		15464A301085AFF2005E5642 /* MvrMessage+Showing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrMessage+Showing.h"; sourceTree = "<group>"; };
+		15464A311085AFF2005E5642 /* MvrMessage+Showing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrMessage+Showing.m"; sourceTree = "<group>"; };
+		15464A3B1085B169005E5642 /* MvrMessageAction+ActingUpon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrMessageAction+ActingUpon.h"; sourceTree = "<group>"; };
+		15464A3C1085B169005E5642 /* MvrMessageAction+ActingUpon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrMessageAction+ActingUpon.m"; sourceTree = "<group>"; };
+		15464A481085B47B005E5642 /* MvrNoInternet_MessageAction.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoInternet_MessageAction.alert; sourceTree = "<group>"; };
 		154D0AEF107DD945009BAF92 /* MvrAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAccessibility.h; sourceTree = "<group>"; };
 		154D0AF0107DD945009BAF92 /* MvrAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAccessibility.m; sourceTree = "<group>"; };
 		154FA54810790FD1004DF675 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -326,6 +337,7 @@
 			children = (
 				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
+				15464A1D1085A9DE005E5642 /* Messages from the Cloud */,
 				15AFE6EA108460E400CBCB35 /* Crash Reporting */,
 				1531326D1083A7B000D28022 /* Tell a Friend */,
 				1531318E10837AB100D28022 /* About Pane */,
@@ -391,6 +403,19 @@
 				15B391F0107B5A2A0005B97E /* Transfers */,
 			);
 			name = Bluetooth;
+			sourceTree = "<group>";
+		};
+		15464A1D1085A9DE005E5642 /* Messages from the Cloud */ = {
+			isa = PBXGroup;
+			children = (
+				15464A261085A9F1005E5642 /* MvrMessage.h */,
+				15464A271085A9F1005E5642 /* MvrMessage.m */,
+				15464A301085AFF2005E5642 /* MvrMessage+Showing.h */,
+				15464A311085AFF2005E5642 /* MvrMessage+Showing.m */,
+				15464A3B1085B169005E5642 /* MvrMessageAction+ActingUpon.h */,
+				15464A3C1085B169005E5642 /* MvrMessageAction+ActingUpon.m */,
+			);
+			name = "Messages from the Cloud";
 			sourceTree = "<group>";
 		};
 		156750FF10620DAD006EC706 /* Products */ = {
@@ -632,6 +657,7 @@
 		15CB30981084C7F300CB285F /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
+				15464A481085B47B005E5642 /* MvrNoInternet_MessageAction.alert */,
 				151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */,
 				154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */,
 				1531338C1083AAFA00D28022 /* MvrNoEmail.alert */,
@@ -861,6 +887,7 @@
 				1531338D1083AAFA00D28022 /* MvrNoEmail.alert in Resources */,
 				15AFE6EF1084623300CBCB35 /* MvrAskAboutCrash.alert in Resources */,
 				15C34C8E108502A000CEA68A /* Legalities in Resources */,
+				15464A491085B47B005E5642 /* MvrNoInternet_MessageAction.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,6 +932,9 @@
 				153132701083A7C700D28022 /* MvrTellAFriendController.m in Sources */,
 				15AFE6ED108460F200CBCB35 /* MvrCrashReporting.m in Sources */,
 				15C34BFF1084FB3300CEA68A /* MvrLegalitiesPane.m in Sources */,
+				15464A281085A9F1005E5642 /* MvrMessage.m in Sources */,
+				15464A321085AFF2005E5642 /* MvrMessage+Showing.m in Sources */,
+				15464A3D1085B169005E5642 /* MvrMessageAction+ActingUpon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
