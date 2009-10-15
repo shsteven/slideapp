@@ -36,7 +36,9 @@
 
 
 @interface MvrMessage : NSObject {
-	NSURL* URL;
+	NSString* identifier;
+	
+	NSString* miniTitle;
 	NSString* title;
 	NSString* blurb;
 	NSArray* actions;
@@ -45,10 +47,12 @@
 }
 
 // convenience inits.
-- (id) initWithContentsOfMessageDictionary:(NSDictionary*) dict URL:(NSURL*) url;
-+ messageWithContentsOfMessageDictionary:(NSDictionary*) dict URL:(NSURL*) url;
+- (id) initWithContentsOfMessageDictionary:(NSDictionary*) dict;
++ messageWithContentsOfMessageDictionary:(NSDictionary*) dict;
 
-@property(copy) NSURL* URL;
+@property(copy) NSString* identifier;
+
+@property(copy) NSString* miniTitle;
 @property(copy) NSString* title;
 @property(copy) NSString* blurb;
 @property(copy) NSArray* actions;

@@ -22,6 +22,8 @@
 #import "MvrTellAFriendController.h"
 #import "MvrCrashReporting.h"
 
+#import "MvrMessageChecker.h"
+
 @interface MvrAppDelegate : NSObject <
 	UIApplicationDelegate,
 	UIActionSheetDelegate,
@@ -46,6 +48,7 @@
 	
 	MvrTellAFriendController* tellAFriend;
 	MvrCrashReporting* crashReporting;
+	MvrMessageChecker* messageChecker;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow *window;
@@ -62,6 +65,7 @@
 @property(nonatomic, retain) IBOutlet MvrBluetoothMode* bluetoothMode;
 
 @property(readonly) MvrTellAFriendController* tellAFriend;
+@property(readonly) MvrMessageChecker* messageChecker;
 
 - (IBAction) add;
 - (void) addItemFromSelf:(MvrItem*) item;

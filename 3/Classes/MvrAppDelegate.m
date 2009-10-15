@@ -64,6 +64,8 @@ enum {
 	tellAFriend = [MvrTellAFriendController new];
 	crashReporting = [MvrCrashReporting new];
 	[crashReporting checkForPendingReports];
+	
+	messageChecker = [MvrMessageChecker new];
 
 	[self.tableController viewWillAppear:NO];
 	CGRect bounds = [self.window convertRect:[UIScreen mainScreen].applicationFrame fromWindow:nil];
@@ -75,6 +77,8 @@ enum {
     [self.window makeKeyAndVisible];
 	
 	[crashReporting enableReporting];
+	
+	[messageChecker performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:7.0];
 }
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
@@ -102,7 +106,7 @@ enum {
 	return NO;
 }
 
-@synthesize window, tableController, wifiMode, bluetoothMode, tellAFriend;
+@synthesize window, tableController, wifiMode, bluetoothMode, tellAFriend, messageChecker;
 
 - (void) dealloc;
 {
@@ -121,6 +125,7 @@ enum {
 	
 	[tellAFriend release];
 	[crashReporting release];
+	[messageChecker release];
 	
     [super dealloc];
 }
@@ -237,7 +242,7 @@ enum {
 
 - (MvrAppVariant) variant;
 {
-	return kMvrAppVariantMoverOpenSource; // TODO
+	return kMvrAppVariantMoverExperimental; // TODO
 }
 
 - (L0UUID*) identifierForSelf;

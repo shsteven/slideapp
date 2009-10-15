@@ -69,14 +69,19 @@ static NSString* MvrLocalizedStringFromPack(id pack) {
 
 @implementation MvrMessage
 
-- (id) initWithContentsOfMessageDictionary:(NSDictionary*) dict URL:(NSURL*) url;
+- (id) initWithContentsOfMessageDictionary:(NSDictionary*) dict;
 {
 	if (self = [super init]) {
-		self.URL = url;
+		self.identifier = L0As(NSString, [dict objectForKey:@"MvrIdentifier"]);
+		if (!self.identifier) {
+			[self release];
+			return nil;
+		}
 		
+		self.miniTitle = MvrLocalizedStringFromPack([dict objectForKey:@"MvrMiniTitle"]);
 		self.title = MvrLocalizedStringFromPack([dict objectForKey:@"MvrTitle"]);
 		self.blurb = MvrLocalizedStringFromPack([dict objectForKey:@"MvrBlurb"]);
-		if (!self.title || !self.blurb) {
+		if (!self.title || !self.blurb || !self.miniTitle) {
 			[self release];
 			return nil;
 		}
@@ -106,20 +111,19 @@ static NSString* MvrLocalizedStringFromPack(id pack) {
 	return self;
 }
 
-@synthesize URL, title, blurb, actions, delegate;
+@synthesize identifier, miniTitle, title, blurb, actions, delegate;
 
 - (void) dealloc
 {
-	self.URL = nil;
 	self.title = nil;
 	self.blurb = nil;
 	self.actions = nil;
 	[super dealloc];
 }
 
-+ messageWithContentsOfMessageDictionary:(NSDictionary*) dict URL:(NSURL*) url;
++ messageWithContentsOfMessageDictionary:(NSDictionary*) dict;
 {
-	return [[[self alloc] initWithContentsOfMessageDictionary:dict URL:url] autorelease];
+	return [[[self alloc] initWithContentsOfMessageDictionary:dict] autorelease];
 }
 
 @end

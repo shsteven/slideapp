@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array>
+		<string>Don't Allow</string>
+		<string>OK</string>
+	</array>
+	<key>L0AlertInformativeText</key>
+	<string>No personal data will be sent.</string>
+	<key>L0AlertMessage</key>
+	<string>Mover can check for updates and news automatically. Do you want to allow this?</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

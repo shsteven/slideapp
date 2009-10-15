@@ -6,9 +6,11 @@ enum {
 	// This isn't the Mover application. Useful if, say, we're embedding the Mover engine stuff in another application, eg for testing (see mvr-wifi.m).
 	kMvrAppVariantNotMover = 0,
 	
+	kMvrAppVariantMoverExperimental,
+
 	// Open-source means that anyone can grab it and compile it. Paid means that most of it is open but I can still add Labs-exclusive features to the app that aren't distributed as FOSS. Lite is like Paid, but it's meant to be free of charge and have advertisements or less features and such.
 	// These correspond to Mover Open (Cydia), Mover+ and Mover Lite respectively.
-	kMvrAppVariantMoverOpenSource,
+	kMvrAppVariantMoverOpen,
 	kMvrAppVariantMoverPaid,
 	kMvrAppVariantMoverLite,
 };

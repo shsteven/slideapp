@@ -18,4 +18,7 @@
 - (UIViewController*) nonmodalViewController;
 - (UIViewController*) modalViewController;
 
+// default impl
+- (void) perform;
+
 @end

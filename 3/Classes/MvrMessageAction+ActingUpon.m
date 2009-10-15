@@ -7,12 +7,12 @@
 //
 
 #import "MvrMessageAction+ActingUpon.h"
+
 #import <MuiKit/MuiKit.h>
+#import "MvrAppDelegate.h"
 
 @interface MvrMessageActionWebPane : L0WebViewController {}
-
 - (IBAction) dismiss;
-
 @end
 
 @implementation MvrMessageActionWebPane
@@ -95,6 +95,17 @@
 	
 	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:ctl] autorelease];
 	return nav;
+}
+
+#pragma mark -
+#pragma mark Default acting-upon
+
+- (void) perform;
+{
+	if (self.shouldDisplayInApp)
+		[MvrApp() presentModalViewController:[self modalViewController]];
+	else
+		[self openURLAfterRedirects:YES];
 }
 
 @end

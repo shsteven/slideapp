@@ -1,0 +1,32 @@
+{
+	MvrIdentifier = Test;
+	MvrMiniTitle = {
+		en = "test message";
+	};
+	MvrTitle = {
+		en = "This is a short test messages, used to try the Messages From The Cloud infrastructure.";
+	};
+	MvrBlurb = {
+		en = "Would you like to do cool stuff?";
+	};
+	MvrActions = (
+		{
+			MvrInApp = YES;
+			MvrURL = {
+				en = "http://infinite-labs.net/mover/";
+			};
+			MvrTitle = {
+				en = "Show stuff in-app!";
+			};
+		},
+		{
+			MvrInApp = NO;
+			MvrURL = {
+				en = "http://infinite-labs.net/";
+			};
+			MvrTitle = {
+				en = "Open Safari!";
+			};
+		},
+	);
+}
