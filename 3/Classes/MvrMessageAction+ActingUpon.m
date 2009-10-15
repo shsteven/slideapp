@@ -11,11 +11,20 @@
 #import <MuiKit/MuiKit.h>
 #import "MvrAppDelegate.h"
 
-@interface MvrMessageActionWebPane : L0WebViewController {}
+@interface MvrMessageActionWebPane : L0WebViewController {
+	UIStatusBarStyle oldStatusBarStyle;
+	BOOL switchesBarStyleOnShow;
+}
+
+@property BOOL switchesBarStyleOnShow;
+
 - (IBAction) dismiss;
+
 @end
 
 @implementation MvrMessageActionWebPane
+
+@synthesize switchesBarStyleOnShow;
 
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
@@ -33,7 +42,7 @@
 		return YES;
 }
 
-- (void) didResoveRedirectsWithURL:(NSURL*) u;
+- (void) didResolveRedirectsWithURL:(NSURL*) u;
 {
 	[UIApp endIgnoringInteractionEvents];
 	
@@ -48,7 +57,24 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-// TODO styling stuff
+- (void) viewWillAppear:(BOOL)animated;
+{
+	[super viewWillAppear:animated];
+	
+	if (self.switchesBarStyleOnShow) {
+		oldStatusBarStyle = UIApp.statusBarStyle;
+		UIStatusBarStyle style = self.wantsFullScreenLayout? UIStatusBarStyleBlackTranslucent : UIStatusBarStyleBlackOpaque;
+		[UIApp setStatusBarStyle:style animated:animated];
+	}
+}
+
+- (void) viewWillDisappear:(BOOL)animated;
+{
+	[super viewWillDisappear:animated];
+	
+	if (self.switchesBarStyleOnShow)
+		[UIApp setStatusBarStyle:oldStatusBarStyle animated:animated];
+}
 
 @end
 
@@ -64,12 +90,14 @@
 		[UIApp openURL:self.URL]; // and that's it. otherwise...
 	else  {
 		[UIApp beginIgnoringInteractionEvents];
+		[UIApp beginNetworkUse];
 		[self.URL beginResolvingRedirectsWithDelegate:self selector:@selector(didResolveRedirectsWithURL:)];
 	}
 }
 
-- (void) didResoveRedirectsWithURL:(NSURL*) u;
+- (void) didResolveRedirectsWithURL:(NSURL*) u;
 {
+	[UIApp endNetworkUse];
 	[UIApp endIgnoringInteractionEvents];
 	
 	if (u)
@@ -90,10 +118,14 @@
 
 - (UIViewController*) modalViewController;
 {
-	UIViewController* ctl = [self nonmodalViewController];
-	ctl.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:ctl action:@selector(dismiss)] autorelease];
-	
+	MvrMessageActionWebPane* ctl = (MvrMessageActionWebPane*) [self nonmodalViewController];
+	ctl.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:ctl action:@selector(dismiss)] autorelease];
+	ctl.switchesBarStyleOnShow = YES;
+	ctl.wantsFullScreenLayout = self.usesTranslucentTopBar;
+
 	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:ctl] autorelease];
+	nav.navigationBar.barStyle = self.usesTranslucentTopBar? UIBarStyleBlackTranslucent : UIBarStyleBlack;
+	
 	return nav;
 }
 

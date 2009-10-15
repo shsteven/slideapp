@@ -1,5 +1,5 @@
 {
-	MvrIdentifier = Test;
+	MvrIdentifier = wow;
 	MvrMiniTitle = {
 		en = "test message";
 	};
@@ -12,6 +12,7 @@
 	MvrActions = (
 		{
 			MvrInApp = YES;
+			MvrTranslucent = YES;
 			MvrURL = {
 				en = "http://infinite-labs.net/mover/";
 			};

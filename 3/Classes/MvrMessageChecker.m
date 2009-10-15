@@ -41,7 +41,6 @@ static NSString* MvrURLPartForVariant(MvrAppVariant v) {
 @property(copy) NSNumber* firstLaunchPassed;
 
 - (void) endFailing;
-- (void) endNoChanges;
 - (void) endProcessingData;
 
 @property BOOL shouldRateLimitCheck;
@@ -174,6 +173,8 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 		nil];
 	NSURL* messagesURL = [NSURL URLWithString:messagesURLString];
 	
+	[UIApp beginNetworkUse];
+	
 	receivedData = [NSMutableData new];
 	connection = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:messagesURL] delegate:self];
 }
@@ -201,22 +202,16 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 
 - (void) endFailing;
 {
+	[UIApp endNetworkUse];
 	[connection cancel];
 	self.didFailLoading = [NSNumber numberWithBool:YES];
 	self.lastLoadingAttempt = [NSDate date];
 	[self clear];
 }
 
-- (void) endNoChanges;
-{ // TODO
-	[connection cancel];
-	self.didFailLoading = [NSNumber numberWithBool:NO];
-	self.lastLoadingAttempt = [NSDate date];
-	[self clear];
-}
-
 - (void) endProcessingData;
 {
+	[UIApp endNetworkUse];
 	MvrMessage* message = nil;
 	
 	NSString* errorString = nil;

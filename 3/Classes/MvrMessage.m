@@ -42,15 +42,14 @@ static NSString* MvrLocalizedStringFromPack(id pack) {
 		}
 		
 		self.shouldDisplayInApp = [[d objectForKey:@"MvrInApp"] boolValue];
-		
-		// style stuff
+		self.usesTranslucentTopBar = [[d objectForKey:@"MvrTranslucent"] boolValue];
 		
 	}
 	return self;
 }
 
 
-@synthesize title, URL, shouldDisplayInApp;
+@synthesize title, URL, shouldDisplayInApp, usesTranslucentTopBar;
 
 - (void) dealloc;
 {

@@ -21,6 +21,7 @@
 	NSString* title;
 	NSURL* URL;
 	BOOL shouldDisplayInApp;
+	BOOL usesTranslucentTopBar;
 	// styling stuff
 }
 
@@ -31,6 +32,7 @@
 @property(copy) NSString* title;
 @property(copy) NSURL* URL;
 @property BOOL shouldDisplayInApp;
+@property BOOL usesTranslucentTopBar;
 
 @end
 
