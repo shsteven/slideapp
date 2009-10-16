@@ -22,7 +22,7 @@ if [ -e Current ]; then
 	exit 1
 fi
 
-ps -axc|grep -q Xcode
+ps -xc|grep -q Xcode
 if [ "$?" != "1" ]; then
  	if [ "$ILABS_FORCE" == "NO" ]; then
 		echo "error: Xcode is running! It's much, much better if you quit it before switching. If you're sure Xcode isn't touching this project or any of its dependencies, you can use '$0 --force $1' to switch anyway." >&2
