@@ -158,6 +158,19 @@
 	legalities.action = @selector(showLegalities:);
 	
 	[legalitiesSection.cells addObject:legalities];
+	
+	// ---
+	
+	MvrMorePaneSection* feedbackSection = [MvrMorePaneSection section];
+	[content addObject:feedbackSection];
+	
+	// Ask for Support >
+	MvrMorePaneActionCell* support = [[[MvrMorePaneActionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	support.textLabel.text = NSLocalizedString(@"Ask for Support", @"Ask for Support cell in the More pane.");
+	support.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	support.action = @selector(openSupport:);
+	
+	[feedbackSection.cells addObject:support];
 }
 
 - (void) didChangeOptInOutForMessages:(UISwitch*) sender;
@@ -169,6 +182,11 @@
 {
 	MvrLegalitiesPane* pane = [[MvrLegalitiesPane new] autorelease];
 	[self.navigationController pushViewController:pane animated:YES];
+}
+
+- (void) openSupport:(id) sender;
+{
+	[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net/support"]];
 }
 
 #pragma mark Table view methods
