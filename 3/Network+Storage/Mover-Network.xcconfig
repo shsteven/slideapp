@@ -10,4 +10,4 @@ GCC_PREFIX_HEADER = $(INFINITELABS_TOOLS)/Common/iPhone/Foundation.pch
 
 HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers"
 
-#include "../Variants/Current.xcconfig"
+#include "../Variants/Current/Variant.xcconfig"

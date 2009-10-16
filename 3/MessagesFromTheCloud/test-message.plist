@@ -1,32 +1,32 @@
 {
-	MvrIdentifier = wow;
+	MvrIdentifier = 9D99BCC4-B394-4CF6-AC52-D53C40910586;
 	MvrMiniTitle = {
-		en = "test message";
+		en = "3.0.1 available";
 	};
 	MvrTitle = {
-		en = "This is a short test messages, used to try the Messages From The Cloud infrastructure.";
+		en = "Mover 3.0.1 is now available.";
 	};
 	MvrBlurb = {
-		en = "Would you like to do cool stuff?";
+		en = "You can download it for free from the Updates pane of App Store.";
 	};
 	MvrActions = (
 		{
 			MvrInApp = YES;
-			MvrTranslucent = YES;
+			MvrTranslucent = NO;
 			MvrURL = {
 				en = "http://infinite-labs.net/mover/";
 			};
 			MvrTitle = {
-				en = "Show stuff in-app!";
+				en = "More Info";
 			};
 		},
 		{
 			MvrInApp = NO;
 			MvrURL = {
-				en = "http://infinite-labs.net/";
+				en = "http://infinite-labs.net/mover/download-plus";
 			};
 			MvrTitle = {
-				en = "Open Safari!";
+				en = "App Store";
 			};
 		},
 	);

@@ -21,7 +21,7 @@ PRODUCT_NAME = $(ILABS_MOVER_BUNDLE_NAME)
 GCC_PRECOMPILE_PREFIX_HEADER = YES
 GCC_PREFIX_HEADER = $(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch
 
-#include "Variants/Current.xcconfig"
+#include "Variants/Current/Variant.xcconfig"
 
 // Local settings. See the Scripts/ directory and the README for more info.
 #include "Local.xcconfig"

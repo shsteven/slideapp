@@ -1,0 +1,36 @@
+#!/bin/bash
+
+HERE="`dirname "$0"`"
+cd "$HERE"
+
+ILABS_FORCE=NO
+if [ "$1" == "--force" ]; then
+	ILABS_FORCE=YES
+	shift
+fi
+
+if [ ! -d "$1" ]; then
+	echo "error: I don't know what variant $1 is." >&2
+	exit 1
+fi
+
+if [ -L Current ]; then
+	rm Current
+fi
+if [ -e Current ]; then
+	echo "error: 'Current' exists and is not a symlink. Remove it and retry." >&2
+	exit 1
+fi
+
+ps -axc|grep -q Xcode
+if [ "$?" != "1" ]; then
+ 	if [ "$ILABS_FORCE" == "NO" ]; then
+		echo "error: Xcode is running! It's much, much better if you quit it before switching. If you're sure Xcode isn't touching this project or any of its dependencies, you can use '$0 --force $1' to switch anyway." >&2
+		exit 1
+	fi
+fi
+
+ln -s "$1" Current
+cd ..
+xcodebuild clean -configuration Debug
+open -a Xcode .
