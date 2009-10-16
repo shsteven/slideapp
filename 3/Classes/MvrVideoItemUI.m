@@ -37,6 +37,9 @@
 
 - (void) didStoreItem:(MvrItem *)i;
 {
+	if ((UIVideoAtPathIsCompatibleWithSavedPhotosAlbum) == NULL || (UISaveVideoAtPathToSavedPhotosAlbum) == NULL)
+		return;
+	
 	if (!UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(i.storage.path)) {
 		L0Log(@"Video of item %@ cannot be saved in the saved photos album. Uh. Not doing that.", i);
 		return;

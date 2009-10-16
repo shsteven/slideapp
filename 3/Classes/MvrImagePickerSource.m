@@ -81,7 +81,7 @@
 			if (url && [url isFileURL]) {
 				[self performAddingVideoAtPath:[url path] type:uti];
 				
-				if (sourceType == UIImagePickerControllerSourceTypeCamera)
+				if (sourceType == UIImagePickerControllerSourceTypeCamera && (UISaveVideoAtPathToSavedPhotosAlbum) != NULL)
 					UISaveVideoAtPathToSavedPhotosAlbum([url path], nil, NULL, NULL);
 			}
 			
