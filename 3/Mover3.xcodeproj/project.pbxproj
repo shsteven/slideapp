@@ -13,6 +13,7 @@
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
 		1526AD2310887D15003D8AE0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1526AD2210887D15003D8AE0 /* Default.png */; };
+		1526AD2D10888A69003D8AE0 /* Icon-Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1526AD2C10888A69003D8AE0 /* Icon-Plus.png */; };
 		153131881083757700D28022 /* MvrAboutPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153131871083757700D28022 /* MvrAboutPane.xib */; };
 		1531319110837AC100D28022 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		1531319910837C2C00D28022 /* AboutPaneHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531319810837C2C00D28022 /* AboutPaneHeader.png */; };
@@ -181,6 +182,7 @@
 		151E02211067683400C6CDFF /* MvrImagePickerSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImagePickerSource.h; sourceTree = "<group>"; };
 		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
 		1526AD2210887D15003D8AE0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		1526AD2C10888A69003D8AE0 /* Icon-Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Plus.png"; sourceTree = "<group>"; };
 		153131871083757700D28022 /* MvrAboutPane.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrAboutPane.xib; sourceTree = "<group>"; };
 		1531318F10837AC100D28022 /* MvrAboutPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAboutPane.h; sourceTree = "<group>"; };
 		1531319010837AC100D28022 /* MvrAboutPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAboutPane.m; sourceTree = "<group>"; };
@@ -758,6 +760,7 @@
 			children = (
 				158CBF6C10774E3B006813A7 /* Visors */,
 				1526AD2210887D15003D8AE0 /* Default.png */,
+				1526AD2C10888A69003D8AE0 /* Icon-Plus.png */,
 				15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */,
 				15C1C8621068DABC000C9CDE /* The Table */,
 				8D1107310486CEB800E47090 /* Mover3-Info.plist */,
@@ -915,6 +918,7 @@
 				150F17D810879260009CCAB7 /* MvrMessageOptIn.alert in Resources */,
 				1553536610885FFD00C75A6C /* MvrNoNews.alert in Resources */,
 				1526AD2310887D15003D8AE0 /* Default.png in Resources */,
+				1526AD2D10888A69003D8AE0 /* Icon-Plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
