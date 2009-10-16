@@ -31,6 +31,9 @@
 		154D0AF1107DD945009BAF92 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		154FA62C10792232004DF675 /* MvrClearTableOnShake.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */; };
+		1553517C1088468900C75A6C /* MvrMorePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1553517B1088468900C75A6C /* MvrMorePane.m */; };
+		155352431088547D00C75A6C /* MvrMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 155352421088547D00C75A6C /* MvrMessagesCell.m */; };
+		1553536610885FFD00C75A6C /* MvrNoNews.alert in Resources */ = {isa = PBXBuildFile; fileRef = 1553536510885FFD00C75A6C /* MvrNoNews.alert */; };
 		1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567510510620DAD006EC706 /* libMoverNetwork.a */; };
 		1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
 		1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
@@ -205,6 +208,11 @@
 		154D0AF0107DD945009BAF92 /* MvrAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAccessibility.m; sourceTree = "<group>"; };
 		154FA54810790FD1004DF675 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrClearTableOnShake.alert; sourceTree = "<group>"; };
+		1553517A1088468900C75A6C /* MvrMorePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMorePane.h; sourceTree = "<group>"; };
+		1553517B1088468900C75A6C /* MvrMorePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMorePane.m; sourceTree = "<group>"; };
+		155352411088547D00C75A6C /* MvrMessagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMessagesCell.h; sourceTree = "<group>"; };
+		155352421088547D00C75A6C /* MvrMessagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMessagesCell.m; sourceTree = "<group>"; };
+		1553536510885FFD00C75A6C /* MvrNoNews.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoNews.alert; sourceTree = "<group>"; };
 		156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "Network+Storage/Network+Storage.xcodeproj"; sourceTree = "<group>"; };
 		1567511310620DF7006EC706 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		1567511510620DFC006EC706 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -371,10 +379,14 @@
 		1531318E10837AB100D28022 /* About Pane */ = {
 			isa = PBXGroup;
 			children = (
+				155352411088547D00C75A6C /* MvrMessagesCell.h */,
+				155352421088547D00C75A6C /* MvrMessagesCell.m */,
 				1531318F10837AC100D28022 /* MvrAboutPane.h */,
 				1531319010837AC100D28022 /* MvrAboutPane.m */,
 				15C34BFD1084FB3300CEA68A /* MvrLegalitiesPane.h */,
 				15C34BFE1084FB3300CEA68A /* MvrLegalitiesPane.m */,
+				1553517A1088468900C75A6C /* MvrMorePane.h */,
+				1553517B1088468900C75A6C /* MvrMorePane.m */,
 			);
 			name = "About Pane";
 			sourceTree = "<group>";
@@ -670,6 +682,7 @@
 				1531338C1083AAFA00D28022 /* MvrNoEmail.alert */,
 				15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */,
 				150F17D710879260009CCAB7 /* MvrMessageOptIn.alert */,
+				1553536510885FFD00C75A6C /* MvrNoNews.alert */,
 			);
 			name = Alerts;
 			sourceTree = "<group>";
@@ -897,6 +910,7 @@
 				15C34C8E108502A000CEA68A /* Legalities in Resources */,
 				15464A491085B47B005E5642 /* MvrNoInternet_MessageAction.alert in Resources */,
 				150F17D810879260009CCAB7 /* MvrMessageOptIn.alert in Resources */,
+				1553536610885FFD00C75A6C /* MvrNoNews.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,6 +959,8 @@
 				15464A321085AFF2005E5642 /* MvrMessage+Showing.m in Sources */,
 				15464A3D1085B169005E5642 /* MvrMessageAction+ActingUpon.m in Sources */,
 				15464A8810861B30005E5642 /* MvrMessageChecker.m in Sources */,
+				1553517C1088468900C75A6C /* MvrMorePane.m in Sources */,
+				155352431088547D00C75A6C /* MvrMessagesCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

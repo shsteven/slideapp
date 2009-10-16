@@ -16,6 +16,9 @@
 @interface MvrMessageChecker : NSObject <UIAlertViewDelegate, MvrMessageDelegate> {
 	NSURLConnection* connection;
 	NSMutableData* receivedData;
+	BOOL displayAtEndAnyway;
+	BOOL isChecking;
+	
 	BOOL shouldRateLimitCheck;
 	
 	MvrMessage* lastMessage;
@@ -27,10 +30,13 @@
 @property(readonly, copy) NSDate* lastLoadingAttempt;
 @property(readonly, copy) NSDictionary* lastMessageDictionary;
 
+@property(readonly, getter=isChecking) BOOL checking; // KVOable
+
 @property(copy) NSNumber* userOptedInToMessages;
 
 @property(readonly, retain) MvrMessage* lastMessage;
 
 - (void) displayMessage;
+- (void) checkOrDisplayMessage;
 
 @end

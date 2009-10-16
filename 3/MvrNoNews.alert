@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array>
+		<string>Dismiss</string>
+	</array>
+	<key>L0AlertInformativeText</key>
+	<string>Mover will check again later and warn you if it finds any.</string>
+	<key>L0AlertMessage</key>
+	<string>No news for now.</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

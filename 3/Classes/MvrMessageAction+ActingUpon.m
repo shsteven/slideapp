@@ -111,7 +111,7 @@
 
 - (UIViewController*) nonmodalViewController;
 {
-	MvrMessageActionWebPane* pane = [MvrMessageActionWebPane new];
+	MvrMessageActionWebPane* pane = [[MvrMessageActionWebPane new] autorelease];
 	pane.initialURL = self.URL;
 	return pane;
 }

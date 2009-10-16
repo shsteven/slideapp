@@ -18,6 +18,8 @@ static NSString* MvrLocalizedStringFromPack(id pack) {
 	id o = [pack objectForKey:[l localeIdentifier]];
 	if (!o)
 		o = [pack objectForKey:[l objectForKey:NSLocaleLanguageCode]];
+	if (!o)
+		o = [pack objectForKey:@"en"];
 	
 	if (![o isKindOfClass:[NSString class]])
 		o = nil;

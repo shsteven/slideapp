@@ -23,7 +23,7 @@
 	for (MvrMessageAction* action in self.actions)
 		[alert addButtonWithTitle:action.title];
 		
-	alert.cancelButtonIndex = [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button in cloud message alerts")];
+	alert.cancelButtonIndex = [alert addButtonWithTitle:NSLocalizedString(@"Dismiss", @"Dismiss button in cloud message alerts")];
 
 	alert.delegate = self;
 	[alert show];

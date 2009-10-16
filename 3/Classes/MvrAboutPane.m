@@ -8,7 +8,7 @@
 
 #import "MvrAboutPane.h"
 #import "MvrAppDelegate.h"
-#import "MvrLegalitiesPane.h"
+#import "MvrMorePane.h"
 
 enum {
 	// Top section
@@ -17,7 +17,7 @@ enum {
 	kMvrAboutSectionOneEntriesCount,
 	
 	// Middle section
-	kMvrAboutEntry_Licenses = 0,
+	kMvrAboutEntry_More = 0,
 	kMvrAboutSectionTwoEntriesCount,
 };
 
@@ -29,6 +29,7 @@ enum {
 	if (self = [super initWithNibName:NSStringFromClass([self class]) bundle:nil]) {
 		self.wantsFullScreenLayout = YES;
 		self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+		self.title = @"Mover"; // locale-invariant
 	}
 	
 	return self;
@@ -69,6 +70,8 @@ enum {
 
 	if (!self.navigationController.navigationBarHidden)
 		[self.navigationController setNavigationBarHidden:YES animated:animated];
+	
+	[tableView reloadData];
 }
 
 /*
@@ -109,11 +112,17 @@ enum {
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString* cellIdentifier = @"MvrRegularCell";
+    NSString* cellIdentifier = @"MvrRegularCell";
+	if ([indexPath section] == 1 && [indexPath row] == kMvrAboutEntry_More)
+		cellIdentifier = @"MvrLabeledCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+		UITableViewCellStyle style = UITableViewCellStyleDefault;
+		if ([indexPath section] == 1 && [indexPath row] == kMvrAboutEntry_More)
+			style = UITableViewCellStyleValue1;
+		
+        cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:cellIdentifier] autorelease];
     }
     
 
@@ -137,8 +146,10 @@ enum {
 
 		case 1:
 			switch ([indexPath row]) {
-				case kMvrAboutEntry_Licenses:
-					cell.textLabel.text = NSLocalizedString(@"Licenses & Copyright", @"Licenses entry in about box");
+				case kMvrAboutEntry_More:
+					cell.textLabel.text = NSLocalizedString(@"Settings & More", @"More entry in about box");
+					MvrMessageChecker* checker = MvrApp().messageChecker;
+					cell.detailTextLabel.text = checker.lastMessage.miniTitle;
 					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 					break;
 			}
@@ -171,10 +182,11 @@ enum {
 			
 		case 1:
 			switch ([indexPath row]) {
-				case kMvrAboutEntry_Licenses:
+				case kMvrAboutEntry_More:
 					{
-						MvrLegalitiesPane* legalities = [[MvrLegalitiesPane new] autorelease];
-						[self.navigationController pushViewController:legalities animated:YES];
+						MvrMorePane* more = [[MvrMorePane new] autorelease];
+						[self.navigationController pushViewController:more animated:YES];
+						[self.navigationController setNavigationBarHidden:NO animated:YES];
 					}					
 					break;
 			}
@@ -193,8 +205,10 @@ enum {
 {
 	MvrAboutPane* pane = [[MvrAboutPane new] autorelease];
 	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:pane] autorelease];
+	
 	nav.navigationBarHidden = YES;
 	nav.navigationBar.barStyle = UIBarStyleBlack;
+	nav.navigationBar.translucent = YES;
 	return nav;
 }
 

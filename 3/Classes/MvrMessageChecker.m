@@ -46,8 +46,11 @@ static NSString* MvrURLPartForVariant(MvrAppVariant v) {
 @property BOOL shouldRateLimitCheck;
 
 @property(retain) MvrMessage* lastMessage;
+- (void) displayAtEndIfNeeded;
 
 - (void) clear;
+
+- (void) private_setUserOptedInToMessages:(NSNumber*) n;
 
 @end
 
@@ -144,6 +147,9 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 	if (!self.lastMessage)
 		return;
 	
+	if (![self.userOptedInToMessages boolValue])
+		return;
+	
 	self.lastMessage.delegate = self;
 	[self.lastMessage show];
 }
@@ -151,6 +157,12 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 - (void) message:(MvrMessage *)message didEndShowingWithChosenAction:(MvrMessageAction *)action;
 {
 	[action perform];
+}
+
+- (void) checkOrDisplayMessage;
+{
+	displayAtEndAnyway = YES;
+	[self check];
 }
 
 #pragma mark -
@@ -161,7 +173,16 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 	if (connection)
 		return;
 	
+	if (![self.userOptedInToMessages boolValue])
+		return;
+	
 	NSString* messagesBaseURL = @"http://infinite-labs.net/mover/in-app";
+
+#if DEBUG
+	NSString* envBaseURL = [[[NSProcessInfo processInfo] environment] objectForKey:@"MvrMessagesBaseURL"];
+	if (envBaseURL)
+		messagesBaseURL = envBaseURL;
+#endif
 	
 	NSString* messagesURLString =
 		[NSString stringWithFormat:
@@ -171,12 +192,20 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 		 MvrURLPartForVariant([MvrApp() variant]),
 		 [MvrApp() version],
 		nil];
+	L0Log(@"Will check for news at URL %@", messagesURLString);
 	NSURL* messagesURL = [NSURL URLWithString:messagesURLString];
 	
 	[UIApp beginNetworkUse];
 	
 	receivedData = [NSMutableData new];
+	[self willChangeValueForKey:@"checking"];
 	connection = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:messagesURL] delegate:self];
+	[self didChangeValueForKey:@"checking"];
+}
+
+- (BOOL) isChecking;
+{
+	return connection != nil;
 }
 
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
@@ -207,7 +236,21 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 	self.didFailLoading = [NSNumber numberWithBool:YES];
 	self.lastLoadingAttempt = [NSDate date];
 	[self clear];
+	
+	[self displayAtEndIfNeeded];
 }
+
+- (void) displayAtEndIfNeeded;
+{
+	if (displayAtEndAnyway) {
+		if (self.lastMessage)
+			[self displayMessage];
+		else
+			[[UIAlertView alertNamed:@"MvrNoNews"] show];
+
+		displayAtEndAnyway = NO;
+	}
+}	
 
 - (void) endProcessingData;
 {
@@ -238,8 +281,11 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 
 	if (hasNewMessage)
 		[self displayMessage];
+	else
+		[self displayAtEndIfNeeded];
 	
 cleanup:
+	displayAtEndAnyway = NO;
 	self.lastLoadingAttempt = [NSDate date];
 	self.didFailLoading = [NSNumber numberWithBool:(message == nil)];
 	[self clear];
@@ -247,7 +293,10 @@ cleanup:
 
 - (void) clear;
 {
+	[self willChangeValueForKey:@"checking"];
 	[connection release]; connection = nil;
+	[self didChangeValueForKey:@"checking"];
+	
 	[receivedData release]; receivedData = nil;
 }
 
@@ -264,7 +313,24 @@ L0SynthesizeUserDefaultsGetter(NSDictionary, @"MvrLastMessageDictionary", lastMe
 L0SynthesizeUserDefaultsSetter(NSDictionary, @"MvrLastMessageDictionary", setLastMessageDictionary:)
 
 L0SynthesizeUserDefaultsGetter(NSNumber, @"MvrUserOptedInToMessages", userOptedInToMessages)
-L0SynthesizeUserDefaultsSetter(NSNumber, @"MvrUserOptedInToMessages", setUserOptedInToMessages:)
+L0SynthesizeUserDefaultsSetter(NSNumber, @"MvrUserOptedInToMessages", private_setUserOptedInToMessages:)
+
+- (void) setUserOptedInToMessages:(NSNumber *) n;
+{
+	if ([n boolValue])
+		self.userWasAskedAboutOptingIn = n;
+	else {
+		if (connection)
+			[self endFailing];
+		
+		self.lastMessage = nil;
+		self.lastMessageDictionary = nil;
+		self.lastLoadingAttempt = nil;
+		self.didFailLoading = [NSNumber numberWithBool:NO];
+	}
+	
+	[self private_setUserOptedInToMessages:n];
+}
 
 L0SynthesizeUserDefaultsGetter(NSNumber, @"MvrUserWasAskedAboutOptingInToMessages", userWasAskedAboutOptingIn)
 L0SynthesizeUserDefaultsSetter(NSNumber, @"MvrUserWasAskedAboutOptingInToMessages", setUserWasAskedAboutOptingIn:)
