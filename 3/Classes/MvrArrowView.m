@@ -44,8 +44,6 @@
 		
 		self.normalColor = self.nameLabel.textColor;
 		self.busyColor = [UIColor colorWithRed:33.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0];
-		
-		self.isAccessibilityElement = YES;
     }
 
     return self;

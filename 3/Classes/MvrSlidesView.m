@@ -359,6 +359,8 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 		return;
 	
 	[self clearAccessibility];
+
+	L0Log(@"Updating accessibility for the table.");
 	
 	for (id view in self.subviews) {
 		if ([view isKindOfClass:[MvrSlide class]] && [view isEditing])
@@ -371,10 +373,14 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 		[self makeAccessibilityElementForView:view];
 	
 	isAccessibilityUpToDate = YES;
+	L0Log(@"Updated accessibility: elements now %@", accessibilityElements);
 }
 
 - (void) makeAccessibilityElementForView:(UIView*) v;
 {
+	if ([subviewsToAccessibilityElements objectForKey:v])
+		return;
+	
 	UIAccessibilityElement* el = [[[UIAccessibilityElement alloc] initWithAccessibilityContainer:self] autorelease];
 	el.isAccessibilityElement = YES;
 	el.accessibilityLabel = v.accessibilityLabel;
@@ -385,6 +391,7 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 	
 	[subviewsToAccessibilityElements setObject:el forKey:v];
 	[accessibilityElements addObject:el];
+	L0Log(@"Made accessibility element %@ for view %@", el, v);
 }
 
 - (void) addSubview:(UIView *)view;
@@ -426,6 +433,7 @@ static BOOL MvrSlidesViewAllowsShowingAreas = NO;
 - (void) setAccessibilityViews:(NSArray*) a;
 {
 	[additionalViews setArray:a];
+	L0Log(@"Setting additional views array to: %@", additionalViews);
 	[self clearAccessibility];
 }
 
