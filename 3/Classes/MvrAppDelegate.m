@@ -56,7 +56,9 @@ enum {
 @implementation MvrAppDelegate
 
 - (void) applicationDidFinishLaunching:(UIApplication*) application;
-{	
+{
+	UIApp.idleTimerDisabled = YES;
+	
 	[self setUpItemClassesAndUIs];
 	[self setUpStorageCentral];
 	[self setUpTableController];
@@ -288,7 +290,7 @@ enum {
 
 - (void) addItemFromSelf:(MvrItem*) item;
 {
-	[self.tableController addItem:item animated:YES]; // TODO
+	[self.tableController addItem:item animated:YES];
 	[self.storageCentral.mutableStoredItems addObject:item];
 }
 
