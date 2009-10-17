@@ -96,8 +96,9 @@
 	listener.delegate = self;
 	
 	NSError* e;
-	if (![listener open:&e])
-		return; // TODO!!!
+	BOOL started = [listener open:&e];
+	if (!started)
+		[NSException raise:@"MvrLegacyWiFiCouldNotStartError" format:@"An error occurred when starting the legacy listener: %@", e];
 }
 
 - (void) stop;
