@@ -241,14 +241,22 @@ enum {
 	return kMvrAppleiPhoneOSPlatform;
 }
 
+#ifndef kMvrCurrentAppVariantDisplayName
+#error kMvrCurrentAppVariantDisplayName is undefined! It should have been defined in the variant's Variant.xcconfig (or overridden by Mover-Baseline-Debug.xcconfig).
+#endif
+
 - (NSString*) variantDisplayName;
 {
-	return @"Experimental"; // TODO
+	return kMvrCurrentAppVariantDisplayName;
 }
+
+#ifndef kMvrCurrentAppVariant
+#error kMvrCurrentAppVariant is undefined! It should have been defined in the variant's Variant.xcconfig (or overridden by Mover-Baseline-Debug.xcconfig).
+#endif
 
 - (MvrAppVariant) variant;
 {
-	return kMvrAppVariantMoverExperimental; // TODO
+	return kMvrCurrentAppVariant;
 }
 
 - (L0UUID*) identifierForSelf;

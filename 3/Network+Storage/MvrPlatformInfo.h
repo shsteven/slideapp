@@ -12,6 +12,7 @@ enum {
 	// These correspond to Mover Open (Cydia), Mover+ and Mover Lite respectively.
 	kMvrAppVariantMoverOpen,
 	kMvrAppVariantMoverPaid,
+	kMvrAppVariantMoverPlus = kMvrAppVariantMoverPaid,
 	kMvrAppVariantMoverLite,
 };
 typedef NSUInteger MvrAppVariant;
