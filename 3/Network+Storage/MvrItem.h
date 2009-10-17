@@ -3,7 +3,7 @@
 //  Network+Storage
 //
 //  Created by ∞ on 13/09/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Infinite Labs (Emanuele Vulcano). All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

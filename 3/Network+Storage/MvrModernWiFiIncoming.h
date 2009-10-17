@@ -3,7 +3,7 @@
 //  Mover
 //
 //  Created by ∞ on 25/08/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Infinite Labs (Emanuele Vulcano). All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

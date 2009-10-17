@@ -3,7 +3,7 @@
 //  Mover3
 //
 //  Created by ∞ on 12/09/09.
-//  Copyright __MyCompanyName__ 2009. All rights reserved.
+//  Copyright Infinite Labs (Emanuele Vulcano) 2009. All rights reserved.
 //
 
 #import "MvrAppDelegate.h"
