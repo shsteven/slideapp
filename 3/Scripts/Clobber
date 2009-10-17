@@ -1,0 +1,8 @@
+#!/bin/bash
+
+HERE="`dirname "$0"`"
+cd "$HERE"/..
+
+xcodebuild clean || exit 1
+rm -Rf Build || exit 1
+
