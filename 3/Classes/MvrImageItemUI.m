@@ -16,6 +16,9 @@
 
 #import "Network+Storage/MvrUTISupport.h"
 
+#import "MvrAppDelegate.h"
+#import "MvrAppDelegate+HelpAlerts.h"
+
 @implementation MvrImageItemUI
 
 - (id) init
@@ -59,6 +62,8 @@
 	
 	CFRetain(i); // balanced in image:didFinishSavingWithError:context:
 	UIImageWriteToSavedPhotosAlbum(((MvrImageItem*)i).image, self, @selector(image:didFinishSavingWithError:context:), (void*) i);
+	
+	[MvrApp() showAlertIfNotShownBeforeNamed:@"MvrImageReceived"];
 }
 
 - (void) image:(UIImage*) image didFinishSavingWithError:(NSError*) e context:(void*) context;

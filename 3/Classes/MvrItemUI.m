@@ -302,7 +302,7 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 - (void) performSendByEmail:(MvrItemAction*) send withItem:(id) i;
 {
 	if ([self showsOverlayWhilePreparingEmailForItem:i]) { 
-		[MvrApp() beginDisplayingOverlayViewWithLabel:NSLocalizedString(@"Preparing e-mail...", @"Overlay view label while preparing e-mail")];
+		[MvrApp() beginDisplayingOverlayViewWithLabel:NSLocalizedString(@"Preparing e-mail\u2026", @"Overlay view label while preparing e-mail")];
 		[self performSelector:@selector(sendItemByEmail:) withObject:i afterDelay:0.01];
 	} else
 		[self sendItemByEmail:i];

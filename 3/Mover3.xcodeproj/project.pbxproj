@@ -31,6 +31,10 @@
 		15464A3D1085B169005E5642 /* MvrMessageAction+ActingUpon.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A3C1085B169005E5642 /* MvrMessageAction+ActingUpon.m */; };
 		15464A491085B47B005E5642 /* MvrNoInternet_MessageAction.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15464A481085B47B005E5642 /* MvrNoInternet_MessageAction.alert */; };
 		15464A8810861B30005E5642 /* MvrMessageChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A8710861B30005E5642 /* MvrMessageChecker.m */; };
+		154BD6F71089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */; };
+		154BD70A1089F1DC00C45562 /* MvrImageReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD7091089F1DC00C45562 /* MvrImageReceived.alert */; };
+		154BD70C1089F22200C45562 /* MvrContactReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD70B1089F22200C45562 /* MvrContactReceived.alert */; };
+		154BD70E1089F24500C45562 /* MvrVideoReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD70D1089F24500C45562 /* MvrVideoReceived.alert */; };
 		154D0AF1107DD945009BAF92 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		154FA62C10792232004DF675 /* MvrClearTableOnShake.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */; };
@@ -210,6 +214,11 @@
 		15464A481085B47B005E5642 /* MvrNoInternet_MessageAction.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoInternet_MessageAction.alert; sourceTree = "<group>"; };
 		15464A8610861B30005E5642 /* MvrMessageChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMessageChecker.h; sourceTree = "<group>"; };
 		15464A8710861B30005E5642 /* MvrMessageChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMessageChecker.m; sourceTree = "<group>"; };
+		154BD6F51089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrAppDelegate+HelpAlerts.h"; sourceTree = "<group>"; };
+		154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrAppDelegate+HelpAlerts.m"; sourceTree = "<group>"; };
+		154BD7091089F1DC00C45562 /* MvrImageReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrImageReceived.alert; sourceTree = "<group>"; };
+		154BD70B1089F22200C45562 /* MvrContactReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrContactReceived.alert; sourceTree = "<group>"; };
+		154BD70D1089F24500C45562 /* MvrVideoReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrVideoReceived.alert; sourceTree = "<group>"; };
 		154D0AEF107DD945009BAF92 /* MvrAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAccessibility.h; sourceTree = "<group>"; };
 		154D0AF0107DD945009BAF92 /* MvrAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAccessibility.m; sourceTree = "<group>"; };
 		154FA54810790FD1004DF675 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -354,6 +363,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				154BD6EC1089F05200C45562 /* Help Alerts */,
 				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
 				15464A1D1085A9DE005E5642 /* Messages from the Cloud */,
@@ -451,6 +461,15 @@
 				15464A8710861B30005E5642 /* MvrMessageChecker.m */,
 			);
 			name = "Messages from the Cloud";
+			sourceTree = "<group>";
+		};
+		154BD6EC1089F05200C45562 /* Help Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				154BD6F51089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.h */,
+				154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */,
+			);
+			name = "Help Alerts";
 			sourceTree = "<group>";
 		};
 		156750FF10620DAD006EC706 /* Products */ = {
@@ -699,6 +718,9 @@
 				15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */,
 				150F17D710879260009CCAB7 /* MvrMessageOptIn.alert */,
 				1553536510885FFD00C75A6C /* MvrNoNews.alert */,
+				154BD7091089F1DC00C45562 /* MvrImageReceived.alert */,
+				154BD70B1089F22200C45562 /* MvrContactReceived.alert */,
+				154BD70D1089F24500C45562 /* MvrVideoReceived.alert */,
 			);
 			name = Alerts;
 			sourceTree = "<group>";
@@ -932,6 +954,9 @@
 				1526AD2310887D15003D8AE0 /* Default.png in Resources */,
 				1533F4CA1088FFC20025005B /* Icon.png in Resources */,
 				1533F4CC1088FFC20025005B /* iTunesArtwork in Resources */,
+				154BD70A1089F1DC00C45562 /* MvrImageReceived.alert in Resources */,
+				154BD70C1089F22200C45562 /* MvrContactReceived.alert in Resources */,
+				154BD70E1089F24500C45562 /* MvrVideoReceived.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,6 +1007,7 @@
 				15464A8810861B30005E5642 /* MvrMessageChecker.m in Sources */,
 				1553517C1088468900C75A6C /* MvrMorePane.m in Sources */,
 				155352431088547D00C75A6C /* MvrMessagesCell.m in Sources */,
+				154BD6F71089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

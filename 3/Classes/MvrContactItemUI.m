@@ -13,6 +13,7 @@
 
 #import "MvrContactItem.h"
 #import "MvrAppDelegate.h"
+#import "MvrAppDelegate+HelpAlerts.h"
 
 @class MvrDuplicateContactHandler;
 
@@ -246,6 +247,8 @@ enum {
 		[self saveItem:i inAddressBook:addressBook];
 	
 	CFRelease(addressBook);
+	
+	[MvrApp() showAlertIfNotShownBeforeNamed:@"MvrContactReceived"];
 }
 
 - (void) saveItem:(MvrContactItem*) i inAddressBook:(ABAddressBookRef) addressBook;

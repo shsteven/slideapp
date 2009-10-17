@@ -11,6 +11,8 @@
 #import "MvrImagePickerSource.h"
 #import "Network+Storage/MvrItemStorage.h"
 
+#import "MvrAppDelegate+HelpAlerts.h"
+
 @implementation MvrVideoItemUI
 
 - (void) dealloc
@@ -47,6 +49,8 @@
 	
 	CFRetain(i); // balanced in the completion handler
 	UISaveVideoAtPathToSavedPhotosAlbum(i.storage.path, self, @selector(videoAtPath:didFinishSavingWithError:context:), (void*) i);
+	
+	[MvrApp() showAlertIfNotShownBeforeNamed:@"MvrVideoReceived"];
 }
 
 - (void) videoAtPath:(NSString*) path didFinishSavingWithError:(NSError*) e context:(void*) context;
