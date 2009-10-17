@@ -1,0 +1,6 @@
+
+#include "Mover-Release.xcconfig"
+
+CODE_SIGN_ENTITLEMENTS = AdHoc.plist
+
+#include "Local-AdHoc.xcconfig"

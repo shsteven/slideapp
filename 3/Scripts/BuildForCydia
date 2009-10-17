@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ "$ILABS_L0ShowOnRequestLogging" == "YES" ]; then
+	set -avx
+fi
+
+L0_LDID="`which ldid`"
+if [ "$?" != "0" ]; then
+	echo "Cannot find ldid in the path. Make sure it's available and try again." >&2
+	exit 1
+fi
+
+L0_CODESIGN="`which codesign_allocate`"
+if [ "$L0_CODESIGN" == "/usr/bin/codesign_allocate" -a "$ILABS_AllowMacOSXCodesign" != "YES" ]; then
+
+	DEVELOPER_DIR="`xcode-select -print-path`"
+	
+	if [ -x "$DEVELOPER_DIR/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate" ]; then
+		echo "warning: Using codesign_allocate from developer tools installed in $DEVELOPER_DIR" >&2
+		echo "If you want to use another Xcode installation, use xcode-select or add its $DEVELOPER_DIR/Platforms/iPhoneOS.platform/Developer/usr/bin/ directory in front of the PATH." >&2
+		export PATH="$DEVELOPER_DIR/Platforms/iPhoneOS.platform/Developer/usr/bin/":"$PATH"
+	else
+		echo "Found only Mac OS X's codesign_allocate on the path." >&2
+		echo "Put iPhoneOS.platform's /usr/bin directory on the path, or set the environment variable ILABS_AllowMacOSXCodesign to 'YES' before retrying." >&2
+		exit 1
+	fi
+fi
+
+HERE="`dirname "$0"`"
+HERE="`cd "$HERE"; pwd`"
+cd "$HERE/../"
+
+"Variants/Switch" Open || exit 1
+"$HERE/Clobber" || exit 1
+xcodebuild -configuration Release CODE_SIGNING_REQUIRED=NO || exit 1
+"$L0_LDID" -S Build/Release-iphoneos/MoverOpen.app/MoverOpen || exit 1
