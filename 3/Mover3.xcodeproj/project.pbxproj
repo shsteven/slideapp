@@ -53,8 +53,6 @@
 		1567514E10620E75006EC706 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514D10620E75006EC706 /* Foundation.framework */; };
 		1567515010620E78006EC706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514F10620E78006EC706 /* UIKit.framework */; };
 		1567515210620E7A006EC706 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567515110620E7A006EC706 /* CoreGraphics.framework */; };
-		1567516610620F26006EC706 /* Mover-Baseline-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1567516410620F26006EC706 /* Mover-Baseline-Debug.xcconfig */; };
-		1567516710620F26006EC706 /* Mover-Baseline-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1567516510620F26006EC706 /* Mover-Baseline-Release.xcconfig */; };
 		156751B91062176E006EC706 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
 		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		156E804210663AEB00315D0C /* GenericItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156E804110663AEB00315D0C /* GenericItemIcon.png */; };
@@ -945,8 +943,6 @@
 			files = (
 				1567514A10620E4F006EC706 /* MuiKit.bundle in Resources */,
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				1567516610620F26006EC706 /* Mover-Baseline-Debug.xcconfig in Resources */,
-				1567516710620F26006EC706 /* Mover-Baseline-Release.xcconfig in Resources */,
 				1591A7071063EC4000C5A5BD /* Backdrop.png in Resources */,
 				1591A7131063EEF700C5A5BD /* MvrSlide.xib in Resources */,
 				1591A7171063EF2900C5A5BD /* Frame-Highlighted.png in Resources */,
