@@ -33,4 +33,4 @@ fi
 ln -s "$1" Current
 cd ..
 xcodebuild clean -configuration Debug
-open -a Xcode .
+# open -a Xcode .
