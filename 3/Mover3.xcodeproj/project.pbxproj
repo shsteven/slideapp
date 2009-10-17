@@ -35,6 +35,7 @@
 		154BD70A1089F1DC00C45562 /* MvrImageReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD7091089F1DC00C45562 /* MvrImageReceived.alert */; };
 		154BD70C1089F22200C45562 /* MvrContactReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD70B1089F22200C45562 /* MvrContactReceived.alert */; };
 		154BD70E1089F24500C45562 /* MvrVideoReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD70D1089F24500C45562 /* MvrVideoReceived.alert */; };
+		154BD7371089F62D00C45562 /* MvrWelcome.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD7361089F62D00C45562 /* MvrWelcome.alert */; };
 		154D0AF1107DD945009BAF92 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		154FA62C10792232004DF675 /* MvrClearTableOnShake.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */; };
@@ -219,6 +220,7 @@
 		154BD7091089F1DC00C45562 /* MvrImageReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrImageReceived.alert; sourceTree = "<group>"; };
 		154BD70B1089F22200C45562 /* MvrContactReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrContactReceived.alert; sourceTree = "<group>"; };
 		154BD70D1089F24500C45562 /* MvrVideoReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrVideoReceived.alert; sourceTree = "<group>"; };
+		154BD7361089F62D00C45562 /* MvrWelcome.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrWelcome.alert; sourceTree = "<group>"; };
 		154D0AEF107DD945009BAF92 /* MvrAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAccessibility.h; sourceTree = "<group>"; };
 		154D0AF0107DD945009BAF92 /* MvrAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAccessibility.m; sourceTree = "<group>"; };
 		154FA54810790FD1004DF675 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -721,6 +723,7 @@
 				154BD7091089F1DC00C45562 /* MvrImageReceived.alert */,
 				154BD70B1089F22200C45562 /* MvrContactReceived.alert */,
 				154BD70D1089F24500C45562 /* MvrVideoReceived.alert */,
+				154BD7361089F62D00C45562 /* MvrWelcome.alert */,
 			);
 			name = Alerts;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				154BD70A1089F1DC00C45562 /* MvrImageReceived.alert in Resources */,
 				154BD70C1089F22200C45562 /* MvrContactReceived.alert in Resources */,
 				154BD70E1089F24500C45562 /* MvrVideoReceived.alert in Resources */,
+				154BD7371089F62D00C45562 /* MvrWelcome.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

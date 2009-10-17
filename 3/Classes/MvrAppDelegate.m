@@ -31,6 +31,8 @@
 
 #import "MvrAboutPane.h"
 
+#import "MvrAppDelegate+HelpAlerts.h"
+
 #import <MuiKit/MuiKit.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -81,6 +83,8 @@ enum {
 	[crashReporting enableReporting];
 	
 	[messageChecker performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:7.0];
+	
+	[self showAlertIfNotShownBeforeNamed:@"MvrWelcome"];
 }
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
