@@ -69,6 +69,18 @@
 		157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96C01076589B00F1A1A8 /* AddressBookUI.framework */; };
 		157B96D810765F5800F1A1A8 /* MvrContactItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */; };
 		1585FA32108CB0F800D2AEAB /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA2C108CB0F700D2AEAB /* it.lproj */; };
+		1585FAA8108CBBE600D2AEAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA88108CBBE600D2AEAB /* Localizable.strings */; };
+		1585FAAB108CBBE600D2AEAB /* MvrAskAboutCrash.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA8E108CBBE600D2AEAB /* MvrAskAboutCrash.strings */; };
+		1585FAAC108CBBE600D2AEAB /* MvrClearTableOnShake.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA90108CBBE600D2AEAB /* MvrClearTableOnShake.strings */; };
+		1585FAAD108CBBE600D2AEAB /* MvrContactIsADuplicate.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA92108CBBE600D2AEAB /* MvrContactIsADuplicate.strings */; };
+		1585FAAE108CBBE600D2AEAB /* MvrContactReceived.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA94108CBBE600D2AEAB /* MvrContactReceived.strings */; };
+		1585FAAF108CBBE600D2AEAB /* MvrImageReceived.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA96108CBBE600D2AEAB /* MvrImageReceived.strings */; };
+		1585FAB1108CBBE600D2AEAB /* MvrMessageOptIn.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA9A108CBBE600D2AEAB /* MvrMessageOptIn.strings */; };
+		1585FAB2108CBBE600D2AEAB /* MvrNoEmail.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA9C108CBBE600D2AEAB /* MvrNoEmail.strings */; };
+		1585FAB3108CBBE600D2AEAB /* MvrNoInternet_MessageAction.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA9E108CBBE600D2AEAB /* MvrNoInternet_MessageAction.strings */; };
+		1585FAB4108CBBE600D2AEAB /* MvrNoNews.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FAA0108CBBE600D2AEAB /* MvrNoNews.strings */; };
+		1585FAB6108CBBE600D2AEAB /* MvrVideoReceived.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FAA4108CBBE600D2AEAB /* MvrVideoReceived.strings */; };
+		1585FAB7108CBBE600D2AEAB /* MvrWelcome.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1585FAA6108CBBE600D2AEAB /* MvrWelcome.strings */; };
 		158CBF7310774EEE006813A7 /* MvrImageVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 158CBF7110774EEE006813A7 /* MvrImageVisor.m */; };
 		158CBFE310775816006813A7 /* VideoItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 158CBFE210775816006813A7 /* VideoItemIcon.png */; };
 		158CBFE51077583F006813A7 /* ContactWithoutImageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 158CBFE41077583F006813A7 /* ContactWithoutImageIcon.png */; };
@@ -275,6 +287,18 @@
 		157B96D610765F5800F1A1A8 /* MvrContactItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrContactItemUI.h; sourceTree = "<group>"; };
 		157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrContactItemUI.m; sourceTree = "<group>"; };
 		1585FA2C108CB0F700D2AEAB /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = it.lproj; path = "Compiled Locales/it.lproj"; sourceTree = "<group>"; };
+		1585FA89108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1585FA8F108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrAskAboutCrash.strings; sourceTree = "<group>"; };
+		1585FA91108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrClearTableOnShake.strings; sourceTree = "<group>"; };
+		1585FA93108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrContactIsADuplicate.strings; sourceTree = "<group>"; };
+		1585FA95108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrContactReceived.strings; sourceTree = "<group>"; };
+		1585FA97108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrImageReceived.strings; sourceTree = "<group>"; };
+		1585FA9B108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrMessageOptIn.strings; sourceTree = "<group>"; };
+		1585FA9D108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoEmail.strings; sourceTree = "<group>"; };
+		1585FA9F108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoInternet_MessageAction.strings; sourceTree = "<group>"; };
+		1585FAA1108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoNews.strings; sourceTree = "<group>"; };
+		1585FAA5108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrVideoReceived.strings; sourceTree = "<group>"; };
+		1585FAA7108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrWelcome.strings; sourceTree = "<group>"; };
 		158CBF7010774EEE006813A7 /* MvrImageVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageVisor.h; sourceTree = "<group>"; };
 		158CBF7110774EEE006813A7 /* MvrImageVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageVisor.m; sourceTree = "<group>"; };
 		158CBFE210775816006813A7 /* VideoItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VideoItemIcon.png; sourceTree = "<group>"; };
@@ -604,9 +628,29 @@
 		1585FA2B108CB0BB00D2AEAB /* Localizations */ = {
 			isa = PBXGroup;
 			children = (
+				1585FAB8108CBBE900D2AEAB /* Base strings for alerts */,
 				1585FA2C108CB0F700D2AEAB /* it.lproj */,
 			);
 			name = Localizations;
+			sourceTree = "<group>";
+		};
+		1585FAB8108CBBE900D2AEAB /* Base strings for alerts */ = {
+			isa = PBXGroup;
+			children = (
+				1585FA88108CBBE600D2AEAB /* Localizable.strings */,
+				1585FA8E108CBBE600D2AEAB /* MvrAskAboutCrash.strings */,
+				1585FA90108CBBE600D2AEAB /* MvrClearTableOnShake.strings */,
+				1585FA92108CBBE600D2AEAB /* MvrContactIsADuplicate.strings */,
+				1585FA94108CBBE600D2AEAB /* MvrContactReceived.strings */,
+				1585FA96108CBBE600D2AEAB /* MvrImageReceived.strings */,
+				1585FA9A108CBBE600D2AEAB /* MvrMessageOptIn.strings */,
+				1585FA9C108CBBE600D2AEAB /* MvrNoEmail.strings */,
+				1585FA9E108CBBE600D2AEAB /* MvrNoInternet_MessageAction.strings */,
+				1585FAA0108CBBE600D2AEAB /* MvrNoNews.strings */,
+				1585FAA4108CBBE600D2AEAB /* MvrVideoReceived.strings */,
+				1585FAA6108CBBE600D2AEAB /* MvrWelcome.strings */,
+			);
+			name = "Base strings for alerts";
 			sourceTree = "<group>";
 		};
 		158A5F09106A6659008C6801 /* Modes */ = {
@@ -1008,6 +1052,18 @@
 				154BD7371089F62D00C45562 /* MvrWelcome.alert in Resources */,
 				154BD797108A039F00C45562 /* Mover-AdHoc.xcconfig in Resources */,
 				1585FA32108CB0F800D2AEAB /* it.lproj in Resources */,
+				1585FAA8108CBBE600D2AEAB /* Localizable.strings in Resources */,
+				1585FAAB108CBBE600D2AEAB /* MvrAskAboutCrash.strings in Resources */,
+				1585FAAC108CBBE600D2AEAB /* MvrClearTableOnShake.strings in Resources */,
+				1585FAAD108CBBE600D2AEAB /* MvrContactIsADuplicate.strings in Resources */,
+				1585FAAE108CBBE600D2AEAB /* MvrContactReceived.strings in Resources */,
+				1585FAAF108CBBE600D2AEAB /* MvrImageReceived.strings in Resources */,
+				1585FAB1108CBBE600D2AEAB /* MvrMessageOptIn.strings in Resources */,
+				1585FAB2108CBBE600D2AEAB /* MvrNoEmail.strings in Resources */,
+				1585FAB3108CBBE600D2AEAB /* MvrNoInternet_MessageAction.strings in Resources */,
+				1585FAB4108CBBE600D2AEAB /* MvrNoNews.strings in Resources */,
+				1585FAB6108CBBE600D2AEAB /* MvrVideoReceived.strings in Resources */,
+				1585FAB7108CBBE600D2AEAB /* MvrWelcome.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1125,6 +1181,102 @@
 				156813B5108C923000424179 /* en */,
 			);
 			name = MvrAboutPane.xib;
+			sourceTree = "<group>";
+		};
+		1585FA88108CBBE600D2AEAB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FA89108CBBE600D2AEAB /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		1585FA8E108CBBE600D2AEAB /* MvrAskAboutCrash.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FA8F108CBBE600D2AEAB /* en */,
+			);
+			name = MvrAskAboutCrash.strings;
+			sourceTree = "<group>";
+		};
+		1585FA90108CBBE600D2AEAB /* MvrClearTableOnShake.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FA91108CBBE600D2AEAB /* en */,
+			);
+			name = MvrClearTableOnShake.strings;
+			sourceTree = "<group>";
+		};
+		1585FA92108CBBE600D2AEAB /* MvrContactIsADuplicate.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FA93108CBBE600D2AEAB /* en */,
+			);
+			name = MvrContactIsADuplicate.strings;
+			sourceTree = "<group>";
+		};
+		1585FA94108CBBE600D2AEAB /* MvrContactReceived.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FA95108CBBE600D2AEAB /* en */,
+			);
+			name = MvrContactReceived.strings;
+			sourceTree = "<group>";
+		};
+		1585FA96108CBBE600D2AEAB /* MvrImageReceived.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FA97108CBBE600D2AEAB /* en */,
+			);
+			name = MvrImageReceived.strings;
+			sourceTree = "<group>";
+		};
+		1585FA9A108CBBE600D2AEAB /* MvrMessageOptIn.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FA9B108CBBE600D2AEAB /* en */,
+			);
+			name = MvrMessageOptIn.strings;
+			sourceTree = "<group>";
+		};
+		1585FA9C108CBBE600D2AEAB /* MvrNoEmail.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FA9D108CBBE600D2AEAB /* en */,
+			);
+			name = MvrNoEmail.strings;
+			sourceTree = "<group>";
+		};
+		1585FA9E108CBBE600D2AEAB /* MvrNoInternet_MessageAction.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FA9F108CBBE600D2AEAB /* en */,
+			);
+			name = MvrNoInternet_MessageAction.strings;
+			sourceTree = "<group>";
+		};
+		1585FAA0108CBBE600D2AEAB /* MvrNoNews.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FAA1108CBBE600D2AEAB /* en */,
+			);
+			name = MvrNoNews.strings;
+			sourceTree = "<group>";
+		};
+		1585FAA4108CBBE600D2AEAB /* MvrVideoReceived.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FAA5108CBBE600D2AEAB /* en */,
+			);
+			name = MvrVideoReceived.strings;
+			sourceTree = "<group>";
+		};
+		1585FAA6108CBBE600D2AEAB /* MvrWelcome.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1585FAA7108CBBE600D2AEAB /* en */,
+			);
+			name = MvrWelcome.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
