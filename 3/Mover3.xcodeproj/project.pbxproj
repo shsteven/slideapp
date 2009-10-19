@@ -68,6 +68,7 @@
 		157B96BF1076589800F1A1A8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96BE1076589800F1A1A8 /* AddressBook.framework */; };
 		157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96C01076589B00F1A1A8 /* AddressBookUI.framework */; };
 		157B96D810765F5800F1A1A8 /* MvrContactItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */; };
+		1585FA32108CB0F800D2AEAB /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA2C108CB0F700D2AEAB /* it.lproj */; };
 		158CBF7310774EEE006813A7 /* MvrImageVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 158CBF7110774EEE006813A7 /* MvrImageVisor.m */; };
 		158CBFE310775816006813A7 /* VideoItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 158CBFE210775816006813A7 /* VideoItemIcon.png */; };
 		158CBFE51077583F006813A7 /* ContactWithoutImageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 158CBFE41077583F006813A7 /* ContactWithoutImageIcon.png */; };
@@ -273,6 +274,7 @@
 		157B96C01076589B00F1A1A8 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		157B96D610765F5800F1A1A8 /* MvrContactItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrContactItemUI.h; sourceTree = "<group>"; };
 		157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrContactItemUI.m; sourceTree = "<group>"; };
+		1585FA2C108CB0F700D2AEAB /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = it.lproj; path = "Compiled Locales/it.lproj"; sourceTree = "<group>"; };
 		158CBF7010774EEE006813A7 /* MvrImageVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageVisor.h; sourceTree = "<group>"; };
 		158CBF7110774EEE006813A7 /* MvrImageVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageVisor.m; sourceTree = "<group>"; };
 		158CBFE210775816006813A7 /* VideoItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VideoItemIcon.png; sourceTree = "<group>"; };
@@ -599,6 +601,14 @@
 			name = Contacts;
 			sourceTree = "<group>";
 		};
+		1585FA2B108CB0BB00D2AEAB /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				1585FA2C108CB0F700D2AEAB /* it.lproj */,
+			);
+			name = Localizations;
+			sourceTree = "<group>";
+		};
 		158A5F09106A6659008C6801 /* Modes */ = {
 			isa = PBXGroup;
 			children = (
@@ -818,6 +828,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1585FA2B108CB0BB00D2AEAB /* Localizations */,
 				1533F4C61088FFC10025005B /* Current Variant */,
 				158CBF6C10774E3B006813A7 /* Visors */,
 				1526AD2210887D15003D8AE0 /* Default.png */,
@@ -839,6 +850,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover3" */;
 			buildPhases = (
+				1585FA24108CB05800D2AEAB /* Build Localizations */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
@@ -995,10 +1007,28 @@
 				154BD70E1089F24500C45562 /* MvrVideoReceived.alert in Resources */,
 				154BD7371089F62D00C45562 /* MvrWelcome.alert in Resources */,
 				154BD797108A039F00C45562 /* Mover-AdHoc.xcconfig in Resources */,
+				1585FA32108CB0F800D2AEAB /* it.lproj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1585FA24108CB05800D2AEAB /* Build Localizations */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Localizations";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PRODUCE_APPLIED=YES \"$INFINITELABS_TOOLS\"/BuildLocale\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {

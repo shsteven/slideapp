@@ -5,4 +5,5 @@ cd "$HERE"/..
 
 xcodebuild clean || exit 1
 rm -Rf Build || exit 1
-
+rm -Rf TemporaryItems || exit 1
+rm -Rf "Compiled Locales" || exit 1
