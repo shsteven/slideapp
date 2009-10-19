@@ -104,7 +104,7 @@
 {
 	UIView* view = [[[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds] autorelease];
 	view.backgroundColor =
-		[UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
+		[UIColor colorWithWhite:0.200 alpha:1.000];
 
 	table = [[UITableView alloc] initWithFrame:view.bounds style:UITableViewStyleGrouped];
 	table.backgroundColor = view.backgroundColor;
