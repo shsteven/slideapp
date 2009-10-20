@@ -132,6 +132,15 @@
 	[self.channel didReceiveData:data];
 }
 
+- (void) session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state;
+{
+	if (!self.channel || ![peerID isEqual:self.channel.peerID])
+		return;
+	
+	if (state == GKPeerStateDisconnected)
+		self.channel = nil;
+}
+
 @end
 
 @implementation MvrBTChannel

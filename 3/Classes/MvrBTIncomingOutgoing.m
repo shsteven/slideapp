@@ -252,6 +252,8 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	[builder addPayload:[item.storage preferredContentObject] length:item.storage.contentLength forKey:kMvrProtocolExternalRepresentationPayloadKey];
 	
 	[builder start];
+	
+	[self sendStarter];
 }
 
 - (void) endWithError:(NSError*) e;
