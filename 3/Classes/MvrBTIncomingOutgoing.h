@@ -14,7 +14,13 @@
 #import "Network+Storage/MvrOutgoing.h"
 #import "Network+Storage/MvrStreamedIncoming.h"
 
+#import "Network+Storage/MvrProtocol.h"
+#import "Network+Storage/MvrPacketBuilder.h"
+#import "Network+Storage/MvrBuffer.h"
+
 #import "MvrBTProtocol.h"
+
+#define kMvrBTProtocolPacketSize 4096
 
 @interface MvrBTIncoming : MvrStreamedIncoming <MvrIncoming, MvrBTProtocolIncomingDelegate> {
 	MvrBTChannel* channel;
@@ -30,15 +36,34 @@
 
 @end
 
-@interface MvrBTOutgoing : NSObject <MvrOutgoing> {
+@interface MvrBTOutgoing : NSObject <MvrOutgoing, MvrBTProtocolOutgoingDelegate, MvrPacketBuilderDelegate> {
 	MvrBTChannel* channel;
+	MvrBTProtocolOutgoing* proto;
+	MvrPacketBuilder* builder;
+	MvrBuffer* buffer;
+	
+	NSUInteger baseIndex;
+	NSMutableArray* savedPackets;
+	BOOL needsToSendAPacket;
+	
+	MvrItem* item;
+	
+	NSError* error;
+	BOOL finished; float progress;
 }
 
-- (id) initWithChannel:(MvrBTChannel*) chan;
+- (id) initWithItem:(MvrItem*) i channel:(MvrBTChannel*) chan;
 + outgoingTransferWithItem:(MvrItem*) i channel:(MvrBTChannel*) chan;
 
 - (void) start;
+- (void) endWithError:(NSError*) e;
 
 - (void) didReceiveDataFromBluetooth:(NSData*) data;
+
+@property(retain) NSError* error;
+@property BOOL finished;
+@property float progress;
+
+- (BOOL) sendNextPacket;
 
 @end

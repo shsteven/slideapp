@@ -21,7 +21,6 @@
 	
 	latestSequenceNumber = kMvrBTProtocolStarterSequenceNumber;
 	[delegate sendStarter];
-	[delegate startMonitoringTimeout];
 }
 
 - (void) didAcknowledgeWithSequenceNumber:(NSUInteger) sequenceNumber;
@@ -31,24 +30,18 @@
 		return;
 	}
 	
-	[delegate stopMonitoringTimeout];
-	
 	if (![delegate isPayloadAllSent]) {
 		latestSequenceNumber++;
-		[delegate preparePacketWithSequenceNumber:latestSequenceNumber];
 		[delegate sendPacketWithSequenceNumber:latestSequenceNumber];
-		[delegate startMonitoringTimeout];
 	} else
 		[delegate endConnectionWithReason:kMvrBTProtocolFinishedWithoutErrors];
 }
 
 - (void) didSignalErrorWithSequenceNumber:(NSUInteger) sequenceNumber;
 {
-	[delegate stopMonitoringTimeout];
-	if ([delegate isPacketAvailableWithSequenceNumber:sequenceNumber]) {
+	if ([delegate isPastPacketAvailableWithSequenceNumber:sequenceNumber]) {
 		latestSequenceNumber = sequenceNumber;
 		[delegate sendPacketWithSequenceNumber:sequenceNumber];
-		[delegate startMonitoringTimeout];
 	} else
 		[delegate endConnectionWithReason:kMvrBTProtocolCannotBacktrackSoMuch];
 }

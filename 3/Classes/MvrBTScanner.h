@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
+#import <MuiKit/MuiKit.h>
 
 #import "Network+Storage/MvrScanner.h"
 #import "Network+Storage/MvrChannel.h"
@@ -38,6 +39,7 @@
 	NSString* peerID;
 	
 	NSMutableSet* incomingTransfers, * outgoingTransfers;
+	L0KVODispatcher* kvo;
 }
 
 - (id) initWithScanner:(MvrBTScanner*) s peerID:(NSString*) p;

@@ -19,4 +19,6 @@
 - (void) appendData:(NSData*) data;
 - (NSData*) consume;
 
+@property(readonly) BOOL canConsume;
+
 @end

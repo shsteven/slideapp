@@ -51,4 +51,9 @@
 	}
 }
 
+- (BOOL) canConsume;
+{
+	return [backingStore length] == 0;
+}
+
 @end

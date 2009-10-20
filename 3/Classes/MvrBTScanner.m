@@ -143,6 +143,7 @@
 		peerID = [p copy];
 		incomingTransfers = [NSMutableSet new];
 		outgoingTransfers = [NSMutableSet new];
+		kvo = [[L0KVODispatcher alloc] initWithTarget:self];
 	}
 	
 	return self;
@@ -152,6 +153,8 @@
 
 - (void) dealloc
 {
+	[kvo release];
+	
 	[scanner release];
 	[peerID release];
 	[incomingTransfers release];
@@ -167,9 +170,19 @@
 - (void) setIncomingTransfer:(MvrBTIncoming*) c;
 {
 	NSMutableSet* set = [self mutableSetValueForKey:@"incomingTransfers"];
+	
+	if (self.incomingTransfer) {
+		[kvo endObserving:@"item" ofObject:self.incomingTransfer];
+		[kvo endObserving:@"finished" ofObject:self.incomingTransfer];
+	}
+	
 	[set removeAllObjects];
-	if (c)
+	if (c) {
 		[set addObject:c];
+		
+		[kvo observe:@"item" ofObject:c usingSelector:@selector(incomingTransferMightHaveFinished:change:) options:0];
+		[kvo observe:@"finished" ofObject:c usingSelector:@selector(incomingTransferMightHaveFinished:change:) options:0];
+	}
 }
 
 - (MvrBTOutgoing*) outgoingTransfer;
@@ -179,9 +192,28 @@
 - (void) setOutgoingTransfer:(MvrBTOutgoing*) c;
 {
 	NSMutableSet* set = [self mutableSetValueForKey:@"outgoingTransfers"];
+
+	if (self.outgoingTransfer)
+		[kvo endObserving:@"finished" ofObject:self.outgoingTransfer];
+	
 	[set removeAllObjects];
-	if (c)
+	
+	if (c) {
 		[set addObject:c];
+		[kvo observe:@"finished" ofObject:c usingSelector:@selector(outgoingTransferDidChangeFinished:change:) options:0];
+	}
+}
+
+- (void) outgoingTransferDidChangeFinished:(MvrBTOutgoing*) outgoing change:(NSDictionary*) change;
+{
+	if (self.outgoingTransfer.finished)
+		self.outgoingTransfer = nil;
+}
+
+- (void) incomingTransferMightHaveFinished:(MvrBTIncoming*) incoming change:(NSDictionary*) change;
+{
+	if (self.incomingTransfer.item || self.incomingTransfer.cancelled)
+		self.incomingTransfer = nil;
 }
 
 + (NSSet*) keyPathsForValuesAffectingIncomingTransfer;

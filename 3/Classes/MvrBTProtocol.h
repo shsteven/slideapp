@@ -15,6 +15,7 @@ enum {
 	kMvrBTProtocolOutOfOrderReception,
 	kMvrBTProtocolTooMuchDataReceived,
 	kMvrBTProtocolCannotBacktrackSoMuch,
+	kMvrBTProtocolUnexpectedPacket,
 	// kMvrBTProtocolCRC32DidNotMatch,
 };
 typedef NSInteger MvrBTProtocolErrorReason;
@@ -40,14 +41,10 @@ typedef NSInteger MvrBTProtocolErrorReason;
 
 - (void) sendStarter;
 
-- (void) preparePacketWithSequenceNumber:(NSUInteger) sequenceNumber;
-- (BOOL) isPacketAvailableWithSequenceNumber:(NSUInteger) sequenceNumber;
+- (BOOL) isPastPacketAvailableWithSequenceNumber:(NSUInteger) sequenceNumber;
 - (void) sendPacketWithSequenceNumber:(NSUInteger) sequenceNumber;
 
 - (BOOL) isPayloadAllSent;
-
-- (void) startMonitoringTimeout;
-- (void) stopMonitoringTimeout;
 
 - (void) endConnectionWithReason:(MvrBTProtocolErrorReason) reason;
 

@@ -8,7 +8,6 @@
 
 #import "MvrBTIncomingOutgoing.h"
 
-#pragma mark -
 #pragma mark Data utilities.
 
 static BOOL MvrSameDataAs(NSData* data, void* comparison, size_t size) {
@@ -35,6 +34,15 @@ static size_t kMvrStarterPacket_Size = 7;
 static unsigned char kMvrIncomingPacketHeader[] = 
 	{ 'M', '3', 'S', 'T' };
 static size_t kMvrIncomingPacketHeader_Size = 4;
+
+static unsigned char kMvrAckPacketHeader[] =
+	{ 'M', '3', 'O', 'K' };
+static size_t kMvrAckPacketHeader_Size = 4;
+
+static unsigned char kMvrNackPacketHeader[] =
+	{ 'M', '3', 'N', 'O' };
+static size_t kMvrNackPacketHeader_Size = 4;
+
 
 static NSUInteger MvrNumberFromNumberedPacketWithHeader(NSData* data, unsigned char* header, size_t headerSize) {
 	if ([data length] < headerSize + sizeof(uint16_t) + sizeof(uint8_t))
@@ -89,18 +97,10 @@ static NSData* MvrNumberedPacket(unsigned char* header, size_t headerSize, NSUIn
 }
 
 static NSData* MvrAcknowledgmentPacket(NSUInteger seqNo) {
-	static unsigned char kMvrAckPacketHeader[] =
-		{ 'M', '3', 'O', 'K' };
-	static size_t kMvrAckPacketHeader_Size = 4;	
-	
 	return MvrNumberedPacket(kMvrAckPacketHeader, kMvrAckPacketHeader_Size, seqNo);
 }
 
 static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
-	static unsigned char kMvrNackPacketHeader[] =
-		{ 'M', '3', 'N', 'O' };
-	static size_t kMvrNackPacketHeader_Size = 4;	
-	
 	return MvrNumberedPacket(kMvrNackPacketHeader, kMvrNackPacketHeader_Size, seqNo);
 }
 
@@ -115,6 +115,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	if (self != nil) {
 		channel = chan; // it owns us.
 		proto = [MvrBTProtocolIncoming new];
+		proto.delegate = self;
 	}
 	return self;
 }
@@ -210,5 +211,149 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 @end
 
 @implementation MvrBTOutgoing
+
+- (id) initWithItem:(MvrItem*) i channel:(MvrBTChannel*) chan;
+{
+	if (self = [super init]) {
+		channel = chan; // it owns us
+		item = [i retain];
+		builder = [(MvrPacketBuilder*)[MvrPacketBuilder alloc] initWithDelegate:self];
+
+		buffer = [MvrBuffer new];
+		buffer.consumptionSize = kMvrBTProtocolPacketSize;
+		
+		baseIndex = 1;
+		savedPackets = [NSMutableArray new];
+	}
+	
+	return self;
+}
+
+@synthesize error, finished, progress;
+
+- (void) dealloc
+{
+	[error release];
+	[item release];
+	[super dealloc];
+}
+
+
++ outgoingTransferWithItem:(MvrItem*) i channel:(MvrBTChannel*) chan;
+{
+	return [[[self alloc] initWithItem:i channel:chan] autorelease];
+}
+
+- (void) start;
+{
+	[builder setMetadataValue:item.title forKey:kMvrProtocolMetadataTitleKey];
+	[builder setMetadataValue:item.type forKey:kMvrProtocolMetadataTypeKey];
+	
+	[builder addPayload:[item.storage preferredContentObject] length:item.storage.contentLength forKey:kMvrProtocolExternalRepresentationPayloadKey];
+	
+	[builder start];
+}
+
+- (void) endWithError:(NSError*) e;
+{
+	if (self.finished)
+		return;
+	
+	self.error = e;
+	self.finished = YES;
+}
+
+#pragma mark -
+#pragma mark Packet builder.
+
+- (void) packetBuilder:(MvrPacketBuilder*) b didProduceData:(NSData*) d;
+{
+	[buffer appendData:d];
+	
+	NSData* packet;
+	while ((packet = [buffer consume]) != nil)
+		[savedPackets addObject:packet];
+	
+	if ([savedPackets count] > 10)
+		b.paused = YES;
+	
+	if (needsToSendAPacket)
+		needsToSendAPacket = ![self sendNextPacket];
+}
+
+- (void) packetBuilder:(MvrPacketBuilder*) b didEndWithError:(NSError*) e;
+{
+	if (e)
+		[self endWithError:e];
+}
+
+#pragma mark -
+#pragma mark Protocol.
+
+- (void) didReceiveDataFromBluetooth:(NSData*) data;
+{
+	NSUInteger n;
+	
+	if ((n = MvrNumberFromNumberedPacketWithHeader(data, kMvrAckPacketHeader, kMvrAckPacketHeader_Size)) != NSNotFound)
+		[proto didAcknowledgeWithSequenceNumber:n];
+	else if ((n = MvrNumberFromNumberedPacketWithHeader(data, kMvrNackPacketHeader, kMvrNackPacketHeader_Size)) != NSNotFound)
+		[proto didAcknowledgeWithSequenceNumber:n];
+	else
+		[self endWithError:[NSError errorWithDomain:@"MvrBTProtocolErrorDomain" code:kMvrBTProtocolUnexpectedPacket userInfo:nil]];
+}
+
+- (void) sendStarter;
+{
+	NSData* starter = [NSData dataWithBytes:kMvrStarterPacket length:kMvrStarterPacket_Size];
+	NSError* e;
+	if (![channel sendData:starter error:&e])
+		[self endWithError:e];
+}
+
+- (BOOL) isPastPacketAvailableWithSequenceNumber:(NSUInteger) sequenceNumber;
+{
+	return (sequenceNumber >= baseIndex);
+}
+
+- (BOOL) sendNextPacket;
+{
+	if ([savedPackets count] == 0)
+		return NO;
+	
+	NSData* packet = [[[savedPackets objectAtIndex:0] retain] autorelease];
+	[savedPackets removeObjectAtIndex:0];
+	baseIndex++;
+	
+	NSError* e;
+	if (![channel sendData:packet error:&e])
+		[self endWithError:e];
+	
+	return YES;
+}
+
+- (void) sendPacketWithSequenceNumber:(NSUInteger) sequenceNumber;
+{
+	NSInteger index = sequenceNumber - baseIndex;
+	if (index < [savedPackets count]) {
+		NSError* e;
+		if (![channel sendData:[savedPackets objectAtIndex:index] error:&e]) {
+			[self endWithError:e];
+			return;
+		}
+	} else
+		needsToSendAPacket = YES;
+}
+
+- (BOOL) isPayloadAllSent;
+{
+	return self.finished;
+}
+
+- (void) endConnectionWithReason:(MvrBTProtocolErrorReason) reason;
+{
+	NSError* e = (reason != kMvrBTProtocolFinishedWithoutErrors)?
+		[NSError errorWithDomain:@"MvrBTProtocolErrorDomain" code:reason userInfo:nil] : nil;
+	[self endWithError:e];
+}
 
 @end
