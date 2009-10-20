@@ -35,6 +35,9 @@
 
 - (void) didReceiveDataFromBluetooth:(NSData*) data;
 
+- (void) startWaiting;
+- (void) stopWaiting;
+
 @end
 
 @interface MvrBTOutgoing : NSObject <MvrOutgoing, MvrBTProtocolOutgoingDelegate, MvrPacketBuilderDelegate> {
@@ -50,7 +53,7 @@
 	MvrItem* item;
 	
 	NSError* error;
-	BOOL finished; float progress;
+	BOOL finishedBuilding, hasSentLastPacket, finished; float progress;
 }
 
 - (id) initWithItem:(MvrItem*) i channel:(MvrBTChannel*) chan;

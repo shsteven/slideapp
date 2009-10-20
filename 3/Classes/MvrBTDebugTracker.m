@@ -21,15 +21,8 @@ L0ObjCSingletonMethod(sharedTracker)
 	[super dealloc];
 }
 
-- (void) trackTime;
-{
-	[lastTrackingTime release];
-	lastTrackingTime = [NSDate new];
-}
-
 - (void) track:(NSString*) track from:(id) object at:(const char*) function;
 {
-	BOOL writePreamble = NO;
 	if (!file) {
 		NSString* path = [NSTemporaryDirectory() stringByAppendingPathComponent:@"MvrBTDebugTracking.log"];
 		BOOL done = [[NSData data] writeToFile:path options:0 error:NULL];
@@ -39,17 +32,15 @@ L0ObjCSingletonMethod(sharedTracker)
 		NSAssert(file, @"The tracking file was opened");
 		
 		L0LogAlways(@"Tracking a new transfer at %@", path);
-		writePreamble = YES;
-	}
-	
-	if (writePreamble) {
+		
 		NSString* start = @"\n\n\n\n == !! == !! ==\nSTARTING TRACKING OF A NEW CONNECTION.\n\n";
 		[file writeData:[start dataUsingEncoding:NSUTF8StringEncoding]];
+
+		lastTrackingTime = [NSDate new];
 	}
 	
-	NSString* toWrite = [NSString stringWithFormat:@"%@\n(at %f ms after start, in %s for %@)\n\n", track, lastTrackingTime? 0 : (double) -[lastTrackingTime timeIntervalSinceNow], function, object];
+	NSString* toWrite = [NSString stringWithFormat:@"%@\n(at %f ms after start, in %s for %@)\n\n", track, lastTrackingTime? 0 : (double) -[lastTrackingTime timeIntervalSinceNow] * 1000.0, function, object];
 	[file writeData:[toWrite dataUsingEncoding:NSUTF8StringEncoding]];
-	[self trackTime];
 }
 
 - (void) endTrackingFrom:(id) object at:(const char*) function;

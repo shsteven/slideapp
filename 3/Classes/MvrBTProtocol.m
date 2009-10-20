@@ -97,7 +97,7 @@ enum {
 		return;
 	}
 	
-	MvrBTTrack(@"Received a packet start with number %lu. Now expecting %uz bytes.", number, length);
+	MvrBTTrack(@"Received a packet start with number %lu. Now expecting %zu bytes.", number, length);
 	lastReceivedSequenceNumber = number;
 	state = kMvrStateWaitingForPacketPart;
 	remainingLength = length;	
