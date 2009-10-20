@@ -405,7 +405,7 @@
 		15F096C0105E57690016E2B6 /* MvrLegacyWiFi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrLegacyWiFi.h; sourceTree = "<group>"; };
 		15F096C1105E57690016E2B6 /* MvrLegacyWiFi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrLegacyWiFi.m; sourceTree = "<group>"; };
 		15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
-		D2AAC07E0554694100DB518D /* libNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC07E0554694100DB518D /* libMoverNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMoverNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -447,7 +447,7 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libNetwork.a */,
+				D2AAC07E0554694100DB518D /* libMoverNetwork.a */,
 				1593E964105BB9FB00220989 /* Network+Test.octest */,
 				153B4212105BF36700DB8FB2 /* mvr-wifi */,
 			);
@@ -839,7 +839,7 @@
 			);
 			name = Network;
 			productName = Network;
-			productReference = D2AAC07E0554694100DB518D /* libNetwork.a */;
+			productReference = D2AAC07E0554694100DB518D /* libMoverNetwork.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */

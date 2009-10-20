@@ -13,12 +13,14 @@
 
 #import "Network+Storage/MvrScannerObserver.h"
 
-@interface MvrBluetoothMode : MvrUIMode <GKPeerPickerControllerDelegate, MvrScannerObserverDelegate> {
+@interface MvrBluetoothMode : MvrUIMode <GKPeerPickerControllerDelegate, MvrScannerObserverDelegate, UIAlertViewDelegate> {
 	MvrBTScanner* scanner;
 	GKPeerPickerController* peerPicker;
 	MvrScannerObserver* observer;
 	
 	BOOL didPickAfterSwitch;
+	
+	id nextDestination; MvrItem* nextItem;
 }
 
 - (IBAction) beginPickingPeer;

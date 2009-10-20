@@ -143,6 +143,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) dealloc
 {
+	[self stopWaiting];
 	[proto release];
 	[super dealloc];
 }
@@ -166,12 +167,13 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	
 	if (MvrSameDataAs(data, kMvrStarterPacket, kMvrStarterPacket_Size)) {
 		MvrBTTrack(@"Received a starter packet!");
+		awaitingSequenceNo = 0;
 		[proto didReceiveStarter];
 	} else {
 		NSUInteger n = MvrNumberFromNumberedPacketWithHeader(data, kMvrIncomingPacketHeader, kMvrIncomingPacketHeader_Size);
 		size_t size = (n == NSNotFound)? kMvrInvalidSize : MvrSizeFromIncomingPacket(data);
 		if (n != NSNotFound && size != kMvrInvalidSize) {
-			MvrBTTrack(@"Received an incoming warning packet! number = %n, size = %zu", n, size);
+			MvrBTTrack(@"Received an incoming warning packet! number = %lu, size = %zu", (unsigned long) n, size);
 			[proto didReceivePacketStartWithSequenceNumber:n length:size];
 			return;
 		}
@@ -180,6 +182,8 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 		[self appendData:data];
 		[proto didReceivePacketPart:data];
 	}
+	
+	[self startWaiting];
 }
 
 - (void) sendAcknowledgementForSequenceNumber:(NSUInteger) seq;
@@ -188,6 +192,9 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 		MvrBTTrack(@"Not sending ack since we're cancelled already.");
 		return;
 	}
+	
+	attemptsAtBacktracking = 0;
+	awaitingSequenceNo = seq + 1;
 	
 	MvrBTTrack(@"Sending an ack");
 	NSData* ackPacket = MvrAcknowledgmentPacket(seq);
@@ -221,6 +228,10 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 - (void) startWaiting;
 {
 	[self stopWaiting];
+	
+	if (self.item || self.cancelled)
+		return;
+	
 	MvrBTTrack(@"Starting timeout monitoring for %f seconds", (double) kMvrBTProtocolTimeout);
 	[self performSelector:@selector(timeout) withObject:nil afterDelay:kMvrBTProtocolTimeout];
 }
@@ -233,8 +244,12 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) timeout;
 {
-	L0LogAlways(@"Cancelling due to a timeout.");
-	[self cancel];
+	attemptsAtBacktracking++;
+	if (attemptsAtBacktracking == 10) {
+		L0LogAlways(@"Cancelling due to a timeout.");
+		[self cancel];
+	} else
+		[self signalErrorForSequenceNumber:awaitingSequenceNo reason:kMvrBTProtocolDidTimeOut];
 }
 
 - (void) cancel;
@@ -321,6 +336,11 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	[builder start];
 	
 	[self sendStarter];
+}
+
+- (void) cancel;
+{
+	[self endWithError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil]];
 }
 
 - (void) endWithError:(NSError*) e;
@@ -435,14 +455,14 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 			return;
 		}
 		
+		if (finishedBuilding && index == [savedPackets count] - 1)
+			hasSentLastPacket = YES; // prepares for landing.
+		
 		if (index > 10) {
 			[savedPackets removeObjectsInRange:NSMakeRange(0, 5)];
 			baseIndex += 5;
 			MvrBTTrack(@"Cleared the oldest five sent packets. Now having %lu-%lu (incl) in queue.", (unsigned long)  baseIndex, (unsigned long) baseIndex + [savedPackets count]);
 		}
-		
-		if (finishedBuilding && index == [savedPackets count] - 1)
-			hasSentLastPacket = YES; // prepares for landing.
 		
 	} else {
 		MvrBTTrack(@"Don't have packet %lu (it's in the FUTURE!), so we're pausing until we get it. We'll retry once the packet builder gives it to us.", sequenceNumber);

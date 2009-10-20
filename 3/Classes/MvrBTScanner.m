@@ -108,14 +108,15 @@
 		NSError* e;
 		if ([s acceptConnectionFromPeer:peerID error:&e])
 			[self acceptPeerWithIdentifier:peerID];
-		else {
+		else
 			L0LogAlways(@"Could not accept a connection from peer with id %@", peerID);
-		}
 	}
 }
 
 - (void)session:(GKSession *)s connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error;
 {
+	L0Log(@"A connection attempt failed to peer %@ with error %@", peerID, error);
+	
 	if ([self.channel.peerID isEqual:peerID])
 		self.channel = nil;
 }
@@ -124,6 +125,7 @@
 
 - (void)session:(GKSession *)s didFailWithError:(NSError *)error;
 {
+	L0Log(@"The GameKit session failed with error %@", error);
 	[session disconnectFromAllPeers];
 }
 
@@ -134,8 +136,12 @@
 
 - (void) session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state;
 {
-	if (!self.channel || ![peerID isEqual:self.channel.peerID])
+	if (!self.channel || ![peerID isEqual:self.channel.peerID]) {
+		L0Log(@"Got a status change for a peer other than our current channel: %@, %lu", peerID, (unsigned long) state);
 		return;
+	}
+	
+	L0Log(@"State change for our channel! => %d", (unsigned long) state);
 	
 	if (state == GKPeerStateDisconnected)
 		self.channel = nil;
@@ -166,7 +172,11 @@
 	
 	[scanner release];
 	[peerID release];
+	
+	[self.incomingTransfer cancel];
 	[incomingTransfers release];
+	
+	[self.outgoingTransfer cancel];
 	[outgoingTransfers release];
 	
 	[super dealloc];
@@ -249,7 +259,12 @@
 
 - (BOOL) sendData:(NSData*) data error:(NSError**) e;
 {
-	return [scanner.session sendData:data toPeers:[NSArray arrayWithObject:self.peerID] withDataMode:GKSendDataReliable error:e];
+	BOOL sent = [scanner.session sendData:data toPeers:[NSArray arrayWithObject:self.peerID] withDataMode:GKSendDataReliable error:e];
+	
+	if (!sent)
+		L0Log(@"An error occurred when sending data: %@", *e);
+	
+	return sent;
 }
 
 - (BOOL) supportsStreams;

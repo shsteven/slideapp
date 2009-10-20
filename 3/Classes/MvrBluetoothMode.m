@@ -12,6 +12,13 @@
 
 #import "MvrAppDelegate.h"
 
+@interface MvrBluetoothMode ()
+
+- (void) sendOrConfirmItem:(MvrItem*) i toDestination:(id) destination;
+
+@end
+
+
 @implementation MvrBluetoothMode
 
 - (id) init
@@ -27,6 +34,8 @@
 - (void) dealloc
 {
 	[self stopPickingPeer];
+	[nextDestination release];
+	[nextItem release];
 	[scanner release];
 	[super dealloc];
 }
@@ -127,7 +136,7 @@
 	if (!self.northDestination || d != kMvrDirectionNorth)
 		return;
 	
-	[self.northDestination beginSendingItem:i];
+	[self sendOrConfirmItem:i toDestination:self.northDestination];
 }
 
 - (void) sendItem:(MvrItem*) i toDestination:(id) destination;
@@ -135,9 +144,34 @@
 	if (self.northDestination != destination)
 		return;
 	
-	[destination beginSendingItem:i];
+	[self sendOrConfirmItem:i toDestination:destination];
 }
 
+- (void) sendOrConfirmItem:(MvrItem*) i toDestination:(id) destination;
+{	
+	if (i.storage.contentLength >= 1024 * 1024) {
+		if (nextDestination || nextItem)
+			return;
+		
+		nextDestination = [destination retain];
+		nextItem = [i retain];
+		
+		UIAlertView* alert = [UIAlertView alertNamed:@"MvrLargeItemOverBT"];
+		alert.cancelButtonIndex = 1;
+		alert.delegate = self;
+		[alert show];
+	} else
+		[destination beginSendingItem:i];
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	if (buttonIndex != alertView.cancelButtonIndex)
+		[nextDestination beginSendingItem:nextItem];
+
+	[nextDestination release]; nextDestination = nil;
+	[nextItem release]; nextItem = nil;
+}
 
 #pragma mark Receiving items
 

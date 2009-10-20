@@ -21,11 +21,14 @@
 #import "MvrBTProtocol.h"
 
 #define kMvrBTProtocolPacketSize 4096
-#define kMvrBTProtocolTimeout 15.0
+#define kMvrBTProtocolTimeout 7.0
 
 @interface MvrBTIncoming : MvrStreamedIncoming <MvrIncoming, MvrBTProtocolIncomingDelegate> {
 	MvrBTChannel* channel;
 	MvrBTProtocolIncoming* proto;
+	
+	int attemptsAtBacktracking;
+	NSUInteger awaitingSequenceNo;
 }
 
 + (BOOL) shouldStartReceivingWithData:(NSData*) data;
@@ -61,6 +64,7 @@
 
 - (void) start;
 - (void) endWithError:(NSError*) e;
+- (void) cancel;
 
 - (void) didReceiveDataFromBluetooth:(NSData*) data;
 

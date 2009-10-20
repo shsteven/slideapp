@@ -16,6 +16,7 @@ enum {
 	kMvrBTProtocolTooMuchDataReceived,
 	kMvrBTProtocolCannotBacktrackSoMuch,
 	kMvrBTProtocolUnexpectedPacket,
+	kMvrBTProtocolDidTimeOut,
 	// kMvrBTProtocolCRC32DidNotMatch,
 };
 typedef NSInteger MvrBTProtocolErrorReason;
