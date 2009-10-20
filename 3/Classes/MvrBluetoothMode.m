@@ -18,7 +18,7 @@
 {
 	self = [super init];
 	if (self != nil) {
-		scanner = [MvrBluetoothScanner new];
+		scanner = [MvrBTScanner new];
 		observer = [[MvrScannerObserver alloc] initWithScanner:scanner delegate:self];
 	}
 	return self;
@@ -102,9 +102,9 @@
 		[MvrApp() moveToWiFiMode];
 }
 
-- (NSString*) displayNameForDestination:(MvrBluetoothChannel*) destination;
+- (NSString*) displayNameForDestination:(MvrBTChannel*) destination;
 {
-	return [scanner.session displayNameForPeer:destination.peerIdentifier];
+	return [scanner.session displayNameForPeer:destination.peerID];
 }
 
 - (void) scanner:(id <MvrScanner>) s didAddChannel:(id <MvrChannel>) channel;

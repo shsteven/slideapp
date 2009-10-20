@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #import "MvrUIMode.h"
-#import "MvrBluetoothScanner.h"
+#import "MvrBTScanner.h"
 
 #import "Network+Storage/MvrScannerObserver.h"
 
 @interface MvrBluetoothMode : MvrUIMode <GKPeerPickerControllerDelegate, MvrScannerObserverDelegate> {
-	MvrBluetoothScanner* scanner;
+	MvrBTScanner* scanner;
 	GKPeerPickerController* peerPicker;
 	MvrScannerObserver* observer;
 	
