@@ -24,7 +24,8 @@
 	MvrPacketBuilder* builder;
 	MvrBuffer* buffer;
 	
-	BOOL finished;
+	int acknowledgesEnequeued;
+	BOOL starting, finishing, finished;
 	NSError* error;
 }
 

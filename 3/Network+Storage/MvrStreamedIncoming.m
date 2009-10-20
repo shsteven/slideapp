@@ -97,6 +97,8 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	self.progress = p.progress;
 	NSAssert(itemStorageStream && [itemStorageStream streamStatus] != NSStreamStatusNotOpen, @"We have a stream and it's open.");
 	
+	L0Log(@"Incoming item progressing at %f", p.progress);
+	
 	NSError* e;
 	if (!MvrWriteDataToOutputStreamSynchronously(itemStorageStream, d, &e)) {
 		L0LogAlways(@"Got an error while writing to the offloading stream: %@", e);

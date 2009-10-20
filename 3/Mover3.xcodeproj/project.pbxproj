@@ -57,6 +57,9 @@
 		156813AE108C91C200424179 /* MvrTextVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156813AD108C91C200424179 /* MvrTextVisor.xib */; };
 		156813B1108C921400424179 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156813B0108C921400424179 /* MainWindow.xib */; };
 		156813B4108C922C00424179 /* MvrAboutPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156813B3108C922C00424179 /* MvrAboutPane.xib */; };
+		1569C859108D8CBC00F3B5CF /* MvrBTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C858108D8CBC00F3B5CF /* MvrBTProtocol.m */; };
+		1569C863108DB7A800F3B5CF /* MvrBTScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C862108DB7A800F3B5CF /* MvrBTScanner.m */; };
+		1569C866108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C865108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m */; };
 		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		156E804210663AEB00315D0C /* GenericItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156E804110663AEB00315D0C /* GenericItemIcon.png */; };
 		1577006A10748D0100907F62 /* MvrVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1577006910748D0100907F62 /* MvrVideoItem.m */; };
@@ -263,6 +266,12 @@
 		156813AF108C91C600424179 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MvrTextVisor.xib; sourceTree = "<group>"; };
 		156813B2108C921800424179 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		156813B5108C923000424179 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MvrAboutPane.xib; sourceTree = "<group>"; };
+		1569C857108D8CBC00F3B5CF /* MvrBTProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBTProtocol.h; sourceTree = "<group>"; };
+		1569C858108D8CBC00F3B5CF /* MvrBTProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBTProtocol.m; sourceTree = "<group>"; };
+		1569C861108DB7A800F3B5CF /* MvrBTScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBTScanner.h; sourceTree = "<group>"; };
+		1569C862108DB7A800F3B5CF /* MvrBTScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBTScanner.m; sourceTree = "<group>"; };
+		1569C864108DBDC900F3B5CF /* MvrBTIncomingOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBTIncomingOutgoing.h; sourceTree = "<group>"; };
+		1569C865108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBTIncomingOutgoing.m; sourceTree = "<group>"; };
 		156CF0D4105BAEC3006D8E7A /* Local-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-Debug.xcconfig"; sourceTree = "<group>"; };
 		156CF0D5105BAEC3006D8E7A /* Local-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-Release.xcconfig"; sourceTree = "<group>"; };
 		156CF0D6105BAEC3006D8E7A /* Local.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Local.xcconfig; sourceTree = "<group>"; };
@@ -394,6 +403,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1569C856108D8CA900F3B5CF /* Bluetooth */,
 				154BD6EC1089F05200C45562 /* Help Alerts */,
 				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
@@ -551,6 +561,19 @@
 				15955A2010776B7D00FBC9B4 /* MvrVisor.m */,
 			);
 			name = "Item UI";
+			sourceTree = "<group>";
+		};
+		1569C856108D8CA900F3B5CF /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				1569C864108DBDC900F3B5CF /* MvrBTIncomingOutgoing.h */,
+				1569C865108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m */,
+				1569C857108D8CBC00F3B5CF /* MvrBTProtocol.h */,
+				1569C858108D8CBC00F3B5CF /* MvrBTProtocol.m */,
+				1569C861108DB7A800F3B5CF /* MvrBTScanner.h */,
+				1569C862108DB7A800F3B5CF /* MvrBTScanner.m */,
+			);
+			name = Bluetooth;
 			sourceTree = "<group>";
 		};
 		156CF0D3105BAEB5006D8E7A /* Configuration files */ = {
@@ -1132,6 +1155,9 @@
 				1553517C1088468900C75A6C /* MvrMorePane.m in Sources */,
 				155352431088547D00C75A6C /* MvrMessagesCell.m in Sources */,
 				154BD6F71089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m in Sources */,
+				1569C859108D8CBC00F3B5CF /* MvrBTProtocol.m in Sources */,
+				1569C863108DB7A800F3B5CF /* MvrBTScanner.m in Sources */,
+				1569C866108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

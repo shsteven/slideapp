@@ -26,8 +26,12 @@
 
 - (void) dealloc
 {
+	[self willChangeValueForKey:@"incomingTransfers"];
 	self.incomingTransfer = nil;
+	[self didChangeValueForKey:@"incomingTransfers"];
+	[self willChangeValueForKey:@"outgoingTransfers"];
 	self.outgoingTransfer = nil;
+	[self willChangeValueForKey:@"outgoingTransfers"];
 	
 	[peerIdentifier release];
 	[super dealloc];

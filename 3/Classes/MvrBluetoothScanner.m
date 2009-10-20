@@ -88,10 +88,12 @@
 	}
 }
 
+static const char starter[] = { 'M', '3', 'G', 'O', 0x0 };
+static const size_t starterLength = sizeof(starter) / sizeof(const char);
 
 - (void) receiveData:(NSData*) data fromPeer:(NSString*) peerID inSession:(GKSession*) s context:(void*) context;
 {
-	const char acknowledger[] = { 'M', '2', 'O', 'K', 0x0 };
+	const char acknowledger[] = { 'M', '3', 'O', 'K', 0x0 };
 	const size_t acknowledgerLength = sizeof(acknowledger) / sizeof(const char);
 	
 	BOOL isAck = [data length] == acknowledgerLength && (memcmp(acknowledger, [data bytes], acknowledgerLength) == 0);
@@ -101,9 +103,15 @@
 		return;
 	}
 	
-	if (!self.channel.incomingTransfer) {
+	BOOL isStarter = [data length] == starterLength && (memcmp(starter, [data bytes], starterLength) == 0);
+	
+	if (!self.channel.incomingTransfer && isStarter) {
+		L0Log(@"Received the starter. Acknowledging.");
+		
 		MvrBluetoothIncoming* incoming = [[MvrBluetoothIncoming new] autorelease];
 		self.channel.incomingTransfer = incoming;
+		[session sendData:[NSData dataWithBytesNoCopy:(void*) acknowledger length:acknowledgerLength freeWhenDone:NO] toPeers:[NSArray arrayWithObject:peerID] withDataMode:GKSendDataReliable error:NULL];
+		return;
 	}
 	
 	[self.channel.incomingTransfer appendData:data];
@@ -118,8 +126,11 @@
 #endif
 	
 	L0Log(@"Observed: %@'s peer %@ changed state to %d", s, peerID, state);
-	if ([self.channel.peerIdentifier isEqual:peerID] && state == GKPeerStateDisconnected || state == GKPeerStateUnavailable)
+	if ([self.channel.peerIdentifier isEqual:peerID] && state == GKPeerStateDisconnected || state == GKPeerStateUnavailable) {
+		[self willChangeValueForKey:@"channels"];
 		self.channel = nil;
+		[self didChangeValueForKey:@"channels"];
+	}
 }
 
 - (void) acceptPeerWithIdentifier:(NSString*) peerID;
@@ -156,7 +167,7 @@
 		scanner = s; // it owns us indirectly
 		builder = [(MvrPacketBuilder*)[MvrPacketBuilder alloc] initWithDelegate:self];
 		buffer = [MvrBuffer new];
-		buffer.consumptionSize = 2048;
+		buffer.consumptionSize = 20000;
 	}
 	return self;
 }
@@ -172,16 +183,23 @@
 
 - (void) start;
 {
-	[builder setMetadataValue:item.title forKey:kMvrProtocolMetadataTitleKey];
-	[builder setMetadataValue:item.type forKey:kMvrProtocolMetadataTypeKey];
+	L0Log(@"Sending the starter.");
 	
-	[builder addPayload:[item.storage preferredContentObject] length:item.storage.contentLength forKey:kMvrProtocolExternalRepresentationPayloadKey];
+	starting = YES;
 	
-	[builder start];
+	NSData* data = [NSData dataWithBytesNoCopy:(void*) starter length:starterLength freeWhenDone:NO];
+	NSError* e;
+	if (![scanner.session sendData:data toPeers:[NSArray arrayWithObject:scanner.channel.peerIdentifier] withDataMode:GKSendDataReliable error:&e]) {
+		
+		L0LogAlways(@"%@", e);
+		[self endWithError:e];
+		return;
+	}
 }
 
 - (void) packetBuilder:(MvrPacketBuilder *)b didProduceData:(NSData *)d;
 {
+	L0Log(@"Producing a packet for Bluetooth. Progress = %f", builder.progress);
 	[buffer appendData:d];
 	builder.paused = YES;
 	
@@ -198,6 +216,9 @@
 			L0LogAlways(@"%@", e);
 			[self endWithError:e];
 			
+		} else {
+			acknowledgesEnequeued++;
+			// L0Log(@"Now expecting %d acks", acknowledgesEnequeued);
 		}
 	} else
 		builder.paused = NO;
@@ -206,17 +227,35 @@
 
 - (void) acknowledge;
 {
-	[self sendPacketPart];
+	// L0Log(@"Ack'd. Now expecting %d more acks.", acknowledgesEnequeued);
+	if (starting) {
+		
+		[builder setMetadataValue:item.title forKey:kMvrProtocolMetadataTitleKey];
+		[builder setMetadataValue:item.type forKey:kMvrProtocolMetadataTypeKey];
+		
+		[builder addPayload:[item.storage preferredContentObject] length:item.storage.contentLength forKey:kMvrProtocolExternalRepresentationPayloadKey];
+		
+		[builder start];
+		
+	} else if (finishing)
+		[self endWithError:nil];
+	else
+		[self performSelector:@selector(sendPacketPart) withObject:nil afterDelay:0.05];
 }
 
 - (void) packetBuilder:(MvrPacketBuilder *)b didEndWithError:(NSError *)e;
 {
-	[self endWithError:e];
+	if (e)
+		[self endWithError:e];
+	else
+		finishing = YES;
 }
 
 - (void) endWithError:(NSError*) e;
 {
 	if (self.finished) return;
+	
+	L0Log(@"Will end with error %@", e);
 	
 	self.error = e;
 	self.finished = YES;
