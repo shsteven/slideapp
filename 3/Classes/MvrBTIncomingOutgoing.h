@@ -12,9 +12,13 @@
 #import "Network+Storage/MvrItem.h"
 #import "Network+Storage/MvrIncoming.h"
 #import "Network+Storage/MvrOutgoing.h"
+#import "Network+Storage/MvrStreamedIncoming.h"
 
-@interface MvrBTIncoming : NSObject <MvrIncoming> {
+#import "MvrBTProtocol.h"
+
+@interface MvrBTIncoming : MvrStreamedIncoming <MvrIncoming, MvrBTProtocolIncomingDelegate> {
 	MvrBTChannel* channel;
+	MvrBTProtocolIncoming* proto;
 }
 
 + (BOOL) shouldStartReceivingWithData:(NSData*) data;
@@ -22,7 +26,7 @@
 - (id) initWithChannel:(MvrBTChannel*) chan;
 + incomingTransferWithChannel:(MvrBTChannel*) chan;
 
-- (void) didReceiveData:(NSData*) data;
+- (void) didReceiveDataFromBluetooth:(NSData*) data;
 
 @end
 
@@ -35,6 +39,6 @@
 
 - (void) start;
 
-- (void) didReceiveData:(NSData*) data;
+- (void) didReceiveDataFromBluetooth:(NSData*) data;
 
 @end

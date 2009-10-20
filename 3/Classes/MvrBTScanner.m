@@ -196,13 +196,13 @@
 - (void) didReceiveData:(NSData*) data;
 {
 	if (self.outgoingTransfer)
-		[self.outgoingTransfer didReceiveData:data];
+		[self.outgoingTransfer didReceiveDataFromBluetooth:data];
 	else if (self.incomingTransfer)
-		[self.incomingTransfer didReceiveData:data];
+		[self.incomingTransfer didReceiveDataFromBluetooth:data];
 	else if ([MvrBTIncoming shouldStartReceivingWithData:data]) {
 		MvrBTIncoming* inc = [MvrBTIncoming incomingTransferWithChannel:self];
 		self.incomingTransfer = inc;
-		[inc didReceiveData:data];
+		[inc didReceiveDataFromBluetooth:data];
 	}
 }
 
