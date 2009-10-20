@@ -21,6 +21,7 @@
 #import "MvrBTProtocol.h"
 
 #define kMvrBTProtocolPacketSize 4096
+#define kMvrBTProtocolTimeout 15.0
 
 @interface MvrBTIncoming : MvrStreamedIncoming <MvrIncoming, MvrBTProtocolIncomingDelegate> {
 	MvrBTChannel* channel;
@@ -44,7 +45,7 @@
 	
 	NSUInteger baseIndex;
 	NSMutableArray* savedPackets;
-	BOOL needsToSendAPacket;
+	NSUInteger seqNoThatNeedsSending;
 	
 	MvrItem* item;
 	
@@ -63,7 +64,5 @@
 @property(retain) NSError* error;
 @property BOOL finished;
 @property float progress;
-
-- (BOOL) sendNextPacket;
 
 @end

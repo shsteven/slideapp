@@ -60,6 +60,7 @@
 		1569C859108D8CBC00F3B5CF /* MvrBTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C858108D8CBC00F3B5CF /* MvrBTProtocol.m */; };
 		1569C863108DB7A800F3B5CF /* MvrBTScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C862108DB7A800F3B5CF /* MvrBTScanner.m */; };
 		1569C866108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C865108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m */; };
+		1569CAF8108E040700F3B5CF /* MvrBTDebugTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569CAF7108E040700F3B5CF /* MvrBTDebugTracker.m */; };
 		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		156E804210663AEB00315D0C /* GenericItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156E804110663AEB00315D0C /* GenericItemIcon.png */; };
 		1577006A10748D0100907F62 /* MvrVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1577006910748D0100907F62 /* MvrVideoItem.m */; };
@@ -272,6 +273,8 @@
 		1569C862108DB7A800F3B5CF /* MvrBTScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBTScanner.m; sourceTree = "<group>"; };
 		1569C864108DBDC900F3B5CF /* MvrBTIncomingOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBTIncomingOutgoing.h; sourceTree = "<group>"; };
 		1569C865108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBTIncomingOutgoing.m; sourceTree = "<group>"; };
+		1569CAF6108E040700F3B5CF /* MvrBTDebugTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBTDebugTracker.h; sourceTree = "<group>"; };
+		1569CAF7108E040700F3B5CF /* MvrBTDebugTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBTDebugTracker.m; sourceTree = "<group>"; };
 		156CF0D4105BAEC3006D8E7A /* Local-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-Debug.xcconfig"; sourceTree = "<group>"; };
 		156CF0D5105BAEC3006D8E7A /* Local-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-Release.xcconfig"; sourceTree = "<group>"; };
 		156CF0D6105BAEC3006D8E7A /* Local.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Local.xcconfig; sourceTree = "<group>"; };
@@ -572,6 +575,8 @@
 				1569C858108D8CBC00F3B5CF /* MvrBTProtocol.m */,
 				1569C861108DB7A800F3B5CF /* MvrBTScanner.h */,
 				1569C862108DB7A800F3B5CF /* MvrBTScanner.m */,
+				1569CAF6108E040700F3B5CF /* MvrBTDebugTracker.h */,
+				1569CAF7108E040700F3B5CF /* MvrBTDebugTracker.m */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -1158,6 +1163,7 @@
 				1569C859108D8CBC00F3B5CF /* MvrBTProtocol.m in Sources */,
 				1569C863108DB7A800F3B5CF /* MvrBTScanner.m in Sources */,
 				1569C866108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m in Sources */,
+				1569CAF8108E040700F3B5CF /* MvrBTDebugTracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -71,9 +71,6 @@ typedef NSInteger MvrBTProtocolErrorReason;
 - (void) sendAcknowledgementForSequenceNumber:(NSUInteger) seq;
 - (void) signalErrorForSequenceNumber:(NSUInteger) seq reason:(MvrBTProtocolErrorReason) reason;
 
-- (void) startMonitoringTimeout;
-- (void) stopMonitoringTimeout;
-
 - (BOOL) isPayloadAllReceived;
 
 - (void) endConnectionWithReason:(MvrBTProtocolErrorReason) reason;

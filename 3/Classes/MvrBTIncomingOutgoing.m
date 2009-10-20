@@ -8,13 +8,13 @@
 
 #import "MvrBTIncomingOutgoing.h"
 
+#import "MvrBTDebugTracker.h"
+
 #pragma mark Data utilities.
 
 static BOOL MvrSameDataAs(NSData* data, void* comparison, size_t size) {
-	if ([data length] != size)
-		return NO;
-	
-	return (memcmp([data bytes], comparison, size) == 0);
+	BOOL result = ([data length] == size) && (memcmp([data bytes], comparison, size) == 0);
+	return result;
 }
 
 static BOOL MvrSubdataSameAs(NSData* data, NSUInteger at, void* comparison, size_t size) {
@@ -27,24 +27,24 @@ static BOOL MvrSubdataSameAs(NSData* data, NSUInteger at, void* comparison, size
 #pragma mark -
 #pragma mark Packet production
 
-static unsigned char kMvrStarterPacket[] =
+static uint8_t kMvrStarterPacket[] =
 	{ 'M', '3', 'G', 'O', 0x0, 0x0, 0x0 };
 static size_t kMvrStarterPacket_Size = 7;
 
-static unsigned char kMvrIncomingPacketHeader[] = 
+static uint8_t kMvrIncomingPacketHeader[] = 
 	{ 'M', '3', 'S', 'T' };
 static size_t kMvrIncomingPacketHeader_Size = 4;
 
-static unsigned char kMvrAckPacketHeader[] =
+static uint8_t kMvrAckPacketHeader[] =
 	{ 'M', '3', 'O', 'K' };
 static size_t kMvrAckPacketHeader_Size = 4;
 
-static unsigned char kMvrNackPacketHeader[] =
+static uint8_t kMvrNackPacketHeader[] =
 	{ 'M', '3', 'N', 'O' };
 static size_t kMvrNackPacketHeader_Size = 4;
 
 
-static NSUInteger MvrNumberFromNumberedPacketWithHeader(NSData* data, unsigned char* header, size_t headerSize) {
+static NSUInteger MvrNumberFromNumberedPacketWithHeader(NSData* data, uint8_t* header, size_t headerSize) {
 	if ([data length] < headerSize + sizeof(uint16_t) + sizeof(uint8_t))
 		return NSNotFound;
 	
@@ -76,23 +76,40 @@ static size_t MvrSizeFromIncomingPacket(NSData* data) {
 	if (*((uint8_t*) terminatorPosition) != 0)
 		return kMvrInvalidSize;
 	
-	const void* numberPosition = [data bytes] + headerSize;
-	uint16_t numberInNetworkOrder = *((const uint16_t*) numberPosition);
-	size_t number = ntohs(numberInNetworkOrder);
-	return number;
+	const void* sizePosition = [data bytes] + headerSize;
+	uint16_t sizeInNetworkOrder = *((const uint16_t*) sizePosition);
+	size_t size = (size_t) ntohs(sizeInNetworkOrder);
+		
+	return size;
 }
 
-static NSData* MvrNumberedPacket(unsigned char* header, size_t headerSize, NSUInteger seqNo) {
-	static size_t kMvrNumberedPacket_AdditionalSize = 3;
-	
+const size_t kMvrNumberedPacket_AdditionalSize = sizeof(uint16_t) + sizeof(uint8_t);
+
+static NSData* MvrNumberedPacket(uint8_t* header, size_t headerSize, NSUInteger seqNo) {	
 	NSMutableData* data = [NSMutableData dataWithBytes:header length:headerSize];
-	uint16_t seqNoAltered = htons(seqNo);
-	[data appendBytes:(const void*) &seqNoAltered length:sizeof(uint16_t)];
+	uint16_t networkOrderSeqNo = htons(seqNo);
+	[data appendBytes:(const void*) &networkOrderSeqNo length:sizeof(uint16_t)];
 	
 	const uint8_t endingNull = 0x0;
 	[data appendBytes:(const void*) &endingNull length:sizeof(uint8_t)];
 	
 	NSCAssert([data length] == headerSize + kMvrNumberedPacket_AdditionalSize, @"Numbered packet produced of the wrong lenght");
+	return data;
+}
+
+static NSData* MvrIncomingPacket(NSUInteger seqNo, size_t announcedSize) {
+	NSMutableData* data = [NSMutableData dataWithData:MvrNumberedPacket(kMvrIncomingPacketHeader, kMvrIncomingPacketHeader_Size, seqNo)];
+	
+	NSCAssert(announcedSize <= UINT16_MAX, @"Can't send packets more than UINT16_MAX in length");
+	
+	uint16_t announcedSizeSeqNo = htons(announcedSize);
+	[data appendBytes:(const void*) &announcedSizeSeqNo length:sizeof(uint16_t)];
+	
+	const uint8_t endingNull = 0x0;
+	[data appendBytes:(const void*) &endingNull length:sizeof(uint8_t)];
+	
+	NSCAssert([data length] == kMvrIncomingPacketHeader_Size + kMvrNumberedPacket_AdditionalSize + sizeof(uint16_t) + sizeof(uint8_t), @"Incoming packet produced of the wrong lenght");
+	
 	return data;
 }
 
@@ -134,21 +151,28 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 + (BOOL) shouldStartReceivingWithData:(NSData*) data;
 {
-	return MvrSameDataAs(data, kMvrStarterPacket, kMvrStarterPacket_Size);
+	BOOL result = MvrSameDataAs(data, kMvrStarterPacket, kMvrStarterPacket_Size);
+	MvrBTTrack(@"Should start receiving with %@? result = %d", data, result);
+	return result;
 }
 
 - (void) didReceiveDataFromBluetooth:(NSData *)data
 {
-	if (MvrSameDataAs(data, kMvrStarterPacket, kMvrStarterPacket_Size))
+	MvrBTTrack(@"Received %lu bytes from Bluetooth.", (unsigned long) [data length]);
+	
+	if (MvrSameDataAs(data, kMvrStarterPacket, kMvrStarterPacket_Size)) {
+		MvrBTTrack(@"Received a starter packet!");
 		[proto didReceiveStarter];
-	else {
+	} else {
 		NSUInteger n = MvrNumberFromNumberedPacketWithHeader(data, kMvrIncomingPacketHeader, kMvrIncomingPacketHeader_Size);
 		size_t size = (n == NSNotFound)? kMvrInvalidSize : MvrSizeFromIncomingPacket(data);
 		if (n != NSNotFound && size != kMvrInvalidSize) {
+			MvrBTTrack(@"Received an incoming warning packet! number = %n, size = %uz", n, size);
 			[proto didReceivePacketStartWithSequenceNumber:n length:size];
 			return;
 		}
 		
+		MvrBTTrack(@"Received %lu bytes of actual data", (unsigned long) [data length]);
 		[self appendData:data];
 		[proto didReceivePacketPart:data];
 	}
@@ -156,44 +180,58 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) sendAcknowledgementForSequenceNumber:(NSUInteger) seq;
 {
-	if (self.cancelled)
+	if (self.cancelled) {
+		MvrBTTrack(@"Not sending ack since we're cancelled already.");
 		return;
+	}
 	
+	MvrBTTrack(@"Sending an ack");
 	NSData* ackPacket = MvrAcknowledgmentPacket(seq);
 	NSError* e;
 	if (![channel sendData:ackPacket error:&e]) {
-		L0LogAlways(@"Cancelling incoming %@ due to error %@", self, e);
+		MvrBTTrack(@"Cancelling due to error on ack %@", e);
 		[self cancel];
 	}
 }
 
 - (void) signalErrorForSequenceNumber:(NSUInteger) seq reason:(MvrBTProtocolErrorReason) reason;
 {
-	if (self.cancelled)
+	if (self.cancelled) {
+		MvrBTTrack(@"Not sending Nack since we're cancelled already.");
 		return;
+	}
 	
+	MvrBTTrack(@"Sending a Nack");
 	NSData* ackPacket = MvrNegativeAcknowledgmentPacket(seq);
 	NSError* e;
 	if (![channel sendData:ackPacket error:&e]) {
-		L0LogAlways(@"Cancelling incoming %@ due to error %@", self, e);
+		L0LogAlways(@"Cancelling due to error on nack %@", e);
 		[self cancel];
 	}
 }
 
 - (void) startMonitoringTimeout;
 {
-	[self performSelector:@selector(timeout) withObject:nil afterDelay:15.0];
+	MvrBTTrack(@"Starting timeout monitoring for %f seconds", (double) kMvrBTProtocolTimeout);
+	[self performSelector:@selector(timeout) withObject:nil afterDelay:kMvrBTProtocolTimeout];
 }
 
 - (void) stopMonitoringTimeout;
 {
+	MvrBTTrack(@"Stopping timeout monitoring");
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(timeout) object:nil];
 }
 
 - (void) timeout;
 {
-	L0LogAlways(@"Cancelling incoming %@ due to a timeout.");
+	L0LogAlways(@"Cancelling due to a timeout.");
 	[self cancel];
+}
+
+- (void) cancel;
+{
+	MvrBTTrackEnd();
+	[super cancel];
 }
 
 - (BOOL) isPayloadAllReceived;
@@ -203,7 +241,8 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) endConnectionWithReason:(MvrBTProtocolErrorReason) reason;
 {
-	L0Log(@"Ending connection due to this reason with code %d (0 == all done)", reason);
+	MvrBTTrack(@"Ending connection due to reason with code %d (0 == all done)", reason);
+	MvrBTTrackEnd();
 	if (reason != kMvrBTProtocolFinishedWithoutErrors)
 		[self cancel];
 }
@@ -224,6 +263,9 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 		
 		baseIndex = 1;
 		savedPackets = [NSMutableArray new];
+		
+		proto = [MvrBTProtocolOutgoing new];
+		proto.delegate = self;
 	}
 	
 	return self;
@@ -235,6 +277,10 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 {
 	[error release];
 	[item release];
+	[proto release];
+	[savedPackets release];
+	[buffer release];
+	
 	[super dealloc];
 }
 
@@ -246,6 +292,8 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) start;
 {
+	MvrBTTrack(@"Starting outgoing connection for item %@", item);
+	
 	[builder setMetadataValue:item.title forKey:kMvrProtocolMetadataTitleKey];
 	[builder setMetadataValue:item.type forKey:kMvrProtocolMetadataTypeKey];
 	
@@ -261,6 +309,9 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	if (self.finished)
 		return;
 	
+	MvrBTTrack(@"Ending with error %@", e);
+	MvrBTTrackEnd();
+	
 	self.error = e;
 	self.finished = YES;
 }
@@ -270,21 +321,29 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) packetBuilder:(MvrPacketBuilder*) b didProduceData:(NSData*) d;
 {
+	MvrBTTrack(@"Heeding to the packet builder now...");
 	[buffer appendData:d];
 	
 	NSData* packet;
 	while ((packet = [buffer consume]) != nil)
 		[savedPackets addObject:packet];
 	
-	if ([savedPackets count] > 10)
+	MvrBTTrack(@"There are now %ld enqueued packets.", (long) [savedPackets count]);
+
+	if ([savedPackets count] > 10) {
 		b.paused = YES;
+		MvrBTTrack(@"Pausing the packet builder until we deliver some of these packets.");
+	}
 	
-	if (needsToSendAPacket)
-		needsToSendAPacket = ![self sendNextPacket];
+	if (seqNoThatNeedsSending > 0) {
+		MvrBTTrack(@"Trying to send a packet now that we have some more.");
+		[self sendPacketWithSequenceNumber:seqNoThatNeedsSending];
+	}
 }
 
 - (void) packetBuilder:(MvrPacketBuilder*) b didEndWithError:(NSError*) e;
 {
+	MvrBTTrack(@"The packet build has finished building the AAP packet.");
 	if (e)
 		[self endWithError:e];
 }
@@ -294,18 +353,26 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) didReceiveDataFromBluetooth:(NSData*) data;
 {
+	MvrBTTrack(@"Heeding to Bluetooth data reception now...");
+	
 	NSUInteger n;
 	
-	if ((n = MvrNumberFromNumberedPacketWithHeader(data, kMvrAckPacketHeader, kMvrAckPacketHeader_Size)) != NSNotFound)
+	if ((n = MvrNumberFromNumberedPacketWithHeader(data, kMvrAckPacketHeader, kMvrAckPacketHeader_Size)) != NSNotFound) {
+		MvrBTTrack(@"Found an ack packet.");
 		[proto didAcknowledgeWithSequenceNumber:n];
-	else if ((n = MvrNumberFromNumberedPacketWithHeader(data, kMvrNackPacketHeader, kMvrNackPacketHeader_Size)) != NSNotFound)
-		[proto didAcknowledgeWithSequenceNumber:n];
-	else
+	} else if ((n = MvrNumberFromNumberedPacketWithHeader(data, kMvrNackPacketHeader, kMvrNackPacketHeader_Size)) != NSNotFound) {
+		MvrBTTrack(@"Found a Nack packet.");
+		[proto didSignalErrorWithSequenceNumber:n];
+	} else {
+		MvrBTTrack(@"Unknown kind of packet received!");
 		[self endWithError:[NSError errorWithDomain:@"MvrBTProtocolErrorDomain" code:kMvrBTProtocolUnexpectedPacket userInfo:nil]];
+	}
 }
 
 - (void) sendStarter;
 {
+	MvrBTTrack(@"Sending the starter packet.");
+	
 	NSData* starter = [NSData dataWithBytes:kMvrStarterPacket length:kMvrStarterPacket_Size];
 	NSError* e;
 	if (![channel sendData:starter error:&e])
@@ -314,36 +381,48 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (BOOL) isPastPacketAvailableWithSequenceNumber:(NSUInteger) sequenceNumber;
 {
-	return (sequenceNumber >= baseIndex);
-}
-
-- (BOOL) sendNextPacket;
-{
-	if ([savedPackets count] == 0)
-		return NO;
-	
-	NSData* packet = [[[savedPackets objectAtIndex:0] retain] autorelease];
-	[savedPackets removeObjectAtIndex:0];
-	baseIndex++;
-	
-	NSError* e;
-	if (![channel sendData:packet error:&e])
-		[self endWithError:e];
-	
-	return YES;
+	BOOL isAvailable = (sequenceNumber >= baseIndex);
+	MvrBTTrack(@"Asked whether past packet %ld is available. Since we're caching packets %ld-%ld (incl), I'm responding %d.", (long) sequenceNumber, (long) baseIndex, (long) baseIndex + (long) [savedPackets count], isAvailable);
+	return isAvailable;
 }
 
 - (void) sendPacketWithSequenceNumber:(NSUInteger) sequenceNumber;
 {
+	MvrBTTrack(@"Sending packet number %ld. We have %ld-%ld (incl) in queue.", sequenceNumber, (long) baseIndex, (long) baseIndex + (long) [savedPackets count]);
+	
+	if (sequenceNumber > UINT16_MAX) {
+		MvrBTTrack(@"Whoa, something's rotten here. We were asked for a bizarre sequenceNumber (%lu). Aborting.", (unsigned long) sequenceNumber);
+		[self endWithError:/* TODO appropriate error */ nil];
+		return;
+	}
+	
 	NSInteger index = sequenceNumber - baseIndex;
 	if (index < [savedPackets count]) {
+		seqNoThatNeedsSending = 0;
+		NSData* data = [savedPackets objectAtIndex:index];
+		
 		NSError* e;
-		if (![channel sendData:[savedPackets objectAtIndex:index] error:&e]) {
+		if (![channel sendData:MvrIncomingPacket(sequenceNumber, [data length]) error:&e]) {
 			[self endWithError:e];
 			return;
 		}
-	} else
-		needsToSendAPacket = YES;
+		
+		if (![channel sendData:data error:&e]) {
+			[self endWithError:e];
+			return;
+		}
+		
+		if (index > 10) {
+			[savedPackets removeObjectsInRange:NSMakeRange(0, 5)];
+			baseIndex += 5;
+			MvrBTTrack(@"Cleared the oldest five sent packets. Now having %lu-%lu (incl) in queue.", (unsigned long)  baseIndex, (unsigned long) baseIndex + [savedPackets count]);
+		}
+		
+	} else {
+		MvrBTTrack(@"Don't have packet %lu (it's in the FUTURE!), so we're pausing until we get it. We'll retry once the packet builder gives it to us.", sequenceNumber);
+		seqNoThatNeedsSending = sequenceNumber;
+		builder.paused = NO;
+	}
 }
 
 - (BOOL) isPayloadAllSent;
@@ -353,6 +432,8 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) endConnectionWithReason:(MvrBTProtocolErrorReason) reason;
 {
+	MvrBTTrack(@"Protocol asks to interrupt with reason %ld", (long) reason);
+	
 	NSError* e = (reason != kMvrBTProtocolFinishedWithoutErrors)?
 		[NSError errorWithDomain:@"MvrBTProtocolErrorDomain" code:reason userInfo:nil] : nil;
 	[self endWithError:e];
