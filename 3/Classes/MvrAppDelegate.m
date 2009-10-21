@@ -85,6 +85,12 @@ enum {
 	[messageChecker performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:7.0];
 	
 	[self showAlertIfNotShownBeforeNamed:@"MvrWelcome"];
+	
+#if DEBUG
+	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrTestByPerformingAlertParade"] boolValue]) {
+		[self performSelector:@selector(testByPerformingAlertParade) withObject:nil afterDelay:3.0];
+	}
+#endif
 }
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
@@ -544,5 +550,21 @@ enum {
 	MvrAboutPane* about = [MvrAboutPane modalPane];
 	[self presentModalViewController:about];
 }
+
+#if DEBUG
+
+- (void) testByPerformingAlertParade;
+{
+	NSArray* allResources = [[NSFileManager defaultManager] directoryContentsAtPath:[[NSBundle mainBundle] resourcePath]];
+	
+	for (NSString* resource in allResources) {
+		if ([[resource pathExtension] isEqual:@"alert"]) {
+			UIAlertView* a = [UIAlertView alertNamed:[resource stringByDeletingPathExtension]];
+			[a show];
+		}
+	}
+}
+
+#endif
 
 @end
