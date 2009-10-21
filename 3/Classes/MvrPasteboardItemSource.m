@@ -12,6 +12,7 @@
 
 #import "MvrBookmarkItem.h"
 #import "MvrTextItem.h"
+#import "Network+Storage/MvrGenericItem.h"
 #import "MvrAppDelegate.h"
 
 @implementation MvrPasteboardItemSource
