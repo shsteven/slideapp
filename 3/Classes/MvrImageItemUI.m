@@ -56,7 +56,7 @@
 	return [original imageByRenderingRotationAndScalingWithMaximumSide:MAX(size.width, size.height)];
 }
 
-- (void) didReceiveItem:(MvrItem*) i;
+- (void) didStoreItem:(MvrItem*) i;
 {
 	[itemsBeingSaved addObject:i];
 	
