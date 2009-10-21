@@ -64,7 +64,7 @@ L0ObjCSingletonMethod(sharedSource)
 			}
 		}
 		
-		if (i)
+		if (i && ![i isKindOfClass:[MvrGenericItem class]])
 			[MvrApp() addItemFromSelf:i];
 	}
 }

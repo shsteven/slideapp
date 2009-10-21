@@ -403,10 +403,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1569C856108D8CA900F3B5CF /* Bluetooth */,
-				154BD6EC1089F05200C45562 /* Help Alerts */,
 				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
+				1569C856108D8CA900F3B5CF /* Bluetooth */,
+				154BD6EC1089F05200C45562 /* Help Alerts */,
 				15464A1D1085A9DE005E5642 /* Messages from the Cloud */,
 				15AFE6EA108460E400CBCB35 /* Crash Reporting */,
 				1531326D1083A7B000D28022 /* Tell a Friend */,
