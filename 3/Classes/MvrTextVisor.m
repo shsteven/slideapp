@@ -31,7 +31,7 @@
 - (void) viewDidLoad;
 {
 	[super viewDidLoad];
-	textView.text = [self.item text];	
+	textView.text = [self.item text];
 }
 
 - (void) viewDidUnload;
@@ -48,6 +48,8 @@
 		topInset += self.navigationController.navigationBar.bounds.size.height;
 	
 	textView.contentInset = UIEdgeInsetsMake(topInset, 0, 0, 0);
+	textView.scrollIndicatorInsets = textView.contentInset;
+	textView.contentOffset = CGPointMake(0, -topInset);
 }
 
 @end
