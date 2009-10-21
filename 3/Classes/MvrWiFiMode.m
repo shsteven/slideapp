@@ -15,6 +15,7 @@
 #import "Network+Storage/MvrChannel.h"
 
 #import "MvrAppDelegate.h"
+#import "MvrAppDelegate+HelpAlerts.h"
 
 @implementation MvrWiFiMode
 
