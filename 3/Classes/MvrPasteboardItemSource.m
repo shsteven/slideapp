@@ -36,6 +36,8 @@ L0ObjCSingletonMethod(sharedSource)
 		NSString* currentType = nil;
 		for (NSString* type in types) {
 			Class cls = [MvrItem classForType:type];
+			if ([cls isEqual:[MvrGenericItem class]])
+				continue;
 			
 			// If it's a link, we want MvrBookmarkItem to handle it.
 			if ([currentClass isEqual:[MvrTextItem class]] || !currentClass) {
@@ -75,7 +77,7 @@ L0ObjCSingletonMethod(sharedSource)
 	for (NSDictionary* d in [[UIPasteboard generalPasteboard] items]) {		
 		for (NSString* type in d) {
 			Class cls = [MvrItem classForType:type];
-			if (cls)
+			if (cls && ![cls isEqual:[MvrGenericItem class]])
 				return YES;
 		}
 	}
