@@ -295,6 +295,8 @@
 		157B96C01076589B00F1A1A8 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		157B96D610765F5800F1A1A8 /* MvrContactItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrContactItemUI.h; sourceTree = "<group>"; };
 		157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrContactItemUI.m; sourceTree = "<group>"; };
+		157CBD07108F153D00146778 /* Mover-AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-AppStore.xcconfig"; sourceTree = "<group>"; };
+		157CBD08108F155800146778 /* Local-AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-AppStore.xcconfig"; sourceTree = "<group>"; };
 		1585FA2C108CB0F700D2AEAB /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = it.lproj; path = "Compiled Locales/it.lproj"; sourceTree = "<group>"; };
 		1585FA89108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1585FA8F108CBBE600D2AEAB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrAskAboutCrash.strings; sourceTree = "<group>"; };
@@ -369,7 +371,7 @@
 		15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Backdrop-Bluetooth.png"; path = "Theme/Backdrop-Bluetooth.png"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* MvrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MvrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* MoverPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* MoverOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Mover3_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mover3_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Mover3-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover3-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -590,8 +592,10 @@
 				156CF0D7105BAECB006D8E7A /* Mover-Debug.xcconfig */,
 				156CF0D8105BAECB006D8E7A /* Mover-Release.xcconfig */,
 				154BD796108A039F00C45562 /* Mover-AdHoc.xcconfig */,
+				157CBD07108F153D00146778 /* Mover-AppStore.xcconfig */,
 				156CF0D5105BAEC3006D8E7A /* Local-Release.xcconfig */,
 				154BD7AD108A062400C45562 /* Local-AdHoc.xcconfig */,
+				157CBD08108F155800146778 /* Local-AppStore.xcconfig */,
 				156CF0D6105BAEC3006D8E7A /* Local.xcconfig */,
 				154BD79D108A040300C45562 /* AdHoc.plist */,
 			);
@@ -836,7 +840,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* MoverPlus.app */,
+				1D6058910D05DD3D006BFB54 /* MoverOpen.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -903,6 +907,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover3" */;
 			buildPhases = (
+				157CBD23108F160900146778 /* Check Current Variant */,
 				1585FA24108CB05800D2AEAB /* Build Localizations */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -916,7 +921,7 @@
 			);
 			name = Mover3;
 			productName = Mover3;
-			productReference = 1D6058910D05DD3D006BFB54 /* MoverPlus.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* MoverOpen.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1082,6 +1087,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		157CBD23108F160900146778 /* Check Current Variant */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Current Variant";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\nif [ \"$ILABS_MOVER_VARIANT\" == \"\" ]; then\n\techo \"error: We're missing the variant short name in ILABS_MOVER_VARIANT. Check Variants/Current/Variant.xcconfig\" >&2\n\texit 1\nfi\n\nif [ \"$ILABS_MOVER_ALLOWED_VARIANTS\" == \"\" ]; then\n\techo \"note: This configuration allows all variants because it has an empty ILABS_MOVER_ALLOWED_VARIANTS variable. Continuing.\" >&2\n\texit 0\nfi\n\nfor i in $ILABS_MOVER_ALLOWED_VARIANTS; do\n\tif [ \"$i\" == \"$ILABS_MOVER_VARIANT\" ]; then\n\t\texit 0\n\tfi\ndone\n\necho \"error: Variant $ILABS_MOVER_VARIANT is not allowed in this configuration. Switch variant or change ILABS_MOVER_ALLOWED_VARIANTS accordingly\" >&2\nexit 1\n";
+		};
 		1585FA24108CB05800D2AEAB /* Build Localizations */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1318,6 +1337,28 @@
 			};
 			name = "Ad Hoc";
 		};
+		157CBD0D108F157600146778 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156CF0D9105BAECB006D8E7A /* Mover.xcconfig */;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+			};
+			name = "App Store";
+		};
+		157CBD0E108F157600146778 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 157CBD07108F153D00146778 /* Mover-AppStore.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+			};
+			name = "App Store";
+		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF0D7105BAECB006D8E7A /* Mover-Debug.xcconfig */;
@@ -1371,9 +1412,10 @@
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
 				154BD788108A026B00C45562 /* Ad Hoc */,
+				157CBD0E108F157600146778 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "App Store";
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Mover3" */ = {
 			isa = XCConfigurationList;
@@ -1381,9 +1423,10 @@
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
 				154BD787108A026B00C45562 /* Ad Hoc */,
+				157CBD0D108F157600146778 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "App Store";
 		};
 /* End XCConfigurationList section */
 	};

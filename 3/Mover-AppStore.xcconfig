@@ -2,6 +2,5 @@
 #include "Mover-Release.xcconfig"
 
 ILABS_MOVER_ALLOWED_VARIANTS = Lite Plus
-CODE_SIGN_ENTITLEMENTS = AdHoc.plist
 
-#include "Local-AdHoc.xcconfig"
+#include "Local-AppStore.xcconfig"

@@ -1,6 +1,7 @@
 
 #include "Mover-Baseline-Release.xcconfig"
 
+ILABS_MOVER_ALLOWED_VARIANTS = Open
 PRODUCT_NAME = $(ILABS_MOVER_BUNDLE_NAME)
 
 #include "Local-Release.xcconfig"
