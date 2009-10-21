@@ -9,6 +9,8 @@
 #import "MvrGenericItemUI.h"
 #import "Network+Storage/MvrGenericItem.h"
 
+#import "MvrAppDelegate+HelpAlerts.h"
+
 @implementation MvrGenericItemUI
 
 + supportedItemClasses {
@@ -22,7 +24,7 @@
 
 - (void) didReceiveItem:(MvrItem*) i;
 {
-	// Does nothing.
+	[MvrApp() showAlertIfNotShownBeforeNamed:@"MvrGenericItemReceived"];
 }
 
 - (NSString*) accessibilityLabelForItem:(id)i;

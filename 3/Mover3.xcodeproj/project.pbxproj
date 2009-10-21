@@ -40,7 +40,7 @@
 		1553517C1088468900C75A6C /* MvrMorePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1553517B1088468900C75A6C /* MvrMorePane.m */; };
 		155352431088547D00C75A6C /* MvrMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 155352421088547D00C75A6C /* MvrMessagesCell.m */; };
 		1553536610885FFD00C75A6C /* MvrNoNews.alert in Resources */ = {isa = PBXBuildFile; fileRef = 1553536510885FFD00C75A6C /* MvrNoNews.alert */; };
-		1567510E10620DDB006EC706 /* libNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567510510620DAD006EC706 /* libNetwork.a */; };
+		1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567510510620DAD006EC706 /* libMoverNetwork.a */; };
 		1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
 		1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
 		1567511810620E01006EC706 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511710620E01006EC706 /* CFNetwork.framework */; };
@@ -103,6 +103,7 @@
 		159559E5107769F500FBC9B4 /* TextIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 159559E4107769F500FBC9B4 /* TextIcon.png */; };
 		15955A1D10776B2200FBC9B4 /* MvrTextVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */; };
 		15955A2110776B7D00FBC9B4 /* MvrVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A2010776B7D00FBC9B4 /* MvrVisor.m */; };
+		15A805BC108EECE100DE037F /* MvrGenericItemReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */; };
 		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
 		15AD035B1073F83200D92F5E /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */; };
 		15AE0552108E6F9100D90F84 /* MvrLargeItemOverBT.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15AE0551108E6F9100D90F84 /* MvrLargeItemOverBT.alert */; };
@@ -336,6 +337,7 @@
 		15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTextVisor.m; sourceTree = "<group>"; };
 		15955A1F10776B7D00FBC9B4 /* MvrVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVisor.h; sourceTree = "<group>"; };
 		15955A2010776B7D00FBC9B4 /* MvrVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVisor.m; sourceTree = "<group>"; };
+		15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrGenericItemReceived.alert; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
 		15AE0551108E6F9100D90F84 /* MvrLargeItemOverBT.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrLargeItemOverBT.alert; sourceTree = "<group>"; };
@@ -377,7 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1567514910620E49006EC706 /* libMuiKit.a in Frameworks */,
-				1567510E10620DDB006EC706 /* libNetwork.a in Frameworks */,
+				1567510E10620DDB006EC706 /* libMoverNetwork.a in Frameworks */,
 				1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */,
 				1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */,
 				1567511810620E01006EC706 /* CFNetwork.framework in Frameworks */,
@@ -520,7 +522,7 @@
 		156750FF10620DAD006EC706 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1567510510620DAD006EC706 /* libNetwork.a */,
+				1567510510620DAD006EC706 /* libMoverNetwork.a */,
 				1567510710620DAD006EC706 /* Network+Test.octest */,
 				1567510910620DAD006EC706 /* mvr-wifi */,
 			);
@@ -792,6 +794,7 @@
 		15CB30981084C7F300CB285F /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
+				15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */,
 				15AE0551108E6F9100D90F84 /* MvrLargeItemOverBT.alert */,
 				15464A481085B47B005E5642 /* MvrNoInternet_MessageAction.alert */,
 				151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */,
@@ -953,10 +956,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1567510510620DAD006EC706 /* libNetwork.a */ = {
+		1567510510620DAD006EC706 /* libMoverNetwork.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libNetwork.a;
+			path = libMoverNetwork.a;
 			remoteRef = 1567510410620DAD006EC706 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1068,6 +1071,7 @@
 				1585FAB6108CBBE600D2AEAB /* MvrVideoReceived.strings in Resources */,
 				1585FAB7108CBBE600D2AEAB /* MvrWelcome.strings in Resources */,
 				15AE0552108E6F9100D90F84 /* MvrLargeItemOverBT.alert in Resources */,
+				15A805BC108EECE100DE037F /* MvrGenericItemReceived.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
