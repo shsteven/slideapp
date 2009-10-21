@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array>
+		<string>Dismiss</string>
+	</array>
+	<key>L0AlertInformativeText</key>
+	<string>You can try reopening Mover later, or switching to another network.</string>
+	<key>L0AlertMessage</key>
+	<string>There are network problems that are making it difficult for Mover to pair with other devices.</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

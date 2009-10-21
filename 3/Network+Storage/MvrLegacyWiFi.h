@@ -12,6 +12,8 @@
 
 #import "BLIP.h"
 
+#define kMvrLegacyWiFiDifficultyStartingListenerNotification @"MvrLegacyWiFiDifficultyStartingListenerNotification"
+
 #define kMvrLegacyWiFiApplicationVersionKey @"L0AppVersion"
 #define kMvrLegacyWiFiUserVisibleApplicationVersionKey @"L0UserAppVersion"
 #define kMvrLegacyWiFiUniqueIdentifierKey @"L0PeerID"

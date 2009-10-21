@@ -22,4 +22,7 @@
 - (void) showAlertIfNotShownBeforeNamedForiPhone:(NSString*) iPhoneName foriPodTouch:(NSString*) iPodTouchName;
 - (UIAlertView*) alertIfNotShownBeforeNamedForiPhone:(NSString*) iPhoneName foriPodTouch:(NSString*) iPodTouchName;
 
+- (void) showAlertIfNotShownThisSessionNamed:(NSString *)name;
+- (UIAlertView*) alertIfNotShownThisSessionNamed:(NSString *)name;
+
 @end

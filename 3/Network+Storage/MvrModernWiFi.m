@@ -14,6 +14,11 @@
 
 #import <MuiKit/MuiKit.h>
 
+@interface MvrModernWiFi ()
+- (void) startListening;
+@end
+
+
 @implementation MvrModernWiFi
 
 - (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port;
@@ -40,29 +45,23 @@
 - (void) start;
 {
 	serverSocket = [[AsyncSocket alloc] initWithDelegate:self];
-	
-	NSError* e;
-	
-	int attempts = 0; const int maximumAttempts = 30; BOOL done = NO;
-	
-	do {
-		if (![serverSocket acceptOnPort:serverPort error:&e]) {
-			L0LogAlways(@"Having difficulty accepting modern connections on port %d, retrying shortly: %@", serverPort, e);
-			attempts++;
-			[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.25]];
-		} else {
-			done = YES;
-			break;
-		}
-	} while (attempts < maximumAttempts);
-	
-	NSAssert(done, @"We should've managed to accept sockets!"); // TODO
-	
+	[self startListening];
 	[super start];	
+}
+
+- (void) startListening;
+{
+	NSError* e;
+	if (![serverSocket acceptOnPort:serverPort error:&e]) {		
+		L0LogAlways(@"Having difficulty accepting modern connections on port %d, retrying shortly: %@", serverPort, e);
+		[[NSNotificationCenter defaultCenter] postNotificationName:kMvrModernWiFiDifficultyStartingListenerNotification object:self];
+		[self performSelector:@selector(startListening) withObject:nil afterDelay:1.0];
+	}
 }
 
 - (void) stop;
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(startListening) object:nil];
 	[super stop];
 	[serverSocket disconnect];
 	[serverSocket release]; serverSocket = nil;

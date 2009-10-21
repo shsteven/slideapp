@@ -36,8 +36,16 @@
 		bluetoothButtonView = nil;
 	}
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOfNetworkTrouble:) name:kMvrLegacyWiFiDifficultyStartingListenerNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOfNetworkTrouble:) name:kMvrModernWiFiDifficultyStartingListenerNotification object:nil];
+	
 	if (self.delegate) // we're on!
 		wifi.enabled = YES;
+}
+
+- (void) notifyOfNetworkTrouble:(NSNotification*) n;
+{
+	[MvrApp() showAlertIfNotShownThisSessionNamed:@"MvrNetworkTrouble"];
 }
 
 - (void) dealloc;

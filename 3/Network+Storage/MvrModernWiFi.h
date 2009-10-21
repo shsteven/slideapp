@@ -10,6 +10,8 @@
 #import "MvrWiFiScanner.h"
 #import "MvrPlatformInfo.h"
 
+#define kMvrModernWiFiDifficultyStartingListenerNotification @"MvrModernWiFiDifficultyStartingListenerNotification"
+
 #define kMvrModernWiFiBonjourServiceType @"_x-mover3._tcp."
 #define kMvrModernWiFiPort (25252)
 

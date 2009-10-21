@@ -52,6 +52,25 @@ static int MvrHelpAlertsSuppressionCount = 0;
 		return nil;
 }
 
+static NSMutableSet* MvrAlertNamesShownThisSession = nil;
+- (UIAlertView*) alertIfNotShownThisSessionNamed:(NSString *)name;
+{
+	if (MvrHelpAlertsSuppressionCount > 0)
+		return nil;
+	
+	if (!MvrAlertNamesShownThisSession)
+		MvrAlertNamesShownThisSession = [NSMutableSet new];
+	if (![MvrAlertNamesShownThisSession containsObject:name])
+		return nil;
+	
+	return [UIAlertView alertNamed:name];
+}
+
+- (void) showAlertIfNotShownThisSessionNamed:(NSString *)name;
+{
+	[[self alertIfNotShownThisSessionNamed:name] show];
+}
+
 // Device-dependent alerts.
 
 - (UIAlertView*) alertIfNotShownBeforeNamedForiPhone:(NSString*) iPhoneName foriPodTouch:(NSString*) iPodTouchName;

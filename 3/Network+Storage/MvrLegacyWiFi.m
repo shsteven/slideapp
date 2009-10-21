@@ -62,6 +62,9 @@
 #pragma mark -
 #pragma mark Legacy Wi-Fi Scanner.
 
+@interface MvrLegacyWiFi ()
+- (void) startListening;
+@end
 
 @implementation MvrLegacyWiFi
 
@@ -95,14 +98,23 @@
 	listener = [[BLIPListener alloc] initWithPort:serverPort];
 	listener.delegate = self;
 	
+	[self startListening];
+}
+
+- (void) startListening;
+{
 	NSError* e;
 	BOOL started = [listener open:&e];
-	if (!started)
-		[NSException raise:@"MvrLegacyWiFiCouldNotStartError" format:@"An error occurred when starting the legacy listener: %@", e];
+	if (!started) {
+		L0LogAlways(@"Having difficulty accepting legacy connections on port %d, retrying shortly: %@", serverPort, e);
+		[[NSNotificationCenter defaultCenter] postNotificationName:kMvrLegacyWiFiDifficultyStartingListenerNotification object:self];
+		[self performSelector:@selector(startListening) withObject:nil afterDelay:1.0];
+	}
 }
 
 - (void) stop;
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(startListening) object:nil];
 	[listener close];
 	[listener release]; listener = nil;
 	
