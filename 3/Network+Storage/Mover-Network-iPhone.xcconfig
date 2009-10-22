@@ -4,3 +4,6 @@ GCC_PREFIX_HEADER = $(INFINITELABS_TOOLS)/Common/iPhone/Foundation.pch
 
 SDKROOT = iphoneos3.1
 IPHONEOS_DEPLOYMENT_TARGET = 3.0
+
+
+PRODUCT_NAME = MoverNetwork

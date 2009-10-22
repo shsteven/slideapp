@@ -3,8 +3,6 @@
 
 OTHER_LDFLAGS = -ObjC -all_load
 
-PRODUCT_NAME = MoverNetwork
-
 HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers"
 
 
