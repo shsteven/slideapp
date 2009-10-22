@@ -1,5 +1,9 @@
 
-#include "Mover-Baseline.xcconfig"
+#include "../Mover-Baseline.xcconfig"
+
+// iPhone-only baseline settings.
+SDKROOT = iphoneos3.1
+IPHONEOS_DEPLOYMENT_TARGET = 3.0
 
 // Silences IB.
 IBC_NOTICES = NO

@@ -133,6 +133,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1535D2571090345000CBF778 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1535D2361090336700CBF778 /* libMoverNetwork.a */;
+			remoteInfo = "Network (Mac OS X)";
+		};
 		1567513F10620E3C006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
@@ -274,7 +281,7 @@
 		156CF0D7105BAECB006D8E7A /* Mover-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Debug.xcconfig"; sourceTree = "<group>"; };
 		156CF0D8105BAECB006D8E7A /* Mover-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Release.xcconfig"; sourceTree = "<group>"; };
 		156CF0D9105BAECB006D8E7A /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
-		156CF0F8105BB127006D8E7A /* Mover-Baseline.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Baseline.xcconfig"; sourceTree = "<group>"; };
+		156CF0F8105BB127006D8E7A /* Mover-Baseline.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Mover-Baseline.xcconfig"; path = "../Mover-Baseline.xcconfig"; sourceTree = "<group>"; };
 		156E7FD710662C4A00315D0C /* MvrGenericItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrGenericItemUI.h; sourceTree = "<group>"; };
 		156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrGenericItemUI.m; sourceTree = "<group>"; };
 		156E804110663AEB00315D0C /* GenericItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericItemIcon.png; sourceTree = "<group>"; };
@@ -564,6 +571,7 @@
 		156B0A4610902FFC00209F2D /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				1535D2581090345000CBF778 /* libMoverNetwork.a */,
 				156B0A4C10902FFC00209F2D /* libMoverNetwork.a */,
 				156B0A4E10902FFC00209F2D /* Network+Test.octest */,
 				156B0A5010902FFC00209F2D /* mvr-wifi */,
@@ -965,6 +973,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		1535D2581090345000CBF778 /* libMoverNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMoverNetwork.a;
+			remoteRef = 1535D2571090345000CBF778 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		1567514010620E3C006EC706 /* libMuiKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;

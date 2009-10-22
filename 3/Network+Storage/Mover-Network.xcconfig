@@ -7,4 +7,4 @@ PRODUCT_NAME = MoverNetwork
 
 HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers"
 
-#include "../Variants/Current/Variant.xcconfig"
+
