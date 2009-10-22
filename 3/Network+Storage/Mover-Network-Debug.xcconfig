@@ -1,2 +1,3 @@
 
 #include "../Mover-Baseline-Debug.xcconfig"
+#include "Mover-Network-iPhone.xcconfig"

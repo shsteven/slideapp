@@ -1,7 +1,5 @@
 
 #include "../Mover-Baseline-Release.xcconfig"
-
-SDKROOT = iphoneos3.1
-IPHONEOS_DEPLOYMENT_TARGET = 3.0
+#include "Mover-Network-iPhone.xcconfig"
 
 ARCHS = $(ARCHS_UNIVERSAL_IPHONE_OS)
