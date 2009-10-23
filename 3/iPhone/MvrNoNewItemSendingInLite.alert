@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array>
+		<string>Dismiss</string>
+		<string>App Store</string>
+	</array>
+	<key>L0AlertInformativeText</key>
+	<string>Mover Lite can receive anything and send images and photos over Wi-Fi. Mover+, available on App Store, allows you to send and receive videos, text clippings, bookmarks and more.</string>
+	<key>L0AlertMessage</key>
+	<string>This kind of item cannot be sent using the Lite version.</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

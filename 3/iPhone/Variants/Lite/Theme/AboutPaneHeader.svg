@@ -17,7 +17,7 @@
    version="1.0"
    sodipodi:docname="AboutPaneHeader.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/3/iPhone/Variants/Plus/Theme/AboutPaneHeader.png"
+   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/3/iPhone/Variants/Lite/Theme/AboutPaneHeader.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -148,6 +148,18 @@
        y1="413.59711"
        x2="-54.227779"
        y2="459.83472" />
+    <filter
+       inkscape:collect="always"
+       id="filter3193"
+       x="-0.041086957"
+       width="1.0821739"
+       y="-0.11117647"
+       height="1.2223529">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.575"
+         id="feGaussianBlur3195" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -315,6 +327,45 @@
            x="212.85281"
            id="tspan3175"
            sodipodi:role="line">Mover</tspan></text>
+    </g>
+    <g
+       id="g3217"
+       transform="matrix(0.979142,-0.2031774,0.2031774,0.979142,-23.780301,12.025719)">
+      <g
+         id="g3197">
+        <rect
+           ry="7"
+           rx="7"
+           transform="translate(0,-85)"
+           y="166"
+           x="200"
+           height="34"
+           width="92"
+           id="rect2417"
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.7921257;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter3193);enable-background:accumulate" />
+        <rect
+           style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.7921257;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect2415"
+           width="92"
+           height="34"
+           x="200"
+           y="166"
+           transform="translate(0,-85)"
+           rx="7"
+           ry="7" />
+      </g>
+      <text
+         sodipodi:linespacing="100%"
+         id="text3201"
+         y="108"
+         x="219.2056"
+         style="font-size:45.65665054px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.7921257;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Anivers;-inkscape-font-specification:Anivers"
+         xml:space="preserve"><tspan
+           style="font-size:36px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;font-family:Delicious SmallCaps;-inkscape-font-specification:Delicious SmallCaps"
+           y="108"
+           x="219.2056"
+           id="tspan3203"
+           sodipodi:role="line">lite</tspan></text>
     </g>
   </g>
 </svg>

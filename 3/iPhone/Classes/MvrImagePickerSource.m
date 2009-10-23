@@ -32,7 +32,12 @@
 	// "Add Photo" -- if no available video, or
 	// "Add Photo or Video" if video.
 	
-	BOOL isVideoAvailable = [UIImagePickerController isSourceTypeAvailable:sourceType] && [[UIImagePickerController availableMediaTypesForSourceType:s] containsObject:(id) kUTTypeMovie];
+	BOOL isVideoAvailable;
+#if kMvrIsLite
+	isVideoAvailable = NO;
+#else
+	isVideoAvailable = [UIImagePickerController isSourceTypeAvailable:sourceType] && [[UIImagePickerController availableMediaTypesForSourceType:s] containsObject:(id) kUTTypeMovie];
+#endif
 	
 	NSString* name = isVideoAvailable?
 		dn : dnNoVideo;
@@ -76,7 +81,9 @@
 				}
 			}
 			
-		} else if (UTTypeConformsTo((CFStringRef) uti, kUTTypeMovie)) {
+		}
+#if !kMvrIsLite
+		else if (UTTypeConformsTo((CFStringRef) uti, kUTTypeMovie)) {
 			
 			if (url && [url isFileURL]) {
 				[self performAddingVideoAtPath:[url path] type:uti];
@@ -86,6 +93,7 @@
 			}
 			
 		}
+#endif
 		
 	}
 	
@@ -94,6 +102,7 @@
 
 - (void) performAddingVideoAtPath:(NSString *)path type:(NSString *)type;
 {
+#if !kMvrIsLite
 	NSError* e;
 	MvrVideoItem* video = [MvrVideoItem itemWithVideoAtPath:path type:type error:&e];
 	
@@ -101,6 +110,7 @@
 		[MvrApp() addItemFromSelf:video];
 	else
 		L0Log(@"Could not add video, there was an error: %@", e);
+#endif
 }
 
 - (void) performAddingImage:(UIImage *)i;

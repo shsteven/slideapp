@@ -11,6 +11,7 @@
 #import <MuiKit/MuiKit.h>
 
 #import "MvrAppDelegate.h"
+#import "MvrUpsellController.h"
 
 @interface MvrBluetoothMode ()
 
@@ -27,12 +28,16 @@
 	if (self != nil) {
 		scanner = [MvrBTScanner new];
 		observer = [[MvrScannerObserver alloc] initWithScanner:scanner delegate:self];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingUnavailableInLite:) name:kMvrBTOutgoingUnavailableInLiteVersionNotification object:scanner];
 	}
 	return self;
 }
 
 - (void) dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	[self stopPickingPeer];
 	[nextDestination release];
 	[nextItem release];
@@ -197,6 +202,15 @@
 {
 	NSString* model = [UIDevice currentDevice].internalModelName;
 	return ![model isEqual:@"iPod1,1"] && ![model isEqual:@"iPhone1,1"];
+}
+
+#pragma mark Lite version limitations
+
+- (void) outgoingUnavailableInLite:(NSNotification*) n;
+{
+#if kMvrIsLite
+	[[MvrUpsellController upsellWithAlertNamed:@"MvrNoBTOutgoingInLite" cancelButton:0] show];
+#endif
 }
 
 @end

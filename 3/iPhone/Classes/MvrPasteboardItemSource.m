@@ -15,6 +15,18 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrAppDelegate.h"
 
+#if kMvrIsLite
+
+#import "MvrImageItem.h"
+#import "MvrContactItem.h"
+
+@interface MvrPasteboardItemSource ()
+- (BOOL) liteVersionCanPasteItemOfClass:(Class) c;
+@end
+
+#endif
+
+
 @implementation MvrPasteboardItemSource
 
 L0ObjCSingletonMethod(sharedSource)
@@ -67,7 +79,11 @@ L0ObjCSingletonMethod(sharedSource)
 			}
 		}
 		
-		if (i && ![i isKindOfClass:[MvrGenericItem class]])
+		BOOL canAdd = i && ![i isKindOfClass:[MvrGenericItem class]];
+#if kMvrIsLite
+		canAdd = canAdd && [self liteVersionCanPasteItemOfClass:[i class]];
+#endif
+		if (canAdd)
 			[MvrApp() addItemFromSelf:i];
 	}
 }
@@ -77,12 +93,24 @@ L0ObjCSingletonMethod(sharedSource)
 	for (NSDictionary* d in [[UIPasteboard generalPasteboard] items]) {		
 		for (NSString* type in d) {
 			Class cls = [MvrItem classForType:type];
-			if (cls && ![cls isEqual:[MvrGenericItem class]])
-				return YES;
+			if (cls && ![cls isEqual:[MvrGenericItem class]]) {
+				BOOL canUse = YES;
+#if kMvrIsLite
+				canUse = [self liteVersionCanPasteItemOfClass:cls];
+#endif
+				return canUse;
+			}
 		}
 	}
 	
 	return NO;
 }
+
+#if kMvrIsLite
+- (BOOL) liteVersionCanPasteItemOfClass:(Class) c;
+{
+	return [c isEqual:[MvrImageItem class]] || [c isEqual:[MvrContactItem class]];
+}
+#endif
 
 @end

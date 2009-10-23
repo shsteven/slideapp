@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="30"
+   height="30"
+   id="svg2558"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   version="1.0"
+   sodipodi:docname="PlusSign.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/3/iPhone/PlusSign.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs2560">
+    <linearGradient
+       id="linearGradient5444"
+       inkscape:collect="always">
+      <stop
+         id="stop5446"
+         offset="0"
+         style="stop-color:#f9dfa4;stop-opacity:1" />
+      <stop
+         id="stop5448"
+         offset="1"
+         style="stop-color:#ffffff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5444"
+       id="linearGradient5055"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.8421053,0,0,1.0434782,113.46199,-18.748312)"
+       x1="204.88889"
+       y1="422.5824"
+       x2="204.88889"
+       y2="405.2171" />
+    <filter
+       inkscape:collect="always"
+       id="filter5025"
+       x="-0.11877133"
+       width="1.2375427"
+       y="-0.11877133"
+       height="1.2375427">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="4.7508532"
+         id="feGaussianBlur5027" />
+    </filter>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective2566" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="23.987425"
+     inkscape:cy="9.7959892"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:showpageshadow="false"
+     inkscape:window-width="640"
+     inkscape:window-height="713"
+     inkscape:window-x="20"
+     inkscape:window-y="20" />
+  <metadata
+     id="metadata2563">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g5051"
+       transform="matrix(0.2519357,0,0,0.2519357,-48.991668,-98.371048)">
+      <path
+         style="font-size:627.98571777px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.82549268;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter5025);enable-background:accumulate;font-family:Miso;-inkscape-font-specification:Miso"
+         d="M 206,402 L 206,498 L 302,498 L 302,402 L 206,402 z M 254,416.53125 C 255.90741,416.53135 257.52315,417.2108 258.84375,418.53125 C 260.31098,419.85188 261.0312,421.53966 261.03125,423.59375 L 261.03125,442.96875 L 280.40625,442.96875 C 282.31365,442.96882 283.92938,443.61702 285.25,444.9375 C 286.7172,446.2581 287.46867,447.94588 287.46875,450 C 287.46866,452.05425 286.71719,453.74201 285.25,455.0625 C 283.92938,456.3831 282.31363,457.03131 280.40625,457.03125 L 261.03125,457.03125 L 261.03125,476.40625 C 261.03119,478.46047 260.31097,480.14824 258.84375,481.46875 C 257.52316,482.78931 255.90741,483.46878 254,483.46875 C 251.94578,483.46878 250.258,482.78933 248.9375,481.46875 C 247.61691,480.14823 246.96871,478.46047 246.96875,476.40625 L 246.96875,457.03125 L 227.59375,457.03125 C 225.53954,457.03131 223.85178,456.3831 222.53125,455.0625 C 221.2107,453.74201 220.53124,452.05424 220.53125,450 C 220.53124,447.94589 221.21069,446.25811 222.53125,444.9375 C 223.85178,443.61701 225.53955,442.96882 227.59375,442.96875 L 246.96875,442.96875 L 246.96875,423.59375 C 246.96871,421.53967 247.61691,419.85189 248.9375,418.53125 C 250.258,417.21079 251.94577,416.53135 254,416.53125 z"
+         id="path4959" />
+      <path
+         id="rect4948"
+         d="M 206,402 L 206,498 L 302,498 L 302,402 L 206,402 z M 254,416.53125 C 255.90741,416.53135 257.52315,417.2108 258.84375,418.53125 C 260.31098,419.85188 261.0312,421.53966 261.03125,423.59375 L 261.03125,442.96875 L 280.40625,442.96875 C 282.31365,442.96882 283.92938,443.61702 285.25,444.9375 C 286.7172,446.2581 287.46867,447.94588 287.46875,450 C 287.46866,452.05425 286.71719,453.74201 285.25,455.0625 C 283.92938,456.3831 282.31363,457.03131 280.40625,457.03125 L 261.03125,457.03125 L 261.03125,476.40625 C 261.03119,478.46047 260.31097,480.14824 258.84375,481.46875 C 257.52316,482.78931 255.90741,483.46878 254,483.46875 C 251.94578,483.46878 250.258,482.78933 248.9375,481.46875 C 247.61691,480.14823 246.96871,478.46047 246.96875,476.40625 L 246.96875,457.03125 L 227.59375,457.03125 C 225.53954,457.03131 223.85178,456.3831 222.53125,455.0625 C 221.2107,453.74201 220.53124,452.05424 220.53125,450 C 220.53124,447.94589 221.21069,446.25811 222.53125,444.9375 C 223.85178,443.61701 225.53955,442.96882 227.59375,442.96875 L 246.96875,442.96875 L 246.96875,423.59375 C 246.96871,421.53967 247.61691,419.85189 248.9375,418.53125 C 250.258,417.21079 251.94577,416.53135 254,416.53125 z"
+         style="font-size:627.98571777px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:100%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:url(#linearGradient5055);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.82549268;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Miso;-inkscape-font-specification:Miso" />
+    </g>
+  </g>
+</svg>

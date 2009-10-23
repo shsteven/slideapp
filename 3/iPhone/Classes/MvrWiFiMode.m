@@ -17,6 +17,20 @@
 #import "MvrAppDelegate.h"
 #import "MvrAppDelegate+HelpAlerts.h"
 
+#if kMvrIsLite
+#import "MvrUpsellController.h"
+#import "MvrImageItem.h"
+#import "MvrContactItem.h"
+
+@interface MvrWiFiMode ()
+
+- (BOOL) shouldContinueSendingItemAfterLiteWarning:(MvrItem*) i;
+
+@end
+
+
+#endif
+
 @implementation MvrWiFiMode
 
 @synthesize connectionStateInfo, connectionStateImage, connectionStateContainer, bluetoothButtonView;
@@ -110,6 +124,10 @@
 
 - (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) dest;
 {
+#if kMvrIsLite
+	if (![self shouldContinueSendingItemAfterLiteWarning:i])
+		return;
+#endif
 	[[self destinationAtDirection:dest] beginSendingItem:i];
 }
 
@@ -118,8 +136,24 @@
 	if (![self.mutableDestinations containsObject:destination])
 		return;
 	
+#if kMvrIsLite
+	if (![self shouldContinueSendingItemAfterLiteWarning:i])
+		return;
+#endif
+
 	[destination beginSendingItem:i];
 }
+
+#if kMvrIsLite
+- (BOOL) shouldContinueSendingItemAfterLiteWarning:(MvrItem*) i;
+{
+	if (![i isKindOfClass:[MvrImageItem class]] && ![i isKindOfClass:[MvrContactItem class]]) {
+		[[MvrUpsellController upsellWithAlertNamed:@"MvrNoNewItemSendingInLite" cancelButton:0] show];
+		return NO;
+	} else
+		return YES;
+}
+#endif
 
 - (void) channel:(id <MvrChannel>)c didBeginSendingWithOutgoingTransfer:(id <MvrOutgoing>)outgoing;
 {

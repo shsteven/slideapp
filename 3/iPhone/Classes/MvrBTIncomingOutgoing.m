@@ -280,6 +280,8 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 @end
 
+#if !kMvrIsLite
+
 #pragma mark -
 #pragma mark Outgoing
 
@@ -486,3 +488,5 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 }
 
 @end
+
+#endif

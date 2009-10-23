@@ -43,6 +43,8 @@
 
 @end
 
+#if !kMvrIsLite
+
 @interface MvrBTOutgoing : NSObject <MvrOutgoing, MvrBTProtocolOutgoingDelegate, MvrPacketBuilderDelegate> {
 	MvrBTChannel* channel;
 	MvrBTProtocolOutgoing* proto;
@@ -73,3 +75,5 @@
 @property float progress;
 
 @end
+
+#endif

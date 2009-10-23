@@ -223,11 +223,15 @@
 	}
 }
 
+#if !kMvrIsLite
+
 - (void) outgoingTransferDidChangeFinished:(MvrBTOutgoing*) outgoing change:(NSDictionary*) change;
 {
 	if (self.outgoingTransfer.finished)
 		self.outgoingTransfer = nil;
 }
+
+#endif
 
 - (void) incomingTransferMightHaveFinished:(MvrBTIncoming*) incoming change:(NSDictionary*) change;
 {
@@ -277,9 +281,13 @@
 	if (self.outgoingTransfer)
 		return;
 	
+#if !kMvrIsLite
 	MvrBTOutgoing* outg = [MvrBTOutgoing outgoingTransferWithItem:i channel:self];
 	self.outgoingTransfer = outg;
 	[outg start];
+#else
+	[[NSNotificationCenter defaultCenter] postNotificationName:kMvrBTOutgoingUnavailableInLiteVersionNotification object:self];
+#endif
 }
 
 - (NSString*) displayName;

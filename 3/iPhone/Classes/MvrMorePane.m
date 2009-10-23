@@ -12,6 +12,43 @@
 #import "MvrAppDelegate.h"
 #import "MvrMessagesCell.h"
 
+UIView* MvrWhiteSectionFooterView(NSString* footerText, UITableView* tableView, UILineBreakMode footerLineBreakMode, UIFont* footerFont) {
+	UIView* footer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 100)] autorelease];
+	footer.backgroundColor = [UIColor clearColor];
+	footer.opaque = NO;
+	
+	CGRect labelFrame = CGRectInset(footer.bounds, 20, 0);
+	UILabel* label = [[[UILabel alloc] initWithFrame:labelFrame] autorelease];
+	label.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	label.contentMode = UIViewContentModeCenter;
+	[footer addSubview:label];
+	
+	label.text = footerText;
+	label.numberOfLines = 0;
+	label.lineBreakMode = footerLineBreakMode;
+	label.textAlignment = UITextAlignmentCenter;
+	
+	label.font = footerFont;
+	label.textColor = [UIColor whiteColor];
+	label.shadowColor = [UIColor blackColor];
+	label.shadowOffset = CGSizeMake(0, 1);	
+	
+	label.backgroundColor = [UIColor clearColor];
+	label.opaque = NO;
+	
+	return footer;
+}
+
+CGFloat MvrWhiteSectionFooterHeight(NSString* footerText, UITableView* tableView, UILineBreakMode footerLineBreakMode, UIFont* footerFont) {
+	CGSize theSize = CGSizeMake(tableView.bounds.size.width, CGFLOAT_MAX);
+	return [footerText sizeWithFont:footerFont constrainedToSize:theSize lineBreakMode:footerLineBreakMode].height;
+}
+
+UIFont* MvrWhiteSectionFooterDefaultFont() {
+	return [UIFont systemFontOfSize:13];
+}
+
+
 @interface MvrMorePaneActionCell : UITableViewCell {
 	SEL action;
 }
@@ -121,8 +158,42 @@
 	[table release]; table = nil;
 }
 
+- (void) tellAFriend:(id) sender;
+{
+	[MvrApp().tellAFriend start];
+}
+
+- (void) addBookmarks:(id) sender;
+{
+	[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/safari-bookmarklet"]];
+}
+
 - (void) makeTableStructure:(NSMutableArray*) content;
 {
+#if kMvrIsLite
+	// All stuff that wasn't in the MvrAboutPane because of the upsell is here now.
+	MvrMorePaneSection* commandsSection = [MvrMorePaneSection section];
+	[content addObject:commandsSection];
+	
+	MvrMorePaneActionCell* tellAFriend = [[[MvrMorePaneActionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	
+	tellAFriend.textLabel.text = NSLocalizedString(@"Tell a Friend", @"Tell a Friend entry in about box");
+	tellAFriend.textLabel.textAlignment = UITextAlignmentCenter;
+	
+	if (!MvrApp().tellAFriend.canTellAFriend)
+		tellAFriend.textLabel.textColor = [UIColor grayColor];
+	tellAFriend.action = @selector(tellAFriend:);
+	[commandsSection.cells addObject:tellAFriend];
+	
+	MvrMorePaneActionCell* addBookmarks = [[[MvrMorePaneActionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	
+	addBookmarks.textLabel.text = NSLocalizedString(@"Add Bookmarks from Safari", @"Bookmarklet entry in about box");
+	addBookmarks.textLabel.textAlignment = UITextAlignmentCenter;
+	
+	addBookmarks.action = @selector(addBookmarks:);
+	[commandsSection.cells addObject:addBookmarks];
+#endif
+	
 	MvrMorePaneSection* messagesSection = [MvrMorePaneSection section];
 	[content addObject:messagesSection];
 	
@@ -227,45 +298,22 @@
 	if (!footerText)
 		return nil;
 	
-	UIView* footer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 100)] autorelease];
-	footer.backgroundColor = [UIColor clearColor];
-	footer.opaque = NO;
-	
-	CGRect labelFrame = CGRectInset(footer.bounds, 20, 0);
-	UILabel* label = [[[UILabel alloc] initWithFrame:labelFrame] autorelease];
-	label.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-	label.contentMode = UIViewContentModeCenter;
-	[footer addSubview:label];
-	
-	label.text = footerText;
-	label.numberOfLines = 0;
-	label.lineBreakMode = self.footerLineBreakMode;
-	label.textAlignment = UITextAlignmentCenter;
-	
-	label.font = self.footerFont;
-	label.textColor = [UIColor whiteColor];
-	label.shadowColor = [UIColor blackColor];
-	label.shadowOffset = CGSizeMake(0, 1);	
-	
-	label.backgroundColor = [UIColor clearColor];
-	label.opaque = NO;
-	
-	return footer;
+	return MvrWhiteSectionFooterView(footerText, tableView, self.footerLineBreakMode, self.footerFont);
 }
 
 - (UIFont*) footerFont;
 {
-	return [UIFont systemFontOfSize:13];
+	return MvrWhiteSectionFooterDefaultFont();
 }
 
 - (UILineBreakMode) footerLineBreakMode;
 {
-	return UILineBreakModeWordWrap;
+	return kMvrWhiteSectionDefaultLineBreakMode;
 }
 
 - (CGFloat) footerTopBottomMargin;
 {
-	return 20;
+	return kMvrWhiteSectionDefaultTopBottomMargin;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
@@ -274,9 +322,7 @@
 	if (!footerText)
 		return 0;
 	
-	CGSize theSize = CGSizeMake(tableView.bounds.size.width, CGFLOAT_MAX);
-	CGSize actualSize = [footerText sizeWithFont:self.footerFont constrainedToSize:theSize lineBreakMode:self.footerLineBreakMode];
-	return actualSize.height + self.footerTopBottomMargin * 2;
+	return MvrWhiteSectionFooterHeight(footerText, tableView, self.footerLineBreakMode, self.footerFont) + self.footerTopBottomMargin * 2;
 }
 
 @end

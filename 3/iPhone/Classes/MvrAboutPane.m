@@ -11,15 +11,45 @@
 #import "MvrMorePane.h"
 
 enum {
+#if kMvrIsLite
+	kMvrAboutSectionUpsell,
+#endif
+	
+#if !kMvrIsLite
+	kMvrAboutSectionOne,
+#endif
+	
+	kMvrAboutSectionTwo,
+
+	kMvrAboutSectionsCount,
+};
+
+enum {
+#if kMvrIsLite
+	// Upsell
+	kMvrAboutEntry_Upsell = 0,
+	kMvrAboutSectionUpsellCount,
+#endif
+	
+#if !kMvrIsLite
 	// Top section
 	kMvrAboutEntry_TellAFriend = 0,
 	kMvrAboutEntry_Bookmarklet,
 	kMvrAboutSectionOneEntriesCount,
+#endif
 	
 	// Middle section
 	kMvrAboutEntry_More = 0,
 	kMvrAboutSectionTwoEntriesCount,
 };
+
+@interface MvrAboutPane ()
+
+#if kMvrIsLite
+@property(readonly) NSString* upsellSectionMoverText;
+#endif
+
+@end
 
 
 @implementation MvrAboutPane
@@ -74,35 +104,26 @@ enum {
 	[tableView reloadData];
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tv {
-    return 2;
+	L0Log(@"Asked about sections, answer = %d", kMvrAboutSectionsCount);
+    return kMvrAboutSectionsCount;
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section {
 	switch (section) {
-		case 0:
+#if kMvrIsLite
+		case kMvrAboutSectionUpsell:
+			return kMvrAboutSectionUpsellCount;
+#endif
+#if !kMvrIsLite
+		case kMvrAboutSectionOne:
 			return kMvrAboutSectionOneEntriesCount;
-		case 1:
+#endif
+		case kMvrAboutSectionTwo:
 			return kMvrAboutSectionTwoEntriesCount;
 		default:
 			return 0;
@@ -113,21 +134,36 @@ enum {
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString* cellIdentifier = @"MvrRegularCell";
-	if ([indexPath section] == 1 && [indexPath row] == kMvrAboutEntry_More)
+	if ([indexPath section] == kMvrAboutSectionTwo && [indexPath row] == kMvrAboutEntry_More)
 		cellIdentifier = @"MvrLabeledCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
 		UITableViewCellStyle style = UITableViewCellStyleDefault;
-		if ([indexPath section] == 1 && [indexPath row] == kMvrAboutEntry_More)
+		if ([indexPath section] == kMvrAboutSectionTwo && [indexPath row] == kMvrAboutEntry_More)
 			style = UITableViewCellStyleValue1;
 		
         cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:cellIdentifier] autorelease];
     }
     
+	cell.imageView.image = nil;
 
 	switch ([indexPath section]) {
-		case 0:
+#if kMvrIsLite
+		case kMvrAboutSectionUpsell:
+			switch ([indexPath row]) {
+				case kMvrAboutEntry_Upsell:
+					cell.textLabel.text = NSLocalizedString(@"Get more features in Mover+", @"Upsell entry in about box");
+					break;
+			}
+			
+			cell.imageView.image = [UIImage imageNamed:@"PlusSign.png"];
+			
+			break;
+#endif
+			
+#if !kMvrIsLite
+		case kMvrAboutSectionOne:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_TellAFriend:
 					cell.textLabel.text = NSLocalizedString(@"Tell a Friend", @"Tell a Friend entry in about box");
@@ -135,6 +171,8 @@ enum {
 						cell.textLabel.textColor = [UIColor grayColor];
 					
 					break;
+					
+
 				case kMvrAboutEntry_Bookmarklet:
 					cell.textLabel.text = NSLocalizedString(@"Add Bookmarks from Safari", @"Bookmarklet entry in about box");
 					break;
@@ -143,8 +181,9 @@ enum {
 			cell.textLabel.textAlignment = UITextAlignmentCenter;
 			
 			break;
+#endif
 
-		case 1:
+		case kMvrAboutSectionTwo:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_More:
 					cell.textLabel.text = NSLocalizedString(@"Settings & More", @"More entry in about box");
@@ -162,25 +201,51 @@ enum {
 }
 
 
+#if kMvrIsLite
+
+- (void) openAppStoreURL:(NSURL*) url;
+{
+	[self autorelease]; // balances the -retain in -...didSelectRow....
+	if (!url)
+		url = kMvrUpsellURL;
+	[UIApp openURL:url];
+}
+
+#endif
+
 - (void) tableView:(UITableView*) tv didSelectRowAtIndexPath:(NSIndexPath*) indexPath;
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	switch ([indexPath section]) {
-		case 0:
+#if kMvrIsLite
+		case kMvrAboutSectionUpsell:
+			switch ([indexPath row]) {
+				case kMvrAboutEntry_Upsell:
+					[self retain]; // balanced in -openAppStoreURL:
+					[kMvrUpsellURL beginResolvingRedirectsWithDelegate:self selector:@selector(openAppStoreURL:)];
+					break;
+			}
+			
+			break;
+#endif
+
+#if !kMvrIsLite
+		case kMvrAboutSectionOne:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_TellAFriend:
 					[MvrApp().tellAFriend start];
 					break;
-					
+
 				case kMvrAboutEntry_Bookmarklet:
 					[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/safari-bookmarklet"]];
 					break;
 			}
 			
 			break;
+#endif
 			
-		case 1:
+		case kMvrAboutSectionTwo:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_More:
 					{
@@ -200,6 +265,35 @@ enum {
 	[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net"]];
 }
 
+#if kMvrIsLite
+
+- (NSString*) upsellSectionMoverText {
+	return NSLocalizedString(@"Mover+ has all the features of Mover, and can also resend videos, text clippings and bookmarks via Wi-Fi and Bluetooth.", @"Upsell section text");
+}
+
+- (CGFloat) tableView:(UITableView *)tv heightForFooterInSection:(NSInteger)section;
+{
+	switch (section) {
+		case kMvrAboutSectionUpsell:
+			return MvrWhiteSectionFooterHeight(self.upsellSectionMoverText, tv, kMvrWhiteSectionDefaultLineBreakMode, MvrWhiteSectionFooterDefaultFont()) + kMvrWhiteSectionDefaultTopBottomMargin / 2.0;
+			
+		default:
+			return 0;
+	}
+}
+
+- (UIView*) tableView:(UITableView *)tv viewForFooterInSection:(NSInteger)section;
+{
+	switch (section) {
+		case kMvrAboutSectionUpsell:
+			return MvrWhiteSectionFooterView(self.upsellSectionMoverText, tv, kMvrWhiteSectionDefaultLineBreakMode, MvrWhiteSectionFooterDefaultFont());
+			
+		default:
+			return nil;
+	}
+}
+
+#endif
 
 + modalPane;
 {

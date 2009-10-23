@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MvrUpsellController.h"
 
 @interface MvrAboutPane : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	IBOutlet UITableView* tableView;

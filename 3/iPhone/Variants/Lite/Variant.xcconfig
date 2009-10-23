@@ -4,5 +4,5 @@ ILABS_MOVER_BUNDLE_NAME = Mover
 ILABS_MOVER_BUNDLE_DISPLAY_NAME = Mover
 ILABS_MOVER_BUNDLE_IDENTIFIER = net.infinitelabs.Mover
 
-ILABS_MOVER_VARIANT_PREPROCESSOR_DEFINITIONS = kMvrCurrentAppVariant=kMvrAppVariantMoverLite kMvrCurrentAppVariantDisplayName=@\"Mover\"
+ILABS_MOVER_VARIANT_PREPROCESSOR_DEFINITIONS = kMvrIsLite=1 kMvrCurrentAppVariant=kMvrAppVariantMoverLite kMvrCurrentAppVariantDisplayName=@\"Mover\"
 

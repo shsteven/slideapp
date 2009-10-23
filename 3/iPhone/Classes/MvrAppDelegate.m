@@ -95,6 +95,7 @@ enum {
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
 {
+#if !kMvrIsLite
 	NSString* scheme = [url scheme];
 	if ([scheme isEqual:@"x-infinitelabs-mover"]) {
 		if (![[url resourceSpecifier] hasPrefix:@"add?"])
@@ -114,6 +115,7 @@ enum {
 			[self performSelector:@selector(addItemFromSelf:) withObject:item afterDelay:0.7];
 		return item != nil;
 	}
+#endif
 	
 	return NO;
 }
@@ -323,6 +325,11 @@ enum {
 	as.tag = kMvrAppDelegateItemActionSheetTag;
 	as.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
 	[as setValue:i forKey:@"MvrItem"];
+	
+#if kMvrIsLite
+	if (![i isKindOfClass:[MvrImageItem class]] && ![i isKindOfClass:[MvrContactItem class]])
+		send = NO;
+#endif
 	
 	if (mainAction) {
 		MvrItemAction* main = [ui mainActionForItem:i];

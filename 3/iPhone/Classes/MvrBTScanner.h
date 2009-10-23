@@ -15,6 +15,8 @@
 
 #define kMvrBluetoothSessionID @"net.infinite-labs.Mover3"
 
+#define kMvrBTOutgoingUnavailableInLiteVersionNotification @"kMvrBTOutgoingUnavailableInLiteVersionNotification"
+
 @class MvrBTIncoming, MvrBTOutgoing, MvrBTChannel;
 
 @interface MvrBTScanner : NSObject <MvrScanner, GKSessionDelegate> {
