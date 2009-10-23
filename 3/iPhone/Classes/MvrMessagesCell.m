@@ -103,6 +103,8 @@
 		self.accessoryType = UITableViewCellAccessoryNone;
 		self.detailTextLabel.text = NSLocalizedString(@"Touch to check", @"No news detail text for News & Updates cell");
 		self.detailTextLabel.highlighted = NO;
+		[self setNeedsLayout];
+		[self setNeedsDisplay];
 	}
 }
 
