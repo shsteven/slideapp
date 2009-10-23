@@ -1,8 +1,8 @@
-ILABS_MOVER_VARIANT = Plus
+ILABS_MOVER_VARIANT = Lite
 
-ILABS_MOVER_BUNDLE_NAME = MoverPlus
-ILABS_MOVER_BUNDLE_DISPLAY_NAME = Mover+
-ILABS_MOVER_BUNDLE_IDENTIFIER = net.infinitelabs.Mover.Plus
+ILABS_MOVER_BUNDLE_NAME = Mover
+ILABS_MOVER_BUNDLE_DISPLAY_NAME = Mover
+ILABS_MOVER_BUNDLE_IDENTIFIER = net.infinitelabs.Mover
 
-ILABS_MOVER_VARIANT_PREPROCESSOR_DEFINITIONS = kMvrCurrentAppVariant=kMvrAppVariantMoverPlus kMvrCurrentAppVariantDisplayName=@\"Mover+\"
+ILABS_MOVER_VARIANT_PREPROCESSOR_DEFINITIONS = kMvrCurrentAppVariant=kMvrAppVariantMoverLite kMvrCurrentAppVariantDisplayName=@\"Mover\"
 
