@@ -1,4 +1,4 @@
-"Dismiss" = "Dismiss";
 "App Store" = "App Store";
-"Mover Lite cannot send items over Bluetooth." = "Mover Lite cannot send items over Bluetooth.";
-"Mover Lite can receive items over Wi-Fi and Bluetooth and receive them over Bluetooth. Mover+, available on App Store, adds Bluetooth sending." = "Mover Lite can receive items over Wi-Fi and Bluetooth and receive them over Bluetooth. Mover+, available on App Store, adds Bluetooth sending.";
+"Mover Lite can receive and send items over Wi-Fi and receive them only over Bluetooth. Mover+, available on App Store, adds Bluetooth sending." = "Mover Lite può ricevere e inviare elementi via Wi-Fi e solo riceverli via Bluetooth. Mover+, disponibile su App Store, può anche inviarli via Bluetooth.";
+"Mover Lite cannot send items over Bluetooth." = "Mover Lite non può inviare elementi via Bluetooth.";
+"Dismiss" = "Chiudi";

@@ -8,7 +8,7 @@
 		<string>App Store</string>
 	</array>
 	<key>L0AlertInformativeText</key>
-	<string>Mover Lite can receive items over Wi-Fi and Bluetooth and receive them over Bluetooth. Mover+, available on App Store, adds Bluetooth sending.</string>
+	<string>Mover Lite can receive and send items over Wi-Fi and receive them only over Bluetooth. Mover+, available on App Store, adds Bluetooth sending.</string>
 	<key>L0AlertMessage</key>
 	<string>Mover Lite cannot send items over Bluetooth.</string>
 	<key>L0AlertShowsSuppressionButton</key>
