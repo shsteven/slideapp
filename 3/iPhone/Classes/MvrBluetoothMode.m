@@ -128,6 +128,9 @@
 	self.arrowsView.northView.normalColor = [UIColor whiteColor];
 	self.arrowsView.northView.nameLabel.textColor = [UIColor whiteColor];
 	self.arrowsView.northView.busyColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.820 alpha:1.000];
+#if kMvrIsLite
+	self.arrowsView.northView.arrowView.hidden = YES;
+#endif
 }
 
 - (void) scanner:(id <MvrScanner>) s didRemoveChannel:(id <MvrChannel>) channel;
