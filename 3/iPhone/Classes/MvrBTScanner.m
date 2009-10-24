@@ -131,6 +131,17 @@
 
 - (void) receiveData:(NSData*) data fromPeer:(NSString*) peerID inSession:(GKSession*) s context:(void*) context;
 {
+	if ([MvrBTIncoming isLiteWarningPacket:data]) {
+
+#if kMvrIsLite
+		self.channel = nil;
+		[[NSNotificationCenter defaultCenter] postNotificationName:kMvrBTConnectionToLiteVersionBeingDroppedNotification object:self];
+#endif
+		
+		return;
+		
+	}
+	
 	[self.channel didReceiveData:data];
 }
 
@@ -159,6 +170,10 @@
 		incomingTransfers = [NSMutableSet new];
 		outgoingTransfers = [NSMutableSet new];
 		kvo = [[L0KVODispatcher alloc] initWithTarget:self];
+		
+#if kMvrIsLite
+		[self sendData:[MvrBTIncoming liteWarningPacket] error:NULL];
+#endif
 	}
 	
 	return self;

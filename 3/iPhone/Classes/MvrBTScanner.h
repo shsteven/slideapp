@@ -16,10 +16,11 @@
 #define kMvrBluetoothSessionID @"net.infinite-labs.Mover3"
 
 #define kMvrBTOutgoingUnavailableInLiteVersionNotification @"kMvrBTOutgoingUnavailableInLiteVersionNotification"
+#define kMvrBTConnectionToLiteVersionBeingDroppedNotification @"kMvrBTConnectionToLiteVersionBeingDroppedNotification"
 
 @class MvrBTIncoming, MvrBTOutgoing, MvrBTChannel;
 
-@interface MvrBTScanner : NSObject <MvrScanner, GKSessionDelegate> {
+@interface MvrBTScanner : NSObject <MvrScanner, GKSessionDelegate, UIAlertViewDelegate> {
 	BOOL enabled;
 	NSMutableSet* channels;
 	

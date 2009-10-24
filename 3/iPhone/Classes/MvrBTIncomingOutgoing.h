@@ -41,6 +41,9 @@
 - (void) startWaiting;
 - (void) stopWaiting;
 
++ (BOOL) isLiteWarningPacket:(NSData*) data;
++ (NSData*) liteWarningPacket;
+
 @end
 
 #if !kMvrIsLite

@@ -47,6 +47,9 @@ static uint8_t kMvrNackPacketHeader[] =
 	{ 'M', '3', 'N', 'O' };
 static size_t kMvrNackPacketHeader_Size = 4;
 
+static uint8_t kMvrIsLitePacket[] = 
+	{ 'M', '3', 'L', 'T', 0x0, 0x0, 0x0 };
+static size_t kMvrIsLitePacket_Size = 7;
 
 static NSUInteger MvrNumberFromNumberedPacketWithHeader(NSData* data, uint8_t* header, size_t headerSize) {
 	if ([data length] < headerSize + sizeof(uint16_t) + sizeof(uint8_t))
@@ -152,6 +155,16 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 + incomingTransferWithChannel:(MvrBTChannel*) chan;
 {
 	return [[[self alloc] initWithChannel:chan] autorelease];
+}
+
++ (BOOL) isLiteWarningPacket:(NSData*) data;
+{
+	return MvrSameDataAs(data, kMvrIsLitePacket, kMvrIsLitePacket_Size);
+}
+
++ (NSData*) liteWarningPacket;
+{
+	return [NSData dataWithBytesNoCopy:kMvrIsLitePacket length:kMvrIsLitePacket_Size];
 }
 
 + (BOOL) shouldStartReceivingWithData:(NSData*) data;

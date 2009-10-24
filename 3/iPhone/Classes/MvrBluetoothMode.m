@@ -11,14 +11,20 @@
 #import <MuiKit/MuiKit.h>
 
 #import "MvrAppDelegate.h"
+#import "MvrAppDelegate+HelpAlerts.h"
 #import "MvrUpsellController.h"
 
 @interface MvrBluetoothMode ()
 
 - (void) sendOrConfirmItem:(MvrItem*) i toDestination:(id) destination;
+- (void) startPeerPicker;
 
 @end
 
+enum {
+	kBTAlertNoLiteToLiteReminder = 1000,
+	kBTAlertVeryLarge,
+};
 
 @implementation MvrBluetoothMode
 
@@ -30,6 +36,7 @@
 		observer = [[MvrScannerObserver alloc] initWithScanner:scanner delegate:self];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingUnavailableInLite:) name:kMvrBTOutgoingUnavailableInLiteVersionNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cannotConnectToLite:) name:kMvrBTConnectionToLiteVersionBeingDroppedNotification object:nil];
 	}
 	return self;
 }
@@ -75,9 +82,27 @@
 {
 	if (peerPicker)
 		return;
-	
+
 	scanner.session = nil;
-	
+
+#if kMvrIsLite
+	UIAlertView* alert = [MvrApp() alertIfNotShownBeforeNamed:@"MvrNoLiteToLiteBTReminder"];
+	if (alert) {
+		alert.tag = kBTAlertNoLiteToLiteReminder;
+		alert.delegate = self;
+		[alert show];
+		return;
+	}
+#endif
+		
+	[self startPeerPicker];
+}
+
+- (void) startPeerPicker;
+{
+	if (peerPicker)
+		return;
+
 	peerPicker = [GKPeerPickerController new];
 	peerPicker.delegate = self;
 	peerPicker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
@@ -165,6 +190,7 @@
 		nextItem = [i retain];
 		
 		UIAlertView* alert = [UIAlertView alertNamed:@"MvrLargeItemOverBT"];
+		alert.tag = kBTAlertVeryLarge;
 		alert.cancelButtonIndex = 1;
 		alert.delegate = self;
 		[alert show];
@@ -174,11 +200,21 @@
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-	if (buttonIndex != alertView.cancelButtonIndex)
-		[nextDestination beginSendingItem:nextItem];
-
-	[nextDestination release]; nextDestination = nil;
-	[nextItem release]; nextItem = nil;
+	switch (alertView.tag) {
+		case kBTAlertNoLiteToLiteReminder:
+			[self startPeerPicker];
+			return;
+			
+		case kBTAlertVeryLarge: {
+			if (buttonIndex != alertView.cancelButtonIndex)
+				[nextDestination beginSendingItem:nextItem];
+			
+			[nextDestination release]; nextDestination = nil;
+			[nextItem release]; nextItem = nil;
+		}
+			
+			return;
+	}
 }
 
 #pragma mark Receiving items
@@ -213,6 +249,13 @@
 {
 #if kMvrIsLite
 	[[MvrUpsellController upsellWithAlertNamed:@"MvrNoBTOutgoingInLite" cancelButton:0] show];
+#endif
+}
+
+- (void) cannotConnectToLite:(NSNotification*) n;
+{
+#if kMvrIsLite
+	[[MvrUpsellController upsellWithAlertNamed:@"MvrNoLiteToLiteBT" cancelButton:0] show];
 #endif
 }
 
