@@ -20,9 +20,9 @@
 #import "MvrImageItem.h"
 #import "MvrContactItem.h"
 
-@interface MvrPasteboardItemSource ()
-- (BOOL) liteVersionCanPasteItemOfClass:(Class) c;
-@end
+static inline BOOL MvrPasteboardItemSourceLiteVersionCanPasteItemsOfClass(Class c) {
+	return [c isEqual:[MvrImageItem class]] || [c isEqual:[MvrContactItem class]];
+}
 
 #endif
 
@@ -81,7 +81,7 @@ L0ObjCSingletonMethod(sharedSource)
 		
 		BOOL canAdd = i && ![i isKindOfClass:[MvrGenericItem class]];
 #if kMvrIsLite
-		canAdd = canAdd && [self liteVersionCanPasteItemOfClass:[i class]];
+		canAdd = canAdd && MvrPasteboardItemSourceLiteVersionCanPasteItemsOfClass([i class]);
 #endif
 		if (canAdd)
 			[MvrApp() addItemFromSelf:i];
@@ -96,7 +96,7 @@ L0ObjCSingletonMethod(sharedSource)
 			if (cls && ![cls isEqual:[MvrGenericItem class]]) {
 				BOOL canUse = YES;
 #if kMvrIsLite
-				canUse = [self liteVersionCanPasteItemOfClass:cls];
+				canUse = MvrPasteboardItemSourceLiteVersionCanPasteItemsOfClass(cls);
 #endif
 				return canUse;
 			}
@@ -105,12 +105,5 @@ L0ObjCSingletonMethod(sharedSource)
 	
 	return NO;
 }
-
-#if kMvrIsLite
-- (BOOL) liteVersionCanPasteItemOfClass:(Class) c;
-{
-	return [c isEqual:[MvrImageItem class]] || [c isEqual:[MvrContactItem class]];
-}
-#endif
 
 @end

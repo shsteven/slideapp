@@ -22,12 +22,13 @@
 #import "MvrImageItem.h"
 #import "MvrContactItem.h"
 
-@interface MvrWiFiMode ()
-
-- (BOOL) shouldContinueSendingItemAfterLiteWarning:(MvrItem*) i;
-
-@end
-
+static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem* i) {
+	if (![i isKindOfClass:[MvrImageItem class]] && ![i isKindOfClass:[MvrContactItem class]]) {
+		[[MvrUpsellController upsellWithAlertNamed:@"MvrNoNewItemSendingInLite" cancelButton:0] show];
+		return NO;
+	} else
+		return YES;
+}
 
 #endif
 
@@ -125,7 +126,7 @@
 - (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) dest;
 {
 #if kMvrIsLite
-	if (![self shouldContinueSendingItemAfterLiteWarning:i])
+	if (!MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(i))
 		return;
 #endif
 	[[self destinationAtDirection:dest] beginSendingItem:i];
@@ -137,23 +138,12 @@
 		return;
 	
 #if kMvrIsLite
-	if (![self shouldContinueSendingItemAfterLiteWarning:i])
+	if (!MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(i))
 		return;
 #endif
 
 	[destination beginSendingItem:i];
 }
-
-#if kMvrIsLite
-- (BOOL) shouldContinueSendingItemAfterLiteWarning:(MvrItem*) i;
-{
-	if (![i isKindOfClass:[MvrImageItem class]] && ![i isKindOfClass:[MvrContactItem class]]) {
-		[[MvrUpsellController upsellWithAlertNamed:@"MvrNoNewItemSendingInLite" cancelButton:0] show];
-		return NO;
-	} else
-		return YES;
-}
-#endif
 
 - (void) channel:(id <MvrChannel>)c didBeginSendingWithOutgoingTransfer:(id <MvrOutgoing>)outgoing;
 {

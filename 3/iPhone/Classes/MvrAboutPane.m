@@ -11,16 +11,16 @@
 #import "MvrMorePane.h"
 
 enum {
-#if kMvrIsLite
-	kMvrAboutSectionUpsell,
-#endif
-	
 #if !kMvrIsLite
 	kMvrAboutSectionOne,
 #endif
 	
 	kMvrAboutSectionTwo,
 
+#if kMvrIsLite
+	kMvrAboutSectionUpsell,
+#endif
+	
 	kMvrAboutSectionsCount,
 };
 
@@ -209,6 +209,7 @@ enum {
 	if (!url)
 		url = kMvrUpsellURL;
 	[UIApp openURL:url];
+	[UIApp endIgnoringInteractionEvents];
 }
 
 #endif
@@ -223,6 +224,7 @@ enum {
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_Upsell:
 					[self retain]; // balanced in -openAppStoreURL:
+					[UIApp beginIgnoringInteractionEvents];
 					[kMvrUpsellURL beginResolvingRedirectsWithDelegate:self selector:@selector(openAppStoreURL:)];
 					break;
 			}
