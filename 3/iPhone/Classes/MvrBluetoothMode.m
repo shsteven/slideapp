@@ -29,7 +29,7 @@
 		scanner = [MvrBTScanner new];
 		observer = [[MvrScannerObserver alloc] initWithScanner:scanner delegate:self];
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingUnavailableInLite:) name:kMvrBTOutgoingUnavailableInLiteVersionNotification object:scanner];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outgoingUnavailableInLite:) name:kMvrBTOutgoingUnavailableInLiteVersionNotification object:nil];
 	}
 	return self;
 }
