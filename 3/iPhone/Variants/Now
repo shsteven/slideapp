@@ -1,0 +1,5 @@
+#!/bin/bash
+
+HERE="`dirname "$0"`"
+cd -P "$HERE"/Current
+basename "`pwd`"
