@@ -29,7 +29,7 @@
 			<string>net.infinite-labs.Mover.API</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>x-infinitelabs-mover</string>
+				<string>$(ILABS_MOVER_API_URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>

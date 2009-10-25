@@ -163,11 +163,6 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	[MvrApp().tellAFriend start];
 }
 
-- (void) addBookmarks:(id) sender;
-{
-	[UIApp openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/safari-bookmarklet"]];
-}
-
 - (void) makeTableStructure:(NSMutableArray*) content;
 {
 #if kMvrIsLite
@@ -184,14 +179,6 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 		tellAFriend.textLabel.textColor = [UIColor grayColor];
 	tellAFriend.action = @selector(tellAFriend:);
 	[commandsSection.cells addObject:tellAFriend];
-	
-	MvrMorePaneActionCell* addBookmarks = [[[MvrMorePaneActionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-	
-	addBookmarks.textLabel.text = NSLocalizedString(@"Add Bookmarks from Safari", @"Bookmarklet entry in about box");
-	addBookmarks.textLabel.textAlignment = UITextAlignmentCenter;
-	
-	addBookmarks.action = @selector(addBookmarks:);
-	[commandsSection.cells addObject:addBookmarks];
 #endif
 	
 	MvrMorePaneSection* messagesSection = [MvrMorePaneSection section];

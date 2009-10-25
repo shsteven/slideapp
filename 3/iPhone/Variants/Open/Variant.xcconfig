@@ -1,9 +1,10 @@
 ILABS_MOVER_VARIANT = Open
 
+ILABS_MOVER_API_URL_SCHEME = x-infinitelabs-mover
+
 ILABS_MOVER_BUNDLE_NAME = MoverOpen
 ILABS_MOVER_BUNDLE_DISPLAY_NAME = Mover Open
 ILABS_MOVER_BUNDLE_IDENTIFIER = net.infinitelabs.Mover.Edge
 
 ILABS_MOVER_VARIANT_PREPROCESSOR_DEFINITIONS = kMvrCurrentAppVariant=kMvrAppVariantMoverOpen kMvrVariantSettings_UseSubdirectoryForItemStorage=1 kMvrCurrentAppVariantDisplayName=@\"Open\"
-
 
