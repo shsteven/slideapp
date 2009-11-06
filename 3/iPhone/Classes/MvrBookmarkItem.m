@@ -18,8 +18,8 @@
 
 @end
 
-static BOOL MvrBookmarkURLSeemsSafe(NSURL* url) {
-	return [[url scheme] isEqual:@"http"] || [[url scheme] isEqual:@"https"] || [[url scheme] isEqual:@"ftp"];
+static BOOL MvrBookmarkURLIsNonNilAndSeemsSafe(NSURL* url) {
+	return url && ([[url scheme] isEqual:@"http"] || [[url scheme] isEqual:@"https"] || [[url scheme] isEqual:@"ftp"]);
 }
 
 @implementation MvrBookmarkItem
@@ -32,7 +32,7 @@ static BOOL MvrBookmarkURLSeemsSafe(NSURL* url) {
 - (id) initWithAddress:(NSURL*) url;
 {
 	if (self = [super init]) {
-		if (!MvrBookmarkURLSeemsSafe(url)) {
+		if (!MvrBookmarkURLIsNonNilAndSeemsSafe(url)) {
 			[self release];
 			return nil;
 		}
@@ -48,7 +48,7 @@ static BOOL MvrBookmarkURLSeemsSafe(NSURL* url) {
 - (id) initWithStorage:(MvrItemStorage *)s type:(NSString *)t metadata:(NSDictionary *)m;
 {
 	if (self = [super initWithStorage:s type:t metadata:m]) {
-		if (!MvrBookmarkURLSeemsSafe(self.address)) {
+		if (!MvrBookmarkURLIsNonNilAndSeemsSafe(self.address)) {
 			[self release];
 			return nil;
 		}
@@ -68,7 +68,7 @@ MvrItemSynthesizeCopyFromAutocache(NSURL*, address, private_setAddress:)
 - (NSURL*) objectForEmptyAddressCacheKey;
 {
 	NSString* string = [[[NSString alloc] initWithData:self.storage.data encoding:NSUTF8StringEncoding] autorelease];
-	return [NSURL URLWithString:string];
+	return string? [NSURL URLWithString:string] : nil;
 }
 
 - (id) produceExternalRepresentation;
