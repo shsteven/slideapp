@@ -3,7 +3,10 @@
 HERE="`dirname "$0"`"
 cd "$HERE"/..
 
-xcodebuild clean || exit 1
+for i in Debug Release "Ad Hoc" "App Store"; do
+	xcodebuild -configuration "$i" clean || exit 1
+done
+
 rm -Rf Build || exit 1
 rm -Rf TemporaryItems || exit 1
 rm -Rf "Compiled Locales" || exit 1
