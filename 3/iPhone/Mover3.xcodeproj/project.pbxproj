@@ -7,6 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150C414410A48C7300EBCE51 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
+		150C414510A48C7300EBCE51 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
+		150C414610A48C7300EBCE51 /* MvrAppDelegate+HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */; };
+		150C414710A48C7300EBCE51 /* MvrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MvrAppDelegate.m */; };
+		150C414810A48C7300EBCE51 /* MvrArrowsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C88F1068DCDB000C9CDE /* MvrArrowsView.m */; };
+		150C414910A48C7300EBCE51 /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
+		150C414A10A48C7300EBCE51 /* MvrBluetoothMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */; };
+		150C414B10A48C7300EBCE51 /* MvrBookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1595583010775E6300FBC9B4 /* MvrBookmarkItem.m */; };
+		150C414C10A48C7300EBCE51 /* MvrBookmarkItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 159559111077602800FBC9B4 /* MvrBookmarkItemUI.m */; };
+		150C414D10A48C7300EBCE51 /* MvrBTDebugTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569CAF7108E040700F3B5CF /* MvrBTDebugTracker.m */; };
+		150C414E10A48C7300EBCE51 /* MvrBTIncomingOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C865108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m */; };
+		150C414F10A48C7300EBCE51 /* MvrBTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C858108D8CBC00F3B5CF /* MvrBTProtocol.m */; };
+		150C415010A48C7300EBCE51 /* MvrBTScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C862108DB7A800F3B5CF /* MvrBTScanner.m */; };
+		150C415110A48C7300EBCE51 /* MvrContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B96BC1076586100F1A1A8 /* MvrContactItem.m */; };
+		150C415210A48C7300EBCE51 /* MvrContactItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */; };
+		150C415310A48C7300EBCE51 /* MvrCrashReporting.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */; };
+		150C415410A48C7300EBCE51 /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
+		150C415510A48C7300EBCE51 /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
+		150C415610A48C7300EBCE51 /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
+		150C415710A48C7300EBCE51 /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
+		150C415810A48C7300EBCE51 /* MvrImageVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 158CBF7110774EEE006813A7 /* MvrImageVisor.m */; };
+		150C415910A48C7300EBCE51 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
+		150C415A10A48C7300EBCE51 /* MvrLegalitiesPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34BFE1084FB3300CEA68A /* MvrLegalitiesPane.m */; };
+		150C415B10A48C7300EBCE51 /* MvrMessage+Showing.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A311085AFF2005E5642 /* MvrMessage+Showing.m */; };
+		150C415C10A48C7300EBCE51 /* MvrMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A271085A9F1005E5642 /* MvrMessage.m */; };
+		150C415D10A48C7300EBCE51 /* MvrMessageAction+ActingUpon.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A3C1085B169005E5642 /* MvrMessageAction+ActingUpon.m */; };
+		150C415E10A48C7300EBCE51 /* MvrMessageChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A8710861B30005E5642 /* MvrMessageChecker.m */; };
+		150C415F10A48C7300EBCE51 /* MvrMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 155352421088547D00C75A6C /* MvrMessagesCell.m */; };
+		150C416010A48C7300EBCE51 /* MvrMorePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1553517B1088468900C75A6C /* MvrMorePane.m */; };
+		150C416110A48C7300EBCE51 /* MvrPasteboardItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D881EF107CC78C000832F5 /* MvrPasteboardItemSource.m */; };
+		150C416210A48C7300EBCE51 /* MvrSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A7101063EDA100C5A5BD /* MvrSlide.m */; };
+		150C416310A48C7300EBCE51 /* MvrSlidesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A70D1063ED2900C5A5BD /* MvrSlidesView.m */; };
+		150C416410A48C7300EBCE51 /* MvrTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591A7041063EA0F00C5A5BD /* MvrTableController.m */; };
+		150C416510A48C7300EBCE51 /* MvrTellAFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531326F1083A7C700D28022 /* MvrTellAFriendController.m */; };
+		150C416610A48C7300EBCE51 /* MvrTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 159559D4107767C100FBC9B4 /* MvrTextItem.m */; };
+		150C416710A48C7300EBCE51 /* MvrTextItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 159559DD107768EF00FBC9B4 /* MvrTextItemUI.m */; };
+		150C416810A48C7300EBCE51 /* MvrTextVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */; };
+		150C416910A48C7300EBCE51 /* MvrUIMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86E1068DBDB000C9CDE /* MvrUIMode.m */; };
+		150C416A10A48C7300EBCE51 /* MvrUpsellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */; };
+		150C416B10A48C7300EBCE51 /* MvrVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1577006910748D0100907F62 /* MvrVideoItem.m */; };
+		150C416C10A48C7300EBCE51 /* MvrVideoItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 15779EF81075D80B00FF2018 /* MvrVideoItemUI.m */; };
+		150C416D10A48C7300EBCE51 /* MvrVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A2010776B7D00FBC9B4 /* MvrVisor.m */; };
+		150C416E10A48C7300EBCE51 /* MvrWiFiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86A1068DB92000C9CDE /* MvrWiFiMode.m */; };
+		150C417210A48CA100EBCE51 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
+		150C417310A48CA100EBCE51 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFE6D9108460C000CBCB35 /* CrashReporter.framework */; };
+		150C417410A48CA100EBCE51 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
+		150C417510A48CA100EBCE51 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511710620E01006EC706 /* CFNetwork.framework */; };
+		150C417610A48CA100EBCE51 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511910620E08006EC706 /* MobileCoreServices.framework */; };
+		150C417710A48CA100EBCE51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514D10620E75006EC706 /* Foundation.framework */; };
+		150C417810A48CA100EBCE51 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514F10620E78006EC706 /* UIKit.framework */; };
+		150C417910A48CA100EBCE51 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567515110620E7A006EC706 /* CoreGraphics.framework */; };
+		150C417A10A48CA100EBCE51 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
+		150C417B10A48CA100EBCE51 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15779F101075DC8300FF2018 /* MediaPlayer.framework */; };
+		150C417C10A48CA100EBCE51 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96BE1076589800F1A1A8 /* AddressBook.framework */; };
+		150C417D10A48CA100EBCE51 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96C01076589B00F1A1A8 /* AddressBookUI.framework */; };
+		150C417E10A48CA200EBCE51 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
+		150C417F10A48CA200EBCE51 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1537A6E0107A388000B16B88 /* GameKit.framework */; };
+		150C418810A48DF100EBCE51 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514010620E3C006EC706 /* libMuiKit.a */; };
+		150C418910A48DFB00EBCE51 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 156B0A4C10902FFC00209F2D /* libMoverNetwork.a */; };
+		150C419010A48F7000EBCE51 /* MvrBugFixingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C418F10A48F7000EBCE51 /* MvrBugFixingTests.m */; };
 		150F17D810879260009CCAB7 /* MvrMessageOptIn.alert in Resources */ = {isa = PBXBuildFile; fileRef = 150F17D710879260009CCAB7 /* MvrMessageOptIn.alert */; };
 		151060F11093818D00307C62 /* MvrNoLiteToLiteBT.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151060F01093818D00307C62 /* MvrNoLiteToLiteBT.alert */; };
 		151060F31093819300307C62 /* MvrNoLiteToLiteBTReminder.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151060F21093819300307C62 /* MvrNoLiteToLiteBTReminder.alert */; };
@@ -143,6 +203,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		150C418210A48DD900EBCE51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D /* Network (iPhone) */;
+			remoteInfo = "Network (iPhone)";
+		};
+		150C418410A48DE100EBCE51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D /* Network (iPhone) */;
+			remoteInfo = "Network (iPhone)";
+		};
+		150C418610A48DE100EBCE51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 156FD7720F7A261B00F83283 /* MuiKit */;
+			remoteInfo = MuiKit;
+		};
 		1535D2571090345000CBF778 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
@@ -209,6 +290,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bug Fixing Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bug Fixing Tests-Info.plist"; sourceTree = "<group>"; };
+		150C418E10A48F7000EBCE51 /* MvrBugFixingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBugFixingTests.h; sourceTree = "<group>"; };
+		150C418F10A48F7000EBCE51 /* MvrBugFixingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBugFixingTests.m; sourceTree = "<group>"; };
 		150F17D710879260009CCAB7 /* MvrMessageOptIn.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrMessageOptIn.alert; sourceTree = "<group>"; };
 		151060F01093818D00307C62 /* MvrNoLiteToLiteBT.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoLiteToLiteBT.alert; sourceTree = "<group>"; };
 		151060F21093819300307C62 /* MvrNoLiteToLiteBTReminder.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoLiteToLiteBTReminder.alert; sourceTree = "<group>"; };
@@ -406,6 +491,29 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		150C411B10A48C1200EBCE51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				150C418910A48DFB00EBCE51 /* libMoverNetwork.a in Frameworks */,
+				150C418810A48DF100EBCE51 /* libMuiKit.a in Frameworks */,
+				150C417210A48CA100EBCE51 /* libz.1.1.3.dylib in Frameworks */,
+				150C417310A48CA100EBCE51 /* CrashReporter.framework in Frameworks */,
+				150C417410A48CA100EBCE51 /* SystemConfiguration.framework in Frameworks */,
+				150C417510A48CA100EBCE51 /* CFNetwork.framework in Frameworks */,
+				150C417610A48CA100EBCE51 /* MobileCoreServices.framework in Frameworks */,
+				150C417710A48CA100EBCE51 /* Foundation.framework in Frameworks */,
+				150C417810A48CA100EBCE51 /* UIKit.framework in Frameworks */,
+				150C417910A48CA100EBCE51 /* CoreGraphics.framework in Frameworks */,
+				150C417A10A48CA100EBCE51 /* QuartzCore.framework in Frameworks */,
+				150C417B10A48CA100EBCE51 /* MediaPlayer.framework in Frameworks */,
+				150C417C10A48CA100EBCE51 /* AddressBook.framework in Frameworks */,
+				150C417D10A48CA100EBCE51 /* AddressBookUI.framework in Frameworks */,
+				150C417E10A48CA200EBCE51 /* MessageUI.framework in Frameworks */,
+				150C417F10A48CA200EBCE51 /* GameKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -451,6 +559,15 @@
 				15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		150C418D10A48EAB00EBCE51 /* Tests for Bug Fixes */ = {
+			isa = PBXGroup;
+			children = (
+				150C418E10A48F7000EBCE51 /* MvrBugFixingTests.h */,
+				150C418F10A48F7000EBCE51 /* MvrBugFixingTests.m */,
+			);
+			name = "Tests for Bug Fixes";
 			sourceTree = "<group>";
 		};
 		151E01FE1067652600C6CDFF /* Items */ = {
@@ -894,6 +1011,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* MoverOpen.app */,
+				150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -922,6 +1040,7 @@
 				157B96C01076589B00F1A1A8 /* AddressBookUI.framework */,
 				154FA54810790FD1004DF675 /* MessageUI.framework */,
 				1537A6E0107A388000B16B88 /* GameKit.framework */,
+				150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -929,6 +1048,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				150C418D10A48EAB00EBCE51 /* Tests for Bug Fixes */,
 				32CA4F630368D1EE00C91783 /* Mover3_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -955,6 +1075,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		150C411D10A48C1200EBCE51 /* Bug Fixing Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 150C412410A48C1A00EBCE51 /* Build configuration list for PBXNativeTarget "Bug Fixing Tests" */;
+			buildPhases = (
+				150C411910A48C1200EBCE51 /* Resources */,
+				150C411A10A48C1200EBCE51 /* Sources */,
+				150C411B10A48C1200EBCE51 /* Frameworks */,
+				150C411C10A48C1200EBCE51 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				150C418510A48DE100EBCE51 /* PBXTargetDependency */,
+				150C418710A48DE100EBCE51 /* PBXTargetDependency */,
+			);
+			name = "Bug Fixing Tests";
+			productName = "Bug Fixing Tests";
+			productReference = 150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		1D6058900D05DD3D006BFB54 /* Mover3 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover3" */;
@@ -969,6 +1109,7 @@
 			);
 			dependencies = (
 				1567514810620E42006EC706 /* PBXTargetDependency */,
+				150C418310A48DD900EBCE51 /* PBXTargetDependency */,
 			);
 			name = Mover3;
 			productName = Mover3;
@@ -1010,6 +1151,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* Mover3 */,
+				150C411D10A48C1200EBCE51 /* Bug Fixing Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -1074,6 +1216,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		150C411910A48C1200EBCE51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1157,6 +1306,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		150C411C10A48C1200EBCE51 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		157CBD23108F160900146778 /* Check Current Variant */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1188,6 +1350,57 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		150C411A10A48C1200EBCE51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				150C414410A48C7300EBCE51 /* MvrAboutPane.m in Sources */,
+				150C414510A48C7300EBCE51 /* MvrAccessibility.m in Sources */,
+				150C414610A48C7300EBCE51 /* MvrAppDelegate+HelpAlerts.m in Sources */,
+				150C414710A48C7300EBCE51 /* MvrAppDelegate.m in Sources */,
+				150C414810A48C7300EBCE51 /* MvrArrowsView.m in Sources */,
+				150C414910A48C7300EBCE51 /* MvrArrowView.m in Sources */,
+				150C414A10A48C7300EBCE51 /* MvrBluetoothMode.m in Sources */,
+				150C414B10A48C7300EBCE51 /* MvrBookmarkItem.m in Sources */,
+				150C414C10A48C7300EBCE51 /* MvrBookmarkItemUI.m in Sources */,
+				150C414D10A48C7300EBCE51 /* MvrBTDebugTracker.m in Sources */,
+				150C414E10A48C7300EBCE51 /* MvrBTIncomingOutgoing.m in Sources */,
+				150C414F10A48C7300EBCE51 /* MvrBTProtocol.m in Sources */,
+				150C415010A48C7300EBCE51 /* MvrBTScanner.m in Sources */,
+				150C415110A48C7300EBCE51 /* MvrContactItem.m in Sources */,
+				150C415210A48C7300EBCE51 /* MvrContactItemUI.m in Sources */,
+				150C415310A48C7300EBCE51 /* MvrCrashReporting.m in Sources */,
+				150C415410A48C7300EBCE51 /* MvrGenericItemUI.m in Sources */,
+				150C415510A48C7300EBCE51 /* MvrImageItem.m in Sources */,
+				150C415610A48C7300EBCE51 /* MvrImageItemUI.m in Sources */,
+				150C415710A48C7300EBCE51 /* MvrImagePickerSource.m in Sources */,
+				150C415810A48C7300EBCE51 /* MvrImageVisor.m in Sources */,
+				150C415910A48C7300EBCE51 /* MvrItemUI.m in Sources */,
+				150C415A10A48C7300EBCE51 /* MvrLegalitiesPane.m in Sources */,
+				150C415B10A48C7300EBCE51 /* MvrMessage+Showing.m in Sources */,
+				150C415C10A48C7300EBCE51 /* MvrMessage.m in Sources */,
+				150C415D10A48C7300EBCE51 /* MvrMessageAction+ActingUpon.m in Sources */,
+				150C415E10A48C7300EBCE51 /* MvrMessageChecker.m in Sources */,
+				150C415F10A48C7300EBCE51 /* MvrMessagesCell.m in Sources */,
+				150C416010A48C7300EBCE51 /* MvrMorePane.m in Sources */,
+				150C416110A48C7300EBCE51 /* MvrPasteboardItemSource.m in Sources */,
+				150C416210A48C7300EBCE51 /* MvrSlide.m in Sources */,
+				150C416310A48C7300EBCE51 /* MvrSlidesView.m in Sources */,
+				150C416410A48C7300EBCE51 /* MvrTableController.m in Sources */,
+				150C416510A48C7300EBCE51 /* MvrTellAFriendController.m in Sources */,
+				150C416610A48C7300EBCE51 /* MvrTextItem.m in Sources */,
+				150C416710A48C7300EBCE51 /* MvrTextItemUI.m in Sources */,
+				150C416810A48C7300EBCE51 /* MvrTextVisor.m in Sources */,
+				150C416910A48C7300EBCE51 /* MvrUIMode.m in Sources */,
+				150C416A10A48C7300EBCE51 /* MvrUpsellController.m in Sources */,
+				150C416B10A48C7300EBCE51 /* MvrVideoItem.m in Sources */,
+				150C416C10A48C7300EBCE51 /* MvrVideoItemUI.m in Sources */,
+				150C416D10A48C7300EBCE51 /* MvrVisor.m in Sources */,
+				150C416E10A48C7300EBCE51 /* MvrWiFiMode.m in Sources */,
+				150C419010A48F7000EBCE51 /* MvrBugFixingTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1242,6 +1455,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		150C418310A48DD900EBCE51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Network (iPhone)";
+			targetProxy = 150C418210A48DD900EBCE51 /* PBXContainerItemProxy */;
+		};
+		150C418510A48DE100EBCE51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Network (iPhone)";
+			targetProxy = 150C418410A48DE100EBCE51 /* PBXContainerItemProxy */;
+		};
+		150C418710A48DE100EBCE51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MuiKit;
+			targetProxy = 150C418610A48DE100EBCE51 /* PBXContainerItemProxy */;
+		};
 		1567514810620E42006EC706 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MuiKit;
@@ -1437,6 +1665,120 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		150C412010A48C1900EBCE51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156CF0D9105BAECB006D8E7A /* Mover.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "Bug Fixing Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Bug Fixing Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		150C412110A48C1900EBCE51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156CF0D9105BAECB006D8E7A /* Mover.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "Bug Fixing Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Bug Fixing Tests";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		150C412210A48C1900EBCE51 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156CF0D9105BAECB006D8E7A /* Mover.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "Bug Fixing Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Bug Fixing Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = "Ad Hoc";
+		};
+		150C412310A48C1900EBCE51 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 156CF0D9105BAECB006D8E7A /* Mover.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "Bug Fixing Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Bug Fixing Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = "App Store";
+		};
 		154BD787108A026B00C45562 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF0D9105BAECB006D8E7A /* Mover.xcconfig */;
@@ -1528,6 +1870,17 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		150C412410A48C1A00EBCE51 /* Build configuration list for PBXNativeTarget "Bug Fixing Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				150C412010A48C1900EBCE51 /* Debug */,
+				150C412110A48C1900EBCE51 /* Release */,
+				150C412210A48C1900EBCE51 /* Ad Hoc */,
+				150C412310A48C1900EBCE51 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "App Store";
+		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
