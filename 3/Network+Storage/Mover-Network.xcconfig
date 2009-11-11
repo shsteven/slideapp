@@ -5,4 +5,4 @@ OTHER_LDFLAGS = -ObjC -all_load
 
 HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers"
 
-
+#include "Local.xcconfig"
