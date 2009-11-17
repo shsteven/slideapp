@@ -14,7 +14,9 @@
 #import "Test.h"
 
 
+#if !TARGET_OS_IPHONE
 extern const CFStringRef _kCFStreamPropertySSLClientSideAuthentication; // in CFNetwork
+#endif
 
 static NSError* fixStreamError( NSError *error );
 
@@ -77,9 +79,11 @@ static NSError* fixStreamError( NSError *error );
     LogTo(TCPVerbose,@"%@ SSL settings := %@",self,p);
     [self setProperty: p forKey: kCFStreamPropertySSLSettings];
     
+#if !TARGET_OS_IPHONE
     id clientAuth = [p objectForKey: kTCPPropertySSLClientSideAuthentication];
     if( clientAuth )
         [self setProperty: clientAuth forKey: _kCFStreamPropertySSLClientSideAuthentication];
+#endif
 }
 
 - (NSArray*) peerSSLCerts
