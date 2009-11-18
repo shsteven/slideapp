@@ -134,7 +134,6 @@
 		157B96BF1076589800F1A1A8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96BE1076589800F1A1A8 /* AddressBook.framework */; };
 		157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96C01076589B00F1A1A8 /* AddressBookUI.framework */; };
 		157B96D810765F5800F1A1A8 /* MvrContactItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */; };
-		1585FA32108CB0F800D2AEAB /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 1585FA2C108CB0F700D2AEAB /* it.lproj */; };
 		158CBF7310774EEE006813A7 /* MvrImageVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 158CBF7110774EEE006813A7 /* MvrImageVisor.m */; };
 		158CBFE310775816006813A7 /* VideoItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 158CBFE210775816006813A7 /* VideoItemIcon.png */; };
 		158CBFE51077583F006813A7 /* ContactWithoutImageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 158CBFE41077583F006813A7 /* ContactWithoutImageIcon.png */; };
@@ -400,7 +399,6 @@
 		157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrContactItemUI.m; sourceTree = "<group>"; };
 		157CBD07108F153D00146778 /* Mover-AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-AppStore.xcconfig"; sourceTree = "<group>"; };
 		157CBD08108F155800146778 /* Local-AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-AppStore.xcconfig"; sourceTree = "<group>"; };
-		1585FA2C108CB0F700D2AEAB /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = it.lproj; path = "Compiled Locales/it.lproj"; sourceTree = "<group>"; };
 		158CBF7010774EEE006813A7 /* MvrImageVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageVisor.h; sourceTree = "<group>"; };
 		158CBF7110774EEE006813A7 /* MvrImageVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageVisor.m; sourceTree = "<group>"; };
 		158CBFE210775816006813A7 /* VideoItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VideoItemIcon.png; sourceTree = "<group>"; };
@@ -813,7 +811,6 @@
 			isa = PBXGroup;
 			children = (
 				1585FAB8108CBBE900D2AEAB /* Base strings */,
-				1585FA2C108CB0F700D2AEAB /* it.lproj */,
 			);
 			name = Localizations;
 			sourceTree = "<group>";
@@ -1271,7 +1268,6 @@
 				154BD70E1089F24500C45562 /* MvrVideoReceived.alert in Resources */,
 				154BD7371089F62D00C45562 /* MvrWelcome.alert in Resources */,
 				154BD797108A039F00C45562 /* Mover-AdHoc.xcconfig in Resources */,
-				1585FA32108CB0F800D2AEAB /* it.lproj in Resources */,
 				15AE0552108E6F9100D90F84 /* MvrLargeItemOverBT.alert in Resources */,
 				15A805BC108EECE100DE037F /* MvrGenericItemReceived.alert in Resources */,
 				15A8064F108F011C00DE037F /* MvrNetworkTrouble.alert in Resources */,
@@ -1345,7 +1341,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PRODUCE_APPLIED=YES \"$INFINITELABS_TOOLS\"/BuildLocale\n";
+			shellScript = "COMPILED_LOCALES_DIR=\"$BUILT_PRODUCTS_DIR\"/\"$WRAPPER_NAME\" PRODUCE_APPLIED=YES \"$INFINITELABS_TOOLS\"/BuildLocale\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
