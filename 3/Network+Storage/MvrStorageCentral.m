@@ -36,6 +36,8 @@
 	return self;
 }
 
+@synthesize itemSavingDisabled;
+
 - (void) dealloc;
 {
 	[dispatcher release];
@@ -130,29 +132,34 @@
 		return;
 	
 	MvrItemStorage* storage = [item storage];
-	NSString* path, * name;
-	path = [[self class] unusedPathInDirectory:persistentDirectory withPathExtension:[storage.path pathExtension] fileName:&name];
+
+	if (!self.itemSavingDisabled) {
 	
-	L0Log(@"Older path of storage about to be made persistent: %@", storage.hasPath? @"(none)" : storage.path);
-	
-	NSError* e;
-	BOOL done = [[NSFileManager defaultManager] moveItemAtPath:storage.path toPath:path error:&e];
-	if (!done) {
-		L0LogAlways(@"%@", e);
-		return;
+		NSString* path, * name;
+		path = [[self class] unusedPathInDirectory:persistentDirectory withPathExtension:[storage.path pathExtension] fileName:&name];
+		
+		L0Log(@"Older path of storage about to be made persistent: %@", storage.hasPath? @"(none)" : storage.path);
+		
+		NSError* e;
+		BOOL done = [[NSFileManager defaultManager] moveItemAtPath:storage.path toPath:path error:&e];
+		if (!done) {
+			L0LogAlways(@"%@", e);
+			return;
+		}
+		
+		[metadata setObject:[NSDictionary dictionaryWithObjectsAndKeys:
+							 item.metadata, @"Metadata",
+							 item.type, @"Type",
+							 item.itemNotes, @"Notes",
+							 nil] forKey:name];
+		[self saveMetadata];
+		
+		storage.path = path;
+		storage.persistent = YES;
+		
+		L0Log(@"Item made persistent: %@ (%@)", item, storage);
+		
 	}
-	
-	[metadata setObject:[NSDictionary dictionaryWithObjectsAndKeys:
-						 item.metadata, @"Metadata",
-						 item.type, @"Type",
-						 item.itemNotes, @"Notes",
-						 nil] forKey:name];
-	[self saveMetadata];
-	
-	storage.path = path;
-	storage.persistent = YES;
-	
-	L0Log(@"Item made persistent: %@ (%@)", item, storage);
 	
 	[storedItems addObject:item];
 	
@@ -196,7 +203,7 @@
 		return;
 		
 	MvrItemStorage* storage = [item storage];
-	if (storage.hasPath) {
+	if (storage.persistent && storage.hasPath) {
 		NSString* path = storage.path, * name = [path lastPathComponent],
 		* newPath = [[self class] unusedTemporaryFileNameWithPathExtension:[storage.path pathExtension]];
 		

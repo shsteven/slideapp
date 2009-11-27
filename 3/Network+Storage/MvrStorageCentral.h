@@ -19,6 +19,8 @@
 	
 	NSString* persistentDirectory;
 	id <MvrMetadataStorage> metadataStorage;
+	
+	BOOL itemSavingDisabled;
 }
 
 - (id) initWithPersistentDirectory:(NSString*) dir metadataStorage:(id <MvrMetadataStorage>) meta;
@@ -30,5 +32,8 @@
 
 // Clears the cache on all stored items.
 - (void) clearCache;
+
+// When YES, disables actual saving of items. Defaults to NO. Items will still be kept in the storedItems arrays above, but never actually made persistent. If you use it, set it to YES as soon as humanly possible (before you use the storage central for anything else preferably) and do not change for the rest of the object lifetime.
+@property(assign) BOOL itemSavingDisabled;
 
 @end

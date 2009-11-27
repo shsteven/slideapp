@@ -65,6 +65,10 @@ enum {
 	
 	[self setUpItemClassesAndUIs];
 	[self setUpStorageCentral];
+#if kMvrInstrumentForAds
+	self.storageCentral.itemSavingDisabled = YES;
+#endif
+	
 	[self setUpTableController];
 	
 	tellAFriend = [MvrTellAFriendController new];
