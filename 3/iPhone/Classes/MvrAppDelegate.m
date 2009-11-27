@@ -33,6 +33,8 @@
 
 #import "MvrAppDelegate+HelpAlerts.h"
 
+#import "MvrAdActingController.h"
+
 #import <MuiKit/MuiKit.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -83,14 +85,18 @@ enum {
 	[crashReporting enableReporting];
 	
 	[messageChecker performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:7.0];
-	
-	[self showAlertIfNotShownBeforeNamed:@"MvrWelcome"];
-	
+		
 #if DEBUG
 	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrTestByPerformingAlertParade"] boolValue]) {
 		[self performSelector:@selector(testByPerformingAlertParade) withObject:nil afterDelay:3.0];
 	}
 #endif
+	
+#if kMvrInstrumentForAds
+	[[MvrAdActingController sharedAdController] start];
+#endif
+	
+	[self showAlertIfNotShownBeforeNamed:@"MvrWelcome"];
 }
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  

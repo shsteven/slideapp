@@ -29,3 +29,5 @@
 @property(readonly, getter=isAvailable) BOOL available;
 
 @end
+
+extern BOOL MvrBluetoothIsAvailable();

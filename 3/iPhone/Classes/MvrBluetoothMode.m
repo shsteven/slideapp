@@ -6,6 +6,7 @@
 //  Copyright 2009 Infinite Labs (Emanuele Vulcano). All rights reserved.
 //
 
+
 #import "MvrBluetoothMode.h"
 
 #import <MuiKit/MuiKit.h>
@@ -13,6 +14,13 @@
 #import "MvrAppDelegate.h"
 #import "MvrAppDelegate+HelpAlerts.h"
 #import "MvrUpsellController.h"
+
+BOOL MvrBluetoothIsAvailable() {
+	NSString* model = [UIDevice currentDevice].internalModelName;
+	return ![model isEqual:@"iPod1,1"] && ![model isEqual:@"iPhone1,1"];
+}
+
+#if !kMvrInstrumentForAds
 
 @interface MvrBluetoothMode ()
 
@@ -239,8 +247,7 @@ enum {
 
 - (BOOL) isAvailable;
 {
-	NSString* model = [UIDevice currentDevice].internalModelName;
-	return ![model isEqual:@"iPod1,1"] && ![model isEqual:@"iPhone1,1"];
+	return MvrBluetoothIsAvailable();
 }
 
 #pragma mark Lite version limitations
@@ -260,3 +267,5 @@ enum {
 }
 
 @end
+
+#endif // #if !kMvrInstrumentForAds

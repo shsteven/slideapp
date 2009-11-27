@@ -6,6 +6,8 @@
 //  Copyright 2009 Infinite Labs (Emanuele Vulcano). All rights reserved.
 //
 
+#if !kMvrInstrumentForAds
+
 #import "MvrWiFiMode.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -36,9 +38,14 @@ static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem*
 
 @synthesize connectionStateInfo, connectionStateImage, connectionStateContainer, bluetoothButtonView;
 
+- (Class) scannerClass;
+{
+	return [MvrWiFi class];
+}
+
 - (void) awakeFromNib;
 {
-	wifi = [[MvrWiFi alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort];
+	wifi = [[[self scannerClass] alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort];
 	observer = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
@@ -202,3 +209,5 @@ static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem*
 }
 
 @end
+
+#endif // #if !kMvrInstrumentForAds

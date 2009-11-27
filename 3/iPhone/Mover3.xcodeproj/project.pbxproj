@@ -101,6 +101,9 @@
 		154D0AF1107DD945009BAF92 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		154FA62C10792232004DF675 /* MvrClearTableOnShake.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */; };
+		1551993A10BFD53F002589CD /* MvrAdActingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1551993610BFD4BE002589CD /* MvrAdActingController.m */; };
+		155199B110C00FA5002589CD /* MvrBluetoothMode-AppleAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1551999510C00EA2002589CD /* MvrBluetoothMode-AppleAd.m */; };
+		155199B210C00FAC002589CD /* MvrWiFiMode-AppleAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1551999310C00E85002589CD /* MvrWiFiMode-AppleAd.m */; };
 		1553517C1088468900C75A6C /* MvrMorePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1553517B1088468900C75A6C /* MvrMorePane.m */; };
 		155352431088547D00C75A6C /* MvrMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 155352421088547D00C75A6C /* MvrMessagesCell.m */; };
 		1553536610885FFD00C75A6C /* MvrNoNews.alert in Resources */ = {isa = PBXBuildFile; fileRef = 1553536510885FFD00C75A6C /* MvrNoNews.alert */; };
@@ -342,6 +345,10 @@
 		154D0AF0107DD945009BAF92 /* MvrAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAccessibility.m; sourceTree = "<group>"; };
 		154FA54810790FD1004DF675 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrClearTableOnShake.alert; sourceTree = "<group>"; };
+		1551993510BFD4BE002589CD /* MvrAdActingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAdActingController.h; sourceTree = "<group>"; };
+		1551993610BFD4BE002589CD /* MvrAdActingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAdActingController.m; sourceTree = "<group>"; };
+		1551999310C00E85002589CD /* MvrWiFiMode-AppleAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrWiFiMode-AppleAd.m"; sourceTree = "<group>"; };
+		1551999510C00EA2002589CD /* MvrBluetoothMode-AppleAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrBluetoothMode-AppleAd.m"; sourceTree = "<group>"; };
 		1553517A1088468900C75A6C /* MvrMorePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMorePane.h; sourceTree = "<group>"; };
 		1553517B1088468900C75A6C /* MvrMorePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMorePane.m; sourceTree = "<group>"; };
 		155352411088547D00C75A6C /* MvrMessagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMessagesCell.h; sourceTree = "<group>"; };
@@ -482,7 +489,7 @@
 		15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Backdrop-Bluetooth.png"; path = "Theme/Backdrop-Bluetooth.png"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* MvrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MvrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Mover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mover.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* MoverPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Mover3_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mover3_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Mover3-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover3-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -543,6 +550,7 @@
 			children = (
 				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MvrAppDelegate.m */,
+				1551993410BFD4A1002589CD /* Apple Ads */,
 				1569C856108D8CA900F3B5CF /* Bluetooth */,
 				154BD6EC1089F05200C45562 /* Help Alerts */,
 				15464A1D1085A9DE005E5642 /* Messages from the Cloud */,
@@ -672,6 +680,17 @@
 				154BD79A108A03C900C45562 /* Variant.xcconfig */,
 			);
 			name = Plus;
+			sourceTree = "<group>";
+		};
+		1551993410BFD4A1002589CD /* Apple Ads */ = {
+			isa = PBXGroup;
+			children = (
+				1551993510BFD4BE002589CD /* MvrAdActingController.h */,
+				1551993610BFD4BE002589CD /* MvrAdActingController.m */,
+				1551999310C00E85002589CD /* MvrWiFiMode-AppleAd.m */,
+				1551999510C00EA2002589CD /* MvrBluetoothMode-AppleAd.m */,
+			);
+			name = "Apple Ads";
 			sourceTree = "<group>";
 		};
 		1567513610620E3C006EC706 /* Products */ = {
@@ -1007,7 +1026,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Mover.app */,
+				1D6058910D05DD3D006BFB54 /* MoverPlus.app */,
 				150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */,
 			);
 			name = Products;
@@ -1110,7 +1129,7 @@
 			);
 			name = Mover3;
 			productName = Mover3;
-			productReference = 1D6058910D05DD3D006BFB54 /* Mover.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* MoverPlus.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1445,6 +1464,9 @@
 				1569C866108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m in Sources */,
 				1569CAF8108E040700F3B5CF /* MvrBTDebugTracker.m in Sources */,
 				15D91B4C1092548500D8BAA9 /* MvrUpsellController.m in Sources */,
+				1551993A10BFD53F002589CD /* MvrAdActingController.m in Sources */,
+				155199B110C00FA5002589CD /* MvrBluetoothMode-AppleAd.m in Sources */,
+				155199B210C00FAC002589CD /* MvrWiFiMode-AppleAd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
