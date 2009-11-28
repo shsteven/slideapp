@@ -436,6 +436,7 @@
 		15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTextVisor.m; sourceTree = "<group>"; };
 		15955A1F10776B7D00FBC9B4 /* MvrVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVisor.h; sourceTree = "<group>"; };
 		15955A2010776B7D00FBC9B4 /* MvrVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVisor.m; sourceTree = "<group>"; };
+		1599631410C1142500674DB1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Variants/Ad-Plus/VariantResources/Settings.bundle"; sourceTree = "<group>"; };
 		15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrGenericItemReceived.alert; sourceTree = "<group>"; };
 		15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNetworkTrouble.alert; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1041,6 +1042,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				1599631410C1142500674DB1 /* Settings.bundle */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				1567511310620DF7006EC706 /* libz.1.1.3.dylib */,
 				15AFE6D9108460C000CBCB35 /* CrashReporter.framework */,
@@ -1116,6 +1118,7 @@
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover3" */;
 			buildPhases = (
 				157CBD23108F160900146778 /* Check Current Variant */,
+				159962B810C112D700674DB1 /* Copy Variant Resources */,
 				1585FA24108CB05800D2AEAB /* Build Localizations */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -1361,6 +1364,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "COMPILED_LOCALES_DIR=\"$BUILT_PRODUCTS_DIR\"/\"$WRAPPER_NAME\" PRODUCE_APPLIED=YES \"$INFINITELABS_TOOLS\"/BuildLocale\n";
+		};
+		159962B810C112D700674DB1 /* Copy Variant Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Variant Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$ILABS_MOVER_VARIANT_HAS_RESOURCES\" == \"YES\" ]; then\n\tcp -Rv \"$SRCROOT\"/Variants/Current/VariantResources/* \"$BUILT_PRODUCTS_DIR\"/\"$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

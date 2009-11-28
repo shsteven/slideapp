@@ -1,3 +1,5 @@
 #include "../Plus/Variant.xcconfig"
 
 ILABS_MOVER_VARIANT_PREPROCESSOR_DEFINITIONS = kMvrCurrentAppVariant=kMvrAppVariantMoverPlus kMvrCurrentAppVariantDisplayName=@\"Mover+\" kMvrInstrumentForAds=1
+
+ILABS_MOVER_VARIANT_HAS_RESOURCES = YES

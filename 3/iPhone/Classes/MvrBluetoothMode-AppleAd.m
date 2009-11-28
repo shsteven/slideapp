@@ -91,15 +91,28 @@ static GKPeerPickerController* adPicker = nil;
 	[adPicker release]; adPicker = nil;
 	
 	MvrAdActingController* ad = [MvrAdActingController sharedAdController];
-	if ([ad.receiver boolValue])
+	MvrArrowView* arrowView;
+	if ([ad.receiver boolValue]) {
 		self.eastDestination = peerID;
-	else
+		arrowView = self.arrowsView.eastView;
+	} else {
 		self.westDestination = peerID;
+		arrowView = self.arrowsView.westView;
+	}
+	
+	arrowView.normalColor = [UIColor whiteColor];
+	arrowView.nameLabel.textColor = [UIColor whiteColor];
+	arrowView.busyColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.820 alpha:1.000];
 }
 
 - (BOOL) isAvailable;
 {
 	return MvrBluetoothIsAvailable();
+}
+
+- (NSString*) displayNameForDestination:(id) destination;
+{
+	return [adSession displayNameForPeer:destination];
 }
 
 #pragma mark Sending

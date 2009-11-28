@@ -38,13 +38,13 @@
 @property(retain) IBOutlet UIView* connectionStateDrawerView;
 
 @property(readonly) NSMutableArray* mutableDestinations;
-- (NSString*) displayNameForDestination:(id) destination;
 
 @property(retain) id northDestination;
 @property(retain) id eastDestination;
 @property(retain) id westDestination;
 
 - (void) sendItem:(MvrItem*) i toDestination:(id) destination; // ABSTRACT!
+- (NSString*) displayNameForDestination:(id) destination; // ABSTRACT!
 
 - (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) dest;
 
