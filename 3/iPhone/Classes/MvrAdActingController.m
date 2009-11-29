@@ -11,16 +11,26 @@
 #import "MvrAdActingController.h"
 #import "Network+Storage/MvrUTISupport.h"
 #import "Network+Storage/MvrItemStorage.h"
+#import "MvrImageItem.h"
 #import "MvrAppDelegate.h"
 #import "MvrAppDelegate+HelpAlerts.h"
 #import "MvrTableController.h"
 
 @interface MvrAdActingController ()
 
-- (NSArray*) initialItemsInDirectory:(NSString*) dir;
-
 @end
 
+static UIImage* MvrUIImageEnsureLoaded(UIImage* i) {
+	NSAutoreleasePool* pool = [NSAutoreleasePool new];
+	
+	UIGraphicsBeginImageContext(i.size);
+	[i drawAtPoint:CGPointZero];
+	UIGraphicsEndImageContext();
+	
+	[pool drain];
+	
+	return i;
+}
 
 
 @implementation MvrAdActingController
@@ -29,42 +39,25 @@ L0ObjCSingletonMethod(sharedAdController)
 
 - (NSArray*) initialItemsForSender;
 {
-	return [self initialItemsInDirectory:kMvrAdActingInitialItemsForSenderDirectory];
+	NSMutableArray* items = [NSMutableArray arrayWithCapacity:[senderImages count]];
+	for (UIImage* i in senderImages)
+		[items addObject:[[[MvrImageItem alloc] initWithImage:i type:(id) kUTTypeJPEG] autorelease]];
+	
+	return items;
 }
 
 - (NSArray*) initialItemsForReceiver;
 {
-	return [self initialItemsInDirectory:kMvrAdActingInitialItemsForReceiverDirectory];
-}
-
-- (NSArray*) initialItemsInDirectory:(NSString*) dir;
-{
-	NSMutableArray* items = [NSMutableArray array];
-	
-	for (NSString* path in [[NSBundle mainBundle] pathsForResourcesOfType:@"jpg" inDirectory:dir]) {
-		
-		MvrItemStorage* storage = [MvrItemStorage itemStorageFromFileAtPath:path error:NULL];
-		NSAssert(storage, @"We must be able to load our initial items from disk");
-		
-		MvrItem* i = [MvrItem itemWithStorage:storage type:(id) kUTTypeJPEG metadata:[NSDictionary dictionary]];
-		NSAssert(i, @"We must be able to create items out of the files on disk");
-		
-		[items addObject:i];
-	}
+	NSMutableArray* items = [NSMutableArray arrayWithCapacity:[receiverImages count]];
+	for (UIImage* i in receiverImages)
+		[items addObject:[[[MvrImageItem alloc] initWithImage:i type:(id) kUTTypeJPEG] autorelease]];
 	
 	return items;
 }
 
 - (MvrItem*) itemForReceiving;
 {
-	NSString* path = [[NSBundle mainBundle] pathForResource:kMvrAdActingReceivedImageName ofType:@"jpg"];
-	MvrItemStorage* storage = [MvrItemStorage itemStorageFromFileAtPath:path error:NULL];
-	NSAssert(storage, @"We must be able to load the item for receiving from disk");
-	
-	MvrItem* i = [MvrItem itemWithStorage:storage type:(id) kUTTypeJPEG metadata:[NSDictionary dictionary]];
-	NSAssert(i, @"We must be able to create the item for receiving out of the file on disk");
-	
-	return i;
+	return [[[MvrImageItem alloc] initWithImage:receivedImage type:(id) kUTTypeJPEG] autorelease];
 }
 
 - (void) start;
@@ -72,12 +65,27 @@ L0ObjCSingletonMethod(sharedAdController)
 	[MvrApp() suppressHelpAlerts];
 	[MvrApp() moveToBluetoothMode];
 	
+	senderImages = [NSMutableArray new];
+	
+	for (NSString* path in [[NSBundle mainBundle] pathsForResourcesOfType:@"jpg" inDirectory:kMvrAdActingInitialItemsForSenderDirectory])
+		[senderImages addObject:MvrUIImageEnsureLoaded([UIImage imageWithContentsOfFile:path])];
+
+	receiverImages = [NSMutableArray new];
+
+	for (NSString* path in [[NSBundle mainBundle] pathsForResourcesOfType:@"jpg" inDirectory:kMvrAdActingInitialItemsForSenderDirectory])
+		[receiverImages addObject:MvrUIImageEnsureLoaded([UIImage imageWithContentsOfFile:path])];
+
+	NSString* path = [[NSBundle mainBundle] pathForResource:kMvrAdActingReceivedImageName ofType:@"jpg" inDirectory:kMvrAdActingImageDirectory];
+	receivedImage = [MvrUIImageEnsureLoaded([UIImage imageWithContentsOfFile:path]) retain];
+	
 	MvrTableController* table = MvrApp().tableController;
 	NSArray* toAdd;
 	if ([self.receiver boolValue])
 		toAdd = self.initialItemsForReceiver;
 	else
 		toAdd = self.initialItemsForSender;
+	
+	[MvrApp().storageCentral.mutableStoredItems removeAllObjects];
 	
 	for (MvrItem* i in toAdd)
 		[table addItem:i animated:NO];

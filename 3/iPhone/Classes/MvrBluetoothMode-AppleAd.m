@@ -15,19 +15,57 @@
 #import "MvrTableController.h"
 #import "MvrAppDelegate.h"
 
-@interface MvrBluetoothMode_AdIncoming : NSObject <MvrIncoming> {}
+@interface MvrBluetoothMode_AdIncoming : NSObject <MvrIncoming> {
+	CGFloat progress;
+	BOOL done;
+}
+
+- (void) start;
+
+- (void) showSomeProgress;
+- (void) beDone;
+
 @end
 
 @implementation MvrBluetoothMode_AdIncoming
 
 - (float) progress;
 {
-	return kMvrIndeterminateProgress; // TODO animation
+	return done? 1.0 : progress; // TODO animation
 }
 
 - (MvrItem*) item;
 {
-	return [MvrAdActingController sharedAdController].itemForReceiving; // TODO animation
+	return !done? nil: [MvrAdActingController sharedAdController].itemForReceiving; // TODO animation
+}
+
+- (void) start;
+{
+	[self willChangeValueForKey:@"progress"];
+	progress = 0.2;
+	[self didChangeValueForKey:@"progress"];
+	
+	[self performSelector:@selector(showSomeProgress) withObject:nil afterDelay:0.45];
+}
+
+- (void) showSomeProgress;
+{
+	[self willChangeValueForKey:@"progress"];
+	progress = 0.7;
+	[self didChangeValueForKey:@"progress"];
+	
+	[self performSelector:@selector(beDone) withObject:nil afterDelay:0.25];
+}
+
+- (void) beDone;
+{
+	[self willChangeValueForKey:@"progress"];
+	[self willChangeValueForKey:@"item"];
+	
+	done = YES;
+	
+	[self didChangeValueForKey:@"item"];
+	[self didChangeValueForKey:@"progress"];
 }
 
 - (BOOL) cancelled;
@@ -93,11 +131,11 @@ static GKPeerPickerController* adPicker = nil;
 	MvrAdActingController* ad = [MvrAdActingController sharedAdController];
 	MvrArrowView* arrowView;
 	if ([ad.receiver boolValue]) {
-		self.eastDestination = peerID;
-		arrowView = self.arrowsView.eastView;
-	} else {
 		self.westDestination = peerID;
 		arrowView = self.arrowsView.westView;
+	} else {
+		self.eastDestination = peerID;
+		arrowView = self.arrowsView.eastView;
 	}
 	
 	arrowView.normalColor = [UIColor whiteColor];
@@ -123,7 +161,7 @@ static GKPeerPickerController* adPicker = nil;
 	if ([ad.receiver boolValue])
 		return;
 	
-	[adSession sendData:[@"x" dataUsingEncoding:NSASCIIStringEncoding] toPeers:[NSArray arrayWithObject:destination] withDataMode:GKSendDataReliable error:NULL];
+	[adSession sendData:[@"g" dataUsingEncoding:NSASCIIStringEncoding] toPeers:[NSArray arrayWithObject:destination] withDataMode:GKSendDataReliable error:NULL];
 
 	[self.delegate UIMode:self didFinishSendingItem:i]; // TODO delay?
 }
@@ -132,8 +170,17 @@ static GKPeerPickerController* adPicker = nil;
 
 - (void) receiveData:(NSData*) d fromPeer:(NSString*) peer inSession:(GKSession*) s context:(void*) nothing;
 {
+	if ([d length] != 1)
+		return;
+	
+	const char* data = [d bytes];
+	
+	if (*data != 'g')
+		return;
+	
 	MvrBluetoothMode_AdIncoming* inco = [[MvrBluetoothMode_AdIncoming new] autorelease];
 	[self.delegate UIMode:self willBeginReceivingItemWithTransfer:inco fromDirection:kMvrDirectionWest];
+	[inco start];
 }
 
 @end

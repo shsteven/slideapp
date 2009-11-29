@@ -1377,7 +1377,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$ILABS_MOVER_VARIANT_HAS_RESOURCES\" == \"YES\" ]; then\n\tcp -Rv \"$SRCROOT\"/Variants/Current/VariantResources/* \"$BUILT_PRODUCTS_DIR\"/\"$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nfi\n";
+			shellScript = "if [ \"$ILABS_MOVER_VARIANT_HAS_RESOURCES\" == \"YES\" ]; then\n\trsync -av \"$SRCROOT\"/Variants/Current/VariantResources/* \"$BUILT_PRODUCTS_DIR\"/\"$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

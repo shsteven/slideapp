@@ -11,12 +11,16 @@
 #import <Foundation/Foundation.h>
 #import "Network+Storage/MvrItem.h"
 
-#define kMvrAdActingInitialItemsForSenderDirectory @"Ad-SenderPics"
-#define kMvrAdActingInitialItemsForReceiverDirectory @"Ad-ReceiverPics"
-#define kMvrAdActingReceivedImageName @"Ad-Received" // .jpg
+#define kMvrAdActingImageDirectory @"AdImages"
+
+#define kMvrAdActingInitialItemsForSenderDirectory (kMvrAdActingImageDirectory @"/Sender")
+#define kMvrAdActingInitialItemsForReceiverDirectory (kMvrAdActingImageDirectory @"/Receiver")
+#define kMvrAdActingReceivedImageName @"Received" // in kMvrAdActingImageDirectory, of type @"jpg"
 
 @interface MvrAdActingController : NSObject {
-
+	NSMutableArray* senderImages;
+	NSMutableArray* receiverImages;
+	UIImage* receivedImage;
 }
 
 + (MvrAdActingController*) sharedAdController;

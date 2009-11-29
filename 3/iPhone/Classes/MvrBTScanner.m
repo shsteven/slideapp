@@ -280,8 +280,10 @@
 {
 	BOOL sent = [scanner.session sendData:data toPeers:[NSArray arrayWithObject:self.peerID] withDataMode:GKSendDataReliable error:e];
 	
-	if (!sent)
-		L0Log(@"An error occurred when sending data: %@", *e);
+	if (!sent) {
+		if (e)
+			L0Log(@"An error occurred when sending data: %@", *e);
+	}
 	
 	return sent;
 }

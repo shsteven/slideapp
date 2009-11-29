@@ -39,7 +39,7 @@ L0ObjCSingletonMethod(sharedTracker)
 		lastTrackingTime = [NSDate new];
 	}
 	
-	NSString* toWrite = [NSString stringWithFormat:@"%@\n(at %f ms after start, in %s for %@)\n\n", track, lastTrackingTime? 0 : (double) -[lastTrackingTime timeIntervalSinceNow] * 1000.0, function, object];
+	NSString* toWrite = [NSString stringWithFormat:@"%@\n(at %f ms after start, in %s for %@)\n\n", track, !lastTrackingTime? 0 : (double) -[lastTrackingTime timeIntervalSinceNow] * 1000.0, function, object];
 	[file writeData:[toWrite dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
