@@ -8,6 +8,7 @@
 
 #import "MvrMessageChecker.h"
 #import "MvrAppDelegate.h"
+#import "MvrAppDelegate+HelpAlerts.h"
 
 static NSString* MvrURLPartForVariant(MvrAppVariant v) {
 	switch (v) {
@@ -106,6 +107,10 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 			self.firstLaunchPassed = [NSNumber numberWithBool:YES];
 			return;
 		}
+		
+		// don't ask while help alerts are suppressed.
+		if (MvrApp().helpAlertsSuppressed)
+			return;
 				
 		UIAlertView* alert = [UIAlertView alertNamed:@"MvrMessageOptIn"];
 		alert.cancelButtonIndex = 0;
