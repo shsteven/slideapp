@@ -77,6 +77,7 @@
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
+		152BF22910C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 152BF22810C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png */; };
 		1531319110837AC100D28022 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		1531319910837C2C00D28022 /* AboutPaneHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531319810837C2C00D28022 /* AboutPaneHeader.png */; };
 		1531323510838F3400D28022 /* inflabs_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531323310838F3400D28022 /* inflabs_dark.png */; };
@@ -160,7 +161,6 @@
 		15A805BC108EECE100DE037F /* MvrGenericItemReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */; };
 		15A8064F108F011C00DE037F /* MvrNetworkTrouble.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */; };
 		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
-		15AD035B1073F83200D92F5E /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */; };
 		15AE0552108E6F9100D90F84 /* MvrLargeItemOverBT.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15AE0551108E6F9100D90F84 /* MvrLargeItemOverBT.alert */; };
 		15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFE6D9108460C000CBCB35 /* CrashReporter.framework */; };
 		15AFE6ED108460F200CBCB35 /* MvrCrashReporting.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */; };
@@ -308,6 +308,7 @@
 		151E021F106767A900C6CDFF /* MvrImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemUI.m; sourceTree = "<group>"; };
 		151E02211067683400C6CDFF /* MvrImagePickerSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImagePickerSource.h; sourceTree = "<group>"; };
 		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
+		152BF22810C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArrowsNetworkToolbarIcon.png; sourceTree = "<group>"; };
 		1531318F10837AC100D28022 /* MvrAboutPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAboutPane.h; sourceTree = "<group>"; };
 		1531319010837AC100D28022 /* MvrAboutPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAboutPane.m; sourceTree = "<group>"; };
 		1531319810837C2C00D28022 /* AboutPaneHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AboutPaneHeader.png; path = Theme/AboutPaneHeader.png; sourceTree = "<group>"; };
@@ -440,7 +441,6 @@
 		15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrGenericItemReceived.alert; sourceTree = "<group>"; };
 		15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNetworkTrouble.alert; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
 		15AE0551108E6F9100D90F84 /* MvrLargeItemOverBT.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrLargeItemOverBT.alert; sourceTree = "<group>"; };
 		15AFE6D9108460C000CBCB35 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		15AFE6EB108460F200CBCB35 /* MvrCrashReporting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrCrashReporting.h; sourceTree = "<group>"; };
@@ -966,6 +966,7 @@
 		15CB30971084C7ED00CB285F /* More images */ = {
 			isa = PBXGroup;
 			children = (
+				152BF22810C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png */,
 				15D91B0C109250C700D8BAA9 /* PlusSign.png */,
 				156E804110663AEB00315D0C /* GenericItemIcon.png */,
 				158CBFE210775816006813A7 /* VideoItemIcon.png */,
@@ -1079,7 +1080,6 @@
 				1585FA2B108CB0BB00D2AEAB /* Localizations */,
 				1533F4C61088FFC10025005B /* Current Variant */,
 				158CBF6C10774E3B006813A7 /* Visors */,
-				15AD035A1073F83200D92F5E /* NetworkToolbarIcon.png */,
 				15C1C8621068DABC000C9CDE /* The Table */,
 				8D1107310486CEB800E47090 /* Mover3-Info.plist */,
 				15CB30971084C7ED00CB285F /* More images */,
@@ -1263,7 +1263,6 @@
 				15D46D0F10724C5A00DA8260 /* DrawerLabelHolder.png in Resources */,
 				157B68B21072548600E25E96 /* GreenDot.png in Resources */,
 				157B68B41072548D00E25E96 /* RedDot.png in Resources */,
-				15AD035B1073F83200D92F5E /* NetworkToolbarIcon.png in Resources */,
 				156813AB108C91A200424179 /* MvrImageVisor.xib in Resources */,
 				158CBFE310775816006813A7 /* VideoItemIcon.png in Resources */,
 				158CBFE51077583F006813A7 /* ContactWithoutImageIcon.png in Resources */,
@@ -1318,6 +1317,7 @@
 				151060F31093819300307C62 /* MvrNoLiteToLiteBTReminder.alert in Resources */,
 				151061251093870900307C62 /* MvrNoLiteToLiteBT.strings in Resources */,
 				151061261093870900307C62 /* MvrNoLiteToLiteBTReminder.strings in Resources */,
+				152BF22910C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
