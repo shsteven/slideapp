@@ -101,6 +101,11 @@ static GKPeerPickerController* adPicker = nil;
 	if (adPicker)
 		return;
 	
+#if DEBUG
+	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrAppleAdDoNotConnectBT"] boolValue])
+		return;
+#endif
+	
 	adPicker = [[GKPeerPickerController alloc] init];
 	adPicker.delegate = self;
 	adPicker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
@@ -123,6 +128,7 @@ static GKPeerPickerController* adPicker = nil;
 	adSession = [session retain];
 	adSession.delegate = self;
 	[adSession setDataReceiveHandler:self withContext:NULL];
+	[adSession sendData:[@"hi" dataUsingEncoding:NSASCIIStringEncoding] toPeers:[NSArray arrayWithObject:peerID] withDataMode:GKSendDataReliable error:NULL];
 	
 	adPicker.delegate = nil;
 	[adPicker dismiss];
