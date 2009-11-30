@@ -72,7 +72,7 @@ L0ObjCSingletonMethod(sharedAdController)
 
 	receiverImages = [NSMutableArray new];
 
-	for (NSString* path in [[NSBundle mainBundle] pathsForResourcesOfType:@"jpg" inDirectory:kMvrAdActingInitialItemsForSenderDirectory])
+	for (NSString* path in [[NSBundle mainBundle] pathsForResourcesOfType:@"jpg" inDirectory:kMvrAdActingInitialItemsForReceiverDirectory])
 		[receiverImages addObject:MvrUIImageEnsureLoaded([UIImage imageWithContentsOfFile:path])];
 
 	NSString* path = [[NSBundle mainBundle] pathForResource:kMvrAdActingReceivedImageName ofType:@"jpg" inDirectory:kMvrAdActingImageDirectory];

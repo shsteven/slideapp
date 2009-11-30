@@ -45,7 +45,7 @@
 	progress = 0.2;
 	[self didChangeValueForKey:@"progress"];
 	
-	[self performSelector:@selector(showSomeProgress) withObject:nil afterDelay:0.45];
+	[self performSelector:@selector(showSomeProgress) withObject:nil afterDelay:0.20];
 }
 
 - (void) showSomeProgress;
@@ -54,7 +54,7 @@
 	progress = 0.7;
 	[self didChangeValueForKey:@"progress"];
 	
-	[self performSelector:@selector(beDone) withObject:nil afterDelay:0.25];
+	[self performSelector:@selector(beDone) withObject:nil afterDelay:0.10];
 }
 
 - (void) beDone;
@@ -98,6 +98,11 @@ static GKPeerPickerController* adPicker = nil;
 
 - (void) modeDidBecomeCurrent:(BOOL)animated;
 {
+	[self performSelector:@selector(beginPickingPeerForAd) withObject:nil afterDelay:3.0];
+}
+
+- (void) beginPickingPeerForAd;
+{
 	if (adPicker)
 		return;
 	
@@ -109,7 +114,7 @@ static GKPeerPickerController* adPicker = nil;
 	adPicker = [[GKPeerPickerController alloc] init];
 	adPicker.delegate = self;
 	adPicker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
-	[adPicker show];
+	[adPicker show];	
 }
 
 - (GKSession *)peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type;
@@ -169,7 +174,7 @@ static GKPeerPickerController* adPicker = nil;
 	
 	[adSession sendData:[@"g" dataUsingEncoding:NSASCIIStringEncoding] toPeers:[NSArray arrayWithObject:destination] withDataMode:GKSendDataReliable error:NULL];
 
-	[self.delegate UIMode:self didFinishSendingItem:i]; // TODO delay?
+	// [self.delegate UIMode:self didFinishSendingItem:i]; // TODO delay?
 }
 
 #pragma mark Receiving
