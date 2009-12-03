@@ -239,7 +239,7 @@ static id MvrKeyForABProperty(ABPropertyID prop) {
 			int valueIndex = 0;
 			for (id value in values) {
 				id label = (id) ABMultiValueCopyLabelAtIndex(multi, valueIndex);
-				if (!label) label = [[NSNull null] retain]; // balances the release below
+				if (!label) label = [@"-" retain]; // balances the release below
 				NSDictionary* item = [NSDictionary dictionaryWithObjectsAndKeys:
 									  value, kMvrContactMultiValueItemValue,
 									  label, kMvrContactMultiValueItemLabel,
@@ -360,7 +360,7 @@ static id MvrKeyForABProperty(ABPropertyID prop) {
 	NSData* plistData = [NSPropertyListSerialization dataFromPropertyList:self.contactPropertyList format:NSPropertyListBinaryFormat_v1_0 errorDescription:&errorString];
 	
 	if (!plistData) {
-		[NSException raise:@"MvrContactItemCannotProducePlistException" format:@"Had an error while serializing a contact plist into data. NSDictionary was %@ -- error was %@", self.contactPropertyList, [errorString autorelease]];
+		[NSException raise:@"MvrContactItemCannotProducePlistException" format:@"Had an error while serializing a contact plist into data -- error was %@", self.contactPropertyList, [errorString autorelease]];
 		return nil;
 	}
 	
