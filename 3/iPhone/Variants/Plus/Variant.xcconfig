@@ -8,3 +8,4 @@ ILABS_MOVER_BUNDLE_IDENTIFIER = net.infinitelabs.Mover.Plus
 
 ILABS_MOVER_VARIANT_PREPROCESSOR_DEFINITIONS = kMvrCurrentAppVariant=kMvrAppVariantMoverPlus kMvrCurrentAppVariantDisplayName=@\"Mover+\"
 
+ILABS_MOVER_VARIANT_HAS_RESOURCES = YES

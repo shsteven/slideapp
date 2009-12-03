@@ -8,3 +8,4 @@ ILABS_MOVER_BUNDLE_IDENTIFIER = net.infinitelabs.Mover.Edge
 
 ILABS_MOVER_VARIANT_PREPROCESSOR_DEFINITIONS = kMvrCurrentAppVariant=kMvrAppVariantMoverOpen kMvrVariantSettings_UseSubdirectoryForItemStorage=1 kMvrCurrentAppVariantDisplayName=@\"Open\"
 
+ILABS_MOVER_VARIANT_HAS_RESOURCES = YES
