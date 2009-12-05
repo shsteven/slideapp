@@ -77,6 +77,8 @@
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
+		1522444010CAB0C600ACF91B /* MvrImageVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */; };
+		1522444110CAB0C600ACF91B /* MvrTextVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */; };
 		152BF22910C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 152BF22810C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png */; };
 		1531319110837AC100D28022 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		1531319910837C2C00D28022 /* AboutPaneHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531319810837C2C00D28022 /* AboutPaneHeader.png */; };
@@ -118,8 +120,6 @@
 		1567515010620E78006EC706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514F10620E78006EC706 /* UIKit.framework */; };
 		1567515210620E7A006EC706 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567515110620E7A006EC706 /* CoreGraphics.framework */; };
 		156751B91062176E006EC706 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
-		156813AB108C91A200424179 /* MvrImageVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156813AA108C91A200424179 /* MvrImageVisor.xib */; };
-		156813AE108C91C200424179 /* MvrTextVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156813AD108C91C200424179 /* MvrTextVisor.xib */; };
 		156813B1108C921400424179 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156813B0108C921400424179 /* MainWindow.xib */; };
 		156813B4108C922C00424179 /* MvrAboutPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156813B3108C922C00424179 /* MvrAboutPane.xib */; };
 		1569C859108D8CBC00F3B5CF /* MvrBTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C858108D8CBC00F3B5CF /* MvrBTProtocol.m */; };
@@ -308,6 +308,8 @@
 		151E021F106767A900C6CDFF /* MvrImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemUI.m; sourceTree = "<group>"; };
 		151E02211067683400C6CDFF /* MvrImagePickerSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImagePickerSource.h; sourceTree = "<group>"; };
 		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
+		1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrImageVisor.xib; sourceTree = "<group>"; };
+		1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTextVisor.xib; sourceTree = "<group>"; };
 		152BF22810C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArrowsNetworkToolbarIcon.png; sourceTree = "<group>"; };
 		1531318F10837AC100D28022 /* MvrAboutPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAboutPane.h; sourceTree = "<group>"; };
 		1531319010837AC100D28022 /* MvrAboutPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAboutPane.m; sourceTree = "<group>"; };
@@ -368,8 +370,6 @@
 		1567516510620F26006EC706 /* Mover-Baseline-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Baseline-Release.xcconfig"; sourceTree = "<group>"; };
 		156751B71062176E006EC706 /* MvrItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItemUI.h; sourceTree = "<group>"; };
 		156751B81062176E006EC706 /* MvrItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItemUI.m; sourceTree = "<group>"; };
-		156813AC108C91AA00424179 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MvrImageVisor.xib; sourceTree = "<group>"; };
-		156813AF108C91C600424179 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MvrTextVisor.xib; sourceTree = "<group>"; };
 		156813B2108C921800424179 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		156813B5108C923000424179 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MvrAboutPane.xib; sourceTree = "<group>"; };
 		1569C857108D8CBC00F3B5CF /* MvrBTProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBTProtocol.h; sourceTree = "<group>"; };
@@ -490,7 +490,7 @@
 		15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Backdrop-Bluetooth.png"; path = "Theme/Backdrop-Bluetooth.png"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* MvrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MvrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* MoverPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* MoverOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Mover3_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mover3_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Mover3-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover3-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -877,8 +877,8 @@
 		158CBF6C10774E3B006813A7 /* Visors */ = {
 			isa = PBXGroup;
 			children = (
-				156813AA108C91A200424179 /* MvrImageVisor.xib */,
-				156813AD108C91C200424179 /* MvrTextVisor.xib */,
+				1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */,
+				1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */,
 			);
 			name = Visors;
 			sourceTree = "<group>";
@@ -1028,7 +1028,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* MoverPlus.app */,
+				1D6058910D05DD3D006BFB54 /* MoverOpen.app */,
 				150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */,
 			);
 			name = Products;
@@ -1123,6 +1123,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				1522443910CAB07700ACF91B /* Localization Sanity Check */,
 			);
 			buildRules = (
 			);
@@ -1132,7 +1133,7 @@
 			);
 			name = Mover3;
 			productName = Mover3;
-			productReference = 1D6058910D05DD3D006BFB54 /* MoverPlus.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* MoverOpen.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1263,12 +1264,10 @@
 				15D46D0F10724C5A00DA8260 /* DrawerLabelHolder.png in Resources */,
 				157B68B21072548600E25E96 /* GreenDot.png in Resources */,
 				157B68B41072548D00E25E96 /* RedDot.png in Resources */,
-				156813AB108C91A200424179 /* MvrImageVisor.xib in Resources */,
 				158CBFE310775816006813A7 /* VideoItemIcon.png in Resources */,
 				158CBFE51077583F006813A7 /* ContactWithoutImageIcon.png in Resources */,
 				15955935107760EE00FBC9B4 /* BookmarkIcon.png in Resources */,
 				159559E5107769F500FBC9B4 /* TextIcon.png in Resources */,
-				156813AE108C91C200424179 /* MvrTextVisor.xib in Resources */,
 				151D0AC11077A289009DAE07 /* MvrContactIsADuplicate.alert in Resources */,
 				154FA62C10792232004DF675 /* MvrClearTableOnShake.alert in Resources */,
 				15F036E1107B46720094D21E /* Backdrop-Bluetooth.png in Resources */,
@@ -1318,6 +1317,8 @@
 				151061251093870900307C62 /* MvrNoLiteToLiteBT.strings in Resources */,
 				151061261093870900307C62 /* MvrNoLiteToLiteBTReminder.strings in Resources */,
 				152BF22910C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png in Resources */,
+				1522444010CAB0C600ACF91B /* MvrImageVisor.xib in Resources */,
+				1522444110CAB0C600ACF91B /* MvrTextVisor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1336,6 +1337,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		1522443910CAB07700ACF91B /* Localization Sanity Check */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Localization Sanity Check";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$BUILT_PRODUCTS_DIR\"/\"$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\ncd en.lproj\n\nRESULT=0\n\nfor i in *.strings *.nib; do\n\tfor l in ../*.lproj; do\n\t\tif [ ! -e \"$l\"/\"$i\" ]; then\n\t\t\techo \"error: This localized resource is missing: '$l/$i'. Is that right?\" >&2\n\t\t\tRESULT=1\n\t\tfi\n\tdone\ndone\n\nexit $RESULT\n";
 		};
 		157CBD23108F160900146778 /* Check Current Variant */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1527,22 +1542,6 @@
 				151061241093870900307C62 /* en */,
 			);
 			name = MvrNoLiteToLiteBTReminder.strings;
-			sourceTree = "<group>";
-		};
-		156813AA108C91A200424179 /* MvrImageVisor.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				156813AC108C91AA00424179 /* en */,
-			);
-			name = MvrImageVisor.xib;
-			sourceTree = "<group>";
-		};
-		156813AD108C91C200424179 /* MvrTextVisor.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				156813AF108C91C600424179 /* en */,
-			);
-			name = MvrTextVisor.xib;
 			sourceTree = "<group>";
 		};
 		156813B0108C921400424179 /* MainWindow.xib */ = {
