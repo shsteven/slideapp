@@ -84,7 +84,7 @@ enum {
 	[self.tableController viewDidAppear:NO];
 	
 	self.overlayWindow.hidden = YES;
-    [self.window makeKeyAndVisible];
+	[self.window makeKeyAndVisible];
 	
 	[crashReporting enableReporting];
 	
