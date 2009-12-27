@@ -38,6 +38,8 @@
 #import <MuiKit/MuiKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import <SwapKit/SwapKit.h>
+
 @interface MvrAppDelegate ()
 
 - (void) setUpItemClassesAndUIs;
@@ -59,7 +61,7 @@ enum {
 
 @implementation MvrAppDelegate
 
-- (void) applicationDidFinishLaunching:(UIApplication*) application;
+- (BOOL) application:(UIApplication*) application didFinishLaunchingWithOptions:(NSDictionary*) options;
 {
 	UIApp.idleTimerDisabled = YES;
 	
@@ -101,33 +103,15 @@ enum {
 #endif
 	
 	[self showAlertIfNotShownBeforeNamed:@"MvrWelcome"];
+	
+	[ILSwapService didFinishLaunchingWithOptions:options];
+	
+	return YES;
 }
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
 {
-#if !kMvrIsLite
-	NSString* scheme = [url scheme];
-	if ([scheme isEqual:@"x-infinitelabs-mover"]) {
-		if (![[url resourceSpecifier] hasPrefix:@"add?"])
-			return NO;
-		
-		NSDictionary* query = [url dictionaryByDecodingQueryString];
-		NSString* urlString;
-		if (!(urlString = [query objectForKey:@"url"]))
-			return NO;
-		
-		NSURL* bookmarkedURL = [NSURL URLWithString:urlString];
-		if (!bookmarkedURL)
-			return NO;
-		
-		MvrBookmarkItem* item = [[[MvrBookmarkItem alloc] initWithAddress:bookmarkedURL] autorelease];
-		if (item)
-			[self performSelector:@selector(addItemFromSelf:) withObject:item afterDelay:0.7];
-		return item != nil;
-	}
-#endif
-	
-	return NO;
+	return [ILSwapService handleOpenURL:url];
 }
 
 @synthesize window, tableController, wifiMode, bluetoothMode, tellAFriend, messageChecker;

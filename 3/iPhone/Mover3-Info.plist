@@ -26,6 +26,14 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
+			<string>net.infinite-labs.Mover.SwapKit</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>net.infinitelabs.Mover.receive</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
 			<string>net.infinite-labs.Mover.API</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
@@ -45,5 +53,26 @@
 	<true/>
 	<key>UIViewEdgeAntialiasing</key>
 	<true/>
+	<key>ILSwapRegistration</key>
+	<dict>
+		<key>ILAppReceiveItemURLScheme</key>
+		<string>net.infinitelabs.Mover.receive</string>
+		<key>ILAppSupportedReceivedItemsUTIs</key>
+		<array>
+			<string>public.url</string>
+			<string>public.utf8-plain-text</string>
+			<string>public.jpeg</string>
+			<string>public.tiff</string>
+			<string>com.compuserve.gif</string>
+			<string>public.png</string>
+			<string>com.microsoft.bmp</string>
+			<string>com.microsoft.ico</string>
+			<string>com.apple.quicktime-movie</string>
+			<string>public.mpeg-4</string>
+			<string>net.infinite-labs.Slide.AddressBookPersonPropertyList</string>
+		</array>
+		<key>ILAppSupportsReceivingMultipleItems</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
