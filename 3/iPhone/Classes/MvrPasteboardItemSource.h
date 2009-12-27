@@ -16,4 +16,7 @@
 
 + sharedSource;
 
+// Adds all applicable items from the given pasteboard to the table.
+- (void) addAllItemsFromPasteboard:(UIPasteboard*) pb;
+
 @end

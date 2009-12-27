@@ -27,6 +27,11 @@ static inline BOOL MvrPasteboardItemSourceLiteVersionCanPasteItemsOfClass(Class 
 #endif
 
 
+@interface MvrPasteboardItemSource ()
+
+@end
+
+
 @implementation MvrPasteboardItemSource
 
 L0ObjCSingletonMethod(sharedSource)
@@ -39,6 +44,11 @@ L0ObjCSingletonMethod(sharedSource)
 - (void) beginAddingItem;
 {
 	UIPasteboard* pb = [UIPasteboard generalPasteboard];
+	[self addAllItemsFromPasteboard:pb];
+}
+
+- (void) addAllItemsFromPasteboard:(UIPasteboard*) pb;
+{
 	int length = pb.numberOfItems;
 	for (int i = 0; i < length; i++) {
 		NSIndexSet* thisItem = [NSIndexSet indexSetWithIndex:i];

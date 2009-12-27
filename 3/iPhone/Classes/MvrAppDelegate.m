@@ -40,7 +40,7 @@
 
 #import <SwapKit/SwapKit.h>
 
-@interface MvrAppDelegate ()
+@interface MvrAppDelegate () <ILSwapServiceDelegate>
 
 - (void) setUpItemClassesAndUIs;
 - (void) setUpStorageCentral;
@@ -112,6 +112,11 @@ enum {
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
 {
 	return [ILSwapService handleOpenURL:url];
+}
+
+- (void) swapServiceDidReceiveItemsInPasteboard:(UIPasteboard*) pasteboard attributes:(NSDictionary*) attributes;
+{
+	[[MvrPasteboardItemSource sharedSource] addAllItemsFromPasteboard:pasteboard];
 }
 
 @synthesize window, tableController, wifiMode, bluetoothMode, tellAFriend, messageChecker;
