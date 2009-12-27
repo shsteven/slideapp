@@ -1,0 +1,3 @@
+[submodule "3/iPhone/SwapKit"]
+	path = 3/iPhone/SwapKit
+	url = git://github.com/millenomi/swapkit.git
