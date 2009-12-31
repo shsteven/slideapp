@@ -95,6 +95,7 @@
 		15464A3D1085B169005E5642 /* MvrMessageAction+ActingUpon.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A3C1085B169005E5642 /* MvrMessageAction+ActingUpon.m */; };
 		15464A491085B47B005E5642 /* MvrNoInternet_MessageAction.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15464A481085B47B005E5642 /* MvrNoInternet_MessageAction.alert */; };
 		15464A8810861B30005E5642 /* MvrMessageChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A8710861B30005E5642 /* MvrMessageChecker.m */; };
+		1546D8A210ECE0B500DDDFE2 /* ILSwapKitGuards.m in Sources */ = {isa = PBXBuildFile; fileRef = 1546D8A010ECE0B500DDDFE2 /* ILSwapKitGuards.m */; };
 		154BD6F71089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */; };
 		154BD70A1089F1DC00C45562 /* MvrImageReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD7091089F1DC00C45562 /* MvrImageReceived.alert */; };
 		154BD70C1089F22200C45562 /* MvrContactReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD70B1089F22200C45562 /* MvrContactReceived.alert */; };
@@ -336,6 +337,8 @@
 		15464A481085B47B005E5642 /* MvrNoInternet_MessageAction.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoInternet_MessageAction.alert; sourceTree = "<group>"; };
 		15464A8610861B30005E5642 /* MvrMessageChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMessageChecker.h; sourceTree = "<group>"; };
 		15464A8710861B30005E5642 /* MvrMessageChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMessageChecker.m; sourceTree = "<group>"; };
+		1546D8A010ECE0B500DDDFE2 /* ILSwapKitGuards.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapKitGuards.m; path = SwapKit/ILSwapKitGuards.m; sourceTree = SOURCE_ROOT; };
+		1546D8A110ECE0B500DDDFE2 /* ILSwapKitGuards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapKitGuards.h; path = SwapKit/ILSwapKitGuards.h; sourceTree = SOURCE_ROOT; };
 		154BD6F51089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrAppDelegate+HelpAlerts.h"; sourceTree = "<group>"; };
 		154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrAppDelegate+HelpAlerts.m"; sourceTree = "<group>"; };
 		154BD7091089F1DC00C45562 /* MvrImageReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrImageReceived.alert; sourceTree = "<group>"; };
@@ -803,6 +806,8 @@
 				1570B33610E756420037DEB4 /* ILSwapSendingController.h */,
 				1570B33710E756420037DEB4 /* ILSwapCommonActions.m */,
 				1570B33810E756420037DEB4 /* ILSwapCommonActions.h */,
+				1546D8A010ECE0B500DDDFE2 /* ILSwapKitGuards.m */,
+				1546D8A110ECE0B500DDDFE2 /* ILSwapKitGuards.h */,
 			);
 			name = SwapKit;
 			sourceTree = "<group>";
@@ -1525,6 +1530,7 @@
 				1570B33910E756420037DEB4 /* ILSwapService.m in Sources */,
 				1570B33A10E756420037DEB4 /* ILSwapSendingController.m in Sources */,
 				1570B33B10E756420037DEB4 /* ILSwapCommonActions.m in Sources */,
+				1546D8A210ECE0B500DDDFE2 /* ILSwapKitGuards.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
