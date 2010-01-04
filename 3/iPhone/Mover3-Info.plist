@@ -29,7 +29,7 @@
 			<string>net.infinite-labs.Mover.SwapKit</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>net.infinitelabs.Mover.receive</string>
+				<string>${ILABS_MOVER_BUNDLE_IDENTIFIER}-SwapKit</string>
 			</array>
 		</dict>
 		<dict>
@@ -56,7 +56,7 @@
 	<key>ILSwapRegistration</key>
 	<dict>
 		<key>ILAppReceiveItemURLScheme</key>
-		<string>net.infinitelabs.Mover.receive</string>
+		<string>${ILABS_MOVER_BUNDLE_IDENTIFIER}-SwapKit</string>
 		<key>ILAppSupportedReceivedItemsUTIs</key>
 		<array>
 			<string>public.url</string>

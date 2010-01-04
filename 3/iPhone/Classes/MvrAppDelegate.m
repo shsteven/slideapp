@@ -114,9 +114,9 @@ enum {
 	return [ILSwapService handleOpenURL:url];
 }
 
-- (void) swapServiceDidReceiveItemsInPasteboard:(UIPasteboard*) pasteboard attributes:(NSDictionary*) attributes;
+- (void) swapServiceDidReceiveRequest:(ILSwapRequest*) request;
 {
-	[[MvrPasteboardItemSource sharedSource] addAllItemsFromPasteboard:pasteboard];
+	[[MvrPasteboardItemSource sharedSource] addAllItemsFromSwapKitRequest:request];
 }
 
 @synthesize window, tableController, wifiMode, bluetoothMode, tellAFriend, messageChecker;

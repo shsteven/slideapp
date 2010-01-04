@@ -98,6 +98,19 @@ L0ObjCSingletonMethod(sharedSource)
 	}
 }
 
+- (void) addAllItemsFromSwapKitRequest:(ILSwapRequest*) req;
+{
+	for (NSString* type in req.availableTypes) {
+		for (NSData* d in [req dataForItemsOfType:type]) {
+			NSDictionary* metadata = [NSDictionary dictionary]; // TODO
+			MvrItem* i = [MvrItem itemWithStorage:[MvrItemStorage itemStorageWithData:d] type:type metadata:metadata];
+			
+			if (i)
+				[MvrApp() addItemFromSelf:i];
+		}
+	}
+}
+
 - (BOOL) available;
 {
 	for (NSDictionary* d in [[UIPasteboard generalPasteboard] items]) {		
