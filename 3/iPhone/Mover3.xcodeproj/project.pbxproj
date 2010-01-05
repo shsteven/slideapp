@@ -204,6 +204,7 @@
 		15D91B491092545800D8BAA9 /* MvrNoNewItemSendingInLite.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15D91B481092545800D8BAA9 /* MvrNoNewItemSendingInLite.alert */; };
 		15D91B4C1092548500D8BAA9 /* MvrUpsellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */; };
 		15D91B56109256D900D8BAA9 /* MvrNoBTOutgoingInLite.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15D91B55109256D900D8BAA9 /* MvrNoBTOutgoingInLite.alert */; };
+		15DF586710F3E38B00F6159C /* ILSwapItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DF586510F3E38B00F6159C /* ILSwapItem.m */; };
 		15F036E1107B46720094D21E /* Backdrop-Bluetooth.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */; };
 		1D3623260D0F684500981E51 /* MvrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MvrAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -502,6 +503,8 @@
 		15D91B4A1092548500D8BAA9 /* MvrUpsellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrUpsellController.h; sourceTree = "<group>"; };
 		15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrUpsellController.m; sourceTree = "<group>"; };
 		15D91B55109256D900D8BAA9 /* MvrNoBTOutgoingInLite.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoBTOutgoingInLite.alert; sourceTree = "<group>"; };
+		15DF586510F3E38B00F6159C /* ILSwapItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapItem.m; path = SwapKit/ILSwapItem.m; sourceTree = SOURCE_ROOT; };
+		15DF586610F3E38B00F6159C /* ILSwapItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapItem.h; path = SwapKit/ILSwapItem.h; sourceTree = SOURCE_ROOT; };
 		15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Backdrop-Bluetooth.png"; path = "Theme/Backdrop-Bluetooth.png"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* MvrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MvrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate.m; sourceTree = "<group>"; };
@@ -803,6 +806,8 @@
 		1570B33210E7563B0037DEB4 /* SwapKit */ = {
 			isa = PBXGroup;
 			children = (
+				15DF586510F3E38B00F6159C /* ILSwapItem.m */,
+				15DF586610F3E38B00F6159C /* ILSwapItem.h */,
 				15505E9510F21ABE00DB33B8 /* ILSwapRequest.m */,
 				15505E9610F21ABE00DB33B8 /* ILSwapRequest.h */,
 				1570B33310E756420037DEB4 /* ILSwapService.m */,
@@ -1537,6 +1542,7 @@
 				1570B33B10E756420037DEB4 /* ILSwapCommonActions.m in Sources */,
 				1546D8A210ECE0B500DDDFE2 /* ILSwapKitGuards.m in Sources */,
 				15505E9710F21ABE00DB33B8 /* ILSwapRequest.m in Sources */,
+				15DF586710F3E38B00F6159C /* ILSwapItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
