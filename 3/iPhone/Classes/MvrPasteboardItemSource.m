@@ -100,7 +100,26 @@ L0ObjCSingletonMethod(sharedSource)
 
 - (void) addAllItemsFromSwapKitRequest:(ILSwapRequest*) req;
 {
-	// TODO
+	if (!req.type)
+		return;
+	
+	for (ILSwapItem* i in req.items) {
+		MvrItem* mi = nil;
+		
+		id v = i.value;
+		NSData* d = i.dataValue;
+		
+		if ([v isKindOfClass:[NSString class]]) {
+			NSURL* u = [NSURL URLWithString:v];
+			if (u)
+				mi = [[[MvrBookmarkItem alloc] initWithAddress:u] autorelease];
+			else
+				mi = [[[MvrTextItem alloc] initWithText:v] autorelease];
+		} else if (d)
+			mi = [MvrItem itemWithStorage:[MvrItemStorage itemStorageWithData:d] type:req.type metadata:[NSDictionary dictionary]];
+		
+		[MvrApp() addItemFromSelf:mi];
+	}
 }
 
 - (BOOL) available;
