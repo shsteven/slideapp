@@ -153,4 +153,7 @@
 // If NO, temporarily unavailable (won't be shown)
 @property BOOL available;
 
+// If NO, unavailable for this specific item (won't be shown). Defaults to .available's value.
+- (BOOL) isAvailableForItem:(MvrItem*) i;
+
 @end

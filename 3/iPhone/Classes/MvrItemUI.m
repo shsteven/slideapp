@@ -66,6 +66,11 @@
 	[target performSelector:selector withObject:self withObject:i];
 }
 
+- (BOOL) isAvailableForItem:(MvrItem*) i;
+{
+	return self.available;
+}
+
 @end
 
 #pragma mark Item sources.

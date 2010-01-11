@@ -339,8 +339,10 @@ enum {
 	if (send && [self.tableController.currentMode.mutableDestinations count] > 0)
 		[as addButtonWithTitle:NSLocalizedString(@"Send", @"Send button in action menu") identifier:kMvrAppDelegateSendButtonIdentifier];
 	
-	for (MvrItemAction* a in [ui additionalActionsForItem:i])
-		[as addButtonWithTitle:a.displayName identifier:a];
+	for (MvrItemAction* a in [ui additionalActionsForItem:i]) {
+		if ([a isAvailableForItem:i])
+			[as addButtonWithTitle:a.displayName identifier:a];
+	}
 	
 	if (remove && [ui isItemRemovable:i]) {
 		

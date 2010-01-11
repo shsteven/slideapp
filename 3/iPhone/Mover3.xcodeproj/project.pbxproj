@@ -143,6 +143,7 @@
 		157B96BF1076589800F1A1A8 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96BE1076589800F1A1A8 /* AddressBook.framework */; };
 		157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157B96C01076589B00F1A1A8 /* AddressBookUI.framework */; };
 		157B96D810765F5800F1A1A8 /* MvrContactItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */; };
+		157DD1F810FB6C6D00BE9688 /* MvrSwapKitSendToAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 157DD1F710FB6C6D00BE9688 /* MvrSwapKitSendToAction.m */; };
 		158CBF7310774EEE006813A7 /* MvrImageVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 158CBF7110774EEE006813A7 /* MvrImageVisor.m */; };
 		158CBFE310775816006813A7 /* VideoItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 158CBFE210775816006813A7 /* VideoItemIcon.png */; };
 		158CBFE51077583F006813A7 /* ContactWithoutImageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 158CBFE41077583F006813A7 /* ContactWithoutImageIcon.png */; };
@@ -423,6 +424,8 @@
 		157B96D710765F5800F1A1A8 /* MvrContactItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrContactItemUI.m; sourceTree = "<group>"; };
 		157CBD07108F153D00146778 /* Mover-AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-AppStore.xcconfig"; sourceTree = "<group>"; };
 		157CBD08108F155800146778 /* Local-AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-AppStore.xcconfig"; sourceTree = "<group>"; };
+		157DD1F610FB6C6D00BE9688 /* MvrSwapKitSendToAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrSwapKitSendToAction.h; sourceTree = "<group>"; };
+		157DD1F710FB6C6D00BE9688 /* MvrSwapKitSendToAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrSwapKitSendToAction.m; sourceTree = "<group>"; };
 		158CBF7010774EEE006813A7 /* MvrImageVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageVisor.h; sourceTree = "<group>"; };
 		158CBF7110774EEE006813A7 /* MvrImageVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageVisor.m; sourceTree = "<group>"; };
 		158CBFE210775816006813A7 /* VideoItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VideoItemIcon.png; sourceTree = "<group>"; };
@@ -733,6 +736,8 @@
 				156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */,
 				15955A1F10776B7D00FBC9B4 /* MvrVisor.h */,
 				15955A2010776B7D00FBC9B4 /* MvrVisor.m */,
+				157DD1F610FB6C6D00BE9688 /* MvrSwapKitSendToAction.h */,
+				157DD1F710FB6C6D00BE9688 /* MvrSwapKitSendToAction.m */,
 			);
 			name = "Item UI";
 			sourceTree = "<group>";
@@ -1543,6 +1548,7 @@
 				1546D8A210ECE0B500DDDFE2 /* ILSwapKitGuards.m in Sources */,
 				15505E9710F21ABE00DB33B8 /* ILSwapRequest.m in Sources */,
 				15DF586710F3E38B00F6159C /* ILSwapItem.m in Sources */,
+				157DD1F810FB6C6D00BE9688 /* MvrSwapKitSendToAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
