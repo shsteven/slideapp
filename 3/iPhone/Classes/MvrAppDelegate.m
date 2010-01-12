@@ -567,4 +567,9 @@ enum {
 
 #endif
 
+- (UIView*) actionSheetOriginView;
+{
+	return self.tableController.toolbar;
+}
+
 @end

@@ -83,6 +83,8 @@
 
 - (IBAction) showAboutPane;
 
+@property(readonly) UIView* actionSheetOriginView;
+
 @end
 
 // -----

@@ -7,7 +7,7 @@
 //
 
 #import "MvrSwapKitSendToAction.h"
-
+#import "MvrAppDelegate.h"
 
 @implementation MvrSwapKitSendToAction
 
@@ -29,7 +29,7 @@
 - (void) performActionWithItem:(MvrItem *)i;
 {
 	NSData* d = i.storage.data;
-	[[ILSwapSendingController controllerForSendingItems:[NSArray arrayWithObject:d] ofType:i.type forAction:nil] send];
+	[[ILSwapSendingController controllerForSendingItems:[NSArray arrayWithObject:d] ofType:i.type forAction:nil] send:MvrApp().actionSheetOriginView];
 }
 
 + sendToAction;
