@@ -128,13 +128,16 @@
 
 - (void) addStoredItemsObject:(MvrItem *)item;
 {
+	L0Log(@"Asked to add item to storage: %@", item);
+	
 	if ([self.storedItems containsObject:item])
 		return;
-	
+		
 	MvrItemStorage* storage = [item storage];
 
 	if (!self.itemSavingDisabled) {
-	
+		L0Log(@"Actually adding it.");
+
 		NSString* path, * name;
 		path = [[self class] unusedPathInDirectory:persistentDirectory withPathExtension:[storage.path pathExtension] fileName:&name];
 		
@@ -225,6 +228,7 @@
 
 - (void) saveMetadata;
 {
+	L0Log(@"Persisting metadata: %@", metadata);
 	metadataStorage.metadata = metadata;
 }
 

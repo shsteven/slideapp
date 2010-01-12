@@ -206,27 +206,19 @@ enum {
 
 - (NSDictionary*) metadata;
 {
-	if (!metadata) {
-		metadata = [[NSUserDefaults standardUserDefaults] objectForKey:kMvrItemsMetadataUserDefaultsKey];
-		if (![metadata isKindOfClass:[NSDictionary class]])
-			metadata = [NSDictionary dictionary];
-		
-		[metadata retain];
-	}
+	NSDictionary* m = L0As(NSDictionary, [[NSUserDefaults standardUserDefaults] objectForKey:kMvrItemsMetadataUserDefaultsKey]);
 	
-	return metadata;
+	if (!m)
+		m = [NSDictionary dictionary];
+	
+	return m;
 }
 
 - (void) setMetadata:(NSDictionary*) m;
-{
-	if (m != metadata) {
-		[metadata release];
-		metadata = [m copy];
-		
-		NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-		[ud setObject:m forKey:kMvrItemsMetadataUserDefaultsKey];
-		[ud synchronize];
-	}
+{		
+	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+	[ud setObject:m forKey:kMvrItemsMetadataUserDefaultsKey];
+	[ud synchronize];
 }
 
 #pragma mark -
