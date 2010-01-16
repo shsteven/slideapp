@@ -123,7 +123,8 @@
 	MvrModernWiFiIncoming* incoming = [[MvrModernWiFiIncoming alloc] initWithSocket:newSocket scanner:self];
 	[incomingTransfers addObject:incoming];
 	
-	[incoming observeUsingDispatcher:dispatcher invokeAtItemChange:@selector(itemOrCancelledOfTransfer:changed:) atCancelledChange:@selector(itemOrCancelledOfTransfer:changed:)];
+	SEL iOC = @selector(itemOrCancelledOfTransfer:changed:);
+	[incoming observeUsingDispatcher:dispatcher invokeAtItemChange:iOC atCancelledChange:iOC atKeyChange:NULL];
 	
 	[incoming release];
 }

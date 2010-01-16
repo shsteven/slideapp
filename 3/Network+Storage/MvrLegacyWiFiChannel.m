@@ -27,7 +27,8 @@
 - (void) addIncomingTransferWithConnection:(BLIPConnection*) conn;
 {
 	MvrLegacyWiFiIncoming* incoming = [[MvrLegacyWiFiIncoming alloc] initWithConnection:conn];
-	[incoming observeUsingDispatcher:self.dispatcher invokeAtItemOrCancelledChange:@selector(incomingTransfer:didChangeItemOrCancelledKey:)];
+	SEL iOC = @selector(incomingTransfer:didChangeItemOrCancelledKey:);
+	[incoming observeUsingDispatcher:self.dispatcher invokeAtItemChange:iOC atCancelledChange:iOC atKeyChange:NULL];
 
 	[self.mutableIncomingTransfers addObject:incoming];
 	[incoming release];

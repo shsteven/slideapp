@@ -45,7 +45,8 @@
 
 - (void) addIncomingTransfersObject:(MvrModernWiFiIncoming*) incoming;
 {
-	[incoming observeUsingDispatcher:self.dispatcher invokeAtItemOrCancelledChange:@selector(incomingTransfer:itemOrCancelledChanged:)];
+	SEL iOC = @selector(incomingTransfer:itemOrCancelledChanged:);
+	[incoming observeUsingDispatcher:self.dispatcher invokeAtItemChange:iOC atCancelledChange:iOC atKeyChange:NULL];
 	[super addIncomingTransfersObject:incoming];
 }
 	 

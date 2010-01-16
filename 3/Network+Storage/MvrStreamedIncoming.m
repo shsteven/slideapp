@@ -126,6 +126,9 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 {
 	if (![metadata objectForKey:kMvrProtocolMetadataTitleKey] || ![metadata objectForKey:kMvrProtocolMetadataTypeKey])
 		[self cancel];
+	
+	if (!self.type)
+		self.type = [metadata objectForKey:kMvrProtocolMetadataTypeKey];
 }
 
 
