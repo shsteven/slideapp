@@ -260,7 +260,8 @@ static id MvrKeyForABProperty(ABPropertyID prop) {
 	
 	if (ABPersonHasImageData(record)) {
 		NSData* data = (NSData*) ABPersonCopyImageData(record);
-		[person setObject:data forKey:kMvrContactImageData];
+		if (data)
+			[person setObject:data forKey:kMvrContactImageData];
 		[data release];
 	}
 	
