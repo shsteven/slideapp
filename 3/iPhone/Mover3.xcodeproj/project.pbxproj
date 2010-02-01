@@ -79,7 +79,6 @@
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
 		1522444010CAB0C600ACF91B /* MvrImageVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */; };
 		1522444110CAB0C600ACF91B /* MvrTextVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */; };
-		152BF22910C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 152BF22810C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png */; };
 		1531319110837AC100D28022 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		1531319910837C2C00D28022 /* AboutPaneHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531319810837C2C00D28022 /* AboutPaneHeader.png */; };
 		1531323510838F3400D28022 /* inflabs_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531323310838F3400D28022 /* inflabs_dark.png */; };
@@ -180,6 +179,7 @@
 		15C8A1CB1116CFDE00F844A7 /* SwapKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15C8A1CA1116CFDE00F844A7 /* SwapKit.bundle */; };
 		15C8A1D21116CFF600F844A7 /* ILSwapSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C8A1CF1116CFF600F844A7 /* ILSwapSendController.m */; };
 		15C8A1D31116CFF600F844A7 /* ILSwapKitBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C8A1D11116CFF600F844A7 /* ILSwapKitBundle.m */; };
+		15C8A1E41116D09700F844A7 /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C8A1E31116D09700F844A7 /* NetworkToolbarIcon.png */; };
 		15CFDB2210710B2D00FAB245 /* TopShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB2110710B2D00FAB245 /* TopShadow.png */; };
 		15CFDB41107112C800FAB245 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB3F107112C800FAB245 /* Arrow.png */; };
 		15CFDB42107112C800FAB245 /* DrawerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB40107112C800FAB245 /* DrawerBackdrop.png */; };
@@ -319,7 +319,6 @@
 		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
 		1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrImageVisor.xib; sourceTree = "<group>"; };
 		1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTextVisor.xib; sourceTree = "<group>"; };
-		152BF22810C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArrowsNetworkToolbarIcon.png; sourceTree = "<group>"; };
 		1531318F10837AC100D28022 /* MvrAboutPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAboutPane.h; sourceTree = "<group>"; };
 		1531319010837AC100D28022 /* MvrAboutPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAboutPane.m; sourceTree = "<group>"; };
 		1531319810837C2C00D28022 /* AboutPaneHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AboutPaneHeader.png; path = Theme/AboutPaneHeader.png; sourceTree = "<group>"; };
@@ -482,6 +481,7 @@
 		15C8A1CF1116CFF600F844A7 /* ILSwapSendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapSendController.m; path = SwapKit/ILSwapSendController.m; sourceTree = SOURCE_ROOT; };
 		15C8A1D01116CFF600F844A7 /* ILSwapKitBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapKitBundle.h; path = SwapKit/ILSwapKitBundle.h; sourceTree = SOURCE_ROOT; };
 		15C8A1D11116CFF600F844A7 /* ILSwapKitBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapKitBundle.m; path = SwapKit/ILSwapKitBundle.m; sourceTree = SOURCE_ROOT; };
+		15C8A1E31116D09700F844A7 /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
 		15CFDB2110710B2D00FAB245 /* TopShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TopShadow.png; path = Theme/TopShadow.png; sourceTree = "<group>"; };
 		15CFDB3F107112C800FAB245 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Arrow.png; path = Theme/Arrow.png; sourceTree = "<group>"; };
 		15CFDB40107112C800FAB245 /* DrawerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DrawerBackdrop.png; path = Theme/DrawerBackdrop.png; sourceTree = "<group>"; };
@@ -1017,7 +1017,7 @@
 		15CB30971084C7ED00CB285F /* More images */ = {
 			isa = PBXGroup;
 			children = (
-				152BF22810C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png */,
+				15C8A1E31116D09700F844A7 /* NetworkToolbarIcon.png */,
 				15D91B0C109250C700D8BAA9 /* PlusSign.png */,
 				156E804110663AEB00315D0C /* GenericItemIcon.png */,
 				158CBFE210775816006813A7 /* VideoItemIcon.png */,
@@ -1367,10 +1367,10 @@
 				151060F31093819300307C62 /* MvrNoLiteToLiteBTReminder.alert in Resources */,
 				151061251093870900307C62 /* MvrNoLiteToLiteBT.strings in Resources */,
 				151061261093870900307C62 /* MvrNoLiteToLiteBTReminder.strings in Resources */,
-				152BF22910C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png in Resources */,
 				1522444010CAB0C600ACF91B /* MvrImageVisor.xib in Resources */,
 				1522444110CAB0C600ACF91B /* MvrTextVisor.xib in Resources */,
 				15C8A1CB1116CFDE00F844A7 /* SwapKit.bundle in Resources */,
+				15C8A1E41116D09700F844A7 /* NetworkToolbarIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
