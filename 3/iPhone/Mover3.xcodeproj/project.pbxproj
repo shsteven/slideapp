@@ -131,7 +131,6 @@
 		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		156E804210663AEB00315D0C /* GenericItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156E804110663AEB00315D0C /* GenericItemIcon.png */; };
 		1570B33910E756420037DEB4 /* ILSwapService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570B33310E756420037DEB4 /* ILSwapService.m */; };
-		1570B33A10E756420037DEB4 /* ILSwapSendingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570B33510E756420037DEB4 /* ILSwapSendingController.m */; };
 		1570B33B10E756420037DEB4 /* ILSwapCommonActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570B33710E756420037DEB4 /* ILSwapCommonActions.m */; };
 		1577006A10748D0100907F62 /* MvrVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1577006910748D0100907F62 /* MvrVideoItem.m */; };
 		15779EF91075D80B00FF2018 /* MvrVideoItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 15779EF81075D80B00FF2018 /* MvrVideoItemUI.m */; };
@@ -178,6 +177,9 @@
 		15C1C8901068DCDB000C9CDE /* MvrArrowsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C88F1068DCDB000C9CDE /* MvrArrowsView.m */; };
 		15C34BFF1084FB3300CEA68A /* MvrLegalitiesPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34BFE1084FB3300CEA68A /* MvrLegalitiesPane.m */; };
 		15C34C8E108502A000CEA68A /* Legalities in Resources */ = {isa = PBXBuildFile; fileRef = 15C34C8A108502A000CEA68A /* Legalities */; };
+		15C8A1CB1116CFDE00F844A7 /* SwapKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15C8A1CA1116CFDE00F844A7 /* SwapKit.bundle */; };
+		15C8A1D21116CFF600F844A7 /* ILSwapSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C8A1CF1116CFF600F844A7 /* ILSwapSendController.m */; };
+		15C8A1D31116CFF600F844A7 /* ILSwapKitBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C8A1D11116CFF600F844A7 /* ILSwapKitBundle.m */; };
 		15CFDB2210710B2D00FAB245 /* TopShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB2110710B2D00FAB245 /* TopShadow.png */; };
 		15CFDB41107112C800FAB245 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB3F107112C800FAB245 /* Arrow.png */; };
 		15CFDB42107112C800FAB245 /* DrawerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB40107112C800FAB245 /* DrawerBackdrop.png */; };
@@ -403,8 +405,6 @@
 		156E804110663AEB00315D0C /* GenericItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericItemIcon.png; sourceTree = "<group>"; };
 		1570B33310E756420037DEB4 /* ILSwapService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapService.m; path = SwapKit/ILSwapService.m; sourceTree = SOURCE_ROOT; };
 		1570B33410E756420037DEB4 /* ILSwapService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapService.h; path = SwapKit/ILSwapService.h; sourceTree = SOURCE_ROOT; };
-		1570B33510E756420037DEB4 /* ILSwapSendingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapSendingController.m; path = SwapKit/ILSwapSendingController.m; sourceTree = SOURCE_ROOT; };
-		1570B33610E756420037DEB4 /* ILSwapSendingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapSendingController.h; path = SwapKit/ILSwapSendingController.h; sourceTree = SOURCE_ROOT; };
 		1570B33710E756420037DEB4 /* ILSwapCommonActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapCommonActions.m; path = SwapKit/ILSwapCommonActions.m; sourceTree = SOURCE_ROOT; };
 		1570B33810E756420037DEB4 /* ILSwapCommonActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapCommonActions.h; path = SwapKit/ILSwapCommonActions.h; sourceTree = SOURCE_ROOT; };
 		1577006810748D0100907F62 /* MvrVideoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVideoItem.h; sourceTree = "<group>"; };
@@ -477,6 +477,11 @@
 		15C34BFD1084FB3300CEA68A /* MvrLegalitiesPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrLegalitiesPane.h; sourceTree = "<group>"; };
 		15C34BFE1084FB3300CEA68A /* MvrLegalitiesPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrLegalitiesPane.m; sourceTree = "<group>"; };
 		15C34C8A108502A000CEA68A /* Legalities */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Legalities; path = AboutPane/Legalities; sourceTree = "<group>"; };
+		15C8A1CA1116CFDE00F844A7 /* SwapKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SwapKit.bundle; sourceTree = "<group>"; };
+		15C8A1CE1116CFF600F844A7 /* ILSwapSendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapSendController.h; path = SwapKit/ILSwapSendController.h; sourceTree = SOURCE_ROOT; };
+		15C8A1CF1116CFF600F844A7 /* ILSwapSendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapSendController.m; path = SwapKit/ILSwapSendController.m; sourceTree = SOURCE_ROOT; };
+		15C8A1D01116CFF600F844A7 /* ILSwapKitBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapKitBundle.h; path = SwapKit/ILSwapKitBundle.h; sourceTree = SOURCE_ROOT; };
+		15C8A1D11116CFF600F844A7 /* ILSwapKitBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapKitBundle.m; path = SwapKit/ILSwapKitBundle.m; sourceTree = SOURCE_ROOT; };
 		15CFDB2110710B2D00FAB245 /* TopShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TopShadow.png; path = Theme/TopShadow.png; sourceTree = "<group>"; };
 		15CFDB3F107112C800FAB245 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Arrow.png; path = Theme/Arrow.png; sourceTree = "<group>"; };
 		15CFDB40107112C800FAB245 /* DrawerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DrawerBackdrop.png; path = Theme/DrawerBackdrop.png; sourceTree = "<group>"; };
@@ -811,16 +816,19 @@
 		1570B33210E7563B0037DEB4 /* SwapKit */ = {
 			isa = PBXGroup;
 			children = (
+				15C8A1CA1116CFDE00F844A7 /* SwapKit.bundle */,
 				15DF586510F3E38B00F6159C /* ILSwapItem.m */,
 				15DF586610F3E38B00F6159C /* ILSwapItem.h */,
 				15505E9510F21ABE00DB33B8 /* ILSwapRequest.m */,
 				15505E9610F21ABE00DB33B8 /* ILSwapRequest.h */,
 				1570B33310E756420037DEB4 /* ILSwapService.m */,
 				1570B33410E756420037DEB4 /* ILSwapService.h */,
-				1570B33510E756420037DEB4 /* ILSwapSendingController.m */,
-				1570B33610E756420037DEB4 /* ILSwapSendingController.h */,
 				1570B33710E756420037DEB4 /* ILSwapCommonActions.m */,
 				1570B33810E756420037DEB4 /* ILSwapCommonActions.h */,
+				15C8A1CE1116CFF600F844A7 /* ILSwapSendController.h */,
+				15C8A1CF1116CFF600F844A7 /* ILSwapSendController.m */,
+				15C8A1D01116CFF600F844A7 /* ILSwapKitBundle.h */,
+				15C8A1D11116CFF600F844A7 /* ILSwapKitBundle.m */,
 				1546D8A010ECE0B500DDDFE2 /* ILSwapKitGuards.m */,
 				1546D8A110ECE0B500DDDFE2 /* ILSwapKitGuards.h */,
 			);
@@ -1362,6 +1370,7 @@
 				152BF22910C3F83700B6C1A3 /* ArrowsNetworkToolbarIcon.png in Resources */,
 				1522444010CAB0C600ACF91B /* MvrImageVisor.xib in Resources */,
 				1522444110CAB0C600ACF91B /* MvrTextVisor.xib in Resources */,
+				15C8A1CB1116CFDE00F844A7 /* SwapKit.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1543,12 +1552,13 @@
 				155199B110C00FA5002589CD /* MvrBluetoothMode-AppleAd.m in Sources */,
 				155199B210C00FAC002589CD /* MvrWiFiMode-AppleAd.m in Sources */,
 				1570B33910E756420037DEB4 /* ILSwapService.m in Sources */,
-				1570B33A10E756420037DEB4 /* ILSwapSendingController.m in Sources */,
 				1570B33B10E756420037DEB4 /* ILSwapCommonActions.m in Sources */,
 				1546D8A210ECE0B500DDDFE2 /* ILSwapKitGuards.m in Sources */,
 				15505E9710F21ABE00DB33B8 /* ILSwapRequest.m in Sources */,
 				15DF586710F3E38B00F6159C /* ILSwapItem.m in Sources */,
 				157DD1F810FB6C6D00BE9688 /* MvrSwapKitSendToAction.m in Sources */,
+				15C8A1D21116CFF600F844A7 /* ILSwapSendController.m in Sources */,
+				15C8A1D31116CFF600F844A7 /* ILSwapKitBundle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
