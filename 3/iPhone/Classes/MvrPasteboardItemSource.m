@@ -14,10 +14,10 @@
 #import "MvrTextItem.h"
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrAppDelegate.h"
+#import "MvrImageItem.h"
 
 #if kMvrIsLite
 
-#import "MvrImageItem.h"
 #import "MvrContactItem.h"
 
 static inline BOOL MvrPasteboardItemSourceLiteVersionCanPasteItemsOfClass(Class c) {
@@ -115,10 +115,13 @@ L0ObjCSingletonMethod(sharedSource)
 				mi = [[[MvrBookmarkItem alloc] initWithAddress:u] autorelease];
 			else
 				mi = [[[MvrTextItem alloc] initWithText:v] autorelease];
+		} else if ([v isKindOfClass:[UIImage class]]) {
+			mi = [[[MvrImageItem alloc] initWithImage:v type:(id) kUTTypePNG] autorelease];
 		} else if (d)
 			mi = [MvrItem itemWithStorage:[MvrItemStorage itemStorageWithData:d] type:req.type metadata:[NSDictionary dictionary]];
 		
-		[MvrApp() addItemFromSelf:mi];
+		if (mi)
+			[MvrApp() addItemFromSelf:mi];
 	}
 }
 
