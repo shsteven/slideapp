@@ -305,16 +305,6 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	if (self = [super init]) {
 		channel = chan; // it owns us
 		item = [i retain];
-		builder = [(MvrPacketBuilder*)[MvrPacketBuilder alloc] initWithDelegate:self];
-
-		buffer = [MvrBuffer new];
-		buffer.consumptionSize = kMvrBTProtocolPacketSize;
-		
-		baseIndex = 1;
-		savedPackets = [NSMutableArray new];
-		
-		proto = [MvrBTProtocolOutgoing new];
-		proto.delegate = self;
 	}
 	
 	return self;
@@ -341,6 +331,17 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) start;
 {
+	builder = [(MvrPacketBuilder*)[MvrPacketBuilder alloc] initWithDelegate:self];
+	
+	buffer = [MvrBuffer new];
+	buffer.consumptionSize = kMvrBTProtocolPacketSize;
+	
+	baseIndex = 1;
+	savedPackets = [NSMutableArray new];
+	
+	proto = [MvrBTProtocolOutgoing new];
+	proto.delegate = self;
+	
 	MvrBTTrack(@"Starting outgoing connection for item %@", item);
 	
 	[builder setMetadataValue:item.title forKey:kMvrProtocolMetadataTitleKey];
@@ -363,8 +364,21 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	if (self.finished)
 		return;
 	
+	[builder release]; builder = nil;
+	[buffer release]; buffer = nil;
+	[proto release]; proto = nil;
+
 	MvrBTTrack(@"Ending with error %@", e);
 	MvrBTTrackEnd();
+	
+	if (e) {
+		retries++;
+		
+		if (retries < 3 && [[e domain] isEqual:NSCocoaErrorDomain] && [e code] == NSUserCancelledError) {
+			MvrBTTrack(@"Will retry sending.");
+			[self performSelector:@selector(start) withObject:nil afterDelay:0.5];
+		}
+	}
 	
 	self.error = e;
 	self.finished = YES;

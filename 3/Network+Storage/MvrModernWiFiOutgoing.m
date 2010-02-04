@@ -135,7 +135,7 @@ static BOOL MvrIPv6Allowed = NO;
 	if (e) {
 		retries++;
 		
-		if (retries < 3) {
+		if (retries < 3 && [[e domain] isEqual:NSCocoaErrorDomain] && [e code] == NSUserCancelledError) {
 			L0Log(@"Autoretrying (%d retries done)", retries);
 			[self performSelector:@selector(start) withObject:nil afterDelay:0.5]; // autoretry
 			return;

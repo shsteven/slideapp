@@ -62,6 +62,8 @@
 	
 	NSError* error;
 	BOOL finishedBuilding, hasSentLastPacket, finished; float progress;
+	
+	int retries;
 }
 
 - (id) initWithItem:(MvrItem*) i channel:(MvrBTChannel*) chan;
