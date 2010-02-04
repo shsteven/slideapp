@@ -27,6 +27,8 @@
 	
 	unsigned long chunksPending;
 	BOOL canFinish;
+	
+	int retries;
 }
 
 + (void) allowIPv6;

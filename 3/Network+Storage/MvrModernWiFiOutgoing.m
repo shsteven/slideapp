@@ -132,6 +132,16 @@ static BOOL MvrIPv6Allowed = NO;
 	[socket setDelegate:nil];
 	[socket release]; socket = nil;
 	
+	if (e) {
+		retries++;
+		
+		if (retries < 3) {
+			L0Log(@"Autoretrying (%d retries done)", retries);
+			[self performSelector:@selector(start) withObject:nil afterDelay:0.5]; // autoretry
+			return;
+		}
+	}
+	
 	[[self retain] autorelease]; // people watching -finished could release us. Prevent nastiness.
 	self.finished = YES;
 }
