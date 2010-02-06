@@ -106,7 +106,7 @@
 	NSError* e;
 	BOOL started = [listener open:&e];
 	if (!started) {
-		L0LogAlways(@"Having difficulty accepting legacy connections on port %d, retrying shortly: %@", serverPort, e);
+		L0Log(@"Having difficulty accepting legacy connections on port %d, retrying shortly: %@", serverPort, e);
 		[[NSNotificationCenter defaultCenter] postNotificationName:kMvrLegacyWiFiDifficultyStartingListenerNotification object:self];
 		[self performSelector:@selector(startListening) withObject:nil afterDelay:1.0];
 	}
