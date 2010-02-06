@@ -48,6 +48,10 @@
 
 #if !kMvrIsLite
 
+#if !defined(kMvrBTOutgoingSimulateBreaking)
+#define kMvrBTOutgoingSimulateBreaking 0
+#endif
+
 @interface MvrBTOutgoing : NSObject <MvrOutgoing, MvrBTProtocolOutgoingDelegate, MvrPacketBuilderDelegate> {
 	MvrBTChannel* channel;
 	MvrBTProtocolOutgoing* proto;
@@ -64,6 +68,11 @@
 	BOOL finishedBuilding, hasSentLastPacket, finished; float progress;
 	
 	int retries;
+	
+	BOOL didSendAtLeastPart;
+#if kMvrBTOutgoingSimulateBreaking
+	int simulatedBreaks;
+#endif
 	
 	BOOL finishing;
 }

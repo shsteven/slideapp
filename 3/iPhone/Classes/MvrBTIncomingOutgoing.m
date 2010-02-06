@@ -298,6 +298,10 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 #pragma mark -
 #pragma mark Outgoing
 
+#if !DEBUG && kMvrBTOutgoingSimulateBreaking
+#error Connection break testing code must NOT be left in the release build.
+#endif
+
 @implementation MvrBTOutgoing
 
 - (id) initWithItem:(MvrItem*) i channel:(MvrBTChannel*) chan;
@@ -331,12 +335,15 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) start;
 {
+	didSendAtLeastPart = NO;
+	
 	builder = [(MvrPacketBuilder*)[MvrPacketBuilder alloc] initWithDelegate:self];
 	
 	buffer = [MvrBuffer new];
 	buffer.consumptionSize = kMvrBTProtocolPacketSize;
 	
 	baseIndex = 1;
+	seqNoThatNeedsSending = 0;
 	savedPackets = [NSMutableArray new];
 	
 	proto = [MvrBTProtocolOutgoing new];
@@ -376,7 +383,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	if (e) {
 		retries++;
 		
-		if (retries < 3 && !([[e domain] isEqual:NSCocoaErrorDomain] && [e code] == NSUserCancelledError)) {
+		if (retries < 5 && !([[e domain] isEqual:NSCocoaErrorDomain] && [e code] == NSUserCancelledError)) {
 			MvrBTTrack(@"Will retry sending.");
 			[self performSelector:@selector(start) withObject:nil afterDelay:1.0];
 			finishing = NO;
@@ -395,9 +402,16 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) packetBuilder:(MvrPacketBuilder*) b didProduceData:(NSData*) d;
 {
+#if kMvrBTOutgoingSimulateBreaking
+	if (simulatedBreaks < 3 && didSendAtLeastPart) {
+		[self endWithError:[NSError errorWithDomain:@"SimulatedError" code:1 userInfo:nil]];
+		return;
+	}
+#endif
+	
 	MvrBTTrack(@"Heeding to the packet builder now...");
 	[buffer appendData:d];
-	
+		
 	NSData* packet;
 	while ((packet = [buffer consume]) != nil)
 		[savedPackets addObject:packet];
@@ -504,6 +518,8 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 		seqNoThatNeedsSending = sequenceNumber;
 		builder.paused = NO;
 	}
+	
+	didSendAtLeastPart = YES;
 }
 
 - (BOOL) isPayloadAllSent;

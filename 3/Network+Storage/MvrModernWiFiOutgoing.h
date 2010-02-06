@@ -14,6 +14,10 @@
 
 #import "MvrPacketBuilder.h"
 
+#if !defined(kMvrModernWiFiOutgoingSimulateBreaking)
+#define kMvrModernWiFiOutgoingSimulateBreaking 0
+#endif
+
 @interface MvrModernWiFiOutgoing : NSObject <MvrPacketBuilderDelegate, MvrOutgoing> {
 	MvrItem* item;
 	NSArray* addresses;
