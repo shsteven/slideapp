@@ -52,6 +52,10 @@
 #define kMvrBTOutgoingSimulateBreaking 0
 #endif
 
+#if !defined(kMvrBTOutgoingRetrySending)
+#define kMvrBTOutgoingRetrySending 0
+#endif
+
 @interface MvrBTOutgoing : NSObject <MvrOutgoing, MvrBTProtocolOutgoingDelegate, MvrPacketBuilderDelegate> {
 	MvrBTChannel* channel;
 	MvrBTProtocolOutgoing* proto;

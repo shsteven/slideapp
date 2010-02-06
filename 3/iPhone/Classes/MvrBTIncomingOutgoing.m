@@ -380,6 +380,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	MvrBTTrack(@"Ending with error %@", e);
 	MvrBTTrackEnd();
 	
+#if kMvrBTOutgoingRetrySending
 	if (e) {
 		retries++;
 		
@@ -390,6 +391,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 			return;
 		}
 	}
+#endif
 		
 	self.error = e;
 	self.finished = YES;
