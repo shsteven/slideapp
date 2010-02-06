@@ -18,10 +18,12 @@
 	MvrItem* item;
 	NSArray* addresses;
 	
-	AsyncSocket* socket;
+	AsyncSocket* outgoingSocket;
 	MvrPacketBuilder* builder;
 	
-	BOOL finished;
+	NSMutableSet* failedSockets;
+	
+	BOOL finished, finishing;
 	float progress;
 	NSError* error;
 	
@@ -29,6 +31,11 @@
 	BOOL canFinish;
 	
 	int retries;
+	
+	BOOL didSendAtLeastPart;
+#if kMvrModernWiFiOutgoingSimulateBreaking
+	int simulatedBreaks;
+#endif
 }
 
 + (void) allowIPv6;

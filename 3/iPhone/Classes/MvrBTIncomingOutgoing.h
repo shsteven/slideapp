@@ -64,6 +64,8 @@
 	BOOL finishedBuilding, hasSentLastPacket, finished; float progress;
 	
 	int retries;
+	
+	BOOL finishing;
 }
 
 - (id) initWithItem:(MvrItem*) i channel:(MvrBTChannel*) chan;

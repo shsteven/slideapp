@@ -361,8 +361,10 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 - (void) endWithError:(NSError*) e;
 {
-	if (self.finished)
+	if (self.finished || finishing)
 		return;
+	
+	finishing = YES;
 	
 	[builder release]; builder = nil;
 	[buffer release]; buffer = nil;
@@ -374,14 +376,18 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	if (e) {
 		retries++;
 		
-		if (retries < 3 && [[e domain] isEqual:NSCocoaErrorDomain] && [e code] == NSUserCancelledError) {
+		if (retries < 3 && !([[e domain] isEqual:NSCocoaErrorDomain] && [e code] == NSUserCancelledError)) {
 			MvrBTTrack(@"Will retry sending.");
-			[self performSelector:@selector(start) withObject:nil afterDelay:0.5];
+			[self performSelector:@selector(start) withObject:nil afterDelay:1.0];
+			finishing = NO;
+			return;
 		}
 	}
-	
+		
 	self.error = e;
 	self.finished = YES;
+	
+	finishing = NO;
 }
 
 #pragma mark -

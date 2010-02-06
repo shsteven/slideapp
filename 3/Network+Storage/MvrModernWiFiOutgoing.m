@@ -16,6 +16,10 @@
 #import "MvrModernWiFiChannel.h"
 #import "MvrItemStorage.h"
 
+#if !DEBUG && kMvrModernWiFiOutgoingSimulateBreaking
+#error Release builds must not have simulated breaks testing code.
+#endif
+
 @interface MvrModernWiFiOutgoing ()
 
 - (void) cancel;
@@ -39,6 +43,7 @@
 	if (self = [super init]) {
 		item = [i retain];
 		addresses = [a copy];
+		failedSockets = [NSMutableSet new];
 	}
 	
 	return self;
@@ -52,6 +57,7 @@
 	[item release];
 	[addresses release];
 	[error release];
+	[failedSockets release];
 	[super dealloc];
 }
 
@@ -102,11 +108,13 @@ static BOOL MvrIPv6Allowed = NO;
 		return;
 	}
 	
-	NSAssert(!socket, @"No socket before starting");
-	socket = [[AsyncSocket alloc] initWithDelegate:self];
+	didSendAtLeastPart = NO;
+	
+	NSAssert(!outgoingSocket, @"No socket before starting");
+	outgoingSocket = [[AsyncSocket alloc] initWithDelegate:self];
 	
 	NSError* e = nil;
-	BOOL done = [socket connectToAddress:address withTimeout:15 error:&e];
+	BOOL done = [outgoingSocket connectToAddress:address withTimeout:15 error:&e];
 	if (!done) {
 		L0Log(@"Did not connect: %@", e);
 		[self endWithError:e];
@@ -121,45 +129,61 @@ static BOOL MvrIPv6Allowed = NO;
 
 - (void) endWithError:(NSError*) e;
 {
-	if (self.finished) return;
-	
+	if (self.finished || finishing) return;
+	if (!outgoingSocket) return;
+
+	finishing = YES;
+
 	L0Log(@"%@", e);
 	self.error = e;
 	
 	[builder stop];
 	[builder release]; builder = nil;
 	
-	[socket setDelegate:nil];
-	[socket release]; socket = nil;
+	[failedSockets addObject:outgoingSocket];
+	[outgoingSocket disconnect];
+	[outgoingSocket release]; outgoingSocket = nil;
 	
 	if (e) {
 		retries++;
 		
-		if (retries < 3 && [[e domain] isEqual:NSCocoaErrorDomain] && [e code] == NSUserCancelledError) {
+		if (retries < 5 && !([[e domain] isEqual:NSCocoaErrorDomain] && [e code] == NSUserCancelledError)) {
 			L0Log(@"Autoretrying (%d retries done)", retries);
-			[self performSelector:@selector(start) withObject:nil afterDelay:0.5]; // autoretry
+			[self performSelector:@selector(start) withObject:nil afterDelay:1.0]; // autoretry
+			finishing = NO;
 			return;
 		}
 	}
 	
 	[[self retain] autorelease]; // people watching -finished could release us. Prevent nastiness.
 	self.finished = YES;
+	
+	finishing = NO;
 }
 
 - (void) onSocket:(AsyncSocket*) sock didConnectToHost:(NSString*) host port:(UInt16) port;
 {
+	if ([failedSockets containsObject:sock])
+		return;
+	
 	L0Log(@"%@:%d", host, port);
 	[self buildPacket];
 }
 
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err;
 {
+	if ([failedSockets containsObject:sock])
+		return;
+	
 	if (err)
 		[self endWithError:err];
 }
 
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag;
 {
+	if ([failedSockets containsObject:sock])
+		return;
+	
 	L0Note();
 	[self endWithError:nil];
 }
@@ -167,6 +191,9 @@ static BOOL MvrIPv6Allowed = NO;
 - (void) onSocketDidDisconnect:(AsyncSocket *)sock;
 {
 	L0Note();
+	if ([failedSockets containsObject:sock])
+		return;
+	
 	[self endWithError:nil];
 }
 
@@ -194,8 +221,17 @@ static BOOL MvrIPv6Allowed = NO;
 
 - (void) packetBuilder:(MvrPacketBuilder*) b didProduceData:(NSData*) d;
 {
-	[socket writeData:d withTimeout:-1 tag:0];
-
+#if kMvrModernWiFiOutgoingSimulateBreaking
+	if (simulatedBreaks < 3 && didSendAtLeastPart) {
+		simulatedBreaks++;
+		[self endWithError:[NSError errorWithDomain:@"SimulatedError" code:1 userInfo:nil]];
+		return;
+	}
+#endif
+	
+	[outgoingSocket writeData:d withTimeout:-1 tag:0];
+	didSendAtLeastPart = YES;
+	
 	L0Log(@"Writing %llu bytes, %u chunks now pending", (unsigned long long) [d length], chunksPending);
 	
 	[self willChangeValueForKey:@"progress"];
@@ -212,7 +248,7 @@ static BOOL MvrIPv6Allowed = NO;
 	if (e)
 		[self endWithError:e];
 	
-	[socket readDataToLength:1 withTimeout:120 tag:0];
+	[outgoingSocket readDataToLength:1 withTimeout:120 tag:0];
 }
 
 @end
