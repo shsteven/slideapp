@@ -41,7 +41,7 @@
 		self.storage = s;
 		self.type = t;
 		
-		if (m)
+		if (m && [m count] != 0)
 			[self.metadata setDictionary:m];
 		else
 			[self.metadata setDictionary:[self defaultMetadata]];

@@ -14,6 +14,7 @@
 #import "MvrContactItem.h"
 #import "MvrAppDelegate.h"
 #import "MvrAppDelegate+HelpAlerts.h"
+#import "MvrSwapKitSendToAction.h"
 
 @class MvrDuplicateContactHandler;
 
@@ -189,6 +190,11 @@ enum {
 - (MvrItemAction*) mainActionForItem:(MvrItem*) i;
 {
 	return [self showAction];
+}
+
+- (NSArray*) additionalActionsForItem:(MvrItem*) i;
+{
+	return [NSArray arrayWithObject:[MvrSwapKitSendToAction sendToAction]];
 }
 
 - (void) performShowOrOpenAction:(MvrItemAction*) a withItem:(id) i;
