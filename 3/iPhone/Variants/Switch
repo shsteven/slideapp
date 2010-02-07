@@ -3,10 +3,13 @@
 HERE="`dirname "$0"`"
 cd "$HERE"
 
-ILABS_FORCE=NO
+if [ "$ILABS_FORCE" != "YES" ]; then
+    ILABS_FORCE=NO
+fi
+
 if [ "$1" == "--force" ]; then
-	ILABS_FORCE=YES
-	shift
+    ILABS_FORCE=YES
+    shift
 fi
 
 if [ ! -d "$1" ]; then
