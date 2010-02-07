@@ -25,11 +25,13 @@
 #import "MvrContactItem.h"
 
 static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem* i) {
-	if (![i isKindOfClass:[MvrImageItem class]] && ![i isKindOfClass:[MvrContactItem class]]) {
-		[[MvrUpsellController upsellWithAlertNamed:@"MvrNoNewItemSendingInLite" cancelButton:0] show];
-		return NO;
-	} else
-		return YES;
+//	if (![i isKindOfClass:[MvrImageItem class]] && ![i isKindOfClass:[MvrContactItem class]]) {
+//		[[MvrUpsellController upsellWithAlertNamed:@"MvrNoNewItemSendingInLite" cancelButton:0] show];
+//		return NO;
+//	} else
+//		return YES;
+	
+	return YES;
 }
 
 #endif
