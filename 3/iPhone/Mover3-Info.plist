@@ -67,8 +67,6 @@
 			<string>public.png</string>
 			<string>com.microsoft.bmp</string>
 			<string>com.microsoft.ico</string>
-			<string>com.apple.quicktime-movie</string>
-			<string>public.mpeg-4</string>
 			<string>net.infinite-labs.Slide.AddressBookPersonPropertyList</string>
 		</array>
 		<key>ILAppSupportsReceivingMultipleItems</key>
