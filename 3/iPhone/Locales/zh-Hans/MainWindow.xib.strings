@@ -1,12 +1,12 @@
 "90.text" = "\U84dd\U7259\U6253\U5f00";
 "75.accessibilityHint" = "\U8bf7\U7a0d\U5019";
-"55.normalTitle" = "\U6253\U5f00\U84dd\U7259";
-"89.normalTitle" = "\U8fd4\U56de Wi-Fi";
 "75.text" = "\U7b49\U5f85\U539f\U56e0\U2026";
+"89.normalTitle" = "\U8fd4\U56de Wi-Fi";
+"55.normalTitle" = "\U6253\U5f00\U84dd\U7259";
 "88.text" = "\U7f51\U7edc";
 "87.accessibilityHint" = "\U84dd\U7259\U6253\U5f00";
 "51.text" = "\U7f51\U7edc";
 "96.normalTitle" = "\U91cd\U65b0\U8fde\U63a5";
 "46.accessibilityLabel" = "\U7f51\U7edc\U72b6\U6001";
-"52.text" = "Wi-Fi \U6253\U5f00";
 "87.accessibilityLabel" = "\U7f51\U7edc\U72b6\U6001";
+"52.text" = "Wi-Fi \U6253\U5f00";
