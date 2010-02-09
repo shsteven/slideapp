@@ -187,7 +187,10 @@ enum {
 #if kMvrVariantSettings_UseSubdirectoryForItemStorage
 		docsDir = [docsDir stringByAppendingPathComponent:@"Mover Items"];
 		if (![[NSFileManager defaultManager] fileExistsAtPath:docsDir]) {
-			BOOL created = [[NSFileManager defaultManager] createDirectoryAtPath:docsDir attributes:nil];
+			NSError* e;
+			BOOL created = [[NSFileManager defaultManager] createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:&e];
+			if (!created)
+				L0LogAlways(@"Could not create the Mover Items subdirectory: %@", e);
 			NSAssert(created, @"Could not create the Mover Items subdirectory!");
 		}
 #endif
