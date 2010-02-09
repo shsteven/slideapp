@@ -57,6 +57,11 @@
 	<dict>
 		<key>ILAppReceiveItemURLScheme</key>
 		<string>${ILABS_MOVER_BUNDLE_IDENTIFIER}-SwapKit</string>
+		<key>ILAppSupportedActions</key>
+		<array>
+		    <string>ILReceive</string>
+		    <string>ILPrepareForTransfer</string>
+        </array>
 		<key>ILAppSupportedReceivedItemsUTIs</key>
 		<array>
 			<string>public.url</string>
