@@ -10,6 +10,8 @@
 #import "MvrAppDelegate.h"
 #import "MvrAppDelegate+HelpAlerts.h"
 
+#import <sys/sysctl.h>
+
 static NSString* MvrURLPartForVariant(MvrAppVariant v) {
 	switch (v) {
 		case kMvrAppVariantMoverExperimental:
@@ -28,6 +30,21 @@ static NSString* MvrURLPartForVariant(MvrAppVariant v) {
 		case kMvrAppVariantNotMover:
 			return @"unknown";
 	}
+}
+
+static NSString* MvrDeviceCode() {
+	const char* sysctlName = "hw.machine";
+	size_t length;
+	if (sysctlbyname(sysctlName, NULL, &length, NULL, 0) != 0)
+		return nil;
+	
+	char* contents = alloca(length);
+	NSString* result = nil;
+	if (sysctlbyname(sysctlName, contents, &length, NULL, 0) == 0) {
+		result = [[[NSString alloc] initWithCString:contents encoding:NSASCIIStringEncoding] autorelease];
+	}
+	
+	return result;
 }
 
 @interface MvrMessageChecker ()
@@ -202,9 +219,17 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 	
 	[UIApp beginNetworkUse];
 	
+	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:messagesURL];
+	[request setValue:[UIDevice currentDevice].systemVersion forHTTPHeaderField:@"X-Mover-OS-Version"];
+	
+	NSString* model = MvrDeviceCode();
+	if (model)
+		[request setValue:model forHTTPHeaderField:@"X-Mover-Device"];
+
 	receivedData = [NSMutableData new];
+	
 	[self willChangeValueForKey:@"checking"];
-	connection = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:messagesURL] delegate:self];
+	connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 	[self didChangeValueForKey:@"checking"];
 }
 
