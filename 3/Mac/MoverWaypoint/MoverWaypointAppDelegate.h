@@ -7,10 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Network+Storage/MvrPlatformInfo.h"
+#import "Network+Storage/MvrModernWiFi.h"
+#import "Network+Storage/MvrScannerObserver.h"
 
-@interface MoverWaypointAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate> {
+@interface MoverWaypointAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, MvrPlatformInfo, MvrScannerObserverDelegate> {
     IBOutlet NSWindow * window;
 	CGFloat originalWindowHeight;
+	L0UUID* identifier;
+
+	MvrModernWiFi* wifi;
+	MvrScannerObserver* wifiObserver;
+	
+	IBOutlet NSArrayController* channelsController;
 }
 
 @end
