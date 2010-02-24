@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15035881113523B800144ADC /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1503587F113523B800144ADC /* Icon72.png */; };
+		15035882113523B800144ADC /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = 15035880113523B800144ADC /* Icon512.png */; };
 		150C414410A48C7300EBCE51 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		150C414510A48C7300EBCE51 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		150C414610A48C7300EBCE51 /* MvrAppDelegate+HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */; };
@@ -301,6 +303,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1503587F113523B800144ADC /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon72.png; path = Variants/Current/Icon72.png; sourceTree = SOURCE_ROOT; };
+		15035880113523B800144ADC /* Icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon512.png; path = Variants/Current/Icon512.png; sourceTree = SOURCE_ROOT; };
 		150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bug Fixing Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bug Fixing Tests-Info.plist"; sourceTree = "<group>"; };
 		150C418E10A48F7000EBCE51 /* MvrBugFixingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBugFixingTests.h; sourceTree = "<group>"; };
@@ -519,7 +523,7 @@
 		1D6058910D05DD3D006BFB54 /* MoverOpen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverOpen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Mover3_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mover3_Prefix.pch; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* Mover3-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover3-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.info-plist"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Mover3-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover3-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -659,6 +663,8 @@
 			children = (
 				15789E73109218CD0018EC89 /* Default.png */,
 				1533F4C71088FFC10025005B /* Icon.png */,
+				1503587F113523B800144ADC /* Icon72.png */,
+				15035880113523B800144ADC /* Icon512.png */,
 				15CFDB3F107112C800FAB245 /* Arrow.png */,
 				15CFDB40107112C800FAB245 /* DrawerBackdrop.png */,
 				1591A7061063EC4000C5A5BD /* Backdrop.png */,
@@ -1371,6 +1377,8 @@
 				1522444110CAB0C600ACF91B /* MvrTextVisor.xib in Resources */,
 				15C8A1CB1116CFDE00F844A7 /* SwapKit.bundle in Resources */,
 				15C8A1E41116D09700F844A7 /* NetworkToolbarIcon.png in Resources */,
+				15035881113523B800144ADC /* Icon72.png in Resources */,
+				15035882113523B800144ADC /* Icon512.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

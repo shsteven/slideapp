@@ -215,7 +215,7 @@ enum {
 	unknown.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(hideDisplay)] autorelease];
 	
 	shownPerson = [[UINavigationController alloc] initWithRootViewController:unknown];
-	shownPerson.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	shownPerson.navigationBar.barStyle = UIBarStyleBlack;
 	[MvrApp() presentModalViewController:shownPerson];
 }
 

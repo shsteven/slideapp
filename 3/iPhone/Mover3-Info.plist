@@ -49,6 +49,12 @@
 	<string>MainWindow</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon512.png</string>
+		<string>Icon72.png</string>
+		<string>Icon.png</string>
+	</array>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
 	<key>UIViewEdgeAntialiasing</key>
@@ -59,9 +65,9 @@
 		<string>${ILABS_MOVER_BUNDLE_IDENTIFIER}-SwapKit</string>
 		<key>ILAppSupportedActions</key>
 		<array>
-		    <string>ILReceive</string>
-		    <string>ILPrepareForTransfer</string>
-        </array>
+			<string>ILReceive</string>
+			<string>ILPrepareForTransfer</string>
+		</array>
 		<key>ILAppSupportedReceivedItemsUTIs</key>
 		<array>
 			<string>public.url</string>
