@@ -7,11 +7,20 @@
 //
 
 #import "MoverWaypointAppDelegate.h"
-#import <MuiKit/MuiKit.h>
+#import <Carbon/Carbon.h>
+
+#import "Network+Storage/MvrChannel.h"
+#import "Network+Storage/MvrItem.h"
+#import "Network+Storage/MvrItemStorage.h"
+#import "Network+Storage/MvrPacketParser.h"
 
 @implementation MoverWaypointAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+	[MvrPacketParser setAutomaticConsumptionThreshold:5 * 1024 * 1024];
+	
+	channelsByIncoming = [L0Map new];
+	
 	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort];
 	[channelsController bind:NSContentSetBinding toObject:wifi withKeyPath:@"channels" options:nil];
 	
@@ -98,5 +107,62 @@
 }
 
 #pragma mark Handling incomings and outgoings
+
+- (void) channel:(id <MvrChannel>) c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>) incoming;
+{
+	[channelsByIncoming setObject:c forKey:incoming];
+}
+
+- (void) incomingTransfer:(id <MvrIncoming>) incoming didEndReceivingItem:(MvrItem*) i;
+{
+	if (!i)
+		return;
+	
+	id <MvrChannel> chan = [channelsByIncoming objectForKey:incoming];
+	
+	NSFileManager* fm = [NSFileManager defaultManager];
+	
+	NSArray* dirs = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
+	NSAssert([dirs count] != 0, @"We know where the downloads directory(/ies) is (are)");
+	NSString* downloadDir = [dirs objectAtIndex:0];
+	downloadDir = [downloadDir stringByAppendingPathComponent:@"Mover Items"];
+	BOOL isDir;
+	BOOL goOn = ([fm fileExistsAtPath:downloadDir isDirectory:&isDir] && isDir) || [fm createDirectoryAtPath:downloadDir withIntermediateDirectories:YES attributes:nil error:NULL];
+		
+	NSString* ext = NSMakeCollectable(UTTypeCopyPreferredTagWithClass((CFStringRef) i.type, kUTTagClassFilenameExtension));
+	
+	if (!ext && [i.type isEqual:(id) kUTTypeUTF8PlainText])
+		ext = @"txt";
+	
+	if (goOn && ext) {
+		// !!! Check whether the sanitization of the channel name is sane or not.
+		NSString* baseName = [NSString stringWithFormat:NSLocalizedString(@"From %@", @"Base for received filenames"), [chan.displayName stringByReplacingOccurrencesOfString:@"/" withString:@"-"]];
+		
+		NSString* attempt = baseName;
+		
+		int idx = 1;
+		BOOL alreadyExists;
+		NSString* targetPath;
+		do {
+			targetPath = [downloadDir stringByAppendingPathComponent:[attempt stringByAppendingPathExtension:ext]];
+			alreadyExists = [fm fileExistsAtPath:targetPath];
+			
+			if (alreadyExists) {
+				idx++;
+				attempt = [baseName stringByAppendingFormat:@" (%d)", idx];
+			}
+		} while (alreadyExists);
+		
+		BOOL ok = [fm copyItemAtPath:i.storage.path toPath:targetPath error:NULL];
+		
+		if (ok) {
+			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.DownloadFileFinished" object:targetPath];
+			[[NSWorkspace sharedWorkspace] selectFile:targetPath inFileViewerRootedAtPath:@""];
+		}
+	}
+	
+	[channelsByIncoming removeObjectForKey:incoming];
+	[i invalidate];
+}
 
 @end

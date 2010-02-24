@@ -106,4 +106,9 @@ enum {
 // If it returns a nonzero number, then the packet is ensured to be at least this more bytes long.
 @property(readonly) unsigned long long expectedSize;
 
+// This is an optimization: prevent automatic consumption of the current buffer until this threshold (value is in bytes) is reached. Default is 500 KB. The threshold may be ignored in some cases (for example, when we're expecting the end of a body).
+
++ (NSUInteger) automaticConsumptionThreshold;
++ (void) setAutomaticConsumptionThreshold:(NSUInteger) t;
+
 @end

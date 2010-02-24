@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */; };
+		153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EF0AC1135595100B8DDC1 /* Carbon.framework */; };
 		1574449F113435520088C65E /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574449C113435430088C65E /* libMuiKit-Mac.a */; };
 		1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574452111343C630088C65E /* SystemConfiguration.framework */; };
 		1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574453A11343D090088C65E /* libz.1.1.3.dylib */; };
@@ -24,35 +26,35 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 154B01F00F78156D0082109B /* libMuiKit.a */;
+			remoteGlobalIDString = 154B01F00F78156D0082109B;
 			remoteInfo = "MuiKit (Library)";
 		};
 		15744497113435430088C65E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 156FD76B0F7A25F900F83283 /* MuiKit.bundle */;
+			remoteGlobalIDString = 156FD76B0F7A25F900F83283;
 			remoteInfo = "MuiKit (Resources)";
 		};
 		15744499113435430088C65E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 154635591011BD77000238EE /* MuiKit+Test.octest */;
+			remoteGlobalIDString = 154635591011BD77000238EE;
 			remoteInfo = "MuiKit+Test";
 		};
 		1574449B113435430088C65E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2 /* libMuiKit-Mac.a */;
+			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2;
 			remoteInfo = "MuiKit (Library - Mac OS X)";
 		};
 		157444AC1134359D0088C65E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2 /* MuiKit (Mac OS X) */;
+			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2;
 			remoteInfo = "MuiKit (Mac OS X)";
 		};
 		159439841133E1410017B42D /* PBXContainerItemProxy */ = {
@@ -96,6 +98,8 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeviceBackdrop.png; sourceTree = "<group>"; };
+		153EF0AC1135595100B8DDC1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		1574448B113435430088C65E /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MuiKit.xcodeproj; path = ../../../../MuiKit/MuiKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		1574452111343C630088C65E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1574453A11343D090088C65E /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
@@ -121,6 +125,7 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */,
 				1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */,
+				153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +201,7 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				1574452111343C630088C65E /* SystemConfiguration.framework */,
 				1574453A11343D090088C65E /* libz.1.1.3.dylib */,
+				153EF0AC1135595100B8DDC1 /* Carbon.framework */,
 			);
 			name = MoverWaypoint;
 			sourceTree = "<group>";
@@ -212,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				1594394D1133DACB0017B42D /* WaypointLogo.png */,
+				153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */,
 				8D1107310486CEB800E47090 /* MoverWaypoint-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
@@ -345,6 +352,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */,
+				153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +415,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
 					"$(SRCROOT)/../..",
@@ -432,6 +441,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
 					"$(SRCROOT)/../..",

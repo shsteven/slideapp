@@ -11,6 +11,8 @@
 #import "Network+Storage/MvrModernWiFi.h"
 #import "Network+Storage/MvrScannerObserver.h"
 
+#import <MuiKit/MuiKit.h>
+
 @interface MoverWaypointAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, MvrPlatformInfo, MvrScannerObserverDelegate> {
     IBOutlet NSWindow * window;
 	CGFloat originalWindowHeight;
@@ -20,6 +22,8 @@
 	MvrScannerObserver* wifiObserver;
 	
 	IBOutlet NSArrayController* channelsController;
+	
+	L0Map* channelsByIncoming;
 }
 
 @end

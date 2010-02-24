@@ -109,6 +109,10 @@ typedef NSUInteger MvrStorageDestination;
 - (BOOL) setPathExtension:(NSString*) ext error:(NSError**) e;
 - (BOOL) setPathExtensionAssumingType:(id) uti error:(NSError**) e;
 
+// This method is only for use in garbage-collected environments and from the main thread only. It indicates that the storage is to be invalidated immediately, removing any resource it may be managing (for instance, files on disk or data in memory). This clears the storage.
+// GC apps must call this method at least once, and call no methods that cause .path to be invoked, before the last reference to this object is lost. It is only valid to call this method on non-persistent object, since the storage central references those objects.
+- (void) invalidate;
+
 @end
 
 #pragma mark Methods for use by the storage central only

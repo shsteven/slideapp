@@ -110,7 +110,9 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 {
 	if (!persistent && path) {
 		L0Log(@"Deleting offloading file %@", path);
-		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+		NSFileManager* fm = [NSFileManager new];
+		[fm removeItemAtPath:path error:NULL];
+		[fm release];
 	}
 	
 	[data release];
@@ -290,6 +292,18 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 		self.path = thePath;
 	
 	[data release]; data = nil;
+}
+
+- (void) invalidate;
+{
+	BOOL canInvalidate = NO;
+	
+#if TARGET_OS_MAC && !TARGET_OS_IPHONE
+	canInvalidate = ([NSClassFromString(@"NSGarbageCollector") performSelector:@selector(defaultCollector)] != nil);
+#endif
+	
+	NSAssert(canInvalidate, @"This method can only be called from a garbage-collected environment!");
+	[self resetData];
 }
 
 - (void) resetData;

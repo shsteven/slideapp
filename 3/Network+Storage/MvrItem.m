@@ -251,4 +251,13 @@ static NSMutableDictionary* MvrItemTypesToClasses = nil;
 	return [itemNotes objectForKey:o];
 }
 
+
+#pragma mark GC support
+
+- (void) invalidate;
+{
+	[self.storage invalidate];
+	self.storage = nil;
+}
+
 @end
