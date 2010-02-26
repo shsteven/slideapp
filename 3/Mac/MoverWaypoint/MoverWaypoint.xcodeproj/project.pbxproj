@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */; };
 		153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EF0AC1135595100B8DDC1 /* Carbon.framework */; };
+		157280D31137FE63005634C7 /* MvrDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 157280D21137FE63005634C7 /* MvrDevice.m */; };
+		157280E411380210005634C7 /* MvrDeviceItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157280E311380210005634C7 /* MvrDeviceItem.xib */; };
+		157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 157280F2113805FA005634C7 /* SpinnerBackdrop.png */; };
 		1574449F113435520088C65E /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574449C113435430088C65E /* libMuiKit-Mac.a */; };
 		1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574452111343C630088C65E /* SystemConfiguration.framework */; };
 		1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574453A11343D090088C65E /* libz.1.1.3.dylib */; };
@@ -100,6 +103,10 @@
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeviceBackdrop.png; sourceTree = "<group>"; };
 		153EF0AC1135595100B8DDC1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		157280D11137FE63005634C7 /* MvrDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevice.h; sourceTree = "<group>"; };
+		157280D21137FE63005634C7 /* MvrDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevice.m; sourceTree = "<group>"; };
+		157280E311380210005634C7 /* MvrDeviceItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrDeviceItem.xib; sourceTree = "<group>"; };
+		157280F2113805FA005634C7 /* SpinnerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SpinnerBackdrop.png; sourceTree = "<group>"; };
 		1574448B113435430088C65E /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MuiKit.xcodeproj; path = ../../../../MuiKit/MuiKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		1574452111343C630088C65E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1574453A11343D090088C65E /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
@@ -137,6 +144,8 @@
 			children = (
 				256AC3D80F4B6AC300CF3369 /* MoverWaypointAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* MoverWaypointAppDelegate.m */,
+				157280D11137FE63005634C7 /* MvrDevice.h */,
+				157280D21137FE63005634C7 /* MvrDevice.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -217,11 +226,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				157280F2113805FA005634C7 /* SpinnerBackdrop.png */,
 				1594394D1133DACB0017B42D /* WaypointLogo.png */,
 				153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */,
 				8D1107310486CEB800E47090 /* MoverWaypoint-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				157280E311380210005634C7 /* MvrDeviceItem.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -353,6 +364,8 @@
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */,
 				153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */,
+				157280E411380210005634C7 /* MvrDeviceItem.xib in Resources */,
+				157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +378,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* MoverWaypointAppDelegate.m in Sources */,
+				157280D31137FE63005634C7 /* MvrDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

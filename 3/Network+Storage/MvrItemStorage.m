@@ -103,7 +103,12 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 
 + itemStorageFromFileAtPath:(NSString*) path error:(NSError**) e;
 {
-	return [self itemStorageFromFileAtPath:path persistent:NO error:e];
+	return [self itemStorageFromFileAtPath:path options:0 error:e];
+}
+
++ itemStorageFromFileAtPath:(NSString*) path options:(MvrItemStorageOptions) options error:(NSError**) e;
+{
+	return [self itemStorageFromFileAtPath:path persistent:(options & kMvrItemStorageDoNotTakeOwnershipOfFile) != 0 error:e];
 }
 
 - (void) dealloc;
@@ -140,6 +145,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	
 	MvrItemStorage* me = [self itemStorage];
 	me.path = path;
+	me.persistent = persistent;
 	return me;
 }
 
@@ -193,7 +199,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 		[path release];
 		path = [p copy];
 		
-		L0Log(@"path now = '%@', length = %llu", path, self.contentLength);
+		L0Log(@"path now = '%@'", path);
 	}
 	[self didChangeValueForKey:@"path"];
 }
@@ -364,7 +370,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 
 - (NSString*) description;
 {
-	return [NSString stringWithFormat:@"%@ { path = '%@', data = %@, length = %llu, pending output stream = %@, persistent? = %d }", [super description], path, data? @"not nil" : @"nil", self.contentLength, lastOutputStream, persistent];
+	return [NSString stringWithFormat:@"%@ { path = '%@', data = %@, pending output stream = %@, persistent? = %d }", [super description], path, data? @"not nil" : @"nil", lastOutputStream, persistent];
 }
 
 @end

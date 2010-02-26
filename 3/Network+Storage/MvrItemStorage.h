@@ -33,6 +33,11 @@ enum {
 };
 typedef NSUInteger MvrStorageDestination;
 
+enum {
+	kMvrItemStorageDoNotTakeOwnershipOfFile = 1 << 0,
+};
+typedef NSUInteger MvrItemStorageOptions;
+
 @interface MvrItemStorage : NSObject {
 	BOOL persistent;
 	
@@ -47,6 +52,7 @@ typedef NSUInteger MvrStorageDestination;
 + itemStorage; // a new empty one.
 + itemStorageWithData:(NSData*) data;
 + itemStorageFromFileAtPath:(NSString*) path error:(NSError**) e; // If not in MvrStorageTemporaryDirectory(), it might be copied.
++ itemStorageFromFileAtPath:(NSString*) path options:(MvrItemStorageOptions) options error:(NSError**) e;
 // + itemStorageWithContentsOfStream:(NSInputStream*) stream;
 
 // If NO, the contents will be lost when the item storage is deallocated.
