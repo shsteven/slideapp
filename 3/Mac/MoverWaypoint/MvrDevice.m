@@ -11,6 +11,8 @@
 #import "Network+Storage/MvrItem.h"
 #import "Network+Storage/MvrGenericItem.h"
 #import "Network+Storage/MvrItemStorage.h"
+#import "Network+Storage/MvrIncoming.h"
+#import "Network+Storage/MvrOutgoing.h"
 
 @implementation MvrDevicesCollectionView
 
@@ -44,10 +46,19 @@
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 {
-	L0Log(@"%@.%@ changed: %@", object, keyPath, change);
+	NSLog(@"%@.%@ changed: %@", object, keyPath, change);
 	
+	NSInteger incoming = [self.channel.incomingTransfers count];
+	NSInteger outgoing = [self.channel.incomingTransfers count];
 	
-	if ([self.channel.incomingTransfers count] != 0 || [self.channel.outgoingTransfers count] != 0) {
+	for (id i in [change objectForKey:NSKeyValueChangeNewKey]) {
+		if ([i conformsToProtocol:@protocol(MvrIncoming)])
+			incoming++;
+		else if ([i conformsToProtocol:@protocol(MvrOutgoing)])
+			outgoing++;
+	}
+	
+	if (incoming != 0 || outgoing != 0) {
 		[spinnerView setHidden:NO];
 		[spinner startAnimation:self];
 	} else {
@@ -89,13 +100,53 @@
 	[self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]]; // TODO more types?
 }
 
+- (void) setDragging:(BOOL) d;
+{
+	dragging = d;
+	[self setNeedsDisplay:YES];
+}
+
+- (void) drawRect:(NSRect)dirtyRect;
+{
+	if (dragging) {
+		[[[NSColor selectedTextBackgroundColor] colorWithAlphaComponent:0.5] setFill]; 
+		NSRectFillUsingOperation(self.bounds, NSCompositeSourceOver);
+	} else
+		[super drawRect:dirtyRect];
+}
+
 - (NSDragOperation) draggingEntered:(id <NSDraggingInfo>) sender;
 {
 	NSArray* files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
-	if ([files count] != 1)
+	if ([files count] != 1) {
+		[self setDragging:NO];
 		return NSDragOperationNone;
-	else
+	} else {
+		[self setDragging:YES];
 		return NSDragOperationCopy;
+	}
+}
+
+- (NSDragOperation) draggingUpdated:(id <NSDraggingInfo>) sender;
+{
+	NSArray* files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
+	if ([files count] != 1) {
+		[self setDragging:NO];
+		return NSDragOperationNone;
+	} else {
+		[self setDragging:YES];
+		return NSDragOperationCopy;
+	}
+}
+
+- (void) draggingExited:(id <NSDraggingInfo>)sender;
+{
+	[self setDragging:NO];
+}
+
+- (void) draggingEnded:(id <NSDraggingInfo>) sender;
+{
+	[self setDragging:NO];
 }
 
 - (BOOL) prepareForDragOperation:(id <NSDraggingInfo>)sender;

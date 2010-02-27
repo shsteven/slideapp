@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150072E8113967C3007BF995 /* NSAlert+L0Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 150072E7113967C3007BF995 /* NSAlert+L0Alert.m */; };
+		150072EA113967F1007BF995 /* PrereleaseExpired.alert in Resources */ = {isa = PBXBuildFile; fileRef = 150072E9113967F1007BF995 /* PrereleaseExpired.alert */; };
 		153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */; };
 		153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EF0AC1135595100B8DDC1 /* Carbon.framework */; };
 		157280D31137FE63005634C7 /* MvrDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 157280D21137FE63005634C7 /* MvrDevice.m */; };
@@ -101,6 +103,9 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		150072E6113967C3007BF995 /* NSAlert+L0Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+L0Alert.h"; sourceTree = "<group>"; };
+		150072E7113967C3007BF995 /* NSAlert+L0Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+L0Alert.m"; sourceTree = "<group>"; };
+		150072E9113967F1007BF995 /* PrereleaseExpired.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrereleaseExpired.alert; sourceTree = "<group>"; };
 		153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeviceBackdrop.png; sourceTree = "<group>"; };
 		153EF0AC1135595100B8DDC1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		157280D11137FE63005634C7 /* MvrDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevice.h; sourceTree = "<group>"; };
@@ -119,7 +124,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* MoverWaypoint-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MoverWaypoint-Info.plist"; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* MoverWaypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverWaypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* Mover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +147,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				150072E6113967C3007BF995 /* NSAlert+L0Alert.h */,
+				150072E7113967C3007BF995 /* NSAlert+L0Alert.m */,
 				256AC3D80F4B6AC300CF3369 /* MoverWaypointAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* MoverWaypointAppDelegate.m */,
 				157280D11137FE63005634C7 /* MvrDevice.h */,
@@ -193,7 +200,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* MoverWaypoint.app */,
+				8D1107320486CEB800E47090 /* Mover.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -226,6 +233,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				150072E9113967F1007BF995 /* PrereleaseExpired.alert */,
 				157280F2113805FA005634C7 /* SpinnerBackdrop.png */,
 				1594394D1133DACB0017B42D /* WaypointLogo.png */,
 				153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */,
@@ -266,7 +274,7 @@
 			name = MoverWaypoint;
 			productInstallPath = "$(HOME)/Applications";
 			productName = MoverWaypoint;
-			productReference = 8D1107320486CEB800E47090 /* MoverWaypoint.app */;
+			productReference = 8D1107320486CEB800E47090 /* Mover.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -366,6 +374,7 @@
 				153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */,
 				157280E411380210005634C7 /* MvrDeviceItem.xib in Resources */,
 				157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */,
+				150072EA113967F1007BF995 /* PrereleaseExpired.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +388,7 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* MoverWaypointAppDelegate.m in Sources */,
 				157280D31137FE63005634C7 /* MvrDevice.m in Sources */,
+				150072E8113967C3007BF995 /* NSAlert+L0Alert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +439,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"kMvrMacPrereleaseTimeLimit=1268578191",
+				);
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
@@ -441,7 +455,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_NAME = MoverWaypoint;
+				PRODUCT_NAME = Mover;
 				SDKROOT = macosx10.6;
 			};
 			name = Debug;
@@ -467,7 +481,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_NAME = MoverWaypoint;
+				PRODUCT_NAME = Mover;
 				SDKROOT = macosx10.6;
 			};
 			name = Release;

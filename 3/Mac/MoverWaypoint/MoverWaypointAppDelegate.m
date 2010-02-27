@@ -14,9 +14,20 @@
 #import "Network+Storage/MvrItemStorage.h"
 #import "Network+Storage/MvrPacketParser.h"
 
+#import "NSAlert+L0Alert.h"
+
 @implementation MoverWaypointAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+#if defined(kMvrMacPrereleaseTimeLimit)
+	NSDate* limit = [NSDate dateWithTimeIntervalSince1970:kMvrMacPrereleaseTimeLimit];
+	if ([limit timeIntervalSinceNow] < 0) {
+		[[NSAlert alertNamed:@"PrereleaseExpired"] runModal];
+		[NSApp terminate:self];
+		return;
+	}
+#endif
+	
 	[MvrPacketParser setAutomaticConsumptionThreshold:5 * 1024 * 1024];
 	
 	channelsByIncoming = [L0Map new];

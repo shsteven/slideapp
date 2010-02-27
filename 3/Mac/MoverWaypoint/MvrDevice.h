@@ -37,6 +37,7 @@
 
 @interface MvrDeviceDropDestinationView : NSView {
 	MvrDeviceItem* owner;
+	BOOL dragging;
 }
 
 @property(assign) IBOutlet MvrDeviceItem* owner;
