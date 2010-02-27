@@ -28,7 +28,10 @@
 	}
 #endif
 	
-	[MvrPacketParser setAutomaticConsumptionThreshold:5 * 1024 * 1024];
+	[devicesView setMinItemSize:NSMakeSize(155, 140)];
+	[devicesView setMaxItemSize:NSMakeSize(155, 140)];
+	
+	[MvrPacketParser setAutomaticConsumptionThreshold:1024 * 1024];
 	
 	channelsByIncoming = [L0Map new];
 	

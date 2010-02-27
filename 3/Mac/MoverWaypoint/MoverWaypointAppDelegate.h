@@ -24,6 +24,8 @@
 	IBOutlet NSArrayController* channelsController;
 	
 	L0Map* channelsByIncoming;
+	
+	IBOutlet NSCollectionView* devicesView;
 }
 
 @end

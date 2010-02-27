@@ -17,6 +17,9 @@
 @interface MvrDevicesCollectionView : NSCollectionView {}
 @end
 
+@interface MvrDeviceBaseView : NSView {}
+@end
+
 
 @interface MvrDeviceItem : NSCollectionViewItem {
 	id <MvrChannel> channel;

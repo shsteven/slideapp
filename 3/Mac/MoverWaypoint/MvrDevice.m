@@ -69,6 +69,7 @@
 
 - (void) awakeFromNib;
 {
+	[self.view setFrame:NSMakeRect(0, 0, 155, 140)];
 	[spinner stopAnimation:self];
 	[spinnerView setHidden:YES];
 }
@@ -159,6 +160,15 @@
 {
 	[self.owner sendItemFile:[[[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType] objectAtIndex:0]];
 	return YES;
+}
+
+@end
+
+@implementation MvrDeviceBaseView
+
+- (NSView *) hitTest:(NSPoint)aPoint;
+{
+	return nil;
 }
 
 @end
