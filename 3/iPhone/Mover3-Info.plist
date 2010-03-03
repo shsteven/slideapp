@@ -49,7 +49,7 @@
 	<string>MainWindow</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
-	<key>CFBundleIconFiles</key>
+	<key>MvrTemporarilyDisabled-CFBundleIconFiles</key>
 	<array>
 		<string>Icon512.png</string>
 		<string>Icon72.png</string>

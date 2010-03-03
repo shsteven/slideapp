@@ -21,7 +21,7 @@
 @end
 
 
-@interface MvrDeviceItem : NSCollectionViewItem {
+@interface MvrDeviceItem : NSViewController {
 	id <MvrChannel> channel;
 	
 	IBOutlet NSProgressIndicator* spinner;
