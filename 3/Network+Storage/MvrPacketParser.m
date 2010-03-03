@@ -49,6 +49,17 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 
 @implementation MvrPacketParser
 
+static NSInteger MvrPacketParserAutomaticConsumptionThreshold = 500 * 1024;
+
++ (NSUInteger) automaticConsumptionThreshold {
+	return MvrPacketParserAutomaticConsumptionThreshold;
+}
+
++ (void) setAutomaticConsumptionThreshold:(NSUInteger) t {
+	MvrPacketParserAutomaticConsumptionThreshold = t;
+}
+
+
 - (id) initWithDelegate:(id <MvrPacketParserDelegate>) d;
 {
 	if (self = [super init]) {
@@ -88,7 +99,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	
 	// An optimization: if we're in the expecting body state and we need to read a body, we only consume every 500 KiB or so.
 	if (self.state == kMvrPacketParserExpectingBody) {
-		if ([currentBuffer length] < MIN(500 * 1024, toReadForCurrentStop))
+		if ([currentBuffer length] < MIN(MvrPacketParserAutomaticConsumptionThreshold, toReadForCurrentStop))
 			return;
 	}
 	
@@ -100,7 +111,7 @@ NSString* const kMvrPacketParserErrorDomain = @"kMvrPacketParserErrorDomain";
 	if (self.state != kMvrPacketParserExpectingBody)
 		return 0;
 	
-	return MIN(toReadForCurrentStop - [currentBuffer length], 500 * 1024 - [currentBuffer length]);
+	return MIN(toReadForCurrentStop - [currentBuffer length], MvrPacketParserAutomaticConsumptionThreshold - [currentBuffer length]);
 }
 
 - (void) consumeCurrentBuffer;

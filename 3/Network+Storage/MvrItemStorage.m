@@ -103,14 +103,21 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 
 + itemStorageFromFileAtPath:(NSString*) path error:(NSError**) e;
 {
-	return [self itemStorageFromFileAtPath:path persistent:NO error:e];
+	return [self itemStorageFromFileAtPath:path options:0 error:e];
+}
+
++ itemStorageFromFileAtPath:(NSString*) path options:(MvrItemStorageOptions) options error:(NSError**) e;
+{
+	return [self itemStorageFromFileAtPath:path persistent:(options & kMvrItemStorageDoNotTakeOwnershipOfFile) != 0 error:e];
 }
 
 - (void) dealloc;
 {
 	if (!persistent && path) {
 		L0Log(@"Deleting offloading file %@", path);
-		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+		NSFileManager* fm = [NSFileManager new];
+		[fm removeItemAtPath:path error:NULL];
+		[fm release];
 	}
 	
 	[data release];
@@ -138,6 +145,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	
 	MvrItemStorage* me = [self itemStorage];
 	me.path = path;
+	me.persistent = persistent;
 	return me;
 }
 
@@ -191,7 +199,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 		[path release];
 		path = [p copy];
 		
-		L0Log(@"path now = '%@', length = %llu", path, self.contentLength);
+		L0Log(@"path now = '%@'", path);
 	}
 	[self didChangeValueForKey:@"path"];
 }
@@ -292,6 +300,18 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	[data release]; data = nil;
 }
 
+- (void) invalidate;
+{
+	BOOL canInvalidate = NO;
+	
+#if TARGET_OS_MAC && !TARGET_OS_IPHONE
+	canInvalidate = ([NSClassFromString(@"NSGarbageCollector") performSelector:@selector(defaultCollector)] != nil);
+#endif
+	
+	NSAssert(canInvalidate, @"This method can only be called from a garbage-collected environment!");
+	[self resetData];
+}
+
 - (void) resetData;
 {
 	NSAssert(!persistent, @"Persistent item storage cannot be altered. Remove the item from the storage central first.");
@@ -350,7 +370,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 
 - (NSString*) description;
 {
-	return [NSString stringWithFormat:@"%@ { path = '%@', data = %@, length = %llu, pending output stream = %@, persistent? = %d }", [super description], path, data? @"not nil" : @"nil", self.contentLength, lastOutputStream, persistent];
+	return [NSString stringWithFormat:@"%@ { path = '%@', data = %@, pending output stream = %@, persistent? = %d }", [super description], path, data? @"not nil" : @"nil", lastOutputStream, persistent];
 }
 
 @end

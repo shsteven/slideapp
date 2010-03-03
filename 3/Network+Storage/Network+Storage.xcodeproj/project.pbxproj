@@ -1383,6 +1383,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1535D19F1090328C00CBF778 /* Mover-Network-Mac-Debug.xcconfig */;
 			buildSettings = {
+				GCC_ENABLE_OBJC_GC = supported;
 			};
 			name = Debug;
 		};
@@ -1391,6 +1392,7 @@
 			baseConfigurationReference = 156B0A1A10902F5F00209F2D /* Mover-Network-Mac-Release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/Network.dst;
+				GCC_ENABLE_OBJC_GC = supported;
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Network;
