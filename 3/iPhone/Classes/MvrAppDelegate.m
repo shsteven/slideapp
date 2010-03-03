@@ -111,6 +111,28 @@ enum {
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
 {
+#if !kMvrIsLite
+	NSString* scheme = [url scheme];
+	if ([scheme isEqual:@"x-infinitelabs-mover"]) {
+		if (![[url resourceSpecifier] hasPrefix:@"add?"])
+			return NO;
+		
+		NSDictionary* query = [url dictionaryByDecodingQueryString];
+		NSString* urlString;
+		if (!(urlString = [query objectForKey:@"url"]))
+			return NO;
+		
+		NSURL* bookmarkedURL = [NSURL URLWithString:urlString];
+		if (!bookmarkedURL)
+			return NO;
+		
+		MvrBookmarkItem* item = [[[MvrBookmarkItem alloc] initWithAddress:bookmarkedURL] autorelease];
+		if (item)
+			[self performSelector:@selector(addItemFromSelf:) withObject:item afterDelay:0.7];
+		return item != nil;
+	}
+#endif
+	
 	return [ILSwapService handleOpenURL:url];
 }
 
