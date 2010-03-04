@@ -32,6 +32,11 @@
     return self;
 }
 
+- (void) awakeFromNib;
+{
+	[self layoutSubviews];
+}
+
 - (void) setFrame:(NSRect) frame;
 {
 	[super setFrame:frame];
