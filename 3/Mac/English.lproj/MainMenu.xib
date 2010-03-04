@@ -1361,67 +1361,12 @@
 							</object>
 							<bool key="NSEditable">YES</bool>
 						</object>
-						<object class="NSScrollView" id="196573930">
+						<object class="NSCustomView" id="930343762">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">268</int>
-							<object class="NSMutableArray" key="NSSubviews">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSClipView" id="686738855">
-									<reference key="NSNextResponder" ref="196573930"/>
-									<int key="NSvFlags">2304</int>
-									<object class="NSMutableArray" key="NSSubviews">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-										<object class="NSCustomView" id="930343762">
-											<reference key="NSNextResponder" ref="686738855"/>
-											<int key="NSvFlags">268</int>
-											<string key="NSFrameSize">{484, 155}</string>
-											<reference key="NSSuperview" ref="686738855"/>
-											<string key="NSClassName">MvrDevicesLineView</string>
-										</object>
-									</object>
-									<string key="NSFrameSize">{486, 157}</string>
-									<reference key="NSSuperview" ref="196573930"/>
-									<reference key="NSNextKeyView" ref="930343762"/>
-									<reference key="NSDocView" ref="930343762"/>
-									<object class="NSColor" key="NSBGColor">
-										<int key="NSColorSpace">6</int>
-										<string key="NSCatalogName">System</string>
-										<string key="NSColorName">controlColor</string>
-										<object class="NSColor" key="NSColor">
-											<int key="NSColorSpace">3</int>
-											<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
-										</object>
-									</object>
-									<int key="NScvFlags">4</int>
-								</object>
-								<object class="NSScroller" id="210308472">
-									<reference key="NSNextResponder" ref="196573930"/>
-									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{486, 0}, {15, 157}}</string>
-									<reference key="NSSuperview" ref="196573930"/>
-									<reference key="NSTarget" ref="196573930"/>
-									<string key="NSAction">_doScroller:</string>
-									<double key="NSCurValue">1</double>
-									<double key="NSPercent">0.99367088607594933</double>
-								</object>
-								<object class="NSScroller" id="270836600">
-									<reference key="NSNextResponder" ref="196573930"/>
-									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{0, 157}, {486, 15}}</string>
-									<reference key="NSSuperview" ref="196573930"/>
-									<int key="NSsFlags">1</int>
-									<reference key="NSTarget" ref="196573930"/>
-									<string key="NSAction">_doScroller:</string>
-									<double key="NSPercent">0.50602412223815918</double>
-								</object>
-							</object>
-							<string key="NSFrame">{{154, -16}, {501, 172}}</string>
+							<string key="NSFrame">{{155, 15}, {484, 140}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSNextKeyView" ref="686738855"/>
-							<int key="NSsFlags">48</int>
-							<reference key="NSVScroller" ref="210308472"/>
-							<reference key="NSHScroller" ref="270836600"/>
-							<reference key="NSContentView" ref="686738855"/>
+							<string key="NSClassName">MvrDevicesLineView</string>
 						</object>
 					</object>
 					<string key="NSFrameSize">{639, 155}</string>
@@ -2145,6 +2090,14 @@
 					</object>
 					<int key="connectionID">555</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">devicesView</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="930343762"/>
+					</object>
+					<int key="connectionID">569</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -2701,7 +2654,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="766816162"/>
-							<reference ref="196573930"/>
+							<reference ref="930343762"/>
 						</object>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -3212,30 +3165,9 @@
 						<string key="objectName">Channels</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">565</int>
-						<reference key="object" ref="196573930"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="210308472"/>
-							<reference ref="270836600"/>
-							<reference ref="930343762"/>
-						</object>
-						<reference key="parent" ref="439893737"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">566</int>
-						<reference key="object" ref="210308472"/>
-						<reference key="parent" ref="196573930"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">567</int>
-						<reference key="object" ref="270836600"/>
-						<reference key="parent" ref="196573930"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">564</int>
 						<reference key="object" ref="930343762"/>
-						<reference key="parent" ref="196573930"/>
+						<reference key="parent" ref="439893737"/>
 					</object>
 				</object>
 			</object>
@@ -3772,7 +3704,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">568</int>
+			<int key="maxID">569</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3791,7 +3723,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSArrayController</string>
-							<string>NSCollectionView</string>
+							<string>MvrDevicesLineView</string>
 							<string>NSWindow</string>
 						</object>
 					</object>
@@ -3877,19 +3809,6 @@
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSCell.h</string>
 					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSCollectionView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="965075609">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">AppKit.framework/Headers/NSCollectionView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSCollectionViewItem</string>
-					<string key="superclassName">NSViewController</string>
-					<reference key="sourceIdentifier" ref="965075609"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSControl</string>
@@ -4305,22 +4224,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">NSScrollView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">AppKit.framework/Headers/NSScrollView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSScroller</string>
-					<string key="superclassName">NSControl</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">AppKit.framework/Headers/NSScroller.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">NSTableView</string>
 					<string key="superclassName">NSControl</string>
 					<reference key="sourceIdentifier" ref="809545482"/>
@@ -4363,18 +4266,6 @@
 					<string key="className">NSView</string>
 					<string key="superclassName">NSResponder</string>
 					<reference key="sourceIdentifier" ref="260078765"/>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSViewController</string>
-					<string key="superclassName">NSResponder</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">view</string>
-						<string key="NS.object.0">NSView</string>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">AppKit.framework/Headers/NSViewController.h</string>
-					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSWindow</string>

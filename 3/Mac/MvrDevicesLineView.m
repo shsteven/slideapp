@@ -34,6 +34,7 @@
 {
 	[super setFrame:frame];
 	[self layoutSubviews];
+	[self setNeedsDisplay:YES];
 }
 
 - (NSArray *) contentViewControllers;
@@ -71,9 +72,15 @@
 	[super setFrame:r];
 }
 
+- (void) drawRect:(NSRect)dirtyRect;
+{
+	[[NSColor whiteColor] setFill];
+	NSRectFill([self bounds]);
+}
+
 // KVO support
 
-- (NSMutableArray*) content;
+- (NSMutableArray*) mutableContent;
 {
 	return [self mutableArrayValueForKey:@"mutableContent"];
 }
@@ -83,26 +90,17 @@
 	return [[[MvrDeviceItem alloc] initWithChannel:(id <MvrChannel>) o] autorelease];
 }
 
-- (NSMutableArray*) mutableContent;
-{
-	return content;
-}
+@synthesize content;
 
-- (void) insertObject:(id) o inMutableContentAtIndex:(NSInteger) idx;
+- (void) setContent:(NSArray *) c;
 {
-	[content insertObject:o atIndex:idx];
-	
-	NSViewController* vc = [self viewControllerForContentObject:o];
-	[vc setRepresentedObject:o];
-	[contentViewControllers insertObject:vc atIndex:idx];
-	
-	[self layoutSubviews];
-}
-
-- (void) removeObjectFromMutableContentAtIndex:(NSInteger) idx;
-{
-	[content removeObjectAtIndex:idx];
-	[contentViewControllers removeObjectAtIndex:idx];
+	content = [c copy];
+	contentViewControllers = [NSMutableArray array];
+	for (id o in c) {
+		NSViewController* vc = [self viewControllerForContentObject:o];
+		[vc setRepresentedObject:o];
+		[contentViewControllers addObject:vc];
+	}
 	
 	[self layoutSubviews];
 }

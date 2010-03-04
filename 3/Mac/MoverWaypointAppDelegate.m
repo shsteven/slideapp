@@ -27,16 +27,14 @@
 		return;
 	}
 #endif
-	
-	[devicesView setMinItemSize:NSMakeSize(155, 140)];
-	[devicesView setMaxItemSize:NSMakeSize(155, 140)];
-	
+		
 	[MvrPacketParser setAutomaticConsumptionThreshold:1024 * 1024];
 	
 	channelsByIncoming = [L0Map new];
 	
 	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort];
 	[channelsController bind:NSContentSetBinding toObject:wifi withKeyPath:@"channels" options:nil];
+	[devicesView bind:@"content" toObject:channelsController withKeyPath:@"arrangedObjects" options:nil];
 	
 	wifiObserver = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
 	

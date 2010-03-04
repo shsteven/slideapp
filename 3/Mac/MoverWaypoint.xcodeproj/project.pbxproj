@@ -14,12 +14,13 @@
 		157280D31137FE63005634C7 /* MvrDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 157280D21137FE63005634C7 /* MvrDevice.m */; };
 		157280E411380210005634C7 /* MvrDeviceItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157280E311380210005634C7 /* MvrDeviceItem.xib */; };
 		157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 157280F2113805FA005634C7 /* SpinnerBackdrop.png */; };
-		1574449F113435520088C65E /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574449C113435430088C65E /* libMuiKit-Mac.a */; };
 		1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574452111343C630088C65E /* SystemConfiguration.framework */; };
 		1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574453A11343D090088C65E /* libz.1.1.3.dylib */; };
 		1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1594394D1133DACB0017B42D /* WaypointLogo.png */; };
-		1594398E1133E1880017B42D /* libMoverNetwork-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 159439851133E1410017B42D /* libMoverNetwork-Mac.a */; };
 		15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */; };
+		15E3A4A9113F970C00F301D8 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */; };
+		15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */; };
+		15E3A4B3113F972900F301D8 /* libMoverNetwork-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* MoverWaypointAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* MoverWaypointAppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -28,74 +29,74 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		15744495113435430088C65E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 154B01F00F78156D0082109B;
-			remoteInfo = "MuiKit (Library)";
-		};
-		15744497113435430088C65E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 156FD76B0F7A25F900F83283;
-			remoteInfo = "MuiKit (Resources)";
-		};
-		15744499113435430088C65E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 154635591011BD77000238EE;
-			remoteInfo = "MuiKit+Test";
-		};
-		1574449B113435430088C65E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2;
-			remoteInfo = "MuiKit (Library - Mac OS X)";
-		};
-		157444AC1134359D0088C65E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2;
-			remoteInfo = "MuiKit (Mac OS X)";
-		};
-		159439841133E1410017B42D /* PBXContainerItemProxy */ = {
+		15E3A48C113F96FC00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 1535D2361090336700CBF778;
+			remoteGlobalIDString = 1535D2361090336700CBF778 /* libMoverNetwork-Mac.a */;
 			remoteInfo = "Network (Mac OS X)";
 		};
-		159439861133E1410017B42D /* PBXContainerItemProxy */ = {
+		15E3A48E113F96FC00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D /* libMoverNetwork.a */;
 			remoteInfo = "Network (iPhone)";
 		};
-		159439881133E1410017B42D /* PBXContainerItemProxy */ = {
+		15E3A490113F96FC00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 1593E964105BB9FB00220989;
+			remoteGlobalIDString = 1593E964105BB9FB00220989 /* Network+Test.octest */;
 			remoteInfo = "Network+Test";
 		};
-		1594398A1133E1410017B42D /* PBXContainerItemProxy */ = {
+		15E3A492113F96FC00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 153B4212105BF36700DB8FB2;
+			remoteGlobalIDString = 153B4212105BF36700DB8FB2 /* mvr-wifi */;
 			remoteInfo = "mvr-wifi";
 		};
-		1594398C1133E1790017B42D /* PBXContainerItemProxy */ = {
+		15E3A49D113F96FD00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 154B01F00F78156D0082109B /* libMuiKit.a */;
+			remoteInfo = "MuiKit (Library)";
+		};
+		15E3A49F113F96FD00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 156FD76B0F7A25F900F83283 /* MuiKit.bundle */;
+			remoteInfo = "MuiKit (Resources)";
+		};
+		15E3A4A1113F96FD00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 154635591011BD77000238EE /* MuiKit+Test.octest */;
+			remoteInfo = "MuiKit+Test";
+		};
+		15E3A4A3113F96FD00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2 /* libMuiKit-Mac.a */;
+			remoteInfo = "MuiKit (Library - Mac OS X)";
+		};
+		15E3A4A5113F970600F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2 /* MuiKit (Mac OS X) */;
+			remoteInfo = "MuiKit (Mac OS X)";
+		};
+		15E3A4A7113F970600F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 1535D1CB1090336700CBF778;
+			remoteGlobalIDString = 1535D1CB1090336700CBF778 /* Network (Mac OS X) */;
 			remoteInfo = "Network (Mac OS X)";
 		};
 /* End PBXContainerItemProxy section */
@@ -113,11 +114,11 @@
 		157280D21137FE63005634C7 /* MvrDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevice.m; sourceTree = "<group>"; };
 		157280E311380210005634C7 /* MvrDeviceItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrDeviceItem.xib; sourceTree = "<group>"; };
 		157280F2113805FA005634C7 /* SpinnerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SpinnerBackdrop.png; sourceTree = "<group>"; };
-		1574448B113435430088C65E /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MuiKit.xcodeproj; path = ../../../../MuiKit/MuiKit.xcodeproj; sourceTree = SOURCE_ROOT; };
+		1574448B113435430088C65E /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
 		1574452111343C630088C65E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1574453A11343D090088C65E /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		1594394D1133DACB0017B42D /* WaypointLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaypointLogo.png; sourceTree = "<group>"; };
-		1594397D1133E1410017B42D /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		1594397D1133E1410017B42D /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevicesLineView.h; sourceTree = "<group>"; };
 		15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevicesLineView.m; sourceTree = "<group>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -135,8 +136,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1574449F113435520088C65E /* libMuiKit-Mac.a in Frameworks */,
-				1594398E1133E1880017B42D /* libMoverNetwork-Mac.a in Frameworks */,
+				15E3A4B3113F972900F301D8 /* libMoverNetwork-Mac.a in Frameworks */,
+				15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */,
 				1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */,
@@ -180,24 +181,24 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		1574448C113435430088C65E /* Products */ = {
+		15E3A486113F96FC00F301D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				15744496113435430088C65E /* libMuiKit.a */,
-				15744498113435430088C65E /* MuiKit.bundle */,
-				1574449A113435430088C65E /* MuiKit+Test.octest */,
-				1574449C113435430088C65E /* libMuiKit-Mac.a */,
+				15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */,
+				15E3A48F113F96FC00F301D8 /* libMoverNetwork.a */,
+				15E3A491113F96FC00F301D8 /* Network+Test.octest */,
+				15E3A493113F96FC00F301D8 /* mvr-wifi */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1594397E1133E1410017B42D /* Products */ = {
+		15E3A494113F96FD00F301D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				159439851133E1410017B42D /* libMoverNetwork-Mac.a */,
-				159439871133E1410017B42D /* libMoverNetwork.a */,
-				159439891133E1410017B42D /* Network+Test.octest */,
-				1594398B1133E1410017B42D /* mvr-wifi */,
+				15E3A49E113F96FD00F301D8 /* libMuiKit.a */,
+				15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */,
+				15E3A4A2113F96FD00F301D8 /* MuiKit+Test.octest */,
+				15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,8 +274,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				1594398D1133E1790017B42D /* PBXTargetDependency */,
-				157444AD1134359D0088C65E /* PBXTargetDependency */,
+				15E3A4A6113F970600F301D8 /* PBXTargetDependency */,
+				15E3A4A8113F970600F301D8 /* PBXTargetDependency */,
 			);
 			name = MoverWaypoint;
 			productInstallPath = "$(HOME)/Applications";
@@ -294,11 +295,11 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 1574448C113435430088C65E /* Products */;
+					ProductGroup = 15E3A494113F96FD00F301D8 /* Products */;
 					ProjectRef = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 				},
 				{
-					ProductGroup = 1594397E1133E1410017B42D /* Products */;
+					ProductGroup = 15E3A486113F96FC00F301D8 /* Products */;
 					ProjectRef = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 				},
 			);
@@ -310,60 +311,60 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		15744496113435430088C65E /* libMuiKit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libMuiKit.a;
-			remoteRef = 15744495113435430088C65E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		15744498113435430088C65E /* MuiKit.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = MuiKit.bundle;
-			remoteRef = 15744497113435430088C65E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1574449A113435430088C65E /* MuiKit+Test.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "MuiKit+Test.octest";
-			remoteRef = 15744499113435430088C65E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1574449C113435430088C65E /* libMuiKit-Mac.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libMuiKit-Mac.a";
-			remoteRef = 1574449B113435430088C65E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		159439851133E1410017B42D /* libMoverNetwork-Mac.a */ = {
+		15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libMoverNetwork-Mac.a";
-			remoteRef = 159439841133E1410017B42D /* PBXContainerItemProxy */;
+			remoteRef = 15E3A48C113F96FC00F301D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		159439871133E1410017B42D /* libMoverNetwork.a */ = {
+		15E3A48F113F96FC00F301D8 /* libMoverNetwork.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libMoverNetwork.a;
-			remoteRef = 159439861133E1410017B42D /* PBXContainerItemProxy */;
+			remoteRef = 15E3A48E113F96FC00F301D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		159439891133E1410017B42D /* Network+Test.octest */ = {
+		15E3A491113F96FC00F301D8 /* Network+Test.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "Network+Test.octest";
-			remoteRef = 159439881133E1410017B42D /* PBXContainerItemProxy */;
+			remoteRef = 15E3A490113F96FC00F301D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		1594398B1133E1410017B42D /* mvr-wifi */ = {
+		15E3A493113F96FC00F301D8 /* mvr-wifi */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			path = "mvr-wifi";
-			remoteRef = 1594398A1133E1410017B42D /* PBXContainerItemProxy */;
+			remoteRef = 15E3A492113F96FC00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A49E113F96FD00F301D8 /* libMuiKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMuiKit.a;
+			remoteRef = 15E3A49D113F96FD00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MuiKit.bundle;
+			remoteRef = 15E3A49F113F96FD00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A4A2113F96FD00F301D8 /* MuiKit+Test.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MuiKit+Test.octest";
+			remoteRef = 15E3A4A1113F96FD00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libMuiKit-Mac.a";
+			remoteRef = 15E3A4A3113F96FD00F301D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -373,6 +374,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E3A4A9113F970C00F301D8 /* MuiKit.bundle in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */,
@@ -401,15 +403,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		157444AD1134359D0088C65E /* PBXTargetDependency */ = {
+		15E3A4A6113F970600F301D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "MuiKit (Mac OS X)";
-			targetProxy = 157444AC1134359D0088C65E /* PBXContainerItemProxy */;
+			targetProxy = 15E3A4A5113F970600F301D8 /* PBXContainerItemProxy */;
 		};
-		1594398D1133E1790017B42D /* PBXTargetDependency */ = {
+		15E3A4A8113F970600F301D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Network (Mac OS X)";
-			targetProxy = 1594398C1133E1790017B42D /* PBXContainerItemProxy */;
+			targetProxy = 15E3A4A7113F970600F301D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -452,12 +454,11 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
-					"$(SRCROOT)/../..",
+					"$(SRCROOT)/..",
 				);
 				INFOPLIST_FILE = "MoverWaypoint-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",

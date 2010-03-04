@@ -15,6 +15,7 @@
 }
 
 @property(readonly) NSArray* contentViewControllers;
-@property(readonly) NSMutableArray* content;
+@property(copy) NSArray* content;
+@property(readonly) NSMutableArray* mutableContent;
 
 @end

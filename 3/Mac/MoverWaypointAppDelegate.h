@@ -11,6 +11,8 @@
 #import "Network+Storage/MvrModernWiFi.h"
 #import "Network+Storage/MvrScannerObserver.h"
 
+#import "MvrDevicesLineView.h"
+
 #import <MuiKit/MuiKit.h>
 
 @interface MoverWaypointAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, MvrPlatformInfo, MvrScannerObserverDelegate> {
@@ -25,7 +27,7 @@
 	
 	L0Map* channelsByIncoming;
 	
-	IBOutlet NSCollectionView* devicesView;
+	IBOutlet MvrDevicesLineView* devicesView;
 }
 
 @end
