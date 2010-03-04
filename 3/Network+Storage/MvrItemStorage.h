@@ -33,6 +33,11 @@ enum {
 };
 typedef NSUInteger MvrStorageDestination;
 
+enum {
+	kMvrItemStorageDoNotTakeOwnershipOfFile = 1 << 0,
+};
+typedef NSUInteger MvrItemStorageOptions;
+
 @interface MvrItemStorage : NSObject {
 	BOOL persistent;
 	
@@ -47,6 +52,7 @@ typedef NSUInteger MvrStorageDestination;
 + itemStorage; // a new empty one.
 + itemStorageWithData:(NSData*) data;
 + itemStorageFromFileAtPath:(NSString*) path error:(NSError**) e; // If not in MvrStorageTemporaryDirectory(), it might be copied.
++ itemStorageFromFileAtPath:(NSString*) path options:(MvrItemStorageOptions) options error:(NSError**) e;
 // + itemStorageWithContentsOfStream:(NSInputStream*) stream;
 
 // If NO, the contents will be lost when the item storage is deallocated.
@@ -108,6 +114,10 @@ typedef NSUInteger MvrStorageDestination;
 // The second method is a convenience method that calls the first with the default extension for the given UTI.
 - (BOOL) setPathExtension:(NSString*) ext error:(NSError**) e;
 - (BOOL) setPathExtensionAssumingType:(id) uti error:(NSError**) e;
+
+// This method is only for use in garbage-collected environments and from the main thread only. It indicates that the storage is to be invalidated immediately, removing any resource it may be managing (for instance, files on disk or data in memory). This clears the storage.
+// GC apps must call this method at least once, and call no methods that cause .path to be invoked, before the last reference to this object is lost. It is only valid to call this method on non-persistent object, since the storage central references those objects.
+- (void) invalidate;
 
 @end
 

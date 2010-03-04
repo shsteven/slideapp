@@ -94,8 +94,20 @@
 	[currentPlayer autorelease]; currentPlayer = nil;
 }
 
-- (UIImage*) representingImageWithSize:(CGSize)size forItem:(id)i;
+- (UIImage*) representingImageWithSize:(CGSize)size forItem:(MvrVideoItem*	)i;
 {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+	// iPad only!
+	if ([MPMoviePlayerController instancesRespondToSelector:@selector(thumbnailImageAtTime:timeOption:)]) {
+		
+		MPMoviePlayerController* ctl = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:i.storage.path]];
+		UIImage* image = [[[ctl thumbnailImageAtTime:0.3 * ctl.duration timeOption:MPMovieTimeOptionNearestKeyFrame] retain] autorelease];
+		[ctl release];
+		
+		if (image) return image;
+	}
+#endif
+	
 	return [UIImage imageNamed:@"VideoItemIcon.png"];
 }
 

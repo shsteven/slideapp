@@ -46,6 +46,8 @@
 - (void) setUpStorageCentral;
 - (void) setUpTableController;
 
+- (BOOL) performActionsForURL:(NSURL*) url;
+
 @end
 
 #define kMvrAppDelegateRemoveButtonIdentifier @"kMvrAppDelegateRemoveButtonIdentifier"
@@ -104,14 +106,47 @@ enum {
 	
 	[self showAlertIfNotShownBeforeNamed:@"MvrWelcome"];
 	
-	[ILSwapService didFinishLaunchingWithOptions:options];
+	BOOL ok = [ILSwapService didFinishLaunchingWithOptions:options];
 	
-	return YES;
+	NSURL* url = [options objectForKey:UIApplicationLaunchOptionsURLKey];
+	if (!ok && url)
+		ok = [self performActionsForURL:url];
+	
+	return !url || ok;
 }
+
+- (BOOL) performActionsForURL:(NSURL*) url;
+{
+#if !kMvrIsLite
+	NSString* scheme = [url scheme];
+	if ([scheme isEqual:kMvrLegacyAPIURLScheme]) {
+		if (![[url resourceSpecifier] hasPrefix:@"add?"])
+			return NO;
+		
+		NSDictionary* query = [url dictionaryByDecodingQueryString];
+		NSString* urlString;
+		if (!(urlString = [query objectForKey:@"url"]))
+			return NO;
+		
+		NSURL* bookmarkedURL = [NSURL URLWithString:urlString];
+		if (!bookmarkedURL)
+			return NO;
+		
+		MvrBookmarkItem* item = [[[MvrBookmarkItem alloc] initWithAddress:bookmarkedURL] autorelease];
+		if (item)
+			[self performSelector:@selector(addItemFromSelf:) withObject:item afterDelay:0.7];
+		return item != nil;
+	} else
+		return NO;
+#else
+	return NO;
+#endif
+}
+	
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url;  
 {
-	return [ILSwapService handleOpenURL:url];
+	return [self performActionsForURL:url] || [ILSwapService handleOpenURL:url];
 }
 
 - (void) swapServiceDidReceiveRequest:(ILSwapRequest*) request;

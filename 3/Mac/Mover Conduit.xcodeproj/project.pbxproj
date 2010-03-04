@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		150072E8113967C3007BF995 /* NSAlert+L0Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 150072E7113967C3007BF995 /* NSAlert+L0Alert.m */; };
+		150072EA113967F1007BF995 /* PrereleaseExpired.alert in Resources */ = {isa = PBXBuildFile; fileRef = 150072E9113967F1007BF995 /* PrereleaseExpired.alert */; };
+		153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */; };
+		153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EF0AC1135595100B8DDC1 /* Carbon.framework */; };
+		157280D31137FE63005634C7 /* MvrDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 157280D21137FE63005634C7 /* MvrDevice.m */; };
+		157280E411380210005634C7 /* MvrDeviceItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157280E311380210005634C7 /* MvrDeviceItem.xib */; };
+		157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 157280F2113805FA005634C7 /* SpinnerBackdrop.png */; };
+		1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574452111343C630088C65E /* SystemConfiguration.framework */; };
+		1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574453A11343D090088C65E /* libz.1.1.3.dylib */; };
+		1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1594394D1133DACB0017B42D /* WaypointLogo.png */; };
+		15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */; };
+		15E3A4A9113F970C00F301D8 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */; };
+		15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */; };
+		15E3A4B3113F972900F301D8 /* libMoverNetwork-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */; };
+		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		256AC3DA0F4B6AC300CF3369 /* MoverWaypointAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* MoverWaypointAppDelegate.m */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		15E3A48C113F96FC00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1535D2361090336700CBF778;
+			remoteInfo = "Network (Mac OS X)";
+		};
+		15E3A48E113F96FC00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = "Network (iPhone)";
+		};
+		15E3A490113F96FC00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1593E964105BB9FB00220989;
+			remoteInfo = "Network+Test";
+		};
+		15E3A492113F96FC00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 153B4212105BF36700DB8FB2;
+			remoteInfo = "mvr-wifi";
+		};
+		15E3A49D113F96FD00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 154B01F00F78156D0082109B;
+			remoteInfo = "MuiKit (Library)";
+		};
+		15E3A49F113F96FD00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 156FD76B0F7A25F900F83283;
+			remoteInfo = "MuiKit (Resources)";
+		};
+		15E3A4A1113F96FD00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 154635591011BD77000238EE;
+			remoteInfo = "MuiKit+Test";
+		};
+		15E3A4A3113F96FD00F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2;
+			remoteInfo = "MuiKit (Library - Mac OS X)";
+		};
+		15E3A4A5113F970600F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2;
+			remoteInfo = "MuiKit (Mac OS X)";
+		};
+		15E3A4A7113F970600F301D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1535D1CB1090336700CBF778;
+			remoteInfo = "Network (Mac OS X)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		150072E6113967C3007BF995 /* NSAlert+L0Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+L0Alert.h"; sourceTree = "<group>"; };
+		150072E7113967C3007BF995 /* NSAlert+L0Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+L0Alert.m"; sourceTree = "<group>"; };
+		150072E9113967F1007BF995 /* PrereleaseExpired.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrereleaseExpired.alert; sourceTree = "<group>"; };
+		153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeviceBackdrop.png; sourceTree = "<group>"; };
+		153EF0AC1135595100B8DDC1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		157280D11137FE63005634C7 /* MvrDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevice.h; sourceTree = "<group>"; };
+		157280D21137FE63005634C7 /* MvrDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevice.m; sourceTree = "<group>"; };
+		157280E311380210005634C7 /* MvrDeviceItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrDeviceItem.xib; sourceTree = "<group>"; };
+		157280F2113805FA005634C7 /* SpinnerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SpinnerBackdrop.png; sourceTree = "<group>"; };
+		1574448B113435430088C65E /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
+		1574452111343C630088C65E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1574453A11343D090088C65E /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		1594394D1133DACB0017B42D /* WaypointLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaypointLogo.png; sourceTree = "<group>"; };
+		1594397D1133E1410017B42D /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevicesLineView.h; sourceTree = "<group>"; };
+		15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevicesLineView.m; sourceTree = "<group>"; };
+		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		256AC3D80F4B6AC300CF3369 /* MoverWaypointAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoverWaypointAppDelegate.h; sourceTree = "<group>"; };
+		256AC3D90F4B6AC300CF3369 /* MoverWaypointAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoverWaypointAppDelegate.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8D1107310486CEB800E47090 /* Mover Conduit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover Conduit-Info.plist"; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* Mover Conduit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mover Conduit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15E3A4B3113F972900F301D8 /* libMoverNetwork-Mac.a in Frameworks */,
+				15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */,
+				1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */,
+				153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				150072E6113967C3007BF995 /* NSAlert+L0Alert.h */,
+				150072E7113967C3007BF995 /* NSAlert+L0Alert.m */,
+				256AC3D80F4B6AC300CF3369 /* MoverWaypointAppDelegate.h */,
+				256AC3D90F4B6AC300CF3369 /* MoverWaypointAppDelegate.m */,
+				157280D11137FE63005634C7 /* MvrDevice.h */,
+				157280D21137FE63005634C7 /* MvrDevice.m */,
+				15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */,
+				15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		15E3A486113F96FC00F301D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */,
+				15E3A48F113F96FC00F301D8 /* libMoverNetwork.a */,
+				15E3A491113F96FC00F301D8 /* Network+Test.octest */,
+				15E3A493113F96FC00F301D8 /* mvr-wifi */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15E3A494113F96FD00F301D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15E3A49E113F96FD00F301D8 /* libMuiKit.a */,
+				15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */,
+				15E3A4A2113F96FD00F301D8 /* MuiKit+Test.octest */,
+				15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Mover Conduit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* MoverWaypoint */ = {
+			isa = PBXGroup;
+			children = (
+				1574448B113435430088C65E /* MuiKit.xcodeproj */,
+				1594397D1133E1410017B42D /* Network+Storage.xcodeproj */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				1574452111343C630088C65E /* SystemConfiguration.framework */,
+				1574453A11343D090088C65E /* libz.1.1.3.dylib */,
+				153EF0AC1135595100B8DDC1 /* Carbon.framework */,
+			);
+			name = MoverWaypoint;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				150072E9113967F1007BF995 /* PrereleaseExpired.alert */,
+				157280F2113805FA005634C7 /* SpinnerBackdrop.png */,
+				1594394D1133DACB0017B42D /* WaypointLogo.png */,
+				153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */,
+				8D1107310486CEB800E47090 /* Mover Conduit-Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				157280E311380210005634C7 /* MvrDeviceItem.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Mover Conduit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Mover Conduit" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15E3A4A6113F970600F301D8 /* PBXTargetDependency */,
+				15E3A4A8113F970600F301D8 /* PBXTargetDependency */,
+			);
+			name = "Mover Conduit";
+			productInstallPath = "$(HOME)/Applications";
+			productName = MoverWaypoint;
+			productReference = 8D1107320486CEB800E47090 /* Mover Conduit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Mover Conduit" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* MoverWaypoint */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 15E3A494113F96FD00F301D8 /* Products */;
+					ProjectRef = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 15E3A486113F96FC00F301D8 /* Products */;
+					ProjectRef = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Mover Conduit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libMoverNetwork-Mac.a";
+			remoteRef = 15E3A48C113F96FC00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A48F113F96FC00F301D8 /* libMoverNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMoverNetwork.a;
+			remoteRef = 15E3A48E113F96FC00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A491113F96FC00F301D8 /* Network+Test.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Network+Test.octest";
+			remoteRef = 15E3A490113F96FC00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A493113F96FC00F301D8 /* mvr-wifi */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "mvr-wifi";
+			remoteRef = 15E3A492113F96FC00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A49E113F96FD00F301D8 /* libMuiKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMuiKit.a;
+			remoteRef = 15E3A49D113F96FD00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MuiKit.bundle;
+			remoteRef = 15E3A49F113F96FD00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A4A2113F96FD00F301D8 /* MuiKit+Test.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "MuiKit+Test.octest";
+			remoteRef = 15E3A4A1113F96FD00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libMuiKit-Mac.a";
+			remoteRef = 15E3A4A3113F96FD00F301D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15E3A4A9113F970C00F301D8 /* MuiKit.bundle in Resources */,
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */,
+				153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */,
+				157280E411380210005634C7 /* MvrDeviceItem.xib in Resources */,
+				157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */,
+				150072EA113967F1007BF995 /* PrereleaseExpired.alert in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				256AC3DA0F4B6AC300CF3369 /* MoverWaypointAppDelegate.m in Sources */,
+				157280D31137FE63005634C7 /* MvrDevice.m in Sources */,
+				150072E8113967C3007BF995 /* NSAlert+L0Alert.m in Sources */,
+				15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		15E3A4A6113F970600F301D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "MuiKit (Mac OS X)";
+			targetProxy = 15E3A4A5113F970600F301D8 /* PBXContainerItemProxy */;
+		};
+		15E3A4A8113F970600F301D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Network (Mac OS X)";
+			targetProxy = 15E3A4A7113F970600F301D8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DDD58150DA1D0A300B32029 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"kMvrMacPrereleaseTimeLimit=1268578191",
+				);
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				HEADER_SEARCH_PATHS = (
+					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
+					"$(SRCROOT)/..",
+				);
+				INFOPLIST_FILE = "Mover Conduit-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "Mover Conduit";
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				HEADER_SEARCH_PATHS = (
+					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
+					"$(SRCROOT)/../..",
+				);
+				INFOPLIST_FILE = "Mover Conduit-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = Mover;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Mover Conduit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Mover Conduit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

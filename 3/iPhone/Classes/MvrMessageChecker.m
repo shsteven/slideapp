@@ -9,6 +9,7 @@
 #import "MvrMessageChecker.h"
 #import "MvrAppDelegate.h"
 #import "MvrAppDelegate+HelpAlerts.h"
+#import "MvrPiracyDetector.h"
 
 #import <sys/sysctl.h>
 
@@ -225,6 +226,12 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 	NSString* model = MvrDeviceCode();
 	if (model)
 		[request setValue:model forHTTPHeaderField:@"X-Mover-Device"];
+	
+#if !kMvrIsOpen
+	
+	[request setValue:(MvrIsRunningUnsignedInSeatbeltedEnvironment()? @"yes" : @"no") forHTTPHeaderField:@"X-Mover-Unsigned"];
+	
+#endif
 
 	receivedData = [NSMutableData new];
 	

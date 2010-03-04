@@ -99,10 +99,7 @@ L0ObjCSingletonMethod(sharedSource)
 }
 
 - (void) addAllItemsFromSwapKitRequest:(ILSwapRequest*) req;
-{
-	if (!req.type)
-		return;
-	
+{	
 	for (ILSwapItem* i in req.items) {
 		MvrItem* mi = nil;
 		
@@ -118,7 +115,7 @@ L0ObjCSingletonMethod(sharedSource)
 		} else if ([v isKindOfClass:[UIImage class]]) {
 			mi = [[[MvrImageItem alloc] initWithImage:v type:(id) kUTTypePNG] autorelease];
 		} else if (d)
-			mi = [MvrItem itemWithStorage:[MvrItemStorage itemStorageWithData:d] type:req.type metadata:[NSDictionary dictionary]];
+			mi = [MvrItem itemWithStorage:[MvrItemStorage itemStorageWithData:d] type:i.type metadata:[NSDictionary dictionary]];
 		
 		if (mi)
 			[MvrApp() addItemFromSelf:mi];

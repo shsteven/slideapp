@@ -23,13 +23,15 @@
 - (BOOL) isAvailableForItem:(MvrItem *)i;
 {
 	NSData* d = i.storage.data;
-	return [[ILSwapService sharedService] canSendItems:[NSArray arrayWithObject:d] ofType:i.type forAction:nil];
+	ILSwapItem* item = [ILSwapItem itemWithValue:d type:i.type attributes:nil];
+	return [[ILSwapService sharedService] canSendItems:[NSArray arrayWithObject:item] forAction:nil];
 }
 
 - (void) performActionWithItem:(MvrItem *)i;
 {
 	NSData* d = i.storage.data;
-	[[ILSwapSendController controllerForSendingItems:[NSArray arrayWithObject:d] ofType:i.type forAction:nil] send:MvrApp().actionSheetOriginView];
+	ILSwapItem* item = [ILSwapItem itemWithValue:d type:i.type attributes:nil];
+	[[ILSwapSendController controllerForSendingItems:[NSArray arrayWithObject:item] forAction:nil] send:MvrApp().actionSheetOriginView];
 }
 
 + sendToAction;

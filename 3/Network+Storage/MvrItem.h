@@ -79,6 +79,10 @@
 - (void) setObject:(id) o forItemNotesKey:(NSString*) key;
 - (id) objectForItemNotesKey:(id) o;
 
+// This method is only for use in GC apps and must be called at least once before references to this instance are lost. This method invalidates the underlying storage. See -[MvrItemStorage invalidate] for details.
+// Calling another method of MvrItem after this method is called is a programmer error.
+- (void) invalidate;
+
 // -- - --
 // Autocache support
 
