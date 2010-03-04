@@ -46,6 +46,9 @@
 
 - (void) layoutSubviews;
 {
+	if ([self wantsLayer])
+		[NSAnimationContext beginGrouping];
+	
 	if ([contentViewControllers count] > 0) {
 		[emptyContentView removeFromSuperview];
 		
@@ -56,7 +59,9 @@
 			NSView* v = [vc view];
 			
 			CGFloat y = selfHeight - [v frame].size.height;
-			[v setFrameOrigin:NSMakePoint(x, y)];
+			
+			id toUse = [self wantsLayer]? [v animator] : v;
+			[toUse setFrameOrigin:NSMakePoint(x, y)];
 			
 			if ([v superview] != self) {
 				if ([v superview]) [v removeFromSuperview];
@@ -88,12 +93,9 @@
 			[self addSubview:emptyContentView];
 		}
 	}
-}
-
-- (void) drawRect:(NSRect)dirtyRect;
-{
-	[[NSColor whiteColor] setFill];
-	NSRectFill([self bounds]);
+	
+	if ([self wantsLayer])
+		[NSAnimationContext endGrouping];
 }
 
 // KVO support
