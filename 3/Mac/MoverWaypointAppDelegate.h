@@ -30,4 +30,6 @@
 	IBOutlet MvrDevicesLineView* devicesView;
 }
 
+- (IBAction) openMoverPlusAppStore:(id) sender;
+
 @end

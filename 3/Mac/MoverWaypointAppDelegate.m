@@ -118,6 +118,13 @@
 	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];	
 }
 
+#pragma mark App Store page
+
+- (IBAction) openMoverPlusAppStore:(id) sender;
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/download-plus"]];
+}
+
 #pragma mark Handling incomings and outgoings
 
 - (void) channel:(id <MvrChannel>) c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>) incoming;
