@@ -1361,12 +1361,62 @@
 							</object>
 							<bool key="NSEditable">YES</bool>
 						</object>
-						<object class="NSCustomView" id="930343762">
+						<object class="NSScrollView" id="1022836165">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{155, 15}, {484, 140}}</string>
+							<object class="NSMutableArray" key="NSSubviews">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSClipView" id="440716959">
+									<reference key="NSNextResponder" ref="1022836165"/>
+									<int key="NSvFlags">2304</int>
+									<object class="NSMutableArray" key="NSSubviews">
+										<bool key="EncodedWithXMLCoder">YES</bool>
+										<object class="NSCustomView" id="930343762">
+											<reference key="NSNextResponder" ref="440716959"/>
+											<int key="NSvFlags">268</int>
+											<string key="NSFrameSize">{484, 140}</string>
+											<reference key="NSSuperview" ref="440716959"/>
+											<string key="NSClassName">MvrDevicesLineView</string>
+										</object>
+									</object>
+									<string key="NSFrame">{{1, 1}, {484, 140}}</string>
+									<reference key="NSSuperview" ref="1022836165"/>
+									<reference key="NSNextKeyView" ref="930343762"/>
+									<reference key="NSDocView" ref="930343762"/>
+									<object class="NSColor" key="NSBGColor">
+										<int key="NSColorSpace">1</int>
+										<bytes key="NSRGB">MSAxIDEAA</bytes>
+									</object>
+									<int key="NScvFlags">4</int>
+								</object>
+								<object class="NSScroller" id="63585808">
+									<reference key="NSNextResponder" ref="1022836165"/>
+									<int key="NSvFlags">256</int>
+									<string key="NSFrame">{{485, 1}, {15, 140}}</string>
+									<reference key="NSSuperview" ref="1022836165"/>
+									<reference key="NSTarget" ref="1022836165"/>
+									<string key="NSAction">_doScroller:</string>
+									<double key="NSCurValue">1</double>
+									<double key="NSPercent">0.96363627910614014</double>
+								</object>
+								<object class="NSScroller" id="928483706">
+									<reference key="NSNextResponder" ref="1022836165"/>
+									<int key="NSvFlags">256</int>
+									<string key="NSFrame">{{1, 141}, {469, 15}}</string>
+									<reference key="NSSuperview" ref="1022836165"/>
+									<int key="NSsFlags">1</int>
+									<reference key="NSTarget" ref="1022836165"/>
+									<string key="NSAction">_doScroller:</string>
+									<double key="NSPercent">0.50602412223815918</double>
+								</object>
+							</object>
+							<string key="NSFrame">{{154, -1}, {501, 157}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<string key="NSClassName">MvrDevicesLineView</string>
+							<reference key="NSNextKeyView" ref="440716959"/>
+							<int key="NSsFlags">50</int>
+							<reference key="NSVScroller" ref="63585808"/>
+							<reference key="NSHScroller" ref="928483706"/>
+							<reference key="NSContentView" ref="440716959"/>
 						</object>
 					</object>
 					<string key="NSFrameSize">{639, 155}</string>
@@ -2654,7 +2704,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="766816162"/>
-							<reference ref="930343762"/>
+							<reference ref="1022836165"/>
 						</object>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -3165,9 +3215,30 @@
 						<string key="objectName">Channels</string>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">570</int>
+						<reference key="object" ref="1022836165"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="63585808"/>
+							<reference ref="928483706"/>
+							<reference ref="930343762"/>
+						</object>
+						<reference key="parent" ref="439893737"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">571</int>
+						<reference key="object" ref="63585808"/>
+						<reference key="parent" ref="1022836165"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">572</int>
+						<reference key="object" ref="928483706"/>
+						<reference key="parent" ref="1022836165"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">564</int>
 						<reference key="object" ref="930343762"/>
-						<reference key="parent" ref="439893737"/>
+						<reference key="parent" ref="1022836165"/>
 					</object>
 				</object>
 			</object>
@@ -3704,7 +3775,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">569</int>
+			<int key="maxID">573</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4221,6 +4292,22 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSResponder.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSScrollView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">AppKit.framework/Headers/NSScrollView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSScroller</string>
+					<string key="superclassName">NSControl</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">AppKit.framework/Headers/NSScroller.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
