@@ -12,6 +12,8 @@
 	NSMutableArray* contentViewControllers;
 	NSMutableArray* content;
 	
+	NSViewController* selectedController;
+	
 	NSView* emptyContentView;
 }
 
@@ -24,7 +26,18 @@
 
 - (NSViewController*) viewControllerForContentObject:(id) o; // abstract
 
+- (void) setSelectedViewController:(NSViewController*) vc;
+- (void) setSelectedObject:(id) o;
+
 @end
 
 @interface MvrDevicesLineView : L0LineOfViewsView {}
+@end
+
+
+@protocol L0LineOfViewsItem <NSObject>
+
+@property(assign) L0LineOfViewsView* lineOfViewsView;
+@property BOOL selected;
+
 @end

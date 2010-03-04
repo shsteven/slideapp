@@ -33,70 +33,70 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 1535D2361090336700CBF778 /* libMoverNetwork-Mac.a */;
+			remoteGlobalIDString = 1535D2361090336700CBF778;
 			remoteInfo = "Network (Mac OS X)";
 		};
 		15E3A48E113F96FC00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D /* libMoverNetwork.a */;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
 			remoteInfo = "Network (iPhone)";
 		};
 		15E3A490113F96FC00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 1593E964105BB9FB00220989 /* Network+Test.octest */;
+			remoteGlobalIDString = 1593E964105BB9FB00220989;
 			remoteInfo = "Network+Test";
 		};
 		15E3A492113F96FC00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 153B4212105BF36700DB8FB2 /* mvr-wifi */;
+			remoteGlobalIDString = 153B4212105BF36700DB8FB2;
 			remoteInfo = "mvr-wifi";
 		};
 		15E3A49D113F96FD00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 154B01F00F78156D0082109B /* libMuiKit.a */;
+			remoteGlobalIDString = 154B01F00F78156D0082109B;
 			remoteInfo = "MuiKit (Library)";
 		};
 		15E3A49F113F96FD00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 156FD76B0F7A25F900F83283 /* MuiKit.bundle */;
+			remoteGlobalIDString = 156FD76B0F7A25F900F83283;
 			remoteInfo = "MuiKit (Resources)";
 		};
 		15E3A4A1113F96FD00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 154635591011BD77000238EE /* MuiKit+Test.octest */;
+			remoteGlobalIDString = 154635591011BD77000238EE;
 			remoteInfo = "MuiKit+Test";
 		};
 		15E3A4A3113F96FD00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2 /* libMuiKit-Mac.a */;
+			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2;
 			remoteInfo = "MuiKit (Library - Mac OS X)";
 		};
 		15E3A4A5113F970600F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1574448B113435430088C65E /* MuiKit.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2 /* MuiKit (Mac OS X) */;
+			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2;
 			remoteInfo = "MuiKit (Mac OS X)";
 		};
 		15E3A4A7113F970600F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 1535D1CB1090336700CBF778 /* Network (Mac OS X) */;
+			remoteGlobalIDString = 1535D1CB1090336700CBF778;
 			remoteInfo = "Network (Mac OS X)";
 		};
 /* End PBXContainerItemProxy section */
