@@ -12,8 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="372"/>
-			<integer value="574"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -45,7 +43,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSMenuItem" id="694149608">
 						<reference key="NSMenu" ref="649796088"/>
-						<string key="NSTitle">Mover Conduit</string>
+						<string key="NSTitle">Mover Connect</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -59,12 +57,12 @@
 						</object>
 						<string key="NSAction">submenuAction:</string>
 						<object class="NSMenu" key="NSSubmenu" id="110575045">
-							<string key="NSTitle">Mover Conduit</string>
+							<string key="NSTitle">Mover Connect</string>
 							<object class="NSMutableArray" key="NSMenuItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSMenuItem" id="238522557">
 									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">About Mover Conduit</string>
+									<string key="NSTitle">About Mover Connect</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -131,7 +129,7 @@
 								</object>
 								<object class="NSMenuItem" id="755159360">
 									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">Hide Mover Conduit</string>
+									<string key="NSTitle">Hide Mover Connect</string>
 									<string key="NSKeyEquiv">h</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -169,7 +167,7 @@
 								</object>
 								<object class="NSMenuItem" id="632727374">
 									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">Quit Mover Conduit</string>
+									<string key="NSTitle">Quit Mover Connect</string>
 									<string key="NSKeyEquiv">q</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1301,7 +1299,7 @@
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSMenuItem" id="105068016">
 									<reference key="NSMenu" ref="992780483"/>
-									<string key="NSTitle">Mover Conduit Help</string>
+									<string key="NSTitle">Mover Connect Help</string>
 									<string key="NSKeyEquiv">?</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1320,12 +1318,12 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{335, 596}, {639, 155}}</string>
 				<int key="NSWTFlags">1954021376</int>
-				<string key="NSWindowTitle">Mover Conduit</string>
+				<string key="NSWindowTitle">Mover Connect</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
-				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
+				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<object class="NSView" key="NSWindowView" id="439893737">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1416,7 +1414,7 @@
 								<object class="NSScroller" id="928483706">
 									<reference key="NSNextResponder" ref="1022836165"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{1, 141}, {469, 15}}</string>
+									<string key="NSFrame">{{1, 141}, {484, 15}}</string>
 									<reference key="NSSuperview" ref="1022836165"/>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="1022836165"/>
@@ -1434,7 +1432,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{639, 155}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
@@ -1455,7 +1452,7 @@
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
 			<object class="NSCustomView" id="211074010">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1492,7 +1489,7 @@
 						<object class="NSTextFieldCell" key="NSCell" id="440688808">
 							<int key="NSCellFlags">67239424</int>
 							<int key="NSCellFlags2">138543104</int>
-							<string key="NSContents">Open Mover Conduit on another Mac, or the Mover+ application from App Store on your iPhone or iPod touch, and make sure they're connected to the same Wi-Fi network as this Mac.</string>
+							<string key="NSContents">Open Mover Connect on another Mac, or the Mover+ application from App Store on your iPhone or iPod touch, and make sure they're connected to the same Wi-Fi network as this Mac.</string>
 							<object class="NSFont" key="NSSupport">
 								<string key="NSName">LucidaGrande</string>
 								<double key="NSSize">11</double>
@@ -1528,7 +1525,7 @@
 						<object class="NSTextFieldCell" key="NSCell" id="429084005">
 							<int key="NSCellFlags">68288064</int>
 							<int key="NSCellFlags2">138413056</int>
-							<string key="NSContents">Mover Conduit is looking for devices to send stuff to…</string>
+							<string key="NSContents">Mover Connect is looking for devices to send stuff to…</string>
 							<object class="NSFont" key="NSSupport">
 								<string key="NSName">LucidaGrande-Bold</string>
 								<double key="NSSize">13</double>
@@ -1541,7 +1538,6 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{700, 140}</string>
-				<reference key="NSSuperview"/>
 				<string key="NSClassName">NSView</string>
 			</object>
 		</object>
