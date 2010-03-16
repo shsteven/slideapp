@@ -13,9 +13,18 @@
 #define kMvrModernWiFiDifficultyStartingListenerNotification @"MvrModernWiFiDifficultyStartingListenerNotification"
 
 #define kMvrModernWiFiBonjourServiceType @"_x-mover3._tcp."
+#define kMvrModernWiFiBonjourConduitServiceType @"_x-mover-conduit._tcp."
+
 #define kMvrModernWiFiPort (25252)
 
 #define kMvrModernWiFiPeerIdentifierKey @"MvrID"
+
+enum {
+	kMvrUseMobileService = 1 << 0,
+	kMvrUseConduitService = 1 << 1,
+	kMvrAllowBrowsingForConduitService = 1 << 2,
+};
+typedef NSInteger MvrModernWiFiOptions;
 
 @class L0KVODispatcher;
 
@@ -25,11 +34,16 @@
 	AsyncSocket* serverSocket;
 	int serverPort;
 	
+	BOOL useMobileService;
+	BOOL useConduitService;
+	BOOL allowBrowsingForConduit;
+	
 	NSMutableSet* incomingTransfers;
 	L0KVODispatcher* dispatcher;
 }
 
-- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port options:(MvrModernWiFiOptions) opts;
+
 - (MvrModernWiFiChannel*) channelForAddress:(NSData*) address;
 
 @end

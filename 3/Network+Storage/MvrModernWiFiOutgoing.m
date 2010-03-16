@@ -38,9 +38,11 @@
 
 @implementation MvrModernWiFiOutgoing
 
-- (id) initWithItem:(MvrItem*) i toAddresses:(NSArray*) a;
+- (id) initWithItem:(MvrItem*) i toAddresses:(NSArray*) a options:(MvrModernWiFiOutgoingOptions) opts;
 {
 	if (self = [super init]) {
+		allowExtendedMetadata = (opts & kMvrModernWiFiOutgoingAllowExtendedMetadata) != 0;
+		
 		item = [i retain];
 		addresses = [a copy];
 		failedSockets = [NSMutableSet new];
@@ -206,6 +208,27 @@ static BOOL MvrIPv6Allowed = NO;
 	
 	[builder setMetadataValue:item.title forKey:kMvrProtocolMetadataTitleKey];
 	[builder setMetadataValue:item.type forKey:kMvrProtocolMetadataTypeKey];
+	
+	if (allowExtendedMetadata) {
+		NSMutableArray* keys = [NSMutableArray array];
+		
+		for (NSString* key in item.metadata) {
+			if ([key isEqual:kMvrItemTitleMetadataKey])
+				continue;
+			
+			if (MvrProtocolIsReservedKey(key))
+				continue;
+			
+			if (![[item.metadata objectForKey:key] isKindOfClass:[NSString class]])
+				continue;
+			
+			[builder setMetadataValue:[item.metadata objectForKey:key] forKey:key];
+			[keys addObject:key];
+		}
+		
+		if ([keys count] > 0)
+			[builder setMetadataValue:[keys componentsJoinedByString:@" "] forKey:kMvrProtocolAdditionalMetadataKey];
+	}
 	
 	[builder addPayload:[item.storage preferredContentObject] length:item.storage.contentLength forKey:kMvrProtocolExternalRepresentationPayloadKey];
 	

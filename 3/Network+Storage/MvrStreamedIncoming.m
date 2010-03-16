@@ -142,12 +142,32 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	[self clear];
 }
 
+- (BOOL) acceptsExtendedMetadata;
+{
+	return NO;
+}
+
 - (void) produceItem;
 {
 	self.progress = 1.0;
 	
 	NSString* title = [metadata objectForKey:kMvrProtocolMetadataTitleKey], 
 	* type = [metadata objectForKey:kMvrProtocolMetadataTypeKey];
+	
+	NSMutableDictionary* md = [NSMutableDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey];
+	if (self.acceptsExtendedMetadata) {
+		NSString* mdlist = [metadata objectForKey:kMvrProtocolAdditionalMetadataKey];
+		if (mdlist) {
+			for (NSString* key in [mdlist componentsSeparatedByString:@" "]) {
+				if ([key isEqual:kMvrProtocolMetadataTitleKey] || [key isEqual:kMvrProtocolMetadataTypeKey] || MvrProtocolIsReservedKey(key))
+					continue;
+				
+				id object = [metadata objectForKey:key];
+				if (object)
+					[md setObject:object forKey:key];
+			}
+		}
+	}
 	
 	[itemStorageStream close]; 
 	[itemStorageStream release]; itemStorageStream = nil;

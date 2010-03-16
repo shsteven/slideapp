@@ -12,6 +12,8 @@
 #import "MvrPlatformInfo.h"
 #import "MvrScannerObserver.h"
 
+#import "MvrModernWiFi.h" // for the options
+
 @class MvrModernWiFi, MvrLegacyWiFi, L0KVODispatcher;
 
 @interface MvrWiFi : NSObject <MvrScanner, MvrScannerObserverDelegate> {
@@ -24,7 +26,7 @@
 	BOOL jammed, enabled;
 }
 
-- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info modernPort:(int) port legacyPort:(int) legacyPort;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info modernPort:(int) port legacyPort:(int) legacyPort modernOptions:(MvrModernWiFiOptions) opts;
 
 @property(retain) MvrModernWiFi* modernWiFi;
 @property(retain) MvrLegacyWiFi* legacyWiFi;

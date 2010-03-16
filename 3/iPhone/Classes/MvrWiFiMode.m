@@ -47,7 +47,13 @@ static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem*
 
 - (void) awakeFromNib;
 {
-	wifi = [[[self scannerClass] alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort];
+	MvrModernWiFiOptions opts = kMvrUseMobileService;
+	
+#if !kMvrIsLite
+	opts |= kMvrAllowBrowsingForConduitService;
+#endif
+	
+	wifi = [[[self scannerClass] alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort modernOptions:opts];
 	observer = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];

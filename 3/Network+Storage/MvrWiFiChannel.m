@@ -23,6 +23,7 @@
 		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 		identifier = [ident copy];
 	}
+	
 	return self;
 }
 
