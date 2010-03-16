@@ -144,11 +144,11 @@
 
 @implementation MvrWiFi
 
-- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info modernPort:(int) modernPort legacyPort:(int) legacyPort;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info modernPort:(int) modernPort legacyPort:(int) legacyPort modernOptions:(MvrModernWiFiOptions) opts;
 {
 	self = [super init];
 	if (self != nil) {
-		self.modernWiFi = [[[MvrModernWiFi alloc] initWithPlatformInfo:info serverPort:modernPort] autorelease];
+		self.modernWiFi = [[[MvrModernWiFi alloc] initWithPlatformInfo:info serverPort:modernPort options:opts] autorelease];
 		self.legacyWiFi = [[[MvrLegacyWiFi alloc] initWithPlatformInfo:info serverPort:legacyPort] autorelease];
 		
 		channelsByIdentifier = [NSMutableDictionary new];

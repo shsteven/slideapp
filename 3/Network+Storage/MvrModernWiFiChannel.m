@@ -14,11 +14,34 @@
 
 @implementation MvrModernWiFiChannel
 
+- (id) initWithNetService:(NSNetService *)ns identifier:(NSString *)ident;
+{
+	if (self = [super initWithNetService:ns identifier:ident]) {
+		if ([ns TXTRecordData]) {
+			NSDictionary* metadata = [NSNetService dictionaryFromTXTRecordData:[ns TXTRecordData]];
+			id d = [metadata objectForKey:kMvrModernWiFiBonjourCapabilitiesKey];
+			
+			if ([d isKindOfClass:[NSData class]])
+				d = [[[NSString alloc] initWithData:d encoding:NSASCIIStringEncoding] autorelease];
+			
+			if (d) {
+				unsigned long long capabilities = [d unsignedLongLongValue];
+				if (capabilities < kMvrCapabilityMaximum)
+					supportsExtendedMetadata = (capabilities & kMvrCapabilityExtendedMetadata) != 0;
+			}
+		}
+	}
+	
+	return self;
+}
+
+@synthesize supportsExtendedMetadata;
+
 #pragma mark Outgoing transfers
 
 - (void) beginSendingItem:(MvrItem*) item;
 {
-	MvrModernWiFiOutgoing* outgoing = [[MvrModernWiFiOutgoing alloc] initWithItem:item toAddresses:self.netService.addresses];
+	MvrModernWiFiOutgoing* outgoing = [[MvrModernWiFiOutgoing alloc] initWithItem:item toAddresses:self.netService.addresses options:self.supportsExtendedMetadata? kMvrModernWiFiOutgoingAllowExtendedMetadata : 0];
 
 	[self.dispatcher observe:@"finished" ofObject:outgoing usingSelector:@selector(outgoingTransfer:finishedDidChange:) options:0];
 	

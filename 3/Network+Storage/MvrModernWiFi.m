@@ -21,17 +21,30 @@
 
 @implementation MvrModernWiFi
 
-- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port;
+- (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port options:(MvrModernWiFiOptions) opts;
 {
 	self = [super init];
 	if (self != nil) {
+		useMobileService = (opts & kMvrUseMobileService) != 0;
+		useConduitService = (opts & kMvrUseConduitService) != 0;
+		allowBrowsingForConduit = (opts & kMvrAllowBrowsingForConduitService) != 0;
+		
 		NSDictionary* record = [NSDictionary dictionaryWithObjectsAndKeys:
 								/* TODO */
+								[NSString stringWithFormat:@"%u", kMvrCapabilityExtendedMetadata], kMvrModernWiFiBonjourCapabilitiesKey,
 								[info.identifierForSelf stringValue], kMvrModernWiFiPeerIdentifierKey,
 								nil];
 		
-		[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourServiceType port:port TXTRecord:record];
+		if (useMobileService)
+			[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourServiceType port:port TXTRecord:record];
+		
+		if (useConduitService)
+			[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourConduitServiceType port:port TXTRecord:record];
+		
 		[self addBrowserForServicesWithType:kMvrModernWiFiBonjourServiceType];
+		
+		if (allowBrowsingForConduit)
+			[self addBrowserForServicesWithType:kMvrModernWiFiBonjourConduitServiceType];
 		
 		incomingTransfers = [NSMutableSet new];
 		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];

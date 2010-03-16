@@ -22,3 +22,9 @@ static const size_t kMvrPacketParserStartingBytesLength =
 #define kMvrProtocolExternalRepresentationPayloadKey @"externalRepresentation"
 #define kMvrProtocolMetadataTitleKey @"MvrTitle"
 #define kMvrProtocolMetadataTypeKey @"MvrType"
+
+#define kMvrProtocolAdditionalMetadataKey @"MvrAdditionalMetadata"
+
+static inline BOOL MvrProtocolIsReservedKey(NSString* key) {
+	return [key isEqual:kMvrProtocolPayloadKeysKey] || [key isEqual:kMvrProtocolPayloadStopsKey];
+}

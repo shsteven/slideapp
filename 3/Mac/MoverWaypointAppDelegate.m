@@ -32,7 +32,7 @@
 	
 	channelsByIncoming = [L0Map new];
 	
-	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort];
+	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort options:kMvrUseConduitService|kMvrAllowBrowsingForConduitService];
 	[channelsController bind:NSContentSetBinding toObject:wifi withKeyPath:@"channels" options:nil];
 	[devicesView bind:@"content" toObject:channelsController withKeyPath:@"arrangedObjects" options:nil];
 	

@@ -18,7 +18,14 @@
 #define kMvrModernWiFiOutgoingSimulateBreaking 0
 #endif
 
+enum {
+	kMvrModernWiFiOutgoingAllowExtendedMetadata = 1 << 0,
+};
+typedef NSInteger MvrModernWiFiOutgoingOptions;
+
 @interface MvrModernWiFiOutgoing : NSObject <MvrPacketBuilderDelegate, MvrOutgoing> {
+	BOOL allowExtendedMetadata;
+	
 	MvrItem* item;
 	NSArray* addresses;
 	
@@ -43,7 +50,7 @@
 }
 
 + (void) allowIPv6;
-- (id) initWithItem:(MvrItem*) i toAddresses:(NSArray*) a;
+- (id) initWithItem:(MvrItem*) i toAddresses:(NSArray*) a options:(MvrModernWiFiOutgoingOptions) opts;
 
 @property(readonly, assign) BOOL finished;
 @property(readonly, assign) float progress;

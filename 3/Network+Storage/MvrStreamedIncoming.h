@@ -31,4 +31,6 @@
 
 - (void) appendData:(NSData*) data;
 
+@property(readonly) BOOL acceptsExtendedMetadata;
+
 @end

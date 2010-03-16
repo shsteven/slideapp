@@ -44,6 +44,11 @@
 	[super dealloc];
 }
 
+- (BOOL) acceptsExtendedMetadata;
+{
+	return YES;
+}
+
 #pragma mark -
 #pragma mark Sockets.
 
