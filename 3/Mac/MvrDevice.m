@@ -79,9 +79,14 @@
 	NSString* ext = [file pathExtension];
 	NSArray* types = NSMakeCollectable(UTTypeCreateAllIdentifiersForTag(kUTTagClassFilenameExtension, (CFStringRef) ext, NULL));
 	
+	NSString* filename = [file lastPathComponent];
+	NSDictionary* md = [NSDictionary dictionaryWithObjectsAndKeys:
+						filename, kMvrItemOriginalFilenameMetadataKey,
+						nil];
+	
 	MvrItemStorage* is = [MvrItemStorage itemStorageFromFileAtPath:file options:kMvrItemStorageDoNotTakeOwnershipOfFile error:NULL];
 	if (is && [types count] > 0) {
-		MvrGenericItem* item = [[MvrGenericItem alloc] initWithStorage:is type:[types objectAtIndex:0] metadata:[NSDictionary dictionary]];
+		MvrGenericItem* item = [[MvrGenericItem alloc] initWithStorage:is type:[types objectAtIndex:0] metadata:md];
 		[self.channel beginSendingItem:item];
 	}
 }

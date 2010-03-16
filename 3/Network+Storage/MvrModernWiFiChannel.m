@@ -25,8 +25,8 @@
 				d = [[[NSString alloc] initWithData:d encoding:NSASCIIStringEncoding] autorelease];
 			
 			if (d) {
-				unsigned long long capabilities = [d unsignedLongLongValue];
-				if (capabilities < kMvrCapabilityMaximum)
+				long long capabilities = [d longLongValue];
+				if (capabilities >= 0 && capabilities < kMvrCapabilityMaximum)
 					supportsExtendedMetadata = (capabilities & kMvrCapabilityExtendedMetadata) != 0;
 			}
 		}

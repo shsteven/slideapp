@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+// The item's title as shown on the slide.
 #define kMvrItemTitleMetadataKey @"MvrTitle"
+
+// The item's original filename, if any.
+#define kMvrItemOriginalFilenameMetadataKey @"MvrOriginalFilename"
 
 // These macros produce accessors that provide data from the autocache for the given key. The cache key is the same as the getter's name.
 
