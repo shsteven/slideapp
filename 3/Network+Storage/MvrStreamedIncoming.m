@@ -173,7 +173,7 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	[itemStorageStream release]; itemStorageStream = nil;
 	[itemStorage endUsingOutputStream];
 	
-	MvrItem* i = [MvrItem itemWithStorage:itemStorage type:type metadata:[NSDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey]];
+	MvrItem* i = [MvrItem itemWithStorage:itemStorage type:type metadata:md];
 	
 	self.item = i;
 	self.cancelled = (i == nil);

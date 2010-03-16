@@ -32,7 +32,7 @@
 	
 	channelsByIncoming = [L0Map new];
 	
-	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort options:kMvrUseConduitService|kMvrAllowBrowsingForConduitService];
+	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiConduitPort options:kMvrUseConduitService|kMvrAllowBrowsingForConduitService];
 	[channelsController bind:NSContentSetBinding toObject:wifi withKeyPath:@"channels" options:nil];
 	[devicesView bind:@"content" toObject:channelsController withKeyPath:@"arrangedObjects" options:nil];
 	
@@ -146,17 +146,27 @@
 	NSString* downloadDir = [dirs objectAtIndex:0];
 	downloadDir = [downloadDir stringByAppendingPathComponent:@"Mover Items"];
 	BOOL isDir;
+		
+	NSString* baseName = [i.metadata objectForKey:kMvrItemOriginalFilenameMetadataKey], * ext = nil;
+
+	if (!baseName) {
+		baseName = [NSString stringWithFormat:NSLocalizedString(@"From %@", @"Base for received filenames"), chan.displayName];
+		ext = NSMakeCollectable(UTTypeCopyPreferredTagWithClass((CFStringRef) i.type, kUTTagClassFilenameExtension));
+		
+		if (!ext && [i.type isEqual:(id) kUTTypeUTF8PlainText])
+			ext = @"txt";
+	} else {
+		ext = [baseName pathExtension];
+		baseName = [baseName stringByDeletingPathExtension];
+	}
+	
+	// !!! Check whether the sanitization of the path parts is sane or not.
+	baseName = [baseName stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+	ext = [ext stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+
 	BOOL goOn = ([fm fileExistsAtPath:downloadDir isDirectory:&isDir] && isDir) || [fm createDirectoryAtPath:downloadDir withIntermediateDirectories:YES attributes:nil error:NULL];
-		
-	NSString* ext = NSMakeCollectable(UTTypeCopyPreferredTagWithClass((CFStringRef) i.type, kUTTagClassFilenameExtension));
-	
-	if (!ext && [i.type isEqual:(id) kUTTypeUTF8PlainText])
-		ext = @"txt";
-	
+
 	if (goOn && ext) {
-		// !!! Check whether the sanitization of the channel name is sane or not.
-		NSString* baseName = [NSString stringWithFormat:NSLocalizedString(@"From %@", @"Base for received filenames"), [chan.displayName stringByReplacingOccurrencesOfString:@"/" withString:@"-"]];
-		
 		NSString* attempt = baseName;
 		
 		int idx = 1;

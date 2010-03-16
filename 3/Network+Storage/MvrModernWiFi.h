@@ -16,6 +16,7 @@
 #define kMvrModernWiFiBonjourConduitServiceType @"_x-mover-conduit._tcp."
 
 #define kMvrModernWiFiPort (25252)
+#define kMvrModernWiFiConduitPort (25277)
 
 #define kMvrModernWiFiPeerIdentifierKey @"MvrID"
 

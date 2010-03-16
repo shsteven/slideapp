@@ -449,7 +449,7 @@
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
-					"kMvrMacPrereleaseTimeLimit=1268578191",
+					"kMvrMacPrereleaseTimeLimit=1271331554",
 				);
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
