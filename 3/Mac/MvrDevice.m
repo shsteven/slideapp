@@ -16,6 +16,13 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+static NSArray* MvrTypeForExtension(NSString* ext) {
+	if ([ext isEqual:@"m4v"])
+		return [NSArray arrayWithObject:(id) kUTTypeMPEG4];
+	
+	return NSMakeCollectable(UTTypeCreateAllIdentifiersForTag(kUTTagClassFilenameExtension, (CFStringRef) ext, NULL));
+}
+
 @implementation MvrDevicesCollectionView
 
 - (NSCollectionViewItem*) newItemForRepresentedObject:(id) object;
@@ -89,7 +96,7 @@
 	NSString* title = [[NSFileManager defaultManager] displayNameAtPath:file];
 	
 	NSString* ext = [file pathExtension];
-	NSArray* types = NSMakeCollectable(UTTypeCreateAllIdentifiersForTag(kUTTagClassFilenameExtension, (CFStringRef) ext, NULL));
+	NSArray* types = MvrTypeForExtension(ext);
 	
 	NSString* filename = [file lastPathComponent];
 	NSDictionary* md = [NSDictionary dictionaryWithObjectsAndKeys:
