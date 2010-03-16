@@ -76,11 +76,14 @@
 
 - (void) sendItemFile:(NSString*) file;
 {
+	NSString* title = [[NSFileManager defaultManager] displayNameAtPath:file];
+	
 	NSString* ext = [file pathExtension];
 	NSArray* types = NSMakeCollectable(UTTypeCreateAllIdentifiersForTag(kUTTagClassFilenameExtension, (CFStringRef) ext, NULL));
 	
 	NSString* filename = [file lastPathComponent];
 	NSDictionary* md = [NSDictionary dictionaryWithObjectsAndKeys:
+						title, kMvrItemTitleMetadataKey,
 						filename, kMvrItemOriginalFilenameMetadataKey,
 						nil];
 	
