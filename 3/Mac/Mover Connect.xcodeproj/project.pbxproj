@@ -17,6 +17,8 @@
 		1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574452111343C630088C65E /* SystemConfiguration.framework */; };
 		1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574453A11343D090088C65E /* libz.1.1.3.dylib */; };
 		1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1594394D1133DACB0017B42D /* WaypointLogo.png */; };
+		15CCE81C114FF9D100E45AC6 /* MiniSlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CCE81B114FF9D100E45AC6 /* MiniSlide.png */; };
+		15CCE821114FFC3400E45AC6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CCE820114FFC3400E45AC6 /* QuartzCore.framework */; };
 		15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */; };
 		15E3A4A9113F970C00F301D8 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */; };
 		15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */; };
@@ -119,6 +121,8 @@
 		1574453A11343D090088C65E /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		1594394D1133DACB0017B42D /* WaypointLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaypointLogo.png; sourceTree = "<group>"; };
 		1594397D1133E1410017B42D /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		15CCE81B114FF9D100E45AC6 /* MiniSlide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiniSlide.png; sourceTree = "<group>"; };
+		15CCE820114FFC3400E45AC6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevicesLineView.h; sourceTree = "<group>"; };
 		15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevicesLineView.m; sourceTree = "<group>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */,
 				1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */,
 				153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */,
+				15CCE821114FFC3400E45AC6 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +229,7 @@
 				1574452111343C630088C65E /* SystemConfiguration.framework */,
 				1574453A11343D090088C65E /* libz.1.1.3.dylib */,
 				153EF0AC1135595100B8DDC1 /* Carbon.framework */,
+				15CCE820114FFC3400E45AC6 /* QuartzCore.framework */,
 			);
 			name = MoverWaypoint;
 			sourceTree = "<group>";
@@ -239,6 +245,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15CCE81B114FF9D100E45AC6 /* MiniSlide.png */,
 				150072E9113967F1007BF995 /* PrereleaseExpired.alert */,
 				157280F2113805FA005634C7 /* SpinnerBackdrop.png */,
 				1594394D1133DACB0017B42D /* WaypointLogo.png */,
@@ -382,6 +389,7 @@
 				157280E411380210005634C7 /* MvrDeviceItem.xib in Resources */,
 				157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */,
 				150072EA113967F1007BF995 /* PrereleaseExpired.alert in Resources */,
+				15CCE81C114FF9D100E45AC6 /* MiniSlide.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,7 @@
 	
 	IBOutlet NSProgressIndicator* spinner;
 	IBOutlet NSView* spinnerView;
+	IBOutlet NSView* dropView;
 }
 
 - (id) initWithChannel:(id <MvrChannel>) chan;

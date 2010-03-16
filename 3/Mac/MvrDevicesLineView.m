@@ -87,7 +87,7 @@
 		}
 		
 		NSRect r = [self frame];
-		r.size.width = x;
+		r.size.width = MAX(x, self.contentSize.width);
 		[super setFrame:r];
 	} else {
 		for (NSView* v in [[self subviews] copy])

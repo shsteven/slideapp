@@ -14,12 +14,22 @@
 #import "Network+Storage/MvrIncoming.h"
 #import "Network+Storage/MvrOutgoing.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @implementation MvrDevicesCollectionView
 
 - (NSCollectionViewItem*) newItemForRepresentedObject:(id) object;
 {
 	return [[MvrDeviceItem alloc] initWithChannel:(id <MvrChannel>) object];
 }
+
+@end
+
+
+
+@interface MvrDeviceItem ()
+
+- (void) animateMiniSlide;
 
 @end
 
@@ -92,10 +102,72 @@
 		MvrGenericItem* item = [[MvrGenericItem alloc] initWithStorage:is type:[types objectAtIndex:0] metadata:md];
 		[self.channel beginSendingItem:item];
 	}
+	
+	[self animateMiniSlide];
 }
 
 @synthesize channel;
 @dynamic view;
+
+
+#pragma mark Animation
+
+- (void) animateMiniSlide;
+{
+	NSImageView* iv = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, 32, 32)];
+	[iv setImageScaling:NSImageScaleProportionallyUpOrDown];
+	[iv setImage:[NSImage imageNamed:@"MiniSlide"]];
+	[iv setWantsLayer:YES];	
+	[iv setHidden:YES];
+	[self.view addSubview:iv positioned:NSWindowBelow relativeTo:dropView];
+
+	
+	NSPoint origin = NSMakePoint(NSMidX([self.view bounds]) - [iv frame].size.width / 2, [self.view bounds].size.height + [iv frame].size.height);
+	[iv setFrameOrigin:origin];
+	
+	[iv setAlphaValue:0.0];
+	[iv setHidden:NO];
+	
+	[self performSelector:@selector(fadeMiniSlideIn:) withObject:iv afterDelay:0.001];
+}
+
+- (void) fadeMiniSlideIn:(NSImageView*) iv;
+{
+	[CATransaction begin];
+	[CATransaction setValue:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] forKey:kCATransactionAnimationTimingFunction];
+	[CATransaction setValue:[NSNumber numberWithFloat:1.5] forKey:kCATransactionAnimationDuration];
+	
+	NSRect r = [iv frame];
+	srandomdev();
+	r.origin.y = 57; // + (random() % 20 - 10);
+	
+	[[iv animator] setFrameOrigin:r.origin];
+	[[iv animator] setAlphaValue:1.0];
+	
+#define kMvrMaximumAngleRange (30)
+	srandomdev();
+	CGFloat angle = ((random() % kMvrMaximumAngleRange) - kMvrMaximumAngleRange / 2.0) * M_PI/180.0;
+	[iv layer].transform = CATransform3DMakeAffineTransform(CGAffineTransformMakeRotation(angle));
+	
+	
+	[CATransaction commit];
+	
+	[self performSelector:@selector(fadeSlideOut:) withObject:iv afterDelay:7.0];
+}
+
+- (void) fadeSlideOut:(NSImageView*) iv;
+{
+	[CATransaction begin];
+	[CATransaction setValue:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] forKey:kCATransactionAnimationTimingFunction];
+	[CATransaction setValue:[NSNumber numberWithFloat:3.0] forKey:kCATransactionAnimationDuration];
+	
+	[[iv animator] setAlphaValue:0.0];
+	
+	[CATransaction commit];
+	
+	
+	[iv performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:4.0];
+}
 
 @end
 
