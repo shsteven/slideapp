@@ -19,7 +19,12 @@
 
 + supportedTypes;
 {
-	return [NSSet setWithObject:(id) kUTTypeUTF8PlainText];
+	return [NSSet setWithObjects:
+			(id) kUTTypeUTF8PlainText,
+			(id) kUTTypeUTF16PlainText,
+			(id) kUTTypeUTF16ExternalPlainText,
+			(id) kUTTypePlainText,
+			nil];
 }
 
 - (id) initWithText:(NSString*) text;
@@ -41,14 +46,36 @@
 
 MvrItemSynthesizeCopyFromAutocache(NSString*, text, private_setText:)
 
+- (BOOL) getEncodingForCurrentType:(NSStringEncoding*) enc;
+{
+	BOOL found = YES;
+	
+	if ([type isEqual:(id) kUTTypeUTF8PlainText])
+		*enc = NSUTF8StringEncoding;
+	else if ([type isEqual:(id) kUTTypeUTF16PlainText] || [type isEqual:(id) kUTTypeUTF16ExternalPlainText])
+		*enc = NSUTF16StringEncoding;
+	else
+		found = NO;
+	
+	return found;
+}
+
 - (NSString*) objectForEmptyTextCacheKey;
 {
-	return [[[NSString alloc] initWithData:self.storage.data encoding:NSUTF8StringEncoding] autorelease];
+	NSStringEncoding enc;
+	if ([self getEncodingForCurrentType:&enc])
+		return [[[NSString alloc] initWithData:self.storage.data encoding:enc] autorelease];
+	else
+		return [[[NSString alloc] initWithContentsOfFile:self.storage.path usedEncoding:&enc error:NULL] autorelease];
 }
 
 - (id) produceExternalRepresentation;
 {
-	return [self.text dataUsingEncoding:NSUTF8StringEncoding];
+	NSStringEncoding enc;
+	if (![self getEncodingForCurrentType:&enc])
+		enc = NSUTF8StringEncoding;
+	
+	return [self.text dataUsingEncoding:enc];
 }
 
 @end
