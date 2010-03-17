@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		15035881113523B800144ADC /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1503587F113523B800144ADC /* Icon72.png */; };
 		15035882113523B800144ADC /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = 15035880113523B800144ADC /* Icon512.png */; };
+		1507225B1150BED1009FA8AF /* MvrPreviewableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1507225A1150BED1009FA8AF /* MvrPreviewableItem.m */; };
+		150722631150C0E4009FA8AF /* MvrPreviewableItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 150722621150C0E4009FA8AF /* MvrPreviewableItemUI.m */; };
+		1507226F1150C2EA009FA8AF /* MvrPreviewVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1507226D1150C2EA009FA8AF /* MvrPreviewVisor.m */; };
+		150722701150C2EA009FA8AF /* MvrPreviewVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1507226E1150C2EA009FA8AF /* MvrPreviewVisor.xib */; };
 		150C414410A48C7300EBCE51 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		150C414510A48C7300EBCE51 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		150C414610A48C7300EBCE51 /* MvrAppDelegate+HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */; };
@@ -306,6 +310,13 @@
 /* Begin PBXFileReference section */
 		1503587F113523B800144ADC /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon72.png; path = Variants/Current/Icon72.png; sourceTree = SOURCE_ROOT; };
 		15035880113523B800144ADC /* Icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon512.png; path = Variants/Current/Icon512.png; sourceTree = SOURCE_ROOT; };
+		150722591150BED1009FA8AF /* MvrPreviewableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPreviewableItem.h; sourceTree = "<group>"; };
+		1507225A1150BED1009FA8AF /* MvrPreviewableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPreviewableItem.m; sourceTree = "<group>"; };
+		150722611150C0E4009FA8AF /* MvrPreviewableItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPreviewableItemUI.h; sourceTree = "<group>"; };
+		150722621150C0E4009FA8AF /* MvrPreviewableItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPreviewableItemUI.m; sourceTree = "<group>"; };
+		1507226C1150C2EA009FA8AF /* MvrPreviewVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPreviewVisor.h; sourceTree = "<group>"; };
+		1507226D1150C2EA009FA8AF /* MvrPreviewVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPreviewVisor.m; sourceTree = "<group>"; };
+		1507226E1150C2EA009FA8AF /* MvrPreviewVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrPreviewVisor.xib; sourceTree = "<group>"; };
 		150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bug Fixing Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bug Fixing Tests-Info.plist"; sourceTree = "<group>"; };
 		150C418E10A48F7000EBCE51 /* MvrBugFixingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBugFixingTests.h; sourceTree = "<group>"; };
@@ -602,6 +613,20 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		150722581150BEA1009FA8AF /* Previewable File Items */ = {
+			isa = PBXGroup;
+			children = (
+				150722591150BED1009FA8AF /* MvrPreviewableItem.h */,
+				1507225A1150BED1009FA8AF /* MvrPreviewableItem.m */,
+				150722611150C0E4009FA8AF /* MvrPreviewableItemUI.h */,
+				150722621150C0E4009FA8AF /* MvrPreviewableItemUI.m */,
+				1507226C1150C2EA009FA8AF /* MvrPreviewVisor.h */,
+				1507226D1150C2EA009FA8AF /* MvrPreviewVisor.m */,
+				1507226E1150C2EA009FA8AF /* MvrPreviewVisor.xib */,
+			);
+			name = "Previewable File Items";
+			sourceTree = "<group>";
+		};
 		150C418D10A48EAB00EBCE51 /* Tests for Bug Fixes */ = {
 			isa = PBXGroup;
 			children = (
@@ -614,6 +639,7 @@
 		151E01FE1067652600C6CDFF /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				150722581150BEA1009FA8AF /* Previewable File Items */,
 				156751B610621758006EC706 /* Item UI */,
 				1595582610775E5700FBC9B4 /* Bookmarks */,
 				159559D2107767B100FBC9B4 /* Text clippings */,
@@ -1384,6 +1410,7 @@
 				15C8A1E41116D09700F844A7 /* NetworkToolbarIcon.png in Resources */,
 				15035881113523B800144ADC /* Icon72.png in Resources */,
 				15035882113523B800144ADC /* Icon512.png in Resources */,
+				150722701150C2EA009FA8AF /* MvrPreviewVisor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1573,6 +1600,9 @@
 				15C8A1D21116CFF600F844A7 /* ILSwapSendController.m in Sources */,
 				15C8A1D31116CFF600F844A7 /* ILSwapKitBundle.m in Sources */,
 				1587F455113AFA9E0098C9FE /* ILSwapBinding.m in Sources */,
+				1507225B1150BED1009FA8AF /* MvrPreviewableItem.m in Sources */,
+				150722631150C0E4009FA8AF /* MvrPreviewableItemUI.m in Sources */,
+				1507226F1150C2EA009FA8AF /* MvrPreviewVisor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

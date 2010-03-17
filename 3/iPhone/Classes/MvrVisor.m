@@ -15,8 +15,13 @@
 
 - (id) initWithItem:(MvrItem*) i;
 {
-	if (self = [super initWithNibName:NSStringFromClass([self class]) bundle:nil])
+	if (self = [super initWithNibName:NSStringFromClass([self class]) bundle:nil]) {
 		self.item = i;
+		
+		// The action button
+		if (i && [[MvrItemUI UIForItem:i] hasAdditionalActionsAvailableForItem:i])
+			self.navigationItem.rightBarButtonItem = self.actionButton;
+	}
 	
 	return self;
 }
@@ -62,6 +67,11 @@
 	return [[[self alloc] initWithItem:i] autorelease];
 }
 
+- (void) modifyStyleForModalNavigationBar:(UINavigationBar*) nb;
+{
+	nb.barStyle = UIBarStyleBlackTranslucent;
+}
+
 + modalVisorWithItem:(MvrItem*) i;
 {
 	MvrVisor* me = [self visorWithItem:i];
@@ -69,12 +79,9 @@
 	
 	// The Done button
 	me.navigationItem.leftBarButtonItem = me.doneButton;
-	// The action button
-	if (me.item && [[MvrItemUI UIForItem:me.item] hasAdditionalActionsAvailableForItem:i] > 0)
-		me.navigationItem.rightBarButtonItem = me.actionButton;
 	
 	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:me] autorelease];
-	nav.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	[me modifyStyleForModalNavigationBar:nav.navigationBar];
 	return nav;
 }
 

@@ -27,6 +27,7 @@
 
 @property BOOL changesStatusBarStyleOnAppearance;
 @property(readonly) UIStatusBarStyle preferredStatusBarStyle;
+- (void) modifyStyleForModalNavigationBar:(UINavigationBar*) nb;
 
 @property(readonly) UIBarButtonItem* doneButton, * actionButton;
 

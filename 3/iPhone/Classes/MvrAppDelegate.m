@@ -24,6 +24,8 @@
 #import "MvrBookmarkItemUI.h"
 #import "MvrTextItem.h"
 #import "MvrTextItemUI.h"
+#import "MvrPreviewableItem.h"
+#import "MvrPreviewableItemUI.h"
 
 #import "MvrPasteboardItemSource.h"
 
@@ -200,6 +202,9 @@ enum {
 	
 	[MvrTextItem registerClass];
 	[MvrTextItemUI registerClass];
+	
+	[MvrPreviewableItem registerClass];
+	[MvrPreviewableItemUI registerClass];
 	
 	[[MvrPasteboardItemSource sharedSource] registerSource];
 }

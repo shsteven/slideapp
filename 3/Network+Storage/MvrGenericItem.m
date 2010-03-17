@@ -15,7 +15,7 @@
 
 + supportedTypes;
 {
-	return [NSArray arrayWithObject:(id) kUTTypeData];
+	return [NSSet setWithObject:(id) kUTTypeData];
 }
 
 - (id) initWithStorage:(MvrItemStorage*) s metadata:(NSDictionary*) m;

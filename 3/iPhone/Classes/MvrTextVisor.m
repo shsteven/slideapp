@@ -8,6 +8,12 @@
 
 #import "MvrTextVisor.h"
 
+@interface MvrTextVisor ()
+
+- (void) clearOutlets;
+
+@end
+
 
 @implementation MvrTextVisor
 
@@ -23,7 +29,7 @@
 
 - (void) dealloc
 {
-	[self viewDidUnload];
+	[self clearOutlets];
 	[super dealloc];
 }
 
@@ -35,6 +41,12 @@
 }
 
 - (void) viewDidUnload;
+{
+	[super viewDidUnload];
+	[self clearOutlets];
+}
+
+- (void) clearOutlets;
 {
 	[textView release]; textView = nil;
 }
