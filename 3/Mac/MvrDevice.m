@@ -179,6 +179,13 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 @end
 
 
+@interface MvrDeviceDropDestinationView ()
+
+- (NSDragOperation) updateAndReturnOperationForDragWithInfo:(id <NSDraggingInfo>)sender;
+
+@end
+
+
 @implementation MvrDeviceDropDestinationView
 
 @synthesize owner;
@@ -205,8 +212,14 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 
 - (NSDragOperation) draggingEntered:(id <NSDraggingInfo>) sender;
 {
+	return [self updateAndReturnOperationForDragWithInfo:sender];
+}
+
+- (NSDragOperation) updateAndReturnOperationForDragWithInfo:(id <NSDraggingInfo>) sender;
+{
 	NSArray* files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
-	if ([files count] != 1) {
+	BOOL isDir;
+	if ([files count] != 1 || ![[NSFileManager defaultManager] fileExistsAtPath:[files objectAtIndex:0] isDirectory:&isDir] || isDir) {
 		[self setDragging:NO];
 		return NSDragOperationNone;
 	} else {
@@ -217,14 +230,7 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 
 - (NSDragOperation) draggingUpdated:(id <NSDraggingInfo>) sender;
 {
-	NSArray* files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
-	if ([files count] != 1) {
-		[self setDragging:NO];
-		return NSDragOperationNone;
-	} else {
-		[self setDragging:YES];
-		return NSDragOperationCopy;
-	}
+	return [self updateAndReturnOperationForDragWithInfo:sender];
 }
 
 - (void) draggingExited:(id <NSDraggingInfo>)sender;
