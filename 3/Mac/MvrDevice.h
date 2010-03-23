@@ -10,6 +10,8 @@
 
 #import "Network+Storage/MvrChannel.h"
 
+@class L0KVODispatcher;
+
 #if !__OBJC_GC__
 #error This class assumes garbage collection is available.
 #endif
@@ -27,6 +29,10 @@
 	IBOutlet NSProgressIndicator* spinner;
 	IBOutlet NSView* spinnerView;
 	IBOutlet NSView* dropView;
+	
+	BOOL transfersHappening;
+	
+	L0KVODispatcher* kvo;
 }
 
 - (id) initWithChannel:(id <MvrChannel>) chan;

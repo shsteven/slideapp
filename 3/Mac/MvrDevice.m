@@ -8,6 +8,7 @@
 
 #import "MvrDevice.h"
 
+#import "Network+Storage/MvrProtocol.h"
 #import "Network+Storage/MvrItem.h"
 #import "Network+Storage/MvrGenericItem.h"
 #import "Network+Storage/MvrItemStorage.h"
@@ -15,6 +16,7 @@
 #import "Network+Storage/MvrOutgoing.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import <MuiKit/MuiKit.h>
 
 static NSArray* MvrTypeForExtension(NSString* ext) {
 	if ([ext isEqual:@"m4v"])
@@ -37,6 +39,10 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 @interface MvrDeviceItem ()
 
 - (void) animateMiniSlide;
+- (void) showProgressWindow;
+- (void) hideProgressWindow;
+
+- (CGFloat) currentProgress;
 
 @end
 
@@ -45,50 +51,129 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 
 - (id) initWithChannel:(id <MvrChannel>) chan;
 {
-	if ([NSCollectionViewItem instancesRespondToSelector:@selector(initWithNibName:bundle:)])
-		self = [super initWithNibName:@"MvrDeviceItem" bundle:nil];
-	else {
-		self = [super init];
-		[NSBundle loadNibNamed:@"MvrDeviceItem" owner:self];
-	}
-	
-	if (self) {
-		[(id)chan addObserver:self forKeyPath:@"incomingTransfers" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
-		[(id)chan addObserver:self forKeyPath:@"outgoingTransfers" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
-		self.channel = chan;
+	if (self = [super initWithNibName:@"MvrDeviceItem" bundle:nil]) {
+		self.channel = chan;	
+		kvo = [[L0KVODispatcher alloc] initWithTarget:self];
+		
+		[kvo observe:@"incomingTransfers" ofObject:self.channel usingSelector:@selector(transfersOf:didChange:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld|NSKeyValueObservingOptionPrior];
+		[kvo observe:@"outgoingTransfers" ofObject:self.channel usingSelector:@selector(transfersOf:didChange:) options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld|NSKeyValueObservingOptionPrior];
 	}
 		
 	return self;
 }
 
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
+- (void) transfersOf:(id) chan didChange:(NSDictionary*) change;
 {
-	NSLog(@"%@.%@ changed: %@", object, keyPath, change);
-	
-	NSInteger incoming = [self.channel.incomingTransfers count];
-	NSInteger outgoing = [self.channel.incomingTransfers count];
-	
-	for (id i in [change objectForKey:NSKeyValueChangeNewKey]) {
-		if ([i conformsToProtocol:@protocol(MvrIncoming)])
-			incoming++;
-		else if ([i conformsToProtocol:@protocol(MvrOutgoing)])
-			outgoing++;
+	if ([[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue]) {
+		[self willChangeValueForKey:@"currentProgress"];
+		return;
 	}
 	
-	if (incoming != 0 || outgoing != 0) {
+	BOOL hasNewOnes = NO;
+	for (id t in L0KVOChangedValue(change)) {
+		[kvo observe:@"progress" ofObject:t usingSelector:@selector(progressOfTransfer:didChange:) options:NSKeyValueObservingOptionPrior];
+		hasNewOnes = YES;
+	}
+	
+	for (id t in L0KVOPreviousValue(change)) {
+		[kvo endObserving:@"progress" ofObject:t];
+	}
+	
+	transfersHappening = hasNewOnes || [self.channel.outgoingTransfers count] > 0 || [self.channel.incomingTransfers count] > 0;
+	
+	if (transfersHappening) {
 		[spinnerView setHidden:NO];
+		[spinner setHidden:NO];
+		[spinner setIndeterminate:YES];
 		[spinner startAnimation:self];
 	} else {
-		[spinnerView setHidden:YES];
 		[spinner stopAnimation:self];
-	}	
+		[spinner setHidden:YES];
+		[spinnerView setHidden:YES];		
+	}
+	
+	[self didChangeValueForKey:@"currentProgress"];
+	[self updateBar]; // grrr
 }
+
+- (void) progressOfTransfer:(id) transfer didChange:(NSDictionary*) change;
+{
+	if ([[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue]) {
+		[self willChangeValueForKey:@"currentProgress"];
+		return;
+	}
+	
+	[self didChangeValueForKey:@"currentProgress"];
+	[self updateBar]; // grrr
+}
+
+- (void) updateBar;
+{
+	CGFloat f = [self currentProgress];
+	if (f != kMvrIndeterminateProgress && f >= 0.1) {
+		[spinner setDoubleValue:f];
+		[spinner setIndeterminate:NO];
+	}
+}
+
+- (CGFloat) currentProgress;
+{
+	CGFloat progressSum = 0.0;
+	
+	NSMutableArray* a = [NSMutableArray array];
+	[a addObjectsFromArray:[self.channel.outgoingTransfers allObjects]];
+	[a addObjectsFromArray:[self.channel.incomingTransfers allObjects]];
+	L0Log(@"Considering all of %@", a);
+	
+	for (id t in a) {
+		L0Log(@"Considering %@.progress (%f)", t, (double) [t progress]);
+		if ([t progress] == kMvrIndeterminateProgress) {
+			L0Log(@"Indeterminate. Returning.");
+			return kMvrIndeterminateProgress;
+		}
+		
+		progressSum += [t progress];
+	}
+	
+	L0Log(@"Will return %f divided by %d (indeterminate if 0)", (double) progressSum, (int) [a count]);
+	
+	if ([a count] > 0)
+		return progressSum / (CGFloat) [a count];
+	else
+		return kMvrIndeterminateProgress;
+}
+
+
 
 - (void) awakeFromNib;
 {
 	[self.view setFrame:NSMakeRect(0, 0, 155, 140)];
+	
+	NSTrackingArea* area = [[NSTrackingArea alloc] initWithRect:self.view.bounds options:NSTrackingMouseEnteredAndExited|NSTrackingActiveInActiveApp owner:self userInfo:nil];
+	[self.view addTrackingArea:area];
+	
 	[spinner stopAnimation:self];
 	[spinnerView setHidden:YES];
+}
+
+- (void) mouseEntered:(NSEvent *)theEvent;
+{
+	[self performSelector:@selector(showProgressWindow) withObject:nil afterDelay:1.0];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideProgressWindow) object:nil];
+}
+
+- (void) mouseExited:(NSEvent *)theEvent;
+{
+	[self performSelector:@selector(hideProgressWindow) withObject:nil afterDelay:1.0];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showProgressWindow) object:nil];	
+}
+
+- (void) showProgressWindow;
+{
+}
+
+- (void) hideProgressWindow;
+{
 }
 
 - (void) sendItemFile:(NSString*) file;

@@ -9,7 +9,7 @@
 #import "MvrPacketBuilder.h"
 
 static inline float MvrProgressFromTo(unsigned long long from, unsigned long long to) {
-	return ((float)to - (float)from) / (float)to;
+	return 1.0 - ((float)to - (float)from) / (float)to;
 }
 
 @interface MvrPacketBuilder ()

@@ -82,7 +82,7 @@
 
 - (NSSet*) outgoingTransfers;
 {
-	return incomingTransfers;
+	return outgoingTransfers;
 }
 
 // ... and override these to get notifications for outgoings/incomings being added/removed.
