@@ -42,7 +42,9 @@
 	
 	originalWindowHeight = [window frame].size.height;
 	
-	[window center];
+	NSString* autosaveKey = [NSString stringWithFormat:@"NSWindow Frame %@", [window frameAutosaveName]];
+	if (![[NSUserDefaults standardUserDefaults] objectForKey:autosaveKey])
+		[window center];
 	[window makeKeyAndOrderFront:self];
 }
 
