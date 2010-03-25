@@ -22,7 +22,7 @@
 
 - (UIImage*) representingImageWithSize:(CGSize) size forItem:(id) i;
 {
-	return nil; // TODO
+	return [UIImage imageNamed:@"DocIcon.png"];
 }
 
 - (NSString*) accessibilityLabelForItem:(id)i;

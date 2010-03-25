@@ -133,6 +133,7 @@
 		1569C863108DB7A800F3B5CF /* MvrBTScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C862108DB7A800F3B5CF /* MvrBTScanner.m */; };
 		1569C866108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569C865108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m */; };
 		1569CAF8108E040700F3B5CF /* MvrBTDebugTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569CAF7108E040700F3B5CF /* MvrBTDebugTracker.m */; };
+		156A61A0115B43BC00AF75CD /* DocIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156A619F115B43BC00AF75CD /* DocIcon.png */; };
 		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		156E804210663AEB00315D0C /* GenericItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156E804110663AEB00315D0C /* GenericItemIcon.png */; };
 		1570B33910E756420037DEB4 /* ILSwapService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570B33310E756420037DEB4 /* ILSwapService.m */; };
@@ -408,6 +409,7 @@
 		1569C865108DBDC900F3B5CF /* MvrBTIncomingOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBTIncomingOutgoing.m; sourceTree = "<group>"; };
 		1569CAF6108E040700F3B5CF /* MvrBTDebugTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBTDebugTracker.h; sourceTree = "<group>"; };
 		1569CAF7108E040700F3B5CF /* MvrBTDebugTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBTDebugTracker.m; sourceTree = "<group>"; };
+		156A619F115B43BC00AF75CD /* DocIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DocIcon.png; sourceTree = "<group>"; };
 		156CF0D4105BAEC3006D8E7A /* Local-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-Debug.xcconfig"; sourceTree = "<group>"; };
 		156CF0D5105BAEC3006D8E7A /* Local-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-Release.xcconfig"; sourceTree = "<group>"; };
 		156CF0D6105BAEC3006D8E7A /* Local.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Local.xcconfig; sourceTree = "<group>"; };
@@ -1061,6 +1063,7 @@
 				158CBFE41077583F006813A7 /* ContactWithoutImageIcon.png */,
 				15955934107760EE00FBC9B4 /* BookmarkIcon.png */,
 				159559E4107769F500FBC9B4 /* TextIcon.png */,
+				156A619F115B43BC00AF75CD /* DocIcon.png */,
 				15D46D0C10724C5A00DA8260 /* DrawerButton.png */,
 				15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */,
 				157B68B11072548600E25E96 /* GreenDot.png */,
@@ -1411,6 +1414,7 @@
 				15035881113523B800144ADC /* Icon72.png in Resources */,
 				15035882113523B800144ADC /* Icon512.png in Resources */,
 				150722701150C2EA009FA8AF /* MvrPreviewVisor.xib in Resources */,
+				156A61A0115B43BC00AF75CD /* DocIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
