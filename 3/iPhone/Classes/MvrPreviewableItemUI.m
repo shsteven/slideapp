@@ -9,6 +9,7 @@
 #import "MvrPreviewableItemUI.h"
 #import "MvrPreviewVisor.h"
 #import "MvrAppDelegate.h"
+#import "MvrAppDelegate+HelpAlerts.h"
 
 #import "Network+Storage/MvrItem.h"
 #import "Network+Storage/MvrItemStorage.h"
@@ -33,6 +34,10 @@
 		return NSLocalizedString(@"Untitled item", @"The accessibility label of a generic item without a title");
 }
 
+- (void) didStoreItem:(id) i;
+{
+	[MvrApp() showAlertIfNotShownBeforeNamed:@"MvrPreviewableItemReceived"];
+}
 
 - (MvrItemAction*) mainActionForItem:(id) i;
 {
