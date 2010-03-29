@@ -178,6 +178,7 @@
 		15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFE6D9108460C000CBCB35 /* CrashReporter.framework */; };
 		15AFE6ED108460F200CBCB35 /* MvrCrashReporting.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */; };
 		15AFE6EF1084623300CBCB35 /* MvrAskAboutCrash.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */; };
+		15BF3F5B11608BCB001EC1BC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15BF3F5A11608BCB001EC1BC /* Security.framework */; };
 		15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
 		15C1C8531068DAAA000C9CDE /* MvrArrowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */; };
 		15C1C86B1068DB92000C9CDE /* MvrWiFiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86A1068DB92000C9CDE /* MvrWiFiMode.m */; };
@@ -486,6 +487,7 @@
 		15AFE6EB108460F200CBCB35 /* MvrCrashReporting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrCrashReporting.h; sourceTree = "<group>"; };
 		15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrCrashReporting.m; sourceTree = "<group>"; };
 		15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrAskAboutCrash.alert; sourceTree = "<group>"; };
+		15BF3F5A11608BCB001EC1BC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		15C1C8491068D8AA000C9CDE /* MvrArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView.h; sourceTree = "<group>"; };
 		15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrArrowView.m; sourceTree = "<group>"; };
 		15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrArrowView.xib; sourceTree = "<group>"; };
@@ -538,7 +540,7 @@
 		15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Backdrop-Bluetooth.png"; path = "Theme/Backdrop-Bluetooth.png"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* MvrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MvrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* MoverPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoverPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Mover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Mover3_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mover3_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Mover3-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover3-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */,
 				1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */,
 				15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */,
+				15BF3F5B11608BCB001EC1BC /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1122,7 +1125,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* MoverPlus.app */,
+				1D6058910D05DD3D006BFB54 /* Mover.app */,
 				150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */,
 			);
 			name = Products;
@@ -1154,6 +1157,7 @@
 				154FA54810790FD1004DF675 /* MessageUI.framework */,
 				1537A6E0107A388000B16B88 /* GameKit.framework */,
 				150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */,
+				15BF3F5A11608BCB001EC1BC /* Security.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1211,6 +1215,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover3" */;
 			buildPhases = (
+				15BF3F3C116088E5001EC1BC /* Build StoreUI & Copy Resources */,
 				157CBD23108F160900146778 /* Check Current Variant */,
 				159962B810C112D700674DB1 /* Copy Variant Resources */,
 				1585FA24108CB05800D2AEAB /* Build Localizations */,
@@ -1227,7 +1232,7 @@
 			);
 			name = Mover3;
 			productName = Mover3;
-			productReference = 1D6058910D05DD3D006BFB54 /* MoverPlus.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Mover.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1493,6 +1498,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$ILABS_MOVER_VARIANT_HAS_RESOURCES\" == \"YES\" ]; then\n\trsync -av \"$SRCROOT\"/Variants/Current/VariantResources/* \"$BUILT_PRODUCTS_DIR\"/\"$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nelse\n\techo \"note: Copying variant resources not enabled for this variant.\" >&2\nfi\n";
+		};
+		15BF3F3C116088E5001EC1BC /* Build StoreUI & Copy Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build StoreUI & Copy Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "if [ \"$ILABS_MOVER_VARIANT\" == \"Lite\" ]; then\n\tcd \"$SRCROOT/StoreUI\"\n\txcodebuild -target \"StoreUI (All)\" -configuration \"$CONFIGURATION\" -sdk \"$SDK_NAME\"\n\tcd \"$SRCROOT\"\n\tcp -rv \"StoreUI/build/$CONFIGURATION/StoreUI.bundle\" \"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
