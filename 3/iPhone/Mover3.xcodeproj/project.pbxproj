@@ -178,7 +178,6 @@
 		15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFE6D9108460C000CBCB35 /* CrashReporter.framework */; };
 		15AFE6ED108460F200CBCB35 /* MvrCrashReporting.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */; };
 		15AFE6EF1084623300CBCB35 /* MvrAskAboutCrash.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */; };
-		15BF3F5B11608BCB001EC1BC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15BF3F5A11608BCB001EC1BC /* Security.framework */; };
 		15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
 		15C1C8531068DAAA000C9CDE /* MvrArrowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */; };
 		15C1C86B1068DB92000C9CDE /* MvrWiFiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86A1068DB92000C9CDE /* MvrWiFiMode.m */; };
@@ -487,7 +486,6 @@
 		15AFE6EB108460F200CBCB35 /* MvrCrashReporting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrCrashReporting.h; sourceTree = "<group>"; };
 		15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrCrashReporting.m; sourceTree = "<group>"; };
 		15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrAskAboutCrash.alert; sourceTree = "<group>"; };
-		15BF3F5A11608BCB001EC1BC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		15C1C8491068D8AA000C9CDE /* MvrArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView.h; sourceTree = "<group>"; };
 		15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrArrowView.m; sourceTree = "<group>"; };
 		15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrArrowView.xib; sourceTree = "<group>"; };
@@ -590,7 +588,6 @@
 				154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */,
 				1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */,
 				15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */,
-				15BF3F5B11608BCB001EC1BC /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,7 +1154,6 @@
 				154FA54810790FD1004DF675 /* MessageUI.framework */,
 				1537A6E0107A388000B16B88 /* GameKit.framework */,
 				150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */,
-				15BF3F5A11608BCB001EC1BC /* Security.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1511,7 +1507,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "if [ \"$ILABS_MOVER_VARIANT\" == \"Lite\" ]; then\n\tcd \"$SRCROOT/StoreUI\"\n\txcodebuild -target \"StoreUI (All)\" -configuration \"$CONFIGURATION\" -sdk \"$SDK_NAME\"\n\tcd \"$SRCROOT\"\n\tcp -rv \"StoreUI/build/$CONFIGURATION/StoreUI.bundle\" \"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/\nfi\n";
+			shellScript = "if [ \"$ILABS_MOVER_VARIANT\" == \"Lite\" ]; then\n\tif [ \"$CONFIGURATION\" == \"Debug\" ]; then\n\t\tACTIONS=build\n\telse\n\t\tACTIONS=\"clean build\"\n\tfi\n\n\tNO_CODE_SIGNING=\"CODE_SIGN_REQUIRED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= PROVISIONING_PROFILE=\"\n\n\tcd \"$SRCROOT/StoreUI\"\n\t\n\txcodebuild -target \"StoreUI\" -configuration \"$CONFIGURATION\" -sdk \"$SDK_NAME\" $NO_CODE_SIGNING $ACTIONS\n\txcodebuild -target \"StoreUI (Resources)\" -configuration \"$CONFIGURATION\" $NO_CODE_SIGNING $ACTIONS\n\n\tcd \"$SRCROOT\"\n\tcp -rv \"StoreUI/build/$CONFIGURATION/StoreUI.bundle\" \"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
