@@ -42,6 +42,10 @@
 
 #import <SwapKit/SwapKit.h>
 
+#if kMvrIsLite
+#import "MvrStore.h"
+#endif
+
 @interface MvrAppDelegate () <ILSwapServiceDelegate>
 
 - (void) setUpItemClassesAndUIs;
@@ -107,6 +111,11 @@ enum {
 #endif
 	
 	[self showAlertIfNotShownBeforeNamed:@"MvrWelcome"];
+	
+#if kMvrIsLite
+	[MvrStore setStoreUIBundleFromResource:@"StoreUI" ofType:@"bundle" inBundle:[NSBundle mainBundle]];
+	[[MvrStore store] beginObservingTransactions];
+#endif
 	
 	BOOL ok = [ILSwapService didFinishLaunchingWithOptions:options];
 	
@@ -613,6 +622,18 @@ enum {
 - (UIView*) actionSheetOriginView;
 {
 	return self.tableController.toolbar;
+}
+
+#pragma mark -
+#pragma mark Feature availability
+
+- (void) isFeatureAvailable:(MvrStoreFeature) f;
+{
+#if !kMvrIsLite
+	return YES;
+#else
+	return [[MvrStore store] isFeatureAvailable:f];
+#endif
 }
 
 @end

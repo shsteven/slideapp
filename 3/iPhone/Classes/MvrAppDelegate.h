@@ -24,6 +24,8 @@
 
 #import "MvrMessageChecker.h"
 
+#import "MvrFeatures.h"
+
 @interface MvrAppDelegate : NSObject <
 	UIApplicationDelegate,
 	UIActionSheetDelegate,
@@ -84,6 +86,8 @@
 - (IBAction) showAboutPane;
 
 @property(readonly) UIView* actionSheetOriginView;
+
+- (void) isFeatureAvailable:(MvrStoreFeature) f;
 
 @end
 

@@ -10,6 +10,10 @@
 #import "MvrAppDelegate.h"
 #import "MvrMorePane.h"
 
+#if kMvrIsLite
+#import "MvrStorePane.h"
+#endif
+
 enum {
 #if !kMvrIsLite
 	kMvrAboutSectionOne,
@@ -223,9 +227,16 @@ enum {
 		case kMvrAboutSectionUpsell:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_Upsell:
-					[self retain]; // balanced in -openAppStoreURL:
-					[UIApp beginIgnoringInteractionEvents];
-					[kMvrUpsellURL beginResolvingRedirectsWithDelegate:self selector:@selector(openAppStoreURL:)];
+//					[self retain]; // balanced in -openAppStoreURL:
+//					[UIApp beginIgnoringInteractionEvents];
+//					[kMvrUpsellURL beginResolvingRedirectsWithDelegate:self selector:@selector(openAppStoreURL:)];
+				{
+					MvrStorePane* pane = [[MvrStorePane alloc] initWithDefaultNibName];
+					[self.navigationController pushViewController:pane animated:YES];
+					[self.navigationController setNavigationBarHidden:NO animated:YES];
+					[pane release];
+				}
+					
 					break;
 			}
 			
