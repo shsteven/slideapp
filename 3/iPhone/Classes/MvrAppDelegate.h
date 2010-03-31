@@ -87,7 +87,7 @@
 
 @property(readonly) UIView* actionSheetOriginView;
 
-- (void) isFeatureAvailable:(MvrStoreFeature) f;
+- (BOOL) isFeatureAvailable:(MvrStoreFeature) f;
 
 @end
 

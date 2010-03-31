@@ -137,11 +137,14 @@ enum {
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString* cellIdentifier = @"MvrRegularCell";
+    NSString* cellIdentifier = nil;
 	if ([indexPath section] == kMvrAboutSectionTwo && [indexPath row] == kMvrAboutEntry_More)
 		cellIdentifier = @"MvrLabeledCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UITableViewCell *cell = nil;
+	if (cellIdentifier)
+		[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
     if (cell == nil) {
 		UITableViewCellStyle style = UITableViewCellStyleDefault;
 		if ([indexPath section] == kMvrAboutSectionTwo && [indexPath row] == kMvrAboutEntry_More)
@@ -157,11 +160,25 @@ enum {
 		case kMvrAboutSectionUpsell:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_Upsell:
-					cell.textLabel.text = NSLocalizedString(@"Get more features in Mover+", @"Upsell entry in about box");
+					// cell.textLabel.text = NSLocalizedString(@"Get more features in Mover+", @"Upsell entry in about box");
+					
+				{
+					UIImageView* iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StoreTableViewCell.png"]];
+					
+					iv.highlightedImage = [UIImage imageNamed:@"StoreTableViewCell_Highlighted.png"];
+					
+					iv.contentMode = UIViewContentModeTop;
+					iv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+					iv.frame = cell.contentView.bounds;
+					
+					[cell.contentView addSubview:iv];
+					[iv release];
+					
+					[cell setAccessibilityLabel:NSLocalizedString(@"Store", @"Store cell accessibility label")];
+					
+				}
 					break;
 			}
-			
-			cell.imageView.image = [UIImage imageNamed:@"PlusSign.png"];
 			
 			break;
 #endif
@@ -281,7 +298,7 @@ enum {
 #if kMvrIsLite
 
 - (NSString*) upsellSectionMoverText {
-	return NSLocalizedString(@"Mover+ has all the features of Mover, and can also resend videos, text clippings and bookmarks via Wi-Fi and Bluetooth.", @"Upsell section text");
+	return NSLocalizedString(@"Find out about Mover Lite's feature packs, or get more information on Mover+, the paid version of Mover, at the Store.", @"Upsell section text");
 }
 
 - (CGFloat) tableView:(UITableView *)tv heightForFooterInSection:(NSInteger)section;

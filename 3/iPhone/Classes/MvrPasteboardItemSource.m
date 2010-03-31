@@ -21,7 +21,13 @@
 #import "MvrContactItem.h"
 
 static inline BOOL MvrPasteboardItemSourceLiteVersionCanPasteItemsOfClass(Class c) {
-	return [c isEqual:[MvrImageItem class]] || [c isEqual:[MvrContactItem class]];
+	if ([c isEqual:[MvrImageItem class]] || [c isEqual:[MvrContactItem class]])
+		return YES;
+	
+	if ([c isEqual:[MvrTextItem class]] || [c isEqual:[MvrBookmarkItem class]])
+		return [MvrApp() isFeatureAvailable:kMvrFeatureAllowTextAndBookmarkPasting];
+	
+	return NO;
 }
 
 #endif

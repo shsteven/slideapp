@@ -14,6 +14,10 @@
 #import "Network+Storage/MvrItem.h"
 #import "Network+Storage/MvrItemStorage.h"
 
+#if kMvrIsLite
+#import "MvrUpsellController.h"
+#endif
+
 @implementation MvrPreviewableItemUI
 
 + (NSSet*) supportedItemClasses;
@@ -47,6 +51,13 @@
 
 - (void) performShowOrOpenAction:(MvrItemAction*) showOrOpen withItem:(id) i;
 {
+#if kMvrIsLite
+	if (![MvrApp() isFeatureAvailable:kMvrFeaturePreviewableItems]) {
+		[[MvrUpsellController upsellWithAlertNamed:@"MvrLiteNeedConnectPackForPreviewableItems" cancelButton:0 action:kMvrUpsellDisplayStorePane] show];
+		return;
+	}
+#endif
+	
 	[MvrApp() presentModalViewController:[MvrPreviewVisor modalVisorWithItem:i]];
 }
 

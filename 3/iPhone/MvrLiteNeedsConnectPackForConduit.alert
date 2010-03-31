@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array>
+		<string>Dismiss</string>
+		<string>Store</string>
+	</array>
+	<key>L0AlertMessage</key>
+	<string>Mac sending and receiving requires the Connect Pack, available at the Store.</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

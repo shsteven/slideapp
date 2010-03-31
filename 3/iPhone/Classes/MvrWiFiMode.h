@@ -20,6 +20,8 @@
 	UIImageView* connectionStateImage;
 	UIView* connectionStateContainer;
 	UIView* bluetoothButtonView;
+	
+	BOOL conduitUpsellShown;
 }
 
 @property(assign) IBOutlet UILabel* connectionStateInfo;

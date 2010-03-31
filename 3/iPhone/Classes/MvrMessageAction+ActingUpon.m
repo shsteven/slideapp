@@ -11,6 +11,10 @@
 #import <MuiKit/MuiKit.h>
 #import "MvrAppDelegate.h"
 
+#if kMvrIsLite
+#import "MvrStorePane.h"
+#endif
+
 @interface MvrMessageActionWebPane : L0WebViewController {
 	UIStatusBarStyle oldStatusBarStyle;
 	BOOL switchesBarStyleOnShow;
@@ -118,6 +122,20 @@
 
 - (UIViewController*) modalViewController;
 {
+	
+#if kMvrIsLite
+	if ([[self.URL scheme] isEqual:@"x-mover"]) {
+		if ([[self.URL resourceSpecifier] isEqual:@"store"]) {
+			
+			id vc = [MvrStorePane modalControllerForPane:NULL];
+			return vc;
+			 
+		}
+		
+		return nil;
+	}
+#endif
+	
 	MvrMessageActionWebPane* ctl = (MvrMessageActionWebPane*) [self nonmodalViewController];
 	ctl.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:ctl action:@selector(dismiss)] autorelease];
 	ctl.switchesBarStyleOnShow = YES;
@@ -134,9 +152,12 @@
 
 - (void) perform;
 {
-	if (self.shouldDisplayInApp)
-		[MvrApp() presentModalViewController:[self modalViewController]];
-	else
+	
+	if (self.shouldDisplayInApp) {
+		id vc = [self modalViewController];
+		if (vc)
+			[MvrApp() presentModalViewController:vc];
+	} else
 		[self openURLAfterRedirects:YES];
 }
 

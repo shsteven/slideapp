@@ -20,6 +20,8 @@
 
 #define kMvrModernWiFiPeerIdentifierKey @"MvrID"
 
+#define kMvrModernWiFiDidEncounterConduitChannelNotification @"MvrModernWiFiDidEncounterConduitChannelNotification"
+
 enum {
 	kMvrUseMobileService = 1 << 0,
 	kMvrUseConduitService = 1 << 1,
@@ -41,10 +43,14 @@ typedef NSInteger MvrModernWiFiOptions;
 	
 	NSMutableSet* incomingTransfers;
 	L0KVODispatcher* dispatcher;
+	
+	NSMutableSet* conduitServices;
 }
 
 - (id) initWithPlatformInfo:(id <MvrPlatformInfo>) info serverPort:(int) port options:(MvrModernWiFiOptions) opts;
 
 - (MvrModernWiFiChannel*) channelForAddress:(NSData*) address;
+
+@property(nonatomic) BOOL allowBrowsingForConduit;
 
 @end

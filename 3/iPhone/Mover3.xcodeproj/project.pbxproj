@@ -117,6 +117,8 @@
 		1553517C1088468900C75A6C /* MvrMorePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1553517B1088468900C75A6C /* MvrMorePane.m */; };
 		155352431088547D00C75A6C /* MvrMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 155352421088547D00C75A6C /* MvrMessagesCell.m */; };
 		1553536610885FFD00C75A6C /* MvrNoNews.alert in Resources */ = {isa = PBXBuildFile; fileRef = 1553536510885FFD00C75A6C /* MvrNoNews.alert */; };
+		155F650411633EFA00FC526E /* StoreTableViewCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 155F650311633EFA00FC526E /* StoreTableViewCell.png */; };
+		155F65151163415800FC526E /* StoreTableViewCell_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 155F65141163415800FC526E /* StoreTableViewCell_Highlighted.png */; };
 		1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
 		1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
 		1567511810620E01006EC706 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511710620E01006EC706 /* CFNetwork.framework */; };
@@ -178,6 +180,8 @@
 		15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFE6D9108460C000CBCB35 /* CrashReporter.framework */; };
 		15AFE6ED108460F200CBCB35 /* MvrCrashReporting.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */; };
 		15AFE6EF1084623300CBCB35 /* MvrAskAboutCrash.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */; };
+		15BF40E811613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15BF40E711613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert */; };
+		15BF40EF11613D02001EC1BC /* MvrLiteNeedsConnectPackForConduit.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15BF40EE11613D02001EC1BC /* MvrLiteNeedsConnectPackForConduit.alert */; };
 		15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
 		15C1C8531068DAAA000C9CDE /* MvrArrowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */; };
 		15C1C86B1068DB92000C9CDE /* MvrWiFiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86A1068DB92000C9CDE /* MvrWiFiMode.m */; };
@@ -387,6 +391,8 @@
 		155352411088547D00C75A6C /* MvrMessagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMessagesCell.h; sourceTree = "<group>"; };
 		155352421088547D00C75A6C /* MvrMessagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMessagesCell.m; sourceTree = "<group>"; };
 		1553536510885FFD00C75A6C /* MvrNoNews.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoNews.alert; sourceTree = "<group>"; };
+		155F650311633EFA00FC526E /* StoreTableViewCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoreTableViewCell.png; sourceTree = "<group>"; };
+		155F65141163415800FC526E /* StoreTableViewCell_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoreTableViewCell_Highlighted.png; sourceTree = "<group>"; };
 		156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = "<group>"; };
 		1567511310620DF7006EC706 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		1567511510620DFC006EC706 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -487,6 +493,8 @@
 		15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrCrashReporting.m; sourceTree = "<group>"; };
 		15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrAskAboutCrash.alert; sourceTree = "<group>"; };
 		15BF3FC411609679001EC1BC /* MvrFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrFeatures.h; sourceTree = "<group>"; };
+		15BF40E711613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrLiteNeedConnectPackForPreviewableItems.alert; sourceTree = "<group>"; };
+		15BF40EE11613D02001EC1BC /* MvrLiteNeedsConnectPackForConduit.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrLiteNeedsConnectPackForConduit.alert; sourceTree = "<group>"; };
 		15C1C8491068D8AA000C9CDE /* MvrArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView.h; sourceTree = "<group>"; };
 		15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrArrowView.m; sourceTree = "<group>"; };
 		15C1C8521068DAAA000C9CDE /* MvrArrowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrArrowView.xib; sourceTree = "<group>"; };
@@ -1072,6 +1080,8 @@
 				15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */,
 				157B68B11072548600E25E96 /* GreenDot.png */,
 				157B68B31072548D00E25E96 /* RedDot.png */,
+				155F650311633EFA00FC526E /* StoreTableViewCell.png */,
+				155F65141163415800FC526E /* StoreTableViewCell_Highlighted.png */,
 			);
 			name = "More images";
 			sourceTree = "<group>";
@@ -1079,6 +1089,8 @@
 		15CB30981084C7F300CB285F /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
+				15BF40E711613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert */,
+				15BF40EE11613D02001EC1BC /* MvrLiteNeedsConnectPackForConduit.alert */,
 				151060F21093819300307C62 /* MvrNoLiteToLiteBTReminder.alert */,
 				151060F01093818D00307C62 /* MvrNoLiteToLiteBT.alert */,
 				15D91B481092545800D8BAA9 /* MvrNoNewItemSendingInLite.alert */,
@@ -1422,6 +1434,10 @@
 				150722701150C2EA009FA8AF /* MvrPreviewVisor.xib in Resources */,
 				156A61A0115B43BC00AF75CD /* DocIcon.png in Resources */,
 				156A61D5115B472200AF75CD /* MvrPreviewableItemReceived.alert in Resources */,
+				15BF40E811613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert in Resources */,
+				15BF40EF11613D02001EC1BC /* MvrLiteNeedsConnectPackForConduit.alert in Resources */,
+				155F650411633EFA00FC526E /* StoreTableViewCell.png in Resources */,
+				155F65151163415800FC526E /* StoreTableViewCell_Highlighted.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1506,8 +1522,6 @@
 			);
 			name = "Build StoreUI & Copy Resources";
 			outputPaths = (
-				"$(SRCROOT)/StoreUI/build/$(CONFIGURATION)/StoreUI.bundle",
-				"$(SRCROOT)/StoreUI/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/libStoreUI.a",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;

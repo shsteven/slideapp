@@ -369,10 +369,8 @@ enum {
 	as.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
 	[as setValue:i forKey:@"MvrItem"];
 	
-#if kMvrIsLite
 	if (![i isKindOfClass:[MvrImageItem class]] && ![i isKindOfClass:[MvrContactItem class]])
 		send = NO;
-#endif
 	
 	if (mainAction) {
 		MvrItemAction* main = [ui mainActionForItem:i];
@@ -627,12 +625,12 @@ enum {
 #pragma mark -
 #pragma mark Feature availability
 
-- (void) isFeatureAvailable:(MvrStoreFeature) f;
+- (BOOL) isFeatureAvailable:(MvrStoreFeature) f;
 {
 #if !kMvrIsLite
 	return YES;
 #else
-	return [[MvrStore store] isFeatureAvailable:f];
+	return [[MvrStore store] featureIsAvailable:f];
 #endif
 }
 

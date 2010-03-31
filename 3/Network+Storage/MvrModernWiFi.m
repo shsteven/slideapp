@@ -42,14 +42,14 @@
 			[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourConduitServiceType port:port TXTRecord:record];
 		
 		[self addBrowserForServicesWithType:kMvrModernWiFiBonjourServiceType];
-		
-		if (allowBrowsingForConduit)
-			[self addBrowserForServicesWithType:kMvrModernWiFiBonjourConduitServiceType];
+		[self addBrowserForServicesWithType:kMvrModernWiFiBonjourConduitServiceType];
 		
 		incomingTransfers = [NSMutableSet new];
 		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
 		
 		serverPort = port;
+		
+		conduitServices = [NSMutableSet new];
  	}
 
 	return self;
@@ -78,10 +78,12 @@
 	[super stop];
 	[serverSocket disconnect];
 	[serverSocket release]; serverSocket = nil;
+	[conduitServices removeAllObjects];
 }
 
 - (void) dealloc
 {
+	[conduitServices release];
 	[dispatcher release];
 	[incomingTransfers release];
 	[super dealloc];
@@ -113,6 +115,15 @@
 		return;
 	}
 	
+	if ([[s type] isEqual:kMvrModernWiFiBonjourConduitServiceType]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:kMvrModernWiFiDidEncounterConduitChannelNotification object:self];
+		
+		if (!allowBrowsingForConduit) {
+			[conduitServices addObject:s];
+			return;
+		}
+	}
+	
 	MvrModernWiFiChannel* chan = [[MvrModernWiFiChannel alloc] initWithNetService:s identifier:ident];
 	[self.mutableChannels addObject:chan];
 	[chan release];
@@ -126,6 +137,30 @@
 		if ([chan hasSameServiceAs:s])
 			[self.mutableChannels removeObject:chan];
 	}
+	
+	[conduitServices removeObject:s];
+}
+
+@synthesize allowBrowsingForConduit;
+- (void) setAllowBrowsingForConduit:(BOOL) a;
+{
+	if (a != allowBrowsingForConduit) {
+		for (NSNetService* s in conduitServices) {
+			NSDictionary* idents = [self stringsForKeys:[NSSet setWithObject:kMvrModernWiFiPeerIdentifierKey] inTXTRecordData:[s TXTRecordData] encoding:NSASCIIStringEncoding];
+			NSString* ident = [idents objectForKey:kMvrModernWiFiPeerIdentifierKey];
+			
+			if (!ident) {
+				L0Log(@"Service %@ has its UUID missing, so we don't display it.", s);
+				continue;
+			}
+
+			MvrModernWiFiChannel* chan = [[MvrModernWiFiChannel alloc] initWithNetService:s identifier:ident];
+			[self.mutableChannels addObject:chan];
+			[chan release];			
+		}
+	}
+	
+	allowBrowsingForConduit = a;
 }
 
 #pragma mark -

@@ -34,7 +34,7 @@
 	
 	BOOL isVideoAvailable;
 #if kMvrIsLite
-	isVideoAvailable = NO;
+	isVideoAvailable = [MvrApp() isFeatureAvailable:kMvrFeatureVideoSending];
 #else
 	isVideoAvailable = [UIImagePickerController isSourceTypeAvailable:sourceType] && [[UIImagePickerController availableMediaTypesForSourceType:s] containsObject:(id) kUTTypeMovie];
 #endif
@@ -81,9 +81,7 @@
 				}
 			}
 			
-		}
-#if !kMvrIsLite
-		else if (UTTypeConformsTo((CFStringRef) uti, kUTTypeMovie)) {
+		} else if (UTTypeConformsTo((CFStringRef) uti, kUTTypeMovie) && [MvrApp() isFeatureAvailable:kMvrFeatureVideoSending]) {
 			
 			if (url && [url isFileURL]) {
 				[self performAddingVideoAtPath:[url path] type:uti];
@@ -93,7 +91,6 @@
 			}
 			
 		}
-#endif
 		
 	}
 	
@@ -102,7 +99,9 @@
 
 - (void) performAddingVideoAtPath:(NSString *)path type:(NSString *)type;
 {
-#if !kMvrIsLite
+	if (![MvrApp() isFeatureAvailable:kMvrFeatureVideoSending])
+		return;
+	
 	NSError* e;
 	MvrVideoItem* video = [MvrVideoItem itemWithVideoAtPath:path type:type error:&e];
 	
@@ -110,7 +109,6 @@
 		[MvrApp() addItemFromSelf:video];
 	else
 		L0Log(@"Could not add video, there was an error: %@", e);
-#endif
 }
 
 - (void) performAddingImage:(UIImage *)i;

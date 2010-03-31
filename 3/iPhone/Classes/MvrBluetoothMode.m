@@ -255,14 +255,14 @@ enum {
 - (void) outgoingUnavailableInLite:(NSNotification*) n;
 {
 #if kMvrIsLite
-	[[MvrUpsellController upsellWithAlertNamed:@"MvrNoBTOutgoingInLite" cancelButton:0] show];
+	[[MvrUpsellController upsellWithAlertNamed:@"MvrNoBTOutgoingInLite" cancelButton:0 action:kMvrUpsellOpenMoverPlusPageInAppStore] show];
 #endif
 }
 
 - (void) cannotConnectToLite:(NSNotification*) n;
 {
 #if kMvrIsLite
-	[[MvrUpsellController upsellWithAlertNamed:@"MvrNoLiteToLiteBT" cancelButton:0] show];
+	[[MvrUpsellController upsellWithAlertNamed:@"MvrNoLiteToLiteBT" cancelButton:0 action:kMvrUpsellOpenMoverPlusPageInAppStore] show];
 #endif
 }
 

@@ -24,15 +24,7 @@
 #import "MvrImageItem.h"
 #import "MvrContactItem.h"
 
-static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem* i) {
-//	if (![i isKindOfClass:[MvrImageItem class]] && ![i isKindOfClass:[MvrContactItem class]]) {
-//		[[MvrUpsellController upsellWithAlertNamed:@"MvrNoNewItemSendingInLite" cancelButton:0] show];
-//		return NO;
-//	} else
-//		return YES;
-	
-	return YES;
-}
+#import "MvrStore.h"
 
 #endif
 
@@ -49,9 +41,8 @@ static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem*
 {
 	MvrModernWiFiOptions opts = kMvrUseMobileService;
 	
-#if !kMvrIsLite
-	opts |= kMvrAllowBrowsingForConduitService;
-#endif
+	if ([MvrApp() isFeatureAvailable:kMvrFeatureMoverConnect])
+		opts |= kMvrAllowBrowsingForConduitService;
 	
 	wifi = [[[self scannerClass] alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort modernOptions:opts];
 	observer = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
@@ -70,8 +61,34 @@ static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem*
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOfNetworkTrouble:) name:kMvrLegacyWiFiDifficultyStartingListenerNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOfNetworkTrouble:) name:kMvrModernWiFiDifficultyStartingListenerNotification object:nil];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUnlockProduct:) name:kMvrStoreProductUnlockedNotification object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEncounterConduit:) name:kMvrModernWiFiDidEncounterConduitChannelNotification object:nil];
+	
 	if (self.delegate) // we're on!
 		wifi.enabled = YES;
+}
+
+- (void) didUnlockProduct:(NSNotification*) n;
+{
+	if ([MvrApp() isFeatureAvailable:kMvrFeatureMoverConnect])
+		wifi.modernWiFi.allowBrowsingForConduit = YES;
+}
+
+- (void) didEncounterConduit:(NSNotification*) n;
+{
+	if (![MvrApp() isFeatureAvailable:kMvrFeatureMoverConnect]) {
+
+		if (!conduitUpsellShown) {
+		
+#if kMvrIsLite
+			[[MvrUpsellController upsellWithAlertNamed:@"MvrLiteNeedsConnectPackForConduit" cancelButton:0 action:kMvrUpsellDisplayStorePane] show];
+#endif
+			
+			conduitUpsellShown = YES;
+			
+		}
+	}
 }
 
 - (void) notifyOfNetworkTrouble:(NSNotification*) n;
@@ -140,10 +157,6 @@ static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem*
 
 - (void) sendItem:(MvrItem*) i toDestinationAtDirection:(MvrDirection) dest;
 {
-#if kMvrIsLite
-	if (!MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(i))
-		return;
-#endif
 	[[self destinationAtDirection:dest] beginSendingItem:i];
 }
 
@@ -151,11 +164,6 @@ static inline BOOL MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(MvrItem*
 {
 	if (![self.mutableDestinations containsObject:destination])
 		return;
-	
-#if kMvrIsLite
-	if (!MvrWiFiModeShouldContinueSendingItemAfterLiteWarning(i))
-		return;
-#endif
 
 	[destination beginSendingItem:i];
 }
