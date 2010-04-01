@@ -61,7 +61,9 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOfNetworkTrouble:) name:kMvrLegacyWiFiDifficultyStartingListenerNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOfNetworkTrouble:) name:kMvrModernWiFiDifficultyStartingListenerNotification object:nil];
 	
+#if kMvrIsLite
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUnlockProduct:) name:kMvrStoreProductUnlockedNotification object:nil];
+#endif
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEncounterConduit:) name:kMvrModernWiFiDidEncounterConduitChannelNotification object:nil];
 	
