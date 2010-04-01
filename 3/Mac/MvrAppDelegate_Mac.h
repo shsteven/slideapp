@@ -8,33 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Network+Storage/MvrPlatformInfo.h"
-#import "Network+Storage/MvrModernWiFi.h"
-#import "Network+Storage/MvrModernWiFiChannel.h"
-#import "Network+Storage/MvrScannerObserver.h"
 
 #import "MvrDevicesLineView.h"
 
 #import <MuiKit/MuiKit.h>
 
-@interface MoverWaypointAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, MvrPlatformInfo, MvrScannerObserverDelegate> {
+@interface MvrAppDelegate_Mac : NSObject <NSApplicationDelegate, NSWindowDelegate> {
     IBOutlet NSWindow * window;
 	CGFloat originalWindowHeight;
-	L0UUID* identifier;
-
-	MvrModernWiFi* wifi;
-	MvrScannerObserver* wifiObserver;
 	
 	IBOutlet NSArrayController* channelsController;
 	
-	L0Map* channelsByIncoming;
-	
 	IBOutlet MvrDevicesLineView* devicesView;
-	
-	NSMutableSet* channels;
 }
 
 - (IBAction) openMoverPlusAppStore:(id) sender;
-
-@property(readonly) NSMutableSet* channels;
 
 @end

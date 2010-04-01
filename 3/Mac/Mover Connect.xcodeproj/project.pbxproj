@@ -23,8 +23,9 @@
 		15E3A4A9113F970C00F301D8 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */; };
 		15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */; };
 		15E3A4B3113F972900F301D8 /* libMoverNetwork-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */; };
+		15F965DE11652D2E00EE3F9E /* MvrTransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F965DD11652D2E00EE3F9E /* MvrTransferController.m */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
-		256AC3DA0F4B6AC300CF3369 /* MoverWaypointAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* MoverWaypointAppDelegate.m */; };
+		256AC3DA0F4B6AC300CF3369 /* MvrAppDelegate_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* MvrAppDelegate_Mac.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -125,9 +126,11 @@
 		15CCE820114FFC3400E45AC6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevicesLineView.h; sourceTree = "<group>"; };
 		15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevicesLineView.m; sourceTree = "<group>"; };
+		15F965DC11652D2E00EE3F9E /* MvrTransferController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTransferController.h; sourceTree = "<group>"; };
+		15F965DD11652D2E00EE3F9E /* MvrTransferController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTransferController.m; sourceTree = "<group>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		256AC3D80F4B6AC300CF3369 /* MoverWaypointAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoverWaypointAppDelegate.h; sourceTree = "<group>"; };
-		256AC3D90F4B6AC300CF3369 /* MoverWaypointAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoverWaypointAppDelegate.m; sourceTree = "<group>"; };
+		256AC3D80F4B6AC300CF3369 /* MvrAppDelegate_Mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate_Mac.h; sourceTree = "<group>"; };
+		256AC3D90F4B6AC300CF3369 /* MvrAppDelegate_Mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate_Mac.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -156,13 +159,13 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				15F965DB11652CF200EE3F9E /* Network Control */,
 				150072E6113967C3007BF995 /* NSAlert+L0Alert.h */,
 				150072E7113967C3007BF995 /* NSAlert+L0Alert.m */,
-				256AC3D80F4B6AC300CF3369 /* MoverWaypointAppDelegate.h */,
-				256AC3D90F4B6AC300CF3369 /* MoverWaypointAppDelegate.m */,
+				256AC3D80F4B6AC300CF3369 /* MvrAppDelegate_Mac.h */,
+				256AC3D90F4B6AC300CF3369 /* MvrAppDelegate_Mac.m */,
 				157280D11137FE63005634C7 /* MvrDevice.h */,
 				157280D21137FE63005634C7 /* MvrDevice.m */,
-				1551C34C1158AA9600D9C6DD /* New Group */,
 				15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */,
 				15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */,
 			);
@@ -187,13 +190,6 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		1551C34C1158AA9600D9C6DD /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
-			sourceTree = "<group>";
-		};
 		15E3A486113F96FC00F301D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +210,15 @@
 				15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		15F965DB11652CF200EE3F9E /* Network Control */ = {
+			isa = PBXGroup;
+			children = (
+				15F965DC11652D2E00EE3F9E /* MvrTransferController.h */,
+				15F965DD11652D2E00EE3F9E /* MvrTransferController.m */,
+			);
+			name = "Network Control";
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -409,10 +414,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				256AC3DA0F4B6AC300CF3369 /* MoverWaypointAppDelegate.m in Sources */,
+				256AC3DA0F4B6AC300CF3369 /* MvrAppDelegate_Mac.m in Sources */,
 				157280D31137FE63005634C7 /* MvrDevice.m in Sources */,
 				150072E8113967C3007BF995 /* NSAlert+L0Alert.m in Sources */,
 				15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */,
+				15F965DE11652D2E00EE3F9E /* MvrTransferController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

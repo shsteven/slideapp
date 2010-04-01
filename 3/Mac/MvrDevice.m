@@ -10,37 +10,17 @@
 
 #import "Network+Storage/MvrProtocol.h"
 #import "Network+Storage/MvrItem.h"
-#import "Network+Storage/MvrGenericItem.h"
-#import "Network+Storage/MvrItemStorage.h"
 #import "Network+Storage/MvrIncoming.h"
 #import "Network+Storage/MvrOutgoing.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <MuiKit/MuiKit.h>
 
-static NSArray* MvrTypeForExtension(NSString* ext) {
-	if ([ext isEqual:@"m4v"])
-		return [NSArray arrayWithObject:(id) kUTTypeMPEG4];
-	
-	return NSMakeCollectable(UTTypeCreateAllIdentifiersForTag(kUTTagClassFilenameExtension, (CFStringRef) ext, NULL));
-}
-
-@implementation MvrDevicesCollectionView
-
-- (NSCollectionViewItem*) newItemForRepresentedObject:(id) object;
-{
-	return [[MvrDeviceItem alloc] initWithChannel:(id <MvrChannel>) object];
-}
-
-@end
-
-
+#import "MvrTransferController.h"
 
 @interface MvrDeviceItem ()
 
 - (void) animateMiniSlide;
-- (void) showProgressWindow;
-- (void) hideProgressWindow;
 
 - (CGFloat) currentProgress;
 - (void) updateBar;
@@ -169,33 +149,9 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showProgressWindow) object:nil];	
 }
 
-- (void) showProgressWindow;
+- (void) sendItemFile:(NSString *)file;
 {
-}
-
-- (void) hideProgressWindow;
-{
-}
-
-- (void) sendItemFile:(NSString*) file;
-{
-	NSString* title = [[NSFileManager defaultManager] displayNameAtPath:file];
-	
-	NSString* ext = [file pathExtension];
-	NSArray* types = MvrTypeForExtension(ext);
-	
-	NSString* filename = [file lastPathComponent];
-	NSDictionary* md = [NSDictionary dictionaryWithObjectsAndKeys:
-						title, kMvrItemTitleMetadataKey,
-						filename, kMvrItemOriginalFilenameMetadataKey,
-						nil];
-	
-	MvrItemStorage* is = [MvrItemStorage itemStorageFromFileAtPath:file options:kMvrItemStorageDoNotTakeOwnershipOfFile error:NULL];
-	if (is && [types count] > 0) {
-		MvrGenericItem* item = [[MvrGenericItem alloc] initWithStorage:is type:[types objectAtIndex:0] metadata:md];
-		[self.channel beginSendingItem:item];
-	}
-	
+	[[MvrTransferController transferController] sendItemFile:file throughChannel:self.channel];
 	[self animateMiniSlide];
 }
 

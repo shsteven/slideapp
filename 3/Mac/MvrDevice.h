@@ -16,9 +16,6 @@
 #error This class assumes garbage collection is available.
 #endif
 
-@interface MvrDevicesCollectionView : NSCollectionView {}
-@end
-
 @interface MvrDeviceBaseView : NSView {}
 @end
 
