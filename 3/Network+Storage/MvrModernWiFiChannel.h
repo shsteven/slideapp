@@ -16,6 +16,7 @@
 
 enum {
 	kMvrCapabilityExtendedMetadata = 1 << 0,
+	kMvrCapabilityAllowsConduitConnections = 1 << 1,
 	
 	kMvrCapabilityMaximum = UINT32_MAX,
 };
@@ -25,8 +26,10 @@ typedef unsigned long long MvrCapabilities;
 
 @interface MvrModernWiFiChannel : MvrWiFiChannel {
 	BOOL supportsExtendedMetadata;
+	BOOL allowsConduitConnections;
 }
 
 @property(readonly) BOOL supportsExtendedMetadata;
+@property(readonly) BOOL allowsConduitConnections;
 
 @end

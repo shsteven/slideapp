@@ -26,8 +26,13 @@
 			
 			if (d) {
 				long long capabilities = [d longLongValue];
-				if (capabilities >= 0 && capabilities < kMvrCapabilityMaximum)
+				if (capabilities >= 0 && capabilities < kMvrCapabilityMaximum) {
+					
+					// Parsing capabilities
 					supportsExtendedMetadata = (capabilities & kMvrCapabilityExtendedMetadata) != 0;
+					allowsConduitConnections = (capabilities & kMvrCapabilityAllowsConduitConnections) != 0;
+					
+				}
 			}
 		}
 	}
@@ -35,7 +40,7 @@
 	return self;
 }
 
-@synthesize supportsExtendedMetadata;
+@synthesize supportsExtendedMetadata, allowsConduitConnections;
 
 #pragma mark Outgoing transfers
 

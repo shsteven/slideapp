@@ -26,6 +26,7 @@ enum {
 	kMvrUseMobileService = 1 << 0,
 	kMvrUseConduitService = 1 << 1,
 	kMvrAllowBrowsingForConduitService = 1 << 2,
+	kMvrAllowConnectionsFromConduitService = 1 << 3,
 };
 typedef NSInteger MvrModernWiFiOptions;
 
@@ -40,6 +41,10 @@ typedef NSInteger MvrModernWiFiOptions;
 	BOOL useMobileService;
 	BOOL useConduitService;
 	BOOL allowBrowsingForConduit;
+	BOOL allowConnectionsFromConduit;
+	
+	NSString* selfIdentifier;
+	NSString* selfDisplayName;
 	
 	NSMutableSet* incomingTransfers;
 	L0KVODispatcher* dispatcher;
@@ -52,5 +57,6 @@ typedef NSInteger MvrModernWiFiOptions;
 - (MvrModernWiFiChannel*) channelForAddress:(NSData*) address;
 
 @property(nonatomic) BOOL allowBrowsingForConduit;
+@property(nonatomic) BOOL allowConnectionsFromConduit;
 
 @end

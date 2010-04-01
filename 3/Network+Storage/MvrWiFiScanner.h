@@ -40,6 +40,7 @@
 
 // Subclasses use these to set up stuff. Must be done while the scanner is disabled.
 - (void) addServiceWithName:(NSString*) name type:(NSString*) type port:(int) port TXTRecord:(NSDictionary*) record;
+- (void) clearAllServices;
 - (void) addBrowserForServicesWithType:(NSString*) type;
 
 // Called when services are found.

@@ -16,6 +16,7 @@
 
 @interface MvrModernWiFi ()
 - (void) startListening;
+- (void) addServices;
 @end
 
 
@@ -28,31 +29,55 @@
 		useMobileService = (opts & kMvrUseMobileService) != 0;
 		useConduitService = (opts & kMvrUseConduitService) != 0;
 		allowBrowsingForConduit = (opts & kMvrAllowBrowsingForConduitService) != 0;
+		allowConnectionsFromConduit = (opts & kMvrAllowConnectionsFromConduitService) != 0;
 		
-		NSDictionary* record = [NSDictionary dictionaryWithObjectsAndKeys:
-								/* TODO */
-								[NSString stringWithFormat:@"%u", kMvrCapabilityExtendedMetadata], kMvrModernWiFiBonjourCapabilitiesKey,
-								[info.identifierForSelf stringValue], kMvrModernWiFiPeerIdentifierKey,
-								nil];
+		serverPort = port;
 		
-		if (useMobileService)
-			[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourServiceType port:port TXTRecord:record];
+		selfIdentifier = [[info.identifierForSelf stringValue] copy];
+		selfDisplayName = [info.displayNameForSelf copy];
 		
-		if (useConduitService)
-			[self addServiceWithName:[info displayNameForSelf] type:kMvrModernWiFiBonjourConduitServiceType port:port TXTRecord:record];
+		[self addServices];
 		
 		[self addBrowserForServicesWithType:kMvrModernWiFiBonjourServiceType];
 		[self addBrowserForServicesWithType:kMvrModernWiFiBonjourConduitServiceType];
 		
 		incomingTransfers = [NSMutableSet new];
 		dispatcher = [[L0KVODispatcher alloc] initWithTarget:self];
-		
-		serverPort = port;
-		
+				
 		conduitServices = [NSMutableSet new];
  	}
 
 	return self;
+}
+
+- (void) dealloc
+{
+	[selfIdentifier release];
+	[selfDisplayName release];
+	[conduitServices release];
+	[dispatcher release];
+	[incomingTransfers release];
+	[super dealloc];
+}
+
+
+- (void) addServices;
+{
+	unsigned int caps = kMvrCapabilityExtendedMetadata;
+	if (allowConnectionsFromConduit)
+		caps |= kMvrCapabilityAllowsConduitConnections;
+	
+	NSDictionary* record = [NSDictionary dictionaryWithObjectsAndKeys:
+							/* TODO */
+							[NSString stringWithFormat:@"%u", caps], kMvrModernWiFiBonjourCapabilitiesKey,
+							selfIdentifier, kMvrModernWiFiPeerIdentifierKey,
+							nil];
+	
+	if (useMobileService)
+		[self addServiceWithName:selfDisplayName type:kMvrModernWiFiBonjourServiceType port:serverPort TXTRecord:record];
+	
+	if (useConduitService)
+		[self addServiceWithName:selfDisplayName type:kMvrModernWiFiBonjourConduitServiceType port:serverPort TXTRecord:record];
 }
 
 - (void) start;
@@ -79,14 +104,6 @@
 	[serverSocket disconnect];
 	[serverSocket release]; serverSocket = nil;
 	[conduitServices removeAllObjects];
-}
-
-- (void) dealloc
-{
-	[conduitServices release];
-	[dispatcher release];
-	[incomingTransfers release];
-	[super dealloc];
 }
 
 
@@ -145,22 +162,48 @@
 - (void) setAllowBrowsingForConduit:(BOOL) a;
 {
 	if (a != allowBrowsingForConduit) {
-		for (NSNetService* s in conduitServices) {
-			NSDictionary* idents = [self stringsForKeys:[NSSet setWithObject:kMvrModernWiFiPeerIdentifierKey] inTXTRecordData:[s TXTRecordData] encoding:NSASCIIStringEncoding];
-			NSString* ident = [idents objectForKey:kMvrModernWiFiPeerIdentifierKey];
-			
-			if (!ident) {
-				L0Log(@"Service %@ has its UUID missing, so we don't display it.", s);
-				continue;
-			}
+		if (a) {
+			for (NSNetService* s in conduitServices) {
+				NSDictionary* idents = [self stringsForKeys:[NSSet setWithObject:kMvrModernWiFiPeerIdentifierKey] inTXTRecordData:[s TXTRecordData] encoding:NSASCIIStringEncoding];
+				NSString* ident = [idents objectForKey:kMvrModernWiFiPeerIdentifierKey];
+				
+				if (!ident) {
+					L0Log(@"Service %@ has its UUID missing, so we don't display it.", s);
+					continue;
+				}
 
-			MvrModernWiFiChannel* chan = [[MvrModernWiFiChannel alloc] initWithNetService:s identifier:ident];
-			[self.mutableChannels addObject:chan];
-			[chan release];			
+				MvrModernWiFiChannel* chan = [[MvrModernWiFiChannel alloc] initWithNetService:s identifier:ident];
+				[self.mutableChannels addObject:chan];
+				[chan release];			
+			}
+		} else {
+			for (MvrModernWiFiChannel* chan in [[self.channels copy] autorelease]) {
+				if ([[chan.netService type] isEqual:kMvrModernWiFiBonjourConduitServiceType])
+					[self.mutableChannels removeObject:chan];
+			}
 		}
+		
+		allowBrowsingForConduit = a;
 	}
 	
-	allowBrowsingForConduit = a;
+}
+
+@synthesize allowConnectionsFromConduit;
+- (void) setAllowConnectionsFromConduit:(BOOL) a;
+{
+	if (a != allowConnectionsFromConduit) {
+		BOOL wasEnabled = self.enabled;
+		if (self.enabled)
+			self.enabled = NO;
+		
+		[self clearAllServices];
+		[self addServices];
+		
+		if (wasEnabled)
+			self.enabled = YES;
+		
+		allowConnectionsFromConduit = a;
+	}
 }
 
 #pragma mark -

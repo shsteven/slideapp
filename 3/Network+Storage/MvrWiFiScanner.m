@@ -58,6 +58,18 @@
 	[netServices addObject:service];
 }
 
+- (void) clearAllServices;
+{
+	NSAssert(!enabled, @"Can't change published services without disabling");
+	
+	for (NSNetService* ns in netServices) {
+		ns.delegate = nil;
+		[ns stop];
+	}
+	
+	[netServices removeAllObjects];
+}
+
 - (void) addBrowserForServicesWithType:(NSString*) type;
 {
 	[soughtServices addObject:type];
