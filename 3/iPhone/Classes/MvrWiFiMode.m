@@ -41,8 +41,10 @@
 {
 	MvrModernWiFiOptions opts = kMvrUseMobileService;
 	
-	if ([MvrApp() isFeatureAvailable:kMvrFeatureMoverConnect])
+	if ([MvrApp() isFeatureAvailable:kMvrFeatureMoverConnect]) {
 		opts |= kMvrAllowBrowsingForConduitService;
+		opts |= kMvrAllowConnectionsFromConduitService;
+	}
 	
 	wifi = [[[self scannerClass] alloc] initWithPlatformInfo:MvrApp() modernPort:kMvrModernWiFiPort legacyPort:kMvrLegacyWiFiPort modernOptions:opts];
 	observer = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
@@ -73,8 +75,10 @@
 
 - (void) didUnlockProduct:(NSNotification*) n;
 {
-	if ([MvrApp() isFeatureAvailable:kMvrFeatureMoverConnect])
+	if ([MvrApp() isFeatureAvailable:kMvrFeatureMoverConnect]) {
 		wifi.modernWiFi.allowBrowsingForConduit = YES;
+		wifi.modernWiFi.allowConnectionsFromConduit = YES;
+	}
 }
 
 - (void) didEncounterConduit:(NSNotification*) n;

@@ -43,6 +43,7 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 - (void) hideProgressWindow;
 
 - (CGFloat) currentProgress;
+- (void) updateBar;
 
 @end
 

@@ -197,13 +197,26 @@
 			self.enabled = NO;
 		
 		[self clearAllServices];
-		[self addServices];
 		
 		if (wasEnabled)
 			self.enabled = YES;
-		
+
 		allowConnectionsFromConduit = a;
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(readdServicesAfterAllowingConduit) object:nil];
+		[self performSelector:@selector(readdServicesAfterAllowingConduit) withObject:nil afterDelay:2.0];
 	}
+}
+
+- (void) readdServicesAfterAllowingConduit;
+{
+	BOOL wasEnabled = self.enabled;
+	if (self.enabled)
+		self.enabled = NO;
+	
+	[self addServices];
+	
+	if (wasEnabled)
+		self.enabled = YES;
 }
 
 #pragma mark -

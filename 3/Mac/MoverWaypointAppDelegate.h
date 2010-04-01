@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Network+Storage/MvrPlatformInfo.h"
 #import "Network+Storage/MvrModernWiFi.h"
+#import "Network+Storage/MvrModernWiFiChannel.h"
 #import "Network+Storage/MvrScannerObserver.h"
 
 #import "MvrDevicesLineView.h"
@@ -28,8 +29,12 @@
 	L0Map* channelsByIncoming;
 	
 	IBOutlet MvrDevicesLineView* devicesView;
+	
+	NSMutableSet* channels;
 }
 
 - (IBAction) openMoverPlusAppStore:(id) sender;
+
+@property(readonly) NSMutableSet* channels;
 
 @end

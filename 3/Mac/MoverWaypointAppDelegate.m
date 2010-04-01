@@ -27,13 +27,15 @@
 		return;
 	}
 #endif
+	
+	channels = [NSMutableSet new];
 		
 	[MvrPacketParser setAutomaticConsumptionThreshold:1024 * 1024];
 	
 	channelsByIncoming = [L0Map new];
 	
-	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiConduitPort options:kMvrUseConduitService|kMvrAllowBrowsingForConduitService];
-	[channelsController bind:NSContentSetBinding toObject:wifi withKeyPath:@"channels" options:nil];
+	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiConduitPort options:kMvrUseConduitService|kMvrAllowBrowsingForConduitService|kMvrAllowConnectionsFromConduitService];
+	[channelsController bind:NSContentSetBinding toObject:self withKeyPath:@"channels" options:nil];
 	[devicesView bind:@"content" toObject:channelsController withKeyPath:@"arrangedObjects" options:nil];
 	
 	wifiObserver = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
@@ -139,7 +141,10 @@
 	if (!i)
 		return;
 	
-	id <MvrChannel> chan = [channelsByIncoming objectForKey:incoming];
+	MvrModernWiFiChannel* chan = [channelsByIncoming objectForKey:incoming];
+	
+	if (!chan.allowsConduitConnections)
+		return;
 	
 	NSFileManager* fm = [NSFileManager defaultManager];
 	
@@ -195,5 +200,22 @@
 	[channelsByIncoming removeObjectForKey:incoming];
 	[i invalidate];
 }
+
+#pragma mark Channels
+
+- (void) scanner:(id <MvrScanner>) s didAddChannel:(id <MvrChannel>) channel;
+{
+	MvrModernWiFiChannel* c = (MvrModernWiFiChannel*) channel;
+	
+	if (c.allowsConduitConnections)
+		[[self mutableSetValueForKey:@"channels"] addObject:c];
+}
+
+- (void) scanner:(id <MvrScanner>)s didRemoveChannel:(id <MvrChannel>)channel;
+{
+	[[self mutableSetValueForKey:@"channels"] removeObject:channel];
+}
+
+@synthesize channels;
 
 @end
