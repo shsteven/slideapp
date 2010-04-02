@@ -27,8 +27,6 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 
 @implementation MvrTransferController
 
-L0ObjCSingletonMethod(transferController)
-
 - (id) init;
 {
 	if (self = [super init]) {

@@ -25,7 +25,9 @@
 	}
 #endif
 	
-	[channelsController bind:NSContentSetBinding toObject:[MvrTransferController transferController] withKeyPath:@"channels" options:nil];
+	transfer = [[MvrTransferController alloc] init];
+	
+	[channelsController bind:NSContentSetBinding toObject:transfer withKeyPath:@"channels" options:nil];
 	[devicesView bind:@"content" toObject:channelsController withKeyPath:@"arrangedObjects" options:nil];
 	
 	originalWindowHeight = [window frame].size.height;
@@ -35,8 +37,10 @@
 		[window center];
 	[window makeKeyAndOrderFront:self];
 	
-	[[MvrTransferController transferController] setEnabled:YES];
+	transfer.enabled = YES;
 }
+
+@synthesize transfer;
 
 - (BOOL) applicationShouldHandleReopen:(NSApplication*) sender hasVisibleWindows:(BOOL) noWindows;
 {
@@ -50,7 +54,7 @@
 
 - (void) applicationWillTerminate:(NSNotification *)notification;
 {
-	[[MvrTransferController transferController] setEnabled:NO];
+	transfer.enabled = NO;
 }
 
 - (NSSize) windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize;

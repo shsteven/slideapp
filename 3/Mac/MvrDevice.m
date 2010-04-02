@@ -17,6 +17,7 @@
 #import <MuiKit/MuiKit.h>
 
 #import "MvrTransferController.h"
+#import "MvrAppDelegate_Mac.h"
 
 @interface MvrDeviceItem ()
 
@@ -75,6 +76,13 @@
 	
 	[self didChangeValueForKey:@"currentProgress"];
 	[self updateBar]; // grrr
+	
+	NSInteger current = [self.channel.outgoingTransfers count];
+	if (current > lastCountOfOutgoingTransfers) {
+		for (NSInteger i = 0; i < (current - lastCountOfOutgoingTransfers); i++)
+			[self animateMiniSlide];
+	}
+	lastCountOfOutgoingTransfers = current;
 }
 
 - (void) progressOfTransfer:(id) transfer didChange:(NSDictionary*) change;
@@ -124,35 +132,12 @@
 		return kMvrIndeterminateProgress;
 }
 
-
-
 - (void) awakeFromNib;
 {
 	[self.view setFrame:NSMakeRect(0, 0, 155, 140)];
 	
-	NSTrackingArea* area = [[NSTrackingArea alloc] initWithRect:self.view.bounds options:NSTrackingMouseEnteredAndExited|NSTrackingActiveInActiveApp owner:self userInfo:nil];
-	[self.view addTrackingArea:area];
-	
 	[spinner stopAnimation:self];
 	[spinnerView setHidden:YES];
-}
-
-- (void) mouseEntered:(NSEvent *)theEvent;
-{
-	[self performSelector:@selector(showProgressWindow) withObject:nil afterDelay:1.0];
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideProgressWindow) object:nil];
-}
-
-- (void) mouseExited:(NSEvent *)theEvent;
-{
-	[self performSelector:@selector(hideProgressWindow) withObject:nil afterDelay:1.0];
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showProgressWindow) object:nil];	
-}
-
-- (void) sendItemFile:(NSString *)file;
-{
-	[[MvrTransferController transferController] sendItemFile:file throughChannel:self.channel];
-	[self animateMiniSlide];
 }
 
 @synthesize channel;
@@ -224,6 +209,7 @@
 @interface MvrDeviceDropDestinationView ()
 
 - (NSDragOperation) updateAndReturnOperationForDragWithInfo:(id <NSDraggingInfo>)sender;
+- (BOOL) canSendFilesForDragWithInfo:(id <NSDraggingInfo>) sender;
 
 @end
 
@@ -259,15 +245,27 @@
 
 - (NSDragOperation) updateAndReturnOperationForDragWithInfo:(id <NSDraggingInfo>) sender;
 {
-	NSArray* files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
-	BOOL isDir;
-	if ([files count] != 1 || ![[NSFileManager defaultManager] fileExistsAtPath:[files objectAtIndex:0] isDirectory:&isDir] || isDir) {
+	BOOL isOK = [self canSendFilesForDragWithInfo:sender];
+	
+	if (!isOK) {
 		[self setDragging:NO];
 		return NSDragOperationNone;
 	} else {
 		[self setDragging:YES];
 		return NSDragOperationCopy;
 	}
+}
+
+- (BOOL) canSendFilesForDragWithInfo:(id <NSDraggingInfo>) sender;
+{
+	NSArray* files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
+	for (NSString* file in files) {
+		BOOL isDir;
+		if (![[NSFileManager defaultManager] fileExistsAtPath:[files objectAtIndex:0] isDirectory:&isDir] || isDir)
+			return NO;
+	}
+	
+	return YES;
 }
 
 - (NSDragOperation) draggingUpdated:(id <NSDraggingInfo>) sender;
@@ -287,13 +285,14 @@
 
 - (BOOL) prepareForDragOperation:(id <NSDraggingInfo>)sender;
 {
-	NSArray* files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
-	return [files count] == 1;
+	return [self canSendFilesForDragWithInfo:sender];
 }
 
 - (BOOL) performDragOperation:(id <NSDraggingInfo>)sender;
 {
-	[self.owner sendItemFile:[[[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType] objectAtIndex:0]];
+	for (NSString* file in [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType])
+		[MvrApp().transfer sendItemFile:file throughChannel:self.owner.channel];
+	
 	return YES;
 }
 

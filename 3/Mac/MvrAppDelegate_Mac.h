@@ -10,6 +10,7 @@
 #import "Network+Storage/MvrPlatformInfo.h"
 
 #import "MvrDevicesLineView.h"
+#import "MvrTransferController.h"
 
 #import <MuiKit/MuiKit.h>
 
@@ -20,8 +21,16 @@
 	IBOutlet NSArrayController* channelsController;
 	
 	IBOutlet MvrDevicesLineView* devicesView;
+	
+	MvrTransferController* transfer;
 }
 
 - (IBAction) openMoverPlusAppStore:(id) sender;
 
+@property(readonly) MvrTransferController* transfer;
+
 @end
+
+static inline MvrAppDelegate_Mac* MvrApp() {
+	return (MvrAppDelegate_Mac*) [NSApp delegate];
+}

@@ -28,8 +28,6 @@
 	L0UUID* identifier;
 }
 
-+ transferController;
-
 @property BOOL enabled;
 
 @property(readonly) NSMutableSet* channels;

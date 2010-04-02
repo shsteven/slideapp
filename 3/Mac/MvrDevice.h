@@ -30,14 +30,14 @@
 	BOOL transfersHappening;
 	
 	L0KVODispatcher* kvo;
+	
+	NSInteger lastCountOfOutgoingTransfers;
 }
 
 - (id) initWithChannel:(id <MvrChannel>) chan;
 
 @property id <MvrChannel> channel;
 @property IBOutlet NSView* view;
-
-- (void) sendItemFile:(NSString*) file;
 
 @end
 
