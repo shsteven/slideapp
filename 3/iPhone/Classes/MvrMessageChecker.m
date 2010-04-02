@@ -159,7 +159,7 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 {
 	self.userWasAskedAboutOptingIn = [NSNumber numberWithBool:YES];
 	self.userOptedInToMessages = [NSNumber numberWithBool:(buttonIndex != alert.cancelButtonIndex)];
-	[self performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:5.0];
+	[self performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:50.0];
 }
 
 #pragma mark -
