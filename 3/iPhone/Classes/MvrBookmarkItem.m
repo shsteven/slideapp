@@ -10,7 +10,6 @@
 #import "Network+Storage/MvrUTISupport.h"
 #import "Network+Storage/MvrItemStorage.h"
 
-#import "MvrAppDelegate.h"
 
 @interface MvrBookmarkItem ()
 

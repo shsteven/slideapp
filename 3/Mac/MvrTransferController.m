@@ -17,6 +17,7 @@
 #import "Network+Storage/MvrItemStorage.h"
 
 #import "MvrTextItem.h"
+#import "MvrBookmarkItem.h"
 
 
 static NSArray* MvrTypeForExtension(NSString* ext) {
@@ -80,7 +81,7 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 
 - (NSArray*) knownPasteboardTypes;
 {
-	return [NSArray arrayWithObjects:NSFilenamesPboardType, NSStringPboardType, NSTIFFPboardType, (id) kUTTypePNG, nil];
+	return [NSArray arrayWithObjects:NSFilenamesPboardType, NSStringPboardType, NSTIFFPboardType, NSURLPboardType, (id) kUTTypePNG, nil];
 }
 
 - (BOOL) canSendContentsOfPasteboard:(NSPasteboard*) pb;
@@ -90,8 +91,12 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 	BOOL containsKnownType = NO;
 	
 	NSArray* types = [pb types];
-	if ([types containsObject:NSStringPboardType] || [types containsObject:NSTIFFPboardType] || [types containsObject:(id) kUTTypePNG])
-		containsKnownType = YES;
+	for (id x in [self knownPasteboardTypes]) {
+		if ([types containsObject:x]) {
+			containsKnownType = YES;
+			break;
+		}
+	}
 	
 	NSArray* files = L0As(NSArray, [pb propertyListForType:NSFilenamesPboardType]);
 	for (NSString* file in files) {
@@ -130,10 +135,18 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 		return;
 	}
 	
-	// TODO URL autodetection.
-	
 	NSString* str = [pb stringForType:NSStringPboardType];
 	if (str) {
+		// autodetect URLs.
+		NSURL* url = [NSURL URLWithString:str];
+		if (url) {
+			MvrBookmarkItem* bookmark = [[MvrBookmarkItem alloc] initWithAddress:url];
+			if (bookmark) {
+				[c beginSendingItem:bookmark];
+				return;
+			}
+		}
+		
 		MvrTextItem* text = [[MvrTextItem alloc] initWithText:str];
 		[c beginSendingItem:text];
 	}
