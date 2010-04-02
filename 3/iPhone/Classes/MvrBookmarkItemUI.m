@@ -39,6 +39,11 @@
 			nil];
 }
 
+- (NSString*) actionMenuTitleForItem:(MvrBookmarkItem*) i;
+{
+	return [i.address absoluteString];
+}
+
 - (void) performShowOrOpenAction:(MvrItemAction*) a withItem:(MvrBookmarkItem*) item;
 {
 	[[UIApplication sharedApplication] openURL:item.address];

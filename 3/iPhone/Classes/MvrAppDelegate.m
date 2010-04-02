@@ -364,7 +364,13 @@ enum {
 {
 	MvrItemUI* ui = [MvrItemUI UIForItem:i];
 	
+	
 	L0ActionSheet* as = [[L0ActionSheet new] autorelease];
+	NSString* title = [ui actionMenuTitleForItem:i];
+	if (title)
+		as.title = title;
+
+	
 	as.tag = kMvrAppDelegateItemActionSheetTag;
 	as.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
 	[as setValue:i forKey:@"MvrItem"];

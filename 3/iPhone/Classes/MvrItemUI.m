@@ -254,6 +254,11 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 	return [NSArray array];
 }
 
+- (NSString*) actionMenuTitleForItem:(id) i;
+{
+	return nil;
+}
+
 - (BOOL) hasAdditionalActionsAvailableForItem:(id) i;
 {
 	NSArray* as = [self additionalActionsForItem:i];

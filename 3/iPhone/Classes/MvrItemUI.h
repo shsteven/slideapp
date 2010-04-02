@@ -53,6 +53,10 @@
 // Default impl returns empty array.
 - (NSArray*) additionalActionsForItem:(id) i;
 
+// Title for action menu. If nil, no title will be shown.
+// Default impl returns nil.
+- (NSString*) actionMenuTitleForItem:(id) i;
+
 // YES if there is at least one action returned by additionalActionsForItem: that is available.
 - (BOOL) hasAdditionalActionsAvailableForItem:(id) i;
 
