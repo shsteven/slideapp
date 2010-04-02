@@ -20,7 +20,7 @@
 
 + (NSDictionary*) previewFileExtensionsByType;
 {
-	NSDictionary* d = nil; if (!d) {
+	static NSDictionary* d = nil; if (!d) {
 		d = [[NSDictionary alloc] initWithObjectsAndKeys:
 			 @"rtf", (id) kUTTypeRTF,
 			 @"pdf", (id) kUTTypePDF,
