@@ -220,7 +220,7 @@
 
 - (void) awakeFromNib;
 {
-	[self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]]; // TODO more types?
+	[self registerForDraggedTypes:MvrApp().transfer.knownPasteboardTypes]; // TODO more types?
 }
 
 - (void) setDragging:(BOOL) d;
@@ -258,14 +258,7 @@
 
 - (BOOL) canSendFilesForDragWithInfo:(id <NSDraggingInfo>) sender;
 {
-	NSArray* files = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
-	for (NSString* file in files) {
-		BOOL isDir;
-		if (![[NSFileManager defaultManager] fileExistsAtPath:[files objectAtIndex:0] isDirectory:&isDir] || isDir)
-			return NO;
-	}
-	
-	return YES;
+	return [MvrApp().transfer canSendContentsOfPasteboard:[sender draggingPasteboard]];
 }
 
 - (NSDragOperation) draggingUpdated:(id <NSDraggingInfo>) sender;
@@ -290,8 +283,7 @@
 
 - (BOOL) performDragOperation:(id <NSDraggingInfo>)sender;
 {
-	for (NSString* file in [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType])
-		[MvrApp().transfer sendItemFile:file throughChannel:self.owner.channel];
+	[MvrApp().transfer sendContentsOfPasteboard:[sender draggingPasteboard] throughChannel:self.owner.channel];
 	
 	return YES;
 }

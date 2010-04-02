@@ -13,6 +13,10 @@
 
 #import "NSAlert+L0Alert.h"
 
+@interface MvrAppDelegate_Mac () <NSUserInterfaceValidations>
+@end
+
+
 @implementation MvrAppDelegate_Mac
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -71,5 +75,25 @@
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/download-plus"]];
 }
+
+#pragma mark Sending from clipboard
+
+- (IBAction) paste:(id) sender;
+{
+	if ([transfer.channels count] == 1) {
+		[transfer sendContentsOfPasteboard:[NSPasteboard generalPasteboard] throughChannel:[transfer.channels anyObject]];
+	} else {
+		// TODO device picker.
+	}
+}
+
+- (BOOL) validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>) anItem;
+{
+	if ([anItem action] == @selector(paste:))
+		return [transfer canSendContentsOfPasteboard:[NSPasteboard generalPasteboard]];
+	
+	return NO;
+}
+
 
 @end

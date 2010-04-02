@@ -16,6 +16,8 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "Network+Storage/MvrItemStorage.h"
 
+#import "MvrTextItem.h"
+
 
 static NSArray* MvrTypeForExtension(NSString* ext) {
 	if ([ext isEqual:@"m4v"])
@@ -73,6 +75,67 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 	if (is && [types count] > 0) {
 		MvrGenericItem* item = [[MvrGenericItem alloc] initWithStorage:is type:[types objectAtIndex:0] metadata:md];
 		[c beginSendingItem:item];
+	}
+}
+
+- (NSArray*) knownPasteboardTypes;
+{
+	return [NSArray arrayWithObjects:NSFilenamesPboardType, NSStringPboardType, NSTIFFPboardType, (id) kUTTypePNG, nil];
+}
+
+- (BOOL) canSendContentsOfPasteboard:(NSPasteboard*) pb;
+{
+	L0Log(@"%@", [pb types]);
+	
+	BOOL containsKnownType = NO;
+	
+	NSArray* types = [pb types];
+	if ([types containsObject:NSStringPboardType] || [types containsObject:NSTIFFPboardType] || [types containsObject:(id) kUTTypePNG])
+		containsKnownType = YES;
+	
+	NSArray* files = L0As(NSArray, [pb propertyListForType:NSFilenamesPboardType]);
+	for (NSString* file in files) {
+		containsKnownType = YES;
+		
+		BOOL isDir;
+		if (![[NSFileManager defaultManager] fileExistsAtPath:[files objectAtIndex:0] isDirectory:&isDir] || isDir)
+			return NO;
+	}
+	
+	return containsKnownType;
+}
+
+- (void) sendContentsOfPasteboard:(NSPasteboard*) pb throughChannel:(id <MvrChannel>) c;
+{
+	BOOL sent = NO;
+	
+	for (NSString* path in L0As(NSArray, [pb propertyListForType:NSFilenamesPboardType])) {
+		sent = YES;
+		[self sendItemFile:path throughChannel:c];
+	}
+	
+	if (sent)
+		return;
+	
+	NSImage* image = [[NSImage alloc] initWithPasteboard:pb];
+	if (image && [[image representations] count] > 0 && [[[image representations] objectAtIndex:0] isKindOfClass:[NSBitmapImageRep class]]) {
+		
+		NSBitmapImageRep* rep = [[image representations] objectAtIndex:0];
+		NSData* d = [rep representationUsingType:NSPNGFileType properties:[NSDictionary dictionary]];
+		
+		MvrItemStorage* s = [MvrItemStorage itemStorageWithData:d];
+		MvrGenericItem* item = [[MvrGenericItem alloc] initWithStorage:s type:(id) kUTTypePNG metadata:nil];
+		
+		[c beginSendingItem:item];
+		return;
+	}
+	
+	// TODO URL autodetection.
+	
+	NSString* str = [pb stringForType:NSStringPboardType];
+	if (str) {
+		MvrTextItem* text = [[MvrTextItem alloc] initWithText:str];
+		[c beginSendingItem:text];
 	}
 }
 
