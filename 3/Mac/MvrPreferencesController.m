@@ -174,6 +174,7 @@ done:
 	NSOpenPanel* openPanel = [NSOpenPanel openPanel];
 	[openPanel setCanChooseFiles:NO];
 	[openPanel setCanChooseDirectories:YES];
+	[openPanel setCanCreateDirectories:YES];
 	
 	[openPanel beginSheetForDirectory:self.selectedDownloadPath file:nil modalForWindow:[downloadsFolderPicker window] modalDelegate:self didEndSelector:@selector(downloadPicker:didEndWithCode:context:) contextInfo:NULL];
 }
@@ -181,7 +182,8 @@ done:
 - (void) downloadPicker:(NSOpenPanel*) openPanel didEndWithCode:(NSInteger) i context:(void*) nothing;
 {
 	[downloadsFolderPicker selectItemAtIndex:0];
-	self.selectedDownloadPath = [openPanel filename];
+	if (i == NSOKButton)
+		self.selectedDownloadPath = [openPanel filename];
 }
 
 @end
