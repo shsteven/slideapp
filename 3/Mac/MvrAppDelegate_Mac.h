@@ -12,6 +12,8 @@
 #import "MvrDevicesLineView.h"
 #import "MvrTransferController.h"
 
+#import "MvrPreferencesController.h"
+
 #import <MuiKit/MuiKit.h>
 
 @interface MvrAppDelegate_Mac : NSObject <NSApplicationDelegate, NSWindowDelegate> {
@@ -30,6 +32,9 @@
 	id channelPickerDelegate;
 	SEL channelPickerSelector;
 	id channelPickerContext;
+	
+	IBOutlet NSWindow* preferencesPanel;
+	IBOutlet MvrPreferencesController* preferencesController;
 }
 
 - (IBAction) openMoverPlusAppStore:(id) sender;

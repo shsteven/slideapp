@@ -10,7 +10,26 @@
 
 
 @interface MvrPreferencesController : NSObject {
-
+	IBOutlet NSPanel* preferencesPanel;
+	
+	IBOutlet NSPopUpButton* downloadsFolderPicker;
 }
 
+@property(copy) NSString* selectedDownloadPath;
+@property(readonly, getter=isSystemDownloadPathSelected) BOOL systemDownloadPathSelected;
+
+@property BOOL shouldGroupStuffInMoverItemsFolder;
+
+@property(readonly) BOOL hasSystemDownloadPath;
+@property(readonly) NSString* systemDownloadPath;
+
+@property BOOL runMoverAgent;
+
+@end
+
+
+@interface MvrPreferencesControllerIconTransformer : NSValueTransformer {}
+@end
+
+@interface MvrPreferencesControllerDisplayNameTransformer : NSValueTransformer {}
 @end
