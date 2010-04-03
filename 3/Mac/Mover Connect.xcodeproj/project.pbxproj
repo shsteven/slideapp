@@ -116,7 +116,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 15F931FA116740CB00AA71AB /* Mover Agent */;
+			remoteGlobalIDString = 15F931FA116740CB00AA71AB;
 			remoteInfo = "Mover Agent";
 		};
 /* End PBXContainerItemProxy section */

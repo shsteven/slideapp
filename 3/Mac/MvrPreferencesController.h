@@ -25,6 +25,10 @@
 
 @property BOOL runMoverAgent;
 
+// UI stuff
+- (IBAction) pickSystemDownloadsFolder:(id) sender;
+- (IBAction) pickDownloadsFolder:(id) sender;
+
 @end
 
 

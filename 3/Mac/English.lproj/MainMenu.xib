@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="640"/>
+			<integer value="645"/>
 			<integer value="57"/>
 			<integer value="372"/>
 			<integer value="586"/>
@@ -1808,9 +1808,9 @@
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
 								<int key="NSPeriodicInterval">75</int>
-								<object class="NSMenuItem" key="NSMenuItem" id="439088738">
+								<object class="NSMenuItem" key="NSMenuItem" id="322902639">
 									<reference key="NSMenu" ref="148386937"/>
-									<string key="NSTitle">Downloads folder</string>
+									<string key="NSTitle">Choose…</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1848,10 +1848,9 @@
 											<string key="NSAction">_popUpItemAction:</string>
 											<reference key="NSTarget" ref="384912606"/>
 										</object>
-										<reference ref="439088738"/>
-										<object class="NSMenuItem" id="322902639">
+										<object class="NSMenuItem" id="439088738">
 											<reference key="NSMenu" ref="148386937"/>
-											<string key="NSTitle">Choose…</string>
+											<string key="NSTitle">Downloads folder</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -1860,10 +1859,11 @@
 											<string key="NSAction">_popUpItemAction:</string>
 											<reference key="NSTarget" ref="384912606"/>
 										</object>
+										<reference ref="322902639"/>
 									</object>
 									<reference key="NSMenuFont" ref="540043323"/>
 								</object>
-								<int key="NSSelectedIndex">2</int>
+								<int key="NSSelectedIndex">3</int>
 								<int key="NSPreferredEdge">1</int>
 								<bool key="NSUsesItemFromMenu">YES</bool>
 								<bool key="NSAltersState">YES</bool>
@@ -1985,7 +1985,7 @@
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 			</object>
-			<object class="NSCustomObject" id="867562739">
+			<object class="NSCustomObject" id="81313139">
 				<string key="NSClassName">MvrPreferencesController</string>
 			</object>
 		</object>
@@ -2829,7 +2829,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">preferencesController</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="867562739"/>
+						<reference key="destination" ref="81313139"/>
 					</object>
 					<int key="connectionID">662</int>
 				</object>
@@ -2837,10 +2837,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: runMoverAgent</string>
 						<reference key="source" ref="810999116"/>
-						<reference key="destination" ref="867562739"/>
+						<reference key="destination" ref="81313139"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="810999116"/>
-							<reference key="NSDestination" ref="867562739"/>
+							<reference key="NSDestination" ref="81313139"/>
 							<string key="NSLabel">value: runMoverAgent</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">runMoverAgent</string>
@@ -2853,10 +2853,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: shouldGroupStuffInMoverItemsFolder</string>
 						<reference key="source" ref="815249495"/>
-						<reference key="destination" ref="867562739"/>
+						<reference key="destination" ref="81313139"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="815249495"/>
-							<reference key="NSDestination" ref="867562739"/>
+							<reference key="NSDestination" ref="81313139"/>
 							<string key="NSLabel">value: shouldGroupStuffInMoverItemsFolder</string>
 							<string key="NSBinding">value</string>
 							<string key="NSKeyPath">shouldGroupStuffInMoverItemsFolder</string>
@@ -2869,10 +2869,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: hasSystemDownloadPath</string>
 						<reference key="source" ref="587012354"/>
-						<reference key="destination" ref="867562739"/>
+						<reference key="destination" ref="81313139"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="587012354"/>
-							<reference key="NSDestination" ref="867562739"/>
+							<reference key="NSDestination" ref="81313139"/>
 							<string key="NSLabel">enabled: hasSystemDownloadPath</string>
 							<string key="NSBinding">enabled</string>
 							<string key="NSKeyPath">hasSystemDownloadPath</string>
@@ -2885,10 +2885,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">image: selectedDownloadPath</string>
 						<reference key="source" ref="587012354"/>
-						<reference key="destination" ref="867562739"/>
-						<object class="NSNibBindingConnector" key="connector" id="630885596">
+						<reference key="destination" ref="81313139"/>
+						<object class="NSNibBindingConnector" key="connector" id="1007184309">
 							<reference key="NSSource" ref="587012354"/>
-							<reference key="NSDestination" ref="867562739"/>
+							<reference key="NSDestination" ref="81313139"/>
 							<string key="NSLabel">image: selectedDownloadPath</string>
 							<string key="NSBinding">image</string>
 							<string key="NSKeyPath">selectedDownloadPath</string>
@@ -2905,10 +2905,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">title: selectedDownloadPath</string>
 						<reference key="source" ref="587012354"/>
-						<reference key="destination" ref="867562739"/>
+						<reference key="destination" ref="81313139"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="587012354"/>
-							<reference key="NSDestination" ref="867562739"/>
+							<reference key="NSDestination" ref="81313139"/>
 							<string key="NSLabel">title: selectedDownloadPath</string>
 							<string key="NSBinding">title</string>
 							<string key="NSKeyPath">selectedDownloadPath</string>
@@ -2925,7 +2925,7 @@
 									<string>MvrPreferencesControllerDisplayNameTransformer</string>
 								</object>
 							</object>
-							<reference key="NSPreviousConnector" ref="630885596"/>
+							<reference key="NSPreviousConnector" ref="1007184309"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -2935,10 +2935,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">image: systemDownloadPath</string>
 						<reference key="source" ref="439088738"/>
-						<reference key="destination" ref="867562739"/>
-						<object class="NSNibBindingConnector" key="connector" id="964677918">
+						<reference key="destination" ref="81313139"/>
+						<object class="NSNibBindingConnector" key="connector" id="227480447">
 							<reference key="NSSource" ref="439088738"/>
-							<reference key="NSDestination" ref="867562739"/>
+							<reference key="NSDestination" ref="81313139"/>
 							<string key="NSLabel">image: systemDownloadPath</string>
 							<string key="NSBinding">image</string>
 							<string key="NSKeyPath">systemDownloadPath</string>
@@ -2955,10 +2955,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">title: systemDownloadPath</string>
 						<reference key="source" ref="439088738"/>
-						<reference key="destination" ref="867562739"/>
+						<reference key="destination" ref="81313139"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="439088738"/>
-							<reference key="NSDestination" ref="867562739"/>
+							<reference key="NSDestination" ref="81313139"/>
 							<string key="NSLabel">title: systemDownloadPath</string>
 							<string key="NSBinding">title</string>
 							<string key="NSKeyPath">systemDownloadPath</string>
@@ -2975,7 +2975,7 @@
 									<string>MvrPreferencesControllerDisplayNameTransformer</string>
 								</object>
 							</object>
-							<reference key="NSPreviousConnector" ref="964677918"/>
+							<reference key="NSPreviousConnector" ref="227480447"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -2993,10 +2993,10 @@
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">hidden: systemDownloadPathSelected</string>
 						<reference key="source" ref="439088738"/>
-						<reference key="destination" ref="867562739"/>
+						<reference key="destination" ref="81313139"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="439088738"/>
-							<reference key="NSDestination" ref="867562739"/>
+							<reference key="NSDestination" ref="81313139"/>
 							<string key="NSLabel">hidden: systemDownloadPathSelected</string>
 							<string key="NSBinding">hidden</string>
 							<string key="NSKeyPath">systemDownloadPathSelected</string>
@@ -3008,10 +3008,26 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">downloadsFolderPicker</string>
-						<reference key="source" ref="867562739"/>
+						<reference key="source" ref="81313139"/>
 						<reference key="destination" ref="505096940"/>
 					</object>
 					<int key="connectionID">682</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">pickSystemDownloadsFolder:</string>
+						<reference key="source" ref="81313139"/>
+						<reference key="destination" ref="439088738"/>
+					</object>
+					<int key="connectionID">683</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">pickDownloadsFolder:</string>
+						<reference key="source" ref="81313139"/>
+						<reference key="destination" ref="322902639"/>
+					</object>
+					<int key="connectionID">684</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4422,7 +4438,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">661</int>
-						<reference key="object" ref="867562739"/>
+						<reference key="object" ref="81313139"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</object>
@@ -5072,7 +5088,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">682</int>
+			<int key="maxID">684</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5155,6 +5171,19 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">MvrPreferencesController</string>
 					<string key="superclassName">NSObject</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>pickDownloadsFolder:</string>
+							<string>pickSystemDownloadsFolder:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">

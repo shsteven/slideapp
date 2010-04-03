@@ -25,8 +25,12 @@
 
 - (void) setSelectedDownloadPath:(NSString *) p;
 {
+	[self willChangeValueForKey:@"systemDownloadPathSelected"];
+	
 	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
 	[ud setObject:p forKey:@"MvrDownloadsDirectory"];
+	
+	[self didChangeValueForKey:@"systemDownloadPathSelected"];
 }
 
 - (BOOL) isSystemDownloadPathSelected;
@@ -153,6 +157,30 @@ done:
 - (void) awakeFromNib;
 {
 	[downloadsFolderPicker selectItemAtIndex:0];
+}
+
+- (IBAction) pickSystemDownloadsFolder:(id) sender;
+{
+	if (self.systemDownloadPath)
+		self.selectedDownloadPath = self.systemDownloadPath;
+	[downloadsFolderPicker selectItemAtIndex:0];
+}
+
+- (IBAction) pickDownloadsFolder:(id) sender;
+{
+	[downloadsFolderPicker selectItemAtIndex:0];
+	
+	NSOpenPanel* openPanel = [NSOpenPanel openPanel];
+	[openPanel setCanChooseFiles:NO];
+	[openPanel setCanChooseDirectories:YES];
+	
+	[openPanel beginSheetForDirectory:self.selectedDownloadPath file:nil modalForWindow:[downloadsFolderPicker window] modalDelegate:self didEndSelector:@selector(downloadPicker:didEndWithCode:context:) contextInfo:NULL];
+}
+
+- (void) downloadPicker:(NSOpenPanel*) openPanel didEndWithCode:(NSInteger) i context:(void*) nothing;
+{
+	[downloadsFolderPicker selectItemAtIndex:0];
+	self.selectedDownloadPath = [openPanel filename];
 }
 
 @end
