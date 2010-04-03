@@ -393,7 +393,7 @@
 		150718CA105FD55900FA0BF4 /* MvrLegacyWiFiOutgoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrLegacyWiFiOutgoing.m; sourceTree = "<group>"; };
 		150718D1105FD5AA00FA0BF4 /* MvrOutgoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrOutgoing.h; sourceTree = "<group>"; };
 		1535D19F1090328C00CBF778 /* Mover-Network-Mac-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-Mac-Debug.xcconfig"; sourceTree = "<group>"; };
-		1535D2361090336700CBF778 /* libMoverNetwork-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMoverNetwork-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1535D2361090336700CBF778 /* libNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1537A7D8107A598300B16B88 /* MvrBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBuffer.h; sourceTree = "<group>"; };
 		1537A7D9107A598300B16B88 /* MvrBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBuffer.m; sourceTree = "<group>"; };
 		153AF199105C17B300DD862F /* MvrScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrScanner.h; sourceTree = "<group>"; };
@@ -417,7 +417,7 @@
 		153B40C0105BEAFC00DB8FB2 /* DDGetoptLongParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGetoptLongParser.h; sourceTree = "<group>"; };
 		153B40C1105BEAFC00DB8FB2 /* DDGetoptLongParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGetoptLongParser.m; sourceTree = "<group>"; };
 		153B40F4105BEC9500DB8FB2 /* TestTool.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = TestTool.xcconfig; sourceTree = "<group>"; };
-		153B4212105BF36700DB8FB2 /* mvr-wifi */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = "mvr-wifi"; sourceTree = BUILT_PRODUCTS_DIR; };
+		153B4212105BF36700DB8FB2 /* mvr-wifi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mvr-wifi"; sourceTree = BUILT_PRODUCTS_DIR; };
 		155E8F8F107B24AA00F8B33B /* MvrStreamedIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrStreamedIncoming.h; sourceTree = "<group>"; };
 		155E8F91107B24AA00F8B33B /* MvrStreamedIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrStreamedIncoming.m; sourceTree = "<group>"; };
 		156B0A1110902E5D00209F2D /* Mover-Network-iPhone.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-iPhone.xcconfig"; sourceTree = "<group>"; };
@@ -515,7 +515,7 @@
 		15F096C0105E57690016E2B6 /* MvrLegacyWiFi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrLegacyWiFi.h; sourceTree = "<group>"; };
 		15F096C1105E57690016E2B6 /* MvrLegacyWiFi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrLegacyWiFi.m; sourceTree = "<group>"; };
 		15F603EA105BDE1100F73794 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
-		D2AAC07E0554694100DB518D /* libMoverNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMoverNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC07E0554694100DB518D /* libNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -566,10 +566,10 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libMoverNetwork.a */,
+				D2AAC07E0554694100DB518D /* libNetwork.a */,
 				1593E964105BB9FB00220989 /* Network+Test.octest */,
 				153B4212105BF36700DB8FB2 /* mvr-wifi */,
-				1535D2361090336700CBF778 /* libMoverNetwork-Mac.a */,
+				1535D2361090336700CBF778 /* libNetwork.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1002,7 +1002,7 @@
 			);
 			name = "Network (Mac OS X)";
 			productName = Network;
-			productReference = 1535D2361090336700CBF778 /* libMoverNetwork-Mac.a */;
+			productReference = 1535D2361090336700CBF778 /* libNetwork.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		153B4201105BF36700DB8FB2 /* mvr-wifi */ = {
@@ -1057,7 +1057,7 @@
 			);
 			name = "Network (iPhone)";
 			productName = Network;
-			productReference = D2AAC07E0554694100DB518D /* libMoverNetwork.a */;
+			productReference = D2AAC07E0554694100DB518D /* libNetwork.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */

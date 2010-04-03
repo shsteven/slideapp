@@ -53,12 +53,10 @@
 
 - (BOOL) applicationShouldHandleReopen:(NSApplication*) sender hasVisibleWindows:(BOOL) noWindows;
 {
-	if (noWindows) {
+	if (noWindows)
 		[window makeKeyAndOrderFront:self];
-		return NO;
-	}
 	
-	return YES;
+	return NO;
 }
 
 - (BOOL) application:(NSApplication *)sender openFile:(NSString *)filename;
@@ -99,6 +97,11 @@
 - (IBAction) openMoverPlusAppStore:(id) sender;
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/download-plus"]];
+}
+
+- (IBAction) openMoverLiteAppStore:(id) sender;
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/download"]];
 }
 
 #pragma mark Sending from clipboard

@@ -38,6 +38,7 @@
 }
 
 - (IBAction) openMoverPlusAppStore:(id) sender;
+- (IBAction) openMoverLiteAppStore:(id) sender;
 
 @property(readonly) MvrTransferController* transfer;
 
