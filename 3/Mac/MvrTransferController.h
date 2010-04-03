@@ -33,9 +33,12 @@
 @property(readonly) NSMutableSet* channels;
 
 - (void) sendItemFile:(NSString*) file throughChannel:(id <MvrChannel>) c;
+- (void) sendItemFile:(NSString*) file;
+- (BOOL) canSendFile:(NSString*) path;
 
 - (BOOL) canSendContentsOfPasteboard:(NSPasteboard*) pb;
 - (void) sendContentsOfPasteboard:(NSPasteboard*) pb throughChannel:(id <MvrChannel>) c;
 @property(readonly) NSArray* knownPasteboardTypes;
+- (void) sendContentsOfPasteboard:(NSPasteboard*) pb;
 
 @end

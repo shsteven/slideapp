@@ -14,6 +14,9 @@
 #import "NSAlert+L0Alert.h"
 
 @interface MvrAppDelegate_Mac () <NSUserInterfaceValidations>
+
+- (BOOL) sendFile:(NSString*) file;
+
 @end
 
 
@@ -28,12 +31,14 @@
 		return;
 	}
 #endif
-	
+
+	[self willChangeValueForKey:@"transfer"];
 	transfer = [[MvrTransferController alloc] init];
+	[self didChangeValueForKey:@"transfer"];
 	
 	[channelsController bind:NSContentSetBinding toObject:transfer withKeyPath:@"channels" options:nil];
 	[devicesView bind:@"content" toObject:channelsController withKeyPath:@"arrangedObjects" options:nil];
-	
+
 	originalWindowHeight = [window frame].size.height;
 	
 	NSString* autosaveKey = [NSString stringWithFormat:@"NSWindow Frame %@", [window frameAutosaveName]];
@@ -53,6 +58,26 @@
 		return NO;
 	}
 	
+	return YES;
+}
+
+- (BOOL) application:(NSApplication *)sender openFile:(NSString *)filename;
+{
+	if (!transfer) {
+		[self performSelector:@selector(sendFile:) withObject:filename afterDelay:3.0];
+		return YES;
+	} else
+		return [self sendFile:filename];
+}
+
+- (BOOL) sendFile:(NSString*) file;
+{
+	if (![transfer canSendFile:file]) {
+		NSBeep();
+		return NO;
+	}
+	
+	[transfer sendItemFile:file];
 	return YES;
 }
 
@@ -80,11 +105,7 @@
 
 - (IBAction) paste:(id) sender;
 {
-	if ([transfer.channels count] == 1) {
-		[transfer sendContentsOfPasteboard:[NSPasteboard generalPasteboard] throughChannel:[transfer.channels anyObject]];
-	} else {
-		// TODO device picker.
-	}
+	[transfer sendContentsOfPasteboard:[NSPasteboard generalPasteboard]];
 }
 
 - (BOOL) validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>) anItem;
@@ -95,5 +116,39 @@
 	return NO;
 }
 
+- (void) beginPickingChannelWithDelegate:(id) delegate selector:(SEL) selector context:(id) ctx;
+{
+	if (channelPickerDelegate)
+		return;
+	
+	channelPickerDelegate = delegate;
+	channelPickerSelector = selector;
+	channelPickerContext = ctx;
+	
+	[NSApp beginSheet:channelPicker modalForWindow:window modalDelegate:self didEndSelector:@selector(didEndPicking:result:context:) contextInfo:NULL];
+}
+
+- (void) didEndPicking:(NSPanel*) picker result:(NSInteger) result context:(void*) nothing;
+{
+	if (result == NSOKButton && [[pickerChannelsController selectedObjects] count] == 1) {
+		[channelPickerDelegate performSelector:channelPickerSelector withObject:[[pickerChannelsController selectedObjects] objectAtIndex:0] withObject:channelPickerContext];
+	}
+	
+	channelPickerDelegate = nil;
+	channelPickerSelector = NULL;
+	channelPickerContext = nil;
+	
+	[picker orderOut:self];
+}
+
+- (IBAction) cancelPicking:(id) sender;
+{
+	[NSApp endSheet:channelPicker returnCode:NSCancelButton];
+}
+
+- (IBAction) performPicking:(id) sender;
+{
+	[NSApp endSheet:channelPicker returnCode:NSOKButton];
+}
 
 @end

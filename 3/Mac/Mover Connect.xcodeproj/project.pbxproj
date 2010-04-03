@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		150072E8113967C3007BF995 /* NSAlert+L0Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 150072E7113967C3007BF995 /* NSAlert+L0Alert.m */; };
 		150072EA113967F1007BF995 /* PrereleaseExpired.alert in Resources */ = {isa = PBXBuildFile; fileRef = 150072E9113967F1007BF995 /* PrereleaseExpired.alert */; };
+		1500975A116682B40072DC8C /* MvrBookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15009759116682B40072DC8C /* MvrBookmarkItem.m */; };
 		153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */; };
 		153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EF0AC1135595100B8DDC1 /* Carbon.framework */; };
 		157280D31137FE63005634C7 /* MvrDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 157280D21137FE63005634C7 /* MvrDevice.m */; };
@@ -16,13 +17,16 @@
 		157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 157280F2113805FA005634C7 /* SpinnerBackdrop.png */; };
 		1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574452111343C630088C65E /* SystemConfiguration.framework */; };
 		1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574453A11343D090088C65E /* libz.1.1.3.dylib */; };
+		157705D9116619B700EE3C83 /* MvrTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157705D8116619B700EE3C83 /* MvrTextItem.m */; };
 		1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1594394D1133DACB0017B42D /* WaypointLogo.png */; };
 		15CCE81C114FF9D100E45AC6 /* MiniSlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CCE81B114FF9D100E45AC6 /* MiniSlide.png */; };
 		15CCE821114FFC3400E45AC6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CCE820114FFC3400E45AC6 /* QuartzCore.framework */; };
 		15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */; };
 		15E3A4A9113F970C00F301D8 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */; };
 		15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */; };
-		15E3A4B3113F972900F301D8 /* libMoverNetwork-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */; };
+		15E3A4B3113F972900F301D8 /* libNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A48D113F96FC00F301D8 /* libNetwork.a */; };
+		15F9312E11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9312C11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m */; };
+		15F931F111673E0A00AA71AB /* MvrPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F931F011673E0A00AA71AB /* MvrPreferencesController.m */; };
 		15F965DE11652D2E00EE3F9E /* MvrTransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F965DD11652D2E00EE3F9E /* MvrTransferController.m */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* MvrAppDelegate_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* MvrAppDelegate_Mac.m */; };
@@ -111,6 +115,8 @@
 		150072E6113967C3007BF995 /* NSAlert+L0Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+L0Alert.h"; sourceTree = "<group>"; };
 		150072E7113967C3007BF995 /* NSAlert+L0Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+L0Alert.m"; sourceTree = "<group>"; };
 		150072E9113967F1007BF995 /* PrereleaseExpired.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrereleaseExpired.alert; sourceTree = "<group>"; };
+		15009758116682B40072DC8C /* MvrBookmarkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrBookmarkItem.h; path = ../iPhone/Classes/MvrBookmarkItem.h; sourceTree = SOURCE_ROOT; };
+		15009759116682B40072DC8C /* MvrBookmarkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrBookmarkItem.m; path = ../iPhone/Classes/MvrBookmarkItem.m; sourceTree = SOURCE_ROOT; };
 		153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeviceBackdrop.png; sourceTree = "<group>"; };
 		153EF0AC1135595100B8DDC1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		157280D11137FE63005634C7 /* MvrDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevice.h; sourceTree = "<group>"; };
@@ -120,12 +126,18 @@
 		1574448B113435430088C65E /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
 		1574452111343C630088C65E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1574453A11343D090088C65E /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		157705D7116619B700EE3C83 /* MvrTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrTextItem.h; path = ../iPhone/Classes/MvrTextItem.h; sourceTree = SOURCE_ROOT; };
+		157705D8116619B700EE3C83 /* MvrTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrTextItem.m; path = ../iPhone/Classes/MvrTextItem.m; sourceTree = SOURCE_ROOT; };
 		1594394D1133DACB0017B42D /* WaypointLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaypointLogo.png; sourceTree = "<group>"; };
 		1594397D1133E1410017B42D /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		15CCE81B114FF9D100E45AC6 /* MiniSlide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiniSlide.png; sourceTree = "<group>"; };
 		15CCE820114FFC3400E45AC6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevicesLineView.h; sourceTree = "<group>"; };
 		15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevicesLineView.m; sourceTree = "<group>"; };
+		15F9312C11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
+		15F9312D11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
+		15F931EF11673E0A00AA71AB /* MvrPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPreferencesController.h; sourceTree = "<group>"; };
+		15F931F011673E0A00AA71AB /* MvrPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPreferencesController.m; sourceTree = "<group>"; };
 		15F965DC11652D2E00EE3F9E /* MvrTransferController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTransferController.h; sourceTree = "<group>"; };
 		15F965DD11652D2E00EE3F9E /* MvrTransferController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTransferController.m; sourceTree = "<group>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -143,7 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15E3A4B3113F972900F301D8 /* libMoverNetwork-Mac.a in Frameworks */,
+				15E3A4B3113F972900F301D8 /* libNetwork.a in Frameworks */,
 				15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */,
@@ -159,6 +171,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				15F9312C11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m */,
+				15F9312D11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.h */,
+				157705CF1166193800EE3C83 /* Item types from iPhone Mover */,
 				15F965DB11652CF200EE3F9E /* Network Control */,
 				150072E6113967C3007BF995 /* NSAlert+L0Alert.h */,
 				150072E7113967C3007BF995 /* NSAlert+L0Alert.m */,
@@ -168,6 +183,8 @@
 				157280D21137FE63005634C7 /* MvrDevice.m */,
 				15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */,
 				15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */,
+				15F931EF11673E0A00AA71AB /* MvrPreferencesController.h */,
+				15F931F011673E0A00AA71AB /* MvrPreferencesController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -190,11 +207,22 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
+		157705CF1166193800EE3C83 /* Item types from iPhone Mover */ = {
+			isa = PBXGroup;
+			children = (
+				15009758116682B40072DC8C /* MvrBookmarkItem.h */,
+				15009759116682B40072DC8C /* MvrBookmarkItem.m */,
+				157705D7116619B700EE3C83 /* MvrTextItem.h */,
+				157705D8116619B700EE3C83 /* MvrTextItem.m */,
+			);
+			name = "Item types from iPhone Mover";
+			sourceTree = "<group>";
+		};
 		15E3A486113F96FC00F301D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */,
-				15E3A48F113F96FC00F301D8 /* libMoverNetwork.a */,
+				15E3A48D113F96FC00F301D8 /* libNetwork.a */,
+				15E3A48F113F96FC00F301D8 /* libNetwork.a */,
 				15E3A491113F96FC00F301D8 /* Network+Test.octest */,
 				15E3A493113F96FC00F301D8 /* mvr-wifi */,
 			);
@@ -331,17 +359,17 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */ = {
+		15E3A48D113F96FC00F301D8 /* libNetwork.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libMoverNetwork-Mac.a";
+			path = libNetwork.a;
 			remoteRef = 15E3A48C113F96FC00F301D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		15E3A48F113F96FC00F301D8 /* libMoverNetwork.a */ = {
+		15E3A48F113F96FC00F301D8 /* libNetwork.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libMoverNetwork.a;
+			path = libNetwork.a;
 			remoteRef = 15E3A48E113F96FC00F301D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -419,6 +447,10 @@
 				150072E8113967C3007BF995 /* NSAlert+L0Alert.m in Sources */,
 				15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */,
 				15F965DE11652D2E00EE3F9E /* MvrTransferController.m in Sources */,
+				157705D9116619B700EE3C83 /* MvrTextItem.m in Sources */,
+				1500975A116682B40072DC8C /* MvrBookmarkItem.m in Sources */,
+				15F9312E11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m in Sources */,
+				15F931F111673E0A00AA71AB /* MvrPreferencesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +509,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
 					"$(SRCROOT)/..",
+					"$(SRCROOT)/../iPhone/Classes",
 				);
 				INFOPLIST_FILE = "Mover Connect-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -502,7 +535,8 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
-					"$(SRCROOT)/../..",
+					"$(SRCROOT)/..",
+					"$(SRCROOT)/../iPhone/Classes",
 				);
 				INFOPLIST_FILE = "Mover Connect-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";

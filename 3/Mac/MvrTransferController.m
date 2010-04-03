@@ -19,6 +19,8 @@
 #import "MvrTextItem.h"
 #import "MvrBookmarkItem.h"
 
+#import "MvrAppDelegate_Mac.h"
+
 
 static NSArray* MvrTypeForExtension(NSString* ext) {
 	if ([ext isEqual:@"m4v"])
@@ -57,7 +59,7 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 @synthesize channels;
 
 
-#pragma mark Outgoing
+#pragma mark Sending files
 
 - (void) sendItemFile:(NSString*) file throughChannel:(id <MvrChannel>) c;
 {
@@ -78,6 +80,32 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 		[c beginSendingItem:item];
 	}
 }
+
+- (void) sendItemFile:(NSString*) file;
+{
+	if ([channels count] == 1)
+		[self sendItemFile:file throughChannel:[channels anyObject]];
+	else
+		[MvrApp() beginPickingChannelWithDelegate:self selector:@selector(didPickChannel:forSendingFile:) context:file];
+}
+
+- (void) didPickChannel:(id <MvrChannel>)chan forSendingFile:(NSString*) file;
+{
+	[self sendItemFile:file throughChannel:chan];
+}
+
+- (BOOL) canSendFile:(NSString*) path;
+{
+	
+	BOOL isDir;
+	if (![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir] || isDir)
+		return NO;
+	else
+		return YES;
+	
+}
+
+#pragma mark Sending pasteboards
 
 - (NSArray*) knownPasteboardTypes;
 {
@@ -102,8 +130,7 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 	for (NSString* file in files) {
 		containsKnownType = YES;
 		
-		BOOL isDir;
-		if (![[NSFileManager defaultManager] fileExistsAtPath:[files objectAtIndex:0] isDirectory:&isDir] || isDir)
+		if (![self canSendFile:file])
 			return NO;
 	}
 	
@@ -150,6 +177,19 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 		MvrTextItem* text = [[MvrTextItem alloc] initWithText:str];
 		[c beginSendingItem:text];
 	}
+}
+
+- (void) sendContentsOfPasteboard:(NSPasteboard*) pb;
+{
+	if ([channels count] == 1)
+		[self sendContentsOfPasteboard:pb throughChannel:[channels anyObject]];
+	else
+		[MvrApp() beginPickingChannelWithDelegate:self selector:@selector(didPickChannel:forSendingPasteboard:) context:pb];
+}
+
+- (void) didPickChannel:(id <MvrChannel>) chan forSendingPasteboard:(NSPasteboard*) pb;
+{
+	[self sendContentsOfPasteboard:pb throughChannel:chan];
 }
 
 #pragma mark Incoming

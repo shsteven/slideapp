@@ -19,15 +19,28 @@
 	CGFloat originalWindowHeight;
 	
 	IBOutlet NSArrayController* channelsController;
+	IBOutlet NSArrayController* pickerChannelsController;
 	
 	IBOutlet MvrDevicesLineView* devicesView;
 	
 	MvrTransferController* transfer;
+	
+	IBOutlet NSPanel* channelPicker;
+
+	id channelPickerDelegate;
+	SEL channelPickerSelector;
+	id channelPickerContext;
 }
 
 - (IBAction) openMoverPlusAppStore:(id) sender;
 
 @property(readonly) MvrTransferController* transfer;
+
+// - (void) didPickChannel:(id <MvrChannel>) picked context:(id) ctx;
+- (void) beginPickingChannelWithDelegate:(id) delegate selector:(SEL) selector context:(id) ctx;
+
+- (IBAction) cancelPicking:(id) sender;
+- (IBAction) performPicking:(id) sender;
 
 @end
 
