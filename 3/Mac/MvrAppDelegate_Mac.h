@@ -34,7 +34,7 @@
 	id channelPickerContext;
 	
 	IBOutlet NSWindow* preferencesPanel;
-	IBOutlet MvrPreferencesController* preferencesController;
+	IBOutlet MvrPreferencesController* preferences;
 }
 
 - (IBAction) openMoverPlusAppStore:(id) sender;
@@ -46,6 +46,8 @@
 
 - (IBAction) cancelPicking:(id) sender;
 - (IBAction) performPicking:(id) sender;
+
+@property(readonly) MvrPreferencesController* preferences;
 
 @end
 

@@ -17,7 +17,8 @@
 {
 	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
 	id x = [ud stringForKey:@"MvrDownloadsDirectory"];
-	if (!x)
+	BOOL isDir;
+	if (!x || ![[NSFileManager defaultManager] fileExistsAtPath:x isDirectory:&isDir] || !isDir)
 		x = self.systemDownloadPath;
 	
 	return x;

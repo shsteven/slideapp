@@ -33,6 +33,7 @@
 		15F932071167418B00AA71AB /* MoverAgent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F932061167418B00AA71AB /* MoverAgent.xib */; };
 		15F9320F116741C900AA71AB /* MvrAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9320E116741C900AA71AB /* MvrAgent.m */; };
 		15F932A811674A1700AA71AB /* Mover Agent.app in Copy Mover Agent */ = {isa = PBXBuildFile; fileRef = 15F931FB116740CB00AA71AB /* Mover Agent.app */; };
+		15F933E71167736800AA71AB /* LocalizedMoverItemsStrings in Resources */ = {isa = PBXBuildFile; fileRef = 15F933E41167736800AA71AB /* LocalizedMoverItemsStrings */; };
 		15F965DE11652D2E00EE3F9E /* MvrTransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F965DD11652D2E00EE3F9E /* MvrTransferController.m */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* MvrAppDelegate_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* MvrAppDelegate_Mac.m */; };
@@ -172,6 +173,7 @@
 		15F932061167418B00AA71AB /* MoverAgent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoverAgent.xib; sourceTree = "<group>"; };
 		15F9320D116741C900AA71AB /* MvrAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAgent.h; sourceTree = "<group>"; };
 		15F9320E116741C900AA71AB /* MvrAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAgent.m; sourceTree = "<group>"; };
+		15F933E41167736800AA71AB /* LocalizedMoverItemsStrings */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LocalizedMoverItemsStrings; sourceTree = "<group>"; };
 		15F965DC11652D2E00EE3F9E /* MvrTransferController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTransferController.h; sourceTree = "<group>"; };
 		15F965DD11652D2E00EE3F9E /* MvrTransferController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTransferController.m; sourceTree = "<group>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15F933E41167736800AA71AB /* LocalizedMoverItemsStrings */,
 				15CCE81B114FF9D100E45AC6 /* MiniSlide.png */,
 				150072E9113967F1007BF995 /* PrereleaseExpired.alert */,
 				157280F2113805FA005634C7 /* SpinnerBackdrop.png */,
@@ -517,6 +520,7 @@
 				157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */,
 				150072EA113967F1007BF995 /* PrereleaseExpired.alert in Resources */,
 				15CCE81C114FF9D100E45AC6 /* MiniSlide.png in Resources */,
+				15F933E71167736800AA71AB /* LocalizedMoverItemsStrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

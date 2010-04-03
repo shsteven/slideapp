@@ -199,6 +199,27 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 	[channelsByIncoming setObject:c forKey:incoming];
 }
 
+- (NSString*) destinationDirectory;
+{
+	NSString* downloadDir = MvrApp().preferences.selectedDownloadPath;
+
+	if (MvrApp().preferences.shouldGroupStuffInMoverItemsFolder) {		
+		downloadDir = [downloadDir stringByAppendingPathComponent:@"Mover Items.localized"];
+		
+		NSFileManager* fm = [NSFileManager defaultManager];
+		if (![fm fileExistsAtPath:downloadDir]) {
+			
+			NSAssert([fm createDirectoryAtPath:downloadDir withIntermediateDirectories:YES attributes:nil error:NULL], @"We must be able to create the Mover Items directory");
+			
+			NSString* localizedMoverItemsStuff = [[NSBundle mainBundle] pathForResource:@"LocalizedMoverItemsStrings" ofType:@""];
+			[fm copyItemAtPath:localizedMoverItemsStuff toPath:[downloadDir stringByAppendingPathComponent:@".localized"]  error:NULL];
+			
+		}
+	}
+	
+	return downloadDir;
+}
+
 - (void) incomingTransfer:(id <MvrIncoming>) incoming didEndReceivingItem:(MvrItem*) i;
 {
 	if (!i)
@@ -210,11 +231,7 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 		return;
 	
 	NSFileManager* fm = [NSFileManager defaultManager];
-	
-	NSArray* dirs = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
-	NSAssert([dirs count] != 0, @"We know where the downloads directory(/ies) is (are)");
-	NSString* downloadDir = [dirs objectAtIndex:0];
-	downloadDir = [downloadDir stringByAppendingPathComponent:@"Mover Items"];
+	NSString* downloadDir = [self destinationDirectory];
 	BOOL isDir;
 	
 	NSString* baseName = [i.metadata objectForKey:kMvrItemOriginalFilenameMetadataKey], * ext = nil;

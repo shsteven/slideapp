@@ -151,4 +151,6 @@
 	[NSApp endSheet:channelPicker returnCode:NSOKButton];
 }
 
+@synthesize preferences;
+
 @end
