@@ -175,4 +175,17 @@
 	[self.transfer sendItemFile:[open filename]];
 }
 
+- (IBAction) revealDownloadsInFinder:(id) sender;
+{
+	NSString* path = preferences.selectedDownloadPath;
+	
+	if (preferences.shouldGroupStuffInMoverItemsFolder) {
+		NSString* moverItemsPath = [path stringByAppendingPathComponent:@"Mover Items.localized"];
+		if ([[NSFileManager defaultManager] fileExistsAtPath:moverItemsPath])
+			path = moverItemsPath;
+	}
+	
+	[[NSWorkspace sharedWorkspace] openFile:path];
+}
+
 @end

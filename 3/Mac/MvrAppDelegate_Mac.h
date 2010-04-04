@@ -52,6 +52,8 @@
 
 - (IBAction) open:(id) sender;
 
+- (IBAction) revealDownloadsInFinder:(id) sender;
+
 @end
 
 static inline MvrAppDelegate_Mac* MvrApp() {
