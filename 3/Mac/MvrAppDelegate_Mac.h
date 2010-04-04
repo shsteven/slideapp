@@ -50,6 +50,8 @@
 
 @property(readonly) MvrPreferencesController* preferences;
 
+- (IBAction) open:(id) sender;
+
 @end
 
 static inline MvrAppDelegate_Mac* MvrApp() {

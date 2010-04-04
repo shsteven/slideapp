@@ -113,10 +113,15 @@
 
 - (BOOL) validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>) anItem;
 {
-	if ([anItem action] == @selector(paste:))
-		return [transfer canSendContentsOfPasteboard:[NSPasteboard generalPasteboard]];
+	SEL a = [anItem action];
 	
-	return NO;
+	if (a == @selector(paste:) && ![transfer canSendContentsOfPasteboard:[NSPasteboard generalPasteboard]])
+		return NO;
+	
+	if ((a == @selector(paste:) || a == @selector(open:)) && [transfer.channels count] == 0)
+		return NO;
+	
+	return YES;
 }
 
 - (void) beginPickingChannelWithDelegate:(id) delegate selector:(SEL) selector context:(id) ctx;
@@ -155,5 +160,19 @@
 }
 
 @synthesize preferences;
+
+- (IBAction) open:(id) sender;
+{
+	[window makeKeyAndOrderFront:self];
+	
+	NSOpenPanel* open = [NSOpenPanel openPanel];
+	[open beginSheetForDirectory:nil file:nil modalForWindow:window modalDelegate:self didEndSelector:@selector(openPanel:didPickFile:context:) contextInfo:NULL];
+}
+
+- (void) openPanel:(NSOpenPanel*) open didPickFile:(NSInteger) result context:(void*) context;
+{
+	[open orderOut:self];
+	[self.transfer sendItemFile:[open filename]];
+}
 
 @end
