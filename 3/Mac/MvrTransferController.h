@@ -31,7 +31,6 @@
 @property BOOL enabled;
 
 @property(readonly) NSMutableSet* channels;
-@property(readonly) BOOL anyChannelsAvailable;
 
 - (void) sendItemFile:(NSString*) file throughChannel:(id <MvrChannel>) c;
 - (void) sendItemFile:(NSString*) file;
