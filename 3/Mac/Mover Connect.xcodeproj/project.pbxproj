@@ -20,6 +20,7 @@
 		1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574453A11343D090088C65E /* libz.1.1.3.dylib */; };
 		157705D9116619B700EE3C83 /* MvrTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157705D8116619B700EE3C83 /* MvrTextItem.m */; };
 		1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1594394D1133DACB0017B42D /* WaypointLogo.png */; };
+		15AD84961168D49800F88021 /* SlideMenuIcon_Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD84951168D49800F88021 /* SlideMenuIcon_Selected.png */; };
 		15CCE81C114FF9D100E45AC6 /* MiniSlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CCE81B114FF9D100E45AC6 /* MiniSlide.png */; };
 		15CCE821114FFC3400E45AC6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CCE820114FFC3400E45AC6 /* QuartzCore.framework */; };
 		15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */; };
@@ -160,6 +161,7 @@
 		157705D8116619B700EE3C83 /* MvrTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrTextItem.m; path = ../iPhone/Classes/MvrTextItem.m; sourceTree = SOURCE_ROOT; };
 		1594394D1133DACB0017B42D /* WaypointLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaypointLogo.png; sourceTree = "<group>"; };
 		1594397D1133E1410017B42D /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		15AD84951168D49800F88021 /* SlideMenuIcon_Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SlideMenuIcon_Selected.png; sourceTree = "<group>"; };
 		15CCE81B114FF9D100E45AC6 /* MiniSlide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiniSlide.png; sourceTree = "<group>"; };
 		15CCE820114FFC3400E45AC6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevicesLineView.h; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				15F932061167418B00AA71AB /* MoverAgent.xib */,
 				15F9320D116741C900AA71AB /* MvrAgent.h */,
 				15F9320E116741C900AA71AB /* MvrAgent.m */,
+				15AD84951168D49800F88021 /* SlideMenuIcon_Selected.png */,
 			);
 			path = Agent;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				15F932051167416000AA71AB /* SlideMenuIcon.png in Resources */,
 				15F932071167418B00AA71AB /* MoverAgent.xib in Resources */,
 				15534A611168A82600D3D5F3 /* Connect.icns in Resources */,
+				15AD84961168D49800F88021 /* SlideMenuIcon_Selected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

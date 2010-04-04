@@ -16,6 +16,7 @@
 {
 	statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:21];
 	[statusItem setImage:[NSImage imageNamed:@"SlideMenuIcon"]];
+	[statusItem setAlternateImage:[NSImage imageNamed:@"SlideMenuIcon_Selected"]];
 	[statusItem setHighlightMode:YES];
 	
 	[statusItem setMenu:statusItemMenu];
