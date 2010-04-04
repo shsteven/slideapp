@@ -14,6 +14,8 @@ enum {
 	kMvrAppVariantMoverPaid,
 	kMvrAppVariantMoverPlus = kMvrAppVariantMoverPaid,
 	kMvrAppVariantMoverLite,
+	
+	kMvrAppVariantMoverConduit, // an app that runs on a desktop computer.
 };
 typedef NSUInteger MvrAppVariant;
 

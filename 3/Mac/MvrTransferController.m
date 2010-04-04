@@ -322,12 +322,12 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 
 - (MvrAppVariant) variant;
 {
-	return kMvrAppVariantNotMover;
+	return kMvrAppVariantMoverConduit;
 }
 
 - (NSString *) variantDisplayName;
 {
-	return @"Mover Waypoint";
+	return @"Mover Conect";
 }
 
 - (id) platform;
