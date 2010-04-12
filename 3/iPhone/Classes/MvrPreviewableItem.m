@@ -36,6 +36,10 @@
 			 @"pages", @"com.apple.iwork.pages.pages",
 			 @"numbers", @"com.apple.iwork.numbers.numbers",
 			 @"key", @"com.apple.iwork.keynote.key",
+			 
+			 @"docx", @"org.openxmlformats.wordprocessingml.document",
+			 @"pptx", @"org.openxmlformats.presentationml.presentation",
+			 @"xlsx", @"org.openxmlformats.spreadsheetml.sheet",
 			 nil];
 	}
 	

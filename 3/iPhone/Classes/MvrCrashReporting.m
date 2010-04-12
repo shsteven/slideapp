@@ -25,6 +25,11 @@
 
 - (void) checkForPendingReports;
 {
+#if DEBUG
+	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrDisableCrashReporting"] boolValue])
+		return;
+#endif
+	
 	if (reportData || report)
 		return;
 	
@@ -62,6 +67,11 @@ static void MvrHandleException(NSException* ex) {
 
 - (void) enableReporting;
 {
+#if DEBUG
+	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrDisableCrashReporting"] boolValue])
+		return;
+#endif
+	
 	NSError* error;
 	if (![[PLCrashReporter sharedReporter] enableCrashReporterAndReturnError:&error]) {
 		L0LogAlways(@" !!! WARNING !!! Crash reporting was not enabled for this session due to this error: %@. This means that, if we crash, we'll never know. Oh well.", error);
