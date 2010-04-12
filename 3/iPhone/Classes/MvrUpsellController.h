@@ -18,7 +18,7 @@ typedef NSInteger MvrUpsellAction;
 
 #import <UIKit/UIKit.h>
 
-#define kMvrUpsellURL ([NSURL URLWithString:@"http://infinite-labs.net/mover/download-plus"])
+#define kMvrUpsellURL ([NSURL URLWithString:@"http://infinite-labs.net/mover/get/plus"])
 
 @interface MvrUpsellController : NSObject <UIAlertViewDelegate> {
 	UIAlertView* alert;
