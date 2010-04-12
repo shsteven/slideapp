@@ -9,9 +9,13 @@
 #import "MvrAppDelegate_Mac.h"
 #import <Carbon/Carbon.h>
 
+#import <Sparkle/Sparkle.h>
+
 #import "MvrTransferController.h"
 
 #import "NSAlert+L0Alert.h"
+
+#import "PFMoveApplication.h"
 
 @interface MvrAppDelegate_Mac () <NSUserInterfaceValidations>
 
@@ -31,6 +35,8 @@
 		return;
 	}
 #endif
+	
+	PFMoveToApplicationsFolderIfNecessary();
 
 	[self willChangeValueForKey:@"transfer"];
 	transfer = [[MvrTransferController alloc] init];
@@ -47,6 +53,9 @@
 	[window makeKeyAndOrderFront:self];
 	
 	transfer.enabled = YES;
+	
+	[preferences restartAgentIfJustUpdated];
+	[[SUUpdater sharedUpdater] setDelegate:self];
 }
 
 @synthesize transfer;
@@ -186,6 +195,23 @@
 	}
 	
 	[[NSWorkspace sharedWorkspace] openFile:path];
+}
+
+- (void) warnAboutMissingContacts;
+{
+	NSAlert* a = [NSAlert alertNamed:@"MvrNoContactsForNow"];
+	[a beginSheetModalForWindow:window modalDelegate:self didEndSelector:@selector(warnedAboutContacts:didEndWithButton:context:) contextInfo:NULL];
+}
+
+- (void) warnedAboutContacts:(NSAlert*) a didEndWithButton:(NSInteger) b context:(void*) nothing;
+{
+	if (b == NSAlertSecondButtonReturn)
+		[[SUUpdater sharedUpdater] checkForUpdates:self];
+}
+
+- (void)updater:(SUUpdater *)updater willInstallUpdate:(SUAppcastItem *)update;
+{
+	[preferences prepareAgentForUpdating];
 }
 
 @end

@@ -29,6 +29,10 @@
 - (IBAction) pickSystemDownloadsFolder:(id) sender;
 - (IBAction) pickDownloadsFolder:(id) sender;
 
+// updating
+- (void) prepareAgentForUpdating;
+- (void) restartAgentIfJustUpdated;
+
 @end
 
 

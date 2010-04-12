@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array>
+		<string>OK</string>
+		<string>Check for Updates Now</string>
+	</array>
+	<key>L0AlertInformativeText</key>
+	<string>Contact support will be available in a future free update. You can check for updates by using the Check for Updates command in the Mover Connect menu above.</string>
+	<key>L0AlertMessage</key>
+	<string>Contacts are not supported for now.</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

@@ -10,9 +10,15 @@
 		150072E8113967C3007BF995 /* NSAlert+L0Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 150072E7113967C3007BF995 /* NSAlert+L0Alert.m */; };
 		150072EA113967F1007BF995 /* PrereleaseExpired.alert in Resources */ = {isa = PBXBuildFile; fileRef = 150072E9113967F1007BF995 /* PrereleaseExpired.alert */; };
 		1500975A116682B40072DC8C /* MvrBookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15009759116682B40072DC8C /* MvrBookmarkItem.m */; };
+		153DBB351173121800F2080B /* Sparkle.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = 153DBB341173121800F2080B /* Sparkle.framework */; };
+		153DBB431173123E00F2080B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153DBB341173121800F2080B /* Sparkle.framework */; };
+		153DBB4C1173141E00F2080B /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 153DBB4B1173141E00F2080B /* dsa_pub.pem */; };
 		153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */; };
 		153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EF0AC1135595100B8DDC1 /* Carbon.framework */; };
+		15523D9B1173201500888B09 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 15523D991173201500888B09 /* PFMoveApplication.m */; };
+		15523DA61173208F00888B09 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15523DA51173208F00888B09 /* Security.framework */; };
 		15534A611168A82600D3D5F3 /* Connect.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15E6E29D1167ED07000184F3 /* Connect.icns */; };
+		1565BBCF11730E5700745B9A /* MvrNoContactsForNow.alert in Resources */ = {isa = PBXBuildFile; fileRef = 1565BBCE11730E5700745B9A /* MvrNoContactsForNow.alert */; };
 		157280D31137FE63005634C7 /* MvrDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 157280D21137FE63005634C7 /* MvrDevice.m */; };
 		157280E411380210005634C7 /* MvrDeviceItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157280E311380210005634C7 /* MvrDeviceItem.xib */; };
 		157280F3113805FA005634C7 /* SpinnerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 157280F2113805FA005634C7 /* SpinnerBackdrop.png */; };
@@ -23,6 +29,7 @@
 		15AD84961168D49800F88021 /* SlideMenuIcon_Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD84951168D49800F88021 /* SlideMenuIcon_Selected.png */; };
 		15CCE81C114FF9D100E45AC6 /* MiniSlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CCE81B114FF9D100E45AC6 /* MiniSlide.png */; };
 		15CCE821114FFC3400E45AC6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CCE820114FFC3400E45AC6 /* QuartzCore.framework */; };
+		15D327A71172F48E001DD969 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D327A61172F48E001DD969 /* AddressBook.framework */; };
 		15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */; };
 		15E3A4A9113F970C00F301D8 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */; };
 		15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */; };
@@ -126,6 +133,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		153DBB481173125400F2080B /* Copy Sparkle */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				153DBB351173121800F2080B /* Sparkle.framework in Copy Sparkle */,
+			);
+			name = "Copy Sparkle";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		15F932B411674A2400AA71AB /* Copy Mover Agent */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,8 +166,14 @@
 		150072E9113967F1007BF995 /* PrereleaseExpired.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrereleaseExpired.alert; sourceTree = "<group>"; };
 		15009758116682B40072DC8C /* MvrBookmarkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrBookmarkItem.h; path = ../iPhone/Classes/MvrBookmarkItem.h; sourceTree = SOURCE_ROOT; };
 		15009759116682B40072DC8C /* MvrBookmarkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrBookmarkItem.m; path = ../iPhone/Classes/MvrBookmarkItem.m; sourceTree = SOURCE_ROOT; };
+		153DBB341173121800F2080B /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		153DBB4B1173141E00F2080B /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeviceBackdrop.png; sourceTree = "<group>"; };
 		153EF0AC1135595100B8DDC1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		15523D991173201500888B09 /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
+		15523D9A1173201500888B09 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
+		15523DA51173208F00888B09 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1565BBCE11730E5700745B9A /* MvrNoContactsForNow.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoContactsForNow.alert; sourceTree = "<group>"; };
 		157280D11137FE63005634C7 /* MvrDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevice.h; sourceTree = "<group>"; };
 		157280D21137FE63005634C7 /* MvrDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevice.m; sourceTree = "<group>"; };
 		157280E311380210005634C7 /* MvrDeviceItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrDeviceItem.xib; sourceTree = "<group>"; };
@@ -164,6 +188,7 @@
 		15AD84951168D49800F88021 /* SlideMenuIcon_Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SlideMenuIcon_Selected.png; sourceTree = "<group>"; };
 		15CCE81B114FF9D100E45AC6 /* MiniSlide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiniSlide.png; sourceTree = "<group>"; };
 		15CCE820114FFC3400E45AC6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		15D327A61172F48E001DD969 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevicesLineView.h; sourceTree = "<group>"; };
 		15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevicesLineView.m; sourceTree = "<group>"; };
 		15E6E29D1167ED07000184F3 /* Connect.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Connect.icns; sourceTree = "<group>"; };
@@ -204,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				153DBB431173123E00F2080B /* Sparkle.framework in Frameworks */,
 				15E3A4B3113F972900F301D8 /* libNetwork.a in Frameworks */,
 				15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
@@ -211,6 +237,8 @@
 				1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */,
 				153EF0AD1135595100B8DDC1 /* Carbon.framework in Frameworks */,
 				15CCE821114FFC3400E45AC6 /* QuartzCore.framework in Frameworks */,
+				15D327A71172F48E001DD969 /* AddressBook.framework in Frameworks */,
+				15523DA61173208F00888B09 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,10 +248,12 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				15523D9D1173201900888B09 /* Move-to-Applications code */,
 				15F9312C11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m */,
 				15F9312D11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.h */,
 				157705CF1166193800EE3C83 /* Item types from iPhone Mover */,
-				15F965DB11652CF200EE3F9E /* Network Control */,
+				15F965DC11652D2E00EE3F9E /* MvrTransferController.h */,
+				15F965DD11652D2E00EE3F9E /* MvrTransferController.m */,
 				150072E6113967C3007BF995 /* NSAlert+L0Alert.h */,
 				150072E7113967C3007BF995 /* NSAlert+L0Alert.m */,
 				256AC3D80F4B6AC300CF3369 /* MvrAppDelegate_Mac.h */,
@@ -241,6 +271,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				153DBB341173121800F2080B /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -254,6 +285,15 @@
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		15523D9D1173201900888B09 /* Move-to-Applications code */ = {
+			isa = PBXGroup;
+			children = (
+				15523D991173201500888B09 /* PFMoveApplication.m */,
+				15523D9A1173201500888B09 /* PFMoveApplication.h */,
+			);
+			name = "Move-to-Applications code";
 			sourceTree = "<group>";
 		};
 		157705CF1166193800EE3C83 /* Item types from iPhone Mover */ = {
@@ -302,15 +342,6 @@
 			path = Agent;
 			sourceTree = "<group>";
 		};
-		15F965DB11652CF200EE3F9E /* Network Control */ = {
-			isa = PBXGroup;
-			children = (
-				15F965DC11652D2E00EE3F9E /* MvrTransferController.h */,
-				15F965DD11652D2E00EE3F9E /* MvrTransferController.m */,
-			);
-			name = "Network Control";
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +367,8 @@
 				153EF0AC1135595100B8DDC1 /* Carbon.framework */,
 				15CCE820114FFC3400E45AC6 /* QuartzCore.framework */,
 				15F932021167410500AA71AB /* Cocoa.framework */,
+				15D327A61172F48E001DD969 /* AddressBook.framework */,
+				15523DA51173208F00888B09 /* Security.framework */,
 			);
 			name = MoverWaypoint;
 			sourceTree = "<group>";
@@ -351,6 +384,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				153DBB4B1173141E00F2080B /* dsa_pub.pem */,
+				1565BBCE11730E5700745B9A /* MvrNoContactsForNow.alert */,
 				15F933E41167736800AA71AB /* LocalizedMoverItemsStrings */,
 				15CCE81B114FF9D100E45AC6 /* MiniSlide.png */,
 				15E6E29D1167ED07000184F3 /* Connect.icns */,
@@ -403,6 +438,7 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				15F932B411674A2400AA71AB /* Copy Mover Agent */,
+				153DBB481173125400F2080B /* Copy Sparkle */,
 			);
 			buildRules = (
 			);
@@ -531,6 +567,8 @@
 				15CCE81C114FF9D100E45AC6 /* MiniSlide.png in Resources */,
 				15F933E71167736800AA71AB /* LocalizedMoverItemsStrings in Resources */,
 				15E6E29E1167ED07000184F3 /* Connect.icns in Resources */,
+				1565BBCF11730E5700745B9A /* MvrNoContactsForNow.alert in Resources */,
+				153DBB4C1173141E00F2080B /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +598,7 @@
 				1500975A116682B40072DC8C /* MvrBookmarkItem.m in Sources */,
 				15F9312E11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m in Sources */,
 				15F931F111673E0A00AA71AB /* MvrPreferencesController.m in Sources */,
+				15523D9B1173201500888B09 /* PFMoveApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +707,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_GC = required;
@@ -700,6 +743,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

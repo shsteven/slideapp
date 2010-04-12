@@ -139,15 +139,31 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 
 - (void) sendContentsOfPasteboard:(NSPasteboard*) pb throughChannel:(id <MvrChannel>) c;
 {
-	BOOL sent = NO;
+	BOOL sent = NO, warnAboutMissingContacts = NO;
 	
 	for (NSString* path in L0As(NSArray, [pb propertyListForType:NSFilenamesPboardType])) {
 		sent = YES;
+		
+		if ([[path pathExtension] isEqual:@"vcf"]) {
+			warnAboutMissingContacts = YES;
+			continue;
+		}
+		
 		[self sendItemFile:path throughChannel:c];
+	}
+	
+	if (warnAboutMissingContacts) {
+		[MvrApp() warnAboutMissingContacts];
+		return;		
 	}
 	
 	if (sent)
 		return;
+	
+	if ([pb dataForType:NSVCardPboardType]) {
+		[MvrApp() warnAboutMissingContacts];
+		return;
+	}
 	
 	NSImage* image = [[NSImage alloc] initWithPasteboard:pb];
 	if (image && [[image representations] count] > 0 && [[[image representations] objectAtIndex:0] isKindOfClass:[NSBitmapImageRep class]]) {
@@ -229,6 +245,14 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 	
 	if (!chan.allowsConduitConnections)
 		return;
+	
+	// TODO: Added
+	if ([i.type isEqual:@"net.infinite-labs.Slide.AddressBookPersonPropertyList"]) {
+		
+		[MvrApp() warnAboutMissingContacts];
+		return;
+		
+	}
 	
 	NSFileManager* fm = [NSFileManager defaultManager];
 	NSString* downloadDir = [self destinationDirectory];

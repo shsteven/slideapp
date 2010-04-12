@@ -54,6 +54,8 @@
 
 - (IBAction) revealDownloadsInFinder:(id) sender;
 
+- (void) warnAboutMissingContacts;
+
 @end
 
 static inline MvrAppDelegate_Mac* MvrApp() {

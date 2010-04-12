@@ -186,6 +186,32 @@ done:
 		self.selectedDownloadPath = [openPanel filename];
 }
 
+#pragma mark Updating the Agent
+
+#define kMvrPreferencesShouldRestartAgentPostUpdateKey @"MvrShouldRestartAgentPostUpdate"
+
+- (void) prepareAgentForUpdating;
+{
+	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+	
+	[ud setBool:YES forKey:kMvrPreferencesShouldRestartAgentPostUpdateKey];
+	[ud synchronize];
+	
+	self.runMoverAgent = NO;
+}
+
+- (void) restartAgentIfJustUpdated;
+{
+	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+	if ([ud boolForKey:kMvrPreferencesShouldRestartAgentPostUpdateKey]) {
+		L0Log(@"Restarting Agent post-update");
+		
+		[ud setBool:NO forKey:kMvrPreferencesShouldRestartAgentPostUpdateKey];
+		self.runMoverAgent = NO;
+		self.runMoverAgent = YES;
+	}
+}
+
 @end
 
 // ---------
