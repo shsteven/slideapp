@@ -35,6 +35,10 @@
 	
 	IBOutlet NSWindow* preferencesPanel;
 	IBOutlet MvrPreferencesController* preferences;
+	
+	IBOutlet NSWindow* aboutPanel;
+	IBOutlet NSTextField* aboutVersionLabel;
+	IBOutlet NSTextView* legalitiesTextView;
 }
 
 - (IBAction) openMoverPlusAppStore:(id) sender;
@@ -55,6 +59,8 @@
 - (IBAction) revealDownloadsInFinder:(id) sender;
 
 - (void) warnAboutMissingContacts;
+
+- (IBAction) showAboutWindow:(id) sender;
 
 @end
 

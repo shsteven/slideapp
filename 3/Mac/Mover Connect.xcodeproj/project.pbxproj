@@ -30,6 +30,8 @@
 		15CCE81C114FF9D100E45AC6 /* MiniSlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CCE81B114FF9D100E45AC6 /* MiniSlide.png */; };
 		15CCE821114FFC3400E45AC6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CCE820114FFC3400E45AC6 /* QuartzCore.framework */; };
 		15D327A71172F48E001DD969 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D327A61172F48E001DD969 /* AddressBook.framework */; };
+		15D4D0B411732F6000705E3D /* MoverConnect.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D4D0B311732F6000705E3D /* MoverConnect.png */; };
+		15D4D0BA117331D300705E3D /* Legalities.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15D4D0B9117331D300705E3D /* Legalities.rtf */; };
 		15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */; };
 		15E3A4A9113F970C00F301D8 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15E3A4A0113F96FD00F301D8 /* MuiKit.bundle */; };
 		15E3A4B2113F972500F301D8 /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A4A4113F96FD00F301D8 /* libMuiKit-Mac.a */; };
@@ -189,6 +191,8 @@
 		15CCE81B114FF9D100E45AC6 /* MiniSlide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiniSlide.png; sourceTree = "<group>"; };
 		15CCE820114FFC3400E45AC6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15D327A61172F48E001DD969 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		15D4D0B311732F6000705E3D /* MoverConnect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoverConnect.png; sourceTree = "<group>"; };
+		15D4D0B9117331D300705E3D /* Legalities.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Legalities.rtf; sourceTree = "<group>"; };
 		15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevicesLineView.h; sourceTree = "<group>"; };
 		15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevicesLineView.m; sourceTree = "<group>"; };
 		15E6E29D1167ED07000184F3 /* Connect.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Connect.icns; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15D4D0B9117331D300705E3D /* Legalities.rtf */,
 				153DBB4B1173141E00F2080B /* dsa_pub.pem */,
 				1565BBCE11730E5700745B9A /* MvrNoContactsForNow.alert */,
 				15F933E41167736800AA71AB /* LocalizedMoverItemsStrings */,
@@ -397,6 +402,7 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				157280E311380210005634C7 /* MvrDeviceItem.xib */,
+				15D4D0B311732F6000705E3D /* MoverConnect.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -569,6 +575,8 @@
 				15E6E29E1167ED07000184F3 /* Connect.icns in Resources */,
 				1565BBCF11730E5700745B9A /* MvrNoContactsForNow.alert in Resources */,
 				153DBB4C1173141E00F2080B /* dsa_pub.pem in Resources */,
+				15D4D0B411732F6000705E3D /* MoverConnect.png in Resources */,
+				15D4D0BA117331D300705E3D /* Legalities.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

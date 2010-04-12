@@ -37,6 +37,9 @@
 #endif
 	
 	PFMoveToApplicationsFolderIfNecessary();
+	
+	[aboutVersionLabel setStringValue:[NSString stringWithFormat:[aboutVersionLabel stringValue], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]]];
+	[legalitiesTextView readRTFDFromFile:[[NSBundle mainBundle] pathForResource:@"Legalities" ofType:@"rtf"]];
 
 	[self willChangeValueForKey:@"transfer"];
 	transfer = [[MvrTransferController alloc] init];
@@ -105,12 +108,12 @@
 
 - (IBAction) openMoverPlusAppStore:(id) sender;
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/download-plus"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/get/plus"]];
 }
 
 - (IBAction) openMoverLiteAppStore:(id) sender;
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/download"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/get/lite"]];
 }
 
 #pragma mark Sending from clipboard
@@ -212,6 +215,12 @@
 - (void)updater:(SUUpdater *)updater willInstallUpdate:(SUAppcastItem *)update;
 {
 	[preferences prepareAgentForUpdating];
+}
+
+- (IBAction) showAboutWindow:(id) sender;
+{
+	[aboutPanel center];
+	[aboutPanel makeKeyAndOrderFront:self];
 }
 
 @end
