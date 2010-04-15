@@ -34,9 +34,30 @@ enum {
 typedef NSUInteger MvrStorageDestination;
 
 enum {
+	// If passed, the item storage will not be persistent but will not take ownership of the file. This means that losing the item will not cause the file to be deleted from disk. This can be desirable if you want to create item storage representing data in a location you don't own (for example, a random file the user drags from disk).
 	kMvrItemStorageDoNotTakeOwnershipOfFile = 1 << 0,
+	
+	// If passed, this storage will be returned already persistent. This is useful for MvrStorageCentral replacements. These replacements can also use setPath:persistent:error: to turn a nonpersistent storage into a persistent one.
+//	kMvrItemStorageIsPersistent = 1 << 1,
 };
 typedef NSUInteger MvrItemStorageOptions;
+
+/*
+ THE LIFECYCLE OF ITEM STORAGE OBJECTS FOR A MvrStorageCentral REPLACEMENT:
+ 
+ - item arrives. item storage is produced by the transfer system for the item in the MvrStorageTemporaryDirectory().
+ - storage central rep. prepares a spot for the object and calls [storage setPath:<#some path#> persistent:YES error:&e]. This makes the object persistent.
+ 
+ *app quits*
+ *app reopens*
+ - storage central produces a persistent item by using [MvrItemStorage itemStorageFromFileAtPath:<#some path#> options:<#some options#> & kMvrItemStorageIsPersistent error:&e].
+ 
+ *user asks to remove item*
+ - storage central uses -endPersistencyKeepingOwnership: to make the object no longer persistant. Unless you pass NO, the file will be moved back in the temp dir.
+ - when the item storage object dies, the file is deleted (again unless you asked for kMvrItemStorageDoNotTakeOwnershipOfFile).
+ */
+
+#error TODO
 
 @interface MvrItemStorage : NSObject {
 	BOOL persistent;
