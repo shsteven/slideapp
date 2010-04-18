@@ -74,6 +74,11 @@
 
 - (BOOL) runMoverAgent;
 {
+	for (NSDictionary* app in [[NSWorkspace sharedWorkspace] launchedApplications]) {
+		if ([[app objectForKey:@"NSApplicationBundleIdentifier"] isEqual:@"net.infinite-labs.Mover.Mac.Agent"])
+			return YES;
+	}
+	
 	NSURL* agentURL = [self agentURL];
 	BOOL result = NO;
 	
