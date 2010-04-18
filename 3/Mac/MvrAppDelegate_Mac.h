@@ -62,6 +62,8 @@
 
 - (IBAction) showAboutWindow:(id) sender;
 
+- (void) showFirstTimeDeviceFoundAlertIfNeeded;
+
 @end
 
 static inline MvrAppDelegate_Mac* MvrApp() {

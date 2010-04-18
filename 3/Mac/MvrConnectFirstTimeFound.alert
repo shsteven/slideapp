@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array/>
+	<key>L0AlertInformativeText</key>
+	<string>A device was found on your network. To send files to it, just drag them on the device's tile in Mover Connect's window.</string>
+	<key>L0AlertMessage</key>
+	<string>Found it!</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

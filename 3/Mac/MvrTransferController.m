@@ -311,8 +311,10 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 {
 	MvrModernWiFiChannel* c = (MvrModernWiFiChannel*) channel;
 	
-	if (c.allowsConduitConnections)
+	if (c.allowsConduitConnections) {
 		[[self mutableSetValueForKey:@"channels"] addObject:c];
+		[MvrApp() showFirstTimeDeviceFoundAlertIfNeeded];
+	}
 }
 
 - (void) scanner:(id <MvrScanner>)s didRemoveChannel:(id <MvrChannel>)channel;

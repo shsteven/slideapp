@@ -223,4 +223,18 @@
 	[aboutPanel makeKeyAndOrderFront:self];
 }
 
+#define kMvrConnectFirstTimeFoundAlertShownKey @"MvrConnectFirstTimeFoundAlertShown"
+- (void) showFirstTimeDeviceFoundAlertIfNeeded;
+{	
+	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+	if (![ud boolForKey:kMvrConnectFirstTimeFoundAlertShownKey]) {
+		
+		NSAlert* a = [NSAlert alertNamed:@"MvrConnectFirstTimeFound"];
+		[a beginSheetModalForWindow:window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
+		
+		[ud setBool:YES forKey:kMvrConnectFirstTimeFoundAlertShownKey];
+		
+	}
+}
+
 @end
