@@ -7,55 +7,78 @@
 //
 
 #import "MvrTableController_iPad.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation MvrTableController_iPad
 
-
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
-
-
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+- (ILRotationStyle) rotationStyle;
+{
+	return kILRotateAny;
 }
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+
+- (void) awakeFromNib;
+{
+	itemControllers = [NSMutableSet new];
+}
+
+- (NSSet*) itemControllers;
+{	
+	return [[itemControllers copy] autorelease];
+}
+
+- (void) addItemController:(MvrItemViewController*) ic;
+{
+	[itemControllers addObject:ic];
+	[self addDraggableView:ic.draggableView];
+}
+
+- (void) removeItemController:(MvrItemViewController*) ic;
+{
+	if (ic.draggableView.superview == draggableViewsLayer)
+		[ic.draggableView removeFromSuperview];
 	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+	[itemControllers removeObject:ic];
 }
 
 
-- (void)dealloc {
-    [super dealloc];
+
+- (void) addDraggableView:(MvrDraggableView*) v;
+{
+	v.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
+	
+	v.autoresizingMask = UIViewAutoresizingNone;
+	v.delegate = self;
+	[draggableViewsLayer addSubview:v];
+}
+
+
+
+- (void) draggableViewCenterDidMove:(MvrDraggableView *)view;
+{
+	for (MvrItemViewController* ic in itemControllers) {
+		if (ic.view == view) {
+			[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideActionButtonOfController:) object:ic];
+			
+			[ic setActionButtonHidden:NO animated:YES];
+			return;
+		}
+	}
+}
+
+- (void) draggableViewCenterDidStopMoving:(MvrDraggableView *)view;
+{
+	for (MvrItemViewController* ic in itemControllers) {
+		if (ic.view == view) {
+			[self performSelector:@selector(hideActionButtonOfController:) withObject:ic afterDelay:5.0];
+			return;
+		}
+	}
+}
+
+- (void) hideActionButtonOfController:(MvrItemViewController*) ic;
+{
+	[ic setActionButtonHidden:YES animated:YES];
 }
 
 @end

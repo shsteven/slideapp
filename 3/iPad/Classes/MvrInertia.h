@@ -36,6 +36,10 @@ typedef struct {
 // Ends motions with the given last known point. This method returns an animation step producing an inertia (slide) animation if there was enough speed, or one not advising animation otherwise.
 - (MvrAnimationStep) endMotionWithPoint:(CGPoint) p;
 
+// Ends motion using the last point given to addMotionToPoint: as the last point.
+- (MvrAnimationStep) endMotion;
+
+
 // Cancels the current motion and resets this object, so that the next call to -addMotionToPoint: will be the first of a new series. Not needed after an -endMotionWithPoint: call.
 - (void) clearAllMotions;
 

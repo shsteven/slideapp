@@ -57,7 +57,7 @@ typedef NSUInteger MvrItemStorageOptions;
  - when the item storage object dies, the file is deleted (again unless you asked for kMvrItemStorageDoNotTakeOwnershipOfFile).
  */
 
-#error TODO
+#warning TODO
 
 @interface MvrItemStorage : NSObject {
 	BOOL persistent;

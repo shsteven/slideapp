@@ -29,6 +29,7 @@ static inline NSString* MvrNSStringFromAnimationStep(MvrAnimationStep s) {
 @interface MvrInertia ()
 
 - (NSTimeInterval) timestamp;
+- (MvrAnimationStep) endMotionWithLastMovementFromPoint:(CGPoint) checkpoint toPoint:(CGPoint) here;
 
 @end
 
@@ -96,6 +97,16 @@ static MvrAnimationStep MvrMakeAnimationStep(BOOL shouldAnimate, CGPoint destina
 }
 
 - (MvrAnimationStep) endMotionWithPoint:(CGPoint) here;
+{
+	return [self endMotionWithLastMovementFromPoint:lastCheckpointLocation toPoint:here];
+}
+
+- (MvrAnimationStep) endMotion;
+{
+	return [self endMotionWithLastMovementFromPoint:lastCheckpointLocation toPoint:lastMotion];
+}
+
+- (MvrAnimationStep) endMotionWithLastMovementFromPoint:(CGPoint) checkpoint toPoint:(CGPoint) here;
 {
 	MvrILog(@"Final point for movement is %@", NSStringFromCGPoint(here));
 	
