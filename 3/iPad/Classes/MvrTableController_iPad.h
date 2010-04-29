@@ -7,23 +7,36 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MuiKit/MuiKit.h>
 
 #import "ILViewController.h"
 #import "MvrDraggableView.h"
-#import "MvrItemViewController.h"
+#import "MvrItemController.h"
+#import "Network+Storage/MvrItem.h"
 
-@interface MvrTableController_iPad : ILViewController <MvrDraggableViewDelegate> {
+#import "Network+Storage/MvrScannerObserver.h"
+
+enum {
+	kMvrItemSourceUnknown, // source is ignored
+	kMvrItemSourceSelf, // source is ignored
+	kMvrItemSourceChannel, // source is a id <MvrChannel>
+};
+typedef NSInteger MvrItemSourceType;
+
+@interface MvrTableController_iPad : ILViewController <MvrItemsTable, MvrScannerObserverDelegate> {
 	IBOutlet UIView* draggableViewsLayer;
 	
 	NSMutableSet* itemControllers;
 }
 
+- (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
+
 // TODO private?
 - (void) addDraggableView:(MvrDraggableView*) v;
 
 @property(readonly) NSSet* itemControllers;
-- (void) addItemController:(MvrItemViewController*) ic;
-- (void) removeItemController:(MvrItemViewController*) ic;
+- (void) addItemController:(MvrItemController*) ic;
+- (void) removeItemController:(MvrItemController*) ic;
 
 @end
 

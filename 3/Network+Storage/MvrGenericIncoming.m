@@ -13,7 +13,7 @@
 
 @implementation MvrGenericIncoming
 
-@synthesize progress, item, type, cancelled;
+@synthesize progress, item, type, cancelled, channel;
 
 - (void) dealloc;
 {

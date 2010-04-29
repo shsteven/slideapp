@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MvrItemViewController.h"
+#import "MvrItemController.h"
 #import "MvrDraggableView.h"
 
-@interface MvrImageItemController : MvrItemViewController {
+@interface MvrImageItemController : MvrItemController {
 	IBOutlet UIImageView* imageView;
 	CGFloat imageViewMargin;
 }

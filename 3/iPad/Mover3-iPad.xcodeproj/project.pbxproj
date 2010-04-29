@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1520961011859ADA00D16CB7 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1520960F11859ADA00D16CB7 /* PLBlocks.framework */; };
+		1520961911859AFE00D16CB7 /* PLActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1520961811859AFE00D16CB7 /* PLActionSheet.m */; };
 		1555DFB8117F3BE0009D6926 /* MvrDraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1555DFB7117F3BE0009D6926 /* MvrDraggableView.m */; };
 		155F08DD1181E86F00A6CE5E /* ILViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 155F08DB1181E86F00A6CE5E /* ILViewController.m */; };
 		155F08EB1181E9E600A6CE5E /* Backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 155F08EA1181E9E600A6CE5E /* Backdrop.png */; };
 		155F09771181F09200A6CE5E /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 155F09761181F09200A6CE5E /* MvrImageItem.m */; };
 		155F09801181F0AC00A6CE5E /* ILPartController.m in Sources */ = {isa = PBXBuildFile; fileRef = 155F097F1181F0AC00A6CE5E /* ILPartController.m */; };
 		155F09841181F0D700A6CE5E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F09831181F0D700A6CE5E /* MobileCoreServices.framework */; };
-		155F098B1181F1B600A6CE5E /* MvrItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 155F098A1181F1B600A6CE5E /* MvrItemViewController.m */; };
+		155F098B1181F1B600A6CE5E /* MvrItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 155F098A1181F1B600A6CE5E /* MvrItemController.m */; };
 		155F099D1181F5D900A6CE5E /* MvrImageItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 155F099B1181F5D900A6CE5E /* MvrImageItemController.m */; };
 		155F099E1181F5D900A6CE5E /* MvrImageItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 155F099C1181F5D900A6CE5E /* MvrImageItemController.xib */; };
 		155F09C2118232CD00A6CE5E /* IMG_0439.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 155F09C1118232CD00A6CE5E /* IMG_0439.jpg */; };
@@ -111,6 +113,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1520960F11859ADA00D16CB7 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
+		1520961711859AFE00D16CB7 /* PLActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLActionSheet.h; sourceTree = "<group>"; };
+		1520961811859AFE00D16CB7 /* PLActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLActionSheet.m; sourceTree = "<group>"; };
 		1555DFB6117F3BE0009D6926 /* MvrDraggableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDraggableView.h; sourceTree = "<group>"; };
 		1555DFB7117F3BE0009D6926 /* MvrDraggableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDraggableView.m; sourceTree = "<group>"; };
 		155F08DB1181E86F00A6CE5E /* ILViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILViewController.m; sourceTree = "<group>"; };
@@ -121,8 +126,8 @@
 		155F097E1181F0AC00A6CE5E /* ILPartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILPartController.h; sourceTree = "<group>"; };
 		155F097F1181F0AC00A6CE5E /* ILPartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILPartController.m; sourceTree = "<group>"; };
 		155F09831181F0D700A6CE5E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		155F09891181F1B600A6CE5E /* MvrItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItemViewController.h; sourceTree = "<group>"; };
-		155F098A1181F1B600A6CE5E /* MvrItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItemViewController.m; sourceTree = "<group>"; };
+		155F09891181F1B600A6CE5E /* MvrItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItemController.h; sourceTree = "<group>"; };
+		155F098A1181F1B600A6CE5E /* MvrItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItemController.m; sourceTree = "<group>"; };
 		155F099A1181F5D900A6CE5E /* MvrImageItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageItemController.h; sourceTree = "<group>"; };
 		155F099B1181F5D900A6CE5E /* MvrImageItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemController.m; sourceTree = "<group>"; };
 		155F099C1181F5D900A6CE5E /* MvrImageItemController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrImageItemController.xib; sourceTree = "<group>"; };
@@ -166,6 +171,7 @@
 				15E43D3A1184C03E00047418 /* libz.1.1.3.dylib in Frameworks */,
 				15E43D3C1184C04300047418 /* SystemConfiguration.framework in Frameworks */,
 				15E43D421184C04D00047418 /* CFNetwork.framework in Frameworks */,
+				1520961011859ADA00D16CB7 /* PLBlocks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +211,8 @@
 		155F09781181F09B00A6CE5E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				1520961711859AFE00D16CB7 /* PLActionSheet.h */,
+				1520961811859AFE00D16CB7 /* PLActionSheet.m */,
 				155F097E1181F0AC00A6CE5E /* ILPartController.h */,
 				155F097F1181F0AC00A6CE5E /* ILPartController.m */,
 				155F08DC1181E86F00A6CE5E /* ILViewController.h */,
@@ -240,8 +248,8 @@
 			children = (
 				15E43E0B1184D40700047418 /* ActionButton.png */,
 				15E43E0C1184D40700047418 /* ActionButton_Pressed.png */,
-				155F09891181F1B600A6CE5E /* MvrItemViewController.h */,
-				155F098A1181F1B600A6CE5E /* MvrItemViewController.m */,
+				155F09891181F1B600A6CE5E /* MvrItemController.h */,
+				155F098A1181F1B600A6CE5E /* MvrItemController.m */,
 			);
 			name = "Item Controller";
 			sourceTree = "<group>";
@@ -296,6 +304,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1520960F11859ADA00D16CB7 /* PLBlocks.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
@@ -442,8 +451,9 @@
 				155F08DD1181E86F00A6CE5E /* ILViewController.m in Sources */,
 				155F09771181F09200A6CE5E /* MvrImageItem.m in Sources */,
 				155F09801181F0AC00A6CE5E /* ILPartController.m in Sources */,
-				155F098B1181F1B600A6CE5E /* MvrItemViewController.m in Sources */,
+				155F098B1181F1B600A6CE5E /* MvrItemController.m in Sources */,
 				155F099D1181F5D900A6CE5E /* MvrImageItemController.m in Sources */,
+				1520961911859AFE00D16CB7 /* PLActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,11 +478,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = "Mover3_iPad-Info.plist";
 				OTHER_LDFLAGS = (
@@ -489,6 +504,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";

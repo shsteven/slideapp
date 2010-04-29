@@ -11,7 +11,7 @@
 
 #warning Test
 #import "MvrDraggableView.h"
-#import "MvrItemViewController.h"
+#import "MvrItemController.h"
 #import "MvrImageItem.h"
 #import "MvrImageItemController.h"
 
@@ -23,28 +23,70 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {	
 	
-	[MvrItemViewController setViewControllerClass:[MvrImageItemController class] forItemClass:[MvrImageItem class]];
+	[MvrImageItem registerClass];
+	[MvrItemController setViewControllerClass:[MvrImageItemController class] forItemClass:[MvrImageItem class]];
 	
-	MvrImageItem* item = [[[MvrImageItem alloc] initWithImage:[UIImage imageNamed:@"IMG_0439.jpg"] type:@"public.png"] autorelease];
-	MvrImageItemController* ctl = [[[MvrItemViewController viewControllerClassForItem:item] new] autorelease];
-	ctl.item = item;
+	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort options:kMvrUseMobileService|kMvrAllowBrowsingForConduitService|kMvrAllowConnectionsFromConduitService];
 	
-	[viewController addItemController:ctl];
+	wifi.enabled = YES;
 	
-	
-	// Override point for customization after app launch	
 	[window addSubview:viewController.view];
 	[window makeKeyAndVisible];
+		
+	MvrImageItem* img = [[MvrImageItem alloc] initWithImage:[UIImage imageNamed:@"IMG_0439.jpg"] type:@"public.jpeg"];
+	[viewController addItem:img fromSource:nil ofType:kMvrItemSourceSelf];
 	
 	return YES;
 }
 
-
 - (void)dealloc {
+	[wifi release];
+	
 	[viewController release];
 	[window release];
 	[super dealloc];
 }
 
+@synthesize wifi;
+
+#pragma mark Platform info
+
+- (NSString *) displayNameForSelf;
+{
+	return [UIDevice currentDevice].name;
+}
+
+- (L0UUID*) identifierForSelf;
+{
+	if (!selfIdentifier)
+		selfIdentifier = [[L0UUID UUID] retain];
+	
+	return selfIdentifier;
+}
+
+- (MvrAppVariant) variant;
+{
+	return kMvrAppVariantMoverOpen;
+}
+
+- (NSString *) variantDisplayName;
+{
+	return @"Mover";
+}
+
+- (id) platform;
+{
+	return kMvrAppleiPhoneOSPlatform;
+}
+
+- (double) version;
+{
+	return [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"] doubleValue];
+}
+
+- (NSString *) userVisibleVersion;
+{
+	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+}
 
 @end

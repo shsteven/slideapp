@@ -12,9 +12,14 @@
 #import "Network+Storage/MvrItem.h"
 #import "MvrDraggableView.h"
 
-@interface MvrItemViewController : ILPartController {
+@protocol MvrItemsTable;
+
+@interface MvrItemController : ILPartController <MvrDraggableViewDelegate> {
 	id item;
 	UIButton* actionButton;
+	
+	BOOL actionMenuShown;
+	id <MvrItemsTable> itemsTable;
 }
 
 + (void) setViewControllerClass:(Class) vcc forItemClass:(Class) ic;
@@ -31,6 +36,14 @@
 @property(readonly) UIButton* actionButton;
 - (void) setActionButtonHidden:(BOOL) hidden animated:(BOOL) animated;
 
-// more stuff! TODO
+@property(assign) id <MvrItemsTable> itemsTable;
+
+@end
+
+
+
+@protocol MvrItemsTable <NSObject>
+
+- (void) itemControllerViewDidFinishMoving:(MvrItemController*) ic;
 
 @end

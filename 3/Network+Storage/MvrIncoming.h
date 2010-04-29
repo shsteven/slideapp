@@ -2,10 +2,14 @@
 #import <Foundation/Foundation.h>
 
 @class MvrItem;
+@protocol MvrChannel;
 
 @protocol MvrIncoming <NSObject>
 
-// All KVOable past this point. All could be set on first appaerance, so use NSKeyValueObservingOptionInitial or something.
+// Set on first appearance.
+- (id <MvrChannel>) channel;
+
+// All KVOable past this point. All could be set on first appearance, so use NSKeyValueObservingOptionInitial or something.
 
 // These can be set if they're found during the transfer but before it finishes.
 - (NSString*) type;

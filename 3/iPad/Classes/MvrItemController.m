@@ -6,10 +6,12 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "MvrItemViewController.h"
+#import "MvrItemController.h"
 #import <MuiKit/MuiKit.h>
 
-@implementation MvrItemViewController
+#import "PLActionSheet.h"
+
+@implementation MvrItemController
 
 static L0Map* MvrItemViewControllerClasses = nil;
 
@@ -38,6 +40,9 @@ static L0Map* MvrItemViewControllerClasses = nil;
 }
 
 
+@synthesize itemsTable;
+
+
 @synthesize item;
 - (void) setItem:(id) i;
 {
@@ -60,7 +65,7 @@ static L0Map* MvrItemViewControllerClasses = nil;
 - (void) clearOutlets;
 {
 	[super clearOutlets];
-
+	
 	[actionButton release];
 	actionButton = nil;
 }
@@ -84,7 +89,7 @@ static L0Map* MvrItemViewControllerClasses = nil;
 }
 
 - (void) setActionButtonHidden:(BOOL) hidden animated:(BOOL) animated;
-{
+{	
 	if (animated)
 		[UIView beginAnimations:nil context:NULL];
 	
@@ -94,14 +99,55 @@ static L0Map* MvrItemViewControllerClasses = nil;
 		[UIView commitAnimations];
 }
 
+- (void) viewDidLoad;
+{
+	[super viewDidLoad];
+	self.draggableView.delegate = self;
+}
+
 - (void) showActionMenu;
 {
-#warning TODO
-	UIActionSheet* testSheet = [[UIActionSheet new] autorelease];
-	[testSheet addButtonWithTitle:@"Test"];
-	[testSheet addButtonWithTitle:@"Test 2"];
+	actionMenuShown = YES;
 	
-	[testSheet showFromRect:self.actionButton.bounds inView:self.actionButton animated:YES];
+	PLActionSheet* as = [[PLActionSheet new] autorelease];
+	[as addButtonWithTitle:@"Test 1" action:^{
+		NSLog(@"Uno!");
+		actionMenuShown = NO;
+		[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
+	}];
+	[as addButtonWithTitle:@"Test 2" action:^{
+		NSLog(@"Due!");
+		actionMenuShown = NO;
+		[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
+	}];
+	[as addCancelButtonWithTitle:@"Cancel" action:^{
+		actionMenuShown = NO;
+		[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
+	}];
+	
+	[as showFromRect:self.actionButton.bounds inView:self.actionButton animated:YES];
 }
+
+- (void) draggableViewCenterDidMove:(MvrDraggableView *)view;
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideActionButton) object:nil];
+	
+	[self setActionButtonHidden:NO animated:YES];
+}
+
+- (void) draggableViewCenterDidStopMoving:(MvrDraggableView *)view;
+{
+	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
+	[self.itemsTable itemControllerViewDidFinishMoving:self];
+}
+
+- (void) hideActionButton;
+{
+	if (actionMenuShown)
+		return;
+	
+	[self setActionButtonHidden:YES animated:YES];
+}
+
 
 @end

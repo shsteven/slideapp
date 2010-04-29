@@ -20,6 +20,11 @@
 
 @implementation MvrModernWiFiIncoming
 
+- (id <MvrChannel>) channel;
+{
+	return wifiChannel;
+}
+
 - (id) initWithSocket:(AsyncSocket*) s scanner:(MvrModernWiFi*) sc;
 {
 	if (self = [super init]) {
@@ -55,12 +60,12 @@
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;
 {
 	L0Log(@"%@:%d", host, port);
-	channel = [[scanner channelForAddress:[sock connectedHostAddress]] retain];
-	if (!channel)
+	wifiChannel = [[scanner channelForAddress:[sock connectedHostAddress]] retain];
+	if (!wifiChannel)
 		[self cancel];
-	L0Log(@" => %@", channel);
+	L0Log(@" => %@", wifiChannel);
 	
-	[[channel mutableSetValueForKey:@"incomingTransfers"] addObject:self];
+	[[wifiChannel mutableSetValueForKey:@"incomingTransfers"] addObject:self];
 	
 	[sock readDataWithTimeout:30 tag:0];
 }
@@ -91,7 +96,7 @@
 
 - (void) clear;
 {
-	[channel release]; channel = nil;
+	[wifiChannel release]; wifiChannel = nil;
 	
 	[socket disconnect];
 	[socket setDelegate:nil];
