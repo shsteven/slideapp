@@ -15,6 +15,9 @@
     UIActionSheet *_sheet;
     NSMutableArray *_blocks;
 	void (^_cancelledBlock)();
+	void (^_finishedBlock)();
+	
+	BOOL _cleanedUp;
 }
 
 - (void) addCancelButtonWithTitle: (NSString *) title action: (void (^)()) block;
@@ -26,6 +29,7 @@
 - (void) showFromRect:(CGRect) r inView:(UIView*) v animated:(BOOL) ani;
 
 - (void) setCancelledAction:(void (^)()) block;
+- (void) setFinishedAction:(void (^)()) finished;
 
 @property(nonatomic, readonly) UIActionSheet* sheet;
 

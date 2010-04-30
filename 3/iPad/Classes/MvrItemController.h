@@ -14,12 +14,14 @@
 
 @protocol MvrItemsTable;
 
-@interface MvrItemController : ILPartController <MvrDraggableViewDelegate> {
+@interface MvrItemController : ILPartController <MvrDraggableViewDelegate, UIDocumentInteractionControllerDelegate> {
 	id item;
 	UIButton* actionButton;
 	
 	BOOL actionMenuShown;
 	id <MvrItemsTable> itemsTable;
+	
+	UIDocumentInteractionController* doc;
 }
 
 + (void) setViewControllerClass:(Class) vcc forItemClass:(Class) ic;
@@ -37,6 +39,8 @@
 - (void) setActionButtonHidden:(BOOL) hidden animated:(BOOL) animated;
 
 @property(assign) id <MvrItemsTable> itemsTable;
+
+- (void) showOpeningOptionsMenu;
 
 @end
 

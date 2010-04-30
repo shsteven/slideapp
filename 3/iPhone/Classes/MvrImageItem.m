@@ -44,6 +44,8 @@
 		observingPath = YES;
 	}
 	
+	[s setDesiredExtensionAssumingType:self.type error:NULL];
+	
 	return s;
 }
 

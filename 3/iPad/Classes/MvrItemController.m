@@ -9,7 +9,11 @@
 #import "MvrItemController.h"
 #import <MuiKit/MuiKit.h>
 
+#import "Network+Storage/MvrItemStorage.h"
+
 #import "PLActionSheet.h"
+#import "MvrAppDelegate_iPad.h"
+#import "MvrTableController_iPad.h"
 
 @implementation MvrItemController
 
@@ -35,6 +39,8 @@ static L0Map* MvrItemViewControllerClasses = nil;
 
 - (void) dealloc
 {
+	doc.delegate = nil;
+	[doc release];
 	[item release];
 	[super dealloc];
 }
@@ -110,17 +116,13 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	actionMenuShown = YES;
 	
 	PLActionSheet* as = [[PLActionSheet new] autorelease];
-	[as addButtonWithTitle:@"Test 1" action:^{
-		NSLog(@"Uno!");
-		actionMenuShown = NO;
-		[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
+
+	[as addButtonWithTitle:@"Open \u203a" action:^{
+		[self showOpeningOptionsMenu];
 	}];
-	[as addButtonWithTitle:@"Test 2" action:^{
-		NSLog(@"Due!");
-		actionMenuShown = NO;
-		[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
-	}];
-	[as addCancelButtonWithTitle:@"Cancel" action:^{
+	
+	[as setCancelledAction:^{
+		NSLog(@"Cleanup!");
 		actionMenuShown = NO;
 		[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
 	}];
@@ -149,5 +151,64 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	[self setActionButtonHidden:YES animated:YES];
 }
 
+- (void) showOpeningOptionsMenu;
+{	
+	if (!doc)
+		doc = [UIDocumentInteractionController new];
+	
+	doc.URL = [NSURL fileURLWithPath:[self.item storage].path];
+	doc.UTI = [self.item type];
+	if ([self.item title] && ![[self.item title] isEqual:@""])
+		doc.name = [self.item title];
+	else
+		doc.name = @"Preview"; // TODO
+	
+	doc.delegate = self;
+	
+	[doc presentOptionsMenuFromRect:self.actionButton.bounds inView:self.actionButton animated:YES];
+}
+
+- (UIView *) documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller;
+{
+	return self.draggableView;
+}
+
+- (CGRect) documentInteractionControllerRectForPreview:(UIDocumentInteractionController *)controller;
+{
+	return self.draggableView.bounds;
+}
+
+- (UIViewController*) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller;
+{
+	return MvrApp().viewController;
+}
+
+- (void) documentInteractionControllerDidDismissOptionsMenu:(UIDocumentInteractionController *)controller;
+{
+	L0Note();
+	actionMenuShown = NO;
+	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];	
+}
+
+- (void) documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller;
+{
+	L0Note();
+	actionMenuShown = NO;
+	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];	
+}
+
+- (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller;
+{
+	L0Note();
+	actionMenuShown = NO;
+	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];		
+}
+
+- (void) documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application;
+{
+	L0Note();
+	actionMenuShown = NO;
+	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];		
+}
 
 @end

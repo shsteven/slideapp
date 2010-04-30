@@ -123,6 +123,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	[data release];
 	[path release];
 	[lastOutputStream release];
+	[desiredExtension release];
 	[super dealloc];
 }
 
@@ -287,7 +288,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	
 	NSString* thePath = path;
 	if (!thePath) // we'd have a path if we had been made persistant by the storage central.
-		thePath = MvrUnusedTemporaryFileNameWithPathExtension(@"");
+		thePath = MvrUnusedTemporaryFileNameWithPathExtension(desiredExtension?: @"");
 	
 	NSError* e;
 	BOOL done = [data writeToFile:thePath options:NSAtomicWrite error:&e];
@@ -364,6 +365,42 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	CFRelease(ext);
 	
 	return done;
+}
+
+- (BOOL) setDesiredExtension:(NSString*) ext error:(NSError**) e;
+{
+	if (self.hasPath)
+		return [self setPathExtension:ext error:e];
+	else {
+		if (desiredExtension != ext) {
+			[desiredExtension release];
+			desiredExtension = [ext copy];
+		}
+		
+		return YES;
+	}
+}
+
+- (BOOL) setDesiredExtensionAssumingType:(id) uti error:(NSError**) e;
+{
+	if (self.hasPath)
+		return [self setPathExtensionAssumingType:uti error:e];
+	else {
+		CFStringRef ext = UTTypeCopyPreferredTagWithClass((CFStringRef) uti, kUTTagClassFilenameExtension);
+		
+		if (!ext) {
+			if (e) *e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageNoFilenameExtensionForTypeError userInfo:nil];
+			return NO;
+		}
+		
+		if (desiredExtension != (id) ext) {
+			[desiredExtension release];
+			desiredExtension = [(id)ext copy];
+		}
+		
+		CFRelease(ext);
+		return YES;	
+	}
 }
 
 #pragma mark Debugging aids

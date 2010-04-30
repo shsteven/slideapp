@@ -67,6 +67,8 @@ typedef NSUInteger MvrItemStorageOptions;
 	
 	NSOutputStream* lastOutputStream;
 	NSString* outputStreamPath;
+	
+	NSString* desiredExtension;
 }
 
 // Creating a new item storage.
@@ -139,6 +141,14 @@ typedef NSUInteger MvrItemStorageOptions;
 // This method is only for use in garbage-collected environments and from the main thread only. It indicates that the storage is to be invalidated immediately, removing any resource it may be managing (for instance, files on disk or data in memory). This clears the storage.
 // GC apps must call this method at least once, and call no methods that cause .path to be invoked, before the last reference to this object is lost. It is only valid to call this method on non-persistent object, since the storage central references those objects.
 - (void) invalidate;
+
+// This method has two purposes:
+// - if the item has a path, it sets its extension the same way setPathExtension:error: does.
+// - if the item has no path, it stores the extension instead. Any automatic creation of a path (eg. by accessing .path) will produce a path with that extension.
+// Unlike setPathExtension..., calling any of these methods does NOT cause data to be written to disk.
+// The ...assumingType: variant will work just like the above but with setPathExtensionAssumingType:error:. (The extension will be determined at the time you call setDesiredExtensionAssumingType:....)
+- (BOOL) setDesiredExtension:(NSString*) ext error:(NSError**) e;
+- (BOOL) setDesiredExtensionAssumingType:(id) uti error:(NSError**) e;
 
 @end
 

@@ -30,6 +30,7 @@
 
     [_blocks release];
 	[_cancelledBlock release];
+	[_finishedBlock release];
 	
     [super dealloc];
 }
@@ -47,6 +48,7 @@
 }
 
 - (void) showInView: (UIView *) view {
+	_cleanedUp = NO;
     [_sheet showInView: view];
 
     /* Ensure that the delegate (that's us) survives until the sheet is dismissed */
@@ -63,18 +65,33 @@
 	if (buttonIndex == -1 && _cancelledBlock) // cancelled without picking a button
 		_cancelledBlock();
 	
+	if (!_cleanedUp && _finishedBlock) {
+		_finishedBlock();
+		_cleanedUp = YES;
+	}
+	
     /* Sheet to be dismissed, drop our self reference */
     [self release];
 }
 
+- (void) actionSheetCancel:(UIActionSheet *)actionSheet;
+{
+	if (!_cleanedUp && _finishedBlock) {
+		_finishedBlock();
+		_cleanedUp = YES;
+	}	
+}
+
 - (void) showFromBarButtonItem:(UIBarButtonItem*) bi animated:(BOOL) ani;
 {
+	_cleanedUp = NO;
 	[_sheet showFromBarButtonItem:bi animated:ani];
 	[self retain];
 }
 
 - (void) showFromRect:(CGRect) r inView:(UIView*) v animated:(BOOL) ani;
 {
+	_cleanedUp = NO;
 	[_sheet showFromRect:r inView:v animated:ani];
 	[self retain];
 }
@@ -86,6 +103,14 @@
 	if (_cancelledBlock != block) {
 		[_cancelledBlock release];
 		_cancelledBlock = [block copy];
+	}
+}
+
+- (void) setFinishedAction:(void (^)()) block;
+{
+	if (_finishedBlock != block) {
+		[_finishedBlock release];
+		_finishedBlock = [block copy];
 	}
 }
 
