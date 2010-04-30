@@ -9,6 +9,8 @@
 #import "MvrTableController_iPad.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "MvrInertia.h"
+
 #define kMvrMaximumAngleRange (30)
 static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransform transform)
 {
@@ -207,9 +209,36 @@ enum {
 		[self bounceBackViewIfNeeded:ic.draggableView];
 }
 
-- (void) itemControllerViewDidFinishMoving:(MvrItemController *)ic;
+- (void) itemControllerViewDidFinishMoving:(MvrItemController *)ic velocity:(CGPoint) v;
 {
-	[self bounceBackViewIfNeeded:ic.draggableView];
+	CGPoint end;
+	NSTimeInterval time;
+	
+	if (MvrInertiaShouldBeginAnimationAtStartPointAndVelocity(ic.draggableView.center, v, 0.1, 0, nil, &end, &time)) {
+		
+		[ic retain]; // released in the did stop selector.
+		[UIView beginAnimations:nil context:(void*) ic];
+		{
+			[UIView setAnimationDuration:time];
+			[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+			
+			[UIView setAnimationDelegate:self];
+			[UIView setAnimationDidStopSelector:@selector(inertiaAnimation:didEnd:context:)];
+			
+			ic.draggableView.center = end;
+		}
+		[UIView commitAnimations];
+		
+		// TODO begin transfer if needed.
+		
+	} else
+		[self bounceBackViewIfNeeded:ic.draggableView];
+}
+
+- (void) inertiaAnimation:(NSString*) ani didEnd:(BOOL) finished context:(MvrItemController*) retainedItemController;
+{
+	[self bounceBackViewIfNeeded:retainedItemController.draggableView];
+	[retainedItemController release]; // balances the retain above.
 }
 
 @end

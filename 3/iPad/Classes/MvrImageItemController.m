@@ -15,8 +15,6 @@
 
 @interface MvrImageItemBackdropView ()
 
-- (void) addBackdropLayer;
-
 @end
 
 

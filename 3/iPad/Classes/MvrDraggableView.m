@@ -63,7 +63,7 @@
 		self.transform = CGAffineTransformRotate(startingTransform, rotation.rotation);
 		[self.delegate draggableViewCenterDidMove:self];
 	} else if (rotation.state == UIGestureRecognizerStateEnded) {
-		[self.delegate draggableViewCenterDidStopMoving:self];
+		[self.delegate draggableViewCenterDidStopMoving:self velocity:CGPointZero];
 	}
 }
 
@@ -93,7 +93,7 @@
 
 	} else if (pan.state == UIGestureRecognizerStateEnded) {
 		
-		[self.delegate draggableViewCenterDidStopMoving:self];
+		[self.delegate draggableViewCenterDidStopMoving:self velocity:[pan velocityInView:self.superview]];
 		
 	}
 }

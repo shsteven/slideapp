@@ -157,10 +157,10 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	[self setActionButtonHidden:NO animated:YES];
 }
 
-- (void) draggableViewCenterDidStopMoving:(MvrDraggableView *)view;
+- (void) draggableViewCenterDidStopMoving:(MvrDraggableView *)view velocity:(CGPoint) v;
 {
 	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
-	[self.itemsTable itemControllerViewDidFinishMoving:self];
+	[self.itemsTable itemControllerViewDidFinishMoving:self velocity:v];
 }
 
 - (void) hideActionButton;

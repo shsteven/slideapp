@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15015CA9118AED3600972828 /* MvrInertia.m in Sources */ = {isa = PBXBuildFile; fileRef = 15015CA8118AED3600972828 /* MvrInertia.m */; };
 		1520961011859ADA00D16CB7 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1520960F11859ADA00D16CB7 /* PLBlocks.framework */; };
 		1520961911859AFE00D16CB7 /* PLActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1520961811859AFE00D16CB7 /* PLActionSheet.m */; };
 		1555DFB8117F3BE0009D6926 /* MvrDraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1555DFB7117F3BE0009D6926 /* MvrDraggableView.m */; };
@@ -23,7 +24,7 @@
 		1594522811766FF2003126B6 /* libNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1594521A11766FB9003126B6 /* libNetwork.a */; };
 		159452531176702D003126B6 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1594524C11767023003126B6 /* libMuiKit.a */; };
 		1594525411767031003126B6 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1594524E11767023003126B6 /* MuiKit.bundle */; };
-		15945260117672AC003126B6 /* MvrInertia.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594525F117672AC003126B6 /* MvrInertia.m */; };
+		15945260117672AC003126B6 /* MvrInertia_Old.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594525F117672AC003126B6 /* MvrInertia_Old.m */; };
 		15E43D3A1184C03E00047418 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E43D391184C03E00047418 /* libz.1.1.3.dylib */; };
 		15E43D3C1184C04300047418 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E43D3B1184C04300047418 /* SystemConfiguration.framework */; };
 		15E43D421184C04D00047418 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E43D411184C04D00047418 /* CFNetwork.framework */; };
@@ -113,6 +114,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15015CA7118AED3600972828 /* MvrInertia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrInertia.h; sourceTree = "<group>"; };
+		15015CA8118AED3600972828 /* MvrInertia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrInertia.m; sourceTree = "<group>"; };
 		1520960F11859ADA00D16CB7 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		1520961711859AFE00D16CB7 /* PLActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLActionSheet.h; sourceTree = "<group>"; };
 		1520961811859AFE00D16CB7 /* PLActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLActionSheet.m; sourceTree = "<group>"; };
@@ -135,8 +138,8 @@
 		155F09DA1182332B00A6CE5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1594520811766FB8003126B6 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		1594523011767013003126B6 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
-		1594525E117672AC003126B6 /* MvrInertia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrInertia.h; sourceTree = "<group>"; };
-		1594525F117672AC003126B6 /* MvrInertia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrInertia.m; sourceTree = "<group>"; };
+		1594525E117672AC003126B6 /* MvrInertia_Old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrInertia_Old.h; sourceTree = "<group>"; };
+		1594525F117672AC003126B6 /* MvrInertia_Old.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrInertia_Old.m; sourceTree = "<group>"; };
 		15E43D391184C03E00047418 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		15E43D3B1184C04300047418 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		15E43D411184C04D00047418 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -183,8 +186,8 @@
 			children = (
 				155F09781181F09B00A6CE5E /* Tools */,
 				155F094D1181EFF100A6CE5E /* Items */,
-				1594525E117672AC003126B6 /* MvrInertia.h */,
-				1594525F117672AC003126B6 /* MvrInertia.m */,
+				1594525E117672AC003126B6 /* MvrInertia_Old.h */,
+				1594525F117672AC003126B6 /* MvrInertia_Old.m */,
 				1D3623240D0F684500981E51 /* MvrAppDelegate_iPad.h */,
 				1D3623250D0F684500981E51 /* MvrAppDelegate_iPad.m */,
 				28D7ACF60DDB3853001CB0EB /* MvrTableController_iPad.h */,
@@ -192,6 +195,8 @@
 				1555DFB6117F3BE0009D6926 /* MvrDraggableView.h */,
 				1555DFB7117F3BE0009D6926 /* MvrDraggableView.m */,
 				15E43E0A1184D3FB00047418 /* Item Controller */,
+				15015CA7118AED3600972828 /* MvrInertia.h */,
+				15015CA8118AED3600972828 /* MvrInertia.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -446,7 +451,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MvrAppDelegate_iPad.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* MvrTableController_iPad.m in Sources */,
-				15945260117672AC003126B6 /* MvrInertia.m in Sources */,
+				15945260117672AC003126B6 /* MvrInertia_Old.m in Sources */,
 				1555DFB8117F3BE0009D6926 /* MvrDraggableView.m in Sources */,
 				155F08DD1181E86F00A6CE5E /* ILViewController.m in Sources */,
 				155F09771181F09200A6CE5E /* MvrImageItem.m in Sources */,
@@ -454,6 +459,7 @@
 				155F098B1181F1B600A6CE5E /* MvrItemController.m in Sources */,
 				155F099D1181F5D900A6CE5E /* MvrImageItemController.m in Sources */,
 				1520961911859AFE00D16CB7 /* PLActionSheet.m in Sources */,
+				15015CA9118AED3600972828 /* MvrInertia.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "MvrInertia.h"
+#import "MvrInertia_Old.h"
 
 @protocol MvrDraggableViewDelegate;
 
@@ -16,7 +16,7 @@
 	CGPoint startingCenter;
 	CGAffineTransform startingTransform;
 	
-	MvrInertia* inertia;
+	MvrInertia_Old* inertia;
 	
 	id <MvrDraggableViewDelegate> delegate;
 }
@@ -33,6 +33,6 @@
 - (void) draggableViewCenterDidMove:(MvrDraggableView*) view;
 
 // Sent when the view stops moving.
-- (void) draggableViewCenterDidStopMoving:(MvrDraggableView*) view;
+- (void) draggableViewCenterDidStopMoving:(MvrDraggableView*) view velocity:(CGPoint) velocity;
 
 @end

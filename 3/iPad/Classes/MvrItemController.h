@@ -56,6 +56,6 @@
 
 @protocol MvrItemsTable <NSObject>
 
-- (void) itemControllerViewDidFinishMoving:(MvrItemController*) ic;
+- (void) itemControllerViewDidFinishMoving:(MvrItemController*) ic velocity:(CGPoint) v;
 
 @end
