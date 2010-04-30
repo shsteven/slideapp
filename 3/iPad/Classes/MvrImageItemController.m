@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <MuiKit/MuiKit.h>
 
+#import "MvrImageItem.h"
+
 
 @interface MvrImageItemBackdropView ()
 
@@ -28,26 +30,6 @@
 	return self;
 }
 
-- (void) awakeFromNib;
-{
-	[self addBackdropLayer];
-}
-
-- (void) addBackdropLayer;
-{
-	return;
-	
-//	backdrop = [[CALayer layer] retain];
-//	backdrop.frame = CGRectInset(self.bounds, 10, 10);
-//	backdrop.shadowColor = [UIColor blackColor].CGColor;
-//	backdrop.shadowRadius = 1.0;
-//	backdrop.shadowOffset = CGSizeMake(0, 0);
-//	backdrop.shadowOpacity = 3.0;
-//	backdrop.backgroundColor = [UIColor whiteColor].CGColor;
-//	
-//	[self.layer addSublayer:backdrop];
-}
-
 - (void) drawRect:(CGRect)rect;
 {
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -60,17 +42,15 @@
 	UIRectFill(whitePart);
 }
 
-- (UIView*) hitTest:(CGPoint)point withEvent:(UIEvent *)event;
-{
-	UIView* v = [super hitTest:point withEvent:event];
-	L0Log(@"Hit test -> %@", v);
-	return v;
-}
-
 @end
 
 
 @implementation MvrImageItemController
+
++ (NSSet *) supportedItemClasses;
+{
+	return [NSSet setWithObject:[MvrImageItem class]];
+}
 
 - (void) viewDidLoad;
 {

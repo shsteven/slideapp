@@ -88,9 +88,9 @@ enum {
 
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
 {
-	MvrItemController* ic = [[[MvrItemController viewControllerClassForItem:item] new] autorelease];
-	ic.item = item;
+	MvrItemController* ic = [MvrItemController itemControllerWithItem:item];
 	ic.draggableView.hidden = YES;
+	
 	[self addItemController:ic];
 	
 #warning TODO real channel management.

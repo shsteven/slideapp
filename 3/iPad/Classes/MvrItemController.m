@@ -19,7 +19,7 @@
 
 static L0Map* MvrItemViewControllerClasses = nil;
 
-+ (void) setViewControllerClass:(Class) vcc forItemClass:(Class) ic;
++ (void) setItemControllerClass:(Class) vcc forItemClass:(Class) ic;
 {
 	if (!MvrItemViewControllerClasses)
 		MvrItemViewControllerClasses = [L0Map new];
@@ -27,7 +27,7 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	[MvrItemViewControllerClasses setObject:vcc forKey:ic];
 }
 
-+ (Class) viewControllerClassForItem:(MvrItem*) i;
++ (Class) itemControllerClassForItem:(MvrItem*) i;
 {
 	for (Class ic in [MvrItemViewControllerClasses allKeys]) {
 		if ([i isKindOfClass:ic])
@@ -35,6 +35,26 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	}
 	
 	return nil; // TODO generic.
+}
+
++ (NSSet*) supportedItemClasses;
+{
+	L0AbstractMethod();
+	return nil;
+}
+
++ (void) registerClass;
+{
+	for (Class c in [self supportedItemClasses])
+		[MvrItemController setItemControllerClass:self forItemClass:c];
+}
+
++ (MvrItemController*) itemControllerWithItem:(MvrItem*) i;
+{
+	MvrItemController* ic = [[[MvrItemController itemControllerClassForItem:i] new] autorelease];
+	
+	ic.item = i;
+	return ic;
 }
 
 - (void) dealloc
@@ -183,32 +203,34 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	return MvrApp().viewController;
 }
 
+- (void) didEndShowingActionMenu;
+{
+	actionMenuShown = NO;
+	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];	
+}
+
 - (void) documentInteractionControllerDidDismissOptionsMenu:(UIDocumentInteractionController *)controller;
 {
 	L0Note();
-	actionMenuShown = NO;
-	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];	
+	[self didEndShowingActionMenu];
 }
 
 - (void) documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller;
 {
 	L0Note();
-	actionMenuShown = NO;
-	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];	
+	[self didEndShowingActionMenu];
 }
 
 - (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller;
 {
 	L0Note();
-	actionMenuShown = NO;
-	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];		
+	[self didEndShowingActionMenu];
 }
 
 - (void) documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application;
 {
 	L0Note();
-	actionMenuShown = NO;
-	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];		
+	[self didEndShowingActionMenu];
 }
 
 @end

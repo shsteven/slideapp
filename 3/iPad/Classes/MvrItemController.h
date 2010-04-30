@@ -24,8 +24,13 @@
 	UIDocumentInteractionController* doc;
 }
 
-+ (void) setViewControllerClass:(Class) vcc forItemClass:(Class) ic;
-+ (Class) viewControllerClassForItem:(MvrItem*) i;
++ (void) setItemControllerClass:(Class) vcc forItemClass:(Class) ic;
++ (Class) itemControllerClassForItem:(MvrItem*) i;
+
++ (NSSet*) supportedItemClasses;
++ (void) registerClass;
+
++ (MvrItemController*) itemControllerWithItem:(MvrItem*) i;
 
 // may be nil. It's always a MvrItem, but id allows calling subclass methods.
 @property(retain) id item;
@@ -41,6 +46,9 @@
 @property(assign) id <MvrItemsTable> itemsTable;
 
 - (void) showOpeningOptionsMenu;
+
+- (void) showActionMenu;
+- (void) didEndShowingActionMenu;
 
 @end
 

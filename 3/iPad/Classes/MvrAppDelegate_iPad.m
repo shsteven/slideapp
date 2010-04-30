@@ -24,7 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {	
 	
 	[MvrImageItem registerClass];
-	[MvrItemController setViewControllerClass:[MvrImageItemController class] forItemClass:[MvrImageItem class]];
+	[MvrImageItemController registerClass];
 	
 	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort options:kMvrUseMobileService|kMvrAllowBrowsingForConduitService|kMvrAllowConnectionsFromConduitService];
 	
@@ -33,10 +33,16 @@
 	[window addSubview:viewController.view];
 	[window makeKeyAndVisible];
 		
-	MvrImageItem* img = [[MvrImageItem alloc] initWithImage:[UIImage imageNamed:@"IMG_0439.jpg"] type:@"public.jpeg"];
-	[viewController addItem:img fromSource:nil ofType:kMvrItemSourceSelf];
+
+	[self performSelector:@selector(testByAddingImage) withObject:nil afterDelay:1.0];
 	
 	return YES;
+}
+
+- (void) testByAddingImage;
+{
+	MvrImageItem* img = [[MvrImageItem alloc] initWithImage:[UIImage imageNamed:@"IMG_0439.jpg"] type:@"public.jpeg"];
+	[viewController addItem:img fromSource:nil ofType:kMvrItemSourceSelf];	
 }
 
 - (void)dealloc {
