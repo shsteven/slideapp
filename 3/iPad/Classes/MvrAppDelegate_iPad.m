@@ -12,8 +12,11 @@
 #warning Test
 #import "MvrDraggableView.h"
 #import "MvrItemController.h"
+
 #import "MvrImageItem.h"
 #import "MvrImageItemController.h"
+#import "MvrContactItem.h"
+#import "MvrContactItemController.h"
 
 @implementation MvrAppDelegate_iPad
 
@@ -23,16 +26,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {	
 	
+// ------------ SETUP: Network + Observer
 	[MvrImageItem registerClass];
 	[MvrImageItemController registerClass];
 	
+	[MvrContactItem registerClass];
+	[MvrContactItemController registerClass];
+	
 	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort options:kMvrUseMobileService|kMvrAllowBrowsingForConduitService|kMvrAllowConnectionsFromConduitService];
+	
+	observer = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
 	
 	wifi.enabled = YES;
 	
+// ------------- SETUP: UI
+	application.idleTimerDisabled = YES;
+	
 	[window addSubview:viewController.view];
 	[window makeKeyAndVisible];
-		
 
 	[self performSelector:@selector(testByAddingImage) withObject:nil afterDelay:1.0];
 	
@@ -93,6 +104,20 @@
 - (NSString *) userVisibleVersion;
 {
 	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+}
+
+#pragma mark Receiving
+
+- (void) incomingTransfer:(id <MvrIncoming>)incoming didEndReceivingItem:(MvrItem *)i;
+{
+	[viewController addItem:i fromSource:[incoming channel] ofType:kMvrItemSourceChannel];
+}
+
+#pragma mark Cleaning up
+
+- (void) applicationWillTerminate:(UIApplication *)application;
+{
+	wifi.enabled = NO;
 }
 
 @end

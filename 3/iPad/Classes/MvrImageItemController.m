@@ -18,31 +18,6 @@
 @end
 
 
-@implementation MvrImageItemBackdropView
-
-- (id) initWithFrame:(CGRect) r;
-{
-	if (self = [super initWithFrame:r])
-		[self addBackdropLayer];
-	
-	return self;
-}
-
-- (void) drawRect:(CGRect)rect;
-{
-	CGContextRef ctx = UIGraphicsGetCurrentContext();
-	
-	[super drawRect:rect];
-	
-	CGRect whitePart = CGRectInset(self.bounds, 10, 10);
-	CGContextSetShadow(ctx, CGSizeMake(0, 0), 3.0);
-	[[UIColor whiteColor] setFill];
-	UIRectFill(whitePart);
-}
-
-@end
-
-
 @implementation MvrImageItemController
 
 + (NSSet *) supportedItemClasses;

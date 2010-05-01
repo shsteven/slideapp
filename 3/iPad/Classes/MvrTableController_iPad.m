@@ -91,6 +91,9 @@ enum {
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
 {
 	MvrItemController* ic = [MvrItemController itemControllerWithItem:item];
+	if (!ic)
+		return;
+	
 	ic.draggableView.hidden = YES;
 	
 	[self addItemController:ic];
@@ -98,9 +101,12 @@ enum {
 #warning TODO real channel management.
 	
 	switch (type) {
+		case kMvrItemSourceChannel: // TODO
 		case kMvrItemSourceSelf: {
+			NSInteger edge = (type == kMvrItemSourceSelf)? kMvrSouthEdge : kMvrNorthEdge;
+			
 			CGPoint start, end;
-			[self getStartingPoint:&start endingPoint:&end toAnimateSlidingEntranceOfView:ic.draggableView alongEdge:kMvrSouthEdge atCoordinate:CGRectGetMidX(draggableViewsLayer.bounds)];
+			[self getStartingPoint:&start endingPoint:&end toAnimateSlidingEntranceOfView:ic.draggableView alongEdge:edge atCoordinate:CGRectGetMidX(draggableViewsLayer.bounds)];
 			
 			ic.draggableView.center = start;
 			ic.draggableView.hidden = NO;
