@@ -10,8 +10,10 @@
 #import "MvrDraggableView.h"
 
 @interface MvrShadowBackdropDraggableView : MvrDraggableView {
-
+	UIColor* contentAreaBackgroundColor;
 }
+
+@property(retain) UIColor* contentAreaBackgroundColor;
 
 @end
 

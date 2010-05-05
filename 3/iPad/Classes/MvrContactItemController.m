@@ -7,6 +7,7 @@
 //
 
 #import "MvrContactItemController.h"
+#import "MvrShadowBackdropDraggableView.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
@@ -52,6 +53,9 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	self.actionButton.frame = r;
 	
 	[self.view addSubview:self.actionButton];
+	
+	((MvrShadowBackdropDraggableView*)self.view).contentAreaBackgroundColor = 
+		[UIColor colorWithPatternImage:[UIImage imageNamed:@"PaperTexture.jpg"]];
 }
 
 - (void) itemDidChange;
