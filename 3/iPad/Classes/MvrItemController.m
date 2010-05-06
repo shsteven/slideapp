@@ -15,6 +15,8 @@
 #import "MvrAppDelegate_iPad.h"
 #import "MvrTableController_iPad.h"
 
+#import "MvrItemAction.h"
+
 @implementation MvrItemController
 
 static L0Map* MvrItemViewControllerClasses = nil;
@@ -61,6 +63,7 @@ static L0Map* MvrItemViewControllerClasses = nil;
 {
 	doc.delegate = nil;
 	[doc release];
+	[actions release];
 	[item release];
 	[super dealloc];
 }
@@ -115,7 +118,19 @@ static L0Map* MvrItemViewControllerClasses = nil;
 }
 
 - (void) setActionButtonHidden:(BOOL) hidden animated:(BOOL) animated;
-{	
+{
+	BOOL anyAvailable = NO;
+	
+	for (MvrItemAction* a in self.actions) {
+		if ([a isAvailableForItem:self.item]) {
+			anyAvailable = YES;
+			break;
+		}
+	}
+	
+	if (!anyAvailable)
+		return;
+	
 	if (animated)
 		[UIView beginAnimations:nil context:NULL];
 	
@@ -137,14 +152,18 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	
 	PLActionSheet* as = [[PLActionSheet new] autorelease];
 
-	[as addButtonWithTitle:@"Open \u203a" action:^{
-		[self showOpeningOptionsMenu];
-	}];
+	for (MvrItemAction* a in self.actions) {
+		if ([a isAvailableForItem:self.item]) {
+			[as addButtonWithTitle:a.displayName action:^{
+				[a performActionWithItem:self.item];
+				if (!a.continuesInteractionOnTable)
+					[self didFinishAction];
+			}];
+		}
+	}
 	
 	[as setCancelledAction:^{
-		NSLog(@"Cleanup!");
-		actionMenuShown = NO;
-		[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
+		[self didFinishAction];
 	}];
 	
 	[as showFromRect:self.actionButton.bounds inView:self.actionButton animated:YES];
@@ -203,7 +222,7 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	return MvrApp().viewController;
 }
 
-- (void) didEndShowingActionMenu;
+- (void) didFinishAction;
 {
 	actionMenuShown = NO;
 	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];	
@@ -212,25 +231,43 @@ static L0Map* MvrItemViewControllerClasses = nil;
 - (void) documentInteractionControllerDidDismissOptionsMenu:(UIDocumentInteractionController *)controller;
 {
 	L0Note();
-	[self didEndShowingActionMenu];
+	[self didFinishAction];
 }
 
 - (void) documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller;
 {
 	L0Note();
-	[self didEndShowingActionMenu];
+	[self didFinishAction];
 }
 
 - (void)documentInteractionControllerDidEndPreview:(UIDocumentInteractionController *)controller;
 {
 	L0Note();
-	[self didEndShowingActionMenu];
+	[self didFinishAction];
 }
 
 - (void) documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application;
 {
 	L0Note();
-	[self didEndShowingActionMenu];
+	[self didFinishAction];
 }
+
+- (MvrItemAction*) showOpeningOptionsMenuAction;
+{
+	MvrItemAction* a = [MvrItemAction actionWithDisplayName:@"Open \u203a" target:self selector:@selector(showOpeningOptionsMenu)];
+	a.continuesInteractionOnTable = YES;
+	return a;
+}
+
+@synthesize actions;
+- (NSArray*) actions;
+{
+	if (!actions)
+		self.actions = [self defaultActions];
+	
+	return actions;
+}
+
+- (NSArray*) defaultActions { return [NSArray array]; }
 
 @end

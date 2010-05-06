@@ -11,6 +11,7 @@
 		1520961011859ADA00D16CB7 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1520960F11859ADA00D16CB7 /* PLBlocks.framework */; };
 		1520961911859AFE00D16CB7 /* PLActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1520961811859AFE00D16CB7 /* PLActionSheet.m */; };
 		15436D9D11914F180072FDBC /* MvrItemAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 15436D9C11914F180072FDBC /* MvrItemAction.m */; };
+		154AD0D41192BD6A00950C9D /* ContactWithoutImageIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 154AD0D31192BD6A00950C9D /* ContactWithoutImageIcon.png */; };
 		1555DFB8117F3BE0009D6926 /* MvrDraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1555DFB7117F3BE0009D6926 /* MvrDraggableView.m */; };
 		155F08DD1181E86F00A6CE5E /* ILViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 155F08DB1181E86F00A6CE5E /* ILViewController.m */; };
 		155F08EB1181E9E600A6CE5E /* Backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 155F08EA1181E9E600A6CE5E /* Backdrop.png */; };
@@ -129,6 +130,7 @@
 		1520961811859AFE00D16CB7 /* PLActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLActionSheet.m; sourceTree = "<group>"; };
 		15436D9B11914F180072FDBC /* MvrItemAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrItemAction.h; sourceTree = "<group>"; };
 		15436D9C11914F180072FDBC /* MvrItemAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrItemAction.m; sourceTree = "<group>"; };
+		154AD0D31192BD6A00950C9D /* ContactWithoutImageIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ContactWithoutImageIcon.png; path = ../iPhone/ContactWithoutImageIcon.png; sourceTree = SOURCE_ROOT; };
 		1555DFB6117F3BE0009D6926 /* MvrDraggableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDraggableView.h; sourceTree = "<group>"; };
 		1555DFB7117F3BE0009D6926 /* MvrDraggableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDraggableView.m; sourceTree = "<group>"; };
 		155F08DB1181E86F00A6CE5E /* ILViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILViewController.m; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 		15C53060118C5FEE0052381B /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				154AD0D31192BD6A00950C9D /* ContactWithoutImageIcon.png */,
 				15C53061118C5FF60052381B /* MvrContactItem.h */,
 				15C53062118C5FF60052381B /* MvrContactItem.m */,
 				15C53064118C602B0052381B /* MvrContactItemController.h */,
@@ -490,6 +493,7 @@
 				15E43E0E1184D40700047418 /* ActionButton_Pressed.png in Resources */,
 				15C5306A118C60670052381B /* MvrContactItemController.xib in Resources */,
 				15D9BABA11915C0200F65DF9 /* PaperTexture.jpg in Resources */,
+				154AD0D41192BD6A00950C9D /* ContactWithoutImageIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

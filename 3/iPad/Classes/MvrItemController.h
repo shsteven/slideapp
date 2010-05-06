@@ -12,6 +12,8 @@
 #import "Network+Storage/MvrItem.h"
 #import "MvrDraggableView.h"
 
+@class MvrItemAction;
+
 @protocol MvrItemsTable;
 
 @interface MvrItemController : ILPartController <MvrDraggableViewDelegate, UIDocumentInteractionControllerDelegate> {
@@ -22,6 +24,8 @@
 	id <MvrItemsTable> itemsTable;
 	
 	UIDocumentInteractionController* doc;
+	
+	NSArray* actions;
 }
 
 + (void) setItemControllerClass:(Class) vcc forItemClass:(Class) ic;
@@ -48,7 +52,11 @@
 - (void) showOpeningOptionsMenu;
 
 - (void) showActionMenu;
-- (void) didEndShowingActionMenu;
+- (void) didFinishAction;
+@property(copy) NSArray* actions;
+@property(readonly) NSArray* defaultActions;
+
+- (MvrItemAction*) showOpeningOptionsMenuAction;
 
 @end
 

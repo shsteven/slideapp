@@ -61,4 +61,19 @@
 	}
 }
 
+- (NSArray *) defaultActions;
+{
+	return [NSArray arrayWithObjects:
+			[self showOpeningOptionsMenuAction],
+			
+			[MvrItemAction actionWithDisplayName:NSLocalizedString(@"Copy", @"Copy action button") block:^(MvrItem* theItem) {
+				
+		UIImage* i = [self.item image];
+		[UIPasteboard generalPasteboard].image = i;
+				
+			}],
+			
+			nil];
+}
+
 @end

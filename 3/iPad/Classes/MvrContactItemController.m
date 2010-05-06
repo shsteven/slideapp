@@ -8,6 +8,8 @@
 
 #import "MvrContactItemController.h"
 #import "MvrShadowBackdropDraggableView.h"
+#import "MvrItemAction.h"
+
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
@@ -17,11 +19,13 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	
 	ABMultiValueRef mv = ABRecordCopyValue(r, ident);
 	
-	if (ABMultiValueGetCount(mv) > 0)
-		result = [(NSString*)ABMultiValueCopyValueAtIndex(mv, 0) autorelease];
-	
-	CFRelease(mv);
-	
+	if (mv) {
+		if (ABMultiValueGetCount(mv) > 0)
+			result = [(NSString*)ABMultiValueCopyValueAtIndex(mv, 0) autorelease];
+		
+		CFRelease(mv);
+	}
+
 	return result;
 }
 
@@ -67,8 +71,9 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 		if (imageData) {
 			contactImageView.image = [UIImage imageWithData:(NSData*) imageData];
 			CFRelease(imageData);
-		}
-		
+		} else
+			contactImageView.image = [UIImage imageNamed:@"ContactWithoutImageIcon.png"];
+
 		contactNameLabel.text = [self.item title];
 		
 		NSString* email = MvrFirstValueForContactMultivalue(me, kABPersonEmailProperty);
@@ -92,6 +97,73 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 		
 		CFRelease(me);
 	}
+}
+
+- (NSArray *) defaultActions;
+{
+	MvrItemAction* show = [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Show", @"Show action button") target:self selector:@selector(showPersonPopover:forItem:)];
+	show.continuesInteractionOnTable = YES;
+	
+	return [NSArray arrayWithObjects:
+			show,
+			nil];
+}
+
+- (void) showPersonPopover:(MvrItemAction*) a forItem:(MvrItem*) i;
+{
+	if (personPopover)
+		return;
+	
+	ABUnknownPersonViewController* pc = [[ABUnknownPersonViewController new] autorelease];
+	
+	ABRecordRef ref = [self.item copyPersonRecord];
+	pc.displayedPerson = ref;
+	CFRelease(ref);
+	
+	pc.allowsAddingToAddressBook = YES;
+	pc.allowsActions = YES;
+	
+	pc.title = [self.item title];
+	
+	UINavigationController* nc = [[[UINavigationController alloc] initWithRootViewController:pc] autorelease];
+		
+	personPopover = [[UIPopoverController alloc] initWithContentViewController:nc];
+	personPopover.delegate = self;
+	[personPopover presentPopoverFromRect:self.actionButton.bounds inView:self.actionButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+	
+	const CGFloat dimmedInfoAlpha = 0.5;
+	
+	[UIView beginAnimations:nil context:NULL];
+	contactNameLabel.alpha = dimmedInfoAlpha;
+	contactPhoneLabel.alpha = dimmedInfoAlpha;
+	contactEmailLabel.alpha = dimmedInfoAlpha;
+	contactImageView.alpha = dimmedInfoAlpha;
+	
+	self.view.alpha = 0.8;
+	
+	[UIView commitAnimations];
+}
+
+- (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController;
+{
+	[UIView beginAnimations:nil context:NULL];
+	contactNameLabel.alpha = 1.0;
+	contactPhoneLabel.alpha = 1.0;
+	contactEmailLabel.alpha = 1.0;
+	contactImageView.alpha = 1.0;
+	self.view.alpha = 1.0;
+	[UIView commitAnimations];
+
+	[self didFinishAction];
+	personPopover.delegate = nil;
+	[personPopover release]; personPopover = nil;
+}
+
+- (void) dealloc
+{
+	personPopover.delegate = nil;
+	[personPopover release];
+	[super dealloc];
 }
 
 @end

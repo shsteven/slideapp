@@ -18,6 +18,8 @@
 #import "MvrContactItem.h"
 #import "MvrContactItemController.h"
 
+#import <AddressBook/AddressBook.h>
+
 @implementation MvrAppDelegate_iPad
 
 @synthesize window;
@@ -45,15 +47,29 @@
 	[window addSubview:viewController.view];
 	[window makeKeyAndVisible];
 
-	[self performSelector:@selector(testByAddingImage) withObject:nil afterDelay:1.0];
+	[self performSelector:@selector(testByAddingImageAndContact) withObject:nil afterDelay:1.0];
 	
 	return YES;
 }
 
-- (void) testByAddingImage;
+- (void) testByAddingImageAndContact;
 {
 	MvrImageItem* img = [[MvrImageItem alloc] initWithImage:[UIImage imageNamed:@"IMG_0439.jpg"] type:@"public.jpeg"];
 	[viewController addItem:img fromSource:nil ofType:kMvrItemSourceSelf];	
+	
+	ABRecordRef ref = ABPersonCreate();
+	ABRecordSetValue(ref, kABPersonFirstNameProperty, (CFTypeRef) @"Pinco", NULL);
+	ABRecordSetValue(ref, kABPersonLastNameProperty, (CFTypeRef) @"Pallo", NULL);
+
+	ABMultiValueRef email = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+	ABMultiValueAddValueAndLabel(email, (CFTypeRef) @"pinco@pallo.net", kABWorkLabel, NULL);
+	ABRecordSetValue(ref, kABPersonEmailProperty, email, NULL);
+	
+	MvrContactItem* ci = [[[MvrContactItem alloc] initWithContentsOfAddressBookRecord:ref] autorelease];
+	[viewController addItem:ci fromSource:nil ofType:kMvrItemSourceSelf];
+	
+	CFRelease(email);
+	CFRelease(ref);
 }
 
 - (void)dealloc {
