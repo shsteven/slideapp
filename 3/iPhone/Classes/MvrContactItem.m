@@ -235,23 +235,27 @@ static id MvrKeyForABProperty(ABPropertyID prop) {
 			NSMutableArray* multiTransposed = [NSMutableArray array];
 			ABMultiValueRef multi = ABRecordCopyValue(record, propertyID);
 			
-			NSArray* values = (NSArray*) ABMultiValueCopyArrayOfAllValues(multi);
-			int valueIndex = 0;
-			for (id value in values) {
-				id label = (id) ABMultiValueCopyLabelAtIndex(multi, valueIndex);
-				if (!label) label = [@"-" retain]; // balances the release below
-				NSDictionary* item = [NSDictionary dictionaryWithObjectsAndKeys:
-									  value, kMvrContactMultiValueItemValue,
-									  label, kMvrContactMultiValueItemLabel,
-									  nil];
-				[multiTransposed addObject:item];
-				[label release];
-				valueIndex++;
-			}
-			[values release];
+			if (multi) {
 			
-			[info setObject:multiTransposed forKey:MvrKeyForABProperty(propertyID)];
-			CFRelease(multi);
+				NSArray* values = (NSArray*) ABMultiValueCopyArrayOfAllValues(multi);
+				int valueIndex = 0;
+				for (id value in values) {
+					id label = (id) ABMultiValueCopyLabelAtIndex(multi, valueIndex);
+					if (!label) label = [@"-" retain]; // balances the release below
+					NSDictionary* item = [NSDictionary dictionaryWithObjectsAndKeys:
+										  value, kMvrContactMultiValueItemValue,
+										  label, kMvrContactMultiValueItemLabel,
+										  nil];
+					[multiTransposed addObject:item];
+					[label release];
+					valueIndex++;
+				}
+				[values release];
+				
+				[info setObject:multiTransposed forKey:MvrKeyForABProperty(propertyID)];
+				CFRelease(multi);
+				
+			}
 		}
 	}
 	
