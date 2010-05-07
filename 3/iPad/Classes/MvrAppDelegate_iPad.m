@@ -18,6 +18,9 @@
 #import "MvrContactItem.h"
 #import "MvrContactItemController.h"
 
+#import "Network+Storage/MvrGenericItem.h"
+#import "MvrGenericItemController.h"
+
 #import <AddressBook/AddressBook.h>
 
 @implementation MvrAppDelegate_iPad
@@ -29,6 +32,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {	
 	
 // ------------ SETUP: Network + Observer
+	[MvrGenericItemController registerClass];
+	
 	[MvrImageItem registerClass];
 	[MvrImageItemController registerClass];
 	

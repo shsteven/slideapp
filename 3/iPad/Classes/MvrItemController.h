@@ -23,7 +23,7 @@
 	BOOL actionMenuShown;
 	id <MvrItemsTable> itemsTable;
 	
-	UIDocumentInteractionController* doc;
+	UIDocumentInteractionController* documentInteractionController;
 	
 	NSArray* actions;
 }
@@ -58,8 +58,10 @@
 
 - (MvrItemAction*) showOpeningOptionsMenuAction;
 
-@end
+@property(readonly) UIDocumentInteractionController* documentInteractionController;
+- (void) didPrepareDocumentInteractionController:(UIDocumentInteractionController*) d;
 
+@end
 
 
 @protocol MvrItemsTable <NSObject>
@@ -67,3 +69,4 @@
 - (void) itemControllerViewDidFinishMoving:(MvrItemController*) ic velocity:(CGPoint) v;
 
 @end
+

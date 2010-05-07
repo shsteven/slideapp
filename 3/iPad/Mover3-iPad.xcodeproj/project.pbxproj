@@ -27,6 +27,11 @@
 		159452531176702D003126B6 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1594524C11767023003126B6 /* libMuiKit.a */; };
 		1594525411767031003126B6 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1594524E11767023003126B6 /* MuiKit.bundle */; };
 		15945260117672AC003126B6 /* MvrInertia_Old.m in Sources */ = {isa = PBXBuildFile; fileRef = 1594525F117672AC003126B6 /* MvrInertia_Old.m */; };
+		15ABA9681194A10500437F3C /* GenericItemView.png in Resources */ = {isa = PBXBuildFile; fileRef = 15ABA9671194A10500437F3C /* GenericItemView.png */; };
+		15ABA96B1194A15E00437F3C /* MvrGenericItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15ABA96A1194A15E00437F3C /* MvrGenericItemController.m */; };
+		15ABA96D1194A19F00437F3C /* MvrGenericItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15ABA96C1194A19F00437F3C /* MvrGenericItemController.xib */; };
+		15ABA9701194A2BB00437F3C /* UIImage+ILIconTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15ABA96F1194A2BB00437F3C /* UIImage+ILIconTools.m */; };
+		15ABA97E1194A5DA00437F3C /* DocIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15ABA97D1194A5DA00437F3C /* DocIcon.png */; };
 		15C53063118C5FF60052381B /* MvrContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C53062118C5FF60052381B /* MvrContactItem.m */; };
 		15C53066118C602B0052381B /* MvrContactItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C53065118C602B0052381B /* MvrContactItemController.m */; };
 		15C5306A118C60670052381B /* MvrContactItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C53069118C60670052381B /* MvrContactItemController.xib */; };
@@ -152,6 +157,13 @@
 		1594523011767013003126B6 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
 		1594525E117672AC003126B6 /* MvrInertia_Old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrInertia_Old.h; sourceTree = "<group>"; };
 		1594525F117672AC003126B6 /* MvrInertia_Old.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrInertia_Old.m; sourceTree = "<group>"; };
+		15ABA9671194A10500437F3C /* GenericItemView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericItemView.png; sourceTree = SOURCE_ROOT; };
+		15ABA9691194A15E00437F3C /* MvrGenericItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrGenericItemController.h; sourceTree = "<group>"; };
+		15ABA96A1194A15E00437F3C /* MvrGenericItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrGenericItemController.m; sourceTree = "<group>"; };
+		15ABA96C1194A19F00437F3C /* MvrGenericItemController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrGenericItemController.xib; sourceTree = "<group>"; };
+		15ABA96E1194A2BB00437F3C /* UIImage+ILIconTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ILIconTools.h"; sourceTree = "<group>"; };
+		15ABA96F1194A2BB00437F3C /* UIImage+ILIconTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ILIconTools.m"; sourceTree = "<group>"; };
+		15ABA97D1194A5DA00437F3C /* DocIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DocIcon.png; sourceTree = SOURCE_ROOT; };
 		15C53061118C5FF60052381B /* MvrContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrContactItem.h; path = ../iPhone/Classes/MvrContactItem.h; sourceTree = SOURCE_ROOT; };
 		15C53062118C5FF60052381B /* MvrContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrContactItem.m; path = ../iPhone/Classes/MvrContactItem.m; sourceTree = SOURCE_ROOT; };
 		15C53064118C602B0052381B /* MvrContactItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrContactItemController.h; sourceTree = "<group>"; };
@@ -228,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				15E43E0A1184D3FB00047418 /* Item Controller */,
+				15ABA9661194A07D00437F3C /* Generic Item View */,
 				15C53060118C5FEE0052381B /* Contacts */,
 				15C5305C118C5FC40052381B /* Images */,
 				15C5306C118C61940052381B /* MvrShadowBackdropDraggableView.h */,
@@ -245,6 +258,8 @@
 				155F097F1181F0AC00A6CE5E /* ILPartController.m */,
 				155F08DC1181E86F00A6CE5E /* ILViewController.h */,
 				155F08DB1181E86F00A6CE5E /* ILViewController.m */,
+				15ABA96E1194A2BB00437F3C /* UIImage+ILIconTools.h */,
+				15ABA96F1194A2BB00437F3C /* UIImage+ILIconTools.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -269,6 +284,18 @@
 				1594525211767023003126B6 /* libMuiKit-Mac.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		15ABA9661194A07D00437F3C /* Generic Item View */ = {
+			isa = PBXGroup;
+			children = (
+				15ABA97D1194A5DA00437F3C /* DocIcon.png */,
+				15ABA9671194A10500437F3C /* GenericItemView.png */,
+				15ABA9691194A15E00437F3C /* MvrGenericItemController.h */,
+				15ABA96A1194A15E00437F3C /* MvrGenericItemController.m */,
+				15ABA96C1194A19F00437F3C /* MvrGenericItemController.xib */,
+			);
+			name = "Generic Item View";
 			sourceTree = "<group>";
 		};
 		15C5305C118C5FC40052381B /* Images */ = {
@@ -494,6 +521,9 @@
 				15C5306A118C60670052381B /* MvrContactItemController.xib in Resources */,
 				15D9BABA11915C0200F65DF9 /* PaperTexture.jpg in Resources */,
 				154AD0D41192BD6A00950C9D /* ContactWithoutImageIcon.png in Resources */,
+				15ABA9681194A10500437F3C /* GenericItemView.png in Resources */,
+				15ABA96D1194A19F00437F3C /* MvrGenericItemController.xib in Resources */,
+				15ABA97E1194A5DA00437F3C /* DocIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +550,8 @@
 				15C53066118C602B0052381B /* MvrContactItemController.m in Sources */,
 				15C5306E118C61940052381B /* MvrShadowBackdropDraggableView.m in Sources */,
 				15436D9D11914F180072FDBC /* MvrItemAction.m in Sources */,
+				15ABA96B1194A15E00437F3C /* MvrGenericItemController.m in Sources */,
+				15ABA9701194A2BB00437F3C /* UIImage+ILIconTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

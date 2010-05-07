@@ -61,8 +61,8 @@ static L0Map* MvrItemViewControllerClasses = nil;
 
 - (void) dealloc
 {
-	doc.delegate = nil;
-	[doc release];
+	documentInteractionController.delegate = nil;
+	[documentInteractionController release];
 	[actions release];
 	[item release];
 	[super dealloc];
@@ -78,6 +78,12 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	if (i != item) {
 		[item release];
 		item = [i retain];
+		
+		if (!item) {
+			documentInteractionController.delegate = nil;
+			[documentInteractionController release];
+			documentInteractionController = nil;
+		}
 		
 		[self itemDidChange];
 	}
@@ -190,21 +196,34 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	[self setActionButtonHidden:YES animated:YES];
 }
 
+- (UIDocumentInteractionController*) documentInteractionController;
+{
+	if (!documentInteractionController) {
+		documentInteractionController = [UIDocumentInteractionController new];
+	
+		documentInteractionController.URL = [NSURL fileURLWithPath:[self.item storage].path];
+		documentInteractionController.UTI = [self.item type];
+		if ([self.item title] && ![[self.item title] isEqual:@""])
+			documentInteractionController.name = [self.item title];
+		else
+			documentInteractionController.name = @"Preview"; // TODO
+		
+		documentInteractionController.delegate = self;
+		
+		[self didPrepareDocumentInteractionController:documentInteractionController];
+	}
+	
+	return documentInteractionController;
+}
+
+- (void) didPrepareDocumentInteractionController:(UIDocumentInteractionController*) d;
+{
+	// Overridden by subclasses.
+}
+
 - (void) showOpeningOptionsMenu;
 {	
-	if (!doc)
-		doc = [UIDocumentInteractionController new];
-	
-	doc.URL = [NSURL fileURLWithPath:[self.item storage].path];
-	doc.UTI = [self.item type];
-	if ([self.item title] && ![[self.item title] isEqual:@""])
-		doc.name = [self.item title];
-	else
-		doc.name = @"Preview"; // TODO
-	
-	doc.delegate = self;
-	
-	[doc presentOptionsMenuFromRect:self.actionButton.bounds inView:self.actionButton animated:YES];
+	[self.documentInteractionController presentOptionsMenuFromRect:self.actionButton.bounds inView:self.actionButton animated:YES];
 }
 
 - (UIView *) documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller;

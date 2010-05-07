@@ -403,6 +403,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	}
 }
 
+
 #pragma mark Debugging aids
 
 - (NSString*) description;
