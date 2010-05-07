@@ -32,6 +32,7 @@
 		15ABA96D1194A19F00437F3C /* MvrGenericItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15ABA96C1194A19F00437F3C /* MvrGenericItemController.xib */; };
 		15ABA9701194A2BB00437F3C /* UIImage+ILIconTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15ABA96F1194A2BB00437F3C /* UIImage+ILIconTools.m */; };
 		15ABA97E1194A5DA00437F3C /* DocIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15ABA97D1194A5DA00437F3C /* DocIcon.png */; };
+		15ABAA001194AED000437F3C /* MvrNoOpeningOptions.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15ABA9FF1194AED000437F3C /* MvrNoOpeningOptions.alert */; };
 		15C53063118C5FF60052381B /* MvrContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C53062118C5FF60052381B /* MvrContactItem.m */; };
 		15C53066118C602B0052381B /* MvrContactItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C53065118C602B0052381B /* MvrContactItemController.m */; };
 		15C5306A118C60670052381B /* MvrContactItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C53069118C60670052381B /* MvrContactItemController.xib */; };
@@ -164,6 +165,7 @@
 		15ABA96E1194A2BB00437F3C /* UIImage+ILIconTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ILIconTools.h"; sourceTree = "<group>"; };
 		15ABA96F1194A2BB00437F3C /* UIImage+ILIconTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ILIconTools.m"; sourceTree = "<group>"; };
 		15ABA97D1194A5DA00437F3C /* DocIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DocIcon.png; sourceTree = SOURCE_ROOT; };
+		15ABA9FF1194AED000437F3C /* MvrNoOpeningOptions.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoOpeningOptions.alert; sourceTree = SOURCE_ROOT; };
 		15C53061118C5FF60052381B /* MvrContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrContactItem.h; path = ../iPhone/Classes/MvrContactItem.h; sourceTree = SOURCE_ROOT; };
 		15C53062118C5FF60052381B /* MvrContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrContactItem.m; path = ../iPhone/Classes/MvrContactItem.m; sourceTree = SOURCE_ROOT; };
 		15C53064118C602B0052381B /* MvrContactItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrContactItemController.h; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				155F098A1181F1B600A6CE5E /* MvrItemController.m */,
 				15436D9B11914F180072FDBC /* MvrItemAction.h */,
 				15436D9C11914F180072FDBC /* MvrItemAction.m */,
+				15ABA9FF1194AED000437F3C /* MvrNoOpeningOptions.alert */,
 			);
 			name = "Item Controller";
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				15ABA9681194A10500437F3C /* GenericItemView.png in Resources */,
 				15ABA96D1194A19F00437F3C /* MvrGenericItemController.xib in Resources */,
 				15ABA97E1194A5DA00437F3C /* DocIcon.png in Resources */,
+				15ABAA001194AED000437F3C /* MvrNoOpeningOptions.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

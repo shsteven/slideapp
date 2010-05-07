@@ -35,7 +35,7 @@
 	[super drawRect:rect];
 	
 	CGRect whitePart = CGRectInset(self.bounds, 10, 10);
-	CGContextSetShadow(ctx, CGSizeMake(0, 0), 3.0);
+	CGContextSetShadow(ctx, CGSizeMake(0, 0), 10.0);
 	[self.contentAreaBackgroundColor setFill];
 	UIRectFill(whitePart);
 }

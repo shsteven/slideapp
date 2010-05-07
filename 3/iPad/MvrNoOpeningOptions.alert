@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>L0AlertButtons</key>
+	<array>
+		<string>Dismiss</string>
+	</array>
+	<key>L0AlertInformativeText</key>
+	<string>Install one with support for this kind of item from App Store first.</string>
+	<key>L0AlertMessage</key>
+	<string>This item can't be opened, because there's no app that can open it installed on this %@.</string>
+	<key>L0AlertShowsSuppressionButton</key>
+	<false/>
+</dict>
+</plist>

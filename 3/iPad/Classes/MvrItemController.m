@@ -223,7 +223,12 @@ static L0Map* MvrItemViewControllerClasses = nil;
 
 - (void) showOpeningOptionsMenu;
 {	
-	[self.documentInteractionController presentOptionsMenuFromRect:self.actionButton.bounds inView:self.actionButton animated:YES];
+	if (![self.documentInteractionController presentOptionsMenuFromRect:self.actionButton.bounds inView:self.actionButton animated:YES]) {
+		UIAlertView* alert = [UIAlertView alertNamed:@"MvrNoOpeningOptions"];
+		[alert setTitleFormat:nil, [UIDevice currentDevice].localizedModel];
+		[alert show];
+		[self didFinishAction];
+	}
 }
 
 - (UIView *) documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller;
