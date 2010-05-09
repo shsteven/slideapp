@@ -24,6 +24,7 @@ extern NSString* MvrUnusedTemporaryFileNameWithPathExtension(NSString* ext);
 
 enum {
 	kMvrItemStorageNoFilenameExtensionForTypeError = 1,
+	kMvrItemStorageAlreadyPersistent,
 };
 extern NSString* const kMvrItemStorageErrorDomain;
 
@@ -37,27 +38,11 @@ enum {
 	// If passed, the item storage will not be persistent but will not take ownership of the file. This means that losing the item will not cause the file to be deleted from disk. This can be desirable if you want to create item storage representing data in a location you don't own (for example, a random file the user drags from disk).
 	kMvrItemStorageDoNotTakeOwnershipOfFile = 1 << 0,
 	
-	// If passed, this storage will be returned already persistent. This is useful for MvrStorageCentral replacements. These replacements can also use setPath:persistent:error: to turn a nonpersistent storage into a persistent one.
-//	kMvrItemStorageIsPersistent = 1 << 1,
+	// If passed, this storage will be returned already persistent. This is useful for MvrStorageCentral replacements. These replacements can also use makePersistentByOffloadingToPath: to turn a nonpersistent storage into a persistent one.
+	kMvrItemStorageIsPersistent = kMvrItemStorageDoNotTakeOwnershipOfFile,
 };
 typedef NSUInteger MvrItemStorageOptions;
 
-/*
- THE LIFECYCLE OF ITEM STORAGE OBJECTS FOR A MvrStorageCentral REPLACEMENT:
- 
- - item arrives. item storage is produced by the transfer system for the item in the MvrStorageTemporaryDirectory().
- - storage central rep. prepares a spot for the object and calls [storage setPath:<#some path#> persistent:YES error:&e]. This makes the object persistent.
- 
- *app quits*
- *app reopens*
- - storage central produces a persistent item by using [MvrItemStorage itemStorageFromFileAtPath:<#some path#> options:<#some options#> & kMvrItemStorageIsPersistent error:&e].
- 
- *user asks to remove item*
- - storage central uses -endPersistencyKeepingOwnership: to make the object no longer persistant. Unless you pass NO, the file will be moved back in the temp dir.
- - when the item storage object dies, the file is deleted (again unless you asked for kMvrItemStorageDoNotTakeOwnershipOfFile).
- */
-
-#warning TODO
 
 @interface MvrItemStorage : NSObject {
 	BOOL persistent;
@@ -150,9 +135,18 @@ typedef NSUInteger MvrItemStorageOptions;
 - (BOOL) setDesiredExtension:(NSString*) ext error:(NSError**) e;
 - (BOOL) setDesiredExtensionAssumingType:(id) uti error:(NSError**) e;
 
+#pragma mark Managing persistency of items.
+// PLEASE NOTE: These methods replace the use of direct access methods (kMvrItemStorageAllowFriendMethods) below.
+
+// Makes this object persistent. This means it will offload its contents to disk at the specified path and will make sure no modifications happen to the file as a result of using this class's methods.
+- (BOOL) makePersistentByOffloadingToPath:(NSString*) p error:(NSError**) e;
+
+// Makes this object not persistent. The contents of this object will be reset to an empty buffer. The file at the previous offload path (as returned by .path, if any, before calling this method) will not be touched.
+- (void) stopBeingPersistent;
+
 @end
 
-#pragma mark Methods for use by the storage central only
+#pragma mark Methods for use by old-style storage centrals only
 
 #if kMvrItemStorageAllowFriendMethods
 @interface MvrItemStorage ()

@@ -45,6 +45,7 @@
 		15E43D421184C04D00047418 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E43D411184C04D00047418 /* CFNetwork.framework */; };
 		15E43E0D1184D40700047418 /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 15E43E0B1184D40700047418 /* ActionButton.png */; };
 		15E43E0E1184D40700047418 /* ActionButton_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 15E43E0C1184D40700047418 /* ActionButton_Pressed.png */; };
+		15E529EF119552E900D310E2 /* MvrStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E529EE119552E900D310E2 /* MvrStorage.m */; };
 		1D3623260D0F684500981E51 /* MvrAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MvrAppDelegate_iPad.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -181,6 +182,8 @@
 		15E43D411184C04D00047418 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		15E43E0B1184D40700047418 /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton.png; sourceTree = "<group>"; };
 		15E43E0C1184D40700047418 /* ActionButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton_Pressed.png; sourceTree = "<group>"; };
+		15E529ED119552E900D310E2 /* MvrStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrStorage.h; sourceTree = "<group>"; };
+		15E529EE119552E900D310E2 /* MvrStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrStorage.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* MvrAppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate_iPad.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MvrAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate_iPad.m; sourceTree = "<group>"; };
@@ -247,6 +250,7 @@
 				15C5305C118C5FC40052381B /* Images */,
 				15C5306C118C61940052381B /* MvrShadowBackdropDraggableView.h */,
 				15C5306D118C61940052381B /* MvrShadowBackdropDraggableView.m */,
+				15E529F0119553E300D310E2 /* Storage */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -338,6 +342,15 @@
 				15ABA9FF1194AED000437F3C /* MvrNoOpeningOptions.alert */,
 			);
 			name = "Item Controller";
+			sourceTree = "<group>";
+		};
+		15E529F0119553E300D310E2 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				15E529ED119552E900D310E2 /* MvrStorage.h */,
+				15E529EE119552E900D310E2 /* MvrStorage.m */,
+			);
+			name = Storage;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -556,6 +569,7 @@
 				15436D9D11914F180072FDBC /* MvrItemAction.m in Sources */,
 				15ABA96B1194A15E00437F3C /* MvrGenericItemController.m in Sources */,
 				15ABA9701194A2BB00437F3C /* UIImage+ILIconTools.m in Sources */,
+				15E529EF119552E900D310E2 /* MvrStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
