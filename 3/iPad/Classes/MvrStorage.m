@@ -13,13 +13,20 @@
 #define kMvrStorageMetadataFilenameKey @"MvrFilename"
 #define kMvrStorageMetadadaTypeKey @"MvrType"
 #define kMvrStorageMetadataItemInfoKey @"MvrMetadata"
+#define kMvrStorageNotesItemInfoKey @"MvrNotes"
+
+#define kMvrStorageCorrespondingMetadataFileNameItemNoteKey @"MvrMetadataFileName"
 
 #import "Network+Storage/MvrItemStorage.h"
 #import "Network+Storage/MvrItem.h"
 
+#import <MuiKit/MuiKit.h>
+
 @interface MvrStorage ()
 
 - (void) addItemWithMetadataFile:(NSString *)itemMetaPath;
+- (void) makeMetadataFileForItem:(MvrItem*) i;
+- (NSString*) userVisibleFilenameForItem:(MvrItem*) i;
 
 @end
 
@@ -99,19 +106,132 @@
 	if (!i)
 		return;
 	
+	[i setItemNotes:L0As(NSDictionary, [itemMeta objectForKey:kMvrStorageNotesItemInfoKey])];
+	
 	[allStoredItems addObject:i];
 }
 
 - (void) addStoredItemsObject:(MvrItem*) i;
 {
+	if ([allStoredItems containsObject:i])
+		return;
+	
+	NSAssert(!i.storage.persistent, @"This object is already persistent and cannot be managed by this storage central.");
+	
+	NSString* filename = [self userVisibleFilenameForItem:i];
+	
+	NSString* path = [itemsDirectory stringByAppendingPathComponent:filename];
+	BOOL done = [i.storage makePersistentByOffloadingToPath:path error:NULL];
+	NSAssert(done, @"Can't make this item persistent. Why?");
+
+	[self makeMetadataFileForItem:i];
+
+	[allStoredItems addObject:i];
+}
+
+- (void) makeMetadataFileForItem:(MvrItem*) i;
+{
+	NSAssert(i.storage.persistent && i.storage.hasPath, @"The item must be saved to persistent storage before metadata can be written");
+	
+	
+	NSString* name, * path;
+	do {
+		name = [NSString stringWithFormat:@"%@.%@", [[L0UUID UUID] stringValue], kMvrStorageMetadataFileExtension];
+		
+		path = [metadataDirectory stringByAppendingPathComponent:name];
+	} while ([[NSFileManager defaultManager] fileExistsAtPath:path]);
+	
+
+	[i setObject:name forItemNotesKey:kMvrStorageCorrespondingMetadataFileNameItemNoteKey];
+	
+	NSMutableDictionary* itemMeta = [NSMutableDictionary dictionary];
+	[itemMeta setObject:[i.storage.path lastPathComponent] forKey:kMvrStorageMetadataFilenameKey];
+	[itemMeta setObject:i.type forKey:kMvrStorageMetadadaTypeKey];
+	[itemMeta setObject:(i.metadata?: [NSDictionary dictionary]) forKey:kMvrStorageMetadataItemInfoKey];
+	[itemMeta setObject:[i itemNotes] forKey:kMvrStorageNotesItemInfoKey];
+	
+	[itemMeta writeToFile:path atomically:YES];
+}
+
+- (NSString*) userVisibleFilenameForItem:(MvrItem*) i;
+{
+	// step one: does this have a filename? return it then.
+	NSString* filename = [i.metadata objectForKey:kMvrItemOriginalFilenameMetadataKey];
+	
+	if (!filename) {
+		// step one-bis: we need to know this file's extension (ick). We'll query the OS (and probably ship with a ton of UTImported types to match).
+		
+		NSString* ext = [(id)UTTypeCopyPreferredTagWithClass((CFStringRef) i.type, kUTTagClassFilenameExtension) autorelease];
+		if (!ext) {
+			// that's bad: we have no idea re: the correct file extension >_<
+			// for now we die, but we need to come up with a better solution pre-shipping.
 #warning TODO
-	L0AbstractMethod();
+			NSAssert(NO, @"No known file extension for type!");
+			return nil;
+		}
+		
+		// step two: do we know where it's from? then we use "From %@.xxx".
+		// TODO see if this sanitation is sufficient.
+		NSString* whereFrom = [[i objectForItemNotesKey:kMvrItemWhereFromNoteKey] stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+		if (whereFrom)
+			filename = [NSString stringWithFormat:NSLocalizedString(@"From %@.%@", @"Format for file name as in 'from DEVICE'."), whereFrom, ext];
+		else
+			filename = [NSString stringWithFormat:NSLocalizedString(@"Item.%@", @"Generic item filename"), ext];
+	}
+	
+	int attempt = 1;
+	NSString* actualName, * basename = nil, * ext = nil;
+	
+	do {
+		
+		if (attempt == 1)
+			actualName = filename;
+		else {
+			if (!basename)
+				basename = [filename stringByDeletingPathExtension];
+			if (!ext)
+				ext = [filename pathExtension];
+			
+			actualName = [NSString stringWithFormat:@"%@ (%d).%@", basename, attempt, ext];
+		}
+		
+		attempt++;
+		
+	} while ([[NSFileManager defaultManager] fileExistsAtPath:[itemsDirectory stringByAppendingPathComponent:actualName]]);
+	
+	return actualName;
 }
 
 - (void) removeStoredItemsObject:(MvrItem*) i;
 {
-#warning TODO
-	L0AbstractMethod();
+	if (![allStoredItems containsObject:i])
+		return;
+	
+	NSAssert(i.storage.persistent, @"This object isn't persistent -- something disabled persistency behind the back of this storage central");
+	
+	// two-step!
+	// one: gather files
+	
+	NSMutableSet* filesToDelete = [NSMutableSet set];
+	[filesToDelete addObject:i.storage.path];
+	
+	NSString* metadataFileName = [i objectForItemNotesKey:kMvrStorageCorrespondingMetadataFileNameItemNoteKey];
+	if (metadataFileName) {
+		// we're gonna double-check that this metadata file actually corresponds to the item before deleting it.
+		
+		NSString* metadataFilePath = [metadataDirectory stringByAppendingPathComponent:metadataFileName];
+		
+		if ([[[NSDictionary dictionaryWithContentsOfFile:metadataFilePath] objectForKey:kMvrStorageMetadataFilenameKey] isEqual:[i.storage.path lastPathComponent]])
+			[filesToDelete addObject:metadataFilePath];
+	}
+	
+	// two: invalidate the storage and kill the item and delete the files.
+	
+	[i.storage stopBeingPersistent];
+	[allStoredItems removeObject:i];
+	
+	for (NSString* file in filesToDelete)
+		[[NSFileManager defaultManager] removeItemAtPath:file error:NULL];
 }
 
 - (void) migrateFrom30StorageCentralMetadata:(id) meta;
