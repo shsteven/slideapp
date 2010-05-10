@@ -23,7 +23,7 @@
 
 @interface MvrModernWiFiIncoming : MvrStreamedIncoming {
 	AsyncSocket* socket;
-	MvrModernWiFiChannel* channel;
+	MvrModernWiFiChannel* wifiChannel;
 	MvrModernWiFi* scanner;	
 }
 

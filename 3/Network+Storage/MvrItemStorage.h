@@ -24,6 +24,7 @@ extern NSString* MvrUnusedTemporaryFileNameWithPathExtension(NSString* ext);
 
 enum {
 	kMvrItemStorageNoFilenameExtensionForTypeError = 1,
+	kMvrItemStorageAlreadyPersistent,
 };
 extern NSString* const kMvrItemStorageErrorDomain;
 
@@ -34,9 +35,14 @@ enum {
 typedef NSUInteger MvrStorageDestination;
 
 enum {
+	// If passed, the item storage will not be persistent but will not take ownership of the file. This means that losing the item will not cause the file to be deleted from disk. This can be desirable if you want to create item storage representing data in a location you don't own (for example, a random file the user drags from disk).
 	kMvrItemStorageDoNotTakeOwnershipOfFile = 1 << 0,
+	
+	// If passed, this storage will be returned already persistent. This is useful for MvrStorageCentral replacements. These replacements can also use makePersistentByOffloadingToPath: to turn a nonpersistent storage into a persistent one.
+	kMvrItemStorageIsPersistent = kMvrItemStorageDoNotTakeOwnershipOfFile,
 };
 typedef NSUInteger MvrItemStorageOptions;
+
 
 @interface MvrItemStorage : NSObject {
 	BOOL persistent;
@@ -46,6 +52,8 @@ typedef NSUInteger MvrItemStorageOptions;
 	
 	NSOutputStream* lastOutputStream;
 	NSString* outputStreamPath;
+	
+	NSString* desiredExtension;
 }
 
 // Creating a new item storage.
@@ -119,9 +127,26 @@ typedef NSUInteger MvrItemStorageOptions;
 // GC apps must call this method at least once, and call no methods that cause .path to be invoked, before the last reference to this object is lost. It is only valid to call this method on non-persistent object, since the storage central references those objects.
 - (void) invalidate;
 
+// This method has two purposes:
+// - if the item has a path, it sets its extension the same way setPathExtension:error: does.
+// - if the item has no path, it stores the extension instead. Any automatic creation of a path (eg. by accessing .path) will produce a path with that extension.
+// Unlike setPathExtension..., calling any of these methods does NOT cause data to be written to disk.
+// The ...assumingType: variant will work just like the above but with setPathExtensionAssumingType:error:. (The extension will be determined at the time you call setDesiredExtensionAssumingType:....)
+- (BOOL) setDesiredExtension:(NSString*) ext error:(NSError**) e;
+- (BOOL) setDesiredExtensionAssumingType:(id) uti error:(NSError**) e;
+
+#pragma mark Managing persistency of items.
+// PLEASE NOTE: These methods replace the use of direct access methods (kMvrItemStorageAllowFriendMethods) below.
+
+// Makes this object persistent. This means it will offload its contents to disk at the specified path and will make sure no modifications happen to the file as a result of using this class's methods.
+- (BOOL) makePersistentByOffloadingToPath:(NSString*) p error:(NSError**) e;
+
+// Makes this object not persistent. The contents of this object will be reset to an empty buffer. The file at the previous offload path (as returned by .path, if any, before calling this method) will not be touched.
+- (void) stopBeingPersistent;
+
 @end
 
-#pragma mark Methods for use by the storage central only
+#pragma mark Methods for use by old-style storage centrals only
 
 #if kMvrItemStorageAllowFriendMethods
 @interface MvrItemStorage ()

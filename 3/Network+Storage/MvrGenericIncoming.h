@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MvrIncoming.h"
+#import "MvrChannel.h"
 
 @class MvrItem, L0KVODispatcher;
 
@@ -18,7 +19,11 @@
 	MvrItem* item;
 	NSString* type;
 	BOOL cancelled;
+	
+	id <MvrChannel> channel;
 }
+
+@property(assign) id <MvrChannel> channel;
 
 @property float progress;
 

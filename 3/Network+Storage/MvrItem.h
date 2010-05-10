@@ -14,6 +14,11 @@
 // The item's original filename, if any.
 #define kMvrItemOriginalFilenameMetadataKey @"MvrOriginalFilename"
 
+
+// An item note key that can be used to save a localized description of the object's origin. Associated to a NSString*.
+#define kMvrItemWhereFromNoteKey @"MvrWhereFrom"
+
+
 // These macros produce accessors that provide data from the autocache for the given key. The cache key is the same as the getter's name.
 
 #define MvrItemSynthesizeRetainFromAutocache(type, name, setterName) \

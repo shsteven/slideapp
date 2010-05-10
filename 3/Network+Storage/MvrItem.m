@@ -50,7 +50,7 @@
 	return self;
 }
 
-@synthesize storage, metadata, type, itemNotes;
+@synthesize storage, metadata, type;
 
 - (void) dealloc;
 {
@@ -234,9 +234,14 @@ static NSMutableDictionary* MvrItemTypesToClasses = nil;
 
 #pragma mark Item notes
 
+- (NSDictionary*) itemNotes;
+{
+	return itemNotes;
+}
+
 - (void) setItemNotes:(NSDictionary *) d;
 {
-	[itemNotes setDictionary:d];
+	[itemNotes setDictionary:(d?: [NSDictionary dictionary])];
 }
 
 - (void) setObject:(id) o forItemNotesKey:(NSString*) key;

@@ -79,7 +79,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 
 @interface MvrItemStorage ()
 
-- (void) resetData;
+- (void) resetDataByDeletingOffloadFile:(BOOL) delete;
 @property(copy, getter=private_outputStreamPath, setter=private_setOutputStreamPath:) NSString* outputStreamPath;
 
 @end
@@ -123,6 +123,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	[data release];
 	[path release];
 	[lastOutputStream release];
+	[desiredExtension release];
 	[super dealloc];
 }
 
@@ -238,9 +239,9 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 #define kMvrItemStorageMaximumAmountOfDataBeforeOffloading 1024 * 1024
 
 - (void) setData:(NSData*) d;
-{
+{	
 	if (d != data) {
-		[self resetData];
+		[self resetDataByDeletingOffloadFile:YES];
 		
 		[data release]; data = nil;
 		data = [d copy];
@@ -265,7 +266,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 		lastOutputStream = [[NSOutputStream outputStreamToMemory] retain];
 		return lastOutputStream;
 	} else {
-		self.outputStreamPath = MvrUnusedTemporaryFileNameWithPathExtension(@"");
+		self.outputStreamPath = MvrUnusedTemporaryFileNameWithPathExtension(desiredExtension?: @"");
 		return [NSOutputStream outputStreamToFileAtPath:self.outputStreamPath append:NO];
 	}
 }
@@ -287,7 +288,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	
 	NSString* thePath = path;
 	if (!thePath) // we'd have a path if we had been made persistant by the storage central.
-		thePath = MvrUnusedTemporaryFileNameWithPathExtension(@"");
+		thePath = MvrUnusedTemporaryFileNameWithPathExtension(desiredExtension?: @"");
 	
 	NSError* e;
 	BOOL done = [data writeToFile:thePath options:NSAtomicWrite error:&e];
@@ -309,15 +310,16 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 #endif
 	
 	NSAssert(canInvalidate, @"This method can only be called from a garbage-collected environment!");
-	[self resetData];
+	[self resetDataByDeletingOffloadFile:YES];
 }
 
-- (void) resetData;
+- (void) resetDataByDeletingOffloadFile:(BOOL) delete;
 {
 	NSAssert(!persistent, @"Persistent item storage cannot be altered. Remove the item from the storage central first.");
 	
 	if (path) {
-		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+		if (delete)
+			[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
 		self.path = nil;
 	}
 	
@@ -364,6 +366,70 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	CFRelease(ext);
 	
 	return done;
+}
+
+- (BOOL) setDesiredExtension:(NSString*) ext error:(NSError**) e;
+{
+	if (self.hasPath)
+		return [self setPathExtension:ext error:e];
+	else {
+		if (desiredExtension != ext) {
+			[desiredExtension release];
+			desiredExtension = [ext copy];
+		}
+		
+		return YES;
+	}
+}
+
+- (BOOL) setDesiredExtensionAssumingType:(id) uti error:(NSError**) e;
+{
+	if (self.hasPath)
+		return [self setPathExtensionAssumingType:uti error:e];
+	else {
+		CFStringRef ext = UTTypeCopyPreferredTagWithClass((CFStringRef) uti, kUTTagClassFilenameExtension);
+		
+		if (!ext) {
+			if (e) *e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageNoFilenameExtensionForTypeError userInfo:nil];
+			return NO;
+		}
+		
+		if (desiredExtension != (id) ext) {
+			[desiredExtension release];
+			desiredExtension = [(id)ext copy];
+		}
+		
+		CFRelease(ext);
+		return YES;	
+	}
+}
+
+- (BOOL) makePersistentByOffloadingToPath:(NSString*) p error:(NSError**) e;
+{
+	if (self.persistent) {
+		*e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageAlreadyPersistent userInfo:nil];
+		return NO;
+	}
+	
+	if (data && !path) {
+		if (![data writeToFile:p options:NSAtomicWrite error:e])
+			return NO;
+	} else if (![p isEqual:path]) {
+		if (![[NSFileManager defaultManager] moveItemAtPath:path toPath:p error:e])
+			return NO;
+	}
+
+	self.path = p;
+	self.persistent = YES;
+	return YES;
+}
+
+- (void) stopBeingPersistent;
+{
+	if (self.persistent) {
+		self.persistent = NO;
+		[self resetDataByDeletingOffloadFile:NO];
+	}
 }
 
 #pragma mark Debugging aids
