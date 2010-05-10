@@ -136,6 +136,7 @@
 
 - (void) incomingTransfer:(id <MvrIncoming>)incoming didEndReceivingItem:(MvrItem *)i;
 {
+	[self.storage addStoredItemsObject:i];
 	[viewController addItem:i fromSource:[incoming channel] ofType:kMvrItemSourceChannel];
 }
 
