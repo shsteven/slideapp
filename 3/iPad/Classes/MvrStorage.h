@@ -8,17 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Network+Storage/MvrItem.h"
 
 @interface MvrStorage : NSObject {
 	NSString* itemsDirectory, * metadataDirectory;
 	
-	NSMutableSet* allStoredItems;
+	NSMutableSet* storedItemsSet;
 }
 
 - (id) initWithItemsDirectory:(NSString*) i metadataDirectory:(NSString*) m;
 
-@property(readonly) NSMutableSet* storedItems;
-- (NSSet*) allStoredItems;
+@property(readonly) NSSet* storedItems;
+- (void) addStoredItemsObject:(MvrItem*) i;
+- (void) removeStoredItemsObject:(MvrItem*) i;
 
 - (void) migrateFrom30StorageCentralMetadata:(id) meta;
 

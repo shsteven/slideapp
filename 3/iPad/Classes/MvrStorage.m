@@ -18,7 +18,6 @@
 #define kMvrStorageCorrespondingMetadataFileNameItemNoteKey @"MvrMetadataFileName"
 
 #import "Network+Storage/MvrItemStorage.h"
-#import "Network+Storage/MvrItem.h"
 
 #import <MuiKit/MuiKit.h>
 
@@ -27,6 +26,8 @@
 - (void) addItemWithMetadataFile:(NSString *)itemMetaPath;
 - (void) makeMetadataFileForItem:(MvrItem*) i;
 - (NSString*) userVisibleFilenameForItem:(MvrItem*) i;
+
+@property(readonly) NSMutableSet* mutableStoredItems;
 
 @end
 
@@ -45,21 +46,21 @@
 
 - (void) dealloc
 {
-	[allStoredItems release];
+	[storedItemsSet release];
 	[itemsDirectory release];
 	[metadataDirectory release];
 	[super dealloc];
 }
 
-- (NSMutableSet *) storedItems;
+- (NSSet*) storedItems;
 {
-	return [self mutableSetValueForKey:@"allStoredItems"];
+	return [[self.mutableStoredItems copy] autorelease];
 }
 
-- (NSSet*) allStoredItems;
+- (NSMutableSet*) mutableStoredItems;
 {
-	if (!allStoredItems) {
-		allStoredItems = [NSMutableSet new];
+	if (!storedItemsSet) {
+		storedItemsSet = [NSMutableSet new];
 		
 		
 		for (NSString* filename in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:metadataDirectory error:NULL]) {
@@ -73,7 +74,7 @@
 		
 	}
 	
-	return [[allStoredItems copy] autorelease];
+	return storedItemsSet;
 }
 
 - (void) addItemWithMetadataFile:(NSString*) itemMetaPath;
@@ -108,12 +109,12 @@
 	
 	[i setItemNotes:L0As(NSDictionary, [itemMeta objectForKey:kMvrStorageNotesItemInfoKey])];
 	
-	[allStoredItems addObject:i];
+	[self.mutableStoredItems addObject:i];
 }
 
 - (void) addStoredItemsObject:(MvrItem*) i;
 {
-	if ([allStoredItems containsObject:i])
+	if ([storedItemsSet containsObject:i])
 		return;
 	
 	NSAssert(!i.storage.persistent, @"This object is already persistent and cannot be managed by this storage central.");
@@ -126,7 +127,7 @@
 
 	[self makeMetadataFileForItem:i];
 
-	[allStoredItems addObject:i];
+	[self.mutableStoredItems addObject:i];
 }
 
 - (void) makeMetadataFileForItem:(MvrItem*) i;
@@ -163,21 +164,28 @@
 		
 		NSString* ext = [(id)UTTypeCopyPreferredTagWithClass((CFStringRef) i.type, kUTTagClassFilenameExtension) autorelease];
 		if (!ext) {
-			// that's bad: we have no idea re: the correct file extension >_<
-			// for now we die, but we need to come up with a better solution pre-shipping.
+			// if we don't know what type of file this is, we hide the file from view.
 #warning TODO
-			NSAssert(NO, @"No known file extension for type!");
-			return nil;
+			// we must show the file when we know an extension.
+			
+			ext = @"";
+			filename = [NSString stringWithFormat:@".%@", [[L0UUID UUID] stringValue]];
 		}
 		
-		// step two: do we know where it's from? then we use "From %@.xxx".
-		// TODO see if this sanitation is sufficient.
-		NSString* whereFrom = [[i objectForItemNotesKey:kMvrItemWhereFromNoteKey] stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-		if (whereFrom)
-			filename = [NSString stringWithFormat:NSLocalizedString(@"From %@.%@", @"Format for file name as in 'from DEVICE'."), whereFrom, ext];
-		else
-			filename = [NSString stringWithFormat:NSLocalizedString(@"Item.%@", @"Generic item filename"), ext];
+		if (!filename) {
+		
+			// step two: do we know where it's from? then we use "From %@.xxx".
+			// TODO see if this sanitation is sufficient.
+			NSString* whereFrom = [[i objectForItemNotesKey:kMvrItemWhereFromNoteKey] stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+			if (whereFrom)
+				filename = [NSString stringWithFormat:NSLocalizedString(@"From %@.%@", @"Format for file name as in 'from DEVICE'."), whereFrom, ext];
+			else
+				filename = [NSString stringWithFormat:NSLocalizedString(@"Item.%@", @"Generic item filename"), ext];
+			
+		}
 	}
+	
+	NSAssert(filename, @"We have found a name for this file.");
 	
 	int attempt = 1;
 	NSString* actualName, * basename = nil, * ext = nil;
@@ -204,7 +212,7 @@
 
 - (void) removeStoredItemsObject:(MvrItem*) i;
 {
-	if (![allStoredItems containsObject:i])
+	if (![storedItemsSet containsObject:i])
 		return;
 	
 	NSAssert(i.storage.persistent, @"This object isn't persistent -- something disabled persistency behind the back of this storage central");
@@ -228,7 +236,7 @@
 	// two: invalidate the storage and kill the item and delete the files.
 	
 	[i.storage stopBeingPersistent];
-	[allStoredItems removeObject:i];
+	[storedItemsSet removeObject:i];
 	
 	for (NSString* file in filesToDelete)
 		[[NSFileManager defaultManager] removeItemAtPath:file error:NULL];

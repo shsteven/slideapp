@@ -7,7 +7,8 @@
 //
 
 #import "MvrAppDelegate_iPad.h"
-#import "MvrTableController_iPad.h"
+
+#import <AddressBook/AddressBook.h>
 
 #warning Test
 #import "MvrDraggableView.h"
@@ -20,8 +21,6 @@
 
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
-
-#import <AddressBook/AddressBook.h>
 
 @implementation MvrAppDelegate_iPad
 
@@ -59,22 +58,28 @@
 
 - (void) testByAddingImageAndContact;
 {
-	MvrImageItem* img = [[MvrImageItem alloc] initWithImage:[UIImage imageNamed:@"IMG_0439.jpg"] type:@"public.jpeg"];
-	[viewController addItem:img fromSource:nil ofType:kMvrItemSourceSelf];	
+	//MvrImageItem* img = [[MvrImageItem alloc] initWithImage:[UIImage imageNamed:@"IMG_0439.jpg"] type:@"public.jpeg"];
+//	[viewController addItem:img fromSource:nil ofType:kMvrItemSourceSelf];	
+//	
+//	ABRecordRef ref = ABPersonCreate();
+//	ABRecordSetValue(ref, kABPersonFirstNameProperty, (CFTypeRef) @"Pinco", NULL);
+//	ABRecordSetValue(ref, kABPersonLastNameProperty, (CFTypeRef) @"Pallo", NULL);
+//
+//	ABMultiValueRef email = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+//	ABMultiValueAddValueAndLabel(email, (CFTypeRef) @"pinco@pallo.net", kABWorkLabel, NULL);
+//	ABRecordSetValue(ref, kABPersonEmailProperty, email, NULL);
+//	
+//	MvrContactItem* ci = [[[MvrContactItem alloc] initWithContentsOfAddressBookRecord:ref] autorelease];
+//	[viewController addItem:ci fromSource:nil ofType:kMvrItemSourceSelf];
+//	
+//	CFRelease(email);
+//	CFRelease(ref);
+//	
+//	[self.storage addStoredItemsObject:img];
+//	[self.storage addStoredItemsObject:ci];
 	
-	ABRecordRef ref = ABPersonCreate();
-	ABRecordSetValue(ref, kABPersonFirstNameProperty, (CFTypeRef) @"Pinco", NULL);
-	ABRecordSetValue(ref, kABPersonLastNameProperty, (CFTypeRef) @"Pallo", NULL);
-
-	ABMultiValueRef email = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-	ABMultiValueAddValueAndLabel(email, (CFTypeRef) @"pinco@pallo.net", kABWorkLabel, NULL);
-	ABRecordSetValue(ref, kABPersonEmailProperty, email, NULL);
-	
-	MvrContactItem* ci = [[[MvrContactItem alloc] initWithContentsOfAddressBookRecord:ref] autorelease];
-	[viewController addItem:ci fromSource:nil ofType:kMvrItemSourceSelf];
-	
-	CFRelease(email);
-	CFRelease(ref);
+	for (MvrItem* i in self.storage.storedItems)
+		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
 }
 
 - (void)dealloc {
@@ -139,6 +144,27 @@
 - (void) applicationWillTerminate:(UIApplication *)application;
 {
 	wifi.enabled = NO;
+}
+
+#pragma mark Storage
+
+- (MvrStorage*) storage;
+{
+	if (!storage) {
+		// TODO support Open /Mover Items subdirectory
+		NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+		NSString* metaDir = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+		metaDir = [metaDir stringByAppendingPathComponent:@"Mover Metadata"];
+		
+		NSFileManager* fm = [NSFileManager defaultManager];
+		
+		[fm createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:NULL];
+		[fm createDirectoryAtPath:metaDir withIntermediateDirectories:YES attributes:nil error:NULL];
+		
+		storage = [[MvrStorage alloc] initWithItemsDirectory:docsDir metadataDirectory:metaDir];
+	}
+	
+	return storage;
 }
 
 @end

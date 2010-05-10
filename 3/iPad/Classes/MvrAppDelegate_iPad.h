@@ -13,7 +13,8 @@
 
 #import "Network+Storage/MvrScannerObserver.h"
 
-@class MvrTableController_iPad;
+#import "MvrStorage.h"
+#import "MvrTableController_iPad.h"
 
 @interface MvrAppDelegate_iPad : NSObject <UIApplicationDelegate, MvrPlatformInfo, MvrScannerObserverDelegate> {
     UIWindow *window;
@@ -23,12 +24,16 @@
 	L0UUID* selfIdentifier;
 	
 	MvrScannerObserver* observer;
+	
+	MvrStorage* storage;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow* window;
 @property(nonatomic, retain) IBOutlet MvrTableController_iPad* viewController;
 
 @property(nonatomic, readonly) MvrModernWiFi* wifi;
+
+@property(nonatomic, readonly) MvrStorage* storage;
 
 @end
 
