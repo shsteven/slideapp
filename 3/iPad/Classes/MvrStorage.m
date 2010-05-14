@@ -132,7 +132,7 @@
 
 - (void) makeMetadataFileForItem:(MvrItem*) i;
 {
-	NSAssert(i.storage.persistent && i.storage.hasPath, @"The item must be saved to persistent storage before metadata can be written");
+	NSAssert(i.storage.persistent && i.storage.hasPath && i.storage.path, @"The item must be saved to persistent storage before metadata can be written");
 	
 	
 	NSString* name, * path;

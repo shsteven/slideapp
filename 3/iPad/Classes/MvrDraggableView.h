@@ -29,10 +29,14 @@
 
 @protocol MvrDraggableViewDelegate <NSObject>
 
+// Sent whenever a touch begins on the view.
+- (void) draggableViewDidBeginTouching:(MvrDraggableView*) view;
+
 // Sent as often as possible during a drag.
 - (void) draggableViewCenterDidMove:(MvrDraggableView*) view;
 
 // Sent when the view stops moving.
 - (void) draggableViewCenterDidStopMoving:(MvrDraggableView*) view velocity:(CGPoint) velocity;
+
 
 @end

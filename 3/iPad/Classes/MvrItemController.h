@@ -45,6 +45,7 @@
 
 // The action button.
 @property(readonly) UIButton* actionButton;
+- (void) beginShowingActionButton;
 - (void) setActionButtonHidden:(BOOL) hidden animated:(BOOL) animated;
 
 @property(assign) id <MvrItemsTable> itemsTable;
@@ -67,6 +68,8 @@
 @protocol MvrItemsTable <NSObject>
 
 - (void) itemControllerViewDidFinishMoving:(MvrItemController*) ic velocity:(CGPoint) v;
+
+- (void) removeItemOfControllerFromTable:(MvrItemController*) ic;
 
 @end
 

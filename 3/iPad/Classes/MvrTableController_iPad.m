@@ -7,6 +7,7 @@
 //
 
 #import "MvrTableController_iPad.h"
+#import "MvrAppDelegate_iPad.h"
 #import <QuartzCore/QuartzCore.h>
 
 #import "MvrInertia.h"
@@ -90,6 +91,9 @@ enum {
 
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
 {
+	if (type == kMvrItemSourceChannel && source)
+		[MvrApp().storage addStoredItemsObject:item];
+	
 	MvrItemController* ic = [MvrItemController itemControllerWithItem:item];
 	if (!ic)
 		return;
@@ -118,6 +122,9 @@ enum {
 				ic.draggableView.center = end;
 			}
 			[UIView commitAnimations];
+			
+			if (type == kMvrItemSourceChannel)
+				[ic beginShowingActionButton];
 			
 		}
 			break;
@@ -245,6 +252,14 @@ enum {
 {
 	[self bounceBackViewIfNeeded:retainedItemController.draggableView];
 	[retainedItemController release]; // balances the retain above.
+}
+
+- (void) removeItemOfControllerFromTable:(MvrItemController *)ic;
+{
+	MvrItem* i = [[ic.item retain] autorelease];
+	ic.item = nil;
+	[MvrApp().storage removeStoredItemsObject:i];
+	[self removeItemController:ic];
 }
 
 @end

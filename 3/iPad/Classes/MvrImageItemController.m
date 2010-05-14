@@ -11,7 +11,7 @@
 #import <MuiKit/MuiKit.h>
 
 #import "MvrImageItem.h"
-
+#import "MvrItemAction.h"
 
 @interface MvrImageItemBackdropView ()
 

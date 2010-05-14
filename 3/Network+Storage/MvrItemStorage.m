@@ -344,7 +344,12 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 		return YES;
 	
 	NSString* storageDir = [self.path stringByDeletingLastPathComponent];
-	NSString* newPath = MvrUnusedPathInDirectoryWithExtension(storageDir, ext, NULL);
+	NSString* newPath = nil;
+	if (self.hasPath)
+		newPath = [[self.path stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
+	
+	if (!newPath || [[NSFileManager defaultManager] fileExistsAtPath:newPath])
+		newPath = MvrUnusedPathInDirectoryWithExtension(storageDir, ext, NULL);
 	
 	BOOL done = [[NSFileManager defaultManager] moveItemAtPath:self.path toPath:newPath error:e];
 	if (done)
@@ -419,6 +424,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 			return NO;
 	}
 
+	[data release]; data = nil;
 	self.path = p;
 	self.persistent = YES;
 	return YES;

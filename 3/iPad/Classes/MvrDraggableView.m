@@ -8,7 +8,7 @@
 
 #import "MvrDraggableView.h"
 
-@interface MvrDraggableView ()
+@interface MvrDraggableView () <UIGestureRecognizerDelegate>
 
 - (void) setupGestureRecognizers;
 
@@ -35,16 +35,31 @@
 }
 
 - (void) setupGestureRecognizers;
-{
+{	
 	UIPanGestureRecognizer* pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panned:)] autorelease];
 	
 	UIRotationGestureRecognizer* rotation = [[[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotated:)] autorelease];
 	
+	pan.delegate = self;
+	rotation.delegate = self;
+	
 	self.gestureRecognizers = [NSArray arrayWithObjects:pan, rotation, nil];
-}	
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
+{
+	return
+		[gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]] ||
+		[gestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
+}
 
 - (void) dealloc;
 {
+	for (UIGestureRecognizer* g in self.gestureRecognizers) {
+		if (g.delegate == self)
+			g.delegate = nil;
+	}
+	
 	[inertia release];
 	[super dealloc];
 }
@@ -65,6 +80,11 @@
 	} else if (rotation.state == UIGestureRecognizerStateEnded) {
 		[self.delegate draggableViewCenterDidStopMoving:self velocity:CGPointZero];
 	}
+}
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+{
+	[self.delegate draggableViewDidBeginTouching:self];
 }
 
 - (void) panned:(UIPanGestureRecognizer*) pan;

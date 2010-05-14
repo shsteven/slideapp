@@ -154,6 +154,8 @@ static L0Map* MvrItemViewControllerClasses = nil;
 
 - (void) showActionMenu;
 {
+	[self.view.superview bringSubviewToFront:self.view];
+	
 	actionMenuShown = YES;
 	
 	PLActionSheet* as = [[PLActionSheet new] autorelease];
@@ -168,11 +170,49 @@ static L0Map* MvrItemViewControllerClasses = nil;
 		}
 	}
 	
+	[as addDestructiveButtonWithTitle:NSLocalizedString(@"Delete", @"Delete button in action menu") action:^{
+		
+		[self.itemsTable removeItemOfControllerFromTable:self];
+		
+	}];
+		
+	
 	[as setCancelledAction:^{
 		[self didFinishAction];
 	}];
 	
 	[as showFromRect:self.actionButton.bounds inView:self.actionButton animated:YES];
+	
+	
+	// "Pop" transition.
+	[self performSelector:@selector(makeViewPop) withObject:nil afterDelay:0.001];
+}
+
+- (void) makeViewPop;
+{
+	CGAffineTransform t = self.view.transform;
+
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:0.1];
+	
+	self.view.transform = CGAffineTransformScale(t, 1.05, 1.05);
+	
+	[UIView commitAnimations];
+	
+	[self performSelector:@selector(makeViewPopDown:) withObject:[NSValue valueWithCGAffineTransform:t] afterDelay:0.1];
+}
+
+- (void) makeViewPopDown:(NSValue*) origTransform;
+{
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:0.1];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	
+	self.view.transform = [origTransform CGAffineTransformValue];
+	
+	[UIView commitAnimations];
 }
 
 - (void) draggableViewCenterDidMove:(MvrDraggableView *)view;
@@ -182,10 +222,23 @@ static L0Map* MvrItemViewControllerClasses = nil;
 	[self setActionButtonHidden:NO animated:YES];
 }
 
+- (void) beginShowingActionButton;
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideActionButton) object:nil];
+	
+	[self setActionButtonHidden:NO animated:YES];
+	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];	
+}
+
 - (void) draggableViewCenterDidStopMoving:(MvrDraggableView *)view velocity:(CGPoint) v;
 {
-	[self performSelector:@selector(hideActionButton) withObject:nil afterDelay:5.0];
+	[self beginShowingActionButton];
 	[self.itemsTable itemControllerViewDidFinishMoving:self velocity:v];
+}
+
+- (void) draggableViewDidBeginTouching:(MvrDraggableView *)view;
+{
+	[self beginShowingActionButton];
 }
 
 - (void) hideActionButton;

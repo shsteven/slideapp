@@ -47,6 +47,11 @@
     [_sheet addButtonWithTitle: title];
 }
 
+- (void) addDestructiveButtonWithTitle:(NSString*) title action:(void (^)()) block {
+    [self addButtonWithTitle: title action: block];
+	_sheet.destructiveButtonIndex = _sheet.numberOfButtons - 1;
+}
+
 - (void) showInView: (UIView *) view {
 	_cleanedUp = NO;
     [_sheet showInView: view];

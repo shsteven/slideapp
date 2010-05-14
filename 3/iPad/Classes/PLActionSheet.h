@@ -20,8 +20,10 @@
 	BOOL _cleanedUp;
 }
 
-- (void) addCancelButtonWithTitle: (NSString *) title action: (void (^)()) block;
 - (void) addButtonWithTitle: (NSString *) title action: (void (^)()) block;
+
+- (void) addCancelButtonWithTitle: (NSString *) title action: (void (^)()) block;
+- (void) addDestructiveButtonWithTitle:(NSString*) title action:(void (^)()) block;
 
 - (void) showInView: (UIView *) view;
 
