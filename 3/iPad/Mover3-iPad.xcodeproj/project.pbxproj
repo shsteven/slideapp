@@ -425,6 +425,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				15148770119D78CC003F74AF /* Save Development Revision */,
 			);
 			buildRules = (
 			);
@@ -547,6 +548,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		15148770119D78CC003F74AF /* Save Development Revision */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Save Development Revision";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$GIT\" == \"\" ]; then\n\tGIT=\"`which git`\"\nfi\n\nif [ \"$GIT\" == \"\" ]; then\n\texit 0\nfi\n\ncd \"$SRCROOT\"\nexport ILABS_MOVER_GIT_REV=\"`\"$GIT\" rev-parse --short HEAD`\"\n\ncd \"$BUILT_PRODUCTS_DIR\"/\"$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\necho \"$ILABS_MOVER_GIT_REV\" > DevelopmentRevision\necho \"note: Revision $ILABS_MOVER_GIT_REV.\" >&2\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
