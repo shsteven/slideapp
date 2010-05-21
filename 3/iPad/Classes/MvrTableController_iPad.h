@@ -27,6 +27,10 @@ typedef NSInteger MvrItemSourceType;
 	IBOutlet UIView* draggableViewsLayer;
 	
 	NSMutableSet* itemControllers;
+	
+	L0Map* arrowViewsByChannel;
+	
+	MvrScannerObserver* obs;
 }
 
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;

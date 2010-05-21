@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		15015CA9118AED3600972828 /* MvrInertia.m in Sources */ = {isa = PBXBuildFile; fileRef = 15015CA8118AED3600972828 /* MvrInertia.m */; };
+		1505CCDA11A66F2100E6BB00 /* MvrArrowView_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 1505CCD911A66F2100E6BB00 /* MvrArrowView_iPad.m */; };
+		1505CCDC11A66F2800E6BB00 /* MvrArrowView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1505CCDB11A66F2800E6BB00 /* MvrArrowView_iPad.xib */; };
+		1505CCDE11A6700100E6BB00 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1505CCDD11A6700100E6BB00 /* Arrow.png */; };
+		1505CCE811A672A700E6BB00 /* TopShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1505CCE711A672A700E6BB00 /* TopShadow.png */; };
 		1520961011859ADA00D16CB7 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1520960F11859ADA00D16CB7 /* PLBlocks.framework */; };
 		1520961911859AFE00D16CB7 /* PLActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1520961811859AFE00D16CB7 /* PLActionSheet.m */; };
 		15436D9D11914F180072FDBC /* MvrItemAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 15436D9C11914F180072FDBC /* MvrItemAction.m */; };
@@ -132,6 +136,11 @@
 /* Begin PBXFileReference section */
 		15015CA7118AED3600972828 /* MvrInertia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrInertia.h; sourceTree = "<group>"; };
 		15015CA8118AED3600972828 /* MvrInertia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrInertia.m; sourceTree = "<group>"; };
+		1505CCD811A66F2100E6BB00 /* MvrArrowView_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView_iPad.h; sourceTree = "<group>"; };
+		1505CCD911A66F2100E6BB00 /* MvrArrowView_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrArrowView_iPad.m; sourceTree = "<group>"; };
+		1505CCDB11A66F2800E6BB00 /* MvrArrowView_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrArrowView_iPad.xib; sourceTree = "<group>"; };
+		1505CCDD11A6700100E6BB00 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = SOURCE_ROOT; };
+		1505CCE711A672A700E6BB00 /* TopShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopShadow.png; sourceTree = SOURCE_ROOT; };
 		1520960F11859ADA00D16CB7 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		1520961711859AFE00D16CB7 /* PLActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLActionSheet.h; sourceTree = "<group>"; };
 		1520961811859AFE00D16CB7 /* PLActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLActionSheet.m; sourceTree = "<group>"; };
@@ -238,8 +247,21 @@
 				1555DFB7117F3BE0009D6926 /* MvrDraggableView.m */,
 				15015CA7118AED3600972828 /* MvrInertia.h */,
 				15015CA8118AED3600972828 /* MvrInertia.m */,
+				1505CCEA11A6732600E6BB00 /* Arrow View */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		1505CCEA11A6732600E6BB00 /* Arrow View */ = {
+			isa = PBXGroup;
+			children = (
+				1505CCD811A66F2100E6BB00 /* MvrArrowView_iPad.h */,
+				1505CCD911A66F2100E6BB00 /* MvrArrowView_iPad.m */,
+				1505CCDB11A66F2800E6BB00 /* MvrArrowView_iPad.xib */,
+				1505CCDD11A6700100E6BB00 /* Arrow.png */,
+				1505CCE711A672A700E6BB00 /* TopShadow.png */,
+			);
+			name = "Arrow View";
 			sourceTree = "<group>";
 		};
 		155F094D1181EFF100A6CE5E /* Items */ = {
@@ -544,6 +566,9 @@
 				15ABA96D1194A19F00437F3C /* MvrGenericItemController.xib in Resources */,
 				15ABA97E1194A5DA00437F3C /* DocIcon.png in Resources */,
 				15ABAA001194AED000437F3C /* MvrNoOpeningOptions.alert in Resources */,
+				1505CCDC11A66F2800E6BB00 /* MvrArrowView_iPad.xib in Resources */,
+				1505CCDE11A6700100E6BB00 /* Arrow.png in Resources */,
+				1505CCE811A672A700E6BB00 /* TopShadow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +615,7 @@
 				15ABA96B1194A15E00437F3C /* MvrGenericItemController.m in Sources */,
 				15ABA9701194A2BB00437F3C /* UIImage+ILIconTools.m in Sources */,
 				15E529EF119552E900D310E2 /* MvrStorage.m in Sources */,
+				1505CCDA11A66F2100E6BB00 /* MvrArrowView_iPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

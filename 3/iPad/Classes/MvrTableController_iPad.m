@@ -12,6 +12,8 @@
 
 #import "MvrInertia.h"
 
+#import "MvrArrowView_iPad.h"
+
 #define kMvrMaximumAngleRange (30)
 static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransform transform)
 {
@@ -36,6 +38,9 @@ enum {
 @interface MvrTableController_iPad ()
 
 - (void) getStartingPoint:(CGPoint*) start endingPoint:(CGPoint*) end toAnimateSlidingEntranceOfView:(MvrDraggableView*) view alongEdge:(NSInteger) edge atCoordinate:(CGFloat) coord;
+
+- (void) addArrowViewForChannel:(id <MvrChannel>) chan;
+- (void) removeArrowViewForChannel:(id <MvrChannel>) chan;
 
 @end
 
@@ -84,9 +89,52 @@ enum {
 	}
 }
 
-- (void) awakeFromNib;
+- (void) viewDidLoad;
 {
+	[super viewDidLoad];
+	
 	itemControllers = [NSMutableSet new];
+	
+	arrowViewsByChannel = [L0Map new];
+
+	for (id <MvrChannel> chan in MvrApp().wifi.channels) {
+		[self addArrowViewForChannel:chan];
+	}
+	
+	obs = [[MvrScannerObserver alloc] initWithScanner:MvrApp().wifi delegate:self];
+}
+
+- (void) scanner:(id <MvrScanner>)s didAddChannel:(id <MvrChannel>)channel;
+{
+	[self addArrowViewForChannel:channel];
+}
+
+- (void) scanner:(id <MvrScanner>)s didRemoveChannel:(id <MvrChannel>)channel;
+{
+	[self removeArrowViewForChannel:channel];
+}
+
+- (void) addArrowViewForChannel:(id <MvrChannel>) chan;
+{
+	L0Log(@"Will add an arrow view for %@", chan);
+	
+	// TODO better constructor
+	MvrArrowView_iPad* arrow = [[MvrArrowView_iPad alloc] initWithFrame:CGRectZero];
+	
+	arrow.mainLabel.text = [chan displayName];
+	
+	[arrowViewsByChannel setObject:arrow forKey:chan];
+	
+	// TODO actually displaying the arrow view.
+}
+
+- (void) removeArrowViewForChannel:(id <MvrChannel>) chan;
+{
+	L0Log(@"Will remove an arrow view for %@", chan);
+
+	MvrArrowView_iPad* arrow = [arrowViewsByChannel objectForKey:chan];
+	[arrow removeFromSuperview]; // TODO animated
+	[arrowViewsByChannel removeObjectForKey:chan];
 }
 
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
