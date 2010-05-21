@@ -29,6 +29,7 @@ typedef NSInteger MvrItemSourceType;
 	NSMutableSet* itemControllers;
 	
 	L0Map* arrowViewsByChannel;
+	NSMutableArray* orderedArrowViews;
 	
 	MvrScannerObserver* obs;
 }

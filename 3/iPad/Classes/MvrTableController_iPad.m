@@ -42,6 +42,8 @@ enum {
 - (void) addArrowViewForChannel:(id <MvrChannel>) chan;
 - (void) removeArrowViewForChannel:(id <MvrChannel>) chan;
 
+- (void) layoutArrowViews;
+
 @end
 
 
@@ -96,10 +98,12 @@ enum {
 	itemControllers = [NSMutableSet new];
 	
 	arrowViewsByChannel = [L0Map new];
+	orderedArrowViews = [NSMutableArray new];
 
-	for (id <MvrChannel> chan in MvrApp().wifi.channels) {
+	for (id <MvrChannel> chan in MvrApp().wifi.channels)
 		[self addArrowViewForChannel:chan];
-	}
+		
+	[self layoutArrowViews];
 	
 	obs = [[MvrScannerObserver alloc] initWithScanner:MvrApp().wifi delegate:self];
 }
@@ -114,8 +118,13 @@ enum {
 	[self removeArrowViewForChannel:channel];
 }
 
+#pragma mark Arrows
+
 - (void) addArrowViewForChannel:(id <MvrChannel>) chan;
 {
+	if ([arrowViewsByChannel objectForKey:chan])
+		return;
+	
 	L0Log(@"Will add an arrow view for %@", chan);
 	
 	// TODO better constructor
@@ -124,8 +133,11 @@ enum {
 	arrow.mainLabel.text = [chan displayName];
 	
 	[arrowViewsByChannel setObject:arrow forKey:chan];
+	[orderedArrowViews addObject:arrow];
 	
 	// TODO actually displaying the arrow view.
+	
+	[self layoutArrowViews];
 }
 
 - (void) removeArrowViewForChannel:(id <MvrChannel>) chan;
@@ -134,8 +146,20 @@ enum {
 
 	MvrArrowView_iPad* arrow = [arrowViewsByChannel objectForKey:chan];
 	[arrow removeFromSuperview]; // TODO animated
+	[orderedArrowViews removeObject:arrow];
 	[arrowViewsByChannel removeObjectForKey:chan];
+
+	[self layoutArrowViews];
 }
+
+- (void) layoutArrowViews;
+{	
+	for (MvrArrowView_iPad* arrow in orderedArrowViews) {
+		// TODO
+	}
+}
+
+#pragma mark Items
 
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
 {
