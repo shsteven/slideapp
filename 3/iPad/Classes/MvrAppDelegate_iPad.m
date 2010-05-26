@@ -167,4 +167,15 @@
 	return storage;
 }
 
+#pragma mark Modal VCs
+
+- (void) presentModalViewController:(UIViewController*) vc;
+{
+	UIViewController* modalParent = viewController;
+	while (modalParent.modalViewController)
+		modalParent = modalParent.modalViewController;
+	
+	[modalParent presentModalViewController:vc animated:YES];
+}
+
 @end

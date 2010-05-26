@@ -32,10 +32,10 @@
 	[self.view addSubview:self.actionButton];
 	[self.view bringSubviewToFront:self.actionButton];
 	
-	[self itemDidChange];
+	[self didChangeItem];
 }
 
-- (void) itemDidChange;
+- (void) didChangeItem;
 {
 	if (self.item) {
 		

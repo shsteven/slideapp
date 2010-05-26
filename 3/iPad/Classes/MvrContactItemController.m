@@ -13,6 +13,17 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
+#import <MuiKit/MuiKit.h>
+
+#import "MvrAppDelegate_iPad.h"
+
+enum {
+	kMvrDuplicateContactReview = 0,
+	kMvrDuplicateContactSaveAsNew = 1,
+	kMvrDuplicateContactDontSave = 2,	
+};
+
+
 // assumes strings are returned.
 NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	NSString* result = nil;
@@ -29,6 +40,17 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	return result;
 }
 
+@interface MvrContactItemController ()
+
+- (void) warnAboutDuplicateForItem;
+- (void) saveItemInAddressBook:(ABAddressBookRef)addressBook;
+- (UINavigationController*) navigationControllerToDisplayPersonItem:(MvrItem *)i;
+
+- (void) showPersonPopover:(MvrItemAction *)a forItem:(MvrItem *)i;
+
+@end
+
+
 @implementation MvrContactItemController
 
 + (NSSet *) supportedItemClasses;
@@ -39,7 +61,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 - (void) viewDidLoad;
 {
 	[super viewDidLoad];
-	[self itemDidChange];
+	[self didChangeItem];
 	
 	[self addManagedOutletKeys:
 	 @"contactImageView",
@@ -62,7 +84,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 		[UIColor colorWithPatternImage:[UIImage imageNamed:@"PaperTexture.jpg"]];
 }
 
-- (void) itemDidChange;
+- (void) didChangeItem;
 {
 	if (self.item) {
 		ABRecordRef me = [self.item copyPersonRecord];
@@ -99,6 +121,83 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	}
 }
 
+- (void) didFinishReceivingItem;
+{
+	ABAddressBookRef addressBook = ABAddressBookCreate();
+	NSString* searchString = [self.item nameAndSurnameForSearching];
+	CFArrayRef people = searchString? ABAddressBookCopyPeopleWithName(addressBook, (CFStringRef) searchString) : NULL;
+	BOOL foundDupe = people && CFArrayGetCount(people) > 0;
+	if (people)
+		CFRelease(people);
+	
+	if (foundDupe)
+		[self warnAboutDuplicateForItem];
+	else
+		[self saveItemInAddressBook:addressBook];
+	
+	CFRelease(addressBook);
+}
+
+- (void) warnAboutDuplicateForItem;
+{
+	UIAlertView* alert = [UIAlertView alertNamed:@"MvrContactIsADuplicate"];
+	[alert setTitleFormat:nil, [self.item title]];
+	
+	alert.cancelButtonIndex = kMvrDuplicateContactDontSave;
+	alert.delegate = self;
+	
+	[alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	switch (buttonIndex) {
+		case kMvrDuplicateContactReview: 
+			[self showPersonPopover:nil forItem:self.item];
+			break;
+			
+		case kMvrDuplicateContactSaveAsNew: {
+			ABAddressBookRef ab = ABAddressBookCreate();
+			[self saveItemInAddressBook:ab];
+			CFRelease(ab);
+		}
+			break;
+			
+		case kMvrDuplicateContactDontSave:
+		default:
+			break;
+	}
+	
+	alertView.delegate = nil;
+}
+
+- (void) saveItemInAddressBook:(ABAddressBookRef) addressBook;
+{
+	ABRecordRef person = [self.item copyPersonRecord];
+	NSAssert(person, @"Did copy a person off the item");
+	
+	CFErrorRef error;
+	if (!ABAddressBookAddRecord(addressBook, person, &error)) {
+		CFRelease(addressBook);
+		CFRelease(person);
+		
+		[NSException raise:@"MvrContactItemUICouldNotSave" format:@"An error occurred while adding an item to the address book: %@", [NSMakeCollectable(error) autorelease]];
+		return;
+	}
+	
+	if (!ABAddressBookSave(addressBook, &error)) {
+		CFRelease(addressBook);
+		CFRelease(person);
+		
+		[NSException raise:@"MvrContactItemUICouldNotSave" format:@"An error occurred while saving the address book: %@", [NSMakeCollectable(error) autorelease]];
+		return;
+	}
+	
+	CFRelease(person);
+	
+	[self.item setObject:[NSNumber numberWithBool:YES] forItemNotesKey:kMvrContactWasSaved];
+}
+
 - (NSArray *) defaultActions;
 {
 	MvrItemAction* show = [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Show", @"Show action button") target:self selector:@selector(showPersonPopover:forItem:)];
@@ -114,18 +213,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	if (personPopover)
 		return;
 	
-	ABUnknownPersonViewController* pc = [[ABUnknownPersonViewController new] autorelease];
-	
-	ABRecordRef ref = [self.item copyPersonRecord];
-	pc.displayedPerson = ref;
-	CFRelease(ref);
-	
-	pc.allowsAddingToAddressBook = YES;
-	pc.allowsActions = YES;
-	
-	pc.title = [self.item title];
-	
-	UINavigationController* nc = [[[UINavigationController alloc] initWithRootViewController:pc] autorelease];
+	UINavigationController* nc = [self navigationControllerToDisplayPersonItem:i];
 		
 	personPopover = [[UIPopoverController alloc] initWithContentViewController:nc];
 	personPopover.delegate = self;
@@ -142,6 +230,23 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	self.view.alpha = 0.8;
 	
 	[UIView commitAnimations];
+}
+
+- (UINavigationController*) navigationControllerToDisplayPersonItem:(MvrItem*) i;
+{
+	ABUnknownPersonViewController* pc = [[ABUnknownPersonViewController new] autorelease];
+	
+	ABRecordRef ref = [self.item copyPersonRecord];
+	pc.displayedPerson = ref;
+	CFRelease(ref);
+	
+	pc.allowsAddingToAddressBook = YES;
+	pc.allowsActions = YES;
+	
+	pc.title = [self.item title];
+	
+	UINavigationController* nc = [[[UINavigationController alloc] initWithRootViewController:pc] autorelease];
+	return nc;
 }
 
 - (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController;

@@ -35,6 +35,8 @@
 
 @property(nonatomic, readonly) MvrStorage* storage;
 
+- (void) presentModalViewController:(UIViewController*) vc;
+
 @end
 
 

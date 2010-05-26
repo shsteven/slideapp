@@ -255,8 +255,10 @@ typedef NSInteger MvrEdge;
 			}
 			[UIView commitAnimations];
 			
-			if (type == kMvrItemSourceChannel)
+			if (type == kMvrItemSourceChannel) {
+				[ic didFinishReceivingItem];
 				[ic beginShowingActionButton];
+			}
 			
 		}
 			break;

@@ -10,7 +10,7 @@
 #import "MvrContactItem.h"
 #import "MvrItemController.h"
 
-@interface MvrContactItemController : MvrItemController <UIPopoverControllerDelegate> {
+@interface MvrContactItemController : MvrItemController <UIPopoverControllerDelegate, UIAlertViewDelegate> {
 	IBOutlet UIImageView* contactImageView;
 	IBOutlet UILabel* contactNameLabel;
 	IBOutlet UILabel* contactEmailLabel;

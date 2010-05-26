@@ -32,7 +32,7 @@
 	[self addManagedOutletKeys:@"imageView", nil];
 	
 	imageViewMargin = imageView.frame.origin.x;
-	[self itemDidChange];
+	[self didChangeItem];
 	
 	UIButton* action = self.actionButton;
 	CGPoint c;
@@ -42,7 +42,7 @@
 	[self.view addSubview:action];
 }
 
-- (void) itemDidChange;
+- (void) didChangeItem;
 {
 	if (self.item) {
 		UIImage* i = [[self.item image] imageByRenderingRotationAndScalingWithMaximumSide:450];
@@ -61,17 +61,24 @@
 	}
 }
 
+- (void) didFinishReceivingItem;
+{
+	UIImageWriteToSavedPhotosAlbum([self.item image], nil, NULL, NULL);
+}
+
 - (NSArray *) defaultActions;
 {
+	MvrItemActionBlock copyBlock = ^(MvrItem* theItem) {
+		
+		UIImage* i = [self.item image];
+		[UIPasteboard generalPasteboard].image = i;
+		
+	};
+	
 	return [NSArray arrayWithObjects:
 			[self showOpeningOptionsMenuAction],
 			
-			[MvrItemAction actionWithDisplayName:NSLocalizedString(@"Copy", @"Copy action button") block:^(MvrItem* theItem) {
-				
-		UIImage* i = [self.item image];
-		[UIPasteboard generalPasteboard].image = i;
-				
-			}],
+			[MvrItemAction actionWithDisplayName:NSLocalizedString(@"Copy", @"Copy action button") block:copyBlock],
 			
 			nil];
 }

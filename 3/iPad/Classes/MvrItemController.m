@@ -85,11 +85,14 @@ static L0Map* MvrItemViewControllerClasses = nil;
 			documentInteractionController = nil;
 		}
 		
-		[self itemDidChange];
+		[self didChangeItem];
 	}
 }
 
-- (void) itemDidChange;
+- (void) didChangeItem;
+{}
+
+- (void) didFinishReceivingItem;
 {}
 
 - (MvrDraggableView*) draggableView;
