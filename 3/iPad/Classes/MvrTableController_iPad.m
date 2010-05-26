@@ -28,6 +28,7 @@ enum {
 	kMvrWestEdge,
 	kMvrEastEdge,
 };
+typedef NSInteger MvrEdge;
 
 // This function computes start and end points for a sliding entrance for a draggable view.
 // - view is the aforementioned view. It must already be correctly transformed and all.
@@ -37,12 +38,13 @@ enum {
 // start and end CANNOT be NULL.
 @interface MvrTableController_iPad ()
 
-- (void) getStartingPoint:(CGPoint*) start endingPoint:(CGPoint*) end toAnimateSlidingEntranceOfView:(MvrDraggableView*) view alongEdge:(NSInteger) edge atCoordinate:(CGFloat) coord;
+- (void) getStartingPoint:(CGPoint*) start endingPoint:(CGPoint*) end toAnimateSlidingEntranceOfView:(MvrDraggableView*) view alongEdge:(MvrEdge) edge atCoordinate:(CGFloat) coord;
 
 - (void) addArrowViewForChannel:(id <MvrChannel>) chan;
 - (void) removeArrowViewForChannel:(id <MvrChannel>) chan;
 
 - (void) layoutArrowViews;
+- (void) layoutArrowViewsInSuperviewBounds:(CGRect)draggableBounds;
 
 @end
 
@@ -55,7 +57,7 @@ enum {
 }
 
 
-- (void) getStartingPoint:(CGPoint*) start endingPoint:(CGPoint*) end toAnimateSlidingEntranceOfView:(MvrDraggableView*) view alongEdge:(NSInteger) edge atCoordinate:(CGFloat) coord;
+- (void) getStartingPoint:(CGPoint*) start endingPoint:(CGPoint*) end toAnimateSlidingEntranceOfView:(MvrDraggableView*) view alongEdge:(MvrEdge) edge atCoordinate:(CGFloat) coord;
 {
 	CGRect bounds = view.bounds, selfBounds = draggableViewsLayer.bounds;
 	// excess approximation
@@ -135,8 +137,7 @@ enum {
 	[arrowViewsByChannel setObject:arrow forKey:chan];
 	[orderedArrowViews addObject:arrow];
 	
-	// TODO actually displaying the arrow view.
-	
+	[draggableViewsLayer addSubview:arrow];
 	[self layoutArrowViews];
 }
 
@@ -153,9 +154,67 @@ enum {
 }
 
 - (void) layoutArrowViews;
-{	
+{
+	CGRect draggableBounds = draggableViewsLayer.bounds;
+	[self layoutArrowViewsInSuperviewBounds:draggableBounds];
+}
+
+- (void) layoutArrowViewsInSuperviewBounds:(CGRect) draggableBounds;
+{
+	int i = 0;
+	MvrEdge edges[] = {
+		kMvrWestEdge,
+		kMvrNorthEdge,
+		kMvrEastEdge,
+	};
+	size_t edgeCount = 3;
+	
+	L0Log(@"%@ being laid out", orderedArrowViews);
+	
 	for (MvrArrowView_iPad* arrow in orderedArrowViews) {
-		// TODO
+		if (i >= edgeCount)
+			break;
+		
+		// TODO more than three arrows.
+		
+		CGRect arrowBounds = arrow.bounds;
+		
+		switch (edges[i]) {
+			case kMvrWestEdge:
+				// first one, west slot
+				arrow.transform = CGAffineTransformMakeRotation(270 * M_PI/180.0);
+				
+				arrow.center = CGPointMake(arrowBounds.size.height / 2, CGRectGetMidY(draggableBounds));
+				arrowBounds.size.width = draggableBounds.size.height;
+				arrow.bounds = arrowBounds;
+								
+				break;
+			
+			case kMvrNorthEdge:
+				// second one, north slot
+				arrow.transform = CGAffineTransformIdentity;
+				
+				arrow.center = CGPointMake(CGRectGetMidX(draggableBounds), arrowBounds.size.height / 2);
+				arrowBounds.size.width = draggableBounds.size.width;
+				arrow.bounds = arrowBounds;
+				
+				break;
+				
+			case kMvrEastEdge:
+				// third one, east slot
+				arrow.transform = CGAffineTransformMakeRotation(90 * M_PI/180.0);
+				
+				arrow.center = CGPointMake(CGRectGetMaxX(draggableBounds) - arrowBounds.size.height / 2, CGRectGetMidY(draggableBounds));
+				arrowBounds.size.width = draggableBounds.size.height;
+				arrow.bounds = arrowBounds;				
+				
+				break;
+				
+			default:
+				return;
+		}
+		
+		i++;
 	}
 }
 
@@ -185,6 +244,7 @@ enum {
 			[self getStartingPoint:&start endingPoint:&end toAnimateSlidingEntranceOfView:ic.draggableView alongEdge:edge atCoordinate:CGRectGetMidX(draggableViewsLayer.bounds)];
 			
 			ic.draggableView.center = start;
+			ic.draggableView.transform = MvrConcatenateRandomRotationToTransform(CGAffineTransformIdentity);
 			ic.draggableView.hidden = NO;
 			
 			[UIView beginAnimations:nil context:NULL];
@@ -290,8 +350,24 @@ enum {
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
 {
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	
 	for (MvrItemController* ic in itemControllers)
-		[self bounceBackViewIfNeeded:ic.draggableView];
+		[self bounceBackViewIfNeeded:ic.draggableView];	
+
+	[self layoutArrowViews];
+}
+
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
+{
+	CGRect bounds = draggableViewsLayer.bounds;
+	CGSize newSize;
+	
+	newSize.width = UIInterfaceOrientationIsPortrait(toInterfaceOrientation)? MIN(bounds.size.width, bounds.size.height) : MAX(bounds.size.width, bounds.size.height);
+	newSize.height = UIInterfaceOrientationIsPortrait(toInterfaceOrientation)? MAX(bounds.size.width, bounds.size.height) : MIN(bounds.size.width, bounds.size.height);
+
+	bounds.size = newSize;
+	[self layoutArrowViewsInSuperviewBounds:bounds];
 }
 
 - (void) itemControllerViewDidFinishMoving:(MvrItemController *)ic velocity:(CGPoint) v;

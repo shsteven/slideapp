@@ -44,7 +44,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIImageView" id="968481552">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">256</int>
+						<int key="NSvFlags">293</int>
 						<string key="NSFrame">{{198, 17}, {22, 11}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -59,8 +59,8 @@
 					</object>
 					<object class="IBUILabel" id="346296902">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{186, 31}, {45, 21}}</string>
+						<int key="NSvFlags">290</int>
+						<string key="NSFrame">{{20, 31}, {378, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -80,30 +80,16 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIActivityIndicatorView" id="849141482">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483355</int>
 						<string key="NSFrame">{{199, 60}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<bool key="IBUIHidesWhenStopped">NO</bool>
 						<int key="IBUIStyle">2</int>
-					</object>
-					<object class="IBUIImageView" id="298508370">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">256</int>
-						<string key="NSFrameSize">{418, 25}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">TopShadow.png</string>
-						</object>
 					</object>
 				</object>
 				<string key="NSFrameSize">{418, 89}</string>
@@ -161,7 +147,6 @@
 							<reference ref="968481552"/>
 							<reference ref="346296902"/>
 							<reference ref="849141482"/>
-							<reference ref="298508370"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -189,11 +174,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
 						<reference key="object" ref="849141482"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">9</int>
-						<reference key="object" ref="298508370"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -279,6 +259,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">MvrAppDelegate_iPad</string>
+					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -591,17 +572,8 @@
 		<string key="IBDocument.LastKnownRelativeProjectPath">../Mover3-iPad.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>Arrow.png</string>
-				<string>TopShadow.png</string>
-			</object>
-			<object class="NSMutableArray" key="dict.values">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{22, 11}</string>
-				<string>{25, 25}</string>
-			</object>
+			<string key="NS.key.0">Arrow.png</string>
+			<string key="NS.object.0">{22, 11}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">87</string>
 	</data>
