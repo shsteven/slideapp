@@ -46,6 +46,8 @@ typedef NSInteger MvrEdge;
 - (void) layoutArrowViews;
 - (void) layoutArrowViewsInSuperviewBounds:(CGRect)draggableBounds;
 
+- (void) getStartCoordinate:(CGFloat*) coord edge:(NSInteger*) edge forArrowView:(MvrArrowView_iPad*) arrow;
+
 @end
 
 
@@ -56,6 +58,33 @@ typedef NSInteger MvrEdge;
 	return kILRotateAny;
 }
 
+- (void) getStartCoordinate:(CGFloat*) coord edge:(NSInteger*) edge forArrowView:(MvrArrowView_iPad*) arrow;
+{
+	CGPoint center = arrow.center;
+	CGRect bounds = draggableViewsLayer.bounds;
+	
+	CGFloat northDistance, southDistance, westDistance, eastDistance;
+	northDistance = center.y;
+	southDistance = bounds.size.height - center.y;
+	westDistance = center.x;
+	eastDistance = bounds.size.width - center.x;
+	
+	CGFloat leastDistance = (MIN(MIN(northDistance, southDistance), MIN(westDistance, eastDistance)));
+	
+	if (leastDistance == northDistance)
+		*edge = kMvrNorthEdge;
+	else if (leastDistance == southDistance)
+		*edge = kMvrSouthEdge;		
+	else if (leastDistance == eastDistance)
+		*edge = kMvrEastEdge;		
+	else
+		*edge = kMvrWestEdge;		
+
+	if (*edge == kMvrNorthEdge || *edge == kMvrSouthEdge)
+		*coord = center.x;
+	else
+		*coord = center.y;
+}
 
 - (void) getStartingPoint:(CGPoint*) start endingPoint:(CGPoint*) end toAnimateSlidingEntranceOfView:(MvrDraggableView*) view alongEdge:(MvrEdge) edge atCoordinate:(CGFloat) coord;
 {
@@ -76,18 +105,18 @@ typedef NSInteger MvrEdge;
 		}
 			break;
 			
-#warning TODO not correct below this point
+		case kMvrWestEdge: {
+			*start = CGPointMake(-safeDistanceForHidingView, coord);
+			*end = CGPointMake(selfBounds.size.width * 0.2, coord);
+		}
+			break;
 			
 		case kMvrEastEdge: {
-			*start = CGPointMake(0, 0);
-			*end = CGPointMake(CGRectGetMidX(selfBounds), CGRectGetMidY(selfBounds));
+			*start = CGPointMake(selfBounds.size.width + safeDistanceForHidingView, coord);
+			*end = CGPointMake(selfBounds.size.width * 0.8, coord);
 		}
 			break;
-		case kMvrWestEdge: {
-			*start = CGPointMake(0, 0);
-			*end = CGPointMake(CGRectGetMidX(selfBounds), CGRectGetMidY(selfBounds));
-		}
-			break;
+			
 		default:
 			break;
 	}
@@ -233,15 +262,25 @@ typedef NSInteger MvrEdge;
 	
 	[self addItemController:ic];
 	
-#warning TODO real channel management.
-	
 	switch (type) {
-		case kMvrItemSourceChannel: // TODO
+		case kMvrItemSourceChannel:
 		case kMvrItemSourceSelf: {
-			NSInteger edge = (type == kMvrItemSourceSelf)? kMvrSouthEdge : kMvrNorthEdge;
+			NSInteger edge;
+			CGFloat coord;
+			
+			MvrArrowView_iPad* arrow = nil;
+			
+			if (source)
+				arrow = [arrowViewsByChannel objectForKey:source];
+			
+			if (type == kMvrItemSourceSelf || !arrow) {
+				edge = kMvrSouthEdge;
+				coord = CGRectGetMidX(draggableViewsLayer.bounds);
+			} else
+				[self getStartCoordinate:&coord edge:&edge forArrowView:arrow];
 			
 			CGPoint start, end;
-			[self getStartingPoint:&start endingPoint:&end toAnimateSlidingEntranceOfView:ic.draggableView alongEdge:edge atCoordinate:CGRectGetMidX(draggableViewsLayer.bounds)];
+			[self getStartingPoint:&start endingPoint:&end toAnimateSlidingEntranceOfView:ic.draggableView alongEdge:edge atCoordinate:coord];
 			
 			ic.draggableView.center = start;
 			ic.draggableView.transform = MvrConcatenateRandomRotationToTransform(CGAffineTransformIdentity);
