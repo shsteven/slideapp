@@ -27,6 +27,7 @@
 		155F099E1181F5D900A6CE5E /* MvrImageItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 155F099C1181F5D900A6CE5E /* MvrImageItemController.xib */; };
 		155F09C2118232CD00A6CE5E /* IMG_0439.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 155F09C1118232CD00A6CE5E /* IMG_0439.jpg */; };
 		155F09DB1182332B00A6CE5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F09DA1182332B00A6CE5E /* QuartzCore.framework */; };
+		157BA4E211B14A2E00418560 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157BA4E111B14A2E00418560 /* MessageUI.framework */; };
 		1594522811766FF2003126B6 /* libNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1594521A11766FB9003126B6 /* libNetwork.a */; };
 		159452531176702D003126B6 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1594524C11767023003126B6 /* libMuiKit.a */; };
 		1594525411767031003126B6 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1594524E11767023003126B6 /* MuiKit.bundle */; };
@@ -166,6 +167,7 @@
 		155F099C1181F5D900A6CE5E /* MvrImageItemController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrImageItemController.xib; sourceTree = "<group>"; };
 		155F09C1118232CD00A6CE5E /* IMG_0439.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0439.jpg; sourceTree = "<group>"; };
 		155F09DA1182332B00A6CE5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		157BA4E111B14A2E00418560 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1594520811766FB8003126B6 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		1594523011767013003126B6 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
 		1594525E117672AC003126B6 /* MvrInertia_Old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrInertia_Old.h; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				1520961011859ADA00D16CB7 /* PLBlocks.framework in Frameworks */,
 				15C5307E118C66440052381B /* AddressBook.framework in Frameworks */,
 				15C53080118C66440052381B /* AddressBookUI.framework in Frameworks */,
+				157BA4E211B14A2E00418560 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +408,7 @@
 				15C5307D118C66440052381B /* AddressBook.framework */,
 				15C5307F118C66440052381B /* AddressBookUI.framework */,
 				152887E8119C2BA600F20F30 /* AdHoc.plist */,
+				157BA4E111B14A2E00418560 /* MessageUI.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";

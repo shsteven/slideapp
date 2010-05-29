@@ -32,7 +32,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	
 	if (mv) {
 		if (ABMultiValueGetCount(mv) > 0)
-			result = [(NSString*)ABMultiValueCopyValueAtIndex(mv, 0) autorelease];
+			result = [NSMakeCollectable(ABMultiValueCopyValueAtIndex(mv, 0)) autorelease];
 		
 		CFRelease(mv);
 	}
@@ -206,8 +206,16 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	MvrItemAction* show = [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Show", @"Show action button") target:self selector:@selector(showPersonPopover:forItem:)];
 	show.continuesInteractionOnTable = YES;
 	
+	MvrItemAction* sendEmail = [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Send E-Mail to Contact", @"Send e-mail to contact action button")
+		block:^(MvrItem* i) {
+			
+			[self showMailComposerForContact];
+			
+		}];
+	
 	return [NSArray arrayWithObjects:
 			show,
+			sendEmail,
 			nil];
 }
 
@@ -272,6 +280,30 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	personPopover.delegate = nil;
 	[personPopover release];
 	[super dealloc];
+}
+
+- (IBAction) showMailComposerForContact;
+{
+	if (!self.item)
+		return;
+	
+	ABRecordRef me = [self.item copyPersonRecord];
+	
+	NSString* email = MvrFirstValueForContactMultivalue(me, kABPersonEmailProperty);
+	
+	MFMailComposeViewController* mail = [[MFMailComposeViewController new] autorelease];
+	[mail setToRecipients:[NSArray arrayWithObject:email]];
+	
+	mail.mailComposeDelegate = self;
+	
+	[MvrApp() presentModalViewController:mail];
+	
+	CFRelease(me);
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
+{
+	[controller dismissModalViewControllerAnimated:YES];
 }
 
 @end

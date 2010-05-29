@@ -10,7 +10,9 @@
 #import "MvrContactItem.h"
 #import "MvrItemController.h"
 
-@interface MvrContactItemController : MvrItemController <UIPopoverControllerDelegate, UIAlertViewDelegate> {
+#import <MessageUI/MessageUI.h>
+
+@interface MvrContactItemController : MvrItemController <UIPopoverControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
 	IBOutlet UIImageView* contactImageView;
 	IBOutlet UILabel* contactNameLabel;
 	IBOutlet UIButton* contactEmailButton;
@@ -18,5 +20,7 @@
 	
 	UIPopoverController* personPopover;
 }
+
+- (IBAction) showMailComposerForContact;
 
 @end
