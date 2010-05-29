@@ -66,7 +66,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	[self addManagedOutletKeys:
 	 @"contactImageView",
 	 @"contactNameLabel",
-	 @"contactEmailLabel",
+	 @"contactEmailButton",
 	 @"contactPhoneLabel",
 	 nil];
 	
@@ -82,6 +82,9 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	
 	((MvrShadowBackdropDraggableView*)self.view).contentAreaBackgroundColor = 
 		[UIColor colorWithPatternImage:[UIImage imageNamed:@"PaperTexture.jpg"]];
+	
+	[contactEmailButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+	[contactEmailButton setTitle:NSLocalizedString(@"no e-mail.", @"No E-Mail marker") forState:UIControlStateDisabled];
 }
 
 - (void) didChangeItem;
@@ -102,12 +105,12 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 		NSString* phone = MvrFirstValueForContactMultivalue(me, kABPersonPhoneProperty);
 
 		if (email) {
-			contactEmailLabel.text = email;
-			contactEmailLabel.textColor = [UIColor blackColor];
-		} else {
-			contactEmailLabel.text = NSLocalizedString(@"no e-mail.", @"No E-mail marker");
-			contactEmailLabel.textColor = [UIColor grayColor];
-		}
+			[contactEmailButton setTitle:email forState:UIControlStateNormal];
+			[contactEmailButton setTitle:email forState:UIControlStateHighlighted];
+			
+			contactEmailButton.enabled = YES;
+		} else
+			contactEmailButton.enabled = NO;
 
 		if (phone) {
 			contactPhoneLabel.text = phone;
@@ -116,7 +119,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 			contactPhoneLabel.text = NSLocalizedString(@"no phone number.", @"No Phone marker");
 			contactPhoneLabel.textColor = [UIColor grayColor];
 		}
-		
+				
 		CFRelease(me);
 	}
 }
@@ -224,7 +227,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	[UIView beginAnimations:nil context:NULL];
 	contactNameLabel.alpha = dimmedInfoAlpha;
 	contactPhoneLabel.alpha = dimmedInfoAlpha;
-	contactEmailLabel.alpha = dimmedInfoAlpha;
+	contactEmailButton.alpha = dimmedInfoAlpha;
 	contactImageView.alpha = dimmedInfoAlpha;
 	
 	self.view.alpha = 0.8;
@@ -254,7 +257,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	[UIView beginAnimations:nil context:NULL];
 	contactNameLabel.alpha = 1.0;
 	contactPhoneLabel.alpha = 1.0;
-	contactEmailLabel.alpha = 1.0;
+	contactEmailButton.alpha = 1.0;
 	contactImageView.alpha = 1.0;
 	self.view.alpha = 1.0;
 	[UIView commitAnimations];

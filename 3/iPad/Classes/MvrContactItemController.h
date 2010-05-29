@@ -13,7 +13,7 @@
 @interface MvrContactItemController : MvrItemController <UIPopoverControllerDelegate, UIAlertViewDelegate> {
 	IBOutlet UIImageView* contactImageView;
 	IBOutlet UILabel* contactNameLabel;
-	IBOutlet UILabel* contactEmailLabel;
+	IBOutlet UIButton* contactEmailButton;
 	IBOutlet UILabel* contactPhoneLabel;
 	
 	UIPopoverController* personPopover;
