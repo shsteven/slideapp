@@ -122,7 +122,11 @@
 	NSString* filename = [self userVisibleFilenameForItem:i];
 	
 	NSString* path = [itemsDirectory stringByAppendingPathComponent:filename];
-	BOOL done = [i.storage makePersistentByOffloadingToPath:path error:NULL];
+	NSError* e;
+	BOOL done = [i.storage makePersistentByOffloadingToPath:path error:&e];
+	if (!done)
+		L0Log(@"Error while making the thing persistent: %@", e);
+	
 	NSAssert(done, @"Can't make this item persistent. Why?");
 
 	[self makeMetadataFileForItem:i];
