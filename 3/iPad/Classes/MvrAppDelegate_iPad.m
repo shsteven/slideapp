@@ -19,6 +19,9 @@
 #import "MvrContactItem.h"
 #import "MvrContactItemController.h"
 
+#import "MvrVideoItem.h"
+#import "MvrVideoItemController.h"
+
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
 
@@ -38,6 +41,9 @@
 	
 	[MvrContactItem registerClass];
 	[MvrContactItemController registerClass];
+	
+	[MvrVideoItem registerClass];
+	[MvrVideoItemController registerClass];
 	
 	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort options:kMvrUseMobileService|kMvrAllowBrowsingForConduitService|kMvrAllowConnectionsFromConduitService];
 	

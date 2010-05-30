@@ -12,6 +12,10 @@
 		1505CCDC11A66F2800E6BB00 /* MvrArrowView_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1505CCDB11A66F2800E6BB00 /* MvrArrowView_iPad.xib */; };
 		1505CCDE11A6700100E6BB00 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1505CCDD11A6700100E6BB00 /* Arrow.png */; };
 		1505CCE811A672A700E6BB00 /* TopShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1505CCE711A672A700E6BB00 /* TopShadow.png */; };
+		151D8FF911B27DE20039803E /* MvrVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151D8FF811B27DE20039803E /* MvrVideoItem.m */; };
+		151D900411B27E1C0039803E /* MvrVideoItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 151D900311B27E1C0039803E /* MvrVideoItemController.m */; };
+		151D900611B27E400039803E /* MvrVideoItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151D900511B27E400039803E /* MvrVideoItemController.xib */; };
+		151D905011B29BD00039803E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 151D904F11B29BD00039803E /* MediaPlayer.framework */; };
 		1520961011859ADA00D16CB7 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1520960F11859ADA00D16CB7 /* PLBlocks.framework */; };
 		1520961911859AFE00D16CB7 /* PLActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1520961811859AFE00D16CB7 /* PLActionSheet.m */; };
 		15436D9D11914F180072FDBC /* MvrItemAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 15436D9C11914F180072FDBC /* MvrItemAction.m */; };
@@ -143,6 +147,12 @@
 		1505CCDB11A66F2800E6BB00 /* MvrArrowView_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrArrowView_iPad.xib; sourceTree = "<group>"; };
 		1505CCDD11A6700100E6BB00 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = SOURCE_ROOT; };
 		1505CCE711A672A700E6BB00 /* TopShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopShadow.png; sourceTree = SOURCE_ROOT; };
+		151D8FF711B27DE20039803E /* MvrVideoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrVideoItem.h; path = ../iPhone/Classes/MvrVideoItem.h; sourceTree = SOURCE_ROOT; };
+		151D8FF811B27DE20039803E /* MvrVideoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrVideoItem.m; path = ../iPhone/Classes/MvrVideoItem.m; sourceTree = SOURCE_ROOT; };
+		151D900211B27E1C0039803E /* MvrVideoItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVideoItemController.h; sourceTree = "<group>"; };
+		151D900311B27E1C0039803E /* MvrVideoItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVideoItemController.m; sourceTree = "<group>"; };
+		151D900511B27E400039803E /* MvrVideoItemController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrVideoItemController.xib; sourceTree = "<group>"; };
+		151D904F11B29BD00039803E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		1520960F11859ADA00D16CB7 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		1520961711859AFE00D16CB7 /* PLActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLActionSheet.h; sourceTree = "<group>"; };
 		1520961811859AFE00D16CB7 /* PLActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLActionSheet.m; sourceTree = "<group>"; };
@@ -231,6 +241,7 @@
 				15C5307E118C66440052381B /* AddressBook.framework in Frameworks */,
 				15C53080118C66440052381B /* AddressBookUI.framework in Frameworks */,
 				157BA4E211B14A2E00418560 /* MessageUI.framework in Frameworks */,
+				151D905011B29BD00039803E /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +280,18 @@
 			name = "Arrow View";
 			sourceTree = "<group>";
 		};
+		151D8FEE11B27DB60039803E /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				151D8FF711B27DE20039803E /* MvrVideoItem.h */,
+				151D8FF811B27DE20039803E /* MvrVideoItem.m */,
+				151D900211B27E1C0039803E /* MvrVideoItemController.h */,
+				151D900311B27E1C0039803E /* MvrVideoItemController.m */,
+				151D900511B27E400039803E /* MvrVideoItemController.xib */,
+			);
+			name = Videos;
+			sourceTree = "<group>";
+		};
 		155F094D1181EFF100A6CE5E /* Items */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +299,7 @@
 				15ABA9661194A07D00437F3C /* Generic Item View */,
 				15C53060118C5FEE0052381B /* Contacts */,
 				15C5305C118C5FC40052381B /* Images */,
+				151D8FEE11B27DB60039803E /* Videos */,
 				15C5306C118C61940052381B /* MvrShadowBackdropDraggableView.h */,
 				15C5306D118C61940052381B /* MvrShadowBackdropDraggableView.m */,
 				15E529F0119553E300D310E2 /* Storage */,
@@ -409,6 +433,7 @@
 				15C5307F118C66440052381B /* AddressBookUI.framework */,
 				152887E8119C2BA600F20F30 /* AdHoc.plist */,
 				157BA4E111B14A2E00418560 /* MessageUI.framework */,
+				151D904F11B29BD00039803E /* MediaPlayer.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -577,6 +602,7 @@
 				1505CCDE11A6700100E6BB00 /* Arrow.png in Resources */,
 				1505CCE811A672A700E6BB00 /* TopShadow.png in Resources */,
 				15F16CCF11AD69F0001CBDD2 /* MvrContactIsADuplicate.alert in Resources */,
+				151D900611B27E400039803E /* MvrVideoItemController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,6 +650,8 @@
 				15ABA9701194A2BB00437F3C /* UIImage+ILIconTools.m in Sources */,
 				15E529EF119552E900D310E2 /* MvrStorage.m in Sources */,
 				1505CCDA11A66F2100E6BB00 /* MvrArrowView_iPad.m in Sources */,
+				151D8FF911B27DE20039803E /* MvrVideoItem.m in Sources */,
+				151D900411B27E1C0039803E /* MvrVideoItemController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
