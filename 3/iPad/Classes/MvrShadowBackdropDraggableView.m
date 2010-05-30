@@ -26,7 +26,15 @@
 	return contentAreaBackgroundColor;
 }
 
+- (CGFloat) margin;
+{
+	return 10.0;
+}
 
+- (CGRect) contentBounds;
+{
+	return CGRectInset(self.bounds, self.margin, self.margin);
+}
 
 - (void) drawRect:(CGRect)rect;
 {
@@ -34,8 +42,8 @@
 	
 	[super drawRect:rect];
 	
-	CGRect whitePart = CGRectInset(self.bounds, 10, 10);
-	CGContextSetShadow(ctx, CGSizeMake(0, 0), 10.0);
+	CGRect whitePart = self.contentBounds;
+	CGContextSetShadow(ctx, CGSizeMake(0, 0), self.margin);
 	[self.contentAreaBackgroundColor setFill];
 	UIRectFill(whitePart);
 }

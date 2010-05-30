@@ -14,6 +14,8 @@
 }
 
 @property(retain) UIColor* contentAreaBackgroundColor;
+@property(readonly) CGFloat margin;
+@property(readonly) CGRect contentBounds;
 
 @end
 
