@@ -29,8 +29,8 @@
 		155F098B1181F1B600A6CE5E /* MvrItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 155F098A1181F1B600A6CE5E /* MvrItemController.m */; };
 		155F099D1181F5D900A6CE5E /* MvrImageItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 155F099B1181F5D900A6CE5E /* MvrImageItemController.m */; };
 		155F099E1181F5D900A6CE5E /* MvrImageItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 155F099C1181F5D900A6CE5E /* MvrImageItemController.xib */; };
-		155F09C2118232CD00A6CE5E /* IMG_0439.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 155F09C1118232CD00A6CE5E /* IMG_0439.jpg */; };
 		155F09DB1182332B00A6CE5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F09DA1182332B00A6CE5E /* QuartzCore.framework */; };
+		1563E23311B7A89B00E2BC0B /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1563E23211B7A89B00E2BC0B /* Icon72.png */; };
 		157BA4E211B14A2E00418560 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157BA4E111B14A2E00418560 /* MessageUI.framework */; };
 		1594522811766FF2003126B6 /* libNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1594521A11766FB9003126B6 /* libNetwork.a */; };
 		159452531176702D003126B6 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1594524C11767023003126B6 /* libMuiKit.a */; };
@@ -175,8 +175,8 @@
 		155F099A1181F5D900A6CE5E /* MvrImageItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageItemController.h; sourceTree = "<group>"; };
 		155F099B1181F5D900A6CE5E /* MvrImageItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemController.m; sourceTree = "<group>"; };
 		155F099C1181F5D900A6CE5E /* MvrImageItemController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrImageItemController.xib; sourceTree = "<group>"; };
-		155F09C1118232CD00A6CE5E /* IMG_0439.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0439.jpg; sourceTree = "<group>"; };
 		155F09DA1182332B00A6CE5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1563E23211B7A89B00E2BC0B /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon72.png; path = ../iPhone/Variants/Plus/Icon72.png; sourceTree = SOURCE_ROOT; };
 		157BA4E111B14A2E00418560 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1594520811766FB8003126B6 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		1594523011767013003126B6 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
@@ -449,7 +449,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				155F09C1118232CD00A6CE5E /* IMG_0439.jpg */,
+				1563E23211B7A89B00E2BC0B /* Icon72.png */,
 				155F08EA1181E9E600A6CE5E /* Backdrop.png */,
 				2899E5210DE3E06400AC0155 /* MvrTableController_iPad.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
@@ -588,7 +588,6 @@
 				2899E5220DE3E06400AC0155 /* MvrTableController_iPad.xib in Resources */,
 				155F08EB1181E9E600A6CE5E /* Backdrop.png in Resources */,
 				155F099E1181F5D900A6CE5E /* MvrImageItemController.xib in Resources */,
-				155F09C2118232CD00A6CE5E /* IMG_0439.jpg in Resources */,
 				15E43E0D1184D40700047418 /* ActionButton.png in Resources */,
 				15E43E0E1184D40700047418 /* ActionButton_Pressed.png in Resources */,
 				15C5306A118C60670052381B /* MvrContactItemController.xib in Resources */,
@@ -603,6 +602,7 @@
 				1505CCE811A672A700E6BB00 /* TopShadow.png in Resources */,
 				15F16CCF11AD69F0001CBDD2 /* MvrContactIsADuplicate.alert in Resources */,
 				151D900611B27E400039803E /* MvrVideoItemController.xib in Resources */,
+				1563E23311B7A89B00E2BC0B /* Icon72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

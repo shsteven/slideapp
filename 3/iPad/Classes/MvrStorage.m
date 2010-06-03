@@ -23,7 +23,7 @@
 
 @interface MvrStorage ()
 
-- (void) addItemWithMetadataFile:(NSString *)itemMetaPath;
+- (void) processMetadataFile:(NSString *)itemMetaPath;
 - (void) makeMetadataFileForItem:(MvrItem*) i;
 - (NSString*) userVisibleFilenameForItem:(MvrItem*) i;
 
@@ -39,6 +39,7 @@
 	if (self = [super init]) {
 		itemsDirectory = [i copy];
 		metadataDirectory = [m copy];
+		knownFiles = [NSMutableSet new];
 	}
 	
 	return self;
@@ -49,6 +50,7 @@
 	[storedItemsSet release];
 	[itemsDirectory release];
 	[metadataDirectory release];
+	[knownFiles release];
 	[super dealloc];
 }
 
@@ -69,7 +71,7 @@
 				continue;
 			
 			NSString* fullPath = [metadataDirectory stringByAppendingPathComponent:filename];
-			[self addItemWithMetadataFile:fullPath];
+			[self processMetadataFile:fullPath];
 		}
 		
 	}
@@ -77,19 +79,25 @@
 	return storedItemsSet;
 }
 
-- (void) addItemWithMetadataFile:(NSString*) itemMetaPath;
+- (void) processMetadataFile:(NSString*) itemMetaPath;
 {
 	NSDictionary* itemMeta = [NSDictionary dictionaryWithContentsOfFile:itemMetaPath];
 	if (!itemMeta)
 		return;
 
 	NSString* filename = [itemMeta objectForKey:kMvrStorageMetadataFilenameKey];
+	if ([knownFiles containsObject:filename]) {
+		[[NSFileManager defaultManager] removeItemAtPath:itemMetaPath error:NULL];
+		return;
+	}
 	
 	NSString* fullPath = [itemsDirectory stringByAppendingPathComponent:filename];
 	
 	NSFileManager* fm = [NSFileManager defaultManager];
-	if (![fm fileExistsAtPath:fullPath])
+	if (![fm fileExistsAtPath:fullPath]) {
+		[[NSFileManager defaultManager] removeItemAtPath:itemMetaPath error:NULL];
 		return;
+	}
 	
 	id meta = L0As(NSDictionary, [itemMeta objectForKey:kMvrStorageMetadataItemInfoKey]);
 	if (!meta)
@@ -109,6 +117,7 @@
 	
 	[i setItemNotes:L0As(NSDictionary, [itemMeta objectForKey:kMvrStorageNotesItemInfoKey])];
 	
+	[knownFiles addObject:filename];
 	[self.mutableStoredItems addObject:i];
 }
 

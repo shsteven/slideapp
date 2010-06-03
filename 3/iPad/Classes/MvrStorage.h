@@ -14,6 +14,7 @@
 	NSString* itemsDirectory, * metadataDirectory;
 	
 	NSMutableSet* storedItemsSet;
+	NSMutableSet* knownFiles;
 }
 
 - (id) initWithItemsDirectory:(NSString*) i metadataDirectory:(NSString*) m;
