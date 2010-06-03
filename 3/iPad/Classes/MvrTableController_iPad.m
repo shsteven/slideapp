@@ -48,6 +48,15 @@ typedef NSInteger MvrEdge;
 
 - (void) getStartCoordinate:(CGFloat*) coord edge:(NSInteger*) edge forArrowView:(MvrArrowView_iPad*) arrow;
 
+- (void) bounceBackViewOfControllerIfNeeded:(MvrItemController*) ic;
+- (BOOL) checkControllerForSending:(MvrItemController *)ic;
+
+- (id <MvrChannel>) channelForArrowView:(MvrArrowView_iPad*) arrow;
+- (id <MvrChannel>) channelAtEdge:(MvrEdge) edge coordinate:(NSInteger) i;
+- (id <MvrChannel>) channelForViewWithCenter:(CGPoint) center;
+
+- (void) userDidEndDraggingController:(MvrItemController*) ic;
+
 @end
 
 
@@ -180,6 +189,42 @@ typedef NSInteger MvrEdge;
 	[arrowViewsByChannel removeObjectForKey:chan];
 
 	[self layoutArrowViews];
+}
+
+- (id <MvrChannel>) channelForArrowView:(MvrArrowView_iPad*) arrow;
+{
+	for (id <MvrChannel> c in [arrowViewsByChannel allKeys]) {
+		if ([[arrowViewsByChannel objectForKey:c] isEqual:arrow])
+			return c;
+	}
+	
+	return nil;
+}
+
+- (id <MvrChannel>) channelAtEdge:(MvrEdge) edge coordinate:(NSInteger) i;
+{
+	switch (edge) {
+		case kMvrWestEdge:
+			return [orderedArrowViews count] >= 1? [self channelForArrowView:[orderedArrowViews objectAtIndex:0]] : nil;
+		case kMvrNorthEdge:
+			return [orderedArrowViews count] >= 2? [self channelForArrowView:[orderedArrowViews objectAtIndex:1]] : nil;
+		case kMvrEastEdge:
+			return [orderedArrowViews count] >= 3? [self channelForArrowView:[orderedArrowViews objectAtIndex:2]] : nil;
+		default:
+			return nil;
+	}
+}
+
+- (id <MvrChannel>) channelForViewWithCenter:(CGPoint) center;
+{
+	if (center.y < 0)
+		return [self channelAtEdge:kMvrNorthEdge coordinate:center.x];
+	else if (center.x < 0)
+		return [self channelAtEdge:kMvrWestEdge coordinate:center.y];
+	else if (center.x > draggableViewsLayer.bounds.size.width)
+		return [self channelAtEdge:kMvrEastEdge coordinate:center.y];
+	else
+		return nil;
 }
 
 - (void) layoutArrowViews;
@@ -357,8 +402,10 @@ typedef NSInteger MvrEdge;
 }
 
 
-- (void) bounceBackViewIfNeeded:(MvrDraggableView*) dv;
+- (void) bounceBackViewOfControllerIfNeeded:(MvrItemController*) ic;
 {
+	MvrDraggableView* dv = ic.draggableView;
+	
 	if (dv.superview != draggableViewsLayer)
 		return;
 	
@@ -394,7 +441,7 @@ typedef NSInteger MvrEdge;
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 	
 	for (MvrItemController* ic in itemControllers)
-		[self bounceBackViewIfNeeded:ic.draggableView];	
+		[self bounceBackViewOfControllerIfNeeded:ic];	
 
 	[self layoutArrowViews];
 }
@@ -434,12 +481,12 @@ typedef NSInteger MvrEdge;
 		// TODO begin transfer if needed.
 		
 	} else
-		[self bounceBackViewIfNeeded:ic.draggableView];
+		[self userDidEndDraggingController:ic];
 }
 
 - (void) inertiaAnimation:(NSString*) ani didEnd:(BOOL) finished context:(MvrItemController*) retainedItemController;
 {
-	[self bounceBackViewIfNeeded:retainedItemController.draggableView];
+	[self userDidEndDraggingController:retainedItemController];
 	[retainedItemController release]; // balances the retain above.
 }
 
@@ -449,6 +496,27 @@ typedef NSInteger MvrEdge;
 	ic.item = nil;
 	[MvrApp().storage removeStoredItemsObject:i];
 	[self removeItemController:ic];
+}
+
+#pragma mark Sending
+
+- (void) userDidEndDraggingController:(MvrItemController*) ic;
+{
+	if ([self checkControllerForSending:ic]) {
+		[self performSelector:@selector(bounceBackViewOfControllerIfNeeded:) withObject:ic afterDelay:0.5];
+	 } else
+		 [self bounceBackViewOfControllerIfNeeded:ic];
+}
+
+- (BOOL) checkControllerForSending:(MvrItemController*) ic;
+{
+	id <MvrChannel> c = [self channelForViewWithCenter:ic.draggableView.center];
+	if (c && ic.item) {
+		[c beginSendingItem:ic.item];
+		return YES;
+	}
+	
+	return NO;
 }
 
 @end
