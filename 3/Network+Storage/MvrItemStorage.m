@@ -412,16 +412,24 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 - (BOOL) makePersistentByOffloadingToPath:(NSString*) p error:(NSError**) e;
 {
 	if (self.persistent) {
-		*e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageAlreadyPersistent userInfo:nil];
+		L0Log(@"Already persistent!");
+		if (e) *e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageAlreadyPersistent userInfo:nil];
 		return NO;
 	}
 	
+	NSError* localError;
 	if (data && !path) {
-		if (![data writeToFile:p options:NSAtomicWrite error:e])
+		if (![data writeToFile:p options:NSAtomicWrite error:&localError]) {
+			L0Log(@"Could not offload from RAM to %@, error %@", p, localError);
+			if (e) *e = localError;
 			return NO;
+		}
 	} else if (![p isEqual:path]) {
-		if (![[NSFileManager defaultManager] moveItemAtPath:path toPath:p error:e])
+		if (![[NSFileManager defaultManager] moveItemAtPath:path toPath:p error:&localError]) {			
+			L0Log(@"Could not offload by moving %@ to %@, error %@", path, p, localError);
+			if (e) *e = localError;
 			return NO;
+		}
 	}
 
 	[data release]; data = nil;
