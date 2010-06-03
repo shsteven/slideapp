@@ -295,7 +295,7 @@ typedef NSInteger MvrEdge;
 			[UIView commitAnimations];
 			
 			if (type == kMvrItemSourceChannel) {
-				[ic didFinishReceivingItem];
+				[ic itemDidFinishReceivingFromNetwork];
 				[ic beginShowingActionButton];
 			}
 			

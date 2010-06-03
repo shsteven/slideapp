@@ -32,7 +32,7 @@
 	[self addManagedOutletKeys:@"imageView", nil];
 	
 	imageViewMargin = imageView.frame.origin.x;
-	[self didChangeItem];
+	[self itemDidChange];
 	
 	UIButton* action = self.actionButton;
 	CGPoint c;
@@ -42,7 +42,7 @@
 	[self.view addSubview:action];
 }
 
-- (void) didChangeItem;
+- (void) itemDidChange;
 {
 	if (self.item) {
 		UIImage* i = [[self.item image] imageByRenderingRotationAndScalingWithMaximumSide:450];
@@ -61,7 +61,7 @@
 	}
 }
 
-- (void) didFinishReceivingItem;
+- (void) itemDidFinishReceivingFromNetwork;
 {
 	UIImageWriteToSavedPhotosAlbum([self.item image], nil, NULL, NULL);
 }

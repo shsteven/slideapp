@@ -38,10 +38,10 @@
 
 // may be nil. It's always a MvrItem, but id allows calling subclass methods.
 @property(retain) id item;
-- (void) didChangeItem;
+- (void) itemDidChange;
 
 // sent to mean that the currently set .item has just been received from a channel.
-- (void) didFinishReceivingItem;
+- (void) itemDidFinishReceivingFromNetwork;
 
 // The draggable view that represents this item. This MUST return the same value as .view, and is here just for convenience.
 @property(readonly) MvrDraggableView* draggableView;

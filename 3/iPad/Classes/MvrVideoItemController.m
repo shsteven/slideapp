@@ -91,7 +91,7 @@ static CGSize MvrAspectRatioSizeWithMaximumSide(CGSize original, CGFloat side) {
 										 bounds.origin.y + 10, buttonBounds.size.width, buttonBounds.size.height);	
 }
 
-- (void) didChangeItem;
+- (void) itemDidChange;
 {
 	[pc.view removeFromSuperview];
 	[pc stop];
@@ -112,19 +112,35 @@ static CGSize MvrAspectRatioSizeWithMaximumSide(CGSize original, CGFloat side) {
 	}
 }
 
+- (void) itemDidFinishReceivingFromNetwork;
+{
+	if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum([[self.item storage] path]))
+		UISaveVideoAtPathToSavedPhotosAlbum([[self.item storage] path], nil, NULL, NULL);
+}
+
 - (void) naturalSizeAvailable:(NSNotification*) n;
 {
 	if ([n object] != pc)
 		return;
 	
 	L0Log(@"natural size available: %@", NSStringFromCGSize(pc.naturalSize));
+
+	[UIView beginAnimations:nil context:NULL];
 	
 	CGPoint p = self.view.center;
 	CGRect r = self.view.bounds;
 	r.size = MvrAspectRatioSizeWithMaximumSide(pc.naturalSize, 450);
-	self.view.bounds = r;
-	self.view.center = p;
+	
+	MvrShadowBackdropDraggableView* v = (MvrShadowBackdropDraggableView*) self.view;
+
+	v.bounds = r;
+	v.center = p;
+	pc.view.frame = v.contentBounds;
+	[pc.view setNeedsLayout];
+	
 	[self repositionActionButton];
+	
+	[UIView commitAnimations];
 }
 
 - (void) willExitFullscreen:(NSNotification*) n;

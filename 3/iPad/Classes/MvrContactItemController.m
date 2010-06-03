@@ -61,7 +61,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 - (void) viewDidLoad;
 {
 	[super viewDidLoad];
-	[self didChangeItem];
+	[self itemDidChange];
 	
 	[self addManagedOutletKeys:
 	 @"contactImageView",
@@ -87,7 +87,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	[contactEmailButton setTitle:NSLocalizedString(@"no e-mail.", @"No E-Mail marker") forState:UIControlStateDisabled];
 }
 
-- (void) didChangeItem;
+- (void) itemDidChange;
 {
 	if (self.item) {
 		ABRecordRef me = [self.item copyPersonRecord];
@@ -124,7 +124,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	}
 }
 
-- (void) didFinishReceivingItem;
+- (void) itemDidFinishReceivingFromNetwork;
 {
 	ABAddressBookRef addressBook = ABAddressBookCreate();
 	NSString* searchString = [self.item nameAndSurnameForSearching];
