@@ -8,6 +8,7 @@
 
 #import "MvrVideoItemController.h"
 #import "MvrVideoItem.h"
+#import "MvrItemAction.h"
 
 #import "MvrShadowBackdropDraggableView.h"
 
@@ -47,11 +48,18 @@ static CGSize MvrAspectRatioSizeWithMaximumSide(CGSize original, CGFloat side) {
 		NSNotificationCenter* c = [NSNotificationCenter defaultCenter];
 		
 		[c addObserver:self selector:@selector(naturalSizeAvailable:) name:MPMovieNaturalSizeAvailableNotification object:nil];
-		[c addObserver:self selector:@selector(didThumbnailMovie:) name:MPMoviePlayerThumbnailImageRequestDidFinishNotification object:nil];
+		[c addObserver:self selector:@selector(willExitFullscreen:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
 	}
 	
 	return self;
 }
+
+- (void) dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[super dealloc];
+}
+
 
 + supportedItemClasses;
 {
@@ -119,20 +127,25 @@ static CGSize MvrAspectRatioSizeWithMaximumSide(CGSize original, CGFloat side) {
 	[self repositionActionButton];
 }
 
-//- (void) didThumbnailMovie:(NSNotification*) n;
-//{
-//	if ([n object] != pc)
-//		return;
-//
-//	UIImage* i = [[n userInfo] objectForKey:MPMoviePlayerThumbnailImageKey];
-//	if (i)
-//		image.image = i;
-//}
-
-- (void) dealloc
+- (void) willExitFullscreen:(NSNotification*) n;
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
+	if ([n object] != pc)
+		return;
+	
+	NSTimeInterval i = [[[n userInfo] objectForKey:MPMoviePlayerFullscreenAnimationDurationUserInfoKey] doubleValue];
+	
+	CGAffineTransform t = self.view.transform;
+	self.view.transform = CGAffineTransformIdentity; // rotate upright
+
+	[UIView beginAnimations:nil context:NULL];
+	{
+		[UIView setAnimationDuration:0.2];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+		[UIView setAnimationDelay:i];
+	
+		self.view.transform = t;
+	}
+	[UIView commitAnimations];
 }
 
 - (void) setActionButtonHidden:(BOOL)hidden animated:(BOOL)animated;

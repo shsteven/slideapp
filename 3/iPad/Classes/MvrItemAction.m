@@ -57,21 +57,15 @@
 }
 
 - (void) performActionWithItem:(id) i;
-{
-	if (!(target && selector)
-#if __BLOCKS__
-		&& !(block && !target && !selector)
-#endif
-	)	
-		L0AbstractMethod();
-	
+{		
 	if (target && selector)
 		[target performSelector:selector withObject:self withObject:i];
-	
 #if __BLOCKS__
-	if (block)
+	else if (block)
 		block(i);
 #endif
+	else
+		L0AbstractMethod();
 }
 
 - (BOOL) isAvailableForItem:(MvrItem*) i;

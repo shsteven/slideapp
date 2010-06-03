@@ -28,3 +28,4 @@ Ads/CurrentSettings.xcconfig
 # These I don't want to distribute and are not essential to building.
 OCMock.framework
 DDCli
+3/iPad/Mover3-iPad.xcodeproj/.LSOverride
