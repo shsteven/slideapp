@@ -559,7 +559,7 @@ typedef NSInteger MvrEdge;
 	[as addDestructiveButtonWithTitle:deleteAllButton action:^{
 		
 		for (id x in [[itemControllers copy] autorelease])
-			[self removeItemController:x];
+			[self removeItemOfControllerFromTable:x];
 		
 	}];
 	
