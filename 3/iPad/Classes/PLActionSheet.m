@@ -87,6 +87,14 @@
 	}	
 }
 
+- (void) actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex;
+{
+	if (!_cleanedUp && _finishedBlock) {
+		_finishedBlock();
+		_cleanedUp = YES;
+	}		
+}
+
 - (void) showFromBarButtonItem:(UIBarButtonItem*) bi animated:(BOOL) ani;
 {
 	_cleanedUp = NO;

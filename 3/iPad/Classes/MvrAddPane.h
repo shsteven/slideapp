@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "ILViewController.h"
+#import "Network+Storage/MvrItem.h"
 
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+
+@protocol MvrAddPaneDelegate <NSObject>
+
+- (void) addPaneDidPickItem:(MvrItem*) i;
+- (void) addPaneDidCancel;
+
+@end
+
 
 @interface MvrAddPane : ILViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, ABPeoplePickerNavigationControllerDelegate> {
 	UIImagePickerController* libraryController;
@@ -19,10 +28,14 @@
 	UIViewController* currentViewController;
 	
 	IBOutlet UISegmentedControl* kindPicker;
+	
+	id <MvrAddPaneDelegate> delegate;
 }
 
 @property(assign) UIViewController* currentViewController;
 
 - (IBAction) updateDisplayedViewController;
+
+@property(assign) id <MvrAddPaneDelegate> delegate;
 
 @end

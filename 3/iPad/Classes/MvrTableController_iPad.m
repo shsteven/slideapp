@@ -16,6 +16,8 @@
 
 #import "MvrAddPane.h"
 
+#import "PLActionSheet.h"
+
 #define kMvrMaximumAngleRange (30)
 static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransform transform)
 {
@@ -523,10 +525,50 @@ typedef NSInteger MvrEdge;
 
 - (IBAction) showAddPopover:(UIBarButtonItem*) sender;
 {
-	if (!addPopover)
-		addPopover = [[MvrAddPane popoverControllerForViewController:NULL] retain];
+	if (!addPopover) {
+		MvrAddPane* pane;
+		addPopover = [[MvrAddPane popoverControllerForViewController:&pane] retain];
+		pane.delegate = self;
+	}
 	
 	[addPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void) addPaneDidPickItem:(MvrItem*) i;
+{
+	[self addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
+	[addPopover dismissPopoverAnimated:YES];
+}
+
+- (void) addPaneDidCancel;
+{
+	[addPopover dismissPopoverAnimated:YES];
+}
+
+- (IBAction) askForDeleteAll:(UIBarButtonItem*) sender;
+{
+	if (askDeleteIsShown)
+		return;
+	
+	PLActionSheet* as = [[PLActionSheet new] autorelease];
+	
+	NSString* title = NSLocalizedString(@"You can remove a single item from the table by touching it, then using its Action button to delete it. You can also delete all items at once.", @""),
+		* deleteAllButton = NSLocalizedString(@"Delete All Items", @"Delete All button");
+	
+	as.sheet.title = title;
+	[as addDestructiveButtonWithTitle:deleteAllButton action:^{
+		
+		for (id x in [[itemControllers copy] autorelease])
+			[self removeItemController:x];
+		
+	}];
+	
+	[as setFinishedAction:^{
+		askDeleteIsShown = NO;
+	}];
+	
+	askDeleteIsShown = YES;
+	[as showFromBarButtonItem:sender animated:YES];
 }
 
 @end

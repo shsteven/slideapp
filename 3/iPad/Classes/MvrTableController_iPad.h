@@ -14,6 +14,8 @@
 #import "MvrItemController.h"
 #import "Network+Storage/MvrItem.h"
 
+#import "MvrAddPane.h"
+
 #import "Network+Storage/MvrScannerObserver.h"
 
 enum {
@@ -23,7 +25,7 @@ enum {
 };
 typedef NSInteger MvrItemSourceType;
 
-@interface MvrTableController_iPad : ILViewController <MvrItemsTable, MvrScannerObserverDelegate> {
+@interface MvrTableController_iPad : ILViewController <MvrItemsTable, MvrScannerObserverDelegate, MvrAddPaneDelegate> {
 	IBOutlet UIView* draggableViewsLayer;
 	
 	NSMutableSet* itemControllers;
@@ -34,6 +36,8 @@ typedef NSInteger MvrItemSourceType;
 	MvrScannerObserver* obs;
 	
 	UIPopoverController* addPopover;
+	
+	BOOL askDeleteIsShown;
 }
 
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
@@ -46,6 +50,7 @@ typedef NSInteger MvrItemSourceType;
 - (void) removeItemController:(MvrItemController*) ic;
 
 - (IBAction) showAddPopover:(UIBarButtonItem*) sender;
+- (IBAction) askForDeleteAll:(UIBarButtonItem*) sender;
 
 @end
 
