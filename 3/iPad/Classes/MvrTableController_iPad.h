@@ -32,6 +32,8 @@ typedef NSInteger MvrItemSourceType;
 	NSMutableArray* orderedArrowViews;
 	
 	MvrScannerObserver* obs;
+	
+	UIPopoverController* addPopover;
 }
 
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
@@ -42,6 +44,8 @@ typedef NSInteger MvrItemSourceType;
 @property(readonly) NSSet* itemControllers;
 - (void) addItemController:(MvrItemController*) ic;
 - (void) removeItemController:(MvrItemController*) ic;
+
+- (IBAction) showAddPopover:(UIBarButtonItem*) sender;
 
 @end
 

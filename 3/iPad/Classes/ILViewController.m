@@ -85,7 +85,7 @@
 		bar.tintColor = oldNavigationBarTintColor;
 		
 		self.oldNavigationBarTintColor = nil;
-		hasOlderStatusBarStyle = NO;
+		hasOlderNavigationBarStyle = NO;
 	}
 	
 	if (self.restoresStatusBarStyleOnDisappearing && hasOlderStatusBarStyle && !ILViewControllerIsOniPad() && !isHoldingRestoresForNavBarPush) {
@@ -137,24 +137,6 @@
 	}
 }
 
-#pragma mark Navigation item setup
-
-- (void) setNavigationItem:(UINavigationItem *) ni;
-{
-	self.navigationItem.title = ni.title;
-	self.navigationItem.prompt = ni.prompt;
-	self.navigationItem.backBarButtonItem = ni.backBarButtonItem;
-	self.navigationItem.titleView = ni.titleView;
-	self.navigationItem.hidesBackButton = ni.hidesBackButton;
-	self.navigationItem.leftBarButtonItem = ni.leftBarButtonItem;
-	self.navigationItem.rightBarButtonItem = ni.rightBarButtonItem;	
-}
-
-- (UINavigationItem*) navigationItem;
-{
-	return [super navigationItem]; // to silence compiler warnings
-}
-
 #pragma mark Common initialization
 
 + (NSBundle*) nibBundle;
@@ -172,12 +154,26 @@
 
 + (UIViewController*) modalPaneForViewController:(id*) vc;
 {
-	ILViewController* me = [[self alloc] init];
+	ILViewController* me = [[[self alloc] init] autorelease];
 	UINavigationController* nc = [[[UINavigationController alloc] initWithRootViewController:me] autorelease];
 	
 	if (vc) *vc = me;
 	return nc;
 }
+
+#if 30200 <= __IPHONE_OS_VERSION_MAX_ALLOWED
+
++ (UIPopoverController*) popoverControllerForViewController:(id*) vc;
+{
+	Class poc = NSClassFromString(@"UIPopoverController");
+	if (!poc)
+		return nil;
+	
+	UIPopoverController* pop = [[[poc alloc] initWithContentViewController:[self modalPaneForViewController:vc]] autorelease];
+	return pop;
+}
+
+#endif // iPhone SDK 3.2+
 
 - (IBAction) dismiss;
 {

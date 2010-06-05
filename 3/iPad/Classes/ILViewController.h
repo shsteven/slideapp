@@ -47,8 +47,6 @@ typedef NSInteger ILRotationStyle;
 
 @property ILRotationStyle rotationStyle;
 
-@property(nonatomic, retain) IBOutlet UINavigationItem* navigationItem;
-
 @property BOOL changesNavigationBarStyle;
 @property UIBarStyle navigationBarStyle;
 @property(retain) UIColor* navigationBarTintColor;
@@ -76,6 +74,13 @@ typedef NSInteger ILRotationStyle;
 // the variable whose pointer is passed as argument, if that pointer is not NULL, will on return be set to the instance of this class that's contained in the view controller hierarchy just returned (autoreleased as per THE RULES).
 // the default implementation creates a UINavigationController wrapping a new instance of the receiver class (produced via -init).
 + (UIViewController*) modalPaneForViewController:(id*) vc;
+
+#if 30200 <= __IPHONE_OS_VERSION_MAX_ALLOWED
+// same as +modalPaneForViewController:, except it returns a popover controller containing a view controller hierarchy rather than a modally presentable vc hierarchy.
+// the default implementation returns the view controller hierarchy returned by modalPaneForViewController:, wrapped in a popover controller.
+// on platforms where popover controllers are not supported, this returns nil.
++ (UIPopoverController*) popoverControllerForViewController:(id*) vc;
+#endif
 
 // dismisses this view controller from being modally presented, with animation. useful for UIBarButtonItems.
 - (IBAction) dismiss;

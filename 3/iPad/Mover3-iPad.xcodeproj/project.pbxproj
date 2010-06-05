@@ -32,6 +32,7 @@
 		155F09DB1182332B00A6CE5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F09DA1182332B00A6CE5E /* QuartzCore.framework */; };
 		1563E23311B7A89B00E2BC0B /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1563E23211B7A89B00E2BC0B /* Icon72.png */; };
 		157BA4E211B14A2E00418560 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157BA4E111B14A2E00418560 /* MessageUI.framework */; };
+		1585DBFF11BA4892008DD945 /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1585DBFE11BA4892008DD945 /* NetworkToolbarIcon.png */; };
 		1594522811766FF2003126B6 /* libNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1594521A11766FB9003126B6 /* libNetwork.a */; };
 		159452531176702D003126B6 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1594524C11767023003126B6 /* libMuiKit.a */; };
 		1594525411767031003126B6 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1594524E11767023003126B6 /* MuiKit.bundle */; };
@@ -42,6 +43,8 @@
 		15ABA9701194A2BB00437F3C /* UIImage+ILIconTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15ABA96F1194A2BB00437F3C /* UIImage+ILIconTools.m */; };
 		15ABA97E1194A5DA00437F3C /* DocIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15ABA97D1194A5DA00437F3C /* DocIcon.png */; };
 		15ABAA001194AED000437F3C /* MvrNoOpeningOptions.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15ABA9FF1194AED000437F3C /* MvrNoOpeningOptions.alert */; };
+		15AE80A911BA4A920057B20C /* MvrAddPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AE80A711BA4A920057B20C /* MvrAddPane.m */; };
+		15AE80AA11BA4A920057B20C /* MvrAddPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15AE80A811BA4A920057B20C /* MvrAddPane.xib */; };
 		15C53063118C5FF60052381B /* MvrContactItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C53062118C5FF60052381B /* MvrContactItem.m */; };
 		15C53066118C602B0052381B /* MvrContactItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C53065118C602B0052381B /* MvrContactItemController.m */; };
 		15C5306A118C60670052381B /* MvrContactItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C53069118C60670052381B /* MvrContactItemController.xib */; };
@@ -178,6 +181,7 @@
 		155F09DA1182332B00A6CE5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1563E23211B7A89B00E2BC0B /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon72.png; path = ../iPhone/Variants/Plus/Icon72.png; sourceTree = SOURCE_ROOT; };
 		157BA4E111B14A2E00418560 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		1585DBFE11BA4892008DD945 /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NetworkToolbarIcon.png; path = ../../NetworkToolbarIcon.png; sourceTree = SOURCE_ROOT; };
 		1594520811766FB8003126B6 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		1594523011767013003126B6 /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
 		1594525E117672AC003126B6 /* MvrInertia_Old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrInertia_Old.h; sourceTree = "<group>"; };
@@ -190,6 +194,9 @@
 		15ABA96F1194A2BB00437F3C /* UIImage+ILIconTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ILIconTools.m"; sourceTree = "<group>"; };
 		15ABA97D1194A5DA00437F3C /* DocIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DocIcon.png; sourceTree = SOURCE_ROOT; };
 		15ABA9FF1194AED000437F3C /* MvrNoOpeningOptions.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoOpeningOptions.alert; sourceTree = SOURCE_ROOT; };
+		15AE80A611BA4A920057B20C /* MvrAddPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAddPane.h; sourceTree = "<group>"; };
+		15AE80A711BA4A920057B20C /* MvrAddPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAddPane.m; sourceTree = "<group>"; };
+		15AE80A811BA4A920057B20C /* MvrAddPane.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrAddPane.xib; sourceTree = "<group>"; };
 		15C53061118C5FF60052381B /* MvrContactItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrContactItem.h; path = ../iPhone/Classes/MvrContactItem.h; sourceTree = SOURCE_ROOT; };
 		15C53062118C5FF60052381B /* MvrContactItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrContactItem.m; path = ../iPhone/Classes/MvrContactItem.m; sourceTree = SOURCE_ROOT; };
 		15C53064118C602B0052381B /* MvrContactItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrContactItemController.h; sourceTree = "<group>"; };
@@ -257,13 +264,7 @@
 				1594525F117672AC003126B6 /* MvrInertia_Old.m */,
 				1D3623240D0F684500981E51 /* MvrAppDelegate_iPad.h */,
 				1D3623250D0F684500981E51 /* MvrAppDelegate_iPad.m */,
-				28D7ACF60DDB3853001CB0EB /* MvrTableController_iPad.h */,
-				28D7ACF70DDB3853001CB0EB /* MvrTableController_iPad.m */,
-				1555DFB6117F3BE0009D6926 /* MvrDraggableView.h */,
-				1555DFB7117F3BE0009D6926 /* MvrDraggableView.m */,
-				15015CA7118AED3600972828 /* MvrInertia.h */,
-				15015CA8118AED3600972828 /* MvrInertia.m */,
-				1505CCEA11A6732600E6BB00 /* Arrow View */,
+				15AE80A511BA4A6F0057B20C /* The Table */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -354,6 +355,23 @@
 				15ABA96C1194A19F00437F3C /* MvrGenericItemController.xib */,
 			);
 			name = "Generic Item View";
+			sourceTree = "<group>";
+		};
+		15AE80A511BA4A6F0057B20C /* The Table */ = {
+			isa = PBXGroup;
+			children = (
+				1505CCEA11A6732600E6BB00 /* Arrow View */,
+				28D7ACF60DDB3853001CB0EB /* MvrTableController_iPad.h */,
+				28D7ACF70DDB3853001CB0EB /* MvrTableController_iPad.m */,
+				1555DFB6117F3BE0009D6926 /* MvrDraggableView.h */,
+				1555DFB7117F3BE0009D6926 /* MvrDraggableView.m */,
+				15015CA7118AED3600972828 /* MvrInertia.h */,
+				15015CA8118AED3600972828 /* MvrInertia.m */,
+				15AE80A611BA4A920057B20C /* MvrAddPane.h */,
+				15AE80A711BA4A920057B20C /* MvrAddPane.m */,
+				15AE80A811BA4A920057B20C /* MvrAddPane.xib */,
+			);
+			name = "The Table";
 			sourceTree = "<group>";
 		};
 		15C5305C118C5FC40052381B /* Images */ = {
@@ -452,6 +470,7 @@
 				1563E23211B7A89B00E2BC0B /* Icon72.png */,
 				155F08EA1181E9E600A6CE5E /* Backdrop.png */,
 				2899E5210DE3E06400AC0155 /* MvrTableController_iPad.xib */,
+				1585DBFE11BA4892008DD945 /* NetworkToolbarIcon.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Mover3_iPad-Info.plist */,
 			);
@@ -603,6 +622,8 @@
 				15F16CCF11AD69F0001CBDD2 /* MvrContactIsADuplicate.alert in Resources */,
 				151D900611B27E400039803E /* MvrVideoItemController.xib in Resources */,
 				1563E23311B7A89B00E2BC0B /* Icon72.png in Resources */,
+				1585DBFF11BA4892008DD945 /* NetworkToolbarIcon.png in Resources */,
+				15AE80AA11BA4A920057B20C /* MvrAddPane.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +673,7 @@
 				1505CCDA11A66F2100E6BB00 /* MvrArrowView_iPad.m in Sources */,
 				151D8FF911B27DE20039803E /* MvrVideoItem.m in Sources */,
 				151D900411B27E1C0039803E /* MvrVideoItemController.m in Sources */,
+				15AE80A911BA4A920057B20C /* MvrAddPane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

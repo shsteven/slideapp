@@ -14,6 +14,8 @@
 
 #import "MvrArrowView_iPad.h"
 
+#import "MvrAddPane.h"
+
 #define kMvrMaximumAngleRange (30)
 static CGAffineTransform MvrConcatenateRandomRotationToTransform(CGAffineTransform transform)
 {
@@ -517,6 +519,14 @@ typedef NSInteger MvrEdge;
 	}
 	
 	return NO;
+}
+
+- (IBAction) showAddPopover:(UIBarButtonItem*) sender;
+{
+	if (!addPopover)
+		addPopover = [[MvrAddPane popoverControllerForViewController:NULL] retain];
+	
+	[addPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 @end
