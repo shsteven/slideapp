@@ -211,9 +211,9 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 		[NSString stringWithFormat:
 		 @"%@/%@/%@/%.2f/",
 		 messagesBaseURL,
-		 [MvrApp() platform],
-		 MvrURLPartForVariant([MvrApp() variant]),
-		 [MvrApp() version],
+		 [MvrServices() platform],
+		 MvrURLPartForVariant([MvrServices() variant]),
+		 [MvrServices() version],
 		nil];
 	L0Log(@"Will check for news at URL %@", messagesURLString);
 	NSURL* messagesURL = [NSURL URLWithString:messagesURLString];

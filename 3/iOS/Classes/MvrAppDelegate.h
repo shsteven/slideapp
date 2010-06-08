@@ -26,7 +26,7 @@
 
 #import "MvrFeatures.h"
 
-@protocol MvrAppServices <NSObject>
+@protocol MvrAppServices <MvrPlatformInfo>
 
 - (void) presentModalViewController:(UIViewController*) ctl;
 
