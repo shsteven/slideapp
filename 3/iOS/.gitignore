@@ -1,3 +1,6 @@
 /Local-*
 /Local.*
 /StoreUI
+/Local*.xcconfig
+/Compiled Locales
+/Applied
