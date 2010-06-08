@@ -16,7 +16,15 @@
 #import "MvrStorage.h"
 #import "MvrTableController_iPad.h"
 
-@interface MvrAppDelegate_iPad : NSObject <UIApplicationDelegate, MvrPlatformInfo, MvrScannerObserverDelegate> {
+#import "MvrMessageChecker.h"
+#import "MvrAppDelegate.h"
+
+@interface MvrAppDelegate_iPad : NSObject <
+	UIApplicationDelegate,
+	MvrPlatformInfo,
+	MvrScannerObserverDelegate,
+	MvrAppServices> {
+		
     UIWindow *window;
     MvrTableController_iPad *viewController;
 	
@@ -26,6 +34,8 @@
 	MvrScannerObserver* observer;
 	
 	MvrStorage* storage;
+	
+	MvrMessageChecker* messageChecker;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow* window;
@@ -35,11 +45,9 @@
 
 @property(nonatomic, readonly) MvrStorage* storage;
 
-- (void) presentModalViewController:(UIViewController*) vc;
-
 @end
 
 
-static inline MvrAppDelegate_iPad* MvrApp() {
+static inline MvrAppDelegate_iPad* MvrApp_iPad() {
 	return (MvrAppDelegate_iPad*) [UIApp delegate];
 }

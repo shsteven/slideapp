@@ -127,7 +127,7 @@ static void MvrMessageCheckerReachabilityCallback(SCNetworkReachabilityRef reach
 		}
 		
 		// don't ask while help alerts are suppressed.
-		if (MvrApp().helpAlertsSuppressed)
+		if (MvrServices().helpAlertsSuppressed)
 			return;
 				
 		UIAlertView* alert = [UIAlertView alertNamed:@"MvrMessageOptIn"];

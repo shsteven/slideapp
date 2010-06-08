@@ -144,12 +144,12 @@ typedef NSInteger MvrEdge;
 	arrowViewsByChannel = [L0Map new];
 	orderedArrowViews = [NSMutableArray new];
 
-	for (id <MvrChannel> chan in MvrApp().wifi.channels)
+	for (id <MvrChannel> chan in MvrApp_iPad().wifi.channels)
 		[self addArrowViewForChannel:chan];
 		
 	[self layoutArrowViews];
 	
-	obs = [[MvrScannerObserver alloc] initWithScanner:MvrApp().wifi delegate:self];
+	obs = [[MvrScannerObserver alloc] initWithScanner:MvrApp_iPad().wifi delegate:self];
 }
 
 - (void) scanner:(id <MvrScanner>)s didAddChannel:(id <MvrChannel>)channel;
@@ -301,7 +301,7 @@ typedef NSInteger MvrEdge;
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
 {
 	if (type == kMvrItemSourceChannel && source)
-		[MvrApp().storage addStoredItemsObject:item];
+		[MvrApp_iPad().storage addStoredItemsObject:item];
 	
 	MvrItemController* ic = [MvrItemController itemControllerWithItem:item];
 	if (!ic)
@@ -498,7 +498,7 @@ typedef NSInteger MvrEdge;
 {
 	MvrItem* i = [[ic.item retain] autorelease];
 	ic.item = nil;
-	[MvrApp().storage removeStoredItemsObject:i];
+	[MvrApp_iPad().storage removeStoredItemsObject:i];
 	[self removeItemController:ic];
 }
 
@@ -536,7 +536,7 @@ typedef NSInteger MvrEdge;
 
 - (void) addPaneDidPickItem:(MvrItem*) i;
 {
-	[MvrApp().storage addStoredItemsObject:i];
+	[MvrApp_iPad().storage addStoredItemsObject:i];
 	[self addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
 	[addPopover dismissPopoverAnimated:YES];
 }

@@ -640,4 +640,8 @@ enum {
 #endif
 }
 
+#pragma mark Compiler warning silencing
+
+@dynamic helpAlertsSuppressed; // defined in MvrAppDelegate+HelpAlerts.[hm]
+
 @end

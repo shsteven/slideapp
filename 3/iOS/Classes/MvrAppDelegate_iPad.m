@@ -59,6 +59,11 @@
 	
 	wifi.enabled = YES;
 	
+// ------------- SETUP: Messages From The Cloud
+	
+	messageChecker = [MvrMessageChecker new];
+	[messageChecker performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:1.0];
+	
 // ------------- SETUP: UI
 	application.idleTimerDisabled = YES;
 	
@@ -67,6 +72,7 @@
 
 	for (MvrItem* i in self.storage.storedItems)
 		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
+	
 	
 	return YES;
 }
@@ -170,6 +176,14 @@
 		modalParent = modalParent.modalViewController;
 	
 	[modalParent presentModalViewController:vc animated:YES];
+}
+
+#pragma mark Services
+
+- (BOOL) helpAlertsSuppressed;
+{
+#warning TODO
+	return NO;
 }
 
 @end

@@ -296,7 +296,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	
 	mail.mailComposeDelegate = self;
 	
-	[MvrApp() presentModalViewController:mail];
+	[MvrServices() presentModalViewController:mail];
 	
 	CFRelease(me);
 }

@@ -144,6 +144,9 @@
 	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:ctl] autorelease];
 	nav.navigationBar.barStyle = self.usesTranslucentTopBar? UIBarStyleBlackTranslucent : UIBarStyleBlack;
 	
+	if ([nav respondsToSelector:@selector(setModalPresentationStyle:)])
+		[nav setModalPresentationStyle:UIModalPresentationFormSheet];
+	
 	return nav;
 }
 
@@ -156,7 +159,7 @@
 	if (self.shouldDisplayInApp) {
 		id vc = [self modalViewController];
 		if (vc)
-			[MvrApp() presentModalViewController:vc];
+			[MvrServices() presentModalViewController:vc];
 	} else
 		[self openURLAfterRedirects:YES];
 }

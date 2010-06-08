@@ -299,7 +299,7 @@ static L0Map* MvrItemViewControllerClasses = nil;
 
 - (UIViewController*) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller;
 {
-	return MvrApp().viewController;
+	return MvrApp_iPad().viewController;
 }
 
 - (void) didFinishAction;

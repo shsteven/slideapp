@@ -26,11 +26,21 @@
 
 #import "MvrFeatures.h"
 
+@protocol MvrAppServices <NSObject>
+
+- (void) presentModalViewController:(UIViewController*) ctl;
+
+@property(readonly, assign) BOOL helpAlertsSuppressed;
+
+@end
+
+
 @interface MvrAppDelegate : NSObject <
 	UIApplicationDelegate,
 	UIActionSheetDelegate,
 	MvrMetadataStorage, 
-	MvrPlatformInfo>
+	MvrPlatformInfo,
+	MvrAppServices>
 {
     UIWindow *window;
 	MvrTableController* tableController;
@@ -73,8 +83,6 @@
 - (void) addItemFromSelf:(MvrItem*) item;
 - (void) displayActionMenuForItem:(MvrItem*) i withRemove:(BOOL) remove withSend:(BOOL) send withMainAction:(BOOL) mainAction;
 
-- (void) presentModalViewController:(UIViewController*) ctl;
-
 - (void) beginDisplayingOverlayViewWithLabel:(NSString*) label;
 - (void) endDisplayingOverlayView;
 
@@ -95,4 +103,8 @@
 
 static inline MvrAppDelegate* MvrApp() {
 	return (MvrAppDelegate*)([[UIApplication sharedApplication] delegate]);
+}
+
+static inline id <MvrAppServices> MvrServices() {
+	return (id <MvrAppServices>)([[UIApplication sharedApplication] delegate]);
 }
