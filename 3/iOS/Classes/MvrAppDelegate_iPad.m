@@ -80,6 +80,7 @@
 - (void)dealloc {
 	[wifi release];
 	
+	[messageChecker release];
 	[viewController release];
 	[window release];
 	[super dealloc];
