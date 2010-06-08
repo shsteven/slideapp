@@ -176,6 +176,9 @@
 		// step one-bis: we need to know this file's extension (ick). We'll query the OS (and probably ship with a ton of UTImported types to match).
 		
 		NSString* ext = [(id)UTTypeCopyPreferredTagWithClass((CFStringRef) i.type, kUTTagClassFilenameExtension) autorelease];
+		if (!ext)
+			ext = [MvrItem fallbackPathExtensionForType:i.type];
+		
 		if (!ext) {
 			// if we don't know what type of file this is, we hide the file from view.
 #warning TODO

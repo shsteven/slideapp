@@ -1168,12 +1168,12 @@
 		15C86B0A11BE72960046CFC0 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				15C86B7A11BE74FC0046CFC0 /* MainWindow-iPad.xib */,
-				15C86B5811BE74410046CFC0 /* The Table */,
 				15C86B5211BE74190046CFC0 /* MvrAppDelegate_iPad.h */,
 				15C86B5311BE74190046CFC0 /* MvrAppDelegate_iPad.m */,
 				15C86B4F11BE74130046CFC0 /* MvrStorage.h */,
 				15C86B5011BE74130046CFC0 /* MvrStorage.m */,
+				15C86B7A11BE74FC0046CFC0 /* MainWindow-iPad.xib */,
+				15C86B5811BE74410046CFC0 /* The Table */,
 				15C86B1711BE72A70046CFC0 /* Item Controllers */,
 				15C86B5711BE743C0046CFC0 /* Tools */,
 			);

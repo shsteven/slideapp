@@ -77,6 +77,18 @@ MvrItemSynthesizeRetainFromAutocache(UIImage*, image, setImage:)
 			nil];
 }
 
++ (NSDictionary *) knownFallbackPathExtensions;
+{
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			@"tiff", (id) kUTTypeTIFF,
+			@"jpeg", (id) kUTTypeJPEG,
+			@"gif", (id) kUTTypeGIF,
+			@"png", (id) kUTTypePNG,
+			@"bmp", (id) kUTTypeBMP,
+			@"ico", (id) kUTTypeICO,
+			nil];
+}
+
 - (NSData*) produceExternalRepresentation;
 {
 	if ([self.type isEqual:(id) kUTTypePNG])

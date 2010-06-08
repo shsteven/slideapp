@@ -25,6 +25,10 @@
 @end
 
 
+static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
+	return [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL] autorelease];
+}
+
 @implementation MvrAddPane
 
 @synthesize delegate;
@@ -39,8 +43,16 @@
 	 @"kindPicker",
 	 @"currentViewController",
 	 nil];
-		
-	self.navigationItem.titleView = kindPicker;
+
+	// At the top
+//	self.navigationItem.titleView = kindPicker;
+	
+	// At the bottom
+	self.toolbarItems = [NSArray arrayWithObjects:
+						 ILBarButtonItemFlexibleSpace(),
+						 [[[UIBarButtonItem alloc] initWithCustomView:kindPicker] autorelease],
+						 ILBarButtonItemFlexibleSpace(),
+						 nil];
 }
 
 - (UIImagePickerController*) libraryController;
@@ -116,6 +128,9 @@
 {
 	[super viewWillAppear:ani];
 	[self updateDisplayedViewController];
+	
+	self.navigationController.navigationBarHidden = YES;
+	self.navigationController.toolbarHidden = NO;
 }
 
 - (void) viewWillDisappear:(BOOL) ani;

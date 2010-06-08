@@ -536,6 +536,7 @@ typedef NSInteger MvrEdge;
 
 - (void) addPaneDidPickItem:(MvrItem*) i;
 {
+	[MvrApp().storage addStoredItemsObject:i];
 	[self addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
 	[addPopover dismissPopoverAnimated:YES];
 }

@@ -25,6 +25,14 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
 
+#define ILAssertNSErrorWorked(errVarName, call) \
+{ \
+	NSError* errVarName; \
+	if (!(call)) \
+		[NSException raise:@"ILUnexpectedNSErrorException" format:@"Operation " #call " failed with error %@", errVarName]; \
+}
+		
+
 @implementation MvrAppDelegate_iPad
 
 @synthesize window;
@@ -57,35 +65,10 @@
 	[window addSubview:viewController.view];
 	[window makeKeyAndVisible];
 
-	[self performSelector:@selector(testByAddingImageAndContact) withObject:nil afterDelay:1.0];
-	
-	return YES;
-}
-
-- (void) testByAddingImageAndContact;
-{
-	//MvrImageItem* img = [[MvrImageItem alloc] initWithImage:[UIImage imageNamed:@"IMG_0439.jpg"] type:@"public.jpeg"];
-//	[viewController addItem:img fromSource:nil ofType:kMvrItemSourceSelf];	
-//	
-//	ABRecordRef ref = ABPersonCreate();
-//	ABRecordSetValue(ref, kABPersonFirstNameProperty, (CFTypeRef) @"Pinco", NULL);
-//	ABRecordSetValue(ref, kABPersonLastNameProperty, (CFTypeRef) @"Pallo", NULL);
-//
-//	ABMultiValueRef email = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-//	ABMultiValueAddValueAndLabel(email, (CFTypeRef) @"pinco@pallo.net", kABWorkLabel, NULL);
-//	ABRecordSetValue(ref, kABPersonEmailProperty, email, NULL);
-//	
-//	MvrContactItem* ci = [[[MvrContactItem alloc] initWithContentsOfAddressBookRecord:ref] autorelease];
-//	[viewController addItem:ci fromSource:nil ofType:kMvrItemSourceSelf];
-//	
-//	CFRelease(email);
-//	CFRelease(ref);
-//	
-//	[self.storage addStoredItemsObject:img];
-//	[self.storage addStoredItemsObject:ci];
-	
 	for (MvrItem* i in self.storage.storedItems)
 		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
+	
+	return YES;
 }
 
 - (void)dealloc {
@@ -164,8 +147,13 @@
 		
 		NSFileManager* fm = [NSFileManager defaultManager];
 		
-		[fm createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:NULL];
-		[fm createDirectoryAtPath:metaDir withIntermediateDirectories:YES attributes:nil error:NULL];
+		// [fm createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:NULL];
+		if (![fm fileExistsAtPath:docsDir])
+			ILAssertNSErrorWorked(e, [fm createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:&e]);
+							  
+		// [fm createDirectoryAtPath:metaDir withIntermediateDirectories:YES attributes:nil error:NULL];
+		if (![fm fileExistsAtPath:metaDir])
+			ILAssertNSErrorWorked(e, [fm createDirectoryAtPath:metaDir withIntermediateDirectories:YES attributes:nil error:&e]);
 		
 		storage = [[MvrStorage alloc] initWithItemsDirectory:docsDir metadataDirectory:metaDir];
 	}

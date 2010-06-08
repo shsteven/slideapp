@@ -130,12 +130,21 @@
 {
 	for (NSString* type in [self supportedTypes])
 		[self registerClass:self forType:type];
+	
+	NSDictionary* d = [self knownFallbackPathExtensions];
+	for (NSString* type in d)
+		[self setFallbackPathExtension:[d objectForKey:type] forType:type];
 }
 
 + (NSSet*) supportedTypes;
 {
 	L0AbstractMethod();
 	return nil;
+}
+
++ (NSDictionary*) knownFallbackPathExtensions;
+{
+	return [NSDictionary dictionary];
 }
 
 static NSMutableDictionary* MvrItemTypesToClasses = nil;
@@ -160,6 +169,23 @@ static NSMutableDictionary* MvrItemTypesToClasses = nil;
 + itemWithStorage:(MvrItemStorage*) s type:(NSString*) t metadata:(NSDictionary*) m;
 {
 	return [[[[self classForType:t] alloc] initWithStorage:s type:t metadata:m] autorelease];
+}
+
+#pragma mark File extensions registry
+
+static NSMutableDictionary* MvrItemFallbackPathExtensions = nil;
+
++ (void) setFallbackPathExtension:(NSString*) ext forType:(NSString*) type;
+{
+	if (!MvrItemFallbackPathExtensions)
+		MvrItemFallbackPathExtensions = [NSMutableDictionary new];
+	
+	[MvrItemFallbackPathExtensions setObject:ext forKey:type];
+}
+
++ (NSString*) fallbackPathExtensionForType:(NSString*) type;
+{
+	return [MvrItemFallbackPathExtensions objectForKey:type];
 }
 
 #pragma mark Caching

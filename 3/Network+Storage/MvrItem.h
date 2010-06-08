@@ -64,9 +64,14 @@
 
 + (void) registerClass;
 + (NSSet*) supportedTypes; // abstract
++ (NSDictionary*) knownFallbackPathExtensions; // default == none. return type -> extension entries.
 
 + (void) registerClass:(Class) c forType:(NSString*) type;
 + (Class) classForType:(NSString*) c;
+
+// These manage a registry of known extensions, in case the OS doesn't help us by giving 'em via the UTI infrastructure.
++ (void) setFallbackPathExtension:(NSString*) ext forType:(NSString*) type;
++ (NSString*) fallbackPathExtensionForType:(NSString*) type;
 
 + itemWithStorage:(MvrItemStorage*) s type:(NSString*) t metadata:(NSDictionary*) m;
 
