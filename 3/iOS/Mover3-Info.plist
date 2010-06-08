@@ -43,22 +43,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>${ILABS_MOVER_VERSION}</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
-	<key>UIPrerenderedIcon</key>
-	<true/>
-	<key>MvrTemporarilyDisabled-CFBundleIconFiles</key>
-	<array>
-		<string>Icon512.png</string>
-		<string>Icon72.png</string>
-		<string>Icon.png</string>
-	</array>
-	<key>UIRequiresPersistentWiFi</key>
-	<true/>
-	<key>UIViewEdgeAntialiasing</key>
-	<true/>
 	<key>ILSwapRegistration</key>
 	<dict>
 		<key>ILAppReceiveItemURLScheme</key>
@@ -83,5 +67,23 @@
 		<key>ILAppSupportsReceivingMultipleItems</key>
 		<true/>
 	</dict>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon512.png</string>
+		<string>Icon72.png</string>
+		<string>Icon.png</string>
+	</array>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>MainWindow-iPad</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
+	<key>UIViewEdgeAntialiasing</key>
+	<true/>
 </dict>
 </plist>

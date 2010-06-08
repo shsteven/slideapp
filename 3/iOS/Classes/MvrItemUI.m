@@ -13,66 +13,6 @@
 
 #import "MvrAppDelegate.h"
 
-#pragma mark -
-#pragma mark Item actions.
-
-@interface MvrItemAction ()
-
-- (id) initWithDisplayName:(NSString *)string target:(id) target selector:(SEL) selector;
-
-@property(copy, setter=private_setDisplayName:) NSString* displayName;
-
-@end
-
-
-@implementation MvrItemAction
-
-- (id) initWithDisplayName:(NSString*) string;
-{
-	if (self = [super init])
-		self.displayName = string;
-	
-	return self;
-}
-
-- (id) initWithDisplayName:(NSString *)string target:(id) t selector:(SEL) s;
-{
-	if (self = [self initWithDisplayName:string]) {
-		target = t; selector = s;
-	}
-	
-	return self;
-}
-
-@synthesize displayName, available;
-
-- (void) dealloc
-{
-	self.displayName = nil;
-	[super dealloc];
-}
-
-+ actionWithDisplayName:(NSString*) name target:(id) target selector:(SEL) selector;
-{
-	return [[[self alloc] initWithDisplayName:name target:target selector:selector] autorelease];
-}
-
-- (void) performActionWithItem:(id) i;
-{
-	if (!target || !selector)
-		L0AbstractMethod();
-	
-	// -performAction:self withItem:i
-	[target performSelector:selector withObject:self withObject:i];
-}
-
-- (BOOL) isAvailableForItem:(MvrItem*) i;
-{
-	return self.available;
-}
-
-@end
-
 #pragma mark Item sources.
 
 static NSMutableArray* MvrItemSources = nil;

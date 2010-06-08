@@ -11,7 +11,9 @@
 
 #import "Network+Storage/MvrItem.h"
 
-@class MvrItemSource, MvrItemAction;
+#import "MvrItemAction.h"
+
+@class MvrItemSource;
 
 @interface MvrItemUI : NSObject <MFMailComposeViewControllerDelegate> {}
 
@@ -133,31 +135,3 @@
 
 @end
 
-// Item actions correspond to the choices available when pressing the action button on an item (or press-and-holding).
-
-@interface MvrItemAction : NSObject {
-	NSString* displayName;
-	id target; SEL selector;
-	BOOL available;
-}
-
-// Uses the default impl.
-// The selector must be of the form -performAction:(MvrItemAction*) thisAction withItem:(MvrItem*) guessWhat;
-+ actionWithDisplayName:(NSString*) name target:(id) target selector:(SEL) selector;
-
-// Designated for subclasses.
-- (id) initWithDisplayName:(NSString*) string;
-
-// Runs the action.
-- (void) performActionWithItem:(MvrItem*) i;
-
-// Display name.
-@property(readonly, copy) NSString* displayName;
-
-// If NO, temporarily unavailable (won't be shown)
-@property BOOL available;
-
-// If NO, unavailable for this specific item (won't be shown). Defaults to .available's value.
-- (BOOL) isAvailableForItem:(MvrItem*) i;
-
-@end

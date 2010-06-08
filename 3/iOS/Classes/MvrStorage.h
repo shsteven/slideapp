@@ -19,7 +19,8 @@
 
 - (id) initWithItemsDirectory:(NSString*) i metadataDirectory:(NSString*) m;
 
-@property(readonly) NSSet* storedItems;
+// @property(readonly) NSSet* storedItems;
+- (NSSet*) storedItems;
 - (void) addStoredItemsObject:(MvrItem*) i;
 - (void) removeStoredItemsObject:(MvrItem*) i;
 

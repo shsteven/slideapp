@@ -8,15 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "MvrInertia_Old.h"
-
 @protocol MvrDraggableViewDelegate;
 
 @interface MvrDraggableView : UIView {
 	CGPoint startingCenter;
 	CGAffineTransform startingTransform;
-	
-	MvrInertia_Old* inertia;
 	
 	id <MvrDraggableViewDelegate> delegate;
 }

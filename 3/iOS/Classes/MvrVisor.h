@@ -11,7 +11,7 @@
 #import "Network+Storage/MvrItem.h"
 
 @interface MvrVisor : UIViewController {
-	MvrItem* item;
+	id item;
 	
 	BOOL changesStatusBarStyleOnAppearance;
 	BOOL didChangeStatusBarStyle;

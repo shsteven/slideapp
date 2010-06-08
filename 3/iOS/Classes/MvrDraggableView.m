@@ -60,7 +60,6 @@
 			g.delegate = nil;
 	}
 	
-	[inertia release];
 	[super dealloc];
 }
 
