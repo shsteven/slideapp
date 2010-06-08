@@ -71,14 +71,14 @@
 		150C417E10A48CA200EBCE51 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		150C417F10A48CA200EBCE51 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1537A6E0107A388000B16B88 /* GameKit.framework */; };
 		150C418810A48DF100EBCE51 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514010620E3C006EC706 /* libMuiKit.a */; };
-		150C418910A48DFB00EBCE51 /* libNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 156B0A4C10902FFC00209F2D /* libNetwork.a */; };
+		150C418910A48DFB00EBCE51 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 156B0A4C10902FFC00209F2D /* libMoverNetwork.a */; };
 		150C419010A48F7000EBCE51 /* MvrBugFixingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C418F10A48F7000EBCE51 /* MvrBugFixingTests.m */; };
 		150F17D810879260009CCAB7 /* MvrMessageOptIn.alert in Resources */ = {isa = PBXBuildFile; fileRef = 150F17D710879260009CCAB7 /* MvrMessageOptIn.alert */; };
 		151060F11093818D00307C62 /* MvrNoLiteToLiteBT.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151060F01093818D00307C62 /* MvrNoLiteToLiteBT.alert */; };
 		151060F31093819300307C62 /* MvrNoLiteToLiteBTReminder.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151060F21093819300307C62 /* MvrNoLiteToLiteBTReminder.alert */; };
 		151061251093870900307C62 /* MvrNoLiteToLiteBT.strings in Resources */ = {isa = PBXBuildFile; fileRef = 151061211093870900307C62 /* MvrNoLiteToLiteBT.strings */; };
 		151061261093870900307C62 /* MvrNoLiteToLiteBTReminder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 151061231093870900307C62 /* MvrNoLiteToLiteBTReminder.strings */; };
-		15125AF31090308C002009A5 /* libNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 156B0A4C10902FFC00209F2D /* libNetwork.a */; };
+		15125AF31090308C002009A5 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 156B0A4C10902FFC00209F2D /* libMoverNetwork.a */; };
 		151D0AC11077A289009DAE07 /* MvrContactIsADuplicate.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */; };
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
@@ -564,7 +564,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				150C418910A48DFB00EBCE51 /* libNetwork.a in Frameworks */,
+				150C418910A48DFB00EBCE51 /* libMoverNetwork.a in Frameworks */,
 				150C418810A48DF100EBCE51 /* libMuiKit.a in Frameworks */,
 				150C417210A48CA100EBCE51 /* libz.1.1.3.dylib in Frameworks */,
 				150C417310A48CA100EBCE51 /* CrashReporter.framework in Frameworks */,
@@ -587,7 +587,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15125AF31090308C002009A5 /* libNetwork.a in Frameworks */,
+				15125AF31090308C002009A5 /* libMoverNetwork.a in Frameworks */,
 				1567514910620E49006EC706 /* libMuiKit.a in Frameworks */,
 				1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */,
 				1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */,
@@ -820,8 +820,8 @@
 		156B0A4610902FFC00209F2D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1535D2581090345000CBF778 /* libNetwork.a */,
-				156B0A4C10902FFC00209F2D /* libNetwork.a */,
+				1535D2581090345000CBF778 /* libMoverNetwork-Mac.a */,
+				156B0A4C10902FFC00209F2D /* libMoverNetwork.a */,
 				156B0A4E10902FFC00209F2D /* Network+Test.octest */,
 				156B0A5010902FFC00209F2D /* mvr-wifi */,
 			);
@@ -1295,10 +1295,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1535D2581090345000CBF778 /* libNetwork.a */ = {
+		1535D2581090345000CBF778 /* libMoverNetwork-Mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libNetwork.a;
+			path = "libMoverNetwork-Mac.a";
 			remoteRef = 1535D2571090345000CBF778 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1330,10 +1330,10 @@
 			remoteRef = 1567514510620E3C006EC706 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		156B0A4C10902FFC00209F2D /* libNetwork.a */ = {
+		156B0A4C10902FFC00209F2D /* libMoverNetwork.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libNetwork.a;
+			path = libMoverNetwork.a;
 			remoteRef = 156B0A4B10902FFC00209F2D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

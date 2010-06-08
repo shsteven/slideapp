@@ -1,5 +1,5 @@
 
-#include "../iPhone/Mover-Baseline-Release.xcconfig"
+#include "../iOS/Mover-Baseline-Release.xcconfig"
 #include "Mover-Network-iPhone.xcconfig"
 
 ARCHS = $(ARCHS_UNIVERSAL_IPHONE_OS)
