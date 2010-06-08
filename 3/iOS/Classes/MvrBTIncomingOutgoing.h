@@ -24,7 +24,6 @@
 #define kMvrBTProtocolTimeout 7.0
 
 @interface MvrBTIncoming : MvrStreamedIncoming <MvrIncoming, MvrBTProtocolIncomingDelegate> {
-	MvrBTChannel* channel;
 	MvrBTProtocolIncoming* proto;
 	
 	int attemptsAtBacktracking;

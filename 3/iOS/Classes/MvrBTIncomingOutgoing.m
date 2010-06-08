@@ -137,7 +137,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 {
 	self = [super init];
 	if (self != nil) {
-		channel = chan; // it owns us.
+		self.channel = chan; // it owns us.
 		proto = [MvrBTProtocolIncoming new];
 		proto.delegate = self;
 	}
@@ -212,7 +212,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	MvrBTTrack(@"Sending an ack");
 	NSData* ackPacket = MvrAcknowledgmentPacket(seq);
 	NSError* e;
-	if (![channel sendData:ackPacket error:&e]) {
+	if (![(MvrBTChannel*)self.channel sendData:ackPacket error:&e]) {
 		MvrBTTrack(@"Cancelling due to error on ack %@", e);
 		[self cancel];
 	}
@@ -230,7 +230,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 	MvrBTTrack(@"Sending a Nack");
 	NSData* ackPacket = MvrNegativeAcknowledgmentPacket(seq);
 	NSError* e;
-	if (![channel sendData:ackPacket error:&e]) {
+	if (![(MvrBTChannel*)self.channel sendData:ackPacket error:&e]) {
 		L0LogAlways(@"Cancelling due to error on nack %@", e);
 		[self cancel];
 	}
@@ -269,7 +269,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 {
 	if (!self.cancelled && !self.item) {
 		NSData* cancelPacket = [NSData dataWithBytes:kMvrCancelPacket length:kMvrCancelPacket_Size];
- 		[channel sendData:cancelPacket error:NULL];
+ 		[(MvrBTChannel*)self.channel sendData:cancelPacket error:NULL];
 		
 		[self stopWaiting];
 		MvrBTTrackEnd();

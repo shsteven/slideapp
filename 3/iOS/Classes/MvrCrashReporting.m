@@ -25,6 +25,8 @@
 
 - (void) checkForPendingReports;
 {
+#if kMvrAllowCrashReporting
+	
 #if DEBUG
 	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrDisableCrashReporting"] boolValue])
 		return;
@@ -54,6 +56,7 @@
 	}
 	
 	[rep purgePendingCrashReport];
+#endif
 }
 
 NSUncaughtExceptionHandler* defaultExceptionHandler = NULL;
@@ -67,6 +70,8 @@ static void MvrHandleException(NSException* ex) {
 
 - (void) enableReporting;
 {
+#if kMvrAllowCrashReporting
+	
 #if DEBUG
 	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrDisableCrashReporting"] boolValue])
 		return;
@@ -86,6 +91,8 @@ static void MvrHandleException(NSException* ex) {
 //	NSException* e = [NSException exceptionWithName:@"MvrTestException" reason:@"A test exception used to try out the reporting machinery" userInfo:nil];
 //	[e performSelector:@selector(raise) withObject:nil afterDelay:7.0];
 //#endif
+	
+#endif
 }
 
 - (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex;
