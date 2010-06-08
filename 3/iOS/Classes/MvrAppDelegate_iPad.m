@@ -62,7 +62,7 @@
 // ------------- SETUP: Messages From The Cloud
 	
 	messageChecker = [MvrMessageChecker new];
-	[messageChecker performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:1.0];
+	[messageChecker performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:7.0];
 	
 // ------------- SETUP: UI
 	application.idleTimerDisabled = YES;
