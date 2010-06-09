@@ -13,6 +13,7 @@
 		150722631150C0E4009FA8AF /* MvrPreviewableItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 150722621150C0E4009FA8AF /* MvrPreviewableItemUI.m */; };
 		1507226F1150C2EA009FA8AF /* MvrPreviewVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1507226D1150C2EA009FA8AF /* MvrPreviewVisor.m */; };
 		150722701150C2EA009FA8AF /* MvrPreviewVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1507226E1150C2EA009FA8AF /* MvrPreviewVisor.xib */; };
+		1507DEA211C025DB00EB85B8 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1507DEA111C025DB00EB85B8 /* CrashReporter.framework */; };
 		150C414410A48C7300EBCE51 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		150C414510A48C7300EBCE51 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		150C414610A48C7300EBCE51 /* MvrAppDelegate+HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */; };
@@ -57,7 +58,6 @@
 		150C416D10A48C7300EBCE51 /* MvrVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A2010776B7D00FBC9B4 /* MvrVisor.m */; };
 		150C416E10A48C7300EBCE51 /* MvrWiFiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C86A1068DB92000C9CDE /* MvrWiFiMode.m */; };
 		150C417210A48CA100EBCE51 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
-		150C417310A48CA100EBCE51 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFE6D9108460C000CBCB35 /* CrashReporter.framework */; };
 		150C417410A48CA100EBCE51 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
 		150C417510A48CA100EBCE51 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511710620E01006EC706 /* CFNetwork.framework */; };
 		150C417610A48CA100EBCE51 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511910620E08006EC706 /* MobileCoreServices.framework */; };
@@ -107,6 +107,8 @@
 		154BD70E1089F24500C45562 /* MvrVideoReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD70D1089F24500C45562 /* MvrVideoReceived.alert */; };
 		154BD7371089F62D00C45562 /* MvrWelcome.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154BD7361089F62D00C45562 /* MvrWelcome.alert */; };
 		154BD797108A039F00C45562 /* Mover-AdHoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 154BD796108A039F00C45562 /* Mover-AdHoc.xcconfig */; };
+		154CCC7C11BFA19E0033DAD3 /* NSBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 154CCC7611BFA19E0033DAD3 /* NSBlock.m */; };
+		154CCC7E11BFA19E0033DAD3 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 154CCC7A11BFA19E0033DAD3 /* Block.c */; };
 		154D0AF1107DD945009BAF92 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154FA54810790FD1004DF675 /* MessageUI.framework */; };
 		154FA62C10792232004DF675 /* MvrClearTableOnShake.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FA62B10792232004DF675 /* MvrClearTableOnShake.alert */; };
@@ -128,7 +130,7 @@
 		1567514910620E49006EC706 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514010620E3C006EC706 /* libMuiKit.a */; };
 		1567514A10620E4F006EC706 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1567514210620E3C006EC706 /* MuiKit.bundle */; };
 		1567514E10620E75006EC706 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514D10620E75006EC706 /* Foundation.framework */; };
-		1567515010620E78006EC706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514F10620E78006EC706 /* UIKit.framework */; };
+		1567515010620E78006EC706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514F10620E78006EC706 /* UIKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		1567515210620E7A006EC706 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567515110620E7A006EC706 /* CoreGraphics.framework */; };
 		156751B91062176E006EC706 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
 		156813B1108C921400424179 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156813B0108C921400424179 /* MainWindow.xib */; };
@@ -145,7 +147,7 @@
 		1570B33B10E756420037DEB4 /* ILSwapCommonActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570B33710E756420037DEB4 /* ILSwapCommonActions.m */; };
 		1577006A10748D0100907F62 /* MvrVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1577006910748D0100907F62 /* MvrVideoItem.m */; };
 		15779EF91075D80B00FF2018 /* MvrVideoItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 15779EF81075D80B00FF2018 /* MvrVideoItemUI.m */; };
-		15779F111075DC8300FF2018 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15779F101075DC8300FF2018 /* MediaPlayer.framework */; };
+		15779F111075DC8300FF2018 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15779F101075DC8300FF2018 /* MediaPlayer.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		15789E74109218CD0018EC89 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 15789E73109218CD0018EC89 /* Default.png */; };
 		157A0DCC11735AC100BA2A4B /* MvrPreviewableItemReceived.strings in Resources */ = {isa = PBXBuildFile; fileRef = 157A0DCA11735AC100BA2A4B /* MvrPreviewableItemReceived.strings */; };
 		157B68B21072548600E25E96 /* GreenDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 157B68B11072548600E25E96 /* GreenDot.png */; };
@@ -180,7 +182,6 @@
 		15A8064F108F011C00DE037F /* MvrNetworkTrouble.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */; };
 		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
 		15AE0552108E6F9100D90F84 /* MvrLargeItemOverBT.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15AE0551108E6F9100D90F84 /* MvrLargeItemOverBT.alert */; };
-		15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AFE6D9108460C000CBCB35 /* CrashReporter.framework */; };
 		15AFE6ED108460F200CBCB35 /* MvrCrashReporting.m in Sources */ = {isa = PBXBuildFile; fileRef = 15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */; };
 		15AFE6EF1084623300CBCB35 /* MvrAskAboutCrash.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */; };
 		15BF40E811613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15BF40E711613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert */; };
@@ -224,7 +225,6 @@
 		15C86B7311BE74930046CFC0 /* MvrAddPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7211BE74930046CFC0 /* MvrAddPane.xib */; };
 		15C86B7911BE74E90046CFC0 /* MvrTableController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7811BE74E90046CFC0 /* MvrTableController_iPad.xib */; };
 		15C86B7B11BE74FC0046CFC0 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7A11BE74FC0046CFC0 /* MainWindow-iPad.xib */; };
-		15C86B9211BE751B0046CFC0 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C86B9111BE751B0046CFC0 /* PLBlocks.framework */; };
 		15C86BB011BE76720046CFC0 /* Backdrop-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7611BE74D00046CFC0 /* Backdrop-iPad.png */; };
 		15C8A1CB1116CFDE00F844A7 /* SwapKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15C8A1CA1116CFDE00F844A7 /* SwapKit.bundle */; };
 		15C8A1D21116CFF600F844A7 /* ILSwapSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C8A1CF1116CFF600F844A7 /* ILSwapSendController.m */; };
@@ -360,6 +360,7 @@
 		1507226C1150C2EA009FA8AF /* MvrPreviewVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPreviewVisor.h; sourceTree = "<group>"; };
 		1507226D1150C2EA009FA8AF /* MvrPreviewVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPreviewVisor.m; sourceTree = "<group>"; };
 		1507226E1150C2EA009FA8AF /* MvrPreviewVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrPreviewVisor.xib; sourceTree = "<group>"; };
+		1507DEA111C025DB00EB85B8 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bug Fixing Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bug Fixing Tests-Info.plist"; sourceTree = "<group>"; };
 		150C418E10A48F7000EBCE51 /* MvrBugFixingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBugFixingTests.h; sourceTree = "<group>"; };
@@ -413,6 +414,11 @@
 		154BD79A108A03C900C45562 /* Variant.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Variant.xcconfig; path = Plus/Variant.xcconfig; sourceTree = "<group>"; };
 		154BD79D108A040300C45562 /* AdHoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdHoc.plist; sourceTree = "<group>"; };
 		154BD7AD108A062400C45562 /* Local-AdHoc.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Local-AdHoc.xcconfig"; sourceTree = "<group>"; };
+		154CCC7611BFA19E0033DAD3 /* NSBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBlock.m; sourceTree = "<group>"; };
+		154CCC7711BFA19E0033DAD3 /* NSBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBlock.h; sourceTree = "<group>"; };
+		154CCC7911BFA19E0033DAD3 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
+		154CCC7A11BFA19E0033DAD3 /* Block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
+		154CCC7B11BFA19E0033DAD3 /* Block_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_private.h; sourceTree = "<group>"; };
 		154D0AEF107DD945009BAF92 /* MvrAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAccessibility.h; sourceTree = "<group>"; };
 		154D0AF0107DD945009BAF92 /* MvrAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAccessibility.m; sourceTree = "<group>"; };
 		154FA54810790FD1004DF675 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -527,7 +533,6 @@
 		15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNetworkTrouble.alert; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15AE0551108E6F9100D90F84 /* MvrLargeItemOverBT.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrLargeItemOverBT.alert; sourceTree = "<group>"; };
-		15AFE6D9108460C000CBCB35 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		15AFE6EB108460F200CBCB35 /* MvrCrashReporting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrCrashReporting.h; sourceTree = "<group>"; };
 		15AFE6EC108460F200CBCB35 /* MvrCrashReporting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrCrashReporting.m; sourceTree = "<group>"; };
 		15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrAskAboutCrash.alert; sourceTree = "<group>"; };
@@ -600,7 +605,6 @@
 		15C86B7611BE74D00046CFC0 /* Backdrop-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Backdrop-iPad.png"; sourceTree = SOURCE_ROOT; };
 		15C86B7811BE74E90046CFC0 /* MvrTableController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTableController_iPad.xib; sourceTree = SOURCE_ROOT; };
 		15C86B7A11BE74FC0046CFC0 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = SOURCE_ROOT; };
-		15C86B9111BE751B0046CFC0 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		15C8A1CA1116CFDE00F844A7 /* SwapKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SwapKit.bundle; sourceTree = "<group>"; };
 		15C8A1CE1116CFF600F844A7 /* ILSwapSendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapSendController.h; path = SwapKit/ILSwapSendController.h; sourceTree = SOURCE_ROOT; };
 		15C8A1CF1116CFF600F844A7 /* ILSwapSendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapSendController.m; path = SwapKit/ILSwapSendController.m; sourceTree = SOURCE_ROOT; };
@@ -655,7 +659,6 @@
 				150C418910A48DFB00EBCE51 /* libMoverNetwork.a in Frameworks */,
 				150C418810A48DF100EBCE51 /* libMuiKit.a in Frameworks */,
 				150C417210A48CA100EBCE51 /* libz.1.1.3.dylib in Frameworks */,
-				150C417310A48CA100EBCE51 /* CrashReporter.framework in Frameworks */,
 				150C417410A48CA100EBCE51 /* SystemConfiguration.framework in Frameworks */,
 				150C417510A48CA100EBCE51 /* CFNetwork.framework in Frameworks */,
 				150C417610A48CA100EBCE51 /* MobileCoreServices.framework in Frameworks */,
@@ -690,8 +693,7 @@
 				157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */,
 				154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */,
 				1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */,
-				15AFE6DA108460C000CBCB35 /* CrashReporter.framework in Frameworks */,
-				15C86B9211BE751B0046CFC0 /* PLBlocks.framework in Frameworks */,
+				1507DEA211C025DB00EB85B8 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +703,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1507DE8B11C024DE00EB85B8 /* PLCrashReporter */,
+				154CCC7111BFA1940033DAD3 /* PLBlocks */,
 				15C86B0A11BE72960046CFC0 /* iPad */,
 				15BF3FC411609679001EC1BC /* MvrFeatures.h */,
 				1D3623240D0F684500981E51 /* MvrAppDelegate.h */,
@@ -735,6 +739,13 @@
 				1507226E1150C2EA009FA8AF /* MvrPreviewVisor.xib */,
 			);
 			name = "Previewable File Items";
+			sourceTree = "<group>";
+		};
+		1507DE8B11C024DE00EB85B8 /* PLCrashReporter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PLCrashReporter;
 			sourceTree = "<group>";
 		};
 		150C418D10A48EAB00EBCE51 /* Tests for Bug Fixes */ = {
@@ -853,6 +864,18 @@
 				154BD79A108A03C900C45562 /* Variant.xcconfig */,
 			);
 			name = Plus;
+			sourceTree = "<group>";
+		};
+		154CCC7111BFA1940033DAD3 /* PLBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				154CCC7611BFA19E0033DAD3 /* NSBlock.m */,
+				154CCC7711BFA19E0033DAD3 /* NSBlock.h */,
+				154CCC7911BFA19E0033DAD3 /* Block.h */,
+				154CCC7A11BFA19E0033DAD3 /* Block.c */,
+				154CCC7B11BFA19E0033DAD3 /* Block_private.h */,
+			);
+			name = PLBlocks;
 			sourceTree = "<group>";
 		};
 		1551993410BFD4A1002589CD /* Apple Ads */ = {
@@ -1361,8 +1384,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				1567511310620DF7006EC706 /* libz.1.1.3.dylib */,
-				15C86B9111BE751B0046CFC0 /* PLBlocks.framework */,
-				15AFE6D9108460C000CBCB35 /* CrashReporter.framework */,
+				1507DEA111C025DB00EB85B8 /* CrashReporter.framework */,
 				1567511510620DFC006EC706 /* SystemConfiguration.framework */,
 				1567511710620E01006EC706 /* CFNetwork.framework */,
 				1567511910620E08006EC706 /* MobileCoreServices.framework */,
@@ -1888,6 +1910,8 @@
 				15C86B6F11BE74800046CFC0 /* MvrDraggableView.m in Sources */,
 				15C86B7011BE74800046CFC0 /* MvrInertia.m in Sources */,
 				15C86B7111BE74800046CFC0 /* MvrAddPane.m in Sources */,
+				154CCC7C11BFA19E0033DAD3 /* NSBlock.m in Sources */,
+				154CCC7E11BFA19E0033DAD3 /* Block.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2241,15 +2265,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 154BD796108A039F00C45562 /* Mover-AdHoc.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F5DDCF5A-79D1-40B0-9911-9AD784A57918";
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Ad Hoc";
@@ -2269,15 +2294,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 157CBD07108F153D00146778 /* Mover-AppStore.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B17671A6-081A-4E40-B253-1BB8DCBD59C4";
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "App Store";
@@ -2286,12 +2312,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF0D7105BAECB006D8E7A /* Mover-Debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2301,15 +2328,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF0D8105BAECB006D8E7A /* Mover-Release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F21519D-4BE2-4903-A7A3-30EA13BECF7F";
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

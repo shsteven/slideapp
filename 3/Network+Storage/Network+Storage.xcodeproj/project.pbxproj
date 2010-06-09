@@ -1478,7 +1478,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF142105BB61D006D8E7A /* Mover-Network-Debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 			};
 			name = Debug;
 		};
@@ -1486,7 +1486,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF144105BB64D006D8E7A /* Mover-Network-Release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				DSTROOT = /tmp/Network.dst;
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
