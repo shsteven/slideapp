@@ -89,7 +89,7 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 {
 	if (!libraryController) {
 		libraryController = [[UIImagePickerController alloc] init];
-		libraryController.mediaTypes = [NSArray arrayWithObjects:(id) kUTTypeImage, (id) kUTTypeVideo, nil];
+		libraryController.mediaTypes = [NSArray arrayWithObjects:(id) kUTTypeImage, (id) kUTTypeMovie, nil];
 		libraryController.delegate = self;
 	}
 	
@@ -211,7 +211,7 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 
 		if (img)
 			i = [[[MvrImageItem alloc] initWithImage:img type:(id) kUTTypePNG] autorelease];
-	} else if ([[info objectForKey:UIImagePickerControllerMediaType] isEqual:(id) kUTTypeImage])
+	} else if ([[info objectForKey:UIImagePickerControllerMediaType] isEqual:(id) kUTTypeMovie])
 		i = [MvrVideoItem itemWithVideoAtPath:[[info objectForKey:UIImagePickerControllerMediaURL] path] type:(id) kUTTypeMovie error:NULL];
 	
 	if (i)
