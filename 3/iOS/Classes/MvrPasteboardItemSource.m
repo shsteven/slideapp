@@ -55,6 +55,15 @@ L0ObjCSingletonMethod(sharedSource)
 
 - (void) addAllItemsFromPasteboard:(UIPasteboard*) pb;
 {
+	[self retrieveItemsFromPasteboard:pb invokingBlock:^(MvrItem* i) {
+		[MvrApp() addItemFromSelf:i];
+	}];
+}
+
+- (BOOL) retrieveItemsFromPasteboard:(UIPasteboard*) pb invokingBlock:(void (^) (MvrItem*)) block;
+{
+	BOOL didAddAny = NO;
+	
 	int length = pb.numberOfItems;
 	for (int i = 0; i < length; i++) {
 		NSIndexSet* thisItem = [NSIndexSet indexSetWithIndex:i];
@@ -99,9 +108,13 @@ L0ObjCSingletonMethod(sharedSource)
 #if kMvrIsLite
 		canAdd = canAdd && MvrPasteboardItemSourceLiteVersionCanPasteItemsOfClass([i class]);
 #endif
-		if (canAdd)
-			[MvrApp() addItemFromSelf:i];
+		if (canAdd) {
+			didAddAny = YES;
+			block(i);
+		}
 	}
+	
+	return didAddAny;
 }
 
 - (void) addAllItemsFromSwapKitRequest:(ILSwapRequest*) req;

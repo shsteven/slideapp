@@ -22,4 +22,6 @@
 
 - (void) addAllItemsFromSwapKitRequest:(ILSwapRequest*) req;
 
+- (BOOL) retrieveItemsFromPasteboard:(UIPasteboard*) pb invokingBlock:(void (^) (MvrItem*)) block;
+
 @end

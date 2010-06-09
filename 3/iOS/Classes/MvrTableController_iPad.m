@@ -545,10 +545,9 @@ typedef NSInteger MvrEdge;
 {
 	[MvrApp_iPad().storage addStoredItemsObject:i];
 	[self addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
-	[addPopover dismissPopoverAnimated:YES];
 }
 
-- (void) addPaneDidCancel;
+- (void) addPaneDidFinishPickingItems;
 {
 	[addPopover dismissPopoverAnimated:YES];
 }

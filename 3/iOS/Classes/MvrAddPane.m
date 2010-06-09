@@ -11,6 +11,7 @@
 #import "MvrContactItem.h"
 #import "MvrImageItem.h"
 #import "MvrVideoItem.h"
+#import "MvrPasteboardItemSource.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -21,6 +22,8 @@
 
 @property(nonatomic, retain) UIImagePickerController* libraryController;
 @property(nonatomic, retain) ABPeoplePickerNavigationController* peoplePicker;
+
+- (void) updatePasteButtonAvailable:(NSNotification *)n;
 
 @end
 
@@ -34,6 +37,28 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 @synthesize delegate;
 @synthesize libraryController, peoplePicker;
 
+- (id) init;
+{
+	if ((self = [super init])) {
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePasteButtonAvailable:) name:UIPasteboardChangedNotification object:[UIPasteboard generalPasteboard]];
+	}
+	
+	return self;
+}
+
+- (void) dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[super dealloc];
+}
+
+
+- (void) updatePasteButtonAvailable:(NSNotification*) n;
+{
+	if (paste)
+		paste.enabled = [[MvrPasteboardItemSource sharedSource] available];
+}
+
 - (void) viewDidLoad;
 {
 	[super viewDidLoad];
@@ -42,17 +67,22 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 	 @"peoplePicker",
 	 @"kindPicker",
 	 @"currentViewController",
+	 @"paste",
 	 nil];
 
 	// At the top
 //	self.navigationItem.titleView = kindPicker;
+	
+	paste = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Paste", @"Paste button in iPad Add pane") style:UIBarButtonItemStyleBordered target:self action:@selector(paste)] autorelease];
 	
 	// At the bottom
 	self.toolbarItems = [NSArray arrayWithObjects:
 						 ILBarButtonItemFlexibleSpace(),
 						 [[[UIBarButtonItem alloc] initWithCustomView:kindPicker] autorelease],
 						 ILBarButtonItemFlexibleSpace(),
-						 nil];
+						 paste,
+						 ILBarButtonItemFlexibleSpace(),
+						 nil];	
 }
 
 - (UIImagePickerController*) libraryController;
@@ -128,6 +158,7 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 {
 	[super viewWillAppear:ani];
 	[self updateDisplayedViewController];
+	[self updatePasteButtonAvailable:nil];
 	
 	self.navigationController.navigationBarHidden = YES;
 	self.navigationController.toolbarHidden = NO;
@@ -154,13 +185,14 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker;
 {
-	[self.delegate addPaneDidCancel];
+	[self.delegate addPaneDidFinishPickingItems];
 }
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person;
 {
 	MvrContactItem* i = [[[MvrContactItem alloc] initWithContentsOfAddressBookRecord:person] autorelease];
 	[self.delegate addPaneDidPickItem:i];
+	[self.delegate addPaneDidFinishPickingItems];
 	return NO;
 }
 
@@ -184,11 +216,28 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 	
 	if (i)
 		[self.delegate addPaneDidPickItem:i];
+	[self.delegate addPaneDidFinishPickingItems];
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker;
 {
-	[self.delegate addPaneDidCancel];
+	[self.delegate addPaneDidFinishPickingItems];
+}
+
+- (IBAction) paste;
+{
+	MvrPasteboardItemSource* s = [MvrPasteboardItemSource sharedSource];
+	
+	if (!s.available)
+		return;
+	
+	[s retrieveItemsFromPasteboard:[UIPasteboard generalPasteboard] invokingBlock:^(MvrItem* i) {
+		
+		[self.delegate addPaneDidPickItem:i];
+		
+	}];
+	
+	[self.delegate addPaneDidFinishPickingItems];
 }
 
 //- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated;

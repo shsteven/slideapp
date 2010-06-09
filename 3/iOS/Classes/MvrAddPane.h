@@ -16,7 +16,7 @@
 @protocol MvrAddPaneDelegate <NSObject>
 
 - (void) addPaneDidPickItem:(MvrItem*) i;
-- (void) addPaneDidCancel;
+- (void) addPaneDidFinishPickingItems;
 
 @end
 
@@ -30,6 +30,8 @@
 	IBOutlet UISegmentedControl* kindPicker;
 	
 	id <MvrAddPaneDelegate> delegate;
+	
+	UIBarButtonItem* paste;
 }
 
 @property(assign) UIViewController* currentViewController;
@@ -37,5 +39,7 @@
 - (IBAction) updateDisplayedViewController;
 
 @property(assign) id <MvrAddPaneDelegate> delegate;
+
+- (IBAction) paste;
 
 @end
