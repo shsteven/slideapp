@@ -240,16 +240,4 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 	[self.delegate addPaneDidFinishPickingItems];
 }
 
-//- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated;
-//{
-//	if ((navigationController == libraryController || navigationController == peoplePicker) && viewController.navigationItem.rightBarButtonItem)
-//		viewController.navigationItem.rightBarButtonItem = nil;
-//}
-//
-//- (void) navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated;
-//{
-//	if ((navigationController == libraryController || navigationController == peoplePicker) && viewController.navigationItem.rightBarButtonItem)
-//		viewController.navigationItem.rightBarButtonItem = nil;
-//}
-
 @end
