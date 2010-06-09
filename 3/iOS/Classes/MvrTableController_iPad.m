@@ -171,7 +171,7 @@ typedef NSInteger MvrEdge;
 	L0Log(@"Will add an arrow view for %@", chan);
 	
 	// TODO better constructor
-	MvrArrowView_iPad* arrow = [[MvrArrowView_iPad alloc] initWithFrame:CGRectZero];
+	MvrArrowView_iPad* arrow = [[[MvrArrowView_iPad alloc] initWithFrame:CGRectZero] autorelease];
 	
 	arrow.mainLabel.text = [chan displayName];
 	
