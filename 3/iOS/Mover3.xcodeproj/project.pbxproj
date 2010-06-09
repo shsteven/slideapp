@@ -225,9 +225,7 @@
 		15C86B7911BE74E90046CFC0 /* MvrTableController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7811BE74E90046CFC0 /* MvrTableController_iPad.xib */; };
 		15C86B7B11BE74FC0046CFC0 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7A11BE74FC0046CFC0 /* MainWindow-iPad.xib */; };
 		15C86B9211BE751B0046CFC0 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C86B9111BE751B0046CFC0 /* PLBlocks.framework */; };
-		15C86BAE11BE766A0046CFC0 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B5D11BE74550046CFC0 /* Arrow.png */; };
-		15C86BAF11BE766D0046CFC0 /* TopShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B5F11BE745F0046CFC0 /* TopShadow.png */; };
-		15C86BB011BE76720046CFC0 /* Backdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7611BE74D00046CFC0 /* Backdrop.png */; };
+		15C86BB011BE76720046CFC0 /* Backdrop-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7611BE74D00046CFC0 /* Backdrop-iPad.png */; };
 		15C8A1CB1116CFDE00F844A7 /* SwapKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15C8A1CA1116CFDE00F844A7 /* SwapKit.bundle */; };
 		15C8A1D21116CFF600F844A7 /* ILSwapSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C8A1CF1116CFF600F844A7 /* ILSwapSendController.m */; };
 		15C8A1D31116CFF600F844A7 /* ILSwapKitBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C8A1D11116CFF600F844A7 /* ILSwapKitBundle.m */; };
@@ -587,8 +585,6 @@
 		15C86B5011BE74130046CFC0 /* MvrStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrStorage.m; sourceTree = "<group>"; };
 		15C86B5211BE74190046CFC0 /* MvrAppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAppDelegate_iPad.h; sourceTree = "<group>"; };
 		15C86B5311BE74190046CFC0 /* MvrAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAppDelegate_iPad.m; sourceTree = "<group>"; };
-		15C86B5D11BE74550046CFC0 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Arrow.png; sourceTree = SOURCE_ROOT; };
-		15C86B5F11BE745F0046CFC0 /* TopShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopShadow.png; sourceTree = SOURCE_ROOT; };
 		15C86B6111BE746E0046CFC0 /* MvrArrowView_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrArrowView_iPad.xib; sourceTree = SOURCE_ROOT; };
 		15C86B6311BE74730046CFC0 /* MvrArrowView_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrArrowView_iPad.h; sourceTree = "<group>"; };
 		15C86B6411BE74730046CFC0 /* MvrArrowView_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrArrowView_iPad.m; sourceTree = "<group>"; };
@@ -601,7 +597,7 @@
 		15C86B6D11BE74800046CFC0 /* MvrAddPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAddPane.h; sourceTree = "<group>"; };
 		15C86B6E11BE74800046CFC0 /* MvrAddPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAddPane.m; sourceTree = "<group>"; };
 		15C86B7211BE74930046CFC0 /* MvrAddPane.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrAddPane.xib; sourceTree = SOURCE_ROOT; };
-		15C86B7611BE74D00046CFC0 /* Backdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Backdrop.png; sourceTree = SOURCE_ROOT; };
+		15C86B7611BE74D00046CFC0 /* Backdrop-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Backdrop-iPad.png"; sourceTree = SOURCE_ROOT; };
 		15C86B7811BE74E90046CFC0 /* MvrTableController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTableController_iPad.xib; sourceTree = SOURCE_ROOT; };
 		15C86B7A11BE74FC0046CFC0 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		15C86B9111BE751B0046CFC0 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
@@ -1250,7 +1246,7 @@
 		15C86B5811BE74410046CFC0 /* The Table */ = {
 			isa = PBXGroup;
 			children = (
-				15C86B7611BE74D00046CFC0 /* Backdrop.png */,
+				15C86B7611BE74D00046CFC0 /* Backdrop-iPad.png */,
 				15C86B6911BE74800046CFC0 /* MvrDraggableView.h */,
 				15C86B6A11BE74800046CFC0 /* MvrDraggableView.m */,
 				15C86B6B11BE74800046CFC0 /* MvrInertia.h */,
@@ -1264,8 +1260,6 @@
 				15C86B6311BE74730046CFC0 /* MvrArrowView_iPad.h */,
 				15C86B6411BE74730046CFC0 /* MvrArrowView_iPad.m */,
 				15C86B6111BE746E0046CFC0 /* MvrArrowView_iPad.xib */,
-				15C86B5D11BE74550046CFC0 /* Arrow.png */,
-				15C86B5F11BE745F0046CFC0 /* TopShadow.png */,
 			);
 			name = "The Table";
 			sourceTree = "<group>";
@@ -1666,9 +1660,7 @@
 				15C86B7311BE74930046CFC0 /* MvrAddPane.xib in Resources */,
 				15C86B7911BE74E90046CFC0 /* MvrTableController_iPad.xib in Resources */,
 				15C86B7B11BE74FC0046CFC0 /* MainWindow-iPad.xib in Resources */,
-				15C86BAE11BE766A0046CFC0 /* Arrow.png in Resources */,
-				15C86BAF11BE766D0046CFC0 /* TopShadow.png in Resources */,
-				15C86BB011BE76720046CFC0 /* Backdrop.png in Resources */,
+				15C86BB011BE76720046CFC0 /* Backdrop-iPad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

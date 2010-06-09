@@ -16,6 +16,9 @@
 	self = [super init];
 	if (self != nil) {
 		self.wantsFullScreenLayout = YES;
+		
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+			self.title = NSLocalizedString(@"Licenses & Copyrights", @"Title for legalities pane.");
 	}
 	return self;
 }
@@ -36,6 +39,11 @@
 	self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 }
 
+- (CGSize) contentSizeForViewInPopover;
+{
+	return CGSizeMake(320, 430);
+}
+
 - (NSURL*) initialURL;
 {
 	NSString* path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"Legalities"];
@@ -49,6 +57,12 @@
 	
 	[UIApp openURL:[request URL]];
 	return NO;
+}
+
+- (void) webViewDidFinishLoad:(UIWebView *)webView;
+{
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+		(void) [self.webView stringByEvaluatingJavaScriptFromString:@"document.body.className += ' is-overlaid-with-translucent-44px-bar';"];	
 }
 
 @end

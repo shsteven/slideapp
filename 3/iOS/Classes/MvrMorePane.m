@@ -144,13 +144,23 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 		[UIColor colorWithWhite:0.200 alpha:1.000];
 
 	table = [[UITableView alloc] initWithFrame:view.bounds style:UITableViewStyleGrouped];
-	table.backgroundColor = view.backgroundColor;
 	table.delegate = self;
 	table.dataSource = self;
-	table.contentInset = UIEdgeInsetsMake(44 + UIApp.statusBarFrame.size.height, 0, 0, 0);
-	[view addSubview:table];
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+		table.contentInset = UIEdgeInsetsMake(44 + UIApp.statusBarFrame.size.height, 0, 0, 0);
+	table.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
+	table.backgroundColor = [UIColor colorWithWhite:0.200 alpha:1.000];
+	if ([table respondsToSelector:@selector(setBackgroundView:)])
+		[table setBackgroundView:nil];
+	
+	[view addSubview:table];
 	self.view = view;
+}
+
+- (CGSize) contentSizeForViewInPopover;
+{
+	return CGSizeMake(320, 430);
 }
 
 - (void) viewDidUnload;
@@ -158,9 +168,17 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	[table release]; table = nil;
 }
 
+- (void) viewWillAppear:(BOOL)animated;
+{
+	[super viewWillAppear:animated];
+	if ([table respondsToSelector:@selector(backgroundView)])
+		[table backgroundView].backgroundColor = self.view.backgroundColor;
+	
+}
+
 - (void) tellAFriend:(id) sender;
 {
-	[MvrApp().tellAFriend start];
+	[MvrServices().tellAFriend start];
 }
 
 - (void) makeTableStructure:(NSMutableArray*) content;
@@ -175,7 +193,7 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	tellAFriend.textLabel.text = NSLocalizedString(@"Tell a Friend", @"Tell a Friend entry in about box");
 	tellAFriend.textLabel.textAlignment = UITextAlignmentCenter;
 	
-	if (!MvrApp().tellAFriend.canTellAFriend)
+	if (!MvrServices().tellAFriend.canTellAFriend)
 		tellAFriend.textLabel.textColor = [UIColor grayColor];
 	tellAFriend.action = @selector(tellAFriend:);
 	[commandsSection.cells addObject:tellAFriend];
@@ -195,7 +213,7 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	UISwitch* switchy = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
 	[switchy sizeToFit];
 	[switchy addTarget:self action:@selector(didChangeOptInOutForMessages:) forControlEvents:UIControlEventValueChanged];
-	switchy.on = [MvrApp().messageChecker.userOptedInToMessages boolValue];
+	switchy.on = [MvrServices().messageChecker.userOptedInToMessages boolValue];
 	
 	messagesConsent.accessoryView = switchy;
 	messagesConsent.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -233,7 +251,7 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 
 - (void) didChangeOptInOutForMessages:(UISwitch*) sender;
 {
-	MvrApp().messageChecker.userOptedInToMessages = [NSNumber numberWithBool:sender.on];
+	MvrServices().messageChecker.userOptedInToMessages = [NSNumber numberWithBool:sender.on];
 }
 
 - (void) showLegalities:(id) sender;
@@ -276,7 +294,7 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	if ([cell isKindOfClass:[MvrMorePaneActionCell class]])
 		[self performSelector:[(MvrMorePaneActionCell*)cell action]];
 	else if ([cell isKindOfClass:[MvrMessagesCell class]])
-		[MvrApp().messageChecker checkOrDisplayMessage];
+		[MvrServices().messageChecker checkOrDisplayMessage];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section;

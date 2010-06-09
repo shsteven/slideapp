@@ -31,6 +31,8 @@
 - (void) presentModalViewController:(UIViewController*) ctl;
 
 @property(readonly, assign) BOOL helpAlertsSuppressed;
+@property(readonly) MvrTellAFriendController* tellAFriend;
+@property(readonly) MvrMessageChecker* messageChecker;
 
 @end
 
@@ -75,9 +77,6 @@
 
 @property(nonatomic, retain) IBOutlet MvrWiFiMode* wifiMode;
 @property(nonatomic, retain) IBOutlet MvrBluetoothMode* bluetoothMode;
-
-@property(readonly) MvrTellAFriendController* tellAFriend;
-@property(readonly) MvrMessageChecker* messageChecker;
 
 - (IBAction) add;
 - (void) addItemFromSelf:(MvrItem*) item;

@@ -187,4 +187,11 @@
 	return NO;
 }
 
+@synthesize messageChecker;
+
+- (MvrTellAFriendController *) tellAFriend;
+{
+	return nil;
+}
+
 @end

@@ -7,14 +7,13 @@
 //
 
 #import "MvrTableController_iPad.h"
-#import "MvrAppDelegate_iPad.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "MvrAppDelegate_iPad.h"
 #import "MvrInertia.h"
-
 #import "MvrArrowView_iPad.h"
-
 #import "MvrAddPane.h"
+#import "MvrAboutPane.h"
 
 #import "PLActionSheet.h"
 
@@ -179,7 +178,7 @@ typedef NSInteger MvrEdge;
 	[arrowViewsByChannel setObject:arrow forKey:chan];
 	[orderedArrowViews addObject:arrow];
 	
-	[draggableViewsLayer addSubview:arrow];
+	[arrowsLayer addSubview:arrow];
 	[self layoutArrowViews];
 }
 
@@ -233,8 +232,8 @@ typedef NSInteger MvrEdge;
 
 - (void) layoutArrowViews;
 {
-	CGRect draggableBounds = draggableViewsLayer.bounds;
-	[self layoutArrowViewsInSuperviewBounds:draggableBounds];
+	CGRect arrowBounds = arrowsLayer.bounds;
+	[self layoutArrowViewsInSuperviewBounds:arrowBounds];
 }
 
 - (void) layoutArrowViewsInSuperviewBounds:(CGRect) draggableBounds;
@@ -448,6 +447,12 @@ typedef NSInteger MvrEdge;
 		[self bounceBackViewOfControllerIfNeeded:ic];	
 
 	[self layoutArrowViews];
+	
+	if (aboutPopover.popoverVisible) {
+		[aboutPopover dismissPopoverAnimated:YES];
+		// TODO
+		// [aboutPopover present...];
+	}
 }
 
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
@@ -525,6 +530,8 @@ typedef NSInteger MvrEdge;
 
 - (IBAction) showAddPopover:(UIBarButtonItem*) sender;
 {
+	[aboutPopover dismissPopoverAnimated:YES];
+	
 	if (!addPopover) {
 		MvrAddPane* pane;
 		addPopover = [[MvrAddPane popoverControllerForViewController:&pane] retain];
@@ -570,6 +577,18 @@ typedef NSInteger MvrEdge;
 	
 	askDeleteIsShown = YES;
 	[as showFromBarButtonItem:sender animated:YES];
+}
+
+- (IBAction) showAboutPane:(UIButton*) infoButton;
+{
+	[addPopover dismissPopoverAnimated:YES];
+	
+	if (!aboutPopover) {
+		MvrAboutPane* about = [MvrAboutPane modalPane];
+		aboutPopover = [[UIPopoverController alloc] initWithContentViewController:about];
+	}
+	
+	[aboutPopover presentPopoverFromRect:infoButton.bounds inView:infoButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 @end

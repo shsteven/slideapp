@@ -27,6 +27,7 @@ typedef NSInteger MvrItemSourceType;
 
 @interface MvrTableController_iPad : ILViewController <MvrItemsTable, MvrScannerObserverDelegate, MvrAddPaneDelegate> {
 	IBOutlet UIView* draggableViewsLayer;
+	IBOutlet UIView* arrowsLayer;
 	
 	NSMutableSet* itemControllers;
 	
@@ -35,7 +36,7 @@ typedef NSInteger MvrItemSourceType;
 	
 	MvrScannerObserver* obs;
 	
-	UIPopoverController* addPopover;
+	UIPopoverController* addPopover, * aboutPopover;
 	
 	BOOL askDeleteIsShown;
 }
@@ -51,6 +52,8 @@ typedef NSInteger MvrItemSourceType;
 
 - (IBAction) showAddPopover:(UIBarButtonItem*) sender;
 - (IBAction) askForDeleteAll:(UIBarButtonItem*) sender;
+
+- (IBAction) showAboutPane:(UIButton*) infoButton;
 
 @end
 

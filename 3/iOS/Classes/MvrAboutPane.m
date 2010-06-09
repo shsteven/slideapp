@@ -55,6 +55,12 @@ enum {
 
 @end
 
+@interface MvrAboutPane ()
+
+- (void) clearOutlets;
+
+@end
+
 
 @implementation MvrAboutPane
 
@@ -74,21 +80,49 @@ enum {
     [super viewDidLoad];
 	tableView.tableHeaderView = headerView;
 	tableView.tableFooterView = footerView;
-	tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
+	tableView.opaque = NO;
 	tableView.delegate = self;
 	tableView.dataSource = self;
 	
+	tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
+	if ([tableView respondsToSelector:@selector(backgroundView)])
+		[tableView backgroundView].backgroundColor = tableView.backgroundColor;
+	
+	
 	versionLabel.text = [NSString stringWithFormat:versionLabel.text, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		// on iPad, this is shown only in a popover.
+		[toolbar removeFromSuperview];
+		[toolbar release]; toolbar = nil;
+	}
+}
+
+- (CGSize) contentSizeForViewInPopover;
+{
+	return CGSizeMake(320, 430);
 }
 
 - (void) viewDidUnload;
 {
+	[self clearOutlets];
+	[super viewDidUnload];
+}
+
+- (void) dealloc
+{
+	[self clearOutlets];
+	[super dealloc];
+}
+
+- (void) clearOutlets;
+{
+	
 	[headerView release]; headerView = nil;
 	[footerView release]; footerView = nil;
 	[tableView release]; tableView = nil;
 	[versionLabel release]; versionLabel = nil;
-	
-	[super viewDidUnload];
+	[toolbar release]; toolbar = nil;
 }
 
 - (IBAction) dismiss;
@@ -100,10 +134,13 @@ enum {
 - (void)viewWillAppear:(BOOL)animated;
 {
     [super viewWillAppear:animated];
-	[UIApp setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		[UIApp setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
 
-	if (!self.navigationController.navigationBarHidden)
-		[self.navigationController setNavigationBarHidden:YES animated:animated];
+		if (!self.navigationController.navigationBarHidden)
+			[self.navigationController setNavigationBarHidden:YES animated:animated];
+	}
 	
 	[tableView reloadData];
 }
@@ -188,7 +225,7 @@ enum {
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_TellAFriend:
 					cell.textLabel.text = NSLocalizedString(@"Tell a Friend", @"Tell a Friend entry in about box");
-					if (!MvrApp().tellAFriend.canTellAFriend)
+					if (!MvrServices().tellAFriend.canTellAFriend)
 						cell.textLabel.textColor = [UIColor grayColor];
 					
 					break;
@@ -208,7 +245,7 @@ enum {
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_More:
 					cell.textLabel.text = NSLocalizedString(@"Settings & More", @"More entry in about box");
-					MvrMessageChecker* checker = MvrApp().messageChecker;
+					MvrMessageChecker* checker = MvrServices().messageChecker;
 					cell.detailTextLabel.text = checker.lastMessage.miniTitle;
 					cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 					break;
@@ -264,7 +301,7 @@ enum {
 		case kMvrAboutSectionOne:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_TellAFriend:
-					[MvrApp().tellAFriend start];
+					[MvrServices().tellAFriend start];
 					break;
 
 				case kMvrAboutEntry_Bookmarklet:
@@ -330,7 +367,9 @@ enum {
 	MvrAboutPane* pane = [[MvrAboutPane new] autorelease];
 	UINavigationController* nav = [[[UINavigationController alloc] initWithRootViewController:pane] autorelease];
 	
-	nav.navigationBarHidden = YES;
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+		nav.navigationBarHidden = YES;
+	
 	nav.navigationBar.barStyle = UIBarStyleBlack;
 	nav.navigationBar.translucent = YES;
 	return nav;

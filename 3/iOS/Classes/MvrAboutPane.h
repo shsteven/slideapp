@@ -16,6 +16,7 @@
 	IBOutlet UIView* footerView;
 	
 	IBOutlet UILabel* versionLabel;
+	IBOutlet UIToolbar* toolbar;
 }
 
 - (IBAction) dismiss;
