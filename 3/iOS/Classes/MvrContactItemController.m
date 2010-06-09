@@ -109,8 +109,11 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 			[contactEmailButton setTitle:email forState:UIControlStateHighlighted];
 			
 			contactEmailButton.enabled = YES;
-		} else
+			sendEmail.available = YES;
+		} else {
 			contactEmailButton.enabled = NO;
+			sendEmail.available = NO;
+		}
 
 		if (phone) {
 			contactPhoneLabel.text = phone;
@@ -206,12 +209,21 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	MvrItemAction* show = [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Show", @"Show action button") target:self selector:@selector(showPersonPopover:forItem:)];
 	show.continuesInteractionOnTable = YES;
 	
-	MvrItemAction* sendEmail = [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Send E-Mail to Contact", @"Send e-mail to contact action button")
-		block:^(MvrItem* i) {
+	if (!sendEmail) {
+		sendEmail = [[MvrItemAction actionWithDisplayName:NSLocalizedString(@"Send E-Mail to Contact", @"Send e-mail to contact action button")
+			block:^(MvrItem* i) {
 			
-			[self showMailComposerForContact];
+				[self showMailComposerForContact];
 			
-		}];
+			}] retain];
+	}
+	
+	if (self.item) {
+		ABRecordRef me = [self.item copyPersonRecord];
+		NSString* email = MvrFirstValueForContactMultivalue(me, kABPersonEmailProperty);
+		sendEmail.available = (email != nil);
+		CFRelease(me);
+	}
 	
 	return [NSArray arrayWithObjects:
 			show,
@@ -277,6 +289,7 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 
 - (void) dealloc
 {
+	[sendEmail release];
 	personPopover.delegate = nil;
 	[personPopover release];
 	[super dealloc];
@@ -291,12 +304,14 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	
 	NSString* email = MvrFirstValueForContactMultivalue(me, kABPersonEmailProperty);
 	
-	MFMailComposeViewController* mail = [[MFMailComposeViewController new] autorelease];
-	[mail setToRecipients:[NSArray arrayWithObject:email]];
-	
-	mail.mailComposeDelegate = self;
-	
-	[MvrServices() presentModalViewController:mail];
+	if (email) {
+		MFMailComposeViewController* mail = [[MFMailComposeViewController new] autorelease];
+		[mail setToRecipients:[NSArray arrayWithObject:email]];
+		
+		mail.mailComposeDelegate = self;
+		
+		[MvrServices() presentModalViewController:mail];
+	}
 	
 	CFRelease(me);
 }

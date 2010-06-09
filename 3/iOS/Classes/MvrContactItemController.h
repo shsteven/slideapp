@@ -19,6 +19,8 @@
 	IBOutlet UILabel* contactPhoneLabel;
 	
 	UIPopoverController* personPopover;
+	
+	MvrItemAction* sendEmail;
 }
 
 - (IBAction) showMailComposerForContact;
