@@ -32,6 +32,13 @@
 		[NSException raise:@"ILUnexpectedNSErrorException" format:@"Operation " #call " failed with error %@", errVarName]; \
 }
 		
+@interface MvrAppDelegate_iPad ()
+
+- (MvrItem *) itemForUnidentifiedFileAtPath:(NSString *)path;
+- (void) addItemForUnidentifiedFileAtPath:(NSString *)path;
+
+@end
+
 
 @implementation MvrAppDelegate_iPad
 
