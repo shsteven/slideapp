@@ -413,7 +413,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 {
 	if (self.persistent) {
 		L0Log(@"Already persistent!");
-		if (e) *e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageAlreadyPersistent userInfo:nil];
+		if (e) *e = [NSError errorWithDomain:kMvrItemStorageErrorDomain code:kMvrItemStorageAlreadyPersistentError userInfo:nil];
 		return NO;
 	}
 	

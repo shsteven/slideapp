@@ -24,7 +24,7 @@ extern NSString* MvrUnusedTemporaryFileNameWithPathExtension(NSString* ext);
 
 enum {
 	kMvrItemStorageNoFilenameExtensionForTypeError = 1,
-	kMvrItemStorageAlreadyPersistent,
+	kMvrItemStorageAlreadyPersistentError,
 };
 extern NSString* const kMvrItemStorageErrorDomain;
 
