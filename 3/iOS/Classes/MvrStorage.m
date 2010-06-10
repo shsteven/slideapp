@@ -145,6 +145,20 @@
 	[self.mutableStoredItems addObject:i];
 }
 
+- (void) adoptPersistentItem:(MvrItem*) i;
+{
+	if ([storedItemsSet containsObject:i])
+		return;
+	
+	NSAssert(i.storage.persistent, @"To adopt, the item must already be persistent on its own.");
+	
+	BOOL sameDir = i.storage.hasPath && ([[[i.storage.path stringByDeletingLastPathComponent] stringByStandardizingPath] isEqual:[itemsDirectory stringByStandardizingPath]]);
+	NSAssert(sameDir, @"To adopt, the item's storage must have been offloaded to the items directory.");
+	
+	[self makeMetadataFileForItem:i];
+	[self.mutableStoredItems addObject:i];
+}
+
 - (void) makeMetadataFileForItem:(MvrItem*) i;
 {
 	NSAssert(i.storage.persistent && i.storage.hasPath && i.storage.path, @"The item must be saved to persistent storage before metadata can be written");
