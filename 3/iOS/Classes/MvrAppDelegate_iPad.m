@@ -194,4 +194,30 @@
 	return nil;
 }
 
+#pragma mark Adding unidentified files
+
+- (MvrItem*) itemForUnidentifiedFileAtPath:(NSString*) path;
+{
+	id type = [NSMakeCollectable(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef) [path pathExtension], NULL)) autorelease];
+	
+	if (!type || ![MvrItem canProduceItemForType:type allowGenericItems:NO]) {
+#warning TODO
+		type = [[MvrItem typesForFallbackPathExtension:type] anyObject];
+	}
+	
+	if (!type)
+		type = (id) kUTTypeData;
+	
+	BOOL shouldMakePersistent = ([[[path stringByDeletingLastPathComponent] stringByStandardizingPath] isEqual:[storage.itemsDirectory stringByStandardizingPath]]);
+	
+	NSError* e;
+	MvrItemStorage* s = [MvrItemStorage itemStorageFromFileAtPath:path options:shouldMakePersistent? kMvrItemStorageIsPersistent : 0 error:&e];
+	if (!s) {
+		L0LogAlways(@"Could not create item storage (persistent? %d) for file at path %@: error %@", shouldMakePersistent, path, e);
+		return nil;
+	}
+	
+	return [MvrItem itemWithStorage:s type:type metadata:[NSDictionary dictionaryWithObject:[path lastPathComponent] forKey:kMvrItemOriginalFilenameMetadataKey]];
+}
+
 @end

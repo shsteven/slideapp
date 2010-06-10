@@ -45,6 +45,8 @@
 	return self;
 }
 
+@synthesize itemsDirectory, metadataDirectory;
+
 - (void) dealloc
 {
 	[storedItemsSet release];
