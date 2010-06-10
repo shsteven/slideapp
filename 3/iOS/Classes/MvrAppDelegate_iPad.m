@@ -25,7 +25,7 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
 
-#define ILAssertNSErrorWorked(errVarName, call) \
+#define ILAssertNoNSError(errVarName, call) \
 { \
 	NSError* errVarName; \
 	if (!(call)) \
@@ -174,11 +174,11 @@
 		
 		// [fm createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:NULL];
 		if (![fm fileExistsAtPath:docsDir])
-			ILAssertNSErrorWorked(e, [fm createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:&e]);
+			ILAssertNoNSError(e, [fm createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:&e]);
 							  
 		// [fm createDirectoryAtPath:metaDir withIntermediateDirectories:YES attributes:nil error:NULL];
 		if (![fm fileExistsAtPath:metaDir])
-			ILAssertNSErrorWorked(e, [fm createDirectoryAtPath:metaDir withIntermediateDirectories:YES attributes:nil error:&e]);
+			ILAssertNoNSError(e, [fm createDirectoryAtPath:metaDir withIntermediateDirectories:YES attributes:nil error:&e]);
 		
 		storage = [[MvrStorage alloc] initWithItemsDirectory:docsDir metadataDirectory:metaDir];
 	}
