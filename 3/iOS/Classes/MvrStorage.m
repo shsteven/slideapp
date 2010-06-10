@@ -173,9 +173,22 @@
 	NSString* filename = [i.metadata objectForKey:kMvrItemOriginalFilenameMetadataKey];
 	
 	if (!filename) {
-		// step one-bis: we need to know this file's extension (ick). We'll query the OS (and probably ship with a ton of UTImported types to match).
+		NSString* ext;
 		
-		NSString* ext = [(id)UTTypeCopyPreferredTagWithClass((CFStringRef) i.type, kUTTagClassFilenameExtension) autorelease];
+		// step one-bis: if the item already has an extension, use that.
+		if (i.storage.hasPath) {
+			ext = [i.storage.path pathExtension];
+			if ([ext isEqual:@""])
+				ext = nil;
+		}
+		
+		// step one-ter: we need to know this file's extension (ick). We'll query the OS (and probably ship with a ton of UTImported types to match).
+		
+		if (!ext)
+			ext = [(id)UTTypeCopyPreferredTagWithClass((CFStringRef) i.type, kUTTagClassFilenameExtension) autorelease];
+		
+		// step one-quater: see if we know a fallback extension for this type.
+		
 		if (!ext)
 			ext = [MvrItem fallbackPathExtensionForType:i.type];
 		
