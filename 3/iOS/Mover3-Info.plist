@@ -85,6 +85,21 @@
 	<true/>
 	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Transferable File</string>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+		</dict>
+	</array>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
 	<key>UIViewEdgeAntialiasing</key>

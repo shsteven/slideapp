@@ -80,6 +80,17 @@
 	for (MvrItem* i in self.storage.storedItems)
 		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
 	
+// ------------- HANDLE FILE OPENING
+	NSURL* u = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+	if ([u isFileURL])
+		[self addItemForUnidentifiedFileAtPath:[u path]];
+	
+	// Delete the inbox if empty
+	NSString* inboxDir = [self.storage.itemsDirectory stringByAppendingPathComponent:@"Inbox"];
+	NSFileManager* fm = [NSFileManager defaultManager];
+	NSArray* content = [fm contentsOfDirectoryAtPath:inboxDir error:NULL];
+	if (content && [content count] == 0)
+		[fm removeItemAtPath:inboxDir error:NULL];
 	
 	return YES;
 }
@@ -218,13 +229,26 @@
 	BOOL shouldMakePersistent = ([[[path stringByDeletingLastPathComponent] stringByStandardizingPath] isEqual:[storage.itemsDirectory stringByStandardizingPath]]);
 	
 	NSError* e;
-	MvrItemStorage* s = [MvrItemStorage itemStorageFromFileAtPath:path options:shouldMakePersistent? kMvrItemStorageIsPersistent : 0 error:&e];
+	MvrItemStorage* s = [MvrItemStorage itemStorageFromFileAtPath:path options:shouldMakePersistent? kMvrItemStorageIsPersistent : kMvrItemStorageCanMoveOrDeleteFile error:&e];
 	if (!s) {
 		L0LogAlways(@"Could not create item storage (persistent? %d) for file at path %@: error %@", shouldMakePersistent, path, e);
 		return nil;
 	}
 	
 	return [MvrItem itemWithStorage:s type:type metadata:[NSDictionary dictionaryWithObject:[path lastPathComponent] forKey:kMvrItemOriginalFilenameMetadataKey]];
+}
+
+- (void) addItemForUnidentifiedFileAtPath:(NSString*) path;
+{
+	MvrItem* i = [self itemForUnidentifiedFileAtPath:path];
+	if (i) {
+		if (i.storage.persistent)
+			[self.storage adoptPersistentItem:i];
+		else
+			[self.storage addStoredItemsObject:i];
+	}
+	
+	[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
 }
 
 @end
