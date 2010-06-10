@@ -100,7 +100,7 @@
 		NSString* path = [persistentDirectory stringByAppendingPathComponent:name];
 		
 		NSError* e;
-		MvrItemStorage* itemStorage = [MvrItemStorage itemStorageFromFileAtPath:path persistent:YES error:&e];
+		MvrItemStorage* itemStorage = [MvrItemStorage itemStorageFromFileAtPath:path persistent:YES canMove:NO error:&e];
 		if (!itemStorage) {
 			L0LogAlways(@"%@", e);
 		} else {

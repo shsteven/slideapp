@@ -40,6 +40,10 @@ enum {
 	
 	// If passed, this storage will be returned already persistent. This is useful for MvrStorageCentral replacements. These replacements can also use makePersistentByOffloadingToPath: to turn a nonpersistent storage into a persistent one.
 	kMvrItemStorageIsPersistent = kMvrItemStorageDoNotTakeOwnershipOfFile,
+	
+	// If passed, this storage will mutate the passed-in file rather than create a copy if needed. The file passed to itemStorageFromFileAtPath:options:error: may be moved or deleted when the call returns.
+	// Persistent items will never be moved or deleted. If you also pass kMvrItemStorageIsPersistent, this flag will be ignored.
+	kMvrItemStorageCanMoveOrDeleteFile = 1 << 1,
 };
 typedef NSUInteger MvrItemStorageOptions;
 
@@ -151,7 +155,7 @@ typedef NSUInteger MvrItemStorageOptions;
 #if kMvrItemStorageAllowFriendMethods
 @interface MvrItemStorage ()
 
-+ itemStorageFromFileAtPath:(NSString*) path persistent:(BOOL) persistent error:(NSError**) e;
++ itemStorageFromFileAtPath:(NSString*) path persistent:(BOOL) persistent canMove:(BOOL) canMove error:(NSError**) e;
 
 @property(copy, setter=private_setPath:) NSString* path;
 @property(assign, setter=private_setPersistent:) BOOL persistent;

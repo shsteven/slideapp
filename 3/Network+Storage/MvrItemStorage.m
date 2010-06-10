@@ -108,7 +108,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 
 + itemStorageFromFileAtPath:(NSString*) path options:(MvrItemStorageOptions) options error:(NSError**) e;
 {
-	return [self itemStorageFromFileAtPath:path persistent:(options & kMvrItemStorageDoNotTakeOwnershipOfFile) != 0 error:e];
+	return [self itemStorageFromFileAtPath:path persistent:(options & kMvrItemStorageDoNotTakeOwnershipOfFile) != 0 canMove:(options & kMvrItemStorageCanMoveOrDeleteFile) error:e];
 }
 
 - (void) dealloc;
@@ -127,7 +127,7 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	[super dealloc];
 }
 
-+ itemStorageFromFileAtPath:(NSString*) path persistent:(BOOL) persistent error:(NSError**) e;
++ itemStorageFromFileAtPath:(NSString*) path persistent:(BOOL) persistent canMove:(BOOL) canMove error:(NSError**) e;
 {
 	NSFileManager* fm = [NSFileManager defaultManager];
 	if (![fm attributesOfItemAtPath:path error:e])
@@ -138,8 +138,13 @@ static BOOL MvrFileIsInDirectory(NSString* file, NSString* directory) {
 	if (!persistent && !MvrFileIsInDirectory(path, MvrStorageTemporaryDirectory())) {
 		NSString* newPath = MvrUnusedTemporaryFileNameWithPathExtension([path pathExtension]);
 		
-		if (![fm copyItemAtPath:path toPath:newPath error:e])
-			return nil;
+		if (!canMove) {
+			if (![fm copyItemAtPath:path toPath:newPath error:e])
+				return nil;
+		} else {
+			if (![fm moveItemAtPath:path toPath:newPath error:e])
+				return nil;
+		}
 		
 		path = newPath;
 	}
