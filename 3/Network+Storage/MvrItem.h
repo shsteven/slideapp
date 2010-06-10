@@ -68,10 +68,12 @@
 
 + (void) registerClass:(Class) c forType:(NSString*) type;
 + (Class) classForType:(NSString*) c;
++ (BOOL) canProduceItemForType:(NSString*) type allowGenericItems:(BOOL) generic;
 
 // These manage a registry of known extensions, in case the OS doesn't help us by giving 'em via the UTI infrastructure.
 + (void) setFallbackPathExtension:(NSString*) ext forType:(NSString*) type;
 + (NSString*) fallbackPathExtensionForType:(NSString*) type;
++ (NSSet*) typesForFallbackPathExtension:(NSString*) ext;
 
 + itemWithStorage:(MvrItemStorage*) s type:(NSString*) t metadata:(NSDictionary*) m;
 

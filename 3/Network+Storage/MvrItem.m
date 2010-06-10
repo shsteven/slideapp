@@ -166,6 +166,14 @@ static NSMutableDictionary* MvrItemTypesToClasses = nil;
 	return cls;
 }
 
++ (BOOL) canProduceItemForType:(NSString*) type allowGenericItems:(BOOL) generic;
+{
+	if (generic)
+		return YES;
+	
+	return [MvrItemTypesToClasses objectForKey:type] != nil;
+}
+
 + itemWithStorage:(MvrItemStorage*) s type:(NSString*) t metadata:(NSDictionary*) m;
 {
 	return [[[[self classForType:t] alloc] initWithStorage:s type:t metadata:m] autorelease];
@@ -186,6 +194,14 @@ static NSMutableDictionary* MvrItemFallbackPathExtensions = nil;
 + (NSString*) fallbackPathExtensionForType:(NSString*) type;
 {
 	return [MvrItemFallbackPathExtensions objectForKey:type];
+}
+
++ (NSSet*) typesForFallbackPathExtension:(NSString*) ext;
+{
+	if (!MvrItemFallbackPathExtensions)
+		return [NSSet set];
+	
+	return [NSSet setWithArray:[MvrItemFallbackPathExtensions allKeysForObject:ext]];
 }
 
 #pragma mark Caching
