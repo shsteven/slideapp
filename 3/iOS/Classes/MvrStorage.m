@@ -189,7 +189,7 @@
 	NSString* filename = [i.metadata objectForKey:kMvrItemOriginalFilenameMetadataKey];
 	
 	if (!filename) {
-		NSString* ext;
+		NSString* ext = nil;
 		
 		// step one-bis: if the item already has an extension, use that.
 		if (i.storage.hasPath) {
