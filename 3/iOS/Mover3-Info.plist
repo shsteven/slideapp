@@ -6,8 +6,6 @@
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
 	<string>${ILABS_MOVER_BUNDLE_DISPLAY_NAME}</string>
-	<key>UIFileSharingEnabled</key>
-	<true/>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
@@ -97,7 +95,7 @@
 				<string>public.data</string>
 			</array>
 			<key>LSHandlerRank</key>
-			<string>Alternate</string>
+			<string>Default</string>
 		</dict>
 	</array>
 	<key>UIRequiresPersistentWiFi</key>
