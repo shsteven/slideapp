@@ -34,8 +34,10 @@
 		
 @interface MvrAppDelegate_iPad ()
 
+- (void) openFileAtPath:(NSString *)path;
 - (MvrItem *) itemForUnidentifiedFileAtPath:(NSString *)path;
 - (void) addItemForUnidentifiedFileAtPath:(NSString *)path;
+- (void) clearInbox;
 
 @end
 
@@ -83,16 +85,36 @@
 // ------------- HANDLE FILE OPENING
 	NSURL* u = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
 	if ([u isFileURL])
-		[self addItemForUnidentifiedFileAtPath:[u path]];
+		[self openFileAtPath:[u path]];
 	
-	// Delete the inbox if empty
+	[self clearInbox];
+	
+	return YES;
+}
+
+- (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)u;
+{
+	if ([u isFileURL])
+		[self openFileAtPath:[u path]];
+	
+	[self clearInbox];
+	
+	return YES;	
+}
+
+- (void) openFileAtPath:(NSString*) path;
+{
+	[self addItemForUnidentifiedFileAtPath:path];	
+}
+
+- (void) clearInbox;
+{
+	// Delete the inbox
 	NSString* inboxDir = [self.storage.itemsDirectory stringByAppendingPathComponent:@"Inbox"];
 	NSFileManager* fm = [NSFileManager defaultManager];
 	NSArray* content = [fm contentsOfDirectoryAtPath:inboxDir error:NULL];
-	if (content && [content count] == 0)
+	if (content)
 		[fm removeItemAtPath:inboxDir error:NULL];
-	
-	return YES;
 }
 
 - (void)dealloc {
@@ -217,12 +239,7 @@
 - (MvrItem*) itemForUnidentifiedFileAtPath:(NSString*) path;
 {
 	id type = [NSMakeCollectable(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef) [path pathExtension], NULL)) autorelease];
-	
-	if (!type || ![MvrItem canProduceItemForType:type allowGenericItems:NO]) {
-#warning TODO
-		type = [[MvrItem typesForFallbackPathExtension:type] anyObject];
-	}
-	
+		
 	if (!type)
 		type = (id) kUTTypeData;
 	
@@ -235,7 +252,12 @@
 		return nil;
 	}
 	
-	return [MvrItem itemWithStorage:s type:type metadata:[NSDictionary dictionaryWithObject:[path lastPathComponent] forKey:kMvrItemOriginalFilenameMetadataKey]];
+	NSDictionary* m = [NSDictionary dictionaryWithObjectsAndKeys:
+					   [path lastPathComponent], kMvrItemOriginalFilenameMetadataKey,
+					   [[NSFileManager defaultManager] displayNameAtPath:path], kMvrItemTitleMetadataKey,
+					   nil];
+	
+	return [MvrItem itemWithStorage:s type:type metadata:m];
 }
 
 - (void) addItemForUnidentifiedFileAtPath:(NSString*) path;
