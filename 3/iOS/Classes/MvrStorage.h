@@ -30,4 +30,8 @@
 
 - (void) migrateFrom30StorageCentralMetadata:(id) meta;
 
+- (BOOL) hasItemForFileAtPath:(NSString*) path;
+- (BOOL) isPathInItemsDirectory:(NSString*) path;
+@property(readonly) NSSet* knownItemFilenames;
+
 @end

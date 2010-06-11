@@ -42,6 +42,7 @@ typedef NSInteger MvrItemSourceType;
 }
 
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;
+- (void) removeItem:(MvrItem*) item;
 
 // TODO private?
 - (void) addDraggableView:(MvrDraggableView*) v;

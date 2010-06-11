@@ -140,8 +140,8 @@
 	
 	NSAssert(done, @"Can't make this item persistent. Why?");
 
+	[knownFiles addObject:[path lastPathComponent]];
 	[self makeMetadataFileForItem:i];
-
 	[self.mutableStoredItems addObject:i];
 }
 
@@ -152,9 +152,10 @@
 	
 	NSAssert(i.storage.persistent, @"To adopt, the item must already be persistent on its own.");
 	
-	BOOL sameDir = i.storage.hasPath && ([[[i.storage.path stringByDeletingLastPathComponent] stringByStandardizingPath] isEqual:[itemsDirectory stringByStandardizingPath]]);
+	BOOL sameDir = i.storage.hasPath && [self isPathInItemsDirectory:i.storage.path];
 	NSAssert(sameDir, @"To adopt, the item's storage must have been offloaded to the items directory.");
 	
+	[knownFiles addObject:[i.storage.path lastPathComponent]];
 	[self makeMetadataFileForItem:i];
 	[self.mutableStoredItems addObject:i];
 }
@@ -266,7 +267,8 @@
 	// one: gather files
 	
 	NSMutableSet* filesToDelete = [NSMutableSet set];
-	[filesToDelete addObject:i.storage.path];
+	NSString* itemFile = [[i.storage.path copy] autorelease];
+	[filesToDelete addObject:itemFile];
 	
 	NSString* metadataFileName = [i objectForItemNotesKey:kMvrStorageCorrespondingMetadataFileNameItemNoteKey];
 	if (metadataFileName) {
@@ -285,12 +287,27 @@
 	
 	for (NSString* file in filesToDelete)
 		[[NSFileManager defaultManager] removeItemAtPath:file error:NULL];
+	
+	[knownFiles removeObject:[itemFile lastPathComponent]];
 }
 
 - (void) migrateFrom30StorageCentralMetadata:(id) meta;
 {
 #warning TODO
 	L0AbstractMethod();
+}
+
+- (BOOL) hasItemForFileAtPath:(NSString*) path;
+{
+	if (![self isPathInItemsDirectory:path])
+		return NO;
+	
+	return [knownFiles containsObject:[path lastPathComponent]];
+}
+
+- (BOOL) isPathInItemsDirectory:(NSString*) path;
+{
+	return ([[[path stringByDeletingLastPathComponent] stringByStandardizingPath] isEqual:[itemsDirectory stringByStandardizingPath]]);
 }
 
 @end

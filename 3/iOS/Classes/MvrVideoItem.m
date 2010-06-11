@@ -26,6 +26,7 @@
 	return [NSSet setWithObjects:
 			(id) kUTTypeQuickTimeMovie,
 			(id) kUTTypeMPEG4,
+			@"com.apple.protected-mpeg-4-video",
 			nil];
 }
 

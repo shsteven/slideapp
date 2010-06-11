@@ -14,6 +14,9 @@
 #import "MvrDraggableView.h"
 #import "MvrItemController.h"
 
+#import "Network+Storage/MvrItem.h"
+#import "Network+Storage/MvrItemStorage.h"
+
 #import "MvrImageItem.h"
 #import "MvrImageItemController.h"
 #import "MvrContactItem.h"
@@ -25,11 +28,22 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
 
+#import <fcntl.h>
+#import <sys/types.h>
+#import <sys/event.h>
+#import <sys/time.h>
+
 #define ILAssertNoNSError(errVarName, call) \
 { \
 	NSError* errVarName; \
 	if (!(call)) \
 		[NSException raise:@"ILUnexpectedNSErrorException" format:@"Operation " #call " failed with error %@", errVarName]; \
+}
+
+static inline BOOL MvrIsDirectory(NSString* path) {
+	BOOL exists, isDir;
+	exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
+	return exists && isDir;
 }
 		
 @interface MvrAppDelegate_iPad ()
@@ -38,6 +52,11 @@
 - (MvrItem *) itemForUnidentifiedFileAtPath:(NSString *)path;
 - (void) addItemForUnidentifiedFileAtPath:(NSString *)path;
 - (void) clearInbox;
+
+- (void) beginMonitoringItemsDirectory;
+- (void) cancelMonitoringItemsDirectory;
+- (void) scheduleItemsDirectorySweep;
+- (void) performItemsDirectorySweep;
 
 @end
 
@@ -82,12 +101,16 @@
 	for (MvrItem* i in self.storage.storedItems)
 		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
 	
-// ------------- HANDLE FILE OPENING
+// ------------- Handle file opening
 	NSURL* u = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
 	if ([u isFileURL])
 		[self openFileAtPath:[u path]];
 	
 	[self clearInbox];
+	
+// ------------- Begin monitoring Documents for File Sharing
+	[self beginMonitoringItemsDirectory];
+	[self performItemsDirectorySweep];
 	
 	return YES;
 }
@@ -241,6 +264,9 @@
 	id type = [NSMakeCollectable(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef) [path pathExtension], NULL)) autorelease];
 		
 	if (!type)
+		type = [[MvrItem typesForFallbackPathExtension:[path pathExtension]] anyObject];
+	
+	if (!type)
 		type = (id) kUTTypeData;
 	
 	BOOL shouldMakePersistent = ([[[path stringByDeletingLastPathComponent] stringByStandardizingPath] isEqual:[storage.itemsDirectory stringByStandardizingPath]]);
@@ -271,6 +297,110 @@
 	}
 	
 	[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
+}
+
+#pragma mark Monitoring the Documents directory
+
+- (void) beginMonitoringItemsDirectory;
+{
+	@synchronized(self) {
+		shouldMonitorDirectory = YES;
+	}
+	
+	[NSThread detachNewThreadSelector:@selector(runKQueueToMonitorDirectory:) toTarget:self withObject:[[self.storage.itemsDirectory copy] autorelease]];
+}
+
+- (BOOL) shouldMonitorDirectory;
+{
+	@synchronized(self) {
+		return shouldMonitorDirectory;
+	}
+}
+
+- (void) cancelMonitoringItemsDirectory;
+{
+	@synchronized(self) {
+		shouldMonitorDirectory = NO;
+	}
+}
+
+- (void) runKQueueToMonitorDirectory:(NSString*) dir;
+{
+	NSAutoreleasePool* pool = [NSAutoreleasePool new];
+	
+	int fdes = open([dir fileSystemRepresentation], O_RDONLY);
+	if (fdes == -1)
+		goto cleanup;
+	
+	int kq = kqueue();
+	if (kq == -1)
+		goto cleanup;
+	
+	struct kevent toMonitor;
+	EV_SET(&toMonitor, fdes, EVFILT_VNODE, EV_ADD | EV_ENABLE | EV_ONESHOT,
+		   NOTE_WRITE | NOTE_EXTEND | NOTE_DELETE,
+		   0, 0);
+	
+	while ([self shouldMonitorDirectory]) {
+		NSAutoreleasePool* innerPool = [NSAutoreleasePool new];
+		
+		const struct timespec time = { 1, 0 };
+		struct kevent event;
+
+		int result = kevent(kq, &toMonitor, 1, &event, 1, &time);
+		
+		if (result > 0)
+			[self performSelectorOnMainThread:@selector(scheduleItemsDirectorySweep) withObject:nil waitUntilDone:NO];
+		
+		[innerPool release];
+		
+		if (result == -1)
+			break;
+	}
+	
+cleanup:
+	if (kq != -1)
+		close(kq);
+	
+	if (fdes != -1)
+		close(fdes);
+	
+	[pool release];
+}
+
+- (void) scheduleItemsDirectorySweep;
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(performItemsDirectorySweep) object:nil];
+	[self performSelector:@selector(performItemsDirectorySweep) withObject:nil afterDelay:2.0];
+}
+
+- (void) performItemsDirectorySweep;
+{
+	L0Note();
+	
+	NSFileManager* fm = [NSFileManager defaultManager];
+	
+	NSString* idir = self.storage.itemsDirectory;
+	
+	for (NSString* item in [fm contentsOfDirectoryAtPath:self.storage.itemsDirectory error:NULL]) {
+		NSString* fullPath = [idir stringByAppendingPathComponent:item];
+		
+		if (MvrIsDirectory(fullPath))
+			L0Log(@"Skipping %@ -- is a directory", fullPath);
+		else if ([self.storage hasItemForFileAtPath:fullPath])
+			L0Log(@"Skipping %@ -- is already known", fullPath);
+		else { // if (!MvrIsDirectory(fullPath) && ![self.storage hasItemForFileAtPath:fullPath])
+			L0Log(@"Adding new file %@", fullPath);
+			[self addItemForUnidentifiedFileAtPath:fullPath];
+		}
+	}
+	
+	for (MvrItem* i in [[self.storage.storedItems copy] autorelease]) {
+		if (i.storage.hasPath && ![fm fileExistsAtPath:i.storage.path]) {
+			[self.viewController removeItem:i];
+			[self.storage removeStoredItemsObject:i];
+		}
+	}
 }
 
 @end

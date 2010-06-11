@@ -73,15 +73,15 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 	// At the top
 //	self.navigationItem.titleView = kindPicker;
 	
-	paste = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Paste", @"Paste button in iPad Add pane") style:UIBarButtonItemStyleBordered target:self action:@selector(paste)] autorelease];
+	paste = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Paste", @"Paste button in iPad Add pane") style:UIBarButtonItemStyleBordered target:self action:@selector(paste)];
 	
 	// At the bottom
 	self.toolbarItems = [NSArray arrayWithObjects:
-						 ILBarButtonItemFlexibleSpace(),
+						 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL] autorelease],				
 						 [[[UIBarButtonItem alloc] initWithCustomView:kindPicker] autorelease],
-						 ILBarButtonItemFlexibleSpace(),
+						 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL] autorelease],				
 						 paste,
-						 ILBarButtonItemFlexibleSpace(),
+						 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL] autorelease],				
 						 nil];	
 }
 
