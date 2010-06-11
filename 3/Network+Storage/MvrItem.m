@@ -159,7 +159,17 @@ static NSMutableDictionary* MvrItemTypesToClasses = nil;
 
 + (Class) classForType:(NSString*) c;
 {
-	Class cls = [MvrItemTypesToClasses objectForKey:c];
+	// Class cls = [MvrItemTypesToClasses objectForKey:c];
+	
+	Class cls = Nil;
+	
+	for (NSString* type in MvrItemTypesToClasses) {
+		if (UTTypeConformsTo((CFStringRef) c, (CFStringRef) type)) {
+			cls = [MvrItemTypesToClasses objectForKey:c];
+			break;
+		}
+	}
+	
 	if (!cls)
 		cls = [MvrGenericItem class];
 	

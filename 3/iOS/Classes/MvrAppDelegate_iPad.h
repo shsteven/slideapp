@@ -23,8 +23,8 @@
 	UIApplicationDelegate,
 	MvrPlatformInfo,
 	MvrScannerObserverDelegate,
-	MvrAppServices> {
-		
+	MvrAppServices>
+{
     UIWindow *window;
     MvrTableController_iPad *viewController;
 	
@@ -36,6 +36,7 @@
 	MvrStorage* storage;
 	
 	MvrMessageChecker* messageChecker;
+	BOOL shouldMonitorDirectory;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow* window;

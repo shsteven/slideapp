@@ -373,6 +373,14 @@ typedef NSInteger MvrEdge;
 	}
 }
 
+- (void) removeItem:(MvrItem*) item;
+{
+	for (MvrItemController* ic in self.itemControllers) {
+		if (ic.item == item)
+			[self removeItemController:ic];
+	}
+}
+
 - (NSSet*) itemControllers;
 {	
 	return [[itemControllers copy] autorelease];
