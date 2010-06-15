@@ -450,13 +450,17 @@ cleanup:
 
 - (IBAction) beginPickingBluetoothChannel;
 {
+	if (!bluetooth || self.currentScanner != bluetooth)
+		return;
+	
 	if (!picker) {
 		picker = [[GKPeerPickerController alloc] init];
 		picker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
 		picker.delegate = self;
 	}
 	
-	[picker show];	
+	if (!picker.visible)
+		[picker show];
 }
 
 - (void) peerPickerControllerDidCancel:(GKPeerPickerController *)picker;

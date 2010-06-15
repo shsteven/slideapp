@@ -237,6 +237,11 @@ typedef NSInteger MvrEdge;
 	[MvrApp_iPad() switchToWiFi];
 }
 
+- (IBAction) reconnectBluetooth;
+{
+	[MvrApp_iPad() beginPickingBluetoothChannel];
+}
+
 #pragma mark Arrows
 
 - (void) scanner:(id <MvrScanner>)s didAddChannel:(id <MvrChannel>)channel;

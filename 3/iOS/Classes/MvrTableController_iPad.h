@@ -66,6 +66,7 @@ typedef NSInteger MvrItemSourceType;
 - (IBAction) showNetworkPopover:(UIBarButtonItem*) sender;
 
 - (IBAction) backToWiFi;
+- (IBAction) reconnectBluetooth;
 
 @end
 
