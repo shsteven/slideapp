@@ -15,6 +15,7 @@
 #import "MvrItemController.h"
 
 #import "Network+Storage/MvrItem.h"
+#import "MvrItem+UnidentifiedFileAdding.h"
 #import "Network+Storage/MvrItemStorage.h"
 
 #import "MvrImageItem.h"
@@ -263,36 +264,11 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 #pragma mark Adding unidentified files
 
-- (MvrItem*) itemForUnidentifiedFileAtPath:(NSString*) path;
-{
-	id type = [NSMakeCollectable(UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef) [path pathExtension], NULL)) autorelease];
-		
-	if (!type)
-		type = [[MvrItem typesForFallbackPathExtension:[path pathExtension]] anyObject];
-	
-	if (!type)
-		type = (id) kUTTypeData;
-	
-	BOOL shouldMakePersistent = ([[[path stringByDeletingLastPathComponent] stringByStandardizingPath] isEqual:[storage.itemsDirectory stringByStandardizingPath]]);
-	
-	NSError* e;
-	MvrItemStorage* s = [MvrItemStorage itemStorageFromFileAtPath:path options:shouldMakePersistent? kMvrItemStorageIsPersistent : kMvrItemStorageCanMoveOrDeleteFile error:&e];
-	if (!s) {
-		L0LogAlways(@"Could not create item storage (persistent? %d) for file at path %@: error %@", shouldMakePersistent, path, e);
-		return nil;
-	}
-	
-	NSDictionary* m = [NSDictionary dictionaryWithObjectsAndKeys:
-					   [path lastPathComponent], kMvrItemOriginalFilenameMetadataKey,
-					   [[NSFileManager defaultManager] displayNameAtPath:path], kMvrItemTitleMetadataKey,
-					   nil];
-	
-	return [MvrItem itemWithStorage:s type:type metadata:m];
-}
-
 - (void) addItemForUnidentifiedFileAtPath:(NSString*) path;
 {
-	MvrItem* i = [self itemForUnidentifiedFileAtPath:path];
+	BOOL shouldMakePersistent = ([[[path stringByDeletingLastPathComponent] stringByStandardizingPath] isEqual:[storage.itemsDirectory stringByStandardizingPath]]);
+	
+	MvrItem* i = [MvrItem itemForUnidentifiedFileAtPath:path options:shouldMakePersistent? kMvrItemStorageIsPersistent : kMvrItemStorageCanMoveOrDeleteFile];
 	if (i) {
 		if (i.storage.persistent)
 			[self.storage adoptPersistentItem:i];

@@ -42,6 +42,8 @@
 
 #import <SwapKit/SwapKit.h>
 
+#import "MvrItem+UnidentifiedFileAdding.h"
+
 #if kMvrIsLite
 #import "MvrStore.h"
 #endif
@@ -120,15 +122,20 @@ enum {
 	BOOL ok = [ILSwapService didFinishLaunchingWithOptions:options];
 	
 	NSURL* url = [options objectForKey:UIApplicationLaunchOptionsURLKey];
-	if (!ok && url)
+	if (!ok && url && ![url isFileURL])
 		ok = [self performActionsForURL:url];
 	
-	return !url || ok;
+	return !url || [url isFileURL] || ok;
 }
 
 - (BOOL) performActionsForURL:(NSURL*) url;
 {
 #if !kMvrIsLite
+	if ([url isFileURL]) {
+		[self addByOpeningFileAtPath:[url path]];
+		return YES;
+	}
+	
 	NSString* scheme = [url scheme];
 	if ([scheme isEqual:kMvrLegacyAPIURLScheme]) {
 		if (![[url resourceSpecifier] hasPrefix:@"add?"])
@@ -355,6 +362,13 @@ enum {
 {
 	[self.tableController addItem:item animated:YES];
 	[self.storageCentral.mutableStoredItems addObject:item];
+}
+
+- (void) addByOpeningFileAtPath:(NSString*) path;
+{
+	MvrItem* i = [MvrItem itemForUnidentifiedFileAtPath:path options:0];
+	if (i)
+		[self addItemFromSelf:i];
 }
 
 #pragma mark -

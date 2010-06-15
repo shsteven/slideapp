@@ -187,6 +187,7 @@
 		15B0FF2A11C26DAD0020ACEF /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B0FF2811C26DAD0020ACEF /* Default-Landscape.png */; };
 		15B0FF2B11C26DAD0020ACEF /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B0FF2911C26DAD0020ACEF /* Default-Portrait.png */; };
 		15BCFA6911C777B3005EA90C /* Backdrop-Bluetooth-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 15BCFA6811C777B3005EA90C /* Backdrop-Bluetooth-iPad.png */; };
+		15BCFB5A11C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BCFB5911C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m */; };
 		15BF40E811613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15BF40E711613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert */; };
 		15BF40EF11613D02001EC1BC /* MvrLiteNeedsConnectPackForConduit.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15BF40EE11613D02001EC1BC /* MvrLiteNeedsConnectPackForConduit.alert */; };
 		15C1C84B1068D8AA000C9CDE /* MvrArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C84A1068D8AA000C9CDE /* MvrArrowView.m */; };
@@ -544,6 +545,8 @@
 		15B0FF2811C26DAD0020ACEF /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = SOURCE_ROOT; };
 		15B0FF2911C26DAD0020ACEF /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = SOURCE_ROOT; };
 		15BCFA6811C777B3005EA90C /* Backdrop-Bluetooth-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Backdrop-Bluetooth-iPad.png"; sourceTree = SOURCE_ROOT; };
+		15BCFB5811C78592005EA90C /* MvrItem+UnidentifiedFileAdding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrItem+UnidentifiedFileAdding.h"; sourceTree = "<group>"; };
+		15BCFB5911C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrItem+UnidentifiedFileAdding.m"; sourceTree = "<group>"; };
 		15BF3FC411609679001EC1BC /* MvrFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrFeatures.h; sourceTree = "<group>"; };
 		15BF40E711613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrLiteNeedConnectPackForPreviewableItems.alert; sourceTree = "<group>"; };
 		15BF40EE11613D02001EC1BC /* MvrLiteNeedsConnectPackForConduit.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrLiteNeedsConnectPackForConduit.alert; sourceTree = "<group>"; };
@@ -734,6 +737,8 @@
 				15CB30901084C76D00CB285F /* Accessibility */,
 				15D91B4A1092548500D8BAA9 /* MvrUpsellController.h */,
 				15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */,
+				15BCFB5811C78592005EA90C /* MvrItem+UnidentifiedFileAdding.h */,
+				15BCFB5911C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1942,6 +1947,7 @@
 				154CCC7C11BFA19E0033DAD3 /* NSBlock.m in Sources */,
 				154CCC7E11BFA19E0033DAD3 /* Block.c in Sources */,
 				15FFE54911C4D19900392210 /* MvrWiFiNetworkStatePane.m in Sources */,
+				15BCFB5A11C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
