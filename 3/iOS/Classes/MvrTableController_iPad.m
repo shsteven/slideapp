@@ -46,6 +46,7 @@ typedef NSInteger MvrEdge;
 
 - (void) addArrowViewForChannel:(id <MvrChannel>) chan;
 - (void) removeArrowViewForChannel:(id <MvrChannel>) chan;
+- (void) clearArrowViews;
 
 - (void) layoutArrowViews;
 - (void) layoutArrowViewsInSuperviewBounds:(CGRect)draggableBounds;
@@ -62,6 +63,8 @@ typedef NSInteger MvrEdge;
 - (void) userDidEndDraggingController:(MvrItemController*) ic;
 
 @property(nonatomic, retain) MvrScannerObserver* currentObserver;
+
+- (void) setupObservationForCurrentScanner;
 
 @end
 

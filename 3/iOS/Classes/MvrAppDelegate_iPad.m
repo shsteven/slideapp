@@ -60,6 +60,8 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 - (void) setCurrentScanner:(id <MvrScanner>) s;
 
+- (void) clearGameKitPicker;
+
 @end
 
 
