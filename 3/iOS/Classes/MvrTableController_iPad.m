@@ -14,6 +14,7 @@
 #import "MvrArrowView_iPad.h"
 #import "MvrAddPane.h"
 #import "MvrAboutPane.h"
+#import "MvrWiFiNetworkStatePane.h"
 
 #import "PLActionSheet.h"
 
@@ -59,6 +60,8 @@ typedef NSInteger MvrEdge;
 - (id <MvrChannel>) channelForViewWithCenter:(CGPoint) center;
 
 - (void) userDidEndDraggingController:(MvrItemController*) ic;
+
+@property(nonatomic, retain) MvrScannerObserver* currentObserver;
 
 @end
 
@@ -130,26 +133,108 @@ typedef NSInteger MvrEdge;
 			break;
 			
 		default:
-			break;
+			NSAssert(NO, @"Unknown edge constant");
+			return;
 	}
+	
+	const int maximumWiggle = 100;
+	
+	srandomdev();
+	end->x += (double)(random() % maximumWiggle * 2) - (double) maximumWiggle;
+	end->y += (double)(random() % maximumWiggle * 2) - (double) maximumWiggle;
 }
 
 - (void) viewDidLoad;
 {
 	[super viewDidLoad];
 	
-	itemControllers = [NSMutableSet new];
-	
-	arrowViewsByChannel = [L0Map new];
-	orderedArrowViews = [NSMutableArray new];
-
-	for (id <MvrChannel> chan in MvrApp_iPad().wifi.channels)
-		[self addArrowViewForChannel:chan];
+	if (!inited) {
+		inited = YES;
 		
+		itemControllersSet = [NSMutableSet new];
+		arrowViewsByChannel = [L0Map new];
+		
+		orderedArrowViews = [NSMutableArray new];
+		
+		[self setupObservationForCurrentScanner];
+		
+		appObserver = [[L0KVODispatcher alloc] initWithTarget:self];
+		
+		bluetoothControlsView.hidden = YES;
+		bluetoothControlsView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
+		
+		[appObserver observe:@"currentScanner" ofObject:MvrApp_iPad() options:0 usingBlock:^(id o, NSDictionary* change) {
+			
+#warning TODO
+			// [self setupTableForScanner]; // switches from wifi to bt table
+			[self setupObservationForCurrentScanner];
+			
+		}];
+	}
+}
+
+- (void) setupObservationForCurrentScanner;
+{
+	[self clearArrowViews];
+	
+	for (id <MvrChannel> chan in MvrApp_iPad().currentScanner.channels)
+		[self addArrowViewForChannel:chan];
+
 	[self layoutArrowViews];
 	
-	obs = [[MvrScannerObserver alloc] initWithScanner:MvrApp_iPad().wifi delegate:self];
+	self.currentObserver = [[[MvrScannerObserver alloc] initWithScanner:MvrApp_iPad().currentScanner delegate:self] autorelease];
+	
+	CATransition* fade = [CATransition animation];
+	fade.type = kCATransitionFade;
+	
+	[backdropImageView.layer addAnimation:fade forKey:@"MvrTableController_iPad - Fade"];
+	if ([MvrApp_iPad().currentScanner isKindOfClass:[MvrBTScanner class]]) {
+		
+		if (bluetoothControlsView.hidden) {
+			bluetoothControlsView.alpha = 0.0;
+			bluetoothControlsView.hidden = NO;
+			
+			[UIView beginAnimations:nil context:NULL];
+			{
+				bluetoothControlsView.alpha = 1.0;
+			}
+			[UIView commitAnimations];
+		}
+		
+		if (networkPopover.popoverVisible)
+			[networkPopover dismissPopoverAnimated:YES];
+		
+		networkBarItem.enabled = NO;
+		
+		backdropImageView.image = [UIImage imageNamed:@"Backdrop-Bluetooth-iPad.png"];
+	} else {
+		if (!bluetoothControlsView.hidden) {
+			[UIView beginAnimations:nil context:NULL];
+			{
+				[UIView setAnimationDelegate:self];
+				[UIView setAnimationDidStopSelector:@selector(fadeOutForBluetoothControls:finished:context:)];
+			
+				bluetoothControlsView.alpha = 0.0;
+			}
+			[UIView commitAnimations];
+		}
+		
+		networkBarItem.enabled = YES;
+		backdropImageView.image = [UIImage imageNamed:@"Backdrop-iPad.png"];
+	}
 }
+
+- (void) fadeOutForBluetoothControls:(NSString*) ani finished:(BOOL) finished context:(void*) nothing;
+{
+	bluetoothControlsView.hidden = YES;
+}
+
+- (IBAction) backToWiFi;
+{
+	[MvrApp_iPad() switchToWiFi];
+}
+
+#pragma mark Arrows
 
 - (void) scanner:(id <MvrScanner>)s didAddChannel:(id <MvrChannel>)channel;
 {
@@ -160,8 +245,6 @@ typedef NSInteger MvrEdge;
 {
 	[self removeArrowViewForChannel:channel];
 }
-
-#pragma mark Arrows
 
 - (void) addArrowViewForChannel:(id <MvrChannel>) chan;
 {
@@ -174,6 +257,9 @@ typedef NSInteger MvrEdge;
 	MvrArrowView_iPad* arrow = [[[MvrArrowView_iPad alloc] initWithFrame:CGRectZero] autorelease];
 	
 	arrow.mainLabel.text = [chan displayName];
+	
+	if ([MvrApp_iPad().currentScanner isKindOfClass:[MvrBTScanner class]])
+		arrow.mainLabel.textColor = [UIColor whiteColor];
 	
 	[arrowViewsByChannel setObject:arrow forKey:chan];
 	[orderedArrowViews addObject:arrow];
@@ -192,6 +278,12 @@ typedef NSInteger MvrEdge;
 	[arrowViewsByChannel removeObjectForKey:chan];
 
 	[self layoutArrowViews];
+}
+
+- (void) clearArrowViews;
+{
+	for (id <MvrChannel> c in [arrowViewsByChannel allKeys])
+		[self removeArrowViewForChannel:c];
 }
 
 - (id <MvrChannel>) channelForArrowView:(MvrArrowView_iPad*) arrow;
@@ -383,12 +475,12 @@ typedef NSInteger MvrEdge;
 
 - (NSSet*) itemControllers;
 {	
-	return [[itemControllers copy] autorelease];
+	return [[itemControllersSet copy] autorelease];
 }
 
 - (void) addItemController:(MvrItemController*) ic;
 {
-	[itemControllers addObject:ic];
+	[itemControllersSet addObject:ic];
 	ic.itemsTable = self;
 	[self addDraggableView:ic.draggableView];
 }
@@ -401,7 +493,7 @@ typedef NSInteger MvrEdge;
 	if (ic.itemsTable == self)
 		ic.itemsTable = nil;
 	
-	[itemControllers removeObject:ic];
+	[itemControllersSet removeObject:ic];
 }
 
 
@@ -451,7 +543,7 @@ typedef NSInteger MvrEdge;
 {
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 	
-	for (MvrItemController* ic in itemControllers)
+	for (MvrItemController* ic in itemControllersSet)
 		[self bounceBackViewOfControllerIfNeeded:ic];	
 
 	[self layoutArrowViews];
@@ -539,6 +631,7 @@ typedef NSInteger MvrEdge;
 - (IBAction) showAddPopover:(UIBarButtonItem*) sender;
 {
 	[aboutPopover dismissPopoverAnimated:YES];
+	[networkPopover dismissPopoverAnimated:YES];
 	
 	if (!addPopover) {
 		MvrAddPane* pane;
@@ -573,7 +666,7 @@ typedef NSInteger MvrEdge;
 	as.sheet.title = title;
 	[as addDestructiveButtonWithTitle:deleteAllButton action:^{
 		
-		for (id x in [[itemControllers copy] autorelease])
+		for (id x in [[itemControllersSet copy] autorelease])
 			[self removeItemOfControllerFromTable:x];
 		
 	}];
@@ -589,6 +682,7 @@ typedef NSInteger MvrEdge;
 - (IBAction) showAboutPane:(UIButton*) infoButton;
 {
 	[addPopover dismissPopoverAnimated:YES];
+	[networkPopover dismissPopoverAnimated:YES];
 	
 	if (!aboutPopover) {
 		MvrAboutPane* about = [MvrAboutPane modalPane];
@@ -597,5 +691,33 @@ typedef NSInteger MvrEdge;
 	
 	[aboutPopover presentPopoverFromRect:infoButton.bounds inView:infoButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
+
+- (void) showNetworkPopover:(UIBarButtonItem *)sender;
+{
+	[addPopover dismissPopoverAnimated:YES];
+	[aboutPopover dismissPopoverAnimated:YES];
+	
+	if (!networkPopover) {
+		MvrWiFiNetworkStatePane* networkPane = [[MvrWiFiNetworkStatePane new] autorelease];
+		networkPopover = [[UIPopoverController alloc] initWithContentViewController:networkPane];
+	}
+	
+	[networkPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void) viewWillAppear:(BOOL)animated;
+{
+	[super viewWillAppear:animated];
+	
+	for (id x in itemControllersSet)
+		[self bounceBackViewOfControllerIfNeeded:x];
+}
+
+- (void) didReceiveMemoryWarning;
+{
+	// never deallocate our view.
+}
+
+@synthesize currentObserver;
 
 @end

@@ -10,9 +10,6 @@
 #import "MvrShadowBackdropDraggableView.h"
 #import "MvrItemAction.h"
 
-#import <AddressBook/AddressBook.h>
-#import <AddressBookUI/AddressBookUI.h>
-
 #import <MuiKit/MuiKit.h>
 
 #import "MvrAppDelegate_iPad.h"
@@ -47,6 +44,8 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 - (UINavigationController*) navigationControllerToDisplayPersonItem:(MvrItem *)i;
 
 - (void) showPersonPopover:(MvrItemAction *)a forItem:(MvrItem *)i;
+
+- (void) finishDimmingAfterShowingContact;
 
 @end
 
@@ -233,15 +232,15 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 
 - (void) showPersonPopover:(MvrItemAction*) a forItem:(MvrItem*) i;
 {
-	if (personPopover)
-		return;
+	if (!personPopover) {
+		UINavigationController* nc = [self navigationControllerToDisplayPersonItem:i];
+			
+		personPopover = [[UIPopoverController alloc] initWithContentViewController:nc];
+		personPopover.delegate = self;
+	}
 	
-	UINavigationController* nc = [self navigationControllerToDisplayPersonItem:i];
-		
-	personPopover = [[UIPopoverController alloc] initWithContentViewController:nc];
-	personPopover.delegate = self;
 	[personPopover presentPopoverFromRect:self.actionButton.bounds inView:self.actionButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
-	
+
 	const CGFloat dimmedInfoAlpha = 0.5;
 	
 	[UIView beginAnimations:nil context:NULL];
@@ -253,6 +252,8 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	self.view.alpha = 0.8;
 	
 	[UIView commitAnimations];
+	
+	[self performSelector:@selector(finishDimmingAfterShowingContact) withObject:nil afterDelay:10.0];
 }
 
 - (UINavigationController*) navigationControllerToDisplayPersonItem:(MvrItem*) i;
@@ -267,12 +268,13 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	pc.allowsActions = YES;
 	
 	pc.title = [self.item title];
+	pc.unknownPersonViewDelegate = self;
 	
 	UINavigationController* nc = [[[UINavigationController alloc] initWithRootViewController:pc] autorelease];
 	return nc;
 }
 
-- (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController;
+- (void) finishDimmingAfterShowingContact;
 {
 	[UIView beginAnimations:nil context:NULL];
 	contactNameLabel.alpha = 1.0;
@@ -281,10 +283,29 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 	contactImageView.alpha = 1.0;
 	self.view.alpha = 1.0;
 	[UIView commitAnimations];
+	
+	[self didFinishAction];	
 
-	[self didFinishAction];
-	personPopover.delegate = nil;
-	[personPopover release]; personPopover = nil;
+	if (!personPopover.popoverVisible) {
+		personPopover.delegate = nil;
+		[personPopover release]; personPopover = nil;
+	}
+}
+
+- (void)unknownPersonViewController:(ABUnknownPersonViewController *)unknownCardViewController didResolveToPerson:(ABRecordRef)person;
+{
+	[self finishDimmingAfterShowingContact];
+}
+
+- (BOOL) unknownPersonViewController:(ABUnknownPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier;
+{
+	[self finishDimmingAfterShowingContact];
+	return YES;
+}
+
+- (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController;
+{
+	[self finishDimmingAfterShowingContact];
 }
 
 - (void) dealloc

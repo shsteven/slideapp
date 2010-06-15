@@ -34,7 +34,7 @@
 
 - (GKSession*) configuredSession;
 {
-	GKSession* s = [[GKSession alloc] initWithSessionID:kMvrBluetoothSessionID displayName:[MvrApp() displayNameForSelf] sessionMode:GKSessionModePeer];
+	GKSession* s = [[GKSession alloc] initWithSessionID:kMvrBluetoothSessionID displayName:[MvrServices() displayNameForSelf] sessionMode:GKSessionModePeer];
 	return [s autorelease];
 }
 

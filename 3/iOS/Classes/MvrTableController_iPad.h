@@ -26,17 +26,24 @@ enum {
 typedef NSInteger MvrItemSourceType;
 
 @interface MvrTableController_iPad : ILViewController <MvrItemsTable, MvrScannerObserverDelegate, MvrAddPaneDelegate> {
+	BOOL inited;
+	
+	IBOutlet UIImageView* backdropImageView;
+	IBOutlet UIView* bluetoothControlsView;
+	
 	IBOutlet UIView* draggableViewsLayer;
 	IBOutlet UIView* arrowsLayer;
 	
-	NSMutableSet* itemControllers;
+	NSMutableSet* itemControllersSet;
 	
 	L0Map* arrowViewsByChannel;
 	NSMutableArray* orderedArrowViews;
 	
-	MvrScannerObserver* obs;
+	L0KVODispatcher* appObserver;
+	MvrScannerObserver* currentObserver;
 	
-	UIPopoverController* addPopover, * aboutPopover;
+	UIPopoverController* addPopover, * aboutPopover, * networkPopover;
+	IBOutlet UIBarButtonItem* networkBarItem;
 	
 	BOOL askDeleteIsShown;
 }
@@ -55,6 +62,10 @@ typedef NSInteger MvrItemSourceType;
 - (IBAction) askForDeleteAll:(UIBarButtonItem*) sender;
 
 - (IBAction) showAboutPane:(UIButton*) infoButton;
+
+- (IBAction) showNetworkPopover:(UIBarButtonItem*) sender;
+
+- (IBAction) backToWiFi;
 
 @end
 

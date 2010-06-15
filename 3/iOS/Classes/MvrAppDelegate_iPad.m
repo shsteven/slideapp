@@ -58,6 +58,8 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 - (void) scheduleItemsDirectorySweep;
 - (void) performItemsDirectorySweep;
 
+- (void) setCurrentScanner:(id <MvrScanner>) s;
+
 @end
 
 
@@ -67,7 +69,7 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 @synthesize viewController;
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {	
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	
 // ------------ SETUP: Network + Observer
 	[MvrGenericItemController registerClass];
@@ -312,9 +314,11 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 - (BOOL) shouldMonitorDirectory;
 {
+	BOOL d;
 	@synchronized(self) {
-		return shouldMonitorDirectory;
+		d = shouldMonitorDirectory;
 	}
+	return d;
 }
 
 - (void) cancelMonitoringItemsDirectory;
@@ -383,6 +387,9 @@ cleanup:
 	NSString* idir = self.storage.itemsDirectory;
 	
 	for (NSString* item in [fm contentsOfDirectoryAtPath:self.storage.itemsDirectory error:NULL]) {
+		if ([item hasPrefix:@"."])
+			continue; // no hidden files.
+		
 		NSString* fullPath = [idir stringByAppendingPathComponent:item];
 		
 		if (MvrIsDirectory(fullPath))
@@ -401,6 +408,101 @@ cleanup:
 			[self.storage removeStoredItemsObject:i];
 		}
 	}
+}
+
+#pragma mark Current scanner & Bluetooth operation
+
+- (id <MvrScanner>) currentScanner;
+{
+	if (!currentScanner)
+		currentScanner = self.wifi;
+	
+	return currentScanner;
+}
+
+- (void) setCurrentScanner:(id <MvrScanner>) n;
+{
+	if (n != currentScanner) {
+		[currentScanner release];
+		currentScanner = [n retain];
+		
+		[observer release];
+		observer = [[MvrScannerObserver alloc] initWithScanner:n delegate:self];
+	}
+}
+
+- (void) switchToBluetooth;
+{
+	if ((bluetooth && self.currentScanner == bluetooth) || picker)
+		return;
+	
+	if (!bluetooth)
+		bluetooth = [[MvrBTScanner alloc] init];
+	
+	self.currentScanner = bluetooth;
+	
+	wifi.enabled = NO;
+	didPickBluetoothChannel = NO;
+	[self beginPickingBluetoothChannel];
+}
+
+- (IBAction) beginPickingBluetoothChannel;
+{
+	if (!picker) {
+		picker = [[GKPeerPickerController alloc] init];
+		picker.connectionTypesMask = GKPeerPickerConnectionTypeNearby;
+		picker.delegate = self;
+	}
+	
+	[picker show];	
+}
+
+- (void) peerPickerControllerDidCancel:(GKPeerPickerController *)picker;
+{
+	[self clearGameKitPicker];
+	
+	if (!didPickBluetoothChannel)
+		[self switchToWiFi];
+}
+
+- (void) clearGameKitPicker;
+{
+	picker.delegate = nil;
+	[picker release]; picker = nil;	
+}
+
+- (void) peerPickerController:(GKPeerPickerController *)p didConnectPeer:(NSString *)peerID toSession:(GKSession *)session;
+{
+	bluetooth.session = session;
+	[bluetooth acceptPeerWithIdentifier:peerID];
+	
+	[picker dismiss];
+	[self clearGameKitPicker];
+	
+	didPickBluetoothChannel = YES;
+}
+
+- (GKSession *) peerPickerController:(GKPeerPickerController *)picker sessionForConnectionType:(GKPeerPickerConnectionType)type;
+{
+	if (type == GKPeerPickerConnectionTypeNearby)
+		return [bluetooth configuredSession];
+	else
+		return nil;
+}
+
+- (void) switchToWiFi;
+{
+	if (self.currentScanner == wifi)
+		return;
+	
+	wifi.enabled = YES;
+	self.currentScanner = wifi;
+	
+	[picker dismiss];
+	[self clearGameKitPicker];
+	
+	bluetooth.enabled = NO;
+	[bluetooth release]; bluetooth = nil;
 }
 
 @end

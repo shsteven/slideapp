@@ -12,7 +12,10 @@
 
 #import <MessageUI/MessageUI.h>
 
-@interface MvrContactItemController : MvrItemController <UIPopoverControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+
+@interface MvrContactItemController : MvrItemController <UIPopoverControllerDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate, ABUnknownPersonViewControllerDelegate> {
 	IBOutlet UIImageView* contactImageView;
 	IBOutlet UILabel* contactNameLabel;
 	IBOutlet UIButton* contactEmailButton;

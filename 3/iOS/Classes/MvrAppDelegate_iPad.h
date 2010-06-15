@@ -19,24 +19,35 @@
 #import "MvrMessageChecker.h"
 #import "MvrAppDelegate.h"
 
+#import "MvrBTScanner.h"
+
+#import <GameKit/GameKit.h>
+
 @interface MvrAppDelegate_iPad : NSObject <
 	UIApplicationDelegate,
 	MvrPlatformInfo,
 	MvrScannerObserverDelegate,
-	MvrAppServices>
+	MvrAppServices,
+	GKPeerPickerControllerDelegate>
 {
     UIWindow *window;
     MvrTableController_iPad *viewController;
 	
 	MvrModernWiFi* wifi;
+	MvrBTScanner* bluetooth;
 	L0UUID* selfIdentifier;
 	
 	MvrScannerObserver* observer;
 	
 	MvrStorage* storage;
 	
+	id <MvrScanner> currentScanner;
+	
 	MvrMessageChecker* messageChecker;
 	BOOL shouldMonitorDirectory;
+	
+	GKPeerPickerController* picker;
+	BOOL didPickBluetoothChannel;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow* window;
@@ -44,7 +55,14 @@
 
 @property(nonatomic, readonly) MvrModernWiFi* wifi;
 
+@property(nonatomic, readonly) id <MvrScanner> currentScanner;
+
 @property(nonatomic, readonly) MvrStorage* storage;
+
+- (void) switchToBluetooth;
+- (void) switchToWiFi;
+
+- (IBAction) beginPickingBluetoothChannel;
 
 @end
 
