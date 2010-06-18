@@ -55,6 +55,7 @@
 - (void) setUpTableController;
 
 - (BOOL) performActionsForURL:(NSURL*) url;
+- (void) addByOpeningFileAtPath:(NSString *)path;
 
 @end
 
