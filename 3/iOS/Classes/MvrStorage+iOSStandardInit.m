@@ -8,6 +8,7 @@
 
 #import "MvrStorage+iOSStandardInit.h"
 
+#define kMvrItemsMetadataUserDefaultsKey @"L0SlidePersistedItems"
 
 @implementation MvrStorage (MvriOSStandardInit)
 
@@ -28,5 +29,15 @@
 	
 	return [[[self alloc] initWithItemsDirectory:docsDir metadataDirectory:metaDir] autorelease];
 }
+
+- (void) migrateFrom30StorageInUserDefaultsIfNeeded;
+{
+	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+	id meta = [ud objectForKey:kMvrItemsMetadataUserDefaultsKey];
+	if (meta) {
+		[self migrateFrom30StorageCentralMetadata:meta];
+		[ud removeObjectForKey:kMvrItemsMetadataUserDefaultsKey];
+	}
+}	
 
 @end

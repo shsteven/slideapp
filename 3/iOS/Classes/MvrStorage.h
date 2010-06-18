@@ -26,6 +26,8 @@
 - (void) addStoredItemsObject:(MvrItem*) i;
 - (void) removeStoredItemsObject:(MvrItem*) i;
 
+@property(readonly) NSMutableSet* mutableStoredItems;
+
 - (void) adoptPersistentItem:(MvrItem*) i;
 
 - (void) migrateFrom30StorageCentralMetadata:(id) meta;

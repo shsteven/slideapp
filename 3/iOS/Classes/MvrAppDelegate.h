@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "Network+Storage/MvrMetadataStorage.h"
 #import "Network+Storage/MvrPlatformInfo.h"
 
-#import "Network+Storage/MvrStorageCentral.h"
+#import "MvrStorage.h"
 #import "Network+Storage/MvrItem.h"
 
 #import "MvrTableController.h"
@@ -39,8 +38,7 @@
 
 @interface MvrAppDelegate : NSObject <
 	UIApplicationDelegate,
-	UIActionSheetDelegate,
-	MvrMetadataStorage, 
+	UIActionSheetDelegate, 
 	MvrPlatformInfo,
 	MvrAppServices>
 {
@@ -48,7 +46,7 @@
 	MvrTableController* tableController;
 		
 	NSString* itemsDirectory;
-	MvrStorageCentral* storageCentral;
+	MvrStorage* storageCentral;
 	NSDictionary* metadata;
 	
 	L0UUID* identifierForSelf;
@@ -69,7 +67,7 @@
 @property(nonatomic, retain) IBOutlet MvrTableController* tableController;
 
 @property(readonly) NSString* itemsDirectory;
-@property(readonly) MvrStorageCentral* storageCentral;
+@property(readonly) MvrStorage* storageCentral;
 
 @property(nonatomic, retain) IBOutlet UIWindow* overlayWindow;
 @property(nonatomic, retain) IBOutlet UILabel* overlayLabel;

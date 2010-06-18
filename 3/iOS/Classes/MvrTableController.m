@@ -354,7 +354,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	// avoid premature dealloc.
 	L0DraggableView* view = [[[itemsToViews objectForKey:item] retain] autorelease];
 	
-	[MvrApp().storageCentral.mutableStoredItems removeObject:item];
+	[MvrApp().storageCentral removeStoredItemsObject:item];
 	[itemsToViews removeObjectForKey:item];
 	[viewsToItems removeObjectForKey:view];
 	[self.slidesStratum removeDraggableSubviewByFadingAway:view];
@@ -416,7 +416,7 @@ static CGPoint MvrCenterOf(CGRect r) {
 	slide.transferring = NO;
 	
 	[[MvrItemUI UIForItem:item] didReceiveItem:item];
-	[MvrApp().storageCentral.mutableStoredItems addObject:item];
+	[MvrApp().storageCentral addStoredItemsObject:item];
 	[[MvrItemUI UIForItem:item] didStoreItem:item];
 	
 	MvrAccessibilityShowToast([NSString stringWithFormat:

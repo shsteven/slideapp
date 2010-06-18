@@ -33,8 +33,6 @@
 #import <sys/event.h>
 #import <sys/time.h>
 
-#define kMvrItemsMetadataUserDefaultsKey @"L0SlidePersistedItems"
-
 static inline BOOL MvrIsDirectory(NSString* path) {
 	BOOL exists, isDir;
 	exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
@@ -96,13 +94,6 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 	[window addSubview:viewController.view];
 	[window makeKeyAndVisible];
 	
-	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-	id meta = [ud objectForKey:kMvrItemsMetadataUserDefaultsKey];
-	if (meta) {
-		[self.storage migrateFrom30StorageCentralMetadata:meta];
-		[ud removeObjectForKey:kMvrItemsMetadataUserDefaultsKey];
-	}
-
 	for (MvrItem* i in self.storage.storedItems)
 		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
 	
@@ -214,8 +205,10 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 - (MvrStorage*) storage;
 {
-	if (!storage) 
+	if (!storage) {
 		storage = [[MvrStorage iOSStorage] retain];
+		[storage migrateFrom30StorageInUserDefaultsIfNeeded];
+	}
 	
 	return storage;
 }

@@ -27,8 +27,6 @@
 - (void) makeMetadataFileForItem:(MvrItem*) i;
 - (NSString*) userVisibleFilenameForItem:(MvrItem*) i;
 
-@property(readonly) NSMutableSet* mutableStoredItems;
-
 @end
 
 

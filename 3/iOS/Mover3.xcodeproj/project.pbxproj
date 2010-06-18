@@ -130,7 +130,7 @@
 		1567514910620E49006EC706 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514010620E3C006EC706 /* libMuiKit.a */; };
 		1567514A10620E4F006EC706 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1567514210620E3C006EC706 /* MuiKit.bundle */; };
 		1567514E10620E75006EC706 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514D10620E75006EC706 /* Foundation.framework */; };
-		1567515010620E78006EC706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514F10620E78006EC706 /* UIKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		1567515010620E78006EC706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567514F10620E78006EC706 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1567515210620E7A006EC706 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567515110620E7A006EC706 /* CoreGraphics.framework */; };
 		156751B91062176E006EC706 /* MvrItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156751B81062176E006EC706 /* MvrItemUI.m */; };
 		156813B1108C921400424179 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156813B0108C921400424179 /* MainWindow.xib */; };

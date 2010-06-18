@@ -10,6 +10,7 @@
 #import "MvrItemUI.h"
 
 #import "Network+Storage/MvrItemStorage.h"
+#import "MvrStorage+iOSStandardInit.h"
 
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemUI.h"
@@ -78,9 +79,6 @@ enum {
 	
 	[self setUpItemClassesAndUIs];
 	[self setUpStorageCentral];
-#if kMvrInstrumentForAds
-	self.storageCentral.itemSavingDisabled = YES;
-#endif
 	
 	[self setUpTableController];
 	
@@ -260,25 +258,9 @@ enum {
 
 - (void) setUpStorageCentral;
 {
-	storageCentral = [[MvrStorageCentral alloc] initWithPersistentDirectory:self.itemsDirectory metadataStorage:self];
 	MvrStorageSetTemporaryDirectory(NSTemporaryDirectory());
-}
-
-- (NSDictionary*) metadata;
-{
-	NSDictionary* m = L0As(NSDictionary, [[NSUserDefaults standardUserDefaults] objectForKey:kMvrItemsMetadataUserDefaultsKey]);
-	
-	if (!m)
-		m = [NSDictionary dictionary];
-	
-	return m;
-}
-
-- (void) setMetadata:(NSDictionary*) m;
-{		
-	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-	[ud setObject:m forKey:kMvrItemsMetadataUserDefaultsKey];
-	[ud synchronize];
+	storageCentral = [[MvrStorage iOSStorage] retain];
+	[storageCentral migrateFrom30StorageInUserDefaultsIfNeeded];
 }
 
 #pragma mark -
@@ -362,7 +344,7 @@ enum {
 - (void) addItemFromSelf:(MvrItem*) item;
 {
 	[self.tableController addItem:item animated:YES];
-	[self.storageCentral.mutableStoredItems addObject:item];
+	[self.storageCentral addStoredItemsObject:item];
 }
 
 - (void) addByOpeningFileAtPath:(NSString*) path;

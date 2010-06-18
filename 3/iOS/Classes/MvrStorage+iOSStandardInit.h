@@ -12,5 +12,6 @@
 @interface MvrStorage (MvrOSStandardInit)
 
 + iOSStorage;
+- (void) migrateFrom30StorageInUserDefaultsIfNeeded;
 
 @end
