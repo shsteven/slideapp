@@ -37,7 +37,7 @@
 	[mail setSubject:mailSubject];
 	[mail setMessageBody:mailMessage isHTML:NO];
 
-	[MvrApp() presentModalViewController:mail];
+	[MvrServices() presentModalViewController:mail];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)mail didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;

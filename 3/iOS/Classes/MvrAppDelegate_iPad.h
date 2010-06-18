@@ -21,6 +21,8 @@
 
 #import "MvrBTScanner.h"
 
+#import "MvrTellAFriendController.h"
+
 #import <GameKit/GameKit.h>
 
 @interface MvrAppDelegate_iPad : NSObject <
@@ -45,6 +47,8 @@
 	
 	MvrMessageChecker* messageChecker;
 	BOOL shouldMonitorDirectory;
+	
+	MvrTellAFriendController* tellAFriend;
 	
 	GKPeerPickerController* picker;
 	BOOL didPickBluetoothChannel;

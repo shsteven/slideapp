@@ -259,7 +259,10 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 - (MvrTellAFriendController *) tellAFriend;
 {
-	return nil;
+	if (!tellAFriend)
+		tellAFriend = [MvrTellAFriendController new];
+	
+	return tellAFriend;
 }
 
 #pragma mark Adding unidentified files
