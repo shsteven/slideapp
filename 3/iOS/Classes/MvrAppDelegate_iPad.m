@@ -10,8 +10,6 @@
 
 #import <AddressBook/AddressBook.h>
 
-#warning Test
-#import "MvrDraggableView.h"
 #import "MvrItemController.h"
 
 #import "Network+Storage/MvrItem.h"
@@ -50,7 +48,6 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 @interface MvrAppDelegate_iPad ()
 
 - (void) openFileAtPath:(NSString *)path;
-- (MvrItem *) itemForUnidentifiedFileAtPath:(NSString *)path;
 - (void) addItemForUnidentifiedFileAtPath:(NSString *)path;
 - (void) clearInbox;
 
@@ -251,7 +248,6 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 - (BOOL) helpAlertsSuppressed;
 {
-#warning TODO
 	return NO;
 }
 
@@ -313,11 +309,13 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 {
 	NSAutoreleasePool* pool = [NSAutoreleasePool new];
 	
-	int fdes = open([dir fileSystemRepresentation], O_RDONLY);
+	int fdes = -1, kq = -1;
+	
+	fdes = open([dir fileSystemRepresentation], O_RDONLY);
 	if (fdes == -1)
 		goto cleanup;
 	
-	int kq = kqueue();
+	kq = kqueue();
 	if (kq == -1)
 		goto cleanup;
 	

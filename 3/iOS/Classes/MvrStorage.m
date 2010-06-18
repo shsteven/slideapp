@@ -211,8 +211,6 @@
 		
 		if (!ext) {
 			// if we don't know what type of file this is, we hide the file from view.
-#warning TODO
-			// we must show the file when we know an extension.
 			
 			ext = @"";
 			filename = [NSString stringWithFormat:@".%@", [[L0UUID UUID] stringValue]];

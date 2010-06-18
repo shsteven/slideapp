@@ -168,8 +168,6 @@ typedef NSInteger MvrEdge;
 		
 		[appObserver observe:@"currentScanner" ofObject:MvrApp_iPad() options:0 usingBlock:^(id o, NSDictionary* change) {
 			
-#warning TODO
-			// [self setupTableForScanner]; // switches from wifi to bt table
 			[self setupObservationForCurrentScanner];
 			
 		}];
