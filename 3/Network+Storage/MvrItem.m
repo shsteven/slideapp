@@ -29,7 +29,7 @@
 	if (self = [super init]) {
 		autocache = [NSMutableDictionary new];
 		metadata = [NSMutableDictionary new];
-		itemNotes = [NSMutableDictionary new];
+		itemNotesDictionary = [NSMutableDictionary new];
 	}
 	
 	return self;
@@ -58,7 +58,7 @@
 	[type release];
 	[metadata release],
 	[autocache release];
-	[itemNotes release];
+	[itemNotesDictionary release];
 	[super dealloc];
 }
 
@@ -288,24 +288,24 @@ static NSMutableDictionary* MvrItemFallbackPathExtensions = nil;
 
 - (NSDictionary*) itemNotes;
 {
-	return itemNotes;
+	return itemNotesDictionary;
 }
 
 - (void) setItemNotes:(NSDictionary *) d;
 {
-	[itemNotes setDictionary:(d?: [NSDictionary dictionary])];
+	[itemNotesDictionary setDictionary:(d?: [NSDictionary dictionary])];
 }
 
 - (void) setObject:(id) o forItemNotesKey:(NSString*) key;
 {
 	[self willChangeValueForKey:@"itemNotes"];
-	[itemNotes setObject:o forKey:key];
+	[itemNotesDictionary setObject:o forKey:key];
 	[self didChangeValueForKey:@"itemNotes"];
 }
 
 - (id) objectForItemNotesKey:(id) o;
 {
-	return [itemNotes objectForKey:o];
+	return [itemNotesDictionary objectForKey:o];
 }
 
 

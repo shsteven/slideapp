@@ -55,7 +55,7 @@
 	NSString* type;
 	NSMutableDictionary* metadata;
 	NSMutableDictionary* autocache;
-	NSMutableDictionary* itemNotes;
+	NSMutableDictionary* itemNotesDictionary;
 }
 
 - (id) init;
