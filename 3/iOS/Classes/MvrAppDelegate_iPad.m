@@ -15,6 +15,7 @@
 #import "Network+Storage/MvrItem.h"
 #import "MvrItem+UnidentifiedFileAdding.h"
 #import "Network+Storage/MvrItemStorage.h"
+#import "MvrStorage+iOSStandardInit.h"
 
 #import "MvrImageItem.h"
 #import "MvrImageItemController.h"
@@ -33,13 +34,6 @@
 #import <sys/time.h>
 
 #define kMvrItemsMetadataUserDefaultsKey @"L0SlidePersistedItems"
-
-#define ILAssertNoNSError(errVarName, call) \
-{ \
-	NSError* errVarName; \
-	if (!(call)) \
-		[NSException raise:@"ILUnexpectedNSErrorException" format:@"Operation " #call " failed with error %@", errVarName]; \
-}
 
 static inline BOOL MvrIsDirectory(NSString* path) {
 	BOOL exists, isDir;
@@ -220,24 +214,8 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 - (MvrStorage*) storage;
 {
-	if (!storage) {
-		// TODO support Open /Mover Items subdirectory
-		NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-		NSString* metaDir = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-		metaDir = [metaDir stringByAppendingPathComponent:@"Mover Metadata"];
-		
-		NSFileManager* fm = [NSFileManager defaultManager];
-		
-		// [fm createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:NULL];
-		if (![fm fileExistsAtPath:docsDir])
-			ILAssertNoNSError(e, [fm createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:&e]);
-							  
-		// [fm createDirectoryAtPath:metaDir withIntermediateDirectories:YES attributes:nil error:NULL];
-		if (![fm fileExistsAtPath:metaDir])
-			ILAssertNoNSError(e, [fm createDirectoryAtPath:metaDir withIntermediateDirectories:YES attributes:nil error:&e]);
-		
-		storage = [[MvrStorage alloc] initWithItemsDirectory:docsDir metadataDirectory:metaDir];
-	}
+	if (!storage) 
+		storage = [[MvrStorage iOSStorage] retain];
 	
 	return storage;
 }

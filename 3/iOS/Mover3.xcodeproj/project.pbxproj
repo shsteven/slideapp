@@ -178,6 +178,7 @@
 		159559E5107769F500FBC9B4 /* TextIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 159559E4107769F500FBC9B4 /* TextIcon.png */; };
 		15955A1D10776B2200FBC9B4 /* MvrTextVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */; };
 		15955A2110776B7D00FBC9B4 /* MvrVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A2010776B7D00FBC9B4 /* MvrVisor.m */; };
+		15A7143B11CB698100BB9759 /* MvrStorage+iOSStandardInit.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */; };
 		15A805BC108EECE100DE037F /* MvrGenericItemReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */; };
 		15A8064F108F011C00DE037F /* MvrNetworkTrouble.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */; };
 		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
@@ -535,6 +536,8 @@
 		15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTextVisor.m; sourceTree = "<group>"; };
 		15955A1F10776B7D00FBC9B4 /* MvrVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVisor.h; sourceTree = "<group>"; };
 		15955A2010776B7D00FBC9B4 /* MvrVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVisor.m; sourceTree = "<group>"; };
+		15A7143911CB698100BB9759 /* MvrStorage+iOSStandardInit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrStorage+iOSStandardInit.h"; sourceTree = "<group>"; };
+		15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrStorage+iOSStandardInit.m"; sourceTree = "<group>"; };
 		15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrGenericItemReceived.alert; sourceTree = "<group>"; };
 		15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNetworkTrouble.alert; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -739,6 +742,8 @@
 				15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */,
 				15BCFB5811C78592005EA90C /* MvrItem+UnidentifiedFileAdding.h */,
 				15BCFB5911C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m */,
+				15A7143911CB698100BB9759 /* MvrStorage+iOSStandardInit.h */,
+				15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1948,6 +1953,7 @@
 				154CCC7E11BFA19E0033DAD3 /* Block.c in Sources */,
 				15FFE54911C4D19900392210 /* MvrWiFiNetworkStatePane.m in Sources */,
 				15BCFB5A11C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m in Sources */,
+				15A7143B11CB698100BB9759 /* MvrStorage+iOSStandardInit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
