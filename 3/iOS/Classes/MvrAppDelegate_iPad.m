@@ -32,6 +32,8 @@
 #import <sys/event.h>
 #import <sys/time.h>
 
+#define kMvrItemsMetadataUserDefaultsKey @"L0SlidePersistedItems"
+
 #define ILAssertNoNSError(errVarName, call) \
 { \
 	NSError* errVarName; \
@@ -99,6 +101,13 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 	
 	[window addSubview:viewController.view];
 	[window makeKeyAndVisible];
+	
+	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+	id meta = [ud objectForKey:kMvrItemsMetadataUserDefaultsKey];
+	if (meta) {
+		[self.storage migrateFrom30StorageCentralMetadata:meta];
+		[ud removeObjectForKey:kMvrItemsMetadataUserDefaultsKey];
+	}
 
 	for (MvrItem* i in self.storage.storedItems)
 		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];

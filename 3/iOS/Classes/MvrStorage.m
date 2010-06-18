@@ -289,10 +289,52 @@
 	[knownFiles removeObject:[itemFile lastPathComponent]];
 }
 
+#define kMvr30StorageMetadataKey (@"Metadata")
+#define kMvr30StorageTypeKey (@"Type")
+#define kMvr30StorageTitleKey (@"Title")
+#define kMvr30StorageNotesKey (@"Notes")
+
 - (void) migrateFrom30StorageCentralMetadata:(id) meta;
 {
-#warning TODO
-	L0AbstractMethod();
+	NSDictionary* storedMetadata = L0As(NSDictionary, meta);
+	if (!storedMetadata)
+		return;
+
+	for (NSString* name in storedMetadata) {
+		NSDictionary* itemInfo = [storedMetadata objectForKey:name];
+		if (![itemInfo isKindOfClass:[NSDictionary class]])
+			continue;
+		
+		NSString* type = [itemInfo objectForKey:kMvr30StorageTypeKey];
+		
+		NSDictionary* moreMeta = [itemInfo objectForKey:kMvr30StorageMetadataKey];
+		if (!moreMeta || ![moreMeta isKindOfClass:[NSDictionary class]]) {
+			NSString* title = [itemInfo objectForKey:kMvr30StorageTitleKey];
+			
+			if (title)
+				moreMeta = [NSDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey];
+		}
+		
+		if (!moreMeta || !type)
+			continue;
+		
+		NSString* path = [self.itemsDirectory stringByAppendingPathComponent:name];
+		
+		NSError* e;
+		MvrItemStorage* itemStorage = [MvrItemStorage itemStorageFromFileAtPath:path options:kMvrItemStorageCanMoveOrDeleteFile error:&e];
+		if (!itemStorage) {
+			L0LogAlways(@"%@", e);
+		} else {
+			MvrItem* item = [MvrItem itemWithStorage:itemStorage type:type metadata:moreMeta];
+			if (item) {
+				NSDictionary* d = [itemInfo objectForKey:kMvr30StorageNotesKey];
+				if (d && [d isKindOfClass:[NSDictionary class]])
+					item.itemNotes = d;
+				
+				[self addStoredItemsObject:item];
+			}
+		}
+	}
 }
 
 - (BOOL) hasItemForFileAtPath:(NSString*) path;
