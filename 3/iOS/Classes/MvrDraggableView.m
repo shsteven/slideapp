@@ -46,6 +46,11 @@
 	self.gestureRecognizers = [NSArray arrayWithObjects:pan, rotation, nil];
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
+{
+	return YES;
+}
+
 - (void) dealloc;
 {
 	for (UIGestureRecognizer* g in self.gestureRecognizers) {
