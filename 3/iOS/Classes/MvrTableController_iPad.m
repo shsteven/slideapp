@@ -66,6 +66,8 @@ typedef NSInteger MvrEdge;
 
 - (void) setupObservationForCurrentScanner;
 
+- (void) setupProgressReportPart;
+
 @end
 
 
@@ -171,6 +173,8 @@ typedef NSInteger MvrEdge;
 			[self setupObservationForCurrentScanner];
 			
 		}];
+		
+		[self setupProgressReportPart];
 	}
 }
 
@@ -725,5 +729,66 @@ typedef NSInteger MvrEdge;
 }
 
 @synthesize currentObserver;
+
+#pragma mark Progress
+
+- (void) setupProgressReportPart;
+{
+	progressReportPart = [[MvrProgressReportPart alloc] init];
+	progressReportPart.delegate = self;
+}
+
+#warning TODO animation.
+
+- (void) progressReportPartShouldDisplay:(MvrProgressReportPart*) part;
+{
+	isHidingProgressReport = NO;
+	
+	if (!part.view.superview) {
+		CGRect frame = part.view.frame;
+		frame.origin.x = CGRectGetMidX(self.view.bounds) - frame.size.width / 2.0;
+		frame.origin.y = 0.3 * self.view.bounds.size.height;
+		part.view.frame = frame;
+		
+		part.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+		
+		CALayer* l = part.view.layer;
+		l.cornerRadius = 20.0;
+		
+		part.view.alpha = 0.0;
+		[self.view insertSubview:part.view belowSubview:draggableViewsLayer];
+	}
+	
+	[UIView beginAnimations:nil context:NULL];
+	{
+		[UIView setAnimationBeginsFromCurrentState:YES];
+		part.view.alpha = 1.0;
+	}
+	[UIView commitAnimations];	
+}
+
+- (void) progressReportPartShouldHide:(MvrProgressReportPart *)part;
+{
+	if (isHidingProgressReport)
+		return;
+	
+	isHidingProgressReport = YES;
+	
+	[UIView beginAnimations:nil context:NULL];
+	{
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(didEndHidingProgressPart:finished:context:)];
+	
+		[UIView setAnimationBeginsFromCurrentState:YES];
+		part.view.alpha = 0.0;
+	}
+	[UIView commitAnimations];
+}
+
+- (void) didEndHidingProgressPart:(NSString*) ani finished:(BOOL) fin context:(void*) n;
+{
+	[progressReportPart.view removeFromSuperview];
+	isHidingProgressReport = NO;
+}
 
 @end

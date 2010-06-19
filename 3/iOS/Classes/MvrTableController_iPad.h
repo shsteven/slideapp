@@ -18,6 +18,8 @@
 
 #import "Network+Storage/MvrScannerObserver.h"
 
+#import "MvrProgressReportPart.h"
+
 enum {
 	kMvrItemSourceUnknown, // source is ignored
 	kMvrItemSourceSelf, // source is ignored
@@ -25,7 +27,7 @@ enum {
 };
 typedef NSInteger MvrItemSourceType;
 
-@interface MvrTableController_iPad : ILViewController <MvrItemsTable, MvrScannerObserverDelegate, MvrAddPaneDelegate> {
+@interface MvrTableController_iPad : ILViewController <MvrItemsTable, MvrScannerObserverDelegate, MvrAddPaneDelegate, MvrProgressReportPartDelegate> {
 	BOOL inited;
 	
 	IBOutlet UIImageView* backdropImageView;
@@ -46,6 +48,9 @@ typedef NSInteger MvrItemSourceType;
 	IBOutlet UIBarButtonItem* networkBarItem;
 	
 	BOOL askDeleteIsShown;
+	
+	MvrProgressReportPart* progressReportPart;
+	BOOL isHidingProgressReport;
 }
 
 - (void) addItem:(MvrItem*) item fromSource:(id) source ofType:(MvrItemSourceType) type;

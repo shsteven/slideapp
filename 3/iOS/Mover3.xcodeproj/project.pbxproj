@@ -95,6 +95,8 @@
 		1533F4CC1088FFC20025005B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 1533F4C91088FFC10025005B /* iTunesArtwork */; };
 		1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1537A6E0107A388000B16B88 /* GameKit.framework */; };
 		1537A6E9107A3CC900B16B88 /* MvrBluetoothMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */; };
+		1541D14011CD375E0061D150 /* MvrProgressReportPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1541D13E11CD375E0061D150 /* MvrProgressReportPart.m */; };
+		1541D14111CD375E0061D150 /* MvrProgressReportPart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1541D13F11CD375E0061D150 /* MvrProgressReportPart.xib */; };
 		15464A281085A9F1005E5642 /* MvrMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A271085A9F1005E5642 /* MvrMessage.m */; };
 		15464A321085AFF2005E5642 /* MvrMessage+Showing.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A311085AFF2005E5642 /* MvrMessage+Showing.m */; };
 		15464A3D1085B169005E5642 /* MvrMessageAction+ActingUpon.m in Sources */ = {isa = PBXBuildFile; fileRef = 15464A3C1085B169005E5642 /* MvrMessageAction+ActingUpon.m */; };
@@ -399,6 +401,9 @@
 		1537A6E0107A388000B16B88 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		1537A6E7107A3CC900B16B88 /* MvrBluetoothMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBluetoothMode.h; sourceTree = "<group>"; };
 		1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBluetoothMode.m; sourceTree = "<group>"; };
+		1541D13D11CD375E0061D150 /* MvrProgressReportPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrProgressReportPart.h; sourceTree = "<group>"; };
+		1541D13E11CD375E0061D150 /* MvrProgressReportPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrProgressReportPart.m; sourceTree = "<group>"; };
+		1541D13F11CD375E0061D150 /* MvrProgressReportPart.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MvrProgressReportPart.xib; path = ../MvrProgressReportPart.xib; sourceTree = "<group>"; };
 		15464A261085A9F1005E5642 /* MvrMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMessage.h; sourceTree = "<group>"; };
 		15464A271085A9F1005E5642 /* MvrMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMessage.m; sourceTree = "<group>"; };
 		15464A301085AFF2005E5642 /* MvrMessage+Showing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrMessage+Showing.h"; sourceTree = "<group>"; };
@@ -847,6 +852,16 @@
 			path = Variants/Current;
 			sourceTree = "<group>";
 		};
+		1541D13C11CD37380061D150 /* Progress Reporting */ = {
+			isa = PBXGroup;
+			children = (
+				1541D13D11CD375E0061D150 /* MvrProgressReportPart.h */,
+				1541D13E11CD375E0061D150 /* MvrProgressReportPart.m */,
+				1541D13F11CD375E0061D150 /* MvrProgressReportPart.xib */,
+			);
+			name = "Progress Reporting";
+			sourceTree = "<group>";
+		};
 		15464A1D1085A9DE005E5642 /* Messages from the Cloud */ = {
 			isa = PBXGroup;
 			children = (
@@ -1292,6 +1307,7 @@
 		15C86B5811BE74410046CFC0 /* The Table */ = {
 			isa = PBXGroup;
 			children = (
+				1541D13C11CD37380061D150 /* Progress Reporting */,
 				15FFE54511C4D18800392210 /* Network */,
 				15C86B7611BE74D00046CFC0 /* Backdrop-iPad.png */,
 				15BCFA6811C777B3005EA90C /* Backdrop-Bluetooth-iPad.png */,
@@ -1722,6 +1738,7 @@
 				15B0FF2B11C26DAD0020ACEF /* Default-Portrait.png in Resources */,
 				15FFE54A11C4D19900392210 /* MvrWiFiNetworkStatePane.xib in Resources */,
 				15BCFA6911C777B3005EA90C /* Backdrop-Bluetooth-iPad.png in Resources */,
+				1541D14111CD375E0061D150 /* MvrProgressReportPart.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1954,6 +1971,7 @@
 				15FFE54911C4D19900392210 /* MvrWiFiNetworkStatePane.m in Sources */,
 				15BCFB5A11C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m in Sources */,
 				15A7143B11CB698100BB9759 /* MvrStorage+iOSStandardInit.m in Sources */,
+				1541D14011CD375E0061D150 /* MvrProgressReportPart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
