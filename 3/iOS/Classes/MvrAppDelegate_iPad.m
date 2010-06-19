@@ -191,7 +191,8 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 - (void) incomingTransfer:(id <MvrIncoming>)incoming didEndReceivingItem:(MvrItem *)i;
 {
-	[viewController addItem:i fromSource:[incoming channel] ofType:kMvrItemSourceChannel];
+	if (i)
+		[viewController addItem:i fromSource:[incoming channel] ofType:kMvrItemSourceChannel];
 }
 
 #pragma mark Cleaning up
