@@ -23,6 +23,8 @@
 
 #import "MvrTellAFriendController.h"
 
+#import "MvrSoundEffects.h"
+
 #import <GameKit/GameKit.h>
 
 @interface MvrAppDelegate_iPad : NSObject <
@@ -49,6 +51,8 @@
 	BOOL shouldMonitorDirectory;
 	
 	MvrTellAFriendController* tellAFriend;
+	
+	MvrSoundEffects* soundEffects;
 	
 	GKPeerPickerController* picker;
 	BOOL didPickBluetoothChannel;

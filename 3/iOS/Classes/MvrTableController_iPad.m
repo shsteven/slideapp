@@ -747,7 +747,7 @@ typedef NSInteger MvrEdge;
 	if (!part.view.superview) {
 		CGRect frame = part.view.frame;
 		frame.origin.x = CGRectGetMidX(self.view.bounds) - frame.size.width / 2.0;
-		frame.origin.y = 0.3 * self.view.bounds.size.height;
+		frame.origin.y = 0.7 * self.view.bounds.size.height;
 		part.view.frame = frame;
 		
 		part.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;

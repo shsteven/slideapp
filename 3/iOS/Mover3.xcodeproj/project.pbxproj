@@ -237,6 +237,13 @@
 		15C8A1D21116CFF600F844A7 /* ILSwapSendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C8A1CF1116CFF600F844A7 /* ILSwapSendController.m */; };
 		15C8A1D31116CFF600F844A7 /* ILSwapKitBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C8A1D11116CFF600F844A7 /* ILSwapKitBundle.m */; };
 		15C8A1E41116D09700F844A7 /* NetworkToolbarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C8A1E31116D09700F844A7 /* NetworkToolbarIcon.png */; };
+		15CF7B9711CE90290010EA06 /* MvrSoundEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CF7B9611CE90290010EA06 /* MvrSoundEffects.m */; };
+		15CF7B9911CE903E0010EA06 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CF7B9811CE903E0010EA06 /* AVFoundation.framework */; };
+		15CF7BC111CE94EB0010EA06 /* ChannelAppeared.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15CF7BBD11CE94EB0010EA06 /* ChannelAppeared.caf */; };
+		15CF7BC211CE94EB0010EA06 /* ChannelDisappeared.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15CF7BBE11CE94EB0010EA06 /* ChannelDisappeared.caf */; };
+		15CF7BC311CE94EB0010EA06 /* ProgressOver.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15CF7BBF11CE94EB0010EA06 /* ProgressOver.caf */; };
+		15CF7BC411CE94EB0010EA06 /* ProgressPing.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15CF7BC011CE94EB0010EA06 /* ProgressPing.caf */; };
+		15CF7C1F11CE9E650010EA06 /* ProgressOverFailure.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15CF7C1E11CE9E650010EA06 /* ProgressOverFailure.caf */; };
 		15CFDB2210710B2D00FAB245 /* TopShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB2110710B2D00FAB245 /* TopShadow.png */; };
 		15CFDB41107112C800FAB245 /* Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB3F107112C800FAB245 /* Arrow.png */; };
 		15CFDB42107112C800FAB245 /* DrawerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDB40107112C800FAB245 /* DrawerBackdrop.png */; };
@@ -630,6 +637,14 @@
 		15C8A1D01116CFF600F844A7 /* ILSwapKitBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapKitBundle.h; path = SwapKit/ILSwapKitBundle.h; sourceTree = SOURCE_ROOT; };
 		15C8A1D11116CFF600F844A7 /* ILSwapKitBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapKitBundle.m; path = SwapKit/ILSwapKitBundle.m; sourceTree = SOURCE_ROOT; };
 		15C8A1E31116D09700F844A7 /* NetworkToolbarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkToolbarIcon.png; sourceTree = "<group>"; };
+		15CF7B9511CE90280010EA06 /* MvrSoundEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrSoundEffects.h; sourceTree = "<group>"; };
+		15CF7B9611CE90290010EA06 /* MvrSoundEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrSoundEffects.m; sourceTree = "<group>"; };
+		15CF7B9811CE903E0010EA06 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		15CF7BBD11CE94EB0010EA06 /* ChannelAppeared.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChannelAppeared.caf; sourceTree = SOURCE_ROOT; };
+		15CF7BBE11CE94EB0010EA06 /* ChannelDisappeared.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChannelDisappeared.caf; sourceTree = SOURCE_ROOT; };
+		15CF7BBF11CE94EB0010EA06 /* ProgressOver.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ProgressOver.caf; sourceTree = SOURCE_ROOT; };
+		15CF7BC011CE94EB0010EA06 /* ProgressPing.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ProgressPing.caf; sourceTree = SOURCE_ROOT; };
+		15CF7C1E11CE9E650010EA06 /* ProgressOverFailure.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ProgressOverFailure.caf; sourceTree = SOURCE_ROOT; };
 		15CFDB2110710B2D00FAB245 /* TopShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TopShadow.png; path = Theme/TopShadow.png; sourceTree = "<group>"; };
 		15CFDB3F107112C800FAB245 /* Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Arrow.png; path = Theme/Arrow.png; sourceTree = "<group>"; };
 		15CFDB40107112C800FAB245 /* DrawerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DrawerBackdrop.png; path = Theme/DrawerBackdrop.png; sourceTree = "<group>"; };
@@ -716,6 +731,7 @@
 				154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */,
 				1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */,
 				1507DEA211C025DB00EB85B8 /* CrashReporter.framework in Frameworks */,
+				15CF7B9911CE903E0010EA06 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,6 +765,7 @@
 				15BCFB5911C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m */,
 				15A7143911CB698100BB9759 /* MvrStorage+iOSStandardInit.h */,
 				15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */,
+				15CF7B9D11CE91F80010EA06 /* SFX */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1386,6 +1403,20 @@
 			name = Alerts;
 			sourceTree = "<group>";
 		};
+		15CF7B9D11CE91F80010EA06 /* SFX */ = {
+			isa = PBXGroup;
+			children = (
+				15CF7BBD11CE94EB0010EA06 /* ChannelAppeared.caf */,
+				15CF7BBE11CE94EB0010EA06 /* ChannelDisappeared.caf */,
+				15CF7BBF11CE94EB0010EA06 /* ProgressOver.caf */,
+				15CF7BC011CE94EB0010EA06 /* ProgressPing.caf */,
+				15CF7C1E11CE9E650010EA06 /* ProgressOverFailure.caf */,
+				15CF7B9511CE90280010EA06 /* MvrSoundEffects.h */,
+				15CF7B9611CE90290010EA06 /* MvrSoundEffects.m */,
+			);
+			name = SFX;
+			sourceTree = "<group>";
+		};
 		15E94B6710741BDD009DA076 /* Images & Video */ = {
 			isa = PBXGroup;
 			children = (
@@ -1449,6 +1480,7 @@
 				154FA54810790FD1004DF675 /* MessageUI.framework */,
 				1537A6E0107A388000B16B88 /* GameKit.framework */,
 				150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */,
+				15CF7B9811CE903E0010EA06 /* AVFoundation.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1739,6 +1771,11 @@
 				15FFE54A11C4D19900392210 /* MvrWiFiNetworkStatePane.xib in Resources */,
 				15BCFA6911C777B3005EA90C /* Backdrop-Bluetooth-iPad.png in Resources */,
 				1541D14111CD375E0061D150 /* MvrProgressReportPart.xib in Resources */,
+				15CF7BC111CE94EB0010EA06 /* ChannelAppeared.caf in Resources */,
+				15CF7BC211CE94EB0010EA06 /* ChannelDisappeared.caf in Resources */,
+				15CF7BC311CE94EB0010EA06 /* ProgressOver.caf in Resources */,
+				15CF7BC411CE94EB0010EA06 /* ProgressPing.caf in Resources */,
+				15CF7C1F11CE9E650010EA06 /* ProgressOverFailure.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1972,6 +2009,7 @@
 				15BCFB5A11C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m in Sources */,
 				15A7143B11CB698100BB9759 /* MvrStorage+iOSStandardInit.m in Sources */,
 				1541D14011CD375E0061D150 /* MvrProgressReportPart.m in Sources */,
+				15CF7B9711CE90290010EA06 /* MvrSoundEffects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -97,6 +97,8 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 	for (MvrItem* i in self.storage.storedItems)
 		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
 	
+	soundEffects = [MvrSoundEffects new];
+	
 // ------------- Handle file opening
 	NSURL* u = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
 	if ([u isFileURL])
@@ -134,15 +136,6 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 	NSArray* content = [fm contentsOfDirectoryAtPath:inboxDir error:NULL];
 	if (content)
 		[fm removeItemAtPath:inboxDir error:NULL];
-}
-
-- (void)dealloc {
-	[wifi release];
-	
-	[messageChecker release];
-	[viewController release];
-	[window release];
-	[super dealloc];
 }
 
 @synthesize wifi;
@@ -193,6 +186,8 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 {
 	if (i)
 		[viewController addItem:i fromSource:[incoming channel] ofType:kMvrItemSourceChannel];
+	
+	[soundEffects endPlayingTransferSoundSucceding:(i != nil)];
 }
 
 #pragma mark Cleaning up
@@ -467,6 +462,23 @@ cleanup:
 	
 	bluetooth.enabled = NO;
 	[bluetooth release]; bluetooth = nil;
+}
+
+#pragma mark Sound effects
+
+- (void) scanner:(id <MvrScanner>)s didAddChannel:(id <MvrChannel>)channel;
+{
+	[soundEffects playChannelNowAvailable];
+}
+
+- (void) scanner:(id <MvrScanner>)s didRemoveChannel:(id <MvrChannel>)channel;
+{
+	[soundEffects playChannelDisconnected];
+}
+
+- (void) channel:(id <MvrChannel>)c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>)incoming;
+{
+	[soundEffects beginPlayingTransferSound];
 }
 
 @end
