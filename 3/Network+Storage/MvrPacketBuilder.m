@@ -255,32 +255,20 @@ NSString* const kMvrPacketBuilderErrorDomain = @"kMvrPacketBuilderErrorDomain";
 
 - (void) stream:(NSInputStream*) aStream handleEvent:(NSStreamEvent) eventCode;
 {
-	switch (eventCode) {
-		case NSStreamEventHasBytesAvailable: {
-			if (!self.paused)
-				[self producePayloadFromAvailableBytesOfStream:aStream];
-		}
-			break;
-			
-		case NSStreamEventErrorOccurred: {
-			[delegate packetBuilder:self didEndWithError:[aStream streamError]];
+	if (eventCode & NSStreamEventErrorOccurred) {
+		[delegate packetBuilder:self didEndWithError:[aStream streamError]];
+		[self stopWithoutNotifying];		
+	} else if (eventCode & NSStreamEventEndEncountered) {
+		if (sealed) {
+			NSError* e = nil;
+			if (toBeRead > 0)
+				e = [NSError errorWithDomain:kMvrPacketBuilderErrorDomain code:kMvrPacketBuilderNotEnoughDataInStreamError userInfo:nil];
+			[delegate packetBuilder:self didEndWithError:e];
 			[self stopWithoutNotifying];
 		}
-			break;
-			
-		case NSStreamEventEndEncountered: {
-			if (sealed) {
-				NSError* e = nil;
-				if (toBeRead > 0)
-					e = [NSError errorWithDomain:kMvrPacketBuilderErrorDomain code:kMvrPacketBuilderNotEnoughDataInStreamError userInfo:nil];
-				[delegate packetBuilder:self didEndWithError:e];
-				[self stopWithoutNotifying];
-			}
-		}
-			break;
-			
-		default:
-			break;
+	} else if (eventCode & NSStreamEventHasBytesAvailable) {
+		if (!self.paused)
+			[self producePayloadFromAvailableBytesOfStream:aStream];
 	}
 }
 
