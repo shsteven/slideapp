@@ -25,10 +25,10 @@
 		1574452211343C630088C65E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574452111343C630088C65E /* SystemConfiguration.framework */; };
 		1574453B11343D090088C65E /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574453A11343D090088C65E /* libz.1.1.3.dylib */; };
 		157705D9116619B700EE3C83 /* MvrTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157705D8116619B700EE3C83 /* MvrTextItem.m */; };
-		1579690E11BFB1FC00AA504B /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1579690D11BFB1FC00AA504B /* libMuiKit-Mac.a */; };
 		1594394E1133DACB0017B42D /* WaypointLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1594394D1133DACB0017B42D /* WaypointLogo.png */; };
 		15A3B23711783CA6000876C8 /* MvrConnectFirstTimeFound.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A3B23611783CA6000876C8 /* MvrConnectFirstTimeFound.alert */; };
 		15AD84961168D49800F88021 /* SlideMenuIcon_Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD84951168D49800F88021 /* SlideMenuIcon_Selected.png */; };
+		15B4231B11D0F41200304CDC /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B4230B11D0F3FA00304CDC /* libMuiKit-Mac.a */; };
 		15CCE81C114FF9D100E45AC6 /* MiniSlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CCE81B114FF9D100E45AC6 /* MiniSlide.png */; };
 		15CCE821114FFC3400E45AC6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CCE820114FFC3400E45AC6 /* QuartzCore.framework */; };
 		15D327A71172F48E001DD969 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D327A61172F48E001DD969 /* AddressBook.framework */; };
@@ -55,40 +55,40 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1579690311BFB1C200AA504B /* PBXContainerItemProxy */ = {
+		15B4230411D0F3FA00304CDC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 157968F211BFB1C200AA504B /* MuiKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 154B01F00F78156D0082109B /* libMuiKit.a */;
 			remoteInfo = "MuiKit (Library)";
 		};
-		1579690511BFB1C200AA504B /* PBXContainerItemProxy */ = {
+		15B4230611D0F3FA00304CDC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 157968F211BFB1C200AA504B /* MuiKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 156FD76B0F7A25F900F83283 /* MuiKit.bundle */;
 			remoteInfo = "MuiKit (Resources)";
 		};
-		1579690711BFB1C200AA504B /* PBXContainerItemProxy */ = {
+		15B4230811D0F3FA00304CDC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 157968F211BFB1C200AA504B /* MuiKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 154635591011BD77000238EE /* MuiKit+Test.octest */;
 			remoteInfo = "MuiKit+Test";
 		};
-		1579690911BFB1C200AA504B /* PBXContainerItemProxy */ = {
+		15B4230A11D0F3FA00304CDC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 157968F211BFB1C200AA504B /* MuiKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 153B416C105BEFCA00DB8FB2 /* libMuiKit-Mac.a */;
 			remoteInfo = "MuiKit (Library - Mac OS X)";
 		};
-		1579690B11BFB1E900AA504B /* PBXContainerItemProxy */ = {
+		15B4231C11D0F41A00304CDC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 157968F211BFB1C200AA504B /* MuiKit.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 153B414E105BEFCA00DB8FB2 /* MuiKit (Library - Mac OS X) */;
-			remoteInfo = "MuiKit (Library - Mac OS X)";
+			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2 /* MuiKit (Mac OS X) */;
+			remoteInfo = "MuiKit (Mac OS X)";
 		};
 		15E3A48C113F96FC00F301D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -166,8 +166,8 @@
 		150072E6113967C3007BF995 /* NSAlert+L0Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+L0Alert.h"; sourceTree = "<group>"; };
 		150072E7113967C3007BF995 /* NSAlert+L0Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+L0Alert.m"; sourceTree = "<group>"; };
 		150072E9113967F1007BF995 /* PrereleaseExpired.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrereleaseExpired.alert; sourceTree = "<group>"; };
-		15009758116682B40072DC8C /* MvrBookmarkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrBookmarkItem.h; path = ../iPhone/Classes/MvrBookmarkItem.h; sourceTree = SOURCE_ROOT; };
-		15009759116682B40072DC8C /* MvrBookmarkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrBookmarkItem.m; path = ../iPhone/Classes/MvrBookmarkItem.m; sourceTree = SOURCE_ROOT; };
+		15009758116682B40072DC8C /* MvrBookmarkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrBookmarkItem.h; path = ../iOS/Classes/MvrBookmarkItem.h; sourceTree = SOURCE_ROOT; };
+		15009759116682B40072DC8C /* MvrBookmarkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrBookmarkItem.m; path = ../iOS/Classes/MvrBookmarkItem.m; sourceTree = SOURCE_ROOT; };
 		153DBB341173121800F2080B /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		153DBB4B1173141E00F2080B /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeviceBackdrop.png; sourceTree = "<group>"; };
@@ -182,10 +182,9 @@
 		157280F2113805FA005634C7 /* SpinnerBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SpinnerBackdrop.png; sourceTree = "<group>"; };
 		1574452111343C630088C65E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1574453A11343D090088C65E /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
-		157705D7116619B700EE3C83 /* MvrTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrTextItem.h; path = ../iPhone/Classes/MvrTextItem.h; sourceTree = SOURCE_ROOT; };
-		157705D8116619B700EE3C83 /* MvrTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrTextItem.m; path = ../iPhone/Classes/MvrTextItem.m; sourceTree = SOURCE_ROOT; };
-		157968F211BFB1C200AA504B /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MuiKit.xcodeproj; path = /Volumes/Mithril/Developer/Multiverse/MuiKit/MuiKit.xcodeproj; sourceTree = "<absolute>"; };
-		1579690D11BFB1FC00AA504B /* libMuiKit-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "/Volumes/Mithril/Developer/Multiverse/MuiKit/Build/Debug/libMuiKit-Mac.a"; sourceTree = "<absolute>"; };
+		157705D7116619B700EE3C83 /* MvrTextItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrTextItem.h; path = ../iOS/Classes/MvrTextItem.h; sourceTree = SOURCE_ROOT; };
+		157705D8116619B700EE3C83 /* MvrTextItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrTextItem.m; path = ../iOS/Classes/MvrTextItem.m; sourceTree = SOURCE_ROOT; };
+		157968F211BFB1C200AA504B /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
 		1594394D1133DACB0017B42D /* WaypointLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaypointLogo.png; sourceTree = "<group>"; };
 		1594397D1133E1410017B42D /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		15A3B23611783CA6000876C8 /* MvrConnectFirstTimeFound.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrConnectFirstTimeFound.alert; sourceTree = "<group>"; };
@@ -235,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B4231B11D0F41200304CDC /* libMuiKit-Mac.a in Frameworks */,
 				153DBB431173123E00F2080B /* Sparkle.framework in Frameworks */,
 				15E3A4B3113F972900F301D8 /* libMoverNetwork-Mac.a in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
@@ -244,7 +244,6 @@
 				15CCE821114FFC3400E45AC6 /* QuartzCore.framework in Frameworks */,
 				15D327A71172F48E001DD969 /* AddressBook.framework in Frameworks */,
 				15523DA61173208F00888B09 /* Security.framework in Frameworks */,
-				1579690E11BFB1FC00AA504B /* libMuiKit-Mac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,13 +312,13 @@
 			name = "Item types from iPhone Mover";
 			sourceTree = "<group>";
 		};
-		157968F311BFB1C200AA504B /* Products */ = {
+		15B422FB11D0F3FA00304CDC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1579690411BFB1C200AA504B /* libMuiKit.a */,
-				1579690611BFB1C200AA504B /* MuiKit.bundle */,
-				1579690811BFB1C200AA504B /* MuiKit+Test.octest */,
-				1579690A11BFB1C200AA504B /* libMuiKit-Mac.a */,
+				15B4230511D0F3FA00304CDC /* libMuiKit.a */,
+				15B4230711D0F3FA00304CDC /* MuiKit.bundle */,
+				15B4230911D0F3FA00304CDC /* MuiKit+Test.octest */,
+				15B4230B11D0F3FA00304CDC /* libMuiKit-Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -360,7 +359,6 @@
 		29B97314FDCFA39411CA2CEA /* MoverWaypoint */ = {
 			isa = PBXGroup;
 			children = (
-				1579690D11BFB1FC00AA504B /* libMuiKit-Mac.a */,
 				157968F211BFB1C200AA504B /* MuiKit.xcodeproj */,
 				1594397D1133E1410017B42D /* Network+Storage.xcodeproj */,
 				15F931F5116740BF00AA71AB /* Agent */,
@@ -455,7 +453,7 @@
 			dependencies = (
 				15E3A4A8113F970600F301D8 /* PBXTargetDependency */,
 				15F932A6116749E600AA71AB /* PBXTargetDependency */,
-				1579690C11BFB1E900AA504B /* PBXTargetDependency */,
+				15B4231D11D0F41A00304CDC /* PBXTargetDependency */,
 			);
 			name = "Mover Connect";
 			productInstallPath = "$(HOME)/Applications";
@@ -475,7 +473,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 157968F311BFB1C200AA504B /* Products */;
+					ProductGroup = 15B422FB11D0F3FA00304CDC /* Products */;
 					ProjectRef = 157968F211BFB1C200AA504B /* MuiKit.xcodeproj */;
 				},
 				{
@@ -492,32 +490,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1579690411BFB1C200AA504B /* libMuiKit.a */ = {
+		15B4230511D0F3FA00304CDC /* libMuiKit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libMuiKit.a;
-			remoteRef = 1579690311BFB1C200AA504B /* PBXContainerItemProxy */;
+			remoteRef = 15B4230411D0F3FA00304CDC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		1579690611BFB1C200AA504B /* MuiKit.bundle */ = {
+		15B4230711D0F3FA00304CDC /* MuiKit.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = MuiKit.bundle;
-			remoteRef = 1579690511BFB1C200AA504B /* PBXContainerItemProxy */;
+			remoteRef = 15B4230611D0F3FA00304CDC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		1579690811BFB1C200AA504B /* MuiKit+Test.octest */ = {
+		15B4230911D0F3FA00304CDC /* MuiKit+Test.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "MuiKit+Test.octest";
-			remoteRef = 1579690711BFB1C200AA504B /* PBXContainerItemProxy */;
+			remoteRef = 15B4230811D0F3FA00304CDC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		1579690A11BFB1C200AA504B /* libMuiKit-Mac.a */ = {
+		15B4230B11D0F3FA00304CDC /* libMuiKit-Mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libMuiKit-Mac.a";
-			remoteRef = 1579690911BFB1C200AA504B /* PBXContainerItemProxy */;
+			remoteRef = 15B4230A11D0F3FA00304CDC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */ = {
@@ -617,10 +615,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1579690C11BFB1E900AA504B /* PBXTargetDependency */ = {
+		15B4231D11D0F41A00304CDC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "MuiKit (Library - Mac OS X)";
-			targetProxy = 1579690B11BFB1E900AA504B /* PBXContainerItemProxy */;
+			name = "MuiKit (Mac OS X)";
+			targetProxy = 15B4231C11D0F41A00304CDC /* PBXContainerItemProxy */;
 		};
 		15E3A4A8113F970600F301D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -735,14 +733,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
 					"$(SRCROOT)/..",
-					"$(SRCROOT)/../iPhone/Classes",
+					"$(SRCROOT)/../iOS/Classes",
 				);
 				INFOPLIST_FILE = "Mover Connect-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Volumes/Mithril/Developer/Multiverse/MuiKit/Build/Debug,
-				);
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -771,14 +765,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
 					"$(SRCROOT)/..",
-					"$(SRCROOT)/../iPhone/Classes",
+					"$(SRCROOT)/../iOS/Classes",
 				);
 				INFOPLIST_FILE = "Mover Connect-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Volumes/Mithril/Developer/Multiverse/MuiKit/Build/Debug,
-				);
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_LDFLAGS = (
 					"-all_load",
