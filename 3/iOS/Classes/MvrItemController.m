@@ -127,19 +127,7 @@ static L0Map* MvrItemViewControllerClasses = nil;
 }
 
 - (void) setActionButtonHidden:(BOOL) hidden animated:(BOOL) animated;
-{
-	BOOL anyAvailable = NO;
-	
-	for (MvrItemAction* a in self.actions) {
-		if ([a isAvailableForItem:self.item]) {
-			anyAvailable = YES;
-			break;
-		}
-	}
-	
-	if (!anyAvailable)
-		return;
-	
+{	
 	if (animated)
 		[UIView beginAnimations:nil context:NULL];
 	
@@ -153,6 +141,9 @@ static L0Map* MvrItemViewControllerClasses = nil;
 {
 	[super viewDidLoad];
 	self.draggableView.delegate = self;
+	
+	if (self.item)
+		[self itemDidChange]; // make sure the view is set for the item.
 }
 
 - (void) showActionMenu;

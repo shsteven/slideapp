@@ -21,6 +21,8 @@
 #import "MvrImageItemController.h"
 #import "MvrContactItem.h"
 #import "MvrContactItemController.h"
+#import "MvrTextItem.h"
+#import "MvrTextItemController.h"
 
 #import "MvrVideoItem.h"
 #import "MvrVideoItemController.h"
@@ -76,6 +78,9 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 	
 	[MvrVideoItem registerClass];
 	[MvrVideoItemController registerClass];
+	
+	[MvrTextItem registerClass];
+	[MvrTextItemController registerClass];
 	
 	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort options:kMvrUseMobileService|kMvrAllowBrowsingForConduitService|kMvrAllowConnectionsFromConduitService];
 	

@@ -15,9 +15,14 @@
 	CGAffineTransform startingTransform;
 	
 	id <MvrDraggableViewDelegate> delegate;
+	
+	BOOL draggingDisabledOnScrollViews;
 }
 
 @property(assign) id <MvrDraggableViewDelegate> delegate;
+
+// If YES, panning gestures on scroll views that have scroll enabled will not cause the view to be dragged. By default NO to prevent performance trouble.
+@property(assign) BOOL draggingDisabledOnScrollViews;
 
 @end
 

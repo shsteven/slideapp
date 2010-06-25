@@ -115,4 +115,30 @@
 	}
 }
 
+@synthesize draggingDisabledOnScrollViews;
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+{
+	if (!self.draggingDisabledOnScrollViews)
+		return YES;
+	
+	if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+		
+		UIView* v = [touch view];
+		while (v != self && v != nil) {
+			
+			if ([v isKindOfClass:[UIScrollView class]] && [(id)v isScrollEnabled])
+				return NO;
+			
+			v = v.superview;
+			
+		}
+		
+		return YES;
+		
+	} else
+		return YES;
+
+}
+
 @end

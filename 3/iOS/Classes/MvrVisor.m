@@ -42,14 +42,16 @@
 - (void) viewWillAppear:(BOOL)animated;
 {
 	[super viewWillAppear:animated];
+
+	BOOL change = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone && self.changesStatusBarStyleOnAppearance;
 	
-	if (self.changesStatusBarStyleOnAppearance) {
+	if (change) {
 		UIApplication* app = [UIApplication sharedApplication];
 		previousStatusBarStyle = app.statusBarStyle;
 		[app setStatusBarStyle:self.preferredStatusBarStyle animated:animated];
 	}
 	
-	didChangeStatusBarStyle = self.changesStatusBarStyleOnAppearance;
+	didChangeStatusBarStyle = change;
 }
 
 - (void) viewWillDisappear:(BOOL)animated;

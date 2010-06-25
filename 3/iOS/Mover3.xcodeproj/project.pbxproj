@@ -74,6 +74,9 @@
 		150C418910A48DFB00EBCE51 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 156B0A4C10902FFC00209F2D /* libMoverNetwork.a */; };
 		150C419010A48F7000EBCE51 /* MvrBugFixingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 150C418F10A48F7000EBCE51 /* MvrBugFixingTests.m */; };
 		150F17D810879260009CCAB7 /* MvrMessageOptIn.alert in Resources */ = {isa = PBXBuildFile; fileRef = 150F17D710879260009CCAB7 /* MvrMessageOptIn.alert */; };
+		150FFC5911D521FA000018EC /* MvrTextItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150FFC5711D521FA000018EC /* MvrTextItemController.m */; };
+		150FFC5A11D521FA000018EC /* MvrTextItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 150FFC5811D521FA000018EC /* MvrTextItemController.xib */; };
+		150FFC5C11D5223F000018EC /* TornPaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 150FFC5B11D5223F000018EC /* TornPaper.png */; };
 		151060F11093818D00307C62 /* MvrNoLiteToLiteBT.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151060F01093818D00307C62 /* MvrNoLiteToLiteBT.alert */; };
 		151060F31093819300307C62 /* MvrNoLiteToLiteBTReminder.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151060F21093819300307C62 /* MvrNoLiteToLiteBTReminder.alert */; };
 		151061251093870900307C62 /* MvrNoLiteToLiteBT.strings in Resources */ = {isa = PBXBuildFile; fileRef = 151061211093870900307C62 /* MvrNoLiteToLiteBT.strings */; };
@@ -382,6 +385,10 @@
 		150C418E10A48F7000EBCE51 /* MvrBugFixingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBugFixingTests.h; sourceTree = "<group>"; };
 		150C418F10A48F7000EBCE51 /* MvrBugFixingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBugFixingTests.m; sourceTree = "<group>"; };
 		150F17D710879260009CCAB7 /* MvrMessageOptIn.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrMessageOptIn.alert; sourceTree = "<group>"; };
+		150FFC5611D521FA000018EC /* MvrTextItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrTextItemController.h; sourceTree = "<group>"; };
+		150FFC5711D521FA000018EC /* MvrTextItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTextItemController.m; sourceTree = "<group>"; };
+		150FFC5811D521FA000018EC /* MvrTextItemController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTextItemController.xib; sourceTree = "<group>"; };
+		150FFC5B11D5223F000018EC /* TornPaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TornPaper.png; sourceTree = SOURCE_ROOT; };
 		151060F01093818D00307C62 /* MvrNoLiteToLiteBT.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoLiteToLiteBT.alert; sourceTree = "<group>"; };
 		151060F21093819300307C62 /* MvrNoLiteToLiteBTReminder.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoLiteToLiteBTReminder.alert; sourceTree = "<group>"; };
 		151061221093870900307C62 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoLiteToLiteBT.strings; sourceTree = "<group>"; };
@@ -798,6 +805,17 @@
 				150C418F10A48F7000EBCE51 /* MvrBugFixingTests.m */,
 			);
 			name = "Tests for Bug Fixes";
+			sourceTree = "<group>";
+		};
+		150FFC5511D521E8000018EC /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				150FFC5611D521FA000018EC /* MvrTextItemController.h */,
+				150FFC5711D521FA000018EC /* MvrTextItemController.m */,
+				150FFC5811D521FA000018EC /* MvrTextItemController.xib */,
+				150FFC5B11D5223F000018EC /* TornPaper.png */,
+			);
+			name = Text;
 			sourceTree = "<group>";
 		};
 		151E01FE1067652600C6CDFF /* Items */ = {
@@ -1262,6 +1280,7 @@
 				15C86B3D11BE73B10046CFC0 /* Images & Videos */,
 				15C86B3111BE734E0046CFC0 /* Contacts */,
 				15C86B1F11BE72D90046CFC0 /* Generic Items */,
+				150FFC5511D521E8000018EC /* Text */,
 				15C86B1811BE72BF0046CFC0 /* MvrItemController.h */,
 				15C86B1911BE72BF0046CFC0 /* MvrItemController.m */,
 				15C86B1A11BE72BF0046CFC0 /* MvrItemAction.h */,
@@ -1776,6 +1795,8 @@
 				15CF7BC311CE94EB0010EA06 /* ProgressOver.caf in Resources */,
 				15CF7BC411CE94EB0010EA06 /* ProgressPing.caf in Resources */,
 				15CF7C1F11CE9E650010EA06 /* ProgressOverFailure.caf in Resources */,
+				150FFC5A11D521FA000018EC /* MvrTextItemController.xib in Resources */,
+				150FFC5C11D5223F000018EC /* TornPaper.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2010,6 +2031,7 @@
 				15A7143B11CB698100BB9759 /* MvrStorage+iOSStandardInit.m in Sources */,
 				1541D14011CD375E0061D150 /* MvrProgressReportPart.m in Sources */,
 				15CF7B9711CE90290010EA06 /* MvrSoundEffects.m in Sources */,
+				150FFC5911D521FA000018EC /* MvrTextItemController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

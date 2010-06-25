@@ -64,4 +64,9 @@
 	textView.contentOffset = CGPointMake(0, -topInset);
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
+{
+	return YES;
+}
+
 @end
