@@ -25,6 +25,8 @@
 
 #import "MvrSoundEffects.h"
 
+#import "MvrDirectoryWatcher.h"
+
 #import <GameKit/GameKit.h>
 
 @interface MvrAppDelegate_iPad : NSObject <
@@ -48,7 +50,8 @@
 	id <MvrScanner> currentScanner;
 	
 	MvrMessageChecker* messageChecker;
-	BOOL shouldMonitorDirectory;
+
+	MvrDirectoryWatcher* itemsDirectoryWatcher;
 	
 	MvrTellAFriendController* tellAFriend;
 	

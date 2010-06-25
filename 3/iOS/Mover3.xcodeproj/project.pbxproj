@@ -128,6 +128,7 @@
 		1556CB5111735E4400B7C68D /* MvrLiteNeedConnectPackForPreviewableItems.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1556CB4F11735E4400B7C68D /* MvrLiteNeedConnectPackForPreviewableItems.strings */; };
 		155F650411633EFA00FC526E /* StoreTableViewCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 155F650311633EFA00FC526E /* StoreTableViewCell.png */; };
 		155F65151163415800FC526E /* StoreTableViewCell_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 155F65141163415800FC526E /* StoreTableViewCell_Highlighted.png */; };
+		1565BE9911D54911000B26A7 /* MvrDirectoryWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1565BE9811D54911000B26A7 /* MvrDirectoryWatcher.m */; };
 		1567511410620DF7006EC706 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511310620DF7006EC706 /* libz.1.1.3.dylib */; };
 		1567511610620DFC006EC706 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511510620DFC006EC706 /* SystemConfiguration.framework */; };
 		1567511810620E01006EC706 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1567511710620E01006EC706 /* CFNetwork.framework */; };
@@ -464,6 +465,8 @@
 		1556CB5011735E4400B7C68D /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrLiteNeedConnectPackForPreviewableItems.strings; sourceTree = "<group>"; };
 		155F650311633EFA00FC526E /* StoreTableViewCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoreTableViewCell.png; sourceTree = "<group>"; };
 		155F65141163415800FC526E /* StoreTableViewCell_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StoreTableViewCell_Highlighted.png; sourceTree = "<group>"; };
+		1565BE9711D54911000B26A7 /* MvrDirectoryWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDirectoryWatcher.h; sourceTree = "<group>"; };
+		1565BE9811D54911000B26A7 /* MvrDirectoryWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDirectoryWatcher.m; sourceTree = "<group>"; };
 		156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Network+Storage.xcodeproj"; path = "../Network+Storage/Network+Storage.xcodeproj"; sourceTree = "<group>"; };
 		1567511310620DF7006EC706 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		1567511510620DFC006EC706 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -773,6 +776,8 @@
 				15A7143911CB698100BB9759 /* MvrStorage+iOSStandardInit.h */,
 				15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */,
 				15CF7B9D11CE91F80010EA06 /* SFX */,
+				1565BE9711D54911000B26A7 /* MvrDirectoryWatcher.h */,
+				1565BE9811D54911000B26A7 /* MvrDirectoryWatcher.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2032,6 +2037,7 @@
 				1541D14011CD375E0061D150 /* MvrProgressReportPart.m in Sources */,
 				15CF7B9711CE90290010EA06 /* MvrSoundEffects.m in Sources */,
 				150FFC5911D521FA000018EC /* MvrTextItemController.m in Sources */,
+				1565BE9911D54911000B26A7 /* MvrDirectoryWatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

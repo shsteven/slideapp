@@ -30,11 +30,6 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
 
-#import <fcntl.h>
-#import <sys/types.h>
-#import <sys/event.h>
-#import <sys/time.h>
-
 static inline BOOL MvrIsDirectory(NSString* path) {
 	BOOL exists, isDir;
 	exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
@@ -48,13 +43,12 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 - (void) clearInbox;
 
 - (void) beginMonitoringItemsDirectory;
-- (void) cancelMonitoringItemsDirectory;
-- (void) scheduleItemsDirectorySweep;
-- (void) performItemsDirectorySweep;
 
 - (void) setCurrentScanner:(id <MvrScanner>) s;
 
 - (void) clearGameKitPicker;
+
+- (void) performItemsDirectorySweep:(MvrDirectoryWatcher *)w;
 
 @end
 
@@ -113,7 +107,7 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 	
 // ------------- Begin monitoring Documents for File Sharing
 	[self beginMonitoringItemsDirectory];
-	[self performItemsDirectorySweep];
+	[self performItemsDirectorySweep:nil];
 	
 	return YES;
 }
@@ -263,82 +257,19 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 - (void) beginMonitoringItemsDirectory;
 {
-	@synchronized(self) {
-		shouldMonitorDirectory = YES;
-	}
+	if (!itemsDirectoryWatcher)
+		itemsDirectoryWatcher = [[MvrDirectoryWatcher alloc] initForDirectoryAtPath:[[self.storage.itemsDirectory copy] autorelease] target:self selector:@selector(scheduleItemsDirectorySweep:)];
 	
-	[NSThread detachNewThreadSelector:@selector(runKQueueToMonitorDirectory:) toTarget:self withObject:[[self.storage.itemsDirectory copy] autorelease]];
+	[itemsDirectoryWatcher start];
 }
 
-- (BOOL) shouldMonitorDirectory;
-{
-	BOOL d;
-	@synchronized(self) {
-		d = shouldMonitorDirectory;
-	}
-	return d;
-}
-
-- (void) cancelMonitoringItemsDirectory;
-{
-	@synchronized(self) {
-		shouldMonitorDirectory = NO;
-	}
-}
-
-- (void) runKQueueToMonitorDirectory:(NSString*) dir;
-{
-	NSAutoreleasePool* pool = [NSAutoreleasePool new];
-	
-	int fdes = -1, kq = -1;
-	
-	fdes = open([dir fileSystemRepresentation], O_RDONLY);
-	if (fdes == -1)
-		goto cleanup;
-	
-	kq = kqueue();
-	if (kq == -1)
-		goto cleanup;
-	
-	struct kevent toMonitor;
-	EV_SET(&toMonitor, fdes, EVFILT_VNODE, EV_ADD | EV_ENABLE | EV_ONESHOT,
-		   NOTE_WRITE | NOTE_EXTEND | NOTE_DELETE,
-		   0, 0);
-	
-	while ([self shouldMonitorDirectory]) {
-		NSAutoreleasePool* innerPool = [NSAutoreleasePool new];
-		
-		const struct timespec time = { 1, 0 };
-		struct kevent event;
-
-		int result = kevent(kq, &toMonitor, 1, &event, 1, &time);
-		
-		if (result > 0)
-			[self performSelectorOnMainThread:@selector(scheduleItemsDirectorySweep) withObject:nil waitUntilDone:NO];
-		
-		[innerPool release];
-		
-		if (result == -1)
-			break;
-	}
-	
-cleanup:
-	if (kq != -1)
-		close(kq);
-	
-	if (fdes != -1)
-		close(fdes);
-	
-	[pool release];
-}
-
-- (void) scheduleItemsDirectorySweep;
+- (void) scheduleItemsDirectorySweep:(MvrDirectoryWatcher*) w;
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(performItemsDirectorySweep) object:nil];
-	[self performSelector:@selector(performItemsDirectorySweep) withObject:nil afterDelay:2.0];
+	[self performSelector:@selector(performItemsDirectorySweep:) withObject:w afterDelay:2.0];
 }
 
-- (void) performItemsDirectorySweep;
+- (void) performItemsDirectorySweep:(MvrDirectoryWatcher*) w;
 {
 	L0Note();
 	
