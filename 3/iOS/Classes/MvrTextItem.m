@@ -78,4 +78,14 @@ MvrItemSynthesizeCopyFromAutocache(NSString*, text, private_setText:)
 	return [self.text dataUsingEncoding:enc];
 }
 
++ (NSDictionary *) knownFallbackPathExtensions;
+{
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			@"txt", (id) kUTTypePlainText,
+			@"txt", (id) kUTTypeUTF8PlainText,
+			@"txt", (id) kUTTypeUTF16PlainText,
+			@"txt", (id) kUTTypeUTF16ExternalPlainText,
+			nil];
+}
+
 @end
