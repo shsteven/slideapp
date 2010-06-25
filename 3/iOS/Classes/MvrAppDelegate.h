@@ -25,6 +25,8 @@
 
 #import "MvrFeatures.h"
 
+#import "MvrDirectoryWatcher.h"
+
 @protocol MvrAppServices <MvrPlatformInfo>
 
 - (void) presentModalViewController:(UIViewController*) ctl;
@@ -61,6 +63,8 @@
 	MvrTellAFriendController* tellAFriend;
 	MvrCrashReporting* crashReporting;
 	MvrMessageChecker* messageChecker;
+	
+	MvrDirectoryWatcher* itemsDirectoryWatcher;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow *window;

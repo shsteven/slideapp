@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "MvrStorage.h"
 
+extern BOOL MvrIsDirectory(NSString* path);
+
 @interface MvrStorage (MvrOSStandardInit)
 
 + iOSStorage;

@@ -8,6 +8,12 @@
 
 #import "MvrStorage+iOSStandardInit.h"
 
+BOOL MvrIsDirectory(NSString* path) {
+	BOOL exists, isDir;
+	exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
+	return exists && isDir;
+}
+
 #define kMvrItemsMetadataUserDefaultsKey @"L0SlidePersistedItems"
 
 @implementation MvrStorage (MvriOSStandardInit)

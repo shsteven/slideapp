@@ -30,12 +30,6 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
 
-static inline BOOL MvrIsDirectory(NSString* path) {
-	BOOL exists, isDir;
-	exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir];
-	return exists && isDir;
-}
-		
 @interface MvrAppDelegate_iPad ()
 
 - (void) openFileAtPath:(NSString *)path;
@@ -265,7 +259,7 @@ static inline BOOL MvrIsDirectory(NSString* path) {
 
 - (void) scheduleItemsDirectorySweep:(MvrDirectoryWatcher*) w;
 {
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(performItemsDirectorySweep) object:nil];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(performItemsDirectorySweep:) object:nil];
 	[self performSelector:@selector(performItemsDirectorySweep:) withObject:w afterDelay:2.0];
 }
 

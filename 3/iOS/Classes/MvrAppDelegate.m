@@ -58,6 +58,11 @@
 - (BOOL) performActionsForURL:(NSURL*) url;
 - (void) addByOpeningFileAtPath:(NSString *)path;
 
+- (void) setUpDirectoryWatching;
+- (void) addItemForUnidentifiedFileAtPath:(NSString *)path;
+- (void) performItemsDirectorySweep:(MvrDirectoryWatcher *)w;
+- (void) scheduleItemsDirectorySweep:(MvrDirectoryWatcher *)w;
+
 @end
 
 #define kMvrAppDelegateRemoveButtonIdentifier @"kMvrAppDelegateRemoveButtonIdentifier"
@@ -123,6 +128,8 @@ enum {
 	NSURL* url = [options objectForKey:UIApplicationLaunchOptionsURLKey];
 	if (!ok && url && ![url isFileURL])
 		ok = [self performActionsForURL:url];
+	
+	[self setUpDirectoryWatching];
 	
 	return !url || [url isFileURL] || ok;
 }
@@ -352,6 +359,70 @@ enum {
 	MvrItem* i = [MvrItem itemForUnidentifiedFileAtPath:path options:0];
 	if (i)
 		[self addItemFromSelf:i];
+}
+
+#pragma mark -
+#pragma mark Directory watching.
+
+- (void) setUpDirectoryWatching;
+{
+	if (!itemsDirectoryWatcher)
+		itemsDirectoryWatcher = [[MvrDirectoryWatcher alloc] initForDirectoryAtPath:self.itemsDirectory target:self selector:@selector(scheduleItemsDirectorySweep:)];
+	
+	[itemsDirectoryWatcher start];
+}
+
+- (void) scheduleItemsDirectorySweep:(MvrDirectoryWatcher*) w;
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(performItemsDirectorySweep:) object:nil];
+	[self performSelector:@selector(performItemsDirectorySweep:) withObject:w afterDelay:2.0];
+}
+
+- (void) performItemsDirectorySweep:(MvrDirectoryWatcher*) w;
+{
+	L0Note();
+	
+	NSFileManager* fm = [NSFileManager defaultManager];
+	
+	NSString* idir = self.itemsDirectory;
+	
+	for (NSString* item in [fm contentsOfDirectoryAtPath:self.itemsDirectory error:NULL]) {
+		if ([item hasPrefix:@"."])
+			continue; // no hidden files.
+		
+		NSString* fullPath = [idir stringByAppendingPathComponent:item];
+		
+		if (MvrIsDirectory(fullPath))
+			L0Log(@"Skipping %@ -- is a directory", fullPath);
+		else if ([self.storageCentral hasItemForFileAtPath:fullPath])
+			L0Log(@"Skipping %@ -- is already known", fullPath);
+		else { // if (!MvrIsDirectory(fullPath) && ![self.storage hasItemForFileAtPath:fullPath])
+			L0Log(@"Adding new file %@", fullPath);
+			[self addItemForUnidentifiedFileAtPath:fullPath];
+		}
+	}
+	
+	for (MvrItem* i in [[self.storageCentral.storedItems copy] autorelease]) {
+		if (i.storage.hasPath && ![fm fileExistsAtPath:i.storage.path]) {
+			[self.tableController removeItem:i];
+			[self.storageCentral removeStoredItemsObject:i];
+		}
+	}
+}
+
+- (void) addItemForUnidentifiedFileAtPath:(NSString*) path;
+{
+	BOOL shouldMakePersistent = ([[[path stringByDeletingLastPathComponent] stringByStandardizingPath] isEqual:[self.storageCentral.itemsDirectory stringByStandardizingPath]]);
+	
+	MvrItem* i = [MvrItem itemForUnidentifiedFileAtPath:path options:shouldMakePersistent? kMvrItemStorageIsPersistent : kMvrItemStorageCanMoveOrDeleteFile];
+	if (i) {
+		if (i.storage.persistent)
+			[self.storageCentral adoptPersistentItem:i];
+		else
+			[self.storageCentral addStoredItemsObject:i];
+	}
+	
+	[self.tableController addItem:i animated:YES];
 }
 
 #pragma mark -
