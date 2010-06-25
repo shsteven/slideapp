@@ -27,6 +27,8 @@
 - (void) makeMetadataFileForItem:(MvrItem*) i;
 - (NSString*) userVisibleFilenameForItem:(MvrItem*) i;
 
+- (NSString *) filenameForUserVisibleString:(NSString *)str;
+
 @end
 
 
@@ -182,6 +184,13 @@
 	[itemMeta writeToFile:path atomically:YES];
 }
 
+- (NSString*) filenameForUserVisibleString:(NSString*) str;
+{
+	str = [str stringByReplacingOccurrencesOfString:@":" withString:@"-"];
+	str = [str stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
+	return str;
+}
+
 - (NSString*) userVisibleFilenameForItem:(MvrItem*) i;
 {
 	// step one: does this have a filename? return it then.
@@ -218,8 +227,13 @@
 		
 			// step two: do we know where it's from? then we use "From %@.xxx".
 			// TODO see if this sanitation is sufficient.
-			NSString* whereFrom = [[i objectForItemNotesKey:kMvrItemWhereFromNoteKey] stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
-			if (whereFrom)
+			NSString* whereFrom = [self filenameForUserVisibleString:[i objectForItemNotesKey:kMvrItemWhereFromNoteKey]];
+			
+			NSString* title = [self filenameForUserVisibleString:[i title]];
+			
+			if (title && ![title isEqual:@""])
+				filename = [NSString stringWithFormat:@"%@.%@", title, ext];
+			else if (whereFrom)
 				filename = [NSString stringWithFormat:NSLocalizedString(@"From %@.%@", @"Format for file name as in 'from DEVICE'."), whereFrom, ext];
 			else
 				filename = [NSString stringWithFormat:NSLocalizedString(@"Item.%@", @"Generic item filename"), ext];
