@@ -62,7 +62,7 @@
 	
 	if (titleView) {
 		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:animated? 0.5 : 0];
+		[UIView setAnimationDuration:animated? (hidden? 0.5 : 0.2) : 0];
 	
 		titleView.alpha = hidden? 1.0 : 0.0;
 		
