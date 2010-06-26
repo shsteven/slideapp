@@ -27,7 +27,7 @@ enum {
 };
 typedef NSInteger MvrItemSourceType;
 
-@interface MvrTableController_iPad : ILViewController <MvrItemsTable, MvrScannerObserverDelegate, MvrAddPaneDelegate, MvrProgressReportPartDelegate> {
+@interface MvrTableController_iPad : ILViewController <MvrItemsTable, MvrScannerObserverDelegate, MvrAddPaneDelegate, MvrProgressReportPartDelegate, UIPopoverControllerDelegate> {
 	BOOL inited;
 	
 	IBOutlet UIImageView* backdropImageView;

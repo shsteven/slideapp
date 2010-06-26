@@ -1,4 +1,4 @@
-    //
+//
 //  MvrWiFiNetworkStatePane.m
 //  Mover3
 //
@@ -9,12 +9,43 @@
 #import "MvrWiFiNetworkStatePane.h"
 
 #import "MvrAppDelegate_iPad.h"
+#import "Network+Storage/MvrScanner.h"
+
+@interface MvrWiFiNetworkStatePane ()
+
+- (void) updateState;
+
+@end
+
+
 
 @implementation MvrWiFiNetworkStatePane
+
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+{
+	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+		
+		obs = [[MvrScannerObserver alloc] initWithScanner:MvrApp_iPad().wifi delegate:self];
+		
+	}
+	
+	return self;
+}
+
+- (void) dealloc
+{
+	[obs release];
+	[super dealloc];
+}
+
 
 - (void) viewDidLoad;
 {
 	[super viewDidLoad];
+	
+	[self addManagedOutletKeys:
+	 @"stateLabel", @"stateImage",
+	 nil];
 	
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DrawerBackdrop.png"]];
 }
@@ -27,6 +58,42 @@
 - (IBAction) switchToBluetooth;
 {
 	[MvrApp_iPad() switchToBluetooth];
+}
+
+- (void) scanner:(id <MvrScanner>)s didChangeEnabledKey:(BOOL)enabled;
+{
+	[self updateState];
+}
+
+- (void) scanner:(id <MvrScanner>)s didChangeJammedKey:(BOOL)jammed;
+{
+	[self updateState];
+}
+
+- (void) viewWillAppear:(BOOL)animated;
+{
+	[super viewWillAppear:animated];
+	[self updateState];
+}
+
+- (void) updateState;
+{
+	id <MvrScanner> s = MvrApp_iPad().wifi;
+	
+	if (!s.enabled)
+		return;	
+
+	if (!s.jammed) {
+		
+		stateLabel.text = NSLocalizedString(@"Wi-Fi On", @"Wi-Fi unjammed text");
+		stateImage.image = [UIImage imageNamed:@"GreenDot.png"];
+		
+	} else {
+		
+		stateLabel.text = NSLocalizedString(@"Wi-Fi Disconnected", @"Wi-Fi jammed text");
+		stateImage.image = [UIImage imageNamed:@"RedDot.png"];
+		
+	}
 }
 
 @end

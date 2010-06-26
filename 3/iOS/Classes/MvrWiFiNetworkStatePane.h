@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ILViewController.h"
+#import "Network+Storage/MvrScannerObserver.h"
 
-@interface MvrWiFiNetworkStatePane : ILViewController {
-
+@interface MvrWiFiNetworkStatePane : ILViewController <MvrScannerObserverDelegate> {
+	MvrScannerObserver* obs;
+	
+	IBOutlet UILabel* stateLabel;
+	IBOutlet UIImageView* stateImage;
 }
 
 - (IBAction) switchToBluetooth;

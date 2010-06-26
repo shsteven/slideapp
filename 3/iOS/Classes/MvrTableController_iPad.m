@@ -710,6 +710,7 @@ typedef NSInteger MvrEdge;
 	if (!networkPopover) {
 		MvrWiFiNetworkStatePane* networkPane = [[MvrWiFiNetworkStatePane new] autorelease];
 		networkPopover = [[UIPopoverController alloc] initWithContentViewController:networkPane];
+		networkPopover.delegate = self;
 	}
 	
 	[networkPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
@@ -737,8 +738,6 @@ typedef NSInteger MvrEdge;
 	progressReportPart = [[MvrProgressReportPart alloc] init];
 	progressReportPart.delegate = self;
 }
-
-#warning TODO animation.
 
 - (void) progressReportPartShouldDisplay:(MvrProgressReportPart*) part;
 {
@@ -789,6 +788,20 @@ typedef NSInteger MvrEdge;
 {
 	[progressReportPart.view removeFromSuperview];
 	isHidingProgressReport = NO;
+}
+
+#pragma mark Jamming report
+
+- (void) scanner:(id <MvrScanner>)s didChangeJammedKey:(BOOL)jammed;
+{
+	// we might be called at app startup, so we just enqueue the call.
+	if ([s isKindOfClass:[MvrModernWiFi class]] && jammed)
+		[self performSelectorOnMainThread:@selector(showNetworkPopover:) withObject:networkBarItem waitUntilDone:NO];
+}
+
+- (BOOL) popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController;
+{
+	return !(popoverController == networkPopover && [MvrApp_iPad().currentScanner isKindOfClass:[MvrModernWiFi class]] && MvrApp_iPad().currentScanner.jammed);
 }
 
 @end
