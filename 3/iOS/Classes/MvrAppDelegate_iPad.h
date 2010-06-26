@@ -59,6 +59,8 @@
 	
 	GKPeerPickerController* picker;
 	BOOL didPickBluetoothChannel;
+	
+	BOOL didShowNetworkTroubleAlert;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow* window;

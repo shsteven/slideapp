@@ -78,6 +78,8 @@
 	
 	observer = [[MvrScannerObserver alloc] initWithScanner:wifi delegate:self];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOfNetworkTrouble:) name:kMvrModernWiFiDifficultyStartingListenerNotification object:nil];
+	
 	wifi.enabled = YES;
 	
 // ------------- SETUP: Messages From The Cloud
@@ -118,6 +120,25 @@
 	[self clearInbox];
 	
 	return YES;	
+}
+
+- (void) notifyOfNetworkTrouble:(NSNotification*) n;
+{
+	if (!didShowNetworkTroubleAlert) {
+		[[UIAlertView alertNamed:@"MvrNetworkTrouble"] show];
+		didShowNetworkTroubleAlert = YES;
+	}
+	
+	if (wifi.enabled) {
+		wifi.enabled = NO;
+		[self performSelector:@selector(reenableWiFi) withObject:nil afterDelay:2.0];
+	}
+}
+
+- (void) reenableWiFi;
+{
+	if (self.currentScanner == wifi)
+		wifi.enabled = YES;
 }
 
 - (void) openFileAtPath:(NSString*) path;
