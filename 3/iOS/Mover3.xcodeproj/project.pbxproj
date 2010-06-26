@@ -1900,7 +1900,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$ILABS_MOVER_VARIANT_HAS_RESOURCES\" == \"YES\" ]; then\n\trsync -av \"$SRCROOT\"/Variants/Current/VariantResources/* \"$BUILT_PRODUCTS_DIR\"/\"$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nelse\n\techo \"note: Copying variant resources not enabled for this variant.\" >&2\nfi\n";
+			shellScript = "exit 0\n\nif [ \"$ILABS_MOVER_VARIANT_HAS_RESOURCES\" == \"YES\" ]; then\n\trsync -av \"$SRCROOT\"/Variants/Current/VariantResources/* \"$BUILT_PRODUCTS_DIR\"/\"$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nelse\n\techo \"note: Copying variant resources not enabled for this variant.\" >&2\nfi\n";
 		};
 		15BF3F3C116088E5001EC1BC /* Build StoreUI & Copy Resources */ = {
 			isa = PBXShellScriptBuildPhase;
