@@ -89,7 +89,7 @@
 
 - (void) startListening;
 {
-	NSError* e;
+	NSError* e = nil;
 	if (![serverSocket acceptOnPort:serverPort error:&e]) {		
 		L0LogAlways(@"Having difficulty accepting modern connections on port %d, retrying shortly: %@", serverPort, e);
 		[[NSNotificationCenter defaultCenter] postNotificationName:kMvrModernWiFiDifficultyStartingListenerNotification object:self];
