@@ -19,13 +19,14 @@
 
 #import "MvrImageItem.h"
 #import "MvrImageItemController.h"
+#import "MvrVideoItem.h"
+#import "MvrVideoItemController.h"
 #import "MvrContactItem.h"
 #import "MvrContactItemController.h"
 #import "MvrTextItem.h"
 #import "MvrTextItemController.h"
-
-#import "MvrVideoItem.h"
-#import "MvrVideoItemController.h"
+#import "MvrBookmarkItem.h"
+#import "MvrBookmarkItemController.h"
 
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
@@ -69,6 +70,9 @@
 	
 	[MvrTextItem registerClass];
 	[MvrTextItemController registerClass];
+	
+	[MvrBookmarkItem registerClass];
+	[MvrBookmarkItemController registerClass];
 	
 	wifi = [[MvrModernWiFi alloc] initWithPlatformInfo:self serverPort:kMvrModernWiFiPort options:kMvrUseMobileService|kMvrAllowBrowsingForConduitService|kMvrAllowConnectionsFromConduitService];
 	

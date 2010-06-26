@@ -83,6 +83,10 @@
 		151061261093870900307C62 /* MvrNoLiteToLiteBTReminder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 151061231093870900307C62 /* MvrNoLiteToLiteBTReminder.strings */; };
 		15125AF31090308C002009A5 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 156B0A4C10902FFC00209F2D /* libMoverNetwork.a */; };
 		151D0AC11077A289009DAE07 /* MvrContactIsADuplicate.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */; };
+		151DA42411D5DB89007611A1 /* MvrBookmarkItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 151DA42211D5DB89007611A1 /* MvrBookmarkItemController.m */; };
+		151DA42511D5DB89007611A1 /* MvrBookmarkItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151DA42311D5DB89007611A1 /* MvrBookmarkItemController.xib */; };
+		151DA44711D5DC47007611A1 /* BookmarkItemView.png in Resources */ = {isa = PBXBuildFile; fileRef = 151DA44611D5DC47007611A1 /* BookmarkItemView.png */; };
+		151DA44911D5DEA4007611A1 /* SmallCompass.png in Resources */ = {isa = PBXBuildFile; fileRef = 151DA44811D5DEA4007611A1 /* SmallCompass.png */; };
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
@@ -395,6 +399,11 @@
 		151061221093870900307C62 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoLiteToLiteBT.strings; sourceTree = "<group>"; };
 		151061241093870900307C62 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoLiteToLiteBTReminder.strings; sourceTree = "<group>"; };
 		151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrContactIsADuplicate.alert; sourceTree = "<group>"; };
+		151DA42111D5DB89007611A1 /* MvrBookmarkItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBookmarkItemController.h; sourceTree = "<group>"; };
+		151DA42211D5DB89007611A1 /* MvrBookmarkItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBookmarkItemController.m; sourceTree = "<group>"; };
+		151DA42311D5DB89007611A1 /* MvrBookmarkItemController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrBookmarkItemController.xib; sourceTree = "<group>"; };
+		151DA44611D5DC47007611A1 /* BookmarkItemView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BookmarkItemView.png; sourceTree = SOURCE_ROOT; };
+		151DA44811D5DEA4007611A1 /* SmallCompass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallCompass.png; sourceTree = SOURCE_ROOT; };
 		151E01FF1067652E00C6CDFF /* MvrImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageItem.h; sourceTree = "<group>"; };
 		151E02001067652E00C6CDFF /* MvrImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItem.m; sourceTree = "<group>"; };
 		151E021E106767A900C6CDFF /* MvrImageItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImageItemUI.h; sourceTree = "<group>"; };
@@ -821,6 +830,18 @@
 				150FFC5B11D5223F000018EC /* TornPaper.png */,
 			);
 			name = Text;
+			sourceTree = "<group>";
+		};
+		151DA42011D5DB70007611A1 /* Bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				151DA42111D5DB89007611A1 /* MvrBookmarkItemController.h */,
+				151DA42211D5DB89007611A1 /* MvrBookmarkItemController.m */,
+				151DA42311D5DB89007611A1 /* MvrBookmarkItemController.xib */,
+				151DA44611D5DC47007611A1 /* BookmarkItemView.png */,
+				151DA44811D5DEA4007611A1 /* SmallCompass.png */,
+			);
+			name = Bookmarks;
 			sourceTree = "<group>";
 		};
 		151E01FE1067652600C6CDFF /* Items */ = {
@@ -1286,6 +1307,7 @@
 				15C86B3111BE734E0046CFC0 /* Contacts */,
 				15C86B1F11BE72D90046CFC0 /* Generic Items */,
 				150FFC5511D521E8000018EC /* Text */,
+				151DA42011D5DB70007611A1 /* Bookmarks */,
 				15C86B1811BE72BF0046CFC0 /* MvrItemController.h */,
 				15C86B1911BE72BF0046CFC0 /* MvrItemController.m */,
 				15C86B1A11BE72BF0046CFC0 /* MvrItemAction.h */,
@@ -1802,6 +1824,9 @@
 				15CF7C1F11CE9E650010EA06 /* ProgressOverFailure.caf in Resources */,
 				150FFC5A11D521FA000018EC /* MvrTextItemController.xib in Resources */,
 				150FFC5C11D5223F000018EC /* TornPaper.png in Resources */,
+				151DA42511D5DB89007611A1 /* MvrBookmarkItemController.xib in Resources */,
+				151DA44711D5DC47007611A1 /* BookmarkItemView.png in Resources */,
+				151DA44911D5DEA4007611A1 /* SmallCompass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2038,6 +2063,7 @@
 				15CF7B9711CE90290010EA06 /* MvrSoundEffects.m in Sources */,
 				150FFC5911D521FA000018EC /* MvrTextItemController.m in Sources */,
 				1565BE9911D54911000B26A7 /* MvrDirectoryWatcher.m in Sources */,
+				151DA42411D5DB89007611A1 /* MvrBookmarkItemController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

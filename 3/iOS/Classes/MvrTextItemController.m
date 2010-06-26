@@ -73,13 +73,20 @@
 - (NSArray *) defaultActions;
 {
 	return [NSArray arrayWithObjects:
-			[MvrItemAction actionWithDisplayName:NSLocalizedString(@"Show", @"Show button") block:^(MvrItem* i) {
+			[MvrItemAction actionWithDisplayName:NSLocalizedString(@"Show", @"Show action") block:^(MvrItem* i) {
 				
 				UIViewController* visor = [MvrTextVisor modalVisorWithItem:i];
 				visor.modalPresentationStyle = UIModalPresentationPageSheet;
 				[MvrApp_iPad() presentModalViewController:visor];
 				
 			}],
+			
+			[MvrItemAction actionWithDisplayName:NSLocalizedString(@"Copy", @"Copy action") block:^(MvrItem* i) {
+		
+				[UIPasteboard generalPasteboard].string = [(MvrTextItem*)i text];
+		
+			}],
+			
 			[self showOpeningOptionsMenuAction],
 			nil];
 }
