@@ -10,7 +10,8 @@
 #import "MvrTextItem.h"
 #import "MvrAppDelegate.h"
 #import "MvrTextVisor.h"
-#import "MvrSwapKitSendToAction.h"
+//#import "MvrSwapKitSendToAction.h"
+#import "MvrDocumentOpenAction.h"
 
 @implementation MvrTextItemUI
 
@@ -49,8 +50,8 @@
 {
 	return [NSArray arrayWithObjects:
 			[self clipboardAction],
+			[MvrDocumentOpenAction openAction],
 			[self sendByEmailAction],
-			[MvrSwapKitSendToAction sendToAction],
 			nil];
 }
 

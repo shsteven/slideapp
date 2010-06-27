@@ -91,10 +91,4 @@
 			nil];
 }
 
-- (void) didPrepareDocumentInteractionController:(UIDocumentInteractionController *)d;
-{
-	[super didPrepareDocumentInteractionController:d];
-	d.UTI = (id) kUTTypeText;
-}
-
 @end

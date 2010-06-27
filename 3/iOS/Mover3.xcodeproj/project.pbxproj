@@ -92,6 +92,7 @@
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
 		1522444010CAB0C600ACF91B /* MvrImageVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */; };
 		1522444110CAB0C600ACF91B /* MvrTextVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */; };
+		152D460711D79E7100A4DC2E /* MvrDocumentOpenAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 152D460611D79E7100A4DC2E /* MvrDocumentOpenAction.m */; };
 		1531319110837AC100D28022 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		1531319910837C2C00D28022 /* AboutPaneHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531319810837C2C00D28022 /* AboutPaneHeader.png */; };
 		1531323510838F3400D28022 /* inflabs_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531323310838F3400D28022 /* inflabs_dark.png */; };
@@ -412,6 +413,8 @@
 		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
 		1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrImageVisor.xib; sourceTree = "<group>"; };
 		1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTextVisor.xib; sourceTree = "<group>"; };
+		152D460511D79E7100A4DC2E /* MvrDocumentOpenAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDocumentOpenAction.h; sourceTree = "<group>"; };
+		152D460611D79E7100A4DC2E /* MvrDocumentOpenAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDocumentOpenAction.m; sourceTree = "<group>"; };
 		1531318F10837AC100D28022 /* MvrAboutPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAboutPane.h; sourceTree = "<group>"; };
 		1531319010837AC100D28022 /* MvrAboutPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAboutPane.m; sourceTree = "<group>"; };
 		1531319810837C2C00D28022 /* AboutPaneHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AboutPaneHeader.png; path = Theme/AboutPaneHeader.png; sourceTree = "<group>"; };
@@ -778,15 +781,8 @@
 				1591A7081063ECE200C5A5BD /* The Table */,
 				158A5F09106A6659008C6801 /* Modes */,
 				15CB30901084C76D00CB285F /* Accessibility */,
-				15D91B4A1092548500D8BAA9 /* MvrUpsellController.h */,
-				15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */,
-				15BCFB5811C78592005EA90C /* MvrItem+UnidentifiedFileAdding.h */,
-				15BCFB5911C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m */,
-				15A7143911CB698100BB9759 /* MvrStorage+iOSStandardInit.h */,
-				15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */,
+				152D460411D79E5B00A4DC2E /* Post-3.2 (Shared with iPad) */,
 				15CF7B9D11CE91F80010EA06 /* SFX */,
-				1565BE9711D54911000B26A7 /* MvrDirectoryWatcher.h */,
-				1565BE9811D54911000B26A7 /* MvrDirectoryWatcher.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -857,6 +853,23 @@
 				15D881EF107CC78C000832F5 /* MvrPasteboardItemSource.m */,
 			);
 			name = Items;
+			sourceTree = "<group>";
+		};
+		152D460411D79E5B00A4DC2E /* Post-3.2 (Shared with iPad) */ = {
+			isa = PBXGroup;
+			children = (
+				15D91B4A1092548500D8BAA9 /* MvrUpsellController.h */,
+				15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */,
+				15BCFB5811C78592005EA90C /* MvrItem+UnidentifiedFileAdding.h */,
+				15BCFB5911C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m */,
+				15A7143911CB698100BB9759 /* MvrStorage+iOSStandardInit.h */,
+				15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */,
+				1565BE9711D54911000B26A7 /* MvrDirectoryWatcher.h */,
+				1565BE9811D54911000B26A7 /* MvrDirectoryWatcher.m */,
+				152D460511D79E7100A4DC2E /* MvrDocumentOpenAction.h */,
+				152D460611D79E7100A4DC2E /* MvrDocumentOpenAction.m */,
+			);
+			name = "Post-3.2 (Shared with iPad)";
 			sourceTree = "<group>";
 		};
 		1531318E10837AB100D28022 /* About Pane */ = {
@@ -2064,6 +2077,7 @@
 				150FFC5911D521FA000018EC /* MvrTextItemController.m in Sources */,
 				1565BE9911D54911000B26A7 /* MvrDirectoryWatcher.m in Sources */,
 				151DA42411D5DB89007611A1 /* MvrBookmarkItemController.m in Sources */,
+				152D460711D79E7100A4DC2E /* MvrDocumentOpenAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

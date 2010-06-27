@@ -192,11 +192,6 @@ enum {
 	return [self showAction];
 }
 
-- (NSArray*) additionalActionsForItem:(MvrItem*) i;
-{
-	return [NSArray arrayWithObject:[MvrSwapKitSendToAction sendToAction]];
-}
-
 - (void) performShowOrOpenAction:(MvrItemAction*) a withItem:(id) i;
 {
 	if (shownPerson)

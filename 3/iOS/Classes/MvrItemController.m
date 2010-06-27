@@ -325,7 +325,7 @@ static L0Map* MvrItemViewControllerClasses = nil;
 
 - (MvrItemAction*) showOpeningOptionsMenuAction;
 {
-	MvrItemAction* a = [MvrItemAction actionWithDisplayName:@"Open\u2026" target:self selector:@selector(showOpeningOptionsMenu)];
+	MvrItemAction* a = [MvrItemAction actionWithDisplayName:NSLocalizedString(@"Open\u2026", @"Open label for doc interaction controller action") target:self selector:@selector(showOpeningOptionsMenu)];
 	a.continuesInteractionOnTable = YES;
 	return a;
 }

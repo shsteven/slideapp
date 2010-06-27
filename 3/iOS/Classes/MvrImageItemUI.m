@@ -19,7 +19,8 @@
 #import "MvrAppDelegate.h"
 #import "MvrAppDelegate+HelpAlerts.h"
 
-#import "MvrSwapKitSendToAction.h"
+// #import "MvrSwapKitSendToAction.h"
+#import "MvrDocumentOpenAction.h"
 
 @implementation MvrImageItemUI
 
@@ -113,7 +114,7 @@
 	return [NSArray arrayWithObjects:
 			[self clipboardAction],
 			[self sendByEmailAction],
-			[MvrSwapKitSendToAction sendToAction],
+			[MvrDocumentOpenAction openAction],
 			nil];
 }
 

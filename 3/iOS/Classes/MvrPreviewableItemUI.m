@@ -14,6 +14,8 @@
 #import "Network+Storage/MvrItem.h"
 #import "Network+Storage/MvrItemStorage.h"
 
+#import "MvrDocumentOpenAction.h"
+
 #if kMvrIsLite
 #import "MvrUpsellController.h"
 #endif
@@ -59,6 +61,11 @@
 #endif
 	
 	[MvrApp() presentModalViewController:[MvrPreviewVisor modalVisorWithItem:i]];
+}
+
+- (NSArray *) additionalActionsForItem:(id)i;
+{
+	return [NSArray arrayWithObject:[MvrDocumentOpenAction openAction]];
 }
 
 @end
