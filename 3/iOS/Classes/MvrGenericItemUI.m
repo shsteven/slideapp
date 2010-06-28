@@ -11,6 +11,8 @@
 
 #import "MvrAppDelegate+HelpAlerts.h"
 
+#import "MvrDocumentOpenAction.h"
+
 @implementation MvrGenericItemUI
 
 + supportedItemClasses {
@@ -29,10 +31,15 @@
 
 - (NSString*) accessibilityLabelForItem:(id)i;
 {
-	if ([i title])
+	if ([i title] && ![[i title] isEqual:@""])
 		return [i title];
 	else
 		return NSLocalizedString(@"Untitled item", @"The accessibility label of a generic item without a title");
+}
+
+- (MvrItemAction *) mainActionForItem:(id)i;
+{
+	return [MvrDocumentOpenAction openAction];
 }
 
 @end
