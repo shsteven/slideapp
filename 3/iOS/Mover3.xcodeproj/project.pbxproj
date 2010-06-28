@@ -2508,7 +2508,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF0D7105BAECB006D8E7A /* Mover-Debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
