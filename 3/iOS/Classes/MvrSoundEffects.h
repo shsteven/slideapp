@@ -11,7 +11,7 @@
 
 
 @interface MvrSoundEffects : NSObject <AVAudioSessionDelegate, AVAudioPlayerDelegate> {
-	BOOL available;
+	BOOL available, enabled;
 	
 	AVAudioPlayer* nowAvailablePlayer, * disconnectedPlayer,
 		* transferBeepPlayer, * transferDonePlayer, * transferFailedPlayer;
@@ -21,6 +21,8 @@
 	
 	int requests;
 }
+
+@property(assign) BOOL enabled;
 
 - (void) playChannelNowAvailable;
 - (void) playChannelDisconnected;

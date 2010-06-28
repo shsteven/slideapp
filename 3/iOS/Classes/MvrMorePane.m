@@ -218,9 +218,36 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	messagesConsent.accessoryView = switchy;
 	messagesConsent.selectionStyle = UITableViewCellSelectionStyleNone;
 	
+	[messagesConsent setAccessibilityLabel:nil];
+	
 	[messagesSection.cells addObject:messagesConsent];
 	
 	messagesSection.footer = NSLocalizedString(@"Mover can check for news when launched and warn you of available updates. This will be done at most once a day while on the cellular network, and will send no personal data.", @"Privacy/bandwidth text for message checking in the More pane.");
+	
+	// ---
+	
+	if (MvrServices().soundsAvailable) {
+	
+		MvrMorePaneSection* soundsSection = [MvrMorePaneSection section];
+		[content addObject:soundsSection];
+		
+		// Sounds |--1| <-- UISwitch
+		UITableViewCell* sounds = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+		sounds.textLabel.text = NSLocalizedString(@"Sounds", @"Sounds on/off cell title");
+		
+		[sounds setIsAccessibilityElement:NO];
+		
+		switchy = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
+		[switchy sizeToFit];
+		[switchy addTarget:self action:@selector(didChangeSounds:) forControlEvents:UIControlEventValueChanged];
+		switchy.on = MvrServices().soundsEnabled;
+		
+		sounds.accessoryView = switchy;
+		sounds.selectionStyle = UITableViewCellSelectionStyleNone;
+		
+		[soundsSection.cells addObject:sounds];
+		
+	}
 	
 	// ---
 	
@@ -252,6 +279,11 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 - (void) didChangeOptInOutForMessages:(UISwitch*) sender;
 {
 	MvrServices().messageChecker.userOptedInToMessages = [NSNumber numberWithBool:sender.on];
+}
+
+- (void) didChangeSounds:(UISwitch*) sender;
+{
+	MvrServices().soundsEnabled = sender.on;
 }
 
 - (void) showLegalities:(id) sender;

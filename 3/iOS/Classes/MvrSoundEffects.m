@@ -80,7 +80,8 @@
 		nowAvailablePlayer.volume = 0.2;
 	}
 	
-	[nowAvailablePlayer play];
+	if (self.enabled)
+		[nowAvailablePlayer play];
 }
 
 - (void) playChannelDisconnected;
@@ -93,7 +94,8 @@
 		disconnectedPlayer.volume = 0.2;
 	}
 	
-	[disconnectedPlayer play];
+	if (self.enabled)
+		[disconnectedPlayer play];
 }
 
 - (void) initializePlayer:(AVAudioPlayer**) player usingResource:(NSString*) res ofType:(NSString*) type;
@@ -106,7 +108,8 @@
 		return;
 	
 	*player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:s] error:NULL];
-	[*player prepareToPlay];
+	if (self.enabled)
+		[*player prepareToPlay];
 }
 
 - (void) beginPlayingTransferSound;
@@ -132,7 +135,8 @@
 	transferBeepPlayer.volume = volume;
 	volume = MAX(volume - 0.1, 0.02);
 	
-	[transferBeepPlayer play];
+	if (self.enabled)
+		[transferBeepPlayer play];
 }
 
 - (void) endPlayingTransferSoundSucceding:(BOOL) succeed;
@@ -145,16 +149,18 @@
 	if (succeed) {
 		if (!transferDonePlayer)
 			[self initializePlayer:&transferDonePlayer usingResource:@"ProgressOver" ofType:@"caf"];
-	
-		[transferDonePlayer play];
+		if (self.enabled)
+			[transferDonePlayer play];
 	} else {
 		if (!transferFailedPlayer)
 			[self initializePlayer:&transferFailedPlayer usingResource:@"ProgressOverFailure" ofType:@"caf"];
 		
 		transferFailedPlayer.volume = 0.5;
-		
-		[transferFailedPlayer play];
+		if (self.enabled)
+			[transferFailedPlayer play];
 	}
 }
+
+@synthesize enabled;
 
 @end

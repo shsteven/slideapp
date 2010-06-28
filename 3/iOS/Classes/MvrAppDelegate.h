@@ -35,6 +35,9 @@
 @property(readonly) MvrTellAFriendController* tellAFriend;
 @property(readonly) MvrMessageChecker* messageChecker;
 
+@property(readonly) BOOL soundsAvailable;
+@property(assign) BOOL soundsEnabled;
+
 @end
 
 

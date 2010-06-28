@@ -31,6 +31,8 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
 
+#define kMvrSoundsEffectsEnabledDefaultsKey @"MvrSoundEffectsEnabled"
+
 @interface MvrAppDelegate_iPad ()
 
 - (void) openFileAtPath:(NSString *)path;
@@ -97,6 +99,8 @@
 		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
 	
 	soundEffects = [MvrSoundEffects new];
+	id on = [[NSUserDefaults standardUserDefaults] objectForKey:kMvrSoundsEffectsEnabledDefaultsKey];
+	soundEffects.enabled = on? [on boolValue] : YES;
 	
 // ------------- Handle file opening
 	NSURL* u = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
@@ -434,6 +438,22 @@
 - (void) channel:(id <MvrChannel>)c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>)incoming;
 {
 	[soundEffects beginPlayingTransferSound];
+}
+
+- (BOOL) soundsAvailable;
+{
+	return YES;
+}
+
+- (BOOL) soundsEnabled;
+{
+	return soundEffects.enabled;
+}
+
+- (void) setSoundsEnabled:(BOOL) e;
+{
+	soundEffects.enabled = e;
+	[[NSUserDefaults standardUserDefaults] setBool:e forKey:kMvrSoundsEffectsEnabledDefaultsKey];
 }
 
 @end

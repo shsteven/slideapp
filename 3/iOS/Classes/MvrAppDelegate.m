@@ -712,4 +712,17 @@ enum {
 
 @dynamic helpAlertsSuppressed; // defined in MvrAppDelegate+HelpAlerts.[hm]
 
+- (BOOL) soundsEnabled;
+{
+	return NO;
+}
+
+- (void) setSoundsEnabled:(BOOL) e;
+{}
+
+- (BOOL) soundsAvailable;
+{
+	return NO;
+}
+
 @end
