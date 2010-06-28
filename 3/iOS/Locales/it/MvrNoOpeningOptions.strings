@@ -1,0 +1,3 @@
+"Dismiss" = "Chiudi";
+"This item can't be opened, because there's no app that can open it installed on this %@." = "Non posso aprire questo elemento, poich\U00e9 non sono installate applicazioni adatte su questo %@.";
+"Install one with support for this kind of item from App Store first." = "Per aprirlo, scarica e installa un'applicazione compatibile da App Store.";
