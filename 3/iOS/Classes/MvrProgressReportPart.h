@@ -30,6 +30,7 @@ typedef NSInteger MvrProgressState;
 	id <MvrProgressReportPartDelegate> delegate;
 	
 	NSInteger currentlyRunningTransfers;
+	NSInteger transfersHighWaterMark;
 }
 
 @property(readonly) MvrProgressState progressState;

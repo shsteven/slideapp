@@ -73,7 +73,10 @@
 
 	}
 	
-	if (progress) *progress = currentlyRunningTransfers == 0? kMvrIndeterminateProgress : sumOfProgresses / currentlyRunningTransfers;
+	if (transfersHighWaterMark > currentlyRunningTransfers)
+		sumOfProgresses += 1.0 * (transfersHighWaterMark - currentlyRunningTransfers);
+	
+	if (progress) *progress = (transfersHighWaterMark == 0? kMvrIndeterminateProgress : sumOfProgresses / transfersHighWaterMark);
 	if (state) *state = newState;
 	
 	L0LogDebugIf(progress, @"Reported progress of %f", *progress);
@@ -149,12 +152,14 @@
 - (void) channel:(id <MvrChannel>)c didBeginSendingWithOutgoingTransfer:(id <MvrOutgoing>)outgoing;
 {
 	currentlyRunningTransfers++;
+	transfersHighWaterMark++;
 	[self updateProgress];
 }
 
 - (void) channel:(id <MvrChannel>)c didBeginReceivingWithIncomingTransfer:(id <MvrIncoming>)incoming;
 {
 	currentlyRunningTransfers++;
+	transfersHighWaterMark++;
 	[self updateProgress];
 }
 
@@ -171,12 +176,16 @@
 - (void) outgoingTransferDidEndSending:(id <MvrOutgoing>)outgoing;
 {
 	currentlyRunningTransfers--;
+	if (currentlyRunningTransfers == 0)
+		transfersHighWaterMark = 0;
 	[self updateProgress];
 }
 
 - (void) incomingTransfer:(id <MvrIncoming>)incoming didEndReceivingItem:(MvrItem *)i;
 {
 	currentlyRunningTransfers--;
+	if (currentlyRunningTransfers == 0)
+		transfersHighWaterMark = 0;
 	[self updateProgress];
 }
 
