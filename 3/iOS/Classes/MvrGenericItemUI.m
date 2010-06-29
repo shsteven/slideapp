@@ -26,7 +26,10 @@
 
 - (void) didReceiveItem:(MvrItem*) i;
 {
-	[MvrApp() showAlertIfNotShownBeforeNamed:@"MvrGenericItemReceived"];
+	if ([[MvrDocumentOpenAction openAction] isAvailableForItem:i])
+		[MvrApp() showAlertIfNotShownBeforeNamed:@"MvrGenericItemReceived_CanOpen"];
+	else
+		[MvrApp() showAlertIfNotShownBeforeNamed:@"MvrGenericItemReceived"];
 }
 
 - (NSString*) accessibilityLabelForItem:(id)i;

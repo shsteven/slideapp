@@ -192,6 +192,8 @@
 		159559E5107769F500FBC9B4 /* TextIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 159559E4107769F500FBC9B4 /* TextIcon.png */; };
 		15955A1D10776B2200FBC9B4 /* MvrTextVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */; };
 		15955A2110776B7D00FBC9B4 /* MvrVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 15955A2010776B7D00FBC9B4 /* MvrVisor.m */; };
+		15A298AD11D9D35F0013D197 /* MvrGenericItemReceived_CanOpen.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A298AC11D9D35F0013D197 /* MvrGenericItemReceived_CanOpen.alert */; };
+		15A298B111D9D36F0013D197 /* MvrGenericItemReceived_CanOpen.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15A298AF11D9D36F0013D197 /* MvrGenericItemReceived_CanOpen.strings */; };
 		15A7143B11CB698100BB9759 /* MvrStorage+iOSStandardInit.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */; };
 		15A805BC108EECE100DE037F /* MvrGenericItemReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */; };
 		15A8064F108F011C00DE037F /* MvrNetworkTrouble.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */; };
@@ -574,6 +576,8 @@
 		15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrTextVisor.m; sourceTree = "<group>"; };
 		15955A1F10776B7D00FBC9B4 /* MvrVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrVisor.h; sourceTree = "<group>"; };
 		15955A2010776B7D00FBC9B4 /* MvrVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrVisor.m; sourceTree = "<group>"; };
+		15A298AC11D9D35F0013D197 /* MvrGenericItemReceived_CanOpen.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrGenericItemReceived_CanOpen.alert; sourceTree = "<group>"; };
+		15A298B011D9D36F0013D197 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrGenericItemReceived_CanOpen.strings; sourceTree = "<group>"; };
 		15A7143911CB698100BB9759 /* MvrStorage+iOSStandardInit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrStorage+iOSStandardInit.h"; sourceTree = "<group>"; };
 		15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrStorage+iOSStandardInit.m"; sourceTree = "<group>"; };
 		15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrGenericItemReceived.alert; sourceTree = "<group>"; };
@@ -1177,6 +1181,7 @@
 		1585FAB8108CBBE900D2AEAB /* Base strings */ = {
 			isa = PBXGroup;
 			children = (
+				15A298AF11D9D36F0013D197 /* MvrGenericItemReceived_CanOpen.strings */,
 				1556CB4F11735E4400B7C68D /* MvrLiteNeedConnectPackForPreviewableItems.strings */,
 				1556CB4C11735E1300B7C68D /* MvrLiteNeedsConnectPackForConduit.strings */,
 				157A0DCA11735AC100BA2A4B /* MvrPreviewableItemReceived.strings */,
@@ -1447,6 +1452,7 @@
 				15D91B481092545800D8BAA9 /* MvrNoNewItemSendingInLite.alert */,
 				15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */,
 				15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */,
+				15A298AC11D9D35F0013D197 /* MvrGenericItemReceived_CanOpen.alert */,
 				15AE0551108E6F9100D90F84 /* MvrLargeItemOverBT.alert */,
 				15464A481085B47B005E5642 /* MvrNoInternet_MessageAction.alert */,
 				151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */,
@@ -1844,6 +1850,8 @@
 				151DA44711D5DC47007611A1 /* BookmarkItemView.png in Resources */,
 				151DA44911D5DEA4007611A1 /* SmallCompass.png in Resources */,
 				152426A811D7E26E00C3535F /* MvrNoOpeningOptions.strings in Resources */,
+				15A298AD11D9D35F0013D197 /* MvrGenericItemReceived_CanOpen.alert in Resources */,
+				15A298B111D9D36F0013D197 /* MvrGenericItemReceived_CanOpen.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2189,6 +2197,14 @@
 				157A0DCB11735AC100BA2A4B /* en */,
 			);
 			name = MvrPreviewableItemReceived.strings;
+			sourceTree = "<group>";
+		};
+		15A298AF11D9D36F0013D197 /* MvrGenericItemReceived_CanOpen.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15A298B011D9D36F0013D197 /* en */,
+			);
+			name = MvrGenericItemReceived_CanOpen.strings;
 			sourceTree = "<group>";
 		};
 		15D7B4DF108F4B6100FA0428 /* Localizable.strings */ = {

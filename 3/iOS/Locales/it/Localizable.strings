@@ -54,16 +54,16 @@
 "Find out about Mover Lite's feature packs, or get more information on Mover+, the paid version of Mover, at the Store." = "Apri il Negozio Mover per info sui pacchetti di funzionalit\U00e0, o su Mover+, la versione a pagamento di Mover.";
 "Settings & More" = "Impostazioni e Altro";
 "(you can add additional details here before sending if you want.)" = "(puoi inserire dettagli qui prima di inviare, se vuoi.)";
-"URL" = "URL";
+"Sounds" = "Suoni";
 "Image (NSData, PNG)" = "Immagine (NSData, PNG)";
 "%@ disconnected." = "%@ scollegato.";
 "Send E-Mail to Contact" = "Manda E-Mail";
 "Store" = "Store";
 "Text clipping titled '%@'" = "Ritaglio di testo dal titolo '%@'";
-"version" = "versione";
+"URL" = "URL";
 "UUID" = "UUID";
 "Capture Photo or Video" = "Cattura foto o video";
-"Mover+ has all the features of Mover, and can also resend videos, text clippings and bookmarks via Wi-Fi and Bluetooth." = "Mover+ ha tutte le funzionalit\U00e0 di Mover e pu\U00f2 anche reinviare video, ritagli di testo e segnalibri via Wi-Fi e Bluetooth.";
+"version" = "versione";
 "Copy" = "Copia";
 "Text (NSString)" = "Testo (NSString)";
 "Add Photo" = "Aggiungi foto";
@@ -75,6 +75,7 @@
 "multiple?" = "multipli?";
 "Send Text" = "Invia Testo";
 "UTIs" = "UTIs";
+"Mover+ has all the features of Mover, and can also resend videos, text clippings and bookmarks via Wi-Fi and Bluetooth." = "Mover+ ha tutte le funzionalit\U00e0 di Mover e pu\U00f2 anche reinviare video, ritagli di testo e segnalibri via Wi-Fi e Bluetooth.";
 "Get more features in Mover+" = "Ottieni di pi\U00f9 in Mover+";
 "Shared.%@" = "Condiviso.%@";
 "Ask for Support" = "Supporto tecnico";
