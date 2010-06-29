@@ -20,7 +20,7 @@ BOOL MvrIsDirectory(NSString* path) {
 
 + iOSStorage;
 {
-#warning TODO support Open /Mover Items subdirectory
+// TODO support Open /Mover Items subdirectory
 	NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSString* metaDir = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	metaDir = [metaDir stringByAppendingPathComponent:@"Mover Metadata"];
