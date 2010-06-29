@@ -88,12 +88,12 @@
 		return;
 
 	NSString* filename = [itemMeta objectForKey:kMvrStorageMetadataFilenameKey];
-	if ([knownFiles containsObject:filename]) {
+	NSString* fullPath = [itemsDirectory stringByAppendingPathComponent:filename];
+	
+	if ([self hasItemForFileAtPath:fullPath]) {
 		[[NSFileManager defaultManager] removeItemAtPath:itemMetaPath error:NULL];
 		return;
 	}
-	
-	NSString* fullPath = [itemsDirectory stringByAppendingPathComponent:filename];
 	
 	NSFileManager* fm = [NSFileManager defaultManager];
 	if (![fm fileExistsAtPath:fullPath]) {
@@ -119,8 +119,7 @@
 	
 	[i setItemNotes:L0As(NSDictionary, [itemMeta objectForKey:kMvrStorageNotesItemInfoKey])];
 	
-	[knownFiles addObject:filename];
-	[self.mutableStoredItems addObject:i];
+	[self adoptPersistentItem:i];
 }
 
 - (void) addStoredItemsObject:(MvrItem*) i;
@@ -133,6 +132,7 @@
 	NSString* filename = [self userVisibleFilenameForItem:i];
 	
 	NSString* path = [itemsDirectory stringByAppendingPathComponent:filename];
+	
 	NSError* e;
 	BOOL done = [i.storage makePersistentByOffloadingToPath:path error:&e];
 	if (!done)
@@ -149,8 +149,11 @@
 {
 	if ([storedItemsSet containsObject:i])
 		return;
-	
+		
 	NSAssert(i.storage.persistent, @"To adopt, the item must already be persistent on its own.");
+	
+	if ([self hasItemForFileAtPath:i.storage.path])
+		return;
 	
 	BOOL sameDir = i.storage.hasPath && [self isPathInItemsDirectory:i.storage.path];
 	NSAssert(sameDir, @"To adopt, the item's storage must have been offloaded to the items directory.");
@@ -308,6 +311,9 @@
 
 - (void) migrateFrom30StorageCentralMetadata:(id) meta;
 {
+	// make sure we already have parsed the stuff in Mover Items *before* we edit it to avoid duplicates.
+	(void) self.mutableStoredItems;
+	
 	NSDictionary* storedMetadata = L0As(NSDictionary, meta);
 	if (!storedMetadata)
 		return;
@@ -354,7 +360,17 @@
 	if (![self isPathInItemsDirectory:path])
 		return NO;
 	
-	return [knownFiles containsObject:[path lastPathComponent]];
+	if ([knownFiles containsObject:[path lastPathComponent]])
+		return YES;
+	
+	for (MvrItem* i in storedItemsSet) {
+		if ([i.storage.path isEqual:path]) {
+			[knownFiles addObject:[path lastPathComponent]];
+			return YES;
+		}
+	}
+	
+	return NO;
 }
 
 - (BOOL) isPathInItemsDirectory:(NSString*) path;
