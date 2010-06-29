@@ -155,6 +155,7 @@
 		1569CAF8108E040700F3B5CF /* MvrBTDebugTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1569CAF7108E040700F3B5CF /* MvrBTDebugTracker.m */; };
 		156A61A0115B43BC00AF75CD /* DocIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156A619F115B43BC00AF75CD /* DocIcon.png */; };
 		156A61D5115B472200AF75CD /* MvrPreviewableItemReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 156A61D4115B472200AF75CD /* MvrPreviewableItemReceived.alert */; };
+		156E38D011D9D9CC0066129C /* MvrTableController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 156E38CF11D9D9CC0066129C /* MvrTableController_iPad.xib */; };
 		156E7FD910662C4A00315D0C /* MvrGenericItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */; };
 		156E804210663AEB00315D0C /* GenericItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 156E804110663AEB00315D0C /* GenericItemIcon.png */; };
 		1570B33910E756420037DEB4 /* ILSwapService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570B33310E756420037DEB4 /* ILSwapService.m */; };
@@ -243,7 +244,6 @@
 		15C86B6F11BE74800046CFC0 /* MvrDraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C86B6A11BE74800046CFC0 /* MvrDraggableView.m */; };
 		15C86B7011BE74800046CFC0 /* MvrInertia.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C86B6C11BE74800046CFC0 /* MvrInertia.m */; };
 		15C86B7111BE74800046CFC0 /* MvrAddPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C86B6E11BE74800046CFC0 /* MvrAddPane.m */; };
-		15C86B7911BE74E90046CFC0 /* MvrTableController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7811BE74E90046CFC0 /* MvrTableController_iPad.xib */; };
 		15C86B7B11BE74FC0046CFC0 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7A11BE74FC0046CFC0 /* MainWindow-iPad.xib */; };
 		15C86BB011BE76720046CFC0 /* Backdrop-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C86B7611BE74D00046CFC0 /* Backdrop-iPad.png */; };
 		15C8A1CB1116CFDE00F844A7 /* SwapKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15C8A1CA1116CFDE00F844A7 /* SwapKit.bundle */; };
@@ -517,6 +517,7 @@
 		156CF0D8105BAECB006D8E7A /* Mover-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Release.xcconfig"; sourceTree = "<group>"; };
 		156CF0D9105BAECB006D8E7A /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
 		156CF0F8105BB127006D8E7A /* Mover-Baseline.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Mover-Baseline.xcconfig"; path = "../Mover-Baseline.xcconfig"; sourceTree = "<group>"; };
+		156E38D111D9D9D60066129C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MvrTableController_iPad.xib; sourceTree = SOURCE_ROOT; };
 		156E7FD710662C4A00315D0C /* MvrGenericItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrGenericItemUI.h; sourceTree = "<group>"; };
 		156E7FD810662C4A00315D0C /* MvrGenericItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrGenericItemUI.m; sourceTree = "<group>"; };
 		156E804110663AEB00315D0C /* GenericItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GenericItemIcon.png; sourceTree = "<group>"; };
@@ -658,7 +659,6 @@
 		15C86B6D11BE74800046CFC0 /* MvrAddPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAddPane.h; sourceTree = "<group>"; };
 		15C86B6E11BE74800046CFC0 /* MvrAddPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAddPane.m; sourceTree = "<group>"; };
 		15C86B7611BE74D00046CFC0 /* Backdrop-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Backdrop-iPad.png"; sourceTree = SOURCE_ROOT; };
-		15C86B7811BE74E90046CFC0 /* MvrTableController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTableController_iPad.xib; sourceTree = SOURCE_ROOT; };
 		15C86B7A11BE74FC0046CFC0 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		15C8A1CA1116CFDE00F844A7 /* SwapKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SwapKit.bundle; sourceTree = "<group>"; };
 		15C8A1CE1116CFF600F844A7 /* ILSwapSendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapSendController.h; path = SwapKit/ILSwapSendController.h; sourceTree = SOURCE_ROOT; };
@@ -1404,7 +1404,7 @@
 				152426BB11D7E6D700C3535F /* MvrAddPane.xib */,
 				15C86B6611BE74770046CFC0 /* MvrTableController_iPad.h */,
 				15C86B6711BE74770046CFC0 /* MvrTableController_iPad.m */,
-				15C86B7811BE74E90046CFC0 /* MvrTableController_iPad.xib */,
+				156E38CF11D9D9CC0066129C /* MvrTableController_iPad.xib */,
 				15C86B6311BE74730046CFC0 /* MvrArrowView_iPad.h */,
 				15C86B6411BE74730046CFC0 /* MvrArrowView_iPad.m */,
 				15C86B6111BE746E0046CFC0 /* MvrArrowView_iPad.xib */,
@@ -1831,7 +1831,7 @@
 				15C86B4B11BE73F20046CFC0 /* MvrVideoItemController.xib in Resources */,
 				15C86B6211BE746E0046CFC0 /* MvrArrowView_iPad.xib in Resources */,
 				152426BC11D7E6D700C3535F /* MvrAddPane.xib in Resources */,
-				15C86B7911BE74E90046CFC0 /* MvrTableController_iPad.xib in Resources */,
+				156E38D011D9D9CC0066129C /* MvrTableController_iPad.xib in Resources */,
 				15C86B7B11BE74FC0046CFC0 /* MainWindow-iPad.xib in Resources */,
 				15C86BB011BE76720046CFC0 /* Backdrop-iPad.png in Resources */,
 				15B0FF2A11C26DAD0020ACEF /* Default-Landscape.png in Resources */,
@@ -2189,6 +2189,14 @@
 				156813B5108C923000424179 /* en */,
 			);
 			name = MvrAboutPane.xib;
+			sourceTree = "<group>";
+		};
+		156E38CF11D9D9CC0066129C /* MvrTableController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				156E38D111D9D9D60066129C /* en */,
+			);
+			name = MvrTableController_iPad.xib;
 			sourceTree = "<group>";
 		};
 		157A0DCA11735AC100BA2A4B /* MvrPreviewableItemReceived.strings */ = {

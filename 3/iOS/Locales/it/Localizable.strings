@@ -26,7 +26,7 @@
 "Open\U2026" = "Apri\U2026";
 "Bookmark to %@" = "Segnalibro per %@";
 "Clear App Catalog" = "Azzera Catalogo App";
-"Sending\U2026" = "Sending\U2026";
+"Sending\U2026" = "Invio\U2026";
 "Licenses & Copyrights" = "Licenze e copyright";
 "SwapKit Catalog" = "Catalogo SwapKit";
 "Untitled item" = "Elemento senza titolo";
@@ -58,7 +58,7 @@
 "Image (NSData, PNG)" = "Immagine (NSData, PNG)";
 "%@ disconnected." = "%@ scollegato.";
 "Send E-Mail to Contact" = "Manda E-Mail";
-"Store" = "Store";
+"Store" = "Negozio";
 "Text clipping titled '%@'" = "Ritaglio di testo dal titolo '%@'";
 "URL" = "URL";
 "UUID" = "UUID";
@@ -74,7 +74,7 @@
 "no e-mail." = "nessuna e-mail.";
 "multiple?" = "multipli?";
 "Send Text" = "Invia Testo";
-"UTIs" = "UTIs";
+"UTIs" = "UTI";
 "Mover+ has all the features of Mover, and can also resend videos, text clippings and bookmarks via Wi-Fi and Bluetooth." = "Mover+ ha tutte le funzionalit\U00e0 di Mover e pu\U00f2 anche reinviare video, ritagli di testo e segnalibri via Wi-Fi e Bluetooth.";
 "Get more features in Mover+" = "Ottieni di pi\U00f9 in Mover+";
 "Shared.%@" = "Condiviso.%@";
