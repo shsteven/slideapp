@@ -31,7 +31,8 @@
 	
 	[self addManagedOutletKeys:@"imageView", nil];
 	
-	imageViewMargin = imageView.frame.origin.x;
+	// imageViewMargin = imageView.frame.origin.x;
+	imageViewMargin = 23.0; // TODO find out why the image view's frame was moved after NIB loading.
 	[self itemDidChange];
 	
 	UIButton* action = self.actionButton;

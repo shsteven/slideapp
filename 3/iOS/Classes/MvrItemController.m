@@ -79,11 +79,12 @@ static L0Map* MvrItemViewControllerClasses = nil;
 		[item release];
 		item = [i retain];
 		
-		if (!item) {
-			documentInteractionController.delegate = nil;
-			[documentInteractionController release];
-			documentInteractionController = nil;
-		}
+		documentInteractionController.delegate = nil;
+		[documentInteractionController release];
+		documentInteractionController = nil;
+		
+		if (!self.viewLoaded)
+			(void) self.view; // loads the view.
 		
 		[self itemDidChange];
 	}

@@ -40,7 +40,9 @@
 {
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	
+	CGContextSaveGState(ctx);
 	[super drawRect:rect];
+	CGContextRestoreGState(ctx);
 	
 	CGRect whitePart = self.contentBounds;
 	CGContextSetShadow(ctx, CGSizeMake(0, 0), self.margin);
