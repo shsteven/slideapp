@@ -2483,7 +2483,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 154BD796108A039F00C45562 /* Mover-AdHoc.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2513,7 +2512,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 157CBD07108F153D00146778 /* Mover-AppStore.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2548,7 +2546,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF0D8105BAECB006D8E7A /* Mover-Release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
