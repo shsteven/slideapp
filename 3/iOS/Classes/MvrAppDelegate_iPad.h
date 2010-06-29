@@ -27,6 +27,8 @@
 
 #import "MvrDirectoryWatcher.h"
 
+#import "MvrCrashReporting.h"
+
 #import <GameKit/GameKit.h>
 
 @interface MvrAppDelegate_iPad : NSObject <
@@ -61,6 +63,8 @@
 	BOOL didPickBluetoothChannel;
 	
 	BOOL didShowNetworkTroubleAlert;
+	
+	MvrCrashReporting* crashReporting;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow* window;

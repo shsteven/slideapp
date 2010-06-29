@@ -22,10 +22,14 @@
 	[super dealloc];
 }
 
+#if kMvrDisableCrashReporting
+#warning Crash reporting is disabled for this build.
+#endif
+
 
 - (void) checkForPendingReports;
 {
-#if kMvrAllowCrashReporting
+#if !kMvrDisableCrashReporting
 	
 #if DEBUG
 	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrDisableCrashReporting"] boolValue])
@@ -70,7 +74,7 @@ static void MvrHandleException(NSException* ex) {
 
 - (void) enableReporting;
 {
-#if kMvrAllowCrashReporting
+#if !kMvrDisableCrashReporting
 	
 #if DEBUG
 	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrDisableCrashReporting"] boolValue])
@@ -85,12 +89,8 @@ static void MvrHandleException(NSException* ex) {
 	defaultExceptionHandler = NSGetUncaughtExceptionHandler();
 	NSSetUncaughtExceptionHandler(&MvrHandleException);
 
-//#define kMvrTestByRaisingException 1
-	
-//#if DEBUG && kMvrTestByRaisingException
 //	NSException* e = [NSException exceptionWithName:@"MvrTestException" reason:@"A test exception used to try out the reporting machinery" userInfo:nil];
 //	[e performSelector:@selector(raise) withObject:nil afterDelay:7.0];
-//#endif
 	
 #endif
 }

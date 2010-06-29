@@ -58,6 +58,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	
+// ------------- BEFORE WE START: Monitor for crashes.
+	crashReporting = [MvrCrashReporting new];
+	[crashReporting enableReporting];
+	
 // ------------ SETUP: Network + Observer
 	[MvrGenericItemController registerClass];
 	
@@ -112,6 +116,9 @@
 // ------------- Begin monitoring Documents for File Sharing
 	[self beginMonitoringItemsDirectory];
 	[self performItemsDirectorySweep:nil];
+
+// ------------- Fix up pending crash reports
+	[crashReporting checkForPendingReports];
 	
 	return YES;
 }
