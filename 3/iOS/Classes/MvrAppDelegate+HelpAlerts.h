@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MvrAppDelegate.h"
 
+extern UIAlertView* MvrAlertIfNotShownBeforeNamed(NSString* name);
+
 @interface MvrAppDelegate (MvrHelpAlerts)
 
 - (void) suppressHelpAlerts;

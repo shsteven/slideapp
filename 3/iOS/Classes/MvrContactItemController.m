@@ -14,6 +14,8 @@
 
 #import "MvrAppDelegate_iPad.h"
 
+#import "MvrAppDelegate+HelpAlerts.h"
+
 enum {
 	kMvrDuplicateContactReview = 0,
 	kMvrDuplicateContactSaveAsNew = 1,
@@ -141,6 +143,8 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 		[self saveItemInAddressBook:addressBook];
 	
 	CFRelease(addressBook);
+	
+	[MvrAlertIfNotShownBeforeNamed(@"MvrContactReceived") show];
 }
 
 - (void) warnAboutDuplicateForItem;

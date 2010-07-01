@@ -31,6 +31,8 @@
 #import "Network+Storage/MvrGenericItem.h"
 #import "MvrGenericItemController.h"
 
+#import "MvrAppDelegate+HelpAlerts.h"
+
 #define kMvrSoundsEffectsEnabledDefaultsKey @"MvrSoundEffectsEnabled"
 
 @interface MvrAppDelegate_iPad ()
@@ -119,6 +121,10 @@
 
 // ------------- Fix up pending crash reports
 	[crashReporting checkForPendingReports];
+	
+	
+// ------------- Aaaaand, welcome!
+	[MvrAlertIfNotShownBeforeNamed(@"MvrWelcome") show];
 	
 	return YES;
 }

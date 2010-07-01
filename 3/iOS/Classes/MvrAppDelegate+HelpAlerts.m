@@ -8,10 +8,23 @@
 
 #import "MvrAppDelegate+HelpAlerts.h"
 
+static int MvrHelpAlertsSuppressionCount = 0;
+
+UIAlertView* MvrAlertIfNotShownBeforeNamed(NSString* name) {
+	if (MvrHelpAlertsSuppressionCount > 0) return nil;
+	
+	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+	NSString* key = [NSString stringWithFormat:@"L0HelpAlertShown_%@", name];
+	
+	if (![ud boolForKey:key]) {
+		UIAlertView* alert = [UIAlertView alertNamed:name];
+		[ud setBool:YES forKey:key];
+		return alert;
+	} else
+		return nil;
+}
 
 @implementation MvrAppDelegate (MvrHelpAlerts)
-
-static int MvrHelpAlertsSuppressionCount = 0;
 
 - (void) suppressHelpAlerts;
 {
@@ -39,17 +52,7 @@ static int MvrHelpAlertsSuppressionCount = 0;
 
 - (UIAlertView*) alertIfNotShownBeforeNamed:(NSString*) name;
 {
-	if (MvrHelpAlertsSuppressionCount > 0) return nil;
-	
-	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-	NSString* key = [NSString stringWithFormat:@"L0HelpAlertShown_%@", name];
-	
-	if (![ud boolForKey:key]) {
-		UIAlertView* alert = [UIAlertView alertNamed:name];
-		[ud setBool:YES forKey:key];
-		return alert;
-	} else
-		return nil;
+	return MvrAlertIfNotShownBeforeNamed(name);
 }
 
 static NSMutableSet* MvrAlertNamesShownThisSession = nil;

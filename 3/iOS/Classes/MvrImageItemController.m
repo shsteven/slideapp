@@ -13,6 +13,8 @@
 #import "MvrImageItem.h"
 #import "MvrItemAction.h"
 
+#import "MvrAppDelegate+HelpAlerts.h"
+
 @interface MvrImageItemBackdropView ()
 
 @end
@@ -65,6 +67,7 @@
 - (void) itemDidFinishReceivingFromNetwork;
 {
 	UIImageWriteToSavedPhotosAlbum([self.item image], nil, NULL, NULL);
+	[MvrAlertIfNotShownBeforeNamed(@"MvrImageReceived") show];
 }
 
 - (NSArray *) defaultActions;
