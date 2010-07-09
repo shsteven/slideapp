@@ -649,7 +649,8 @@ typedef NSInteger MvrEdge;
 		pane.delegate = self;
 	}
 	
-	[addPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+	if (self.view.window)
+		[addPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void) addPaneDidPickItem:(MvrItem*) i;
@@ -699,7 +700,8 @@ typedef NSInteger MvrEdge;
 		aboutPopover = [[UIPopoverController alloc] initWithContentViewController:about];
 	}
 	
-	[aboutPopover presentPopoverFromRect:infoButton.bounds inView:infoButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+	if (infoButton.window)
+		[aboutPopover presentPopoverFromRect:infoButton.bounds inView:infoButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void) showNetworkPopover:(UIBarButtonItem *)sender;
@@ -713,7 +715,8 @@ typedef NSInteger MvrEdge;
 		networkPopover.delegate = self;
 	}
 	
-	[networkPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+	if (self.view.window)
+		[networkPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated;

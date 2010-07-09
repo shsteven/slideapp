@@ -236,6 +236,9 @@ NSString* MvrFirstValueForContactMultivalue(ABRecordRef r, ABPropertyID ident) {
 
 - (void) showPersonPopover:(MvrItemAction*) a forItem:(MvrItem*) i;
 {
+	if (!self.actionButton.window)
+		return;
+	
 	if (!personPopover) {
 		UINavigationController* nc = [self navigationControllerToDisplayPersonItem:i];
 			
