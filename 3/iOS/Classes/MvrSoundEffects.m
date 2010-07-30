@@ -51,7 +51,7 @@
 }
 
 
-- (void) didReceiveMemoryWarning;
+- (void) didReceiveMemoryWarning:(NSNotification*) n;
 {
 	[nowAvailablePlayer release]; nowAvailablePlayer = nil;
 	[disconnectedPlayer release]; disconnectedPlayer = nil;
