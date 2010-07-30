@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Mover Planning.svg"
+   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover3/3/iOS/Mover Planning.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective3620"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3657"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="421"
+     inkscape:cy="288.43009"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="801"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="translate(-57,418)"
+       id="g3862">
+      <rect
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect3864"
+         width="331"
+         height="100"
+         x="91.5"
+         y="325.36218"
+         rx="6"
+         ry="6" />
+      <text
+         xml:space="preserve"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         x="100.89055"
+         y="350.70016"
+         id="text3866"
+         sodipodi:linespacing="100%"><tspan
+           sodipodi:role="line"
+           id="tspan3868"
+           x="100.89055"
+           y="350.70016">TV</tspan></text>
+      <flowRoot
+         transform="translate(-86.5,189)"
+         xml:space="preserve"
+         id="flowRoot3870"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"><flowRegion
+           id="flowRegion3872"><rect
+             id="rect3874"
+             width="313"
+             height="54"
+             x="187"
+             y="173.36218" /></flowRegion><flowPara
+           id="flowPara3876"
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none">Move stuff to the large screen via Google</flowPara><flowPara
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none"
+           id="flowPara3878">TV or Apple TV 2 (iOS) or as an add-on to</flowPara><flowPara
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none"
+           id="flowPara3880">Connect.</flowPara></flowRoot>    </g>
+    <rect
+       style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect2820"
+       width="611"
+       height="12"
+       x="66.547241"
+       y="360.36218"
+       rx="6"
+       ry="6" />
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+       x="581"
+       y="328.36218"
+       id="text2822"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan2824"
+         x="581"
+         y="328.36218"
+         style="fill:#000000;fill-opacity:1;stroke:none"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Anivers;-inkscape-font-specification:Anivers"
+   id="tspan3860">Mover</tspan> 3</tspan></text>
+    <text
+       sodipodi:linespacing="100%"
+       id="text3598"
+       y="428.36218"
+       x="582.41339"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         style="fill:#000000;fill-opacity:1;stroke:none"
+         y="428.36218"
+         x="582.41339"
+         id="tspan3600"
+         sodipodi:role="line">Mover 4</tspan></text>
+    <g
+       id="g3698"
+       transform="translate(27,26)">
+      <rect
+         ry="6"
+         rx="6"
+         y="136.36218"
+         x="178"
+         height="100"
+         width="331"
+         id="rect3610"
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text3602"
+         y="161.70016"
+         x="187.39055"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="161.70016"
+           x="187.39055"
+           id="tspan3604"
+           sodipodi:role="line">Mover Mini</tspan></text>
+      <flowRoot
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"
+         id="flowRoot3641"
+         xml:space="preserve"><flowRegion
+           id="flowRegion3643"><rect
+             y="173.36218"
+             x="187"
+             height="54"
+             width="313"
+             id="rect3645" /></flowRegion><flowPara
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none"
+           id="flowPara3647">A miniature version of Mover that can be embedded in other apps to allow for file transfer/reception/opening with ease and style.</flowPara></flowRoot>    </g>
+    <g
+       id="g3689"
+       transform="translate(5,-23)">
+      <rect
+         ry="6"
+         rx="6"
+         y="325.36218"
+         x="91.5"
+         height="100"
+         width="331"
+         id="rect3610-9"
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text3602-3"
+         y="350.70016"
+         x="100.89055"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="350.70016"
+           x="100.89055"
+           id="tspan3604-8"
+           sodipodi:role="line">FTL (Faster Transmission Layer)</tspan></text>
+      <flowRoot
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"
+         id="flowRoot3641-0"
+         xml:space="preserve"
+         transform="translate(-86.5,189)"><flowRegion
+           id="flowRegion3643-2"><rect
+             y="173.36218"
+             x="187"
+             height="54"
+             width="313"
+             id="rect3645-4" /></flowRegion><flowPara
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none"
+           id="flowPara3647-8">A rewrite and a new set of features in the transmission engine to support higher throughputs, lower failure rates (eg via resumes).</flowPara></flowRoot>    </g>
+    <g
+       transform="translate(44,106)"
+       id="g3707">
+      <rect
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect3709"
+         width="331"
+         height="100"
+         x="91.5"
+         y="325.36218"
+         rx="6"
+         ry="6" />
+      <text
+         xml:space="preserve"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         x="100.89055"
+         y="350.70016"
+         id="text3711"
+         sodipodi:linespacing="100%"><tspan
+           sodipodi:role="line"
+           id="tspan3713"
+           x="100.89055"
+           y="350.70016">Cross-platform</tspan></text>
+      <flowRoot
+         transform="translate(-86.5,189)"
+         xml:space="preserve"
+         id="flowRoot3715"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"><flowRegion
+           id="flowRegion3717"><rect
+             id="rect3719"
+             width="313"
+             height="54"
+             x="187"
+             y="173.36218" /></flowRegion><flowPara
+           id="flowPara3721"
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none">Core (engine + behavior) logic is written in C++ in a platform-agnostic but easily bridgeable way, to allow for easy porting to other platforms.</flowPara></flowRoot>    </g>
+    <g
+       id="g3723"
+       transform="translate(-33,210)">
+      <rect
+         ry="6"
+         rx="6"
+         y="325.36218"
+         x="91.5"
+         height="100"
+         width="331"
+         id="rect3725"
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text3727"
+         y="350.70016"
+         x="100.89055"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="350.70016"
+           x="100.89055"
+           id="tspan3729"
+           sodipodi:role="line">Web Move</tspan></text>
+      <flowRoot
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"
+         id="flowRoot3731"
+         xml:space="preserve"
+         transform="translate(-86.5,189)"><flowRegion
+           id="flowRegion3733"><rect
+             y="173.36218"
+             x="187"
+             height="54"
+             width="313"
+             id="rect3735" /></flowRegion><flowPara
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none"
+           id="flowPara3737">Items can be moved async'ly through a web service to reach turned-off devices, or devices that can't connect to a local network (WP7).</flowPara></flowRoot>    </g>
+    <g
+       transform="translate(264,300)"
+       id="g3739">
+      <rect
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect3741"
+         width="331"
+         height="100"
+         x="91.5"
+         y="325.36218"
+         rx="6"
+         ry="6" />
+      <text
+         xml:space="preserve"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         x="100.89055"
+         y="350.70016"
+         id="text3743"
+         sodipodi:linespacing="100%"><tspan
+           sodipodi:role="line"
+           id="tspan3745"
+           x="100.89055"
+           y="350.70016">Local Sync</tspan></text>
+      <flowRoot
+         transform="translate(-86.5,189)"
+         xml:space="preserve"
+         id="flowRoot3747"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"><flowRegion
+           id="flowRegion3749"><rect
+             id="rect3751"
+             width="313"
+             height="54"
+             x="187"
+             y="173.36218" /></flowRegion><flowPara
+           id="flowPara3753"
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none">No-fuss, zero-configuration sync for people present at the same place. No longer miss a handout or a vCard at a meeting.</flowPara></flowRoot>    </g>
+    <g
+       transform="translate(181,-103)"
+       id="g3755">
+      <rect
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect3757"
+         width="331"
+         height="100"
+         x="178"
+         y="136.36218"
+         rx="6"
+         ry="6" />
+      <text
+         xml:space="preserve"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         x="187.39055"
+         y="161.70016"
+         id="text3759"
+         sodipodi:linespacing="100%"><tspan
+           sodipodi:role="line"
+           id="tspan3761"
+           x="187.39055"
+           y="161.70016">Contact Exchange Format</tspan></text>
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot3763"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"><flowRegion
+           id="flowRegion3765"><rect
+             id="rect3767"
+             width="313"
+             height="54"
+             x="187"
+             y="173.36218" /></flowRegion><flowPara
+           id="flowPara3769"
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none">A way to correctly move contacts (eg a vCard parser/writer) between different Mover platforms that does not rely on iOS Address Book stuff.</flowPara></flowRoot>    </g>
+    <g
+       transform="translate(-72,314)"
+       id="g3771">
+      <rect
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect3773"
+         width="331"
+         height="100"
+         x="91.5"
+         y="325.36218"
+         rx="6"
+         ry="6" />
+      <text
+         xml:space="preserve"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         x="100.89055"
+         y="350.70016"
+         id="text3775"
+         sodipodi:linespacing="100%"><tspan
+           sodipodi:role="line"
+           id="tspan3777"
+           x="100.89055"
+           y="350.70016">Folders + Archive</tspan></text>
+      <flowRoot
+         transform="translate(-86.5,189)"
+         xml:space="preserve"
+         id="flowRoot3779"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"><flowRegion
+           id="flowRegion3781"><rect
+             id="rect3783"
+             width="313"
+             height="54"
+             x="187"
+             y="173.36218" /></flowRegion><flowPara
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none"
+           id="flowPara3787">Make Mover a file management app by allowing multiple folders (in the form of multiple tables) and a &quot;throw it in&quot;, auto-org'd, searchable Archive.</flowPara></flowRoot>    </g>
+    <g
+       id="g3812"
+       transform="translate(220,405)">
+      <rect
+         ry="6"
+         rx="6"
+         y="325.36218"
+         x="91.5"
+         height="100"
+         width="331"
+         id="rect3814"
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text3816"
+         y="350.70016"
+         x="100.89055"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="350.70016"
+           x="100.89055"
+           id="tspan3818"
+           sodipodi:role="line">Web Sync</tspan></text>
+      <flowRoot
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"
+         id="flowRoot3820"
+         xml:space="preserve"
+         transform="translate(-86.5,189)"><flowRegion
+           id="flowRegion3822"><rect
+             y="173.36218"
+             x="187"
+             height="54"
+             width="313"
+             id="rect3824" /></flowRegion><flowPara
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none"
+           id="flowPara3826">Synchronize your Mover table with WebDAV to your Box.net, Dropbox, iDisk account to have everything on your PC/Mac without thinking.</flowPara></flowRoot>    </g>
+    <g
+       transform="translate(303,195)"
+       id="g3844">
+      <rect
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect3846"
+         width="331"
+         height="100"
+         x="91.5"
+         y="325.36218"
+         rx="6"
+         ry="6" />
+      <text
+         xml:space="preserve"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         x="100.89055"
+         y="350.70016"
+         id="text3848"
+         sodipodi:linespacing="100%"><tspan
+           sodipodi:role="line"
+           id="tspan3850"
+           x="100.89055"
+           y="350.70016">SwapKit Services &amp; Item Catalogs</tspan></text>
+      <flowRoot
+         transform="translate(-86.5,189)"
+         xml:space="preserve"
+         id="flowRoot3852"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"><flowRegion
+           id="flowRegion3854"><rect
+             id="rect3856"
+             width="313"
+             height="54"
+             x="187"
+             y="173.36218" /></flowRegion><flowPara
+           id="flowPara3858"
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none">Quickly edit files on the Mover table, or pick items off the storage of another compatible application</flowPara></flowRoot>    </g>
+    <g
+       id="g3882"
+       transform="translate(115.04724,569)">
+      <rect
+         ry="6"
+         rx="6"
+         y="325.36218"
+         x="91.5"
+         height="100"
+         width="331"
+         id="rect3884"
+         style="color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text3886"
+         y="350.70016"
+         x="100.89055"
+         style="font-size:18.6146946px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Delicious;-inkscape-font-specification:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           y="350.70016"
+           x="100.89055"
+           id="tspan3888"
+           sodipodi:role="line">UI makeover</tspan></text>
+      <flowRoot
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#f9f9f9;fill-opacity:1;fill-rule:nonzero;stroke:#d1d1d1;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"
+         id="flowRoot3890"
+         xml:space="preserve"
+         transform="translate(-86.5,189)"><flowRegion
+           id="flowRegion3892"><rect
+             y="173.36218"
+             x="187"
+             height="54"
+             width="313"
+             id="rect3894" /></flowRegion><flowPara
+           id="flowPara3900"
+           style="font-size:14px;fill:#000000;fill-opacity:1;stroke:none">Improve usability (esp. mobile phone version's), possibly a professionally done redo (hire a designer).</flowPara></flowRoot>    </g>
+  </g>
+</svg>

@@ -13,7 +13,6 @@
 		150722631150C0E4009FA8AF /* MvrPreviewableItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 150722621150C0E4009FA8AF /* MvrPreviewableItemUI.m */; };
 		1507226F1150C2EA009FA8AF /* MvrPreviewVisor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1507226D1150C2EA009FA8AF /* MvrPreviewVisor.m */; };
 		150722701150C2EA009FA8AF /* MvrPreviewVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1507226E1150C2EA009FA8AF /* MvrPreviewVisor.xib */; };
-		1507DEA211C025DB00EB85B8 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1507DEA111C025DB00EB85B8 /* CrashReporter.framework */; };
 		150C414410A48C7300EBCE51 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		150C414510A48C7300EBCE51 /* MvrAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D0AF0107DD945009BAF92 /* MvrAccessibility.m */; };
 		150C414610A48C7300EBCE51 /* MvrAppDelegate+HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */; };
@@ -82,6 +81,8 @@
 		151061251093870900307C62 /* MvrNoLiteToLiteBT.strings in Resources */ = {isa = PBXBuildFile; fileRef = 151061211093870900307C62 /* MvrNoLiteToLiteBT.strings */; };
 		151061261093870900307C62 /* MvrNoLiteToLiteBTReminder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 151061231093870900307C62 /* MvrNoLiteToLiteBTReminder.strings */; };
 		15125AF31090308C002009A5 /* libMoverNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 156B0A4C10902FFC00209F2D /* libMoverNetwork.a */; };
+		151BD33E12032559001FADFD /* GenericItemIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 151BD33D12032559001FADFD /* GenericItemIcon@2x.png */; };
+		151BD34112032598001FADFD /* VideoItemIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 151BD34012032598001FADFD /* VideoItemIcon@2x.png */; };
 		151D0AC11077A289009DAE07 /* MvrContactIsADuplicate.alert in Resources */ = {isa = PBXBuildFile; fileRef = 151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */; };
 		151DA42411D5DB89007611A1 /* MvrBookmarkItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 151DA42211D5DB89007611A1 /* MvrBookmarkItemController.m */; };
 		151DA42511D5DB89007611A1 /* MvrBookmarkItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151DA42311D5DB89007611A1 /* MvrBookmarkItemController.xib */; };
@@ -284,6 +285,17 @@
 		15D91B491092545800D8BAA9 /* MvrNoNewItemSendingInLite.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15D91B481092545800D8BAA9 /* MvrNoNewItemSendingInLite.alert */; };
 		15D91B4C1092548500D8BAA9 /* MvrUpsellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */; };
 		15D91B56109256D900D8BAA9 /* MvrNoBTOutgoingInLite.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15D91B55109256D900D8BAA9 /* MvrNoBTOutgoingInLite.alert */; };
+		15DA1DEA12031175003685F5 /* ActionButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1DE912031175003685F5 /* ActionButton@2x.png */; };
+		15DA1DED120311A5003685F5 /* ActionButton-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1DEC120311A5003685F5 /* ActionButton-Pressed@2x.png */; };
+		15DA1DFA12031226003685F5 /* Frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1DF912031226003685F5 /* Frame@2x.png */; };
+		15DA1DFD120312A7003685F5 /* Frame-Highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1DFC120312A7003685F5 /* Frame-Highlighted@2x.png */; };
+		15DA1E1312031638003685F5 /* DocIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1E1212031638003685F5 /* DocIcon@2x.png */; };
+		15DA1E1712031678003685F5 /* NetworkToolbarIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1E1612031678003685F5 /* NetworkToolbarIcon@2x.png */; };
+		15DA1E2612032145003685F5 /* BookmarkIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1E2512032145003685F5 /* BookmarkIcon@2x.png */; };
+		15DA1E2A120321B4003685F5 /* ContactWithoutImageIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1E29120321B4003685F5 /* ContactWithoutImageIcon@2x.png */; };
+		15DA1E2E12032263003685F5 /* DrawerBackdrop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1E2D12032263003685F5 /* DrawerBackdrop@2x.png */; };
+		15DA1E32120322F4003685F5 /* DrawerButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1E31120322F4003685F5 /* DrawerButton@2x.png */; };
+		15DA1E3512032320003685F5 /* DrawerLabelHolder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15DA1E3412032320003685F5 /* DrawerLabelHolder@2x.png */; };
 		15DF586710F3E38B00F6159C /* ILSwapItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DF586510F3E38B00F6159C /* ILSwapItem.m */; };
 		15F036E1107B46720094D21E /* Backdrop-Bluetooth.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */; };
 		15FFE54911C4D19900392210 /* MvrWiFiNetworkStatePane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE54711C4D19900392210 /* MvrWiFiNetworkStatePane.m */; };
@@ -388,7 +400,6 @@
 		1507226C1150C2EA009FA8AF /* MvrPreviewVisor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrPreviewVisor.h; sourceTree = "<group>"; };
 		1507226D1150C2EA009FA8AF /* MvrPreviewVisor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrPreviewVisor.m; sourceTree = "<group>"; };
 		1507226E1150C2EA009FA8AF /* MvrPreviewVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrPreviewVisor.xib; sourceTree = "<group>"; };
-		1507DEA111C025DB00EB85B8 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bug Fixing Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bug Fixing Tests-Info.plist"; sourceTree = "<group>"; };
 		150C418E10A48F7000EBCE51 /* MvrBugFixingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBugFixingTests.h; sourceTree = "<group>"; };
@@ -402,6 +413,8 @@
 		151060F21093819300307C62 /* MvrNoLiteToLiteBTReminder.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoLiteToLiteBTReminder.alert; sourceTree = "<group>"; };
 		151061221093870900307C62 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoLiteToLiteBT.strings; sourceTree = "<group>"; };
 		151061241093870900307C62 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoLiteToLiteBTReminder.strings; sourceTree = "<group>"; };
+		151BD33D12032559001FADFD /* GenericItemIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GenericItemIcon@2x.png"; path = "../GenericItemIcon@2x.png"; sourceTree = SOURCE_ROOT; };
+		151BD34012032598001FADFD /* VideoItemIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "VideoItemIcon@2x.png"; path = "../VideoItemIcon@2x.png"; sourceTree = SOURCE_ROOT; };
 		151D0AC01077A289009DAE07 /* MvrContactIsADuplicate.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrContactIsADuplicate.alert; sourceTree = "<group>"; };
 		151DA42111D5DB89007611A1 /* MvrBookmarkItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrBookmarkItemController.h; sourceTree = "<group>"; };
 		151DA42211D5DB89007611A1 /* MvrBookmarkItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrBookmarkItemController.m; sourceTree = "<group>"; };
@@ -703,6 +716,17 @@
 		15D91B4A1092548500D8BAA9 /* MvrUpsellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrUpsellController.h; sourceTree = "<group>"; };
 		15D91B4B1092548500D8BAA9 /* MvrUpsellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrUpsellController.m; sourceTree = "<group>"; };
 		15D91B55109256D900D8BAA9 /* MvrNoBTOutgoingInLite.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoBTOutgoingInLite.alert; sourceTree = "<group>"; };
+		15DA1DE912031175003685F5 /* ActionButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionButton@2x.png"; path = "Variants/Plus/Theme/ActionButton@2x.png"; sourceTree = "<group>"; };
+		15DA1DEC120311A5003685F5 /* ActionButton-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActionButton-Pressed@2x.png"; path = "Variants/Plus/Theme/ActionButton-Pressed@2x.png"; sourceTree = "<group>"; };
+		15DA1DF912031226003685F5 /* Frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Frame@2x.png"; path = "Variants/Plus/Theme/Frame@2x.png"; sourceTree = "<group>"; };
+		15DA1DFC120312A7003685F5 /* Frame-Highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Frame-Highlighted@2x.png"; path = "Variants/Plus/Theme/Frame-Highlighted@2x.png"; sourceTree = "<group>"; };
+		15DA1E1212031638003685F5 /* DocIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DocIcon@2x.png"; sourceTree = "<group>"; };
+		15DA1E1612031678003685F5 /* NetworkToolbarIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NetworkToolbarIcon@2x.png"; sourceTree = "<group>"; };
+		15DA1E2512032145003685F5 /* BookmarkIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BookmarkIcon@2x.png"; sourceTree = "<group>"; };
+		15DA1E29120321B4003685F5 /* ContactWithoutImageIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ContactWithoutImageIcon@2x.png"; sourceTree = "<group>"; };
+		15DA1E2D12032263003685F5 /* DrawerBackdrop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DrawerBackdrop@2x.png"; path = "Variants/Plus/Theme/DrawerBackdrop@2x.png"; sourceTree = SOURCE_ROOT; };
+		15DA1E31120322F4003685F5 /* DrawerButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DrawerButton@2x.png"; sourceTree = "<group>"; };
+		15DA1E3412032320003685F5 /* DrawerLabelHolder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DrawerLabelHolder@2x.png"; sourceTree = "<group>"; };
 		15DF586510F3E38B00F6159C /* ILSwapItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapItem.m; path = SwapKit/ILSwapItem.m; sourceTree = SOURCE_ROOT; };
 		15DF586610F3E38B00F6159C /* ILSwapItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapItem.h; path = SwapKit/ILSwapItem.h; sourceTree = SOURCE_ROOT; };
 		15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Backdrop-Bluetooth.png"; path = "Theme/Backdrop-Bluetooth.png"; sourceTree = "<group>"; };
@@ -758,7 +782,6 @@
 				157B96C11076589B00F1A1A8 /* AddressBookUI.framework in Frameworks */,
 				154FA54910790FD1004DF675 /* MessageUI.framework in Frameworks */,
 				1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */,
-				1507DEA211C025DB00EB85B8 /* CrashReporter.framework in Frameworks */,
 				15CF7B9911CE903E0010EA06 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -923,6 +946,7 @@
 				15035880113523B800144ADC /* Icon512.png */,
 				15CFDB3F107112C800FAB245 /* Arrow.png */,
 				15CFDB40107112C800FAB245 /* DrawerBackdrop.png */,
+				15DA1E2D12032263003685F5 /* DrawerBackdrop@2x.png */,
 				1591A7061063EC4000C5A5BD /* Backdrop.png */,
 				15F036E0107B46720094D21E /* Backdrop-Bluetooth.png */,
 				15CFDB2110710B2D00FAB245 /* TopShadow.png */,
@@ -1252,9 +1276,13 @@
 			children = (
 				1591A7121063EEF700C5A5BD /* MvrSlide.xib */,
 				1591A7151063EF2900C5A5BD /* Frame-Highlighted.png */,
+				15DA1DFC120312A7003685F5 /* Frame-Highlighted@2x.png */,
 				1591A7161063EF2900C5A5BD /* Frame.png */,
+				15DA1DF912031226003685F5 /* Frame@2x.png */,
 				1591A7461063EF8A00C5A5BD /* ActionButton-Pressed.png */,
+				15DA1DEC120311A5003685F5 /* ActionButton-Pressed@2x.png */,
 				1591A7471063EF8A00C5A5BD /* ActionButton.png */,
+				15DA1DE912031175003685F5 /* ActionButton@2x.png */,
 			);
 			name = "Slide view";
 			sourceTree = "<group>";
@@ -1425,15 +1453,23 @@
 			isa = PBXGroup;
 			children = (
 				15C8A1E31116D09700F844A7 /* NetworkToolbarIcon.png */,
+				15DA1E1612031678003685F5 /* NetworkToolbarIcon@2x.png */,
 				15D91B0C109250C700D8BAA9 /* PlusSign.png */,
 				156E804110663AEB00315D0C /* GenericItemIcon.png */,
+				151BD33D12032559001FADFD /* GenericItemIcon@2x.png */,
 				158CBFE210775816006813A7 /* VideoItemIcon.png */,
+				151BD34012032598001FADFD /* VideoItemIcon@2x.png */,
 				158CBFE41077583F006813A7 /* ContactWithoutImageIcon.png */,
+				15DA1E29120321B4003685F5 /* ContactWithoutImageIcon@2x.png */,
 				15955934107760EE00FBC9B4 /* BookmarkIcon.png */,
+				15DA1E2512032145003685F5 /* BookmarkIcon@2x.png */,
 				159559E4107769F500FBC9B4 /* TextIcon.png */,
 				156A619F115B43BC00AF75CD /* DocIcon.png */,
+				15DA1E1212031638003685F5 /* DocIcon@2x.png */,
 				15D46D0C10724C5A00DA8260 /* DrawerButton.png */,
+				15DA1E31120322F4003685F5 /* DrawerButton@2x.png */,
 				15D46D0D10724C5A00DA8260 /* DrawerLabelHolder.png */,
+				15DA1E3412032320003685F5 /* DrawerLabelHolder@2x.png */,
 				157B68B11072548600E25E96 /* GreenDot.png */,
 				157B68B31072548D00E25E96 /* RedDot.png */,
 				155F650311633EFA00FC526E /* StoreTableViewCell.png */,
@@ -1534,7 +1570,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				1567511310620DF7006EC706 /* libz.1.1.3.dylib */,
-				1507DEA111C025DB00EB85B8 /* CrashReporter.framework */,
 				1567511510620DFC006EC706 /* SystemConfiguration.framework */,
 				1567511710620E01006EC706 /* CFNetwork.framework */,
 				1567511910620E08006EC706 /* MobileCoreServices.framework */,
@@ -1852,6 +1887,19 @@
 				152426A811D7E26E00C3535F /* MvrNoOpeningOptions.strings in Resources */,
 				15A298AD11D9D35F0013D197 /* MvrGenericItemReceived_CanOpen.alert in Resources */,
 				15A298B111D9D36F0013D197 /* MvrGenericItemReceived_CanOpen.strings in Resources */,
+				15DA1DEA12031175003685F5 /* ActionButton@2x.png in Resources */,
+				15DA1DED120311A5003685F5 /* ActionButton-Pressed@2x.png in Resources */,
+				15DA1DFA12031226003685F5 /* Frame@2x.png in Resources */,
+				15DA1DFD120312A7003685F5 /* Frame-Highlighted@2x.png in Resources */,
+				15DA1E1312031638003685F5 /* DocIcon@2x.png in Resources */,
+				15DA1E1712031678003685F5 /* NetworkToolbarIcon@2x.png in Resources */,
+				15DA1E2612032145003685F5 /* BookmarkIcon@2x.png in Resources */,
+				15DA1E2A120321B4003685F5 /* ContactWithoutImageIcon@2x.png in Resources */,
+				15DA1E2E12032263003685F5 /* DrawerBackdrop@2x.png in Resources */,
+				15DA1E32120322F4003685F5 /* DrawerButton@2x.png in Resources */,
+				15DA1E3512032320003685F5 /* DrawerLabelHolder@2x.png in Resources */,
+				151BD33E12032559001FADFD /* GenericItemIcon@2x.png in Resources */,
+				151BD34112032598001FADFD /* VideoItemIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

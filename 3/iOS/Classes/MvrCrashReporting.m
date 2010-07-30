@@ -23,7 +23,7 @@
 }
 
 #if kMvrDisableCrashReporting
-#warning Crash reporting is disabled for this build.
+// #warning Crash reporting is disabled for this build.
 #endif
 
 
