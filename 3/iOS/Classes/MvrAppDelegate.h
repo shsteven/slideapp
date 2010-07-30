@@ -27,6 +27,10 @@
 
 #import "MvrDirectoryWatcher.h"
 
+
+#define kMvrHighQualityVideoEnabledKey @"MvrHighQualityVideoEnabled"
+
+
 @protocol MvrAppServices <MvrPlatformInfo>
 
 - (void) presentModalViewController:(UIViewController*) ctl;
@@ -37,6 +41,8 @@
 
 @property(readonly) BOOL soundsAvailable;
 @property(assign) BOOL soundsEnabled;
+
+@property(assign) BOOL highQualityVideoEnabled;
 
 @end
 

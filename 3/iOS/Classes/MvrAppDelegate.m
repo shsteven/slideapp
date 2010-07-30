@@ -725,4 +725,15 @@ enum {
 	return NO;
 }
 
+- (BOOL) highQualityVideoEnabled;
+{
+	NSNumber* n = L0As(NSNumber, [[NSUserDefaults standardUserDefaults] objectForKey:kMvrHighQualityVideoEnabledKey]);
+	return n? [n boolValue] : YES;
+}
+
+- (void) setHighQualityVideoEnabled:(BOOL) h;
+{
+	[[NSUserDefaults standardUserDefaults] setBool:h forKey:kMvrHighQualityVideoEnabledKey];
+}
+
 @end

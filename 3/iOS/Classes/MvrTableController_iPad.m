@@ -174,6 +174,16 @@ typedef NSInteger MvrEdge;
 			
 		}];
 		
+		[appObserver observe:@"highQualityVideoEnabled" ofObject:MvrServices() options:0 usingBlock:^(id o, NSDictionary* change) {
+			
+			// this makes sure we don't have a high-quality UIImagePickerController lying around.
+			if (addPopover) {
+				[addPopover dismissPopoverAnimated:YES];
+				[addPopover release]; addPopover = nil;
+			}
+			
+		}];
+		
 		[self setupProgressReportPart];
 	}
 }
@@ -712,7 +722,7 @@ typedef NSInteger MvrEdge;
 	if (!networkPopover) {
 		MvrWiFiNetworkStatePane* networkPane = [[MvrWiFiNetworkStatePane new] autorelease];
 		networkPopover = [[UIPopoverController alloc] initWithContentViewController:networkPane];
-		networkPopover.delegate = self;
+		// networkPopover.delegate = self;
 	}
 	
 	if (self.view.window)

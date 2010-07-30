@@ -251,6 +251,31 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	
 	// ---
 	
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(id) kUTTypeMovie]) {
+		
+		MvrMorePaneSection* videoQualitySection = [MvrMorePaneSection section];
+		[content addObject:videoQualitySection];
+		
+		// High Quality Videos |--1| <-- UISwitch
+		UITableViewCell* videos = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+		videos.textLabel.text = NSLocalizedString(@"High Quality Video", @"HQ Video on/off cell title");
+		
+		[videos setIsAccessibilityElement:NO];
+		
+		switchy = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
+		[switchy sizeToFit];
+		[switchy addTarget:self action:@selector(didChangeSounds:) forControlEvents:UIControlEventValueChanged];
+		switchy.on = MvrServices().highQualityVideoEnabled;
+		
+		videos.accessoryView = switchy;
+		videos.selectionStyle = UITableViewCellSelectionStyleNone;
+		
+		[videoQualitySection.cells addObject:videos];
+		videoQualitySection.footer = NSLocalizedString(@"High quality videos take more time to transfer. Turn off to transfer a smaller, compressed video instead.", @"HQ Video section footer");
+	}
+	
+	// ---
+	
 	MvrMorePaneSection* legalitiesSection = [MvrMorePaneSection section];
 	[content addObject:legalitiesSection];
 	

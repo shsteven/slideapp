@@ -54,6 +54,9 @@
 	picker.delegate = self;
 	picker.sourceType = sourceType;
 	picker.mediaTypes = [NSArray arrayWithObjects:(id) kUTTypeImage, (id) kUTTypeMovie, nil];
+	
+	picker.videoQuality = MvrServices().highQualityVideoEnabled? UIImagePickerControllerQualityTypeHigh : UIImagePickerControllerQualityTypeMedium;
+	
 	[MvrApp() presentModalViewController:picker];
 	[picker release];
 }

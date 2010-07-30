@@ -82,3 +82,6 @@
 "No values" = "Nessun valore";
 "%@, Contact" = "%@, Contatto";
 "%@, other device on the network" = "%@, dispositivo su questa rete";
+
+"High Quality Video" = "Video di alta qualità";
+"High quality videos take more time to transfer. Turn off to transfer a smaller, compressed video instead." = "I video di alta qualità richiedono un tempo di trasferimento maggiore. Spegni l'alta qualità per inviare invece video compressi, più piccoli.";

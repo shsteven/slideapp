@@ -13,6 +13,8 @@
 #import "MvrVideoItem.h"
 #import "MvrPasteboardItemSource.h"
 
+#import "MvrAppDelegate.h"
+
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface MvrAddPane ()
@@ -91,6 +93,8 @@ static inline UIBarButtonItem* ILBarButtonItemFlexibleSpace() {
 		libraryController = [[UIImagePickerController alloc] init];
 		libraryController.mediaTypes = [NSArray arrayWithObjects:(id) kUTTypeImage, (id) kUTTypeMovie, nil];
 		libraryController.delegate = self;
+		
+		libraryController.videoQuality = MvrServices().highQualityVideoEnabled? UIImagePickerControllerQualityTypeHigh : UIImagePickerControllerQualityTypeMedium;
 	}
 	
 	return libraryController;
