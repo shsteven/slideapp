@@ -16,6 +16,8 @@ enum {
 	kMvrAppVariantMoverLite,
 	
 	kMvrAppVariantMoverConduit, // an app that runs on a desktop computer.
+	
+	kMvrAppVariantMoverMini, // Mover Mini, aka embedded as a library in another app.
 };
 typedef NSUInteger MvrAppVariant;
 
@@ -25,6 +27,9 @@ typedef NSUInteger MvrAppVariant;
 // use #if TARGET_OS_IPHONE.
 // If something specifies a version and the version does not include a platform, assume this for obvious reasons.
 extern NSString* const kMvrAppleiPhoneOSPlatform;
+
+// Rename for iOS. Use this name rather than the above one for newer apps.
+#define kMvrAppleiOSPlatform kMvrAppleiPhoneOSPlatform
 
 // Apple Mac OS X
 // use #if TARGET_OS_MAC && !TARGET_OS_IPHONE.
