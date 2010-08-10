@@ -69,6 +69,11 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 	
 	self.progress = p.progress;
 	[metadata setObject:value forKey:key];
+	if ([key isEqual:kMvrProtocolMetadataTypeKey]) {
+		[self willChangeValueForKey:@"type"];
+		self.type = value;
+		[self didChangeValueForKey:@"type"];
+	}
 }
 
 - (void) packetParser:(MvrPacketParser*) p willReceivePayloadForKey:(NSString*) key size:(unsigned long long) size;
@@ -149,6 +154,9 @@ static BOOL MvrWriteDataToOutputStreamSynchronously(NSOutputStream* stream, NSDa
 
 - (void) produceItem;
 {
+	if (self.cancelled)
+		return;
+	
 	self.progress = 1.0;
 	
 	NSString* title = [metadata objectForKey:kMvrProtocolMetadataTitleKey], 
