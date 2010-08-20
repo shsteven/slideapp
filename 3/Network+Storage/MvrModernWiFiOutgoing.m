@@ -274,4 +274,9 @@ static BOOL MvrIPv6Allowed = NO;
 	[outgoingSocket readDataToLength:1 withTimeout:120 tag:0];
 }
 
+- (MvrItem *) item;
+{
+	return item;
+}
+
 @end

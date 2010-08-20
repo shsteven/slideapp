@@ -92,4 +92,9 @@ NSString* const kMvrLegacyWiFiOutgoingErrorDomain = @"MvrLegacyWiFiOutgoingError
 	return YES;
 }
 
+- (MvrItem *) item;
+{
+	return item;
+}
+
 @end

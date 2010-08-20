@@ -18,4 +18,7 @@
 // Can be 0.0..1.0 or kMvrIndeterminateProgress. KVOable.
 - (float) progress;
 
+// The item being sent. Set on first appaerance.
+- (MvrItem*) item;
+
 @end
