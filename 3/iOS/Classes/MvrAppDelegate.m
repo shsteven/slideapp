@@ -238,36 +238,16 @@ enum {
 
 @synthesize storageCentral;
 
-- (NSString*) itemsDirectory;
-{
-	if (!itemsDirectory) {
-		NSArray* docsDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSAssert([docsDirs count] > 0, @"At least one documents directory is known");
-		
-		NSString* docsDir = [docsDirs objectAtIndex:0];
-		
-#if kMvrVariantSettings_UseSubdirectoryForItemStorage
-		docsDir = [docsDir stringByAppendingPathComponent:@"Mover Items"];
-		if (![[NSFileManager defaultManager] fileExistsAtPath:docsDir]) {
-			NSError* e;
-			BOOL created = [[NSFileManager defaultManager] createDirectoryAtPath:docsDir withIntermediateDirectories:YES attributes:nil error:&e];
-			if (!created)
-				L0LogAlways(@"Could not create the Mover Items subdirectory: %@", e);
-			NSAssert(created, @"Could not create the Mover Items subdirectory!");
-		}
-#endif
-		
-		itemsDirectory = [docsDir copy];
-	}
-	
-	return itemsDirectory;
-}
-
 - (void) setUpStorageCentral;
 {
 	MvrStorageSetTemporaryDirectory(NSTemporaryDirectory());
 	storageCentral = [[MvrStorage iOSStorage] retain];
 	[storageCentral migrateFrom30StorageInUserDefaultsIfNeeded];
+}
+
+- (NSString *) itemsDirectory;
+{
+	return storageCentral.itemsDirectory;
 }
 
 #pragma mark -

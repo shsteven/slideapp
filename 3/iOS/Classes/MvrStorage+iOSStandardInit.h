@@ -13,6 +13,9 @@ extern BOOL MvrIsDirectory(NSString* path);
 
 @interface MvrStorage (MvrOSStandardInit)
 
++ (NSString*) defaultItemsDirectory;
++ (NSString *) defaultMetadataDirectory;
+
 + iOSStorage;
 - (void) migrateFrom30StorageInUserDefaultsIfNeeded;
 

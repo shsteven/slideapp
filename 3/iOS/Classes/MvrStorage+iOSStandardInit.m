@@ -18,12 +18,33 @@ BOOL MvrIsDirectory(NSString* path) {
 
 @implementation MvrStorage (MvriOSStandardInit)
 
++ (NSString*) defaultItemsDirectory;
+{
+	NSArray* docsDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSAssert([docsDirs count] > 0, @"At least one documents directory is known");
+			
+	NSString* docsDir = [docsDirs objectAtIndex:0];
+			
+#if kMvrVariantSettings_UseSubdirectoryForItemStorage
+	docsDir = [docsDir stringByAppendingPathComponent:@"Mover Items"];
+#endif
+	
+	return docsDir;
+}
+
++ (NSString*) defaultMetadataDirectory;
+{
+	NSString* metaDir = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	metaDir = [metaDir stringByAppendingPathComponent:@"Mover Metadata"];
+
+	return metaDir;
+}
+
 + iOSStorage;
 {
 // TODO support Open /Mover Items subdirectory
-	NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	NSString* metaDir = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	metaDir = [metaDir stringByAppendingPathComponent:@"Mover Metadata"];
+	NSString* docsDir = [self defaultItemsDirectory];
+	NSString* metaDir = [self defaultMetadataDirectory];
 	
 	NSFileManager* fm = [NSFileManager defaultManager];
 	
