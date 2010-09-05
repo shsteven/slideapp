@@ -81,8 +81,6 @@
 	<string>MainWindow</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow-iPad</string>
-	<key>UIApplicationExitsOnSuspend</key>
-	<true/>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>CFBundleDocumentTypes</key>

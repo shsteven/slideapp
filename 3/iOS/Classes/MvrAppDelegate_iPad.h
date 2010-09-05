@@ -65,6 +65,8 @@
 	BOOL didShowNetworkTroubleAlert;
 	
 	MvrCrashReporting* crashReporting;
+	
+	BOOL didTemporarilyStopWiFi, didTemporarilyStopBT;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow* window;

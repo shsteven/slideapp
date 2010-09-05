@@ -417,7 +417,7 @@
 		153B40C0105BEAFC00DB8FB2 /* DDGetoptLongParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGetoptLongParser.h; sourceTree = "<group>"; };
 		153B40C1105BEAFC00DB8FB2 /* DDGetoptLongParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGetoptLongParser.m; sourceTree = "<group>"; };
 		153B40F4105BEC9500DB8FB2 /* TestTool.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = TestTool.xcconfig; sourceTree = "<group>"; };
-		153B4212105BF36700DB8FB2 /* mvr-wifi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mvr-wifi"; sourceTree = BUILT_PRODUCTS_DIR; };
+		153B4212105BF36700DB8FB2 /* mvr-wifi */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = "mvr-wifi"; sourceTree = BUILT_PRODUCTS_DIR; };
 		155E8F8F107B24AA00F8B33B /* MvrStreamedIncoming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrStreamedIncoming.h; sourceTree = "<group>"; };
 		155E8F91107B24AA00F8B33B /* MvrStreamedIncoming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrStreamedIncoming.m; sourceTree = "<group>"; };
 		156B0A1110902E5D00209F2D /* Mover-Network-iPhone.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Network-iPhone.xcconfig"; sourceTree = "<group>"; };
@@ -1067,7 +1067,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Network+Storage" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* Network */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";

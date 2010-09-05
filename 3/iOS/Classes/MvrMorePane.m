@@ -12,6 +12,10 @@
 #import "MvrAppDelegate.h"
 #import "MvrMessagesCell.h"
 
+#if kMvrIsLite
+#import "MvrStorePane.h"
+#endif
+
 UIView* MvrWhiteSectionFooterView(NSString* footerText, UITableView* tableView, UILineBreakMode footerLineBreakMode, UIFont* footerFont) {
 	UIView* footer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 100)] autorelease];
 	footer.backgroundColor = [UIColor clearColor];
@@ -181,6 +185,14 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	[MvrServices().tellAFriend start];
 }
 
+- (void) pushStore:(id) store;
+{
+	MvrStorePane* pane = [[MvrStorePane alloc] initWithDefaultNibName];
+	[self.navigationController pushViewController:pane animated:YES];
+	[self.navigationController setNavigationBarHidden:NO animated:YES];
+	[pane release];	
+}
+
 - (void) makeTableStructure:(NSMutableArray*) content;
 {
 #if kMvrIsLite
@@ -197,6 +209,30 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 		tellAFriend.textLabel.textColor = [UIColor grayColor];
 	tellAFriend.action = @selector(tellAFriend:);
 	[commandsSection.cells addObject:tellAFriend];
+	
+
+	// ||| STORE |||
+	MvrMorePaneSection* moverStoreSection = [MvrMorePaneSection section];
+	[content addObject:moverStoreSection];
+	MvrMorePaneActionCell* store = [[[MvrMorePaneActionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+
+	UIImageView* iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StoreTableViewCell.png"]];
+		
+	iv.highlightedImage = [UIImage imageNamed:@"StoreTableViewCell_Highlighted.png"];
+	
+	iv.contentMode = UIViewContentModeTop;
+	iv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+	iv.frame = store.contentView.bounds;
+	
+	[store.contentView addSubview:iv];
+	[iv release];
+	
+	[store setAccessibilityLabel:NSLocalizedString(@"Store", @"Store cell accessibility label")];
+	
+	store.action = @selector(pushStore:);
+	moverStoreSection.footer = NSLocalizedString(@"Find out about Mover Lite's feature packs, or get more information on Mover+, the paid version of Mover, at the Store.", @"Upsell section text");
+	[moverStoreSection.cells addObject:store];
+	
 #endif
 	
 	MvrMorePaneSection* messagesSection = [MvrMorePaneSection section];
@@ -384,7 +420,7 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	if (!footerText)
 		return 0;
 	
-	return MvrWhiteSectionFooterHeight(footerText, tableView, self.footerLineBreakMode, self.footerFont) + self.footerTopBottomMargin * 2;
+	return MvrWhiteSectionFooterHeight(footerText, tableView, self.footerLineBreakMode, self.footerFont) + self.footerTopBottomMargin * 1.8;
 }
 
 @end

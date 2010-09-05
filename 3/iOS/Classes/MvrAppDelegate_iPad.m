@@ -8,6 +8,8 @@
 
 #import "MvrAppDelegate_iPad.h"
 
+#if !kMvrIsLite
+
 #import <AddressBook/AddressBook.h>
 
 #import "MvrItemController.h"
@@ -156,6 +158,27 @@
 {
 	if (self.currentScanner == wifi)
 		wifi.enabled = YES;
+}
+
+- (void) applicationWillResignActive:(UIApplication *)application;
+{
+	if (self.currentScanner == wifi) {
+		didTemporarilyStopBT = NO;
+		didTemporarilyStopWiFi = wifi.enabled;
+		wifi.enabled = NO;
+	} else if (self.currentScanner == bluetooth) {
+		didTemporarilyStopBT = bluetooth.enabled;
+		didTemporarilyStopWiFi = NO;
+		bluetooth.enabled = NO;		
+	}
+}
+
+- (void) applicationDidBecomeActive:(UIApplication *)application;
+{
+	if (didTemporarilyStopWiFi && self.currentScanner == wifi)
+		wifi.enabled = YES;
+	else if (didTemporarilyStopBT && self.currentScanner == bluetooth)
+		bluetooth.enabled = YES;
 }
 
 - (void) openFileAtPath:(NSString*) path;
@@ -482,3 +505,5 @@
 }
 
 @end
+
+#endif

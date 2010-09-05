@@ -134,6 +134,12 @@ enum {
 	return !url || [url isFileURL] || ok;
 }
 
+- (void) applicationWillResignActive:(UIApplication *)application;
+{
+	if (![self.tableController.currentMode isKindOfClass:[MvrWiFi class]])
+		[self moveToWiFiMode];
+}
+
 - (BOOL) performActionsForURL:(NSURL*) url;
 {
 #if !kMvrIsLite
@@ -659,7 +665,9 @@ enum {
 
 - (void) testByPerformingAlertParade;
 {
-	NSArray* allResources = [[NSFileManager defaultManager] directoryContentsAtPath:[[NSBundle mainBundle] resourcePath]];
+//	NSArray* allResources = [[NSFileManager defaultManager] directoryContentsAtPath:[[NSBundle mainBundle] resourcePath]];
+	
+	NSArray* allResources = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[[NSBundle mainBundle] resourcePath] error:NULL];
 	
 	for (NSString* resource in allResources) {
 		if ([[resource pathExtension] isEqual:@"alert"]) {

@@ -197,23 +197,9 @@ enum {
 		case kMvrAboutSectionUpsell:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_Upsell:
-					// cell.textLabel.text = NSLocalizedString(@"Get more features in Mover+", @"Upsell entry in about box");
+					cell.textLabel.text = NSLocalizedString(@"Get more features in Mover+", @"Upsell entry in about box");
+					cell.imageView.image = [UIImage imageNamed:@"PlusSign.png"];
 					
-				{
-					UIImageView* iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StoreTableViewCell.png"]];
-					
-					iv.highlightedImage = [UIImage imageNamed:@"StoreTableViewCell_Highlighted.png"];
-					
-					iv.contentMode = UIViewContentModeTop;
-					iv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-					iv.frame = cell.contentView.bounds;
-					
-					[cell.contentView addSubview:iv];
-					[iv release];
-					
-					[cell setAccessibilityLabel:NSLocalizedString(@"Store", @"Store cell accessibility label")];
-					
-				}
 					break;
 			}
 			
@@ -281,16 +267,9 @@ enum {
 		case kMvrAboutSectionUpsell:
 			switch ([indexPath row]) {
 				case kMvrAboutEntry_Upsell:
-//					[self retain]; // balanced in -openAppStoreURL:
-//					[UIApp beginIgnoringInteractionEvents];
-//					[kMvrUpsellURL beginResolvingRedirectsWithDelegate:self selector:@selector(openAppStoreURL:)];
-				{
-					MvrStorePane* pane = [[MvrStorePane alloc] initWithDefaultNibName];
-					[self.navigationController pushViewController:pane animated:YES];
-					[self.navigationController setNavigationBarHidden:NO animated:YES];
-					[pane release];
-				}
-					
+					[self retain]; // balanced in -openAppStoreURL:
+					[UIApp beginIgnoringInteractionEvents];
+					[kMvrUpsellURL beginResolvingRedirectsWithDelegate:self selector:@selector(openAppStoreURL:)];
 					break;
 			}
 			
@@ -335,14 +314,14 @@ enum {
 #if kMvrIsLite
 
 - (NSString*) upsellSectionMoverText {
-	return NSLocalizedString(@"Find out about Mover Lite's feature packs, or get more information on Mover+, the paid version of Mover, at the Store.", @"Upsell section text");
+	return NSLocalizedString(@"Mover+ has iPad support, file transfer, can connect to Macs, and receives updates before Mover Lite does.", @"Upsell section text");
 }
 
 - (CGFloat) tableView:(UITableView *)tv heightForFooterInSection:(NSInteger)section;
 {
 	switch (section) {
 		case kMvrAboutSectionUpsell:
-			return MvrWhiteSectionFooterHeight(self.upsellSectionMoverText, tv, kMvrWhiteSectionDefaultLineBreakMode, MvrWhiteSectionFooterDefaultFont()) + kMvrWhiteSectionDefaultTopBottomMargin / 2.0;
+			return MvrWhiteSectionFooterHeight(self.upsellSectionMoverText, tv, kMvrWhiteSectionDefaultLineBreakMode, MvrWhiteSectionFooterDefaultFont()) + kMvrWhiteSectionDefaultTopBottomMargin / 2.0 + 10;
 			
 		default:
 			return 0;
