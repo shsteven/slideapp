@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+
+@class PLCrashReport;
+
+#if !kMvrDisableCrashReporting
 #import <CrashReporter/CrashReporter.h>
+#endif
+
 #import <MessageUI/MessageUI.h>
 
 @interface MvrCrashReporting : NSObject <MFMailComposeViewControllerDelegate, UIAlertViewDelegate> {

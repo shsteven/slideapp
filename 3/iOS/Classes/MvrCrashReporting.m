@@ -97,6 +97,8 @@ static void MvrHandleException(NSException* ex) {
 
 - (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
+#if !kMvrDisableCrashReporting
+	
 	if (buttonIndex == alert.cancelButtonIndex)
 		return;
 	
@@ -121,6 +123,7 @@ static void MvrHandleException(NSException* ex) {
 	[mail setMessageBody:emailBody isHTML:NO];
 	[mail addAttachmentData:reportData mimeType:@"application/octet-stream" fileName:@"Crash Report.plcrash"];
 	[MvrApp() presentModalViewController:mail];	
+#endif
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)mail didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
