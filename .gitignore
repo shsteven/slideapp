@@ -29,3 +29,7 @@ Ads/CurrentSettings.xcconfig
 OCMock.framework
 DDCli
 3/iPad/Mover3-iPad.xcodeproj/.LSOverride
+
+# Xcode 4 stuff
+*.xcworkspace
+xcuserdata
