@@ -12,6 +12,8 @@
 #import <sys/types.h>
 #import <sys/event.h>
 #import <sys/time.h>
+#import <stdio.h>
+#import <unistd.h>
 
 @interface MvrDirectoryWatcher ()
 

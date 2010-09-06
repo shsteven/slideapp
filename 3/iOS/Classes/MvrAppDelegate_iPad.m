@@ -504,6 +504,11 @@
 	[[NSUserDefaults standardUserDefaults] setBool:h forKey:kMvrHighQualityVideoEnabledKey];
 }
 
+- (BOOL) isFeatureAvailable:(MvrStoreFeature)feature;
+{
+	return YES;
+}
+
 @end
 
 #endif

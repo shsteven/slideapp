@@ -3,7 +3,7 @@
 #include "Variants/Current/Variant.xcconfig"
 
 // iPhone-only baseline settings.
-SDKROOT = iphoneos3.2
+SDKROOT = iphoneos4.1
 IPHONEOS_DEPLOYMENT_TARGET = 3.1
 
 // Silences IB.

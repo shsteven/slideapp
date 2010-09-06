@@ -514,7 +514,7 @@ enum {
 				deleteConfirm.cancelButtonIndex = [deleteConfirm addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on action sheet") identifier:kMvrAppDelegateCancelButtonIdentifier];
 				
 				deleteConfirm.delegate = self;
-				[deleteConfirm showInView:self.window];
+				[deleteConfirm performSelector:@selector(showInView:) withObject:self.window afterDelay:0.01];
 			
 			} else if ([identifier isEqual:kMvrAppDelegateSendButtonIdentifier])
 				[self displaySendActionSheetForItem:item];

@@ -44,6 +44,8 @@
 
 @property(assign) BOOL highQualityVideoEnabled;
 
+- (BOOL) isFeatureAvailable:(MvrStoreFeature) feature;
+
 @end
 
 

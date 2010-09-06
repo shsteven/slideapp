@@ -20,7 +20,7 @@
 #define kSCNetworkReachabilityFlagsIsWWAN 0 // unavailable on Mac OS X
 #endif
 
-@interface MvrWiFiScanner ()
+@interface MvrWiFiScanner () < ILClassAlsoConformsTo_Foundation(NSNetServiceDelegate, NSNetServiceBrowserDelegate) >
 
 - (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
 - (BOOL) isSelfPublishedService:(NSNetService*) sender;

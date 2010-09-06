@@ -22,7 +22,11 @@
 static void TCPListenerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType type, 
                                       CFDataRef address, const void *data, void *info);
 
-@interface TCPListener()
+#ifndef ILClassAlsoConformsTo_Foundation
+#define ILClassAlsoConformsTo_Foundation(...) __VA_ARGS__
+#endif
+
+@interface TCPListener() < ILClassAlsoConformsTo_Foundation(NSNetServiceDelegate, NSNetServiceBrowserDelegate) >
 - (void) _openBonjour;
 - (void) _closeBonjour;
 @property BOOL bonjourPublished;

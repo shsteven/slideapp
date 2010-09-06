@@ -13,6 +13,7 @@
 #import "MvrMessagesCell.h"
 
 #if kMvrIsLite
+#import "MvrStore.h"
 #import "MvrStorePane.h"
 #endif
 
@@ -128,6 +129,10 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 		NSMutableArray* structure = [NSMutableArray array];
 		[self makeTableStructure:structure];
 		cellsBySection = [structure copy];
+		
+#if kMvrIsLite
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didUnlockProduct:) name:kMvrStoreProductUnlockedNotification object:nil];
+#endif
 	}
 	
 	return self;
@@ -137,6 +142,10 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 
 - (void) dealloc
 {
+#if kMvrIsLite
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+#endif
+	
 	[cellsBySection release];
 	[super dealloc];
 }
@@ -185,6 +194,7 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	[MvrServices().tellAFriend start];
 }
 
+#if kMvrIsLite
 - (void) pushStore:(id) store;
 {
 	MvrStorePane* pane = [[MvrStorePane alloc] initWithDefaultNibName];
@@ -192,6 +202,7 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	[self.navigationController setNavigationBarHidden:NO animated:YES];
 	[pane release];	
 }
+#endif
 
 - (void) makeTableStructure:(NSMutableArray*) content;
 {
@@ -287,7 +298,7 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	
 	// ---
 	
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(id) kUTTypeMovie]) {
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(id) kUTTypeMovie] && [MvrServices() isFeatureAvailable:kMvrFeatureVideoSending]) {
 		
 		MvrMorePaneSection* videoQualitySection = [MvrMorePaneSection section];
 		[content addObject:videoQualitySection];
@@ -421,6 +432,16 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 		return 0;
 	
 	return MvrWhiteSectionFooterHeight(footerText, tableView, self.footerLineBreakMode, self.footerFont) + self.footerTopBottomMargin * 1.8;
+}
+
+- (void) didUnlockProduct:(NSNotification*) n;
+{
+	NSMutableArray* structure = [NSMutableArray array];
+	[self makeTableStructure:structure];
+	[cellsBySection release];
+	cellsBySection = [structure copy];
+
+	[self.tableView reloadData];
 }
 
 @end
