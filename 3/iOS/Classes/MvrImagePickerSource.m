@@ -13,6 +13,8 @@
 #import "MvrImageItem.h"
 #import "MvrVideoItem.h"
 
+#import <AssetsLibrary/AssetsLibrary.h>
+
 @interface MvrImagePickerSource ()
 
 - (id) initWithDisplayName:(NSString*) dn displayNameWithoutVideo:(NSString*) dnNoVideo sourceType:(UIImagePickerControllerSourceType) s;
@@ -20,6 +22,8 @@
 - (void) performAddingImage:(UIImage*) i;
 - (void) performAddingImageAtPath:(NSString*) path type:(NSString*) type;
 - (void) performAddingVideoAtPath:(NSString *)path type:(NSString *)type;
+
+- (void) continueImportingMediaForPicker:(UIImagePickerController *)picker withInfo:(NSDictionary *)info;
 
 @end
 
@@ -65,9 +69,54 @@
 {
 	L0Log(@"Picked: %@", info);
 	
+	Class al = NSClassFromString(@"ALAssetsLibrary");
+	if (&UIImagePickerControllerReferenceURL != NULL && al) {
+		ALAssetsLibrary* library = [[al new] autorelease];
+		
+		[library assetForURL:[info objectForKey:UIImagePickerControllerReferenceURL]
+				 resultBlock:^(ALAsset* ala) {
+					 L0Log(@"Asset: %@", ala);
+					 
+					 id type = (id) kUTTypeJPEG;
+					 
+					 ALAssetRepresentation* rep = [ala representationForUTI:type];
+					 if (!rep) {
+						 type = (id) kUTTypePNG;
+						 rep = [ala representationForUTI:type];
+					 }
+					 
+					 if (rep) {
+						 // we're loading it all in memory for now.
+						 NSMutableData* d = [NSMutableData dataWithLength:[rep size]];
+						 NSUInteger bytes = [rep getBytes:[d mutableBytes] fromOffset:0 length:[rep size] error:NULL];
+						 if (bytes == [d length]) {
+							 
+							 MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:d];
+							 MvrItem* item = [[MvrImageItem alloc] initWithStorage:storage type:type metadata:nil];
+							 [MvrApp() addItemFromSelf:item];
+							 [item release];
+							 
+							 [picker dismissModalViewControllerAnimated:YES];
+							 return;
+							
+						 }
+					 }
+					 
+					 [self continueImportingMediaForPicker:picker withInfo:info];
+				 }
+				failureBlock:^(NSError* e) {
+					L0Log(@"Error: %@", e);
+					[self continueImportingMediaForPicker:picker withInfo:info];
+				}];		
+	} else
+		[self continueImportingMediaForPicker:picker withInfo:info];
+}
+
+- (void) continueImportingMediaForPicker:(UIImagePickerController*) picker withInfo:(NSDictionary*) info;
+{
 	NSString* uti = [info objectForKey:UIImagePickerControllerMediaType];
 	if (uti) {
-	
+		
 		NSURL* url = [info objectForKey:UIImagePickerControllerMediaURL];
 		
 		if (UTTypeConformsTo((CFStringRef) uti, kUTTypeImage)) {
@@ -78,7 +127,7 @@
 				UIImage* i = [info objectForKey:UIImagePickerControllerOriginalImage];
 				if (i) {
 					[self performAddingImage:i];
-				
+					
 					if (sourceType == UIImagePickerControllerSourceTypeCamera)
 						UIImageWriteToSavedPhotosAlbum(i, nil, NULL, NULL);
 				}

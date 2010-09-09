@@ -94,6 +94,7 @@
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
+		1521B29E123968D9004A34FC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1521B29D123968D9004A34FC /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		1522444010CAB0C600ACF91B /* MvrImageVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */; };
 		1522444110CAB0C600ACF91B /* MvrTextVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */; };
 		152426A811D7E26E00C3535F /* MvrNoOpeningOptions.strings in Resources */ = {isa = PBXBuildFile; fileRef = 152426A611D7E26E00C3535F /* MvrNoOpeningOptions.strings */; };
@@ -663,6 +664,7 @@
 		151E021F106767A900C6CDFF /* MvrImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemUI.m; sourceTree = "<group>"; };
 		151E02211067683400C6CDFF /* MvrImagePickerSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImagePickerSource.h; sourceTree = "<group>"; };
 		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
+		1521B29D123968D9004A34FC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrImageVisor.xib; sourceTree = "<group>"; };
 		1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTextVisor.xib; sourceTree = "<group>"; };
 		152426A711D7E26E00C3535F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoOpeningOptions.strings; sourceTree = SOURCE_ROOT; };
@@ -698,7 +700,7 @@
 		15464A8710861B30005E5642 /* MvrMessageChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMessageChecker.m; sourceTree = "<group>"; };
 		1546D8A010ECE0B500DDDFE2 /* ILSwapKitGuards.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapKitGuards.m; path = SwapKit/ILSwapKitGuards.m; sourceTree = SOURCE_ROOT; };
 		1546D8A110ECE0B500DDDFE2 /* ILSwapKitGuards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapKitGuards.h; path = SwapKit/ILSwapKitGuards.h; sourceTree = SOURCE_ROOT; };
-		154BCAE61235017600D1B145 /* Mover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mover.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		154BCAE61235017600D1B145 /* Mover Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mover Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		154BCAE81235017600D1B145 /* Mover Lite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mover Lite-Info.plist"; sourceTree = "<group>"; };
 		154BD6F51089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrAppDelegate+HelpAlerts.h"; sourceTree = "<group>"; };
 		154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrAppDelegate+HelpAlerts.m"; sourceTree = "<group>"; };
@@ -1025,6 +1027,7 @@
 				154BCB84123503C100D1B145 /* MessageUI.framework in Frameworks */,
 				154BCB85123503C100D1B145 /* GameKit.framework in Frameworks */,
 				154BCB86123503C100D1B145 /* AVFoundation.framework in Frameworks */,
+				1521B29E123968D9004A34FC /* AssetsLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1827,7 +1830,7 @@
 			children = (
 				1D6058910D05DD3D006BFB54 /* MoverPlus.app */,
 				150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */,
-				154BCAE61235017600D1B145 /* Mover.app */,
+				154BCAE61235017600D1B145 /* Mover Lite.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1859,6 +1862,7 @@
 				150C411F10A48C1200EBCE51 /* Bug Fixing Tests-Info.plist */,
 				15CF7B9811CE903E0010EA06 /* AVFoundation.framework */,
 				154BCAE81235017600D1B145 /* Mover Lite-Info.plist */,
+				1521B29D123968D9004A34FC /* AssetsLibrary.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1930,7 +1934,7 @@
 			);
 			name = "Mover Lite";
 			productName = "Mover Lite";
-			productReference = 154BCAE61235017600D1B145 /* Mover.app */;
+			productReference = 154BCAE61235017600D1B145 /* Mover Lite.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1D6058900D05DD3D006BFB54 /* Mover3 */ = {
@@ -3110,6 +3114,7 @@
 				);
 				INFOPLIST_FILE = "Mover Lite-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				IS_DEBUG = 1;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/StoreUI/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"";
 				OTHER_LDFLAGS = (
 					"-lStoreUI",
@@ -3160,6 +3165,7 @@
 				);
 				INFOPLIST_FILE = "Mover Lite-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				IS_DEBUG = 0;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/StoreUI/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"";
 				OTHER_LDFLAGS = (
 					"-lStoreUI",
@@ -3208,6 +3214,7 @@
 				);
 				INFOPLIST_FILE = "Mover Lite-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				IS_DEBUG = 0;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/StoreUI/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"";
 				OTHER_LDFLAGS = (
 					"-lStoreUI",
@@ -3241,6 +3248,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=$(IS_DEBUG)",
 					"kMvrIsLite=1",
 					"kMvrCurrentAppVariant=kMvrAppVariantMoverLite",
 					"kMvrCurrentAppVariantDisplayName=@\\\"Mover\\\"",
@@ -3255,6 +3263,7 @@
 				);
 				INFOPLIST_FILE = "Mover Lite-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				IS_DEBUG = 0;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/StoreUI/build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"";
 				OTHER_LDFLAGS = (
 					"-lStoreUI",

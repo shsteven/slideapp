@@ -22,6 +22,8 @@
 // #import "MvrSwapKitSendToAction.h"
 #import "MvrDocumentOpenAction.h"
 
+#import <AssetsLibrary/AssetsLibrary.h>
+
 @implementation MvrImageItemUI
 
 - (id) init
@@ -62,6 +64,13 @@
 - (void) didStoreItem:(MvrItem*) i;
 {
 	[itemsBeingSaved addObject:i];
+	
+	Class al = NSClassFromString(@"ALAssetsLibrary");
+	if (al && [al instancesRespondToSelector:@selector(writeImageDataToSavedPhotosAlbum:metadata:completionBlock:)]) {
+		ALAssetsLibrary* library = [[al new] autorelease];
+		[library writeImageDataToSavedPhotosAlbum:i.storage.data metadata:nil completionBlock:^(NSURL* url, NSError* e) {}];
+		return;
+	}
 	
 	CFRetain(i); // balanced in image:didFinishSavingWithError:context:
 	UIImageWriteToSavedPhotosAlbum(((MvrImageItem*)i).image, self, @selector(image:didFinishSavingWithError:context:), (void*) i);
