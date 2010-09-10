@@ -465,7 +465,7 @@ enum {
 	as.cancelButtonIndex = [as addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button on action sheet") identifier:kMvrAppDelegateCancelButtonIdentifier];
 
 	as.delegate = self;
-	[as showInView:self.window];
+	[as showInView:[self viewControllerForPresentingModalViewControllers].view];
 }
 
 - (void) displaySendActionSheetForItem:(MvrItem*) i;
