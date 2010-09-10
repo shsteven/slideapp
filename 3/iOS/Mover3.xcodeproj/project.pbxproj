@@ -6,6 +6,21 @@
 	objectVersion = 45;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		1553101C123AD6F500A15F73 /* Mover (All Variants) */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1553102A123AD70600A15F73 /* Build configuration list for PBXAggregateTarget "Mover (All Variants)" */;
+			buildPhases = (
+			);
+			dependencies = (
+				15531022123AD6FF00A15F73 /* PBXTargetDependency */,
+				15531024123AD6FF00A15F73 /* PBXTargetDependency */,
+			);
+			name = "Mover (All Variants)";
+			productName = "Mover (All Variants)";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		15035881113523B800144ADC /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1503587F113523B800144ADC /* Icon72.png */; };
 		15035882113523B800144ADC /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = 15035880113523B800144ADC /* Icon512.png */; };
@@ -573,6 +588,20 @@
 			remoteGlobalIDString = 156FD7720F7A261B00F83283;
 			remoteInfo = MuiKit;
 		};
+		15531021123AD6FF00A15F73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D6058900D05DD3D006BFB54 /* Mover3 */;
+			remoteInfo = Mover3;
+		};
+		15531023123AD6FF00A15F73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 154BCAE51235017600D1B145 /* Mover Lite */;
+			remoteInfo = "Mover Lite";
+		};
 		1567513F10620E3C006EC706 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1567512210620E27006EC706 /* MuiKit.xcodeproj */;
@@ -633,28 +662,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D /* libStoreUI.a */;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
 			remoteInfo = StoreUI;
 		};
 		15A74D47123A0DA800F207F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 155C33D611405DB80029B7C0 /* StoreUI.bundle */;
+			remoteGlobalIDString = 155C33D611405DB80029B7C0;
 			remoteInfo = "StoreUI (Resources)";
 		};
 		15A74D49123A0DA800F207F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 158D66C9115E084E004F0DE2 /* StoreTest.app */;
+			remoteGlobalIDString = 158D66C9115E084E004F0DE2;
 			remoteInfo = StoreTest;
 		};
 		15A74D4B123A0DB300F207F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 155C33DC11405E0D0029B7C0 /* StoreUI (All) */;
+			remoteGlobalIDString = 155C33DC11405E0D0029B7C0;
 			remoteInfo = "StoreUI (All)";
 		};
 /* End PBXContainerItemProxy section */
@@ -735,7 +764,7 @@
 		15464A8710861B30005E5642 /* MvrMessageChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMessageChecker.m; sourceTree = "<group>"; };
 		1546D8A010ECE0B500DDDFE2 /* ILSwapKitGuards.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapKitGuards.m; path = SwapKit/ILSwapKitGuards.m; sourceTree = SOURCE_ROOT; };
 		1546D8A110ECE0B500DDDFE2 /* ILSwapKitGuards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ILSwapKitGuards.h; path = SwapKit/ILSwapKitGuards.h; sourceTree = SOURCE_ROOT; };
-		154BCAE61235017600D1B145 /* Mover Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mover Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		154BCAE61235017600D1B145 /* Mover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		154BCAE81235017600D1B145 /* Mover Lite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mover Lite-Info.plist"; sourceTree = "<group>"; };
 		154BD6F51089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrAppDelegate+HelpAlerts.h"; sourceTree = "<group>"; };
 		154BD6F61089F0AD00C45562 /* MvrAppDelegate+HelpAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrAppDelegate+HelpAlerts.m"; sourceTree = "<group>"; };
@@ -758,6 +787,7 @@
 		1551993610BFD4BE002589CD /* MvrAdActingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrAdActingController.m; sourceTree = "<group>"; };
 		1551999310C00E85002589CD /* MvrWiFiMode-AppleAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrWiFiMode-AppleAd.m"; sourceTree = "<group>"; };
 		1551999510C00EA2002589CD /* MvrBluetoothMode-AppleAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrBluetoothMode-AppleAd.m"; sourceTree = "<group>"; };
+		15530FF0123ACEA000A15F73 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		1553517A1088468900C75A6C /* MvrMorePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMorePane.h; sourceTree = "<group>"; };
 		1553517B1088468900C75A6C /* MvrMorePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrMorePane.m; sourceTree = "<group>"; };
 		155352411088547D00C75A6C /* MvrMessagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrMessagesCell.h; sourceTree = "<group>"; };
@@ -1885,7 +1915,7 @@
 			children = (
 				1D6058910D05DD3D006BFB54 /* MoverPlus.app */,
 				150C411E10A48C1200EBCE51 /* Bug Fixing Tests.octest */,
-				154BCAE61235017600D1B145 /* Mover Lite.app */,
+				154BCAE61235017600D1B145 /* Mover.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1918,6 +1948,7 @@
 				15CF7B9811CE903E0010EA06 /* AVFoundation.framework */,
 				154BCAE81235017600D1B145 /* Mover Lite-Info.plist */,
 				1521B29D123968D9004A34FC /* AssetsLibrary.framework */,
+				15530FF0123ACEA000A15F73 /* QuickLook.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1989,7 +2020,7 @@
 			);
 			name = "Mover Lite";
 			productName = "Mover Lite";
-			productReference = 154BCAE61235017600D1B145 /* Mover Lite.app */;
+			productReference = 154BCAE61235017600D1B145 /* Mover.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1D6058900D05DD3D006BFB54 /* Mover3 */ = {
@@ -2059,6 +2090,7 @@
 				1D6058900D05DD3D006BFB54 /* Mover3 */,
 				150C411D10A48C1200EBCE51 /* Bug Fixing Tests */,
 				154BCAE51235017600D1B145 /* Mover Lite */,
+				1553101C123AD6F500A15F73 /* Mover (All Variants) */,
 			);
 		};
 /* End PBXProject section */
@@ -2801,6 +2833,16 @@
 			name = MuiKit;
 			targetProxy = 154BCB9E123503EE00D1B145 /* PBXContainerItemProxy */;
 		};
+		15531022123AD6FF00A15F73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D6058900D05DD3D006BFB54 /* Mover3 */;
+			targetProxy = 15531021123AD6FF00A15F73 /* PBXContainerItemProxy */;
+		};
+		15531024123AD6FF00A15F73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 154BCAE51235017600D1B145 /* Mover Lite */;
+			targetProxy = 15531023123AD6FF00A15F73 /* PBXContainerItemProxy */;
+		};
 		1567514810620E42006EC706 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MuiKit;
@@ -3207,7 +3249,7 @@
 					UIKit,
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = "Mover Lite";
+				PRODUCT_NAME = Mover;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.1;
 				kMvrDisableCrashReporting = 1;
@@ -3258,7 +3300,7 @@
 					UIKit,
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = "Mover Lite";
+				PRODUCT_NAME = Mover;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.1;
 				ZERO_LINK = NO;
@@ -3394,6 +3436,41 @@
 			};
 			name = "Ad Hoc";
 		};
+		1553101D123AD6F500A15F73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Mover (All Variants)";
+			};
+			name = Debug;
+		};
+		1553101E123AD6F500A15F73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Mover (All Variants)";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		1553101F123AD6F500A15F73 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Mover (All Variants)";
+			};
+			name = "Ad Hoc";
+		};
+		15531020123AD6F500A15F73 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Mover (All Variants)";
+			};
+			name = "App Store";
+		};
 		157CBD0D108F157600146778 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 156CF0D9105BAECB006D8E7A /* Mover.xcconfig */;
@@ -3503,6 +3580,17 @@
 				154BCAEA1235017700D1B145 /* Release */,
 				154BCAEB1235017700D1B145 /* Ad Hoc */,
 				154BCAEC1235017700D1B145 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "App Store";
+		};
+		1553102A123AD70600A15F73 /* Build configuration list for PBXAggregateTarget "Mover (All Variants)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1553101D123AD6F500A15F73 /* Debug */,
+				1553101E123AD6F500A15F73 /* Release */,
+				1553101F123AD6F500A15F73 /* Ad Hoc */,
+				15531020123AD6F500A15F73 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = "App Store";
