@@ -50,6 +50,8 @@
 		progress = kMvrIndeterminateProgress;
 		
 		self.pressAndHoldDelay = 0.7;
+		
+		self.highQualityMark.hidden = YES;
 	}
 	
     return self;
