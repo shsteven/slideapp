@@ -78,6 +78,14 @@
 
 - (void) performShowOrOpenAction:(MvrItemAction *)showOrOpen withItem:(MvrItem *)i;
 {
+	Class mpvc = ILWeakClass(MPMoviePlayerViewController);
+	if (mpvc) {
+		MPMoviePlayerViewController* m = [[mpvc alloc] initWithContentURL:[NSURL fileURLWithPath:i.storage.path]];
+		m.moviePlayer.useApplicationAudioSession = NO;
+		[[MvrApp() viewControllerForPresentingModalViewControllers] presentMoviePlayerViewControllerAnimated:m];
+		return;
+	}
+	
 	if (currentPlayer)
 		return;
 	
@@ -96,8 +104,6 @@
 
 - (UIImage*) representingImageWithSize:(CGSize)size forItem:(MvrVideoItem*	)i;
 {
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
-	// iPad only!
 	if ([MPMoviePlayerController instancesRespondToSelector:@selector(thumbnailImageAtTime:timeOption:)]) {
 		
 		MPMoviePlayerController* ctl = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:i.storage.path]];
@@ -106,8 +112,7 @@
 		
 		if (image) return image;
 	}
-#endif
-	
+
 	return [UIImage imageNamed:@"VideoItemIcon.png"];
 }
 

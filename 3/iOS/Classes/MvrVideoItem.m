@@ -27,6 +27,7 @@
 			(id) kUTTypeQuickTimeMovie,
 			(id) kUTTypeMPEG4,
 			@"com.apple.protected-mpeg-4-video",
+			@"com.apple.m4v-video",
 			nil];
 }
 

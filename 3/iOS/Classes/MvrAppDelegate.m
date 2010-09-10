@@ -562,14 +562,18 @@ enum {
 #pragma mark -
 #pragma mark Utility methods
 
-- (void) presentModalViewController:(UIViewController*) ctl;
+- (UIViewController*) viewControllerForPresentingModalViewControllers;
 {
-	ctl.view.frame = self.window.bounds;
 	UIViewController* vc = self.tableController;
 	while (vc.modalViewController != nil)
 		vc = vc.modalViewController;
-	
-	[vc presentModalViewController:ctl animated:YES];
+	return vc;
+}
+
+- (void) presentModalViewController:(UIViewController*) ctl;
+{
+	ctl.view.frame = self.window.bounds;	
+	[[self viewControllerForPresentingModalViewControllers] presentModalViewController:ctl animated:YES];
 }
 
 #pragma mark -

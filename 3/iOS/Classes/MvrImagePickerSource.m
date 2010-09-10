@@ -77,28 +77,68 @@
 				 resultBlock:^(ALAsset* ala) {
 					 L0Log(@"Asset: %@", ala);
 					 
-					 id type = (id) kUTTypeJPEG;
-					 
-					 ALAssetRepresentation* rep = [ala representationForUTI:type];
-					 if (!rep) {
-						 type = (id) kUTTypePNG;
-						 rep = [ala representationForUTI:type];
-					 }
-					 
-					 if (rep) {
-						 // we're loading it all in memory for now.
-						 NSMutableData* d = [NSMutableData dataWithLength:[rep size]];
-						 NSUInteger bytes = [rep getBytes:[d mutableBytes] fromOffset:0 length:[rep size] error:NULL];
-						 if (bytes == [d length]) {
+					 // video? sidetrack
+					 if (MvrApp().highQualityVideoEnabled && [[ala valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypeVideo]) {
+						 ALAssetRepresentation* rep = [ala defaultRepresentation];
+						 id type = [rep UTI];
+						 
+						 MvrItemStorage* storage = [MvrItemStorage itemStorage];
+						 NSOutputStream* output = [storage outputStreamForContentOfAssumedSize:[rep size]];
+						 [output open];
+						 
+						 long long size = [rep size];
+						 uint8_t* bytes = (uint8_t*) malloc(1024 * 1024);
+						 
+						 while (size > 0) {
+							 long long toRead = MIN(size, 1024 * 1024);
+							 NSInteger actuallyRead = [rep getBytes:bytes fromOffset:[rep size] - size length:toRead error:NULL];
+							 if (actuallyRead != toRead)
+								 break;
+							 [output write:bytes maxLength:actuallyRead];
+							 if ([output streamError])
+								 break;
 							 
-							 MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:d];
-							 MvrItem* item = [[MvrImageItem alloc] initWithStorage:storage type:type metadata:nil];
-							 [MvrApp() addItemFromSelf:item];
-							 [item release];
-							 
+							 size -= actuallyRead;
+						 }
+						 
+						 free(bytes);
+						 
+						 [output close];
+						 [storage endUsingOutputStream];
+						 
+						 if (size == 0) { // all was read
+							 MvrVideoItem* videoItem = [[MvrVideoItem alloc] initWithStorage:storage type:type metadata:nil];
+							 [videoItem setObject:[NSNumber numberWithBool:YES] forItemNotesKey:kMvrVideoItemDidSave];
+							 [MvrApp() addItemFromSelf:videoItem];
+							 [videoItem release];
 							 [picker dismissModalViewControllerAnimated:YES];
 							 return;
-							
+						 }
+						 
+					 } else {
+						 id type = (id) kUTTypeJPEG;
+						 
+						 ALAssetRepresentation* rep = [ala representationForUTI:type];
+						 if (!rep) {
+							 type = (id) kUTTypePNG;
+							 rep = [ala representationForUTI:type];
+						 }
+						 
+						 if (rep) {
+							 // we're loading it all in memory for now.
+							 NSMutableData* d = [NSMutableData dataWithLength:[rep size]];
+							 NSUInteger bytes = [rep getBytes:[d mutableBytes] fromOffset:0 length:[rep size] error:NULL];
+							 if (bytes == [d length]) {
+								 
+								 MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:d];
+								 MvrItem* item = [[MvrImageItem alloc] initWithStorage:storage type:type metadata:nil];
+								 [MvrApp() addItemFromSelf:item];
+								 [item release];
+								 
+								 [picker dismissModalViewControllerAnimated:YES];
+								 return;
+								
+							 }
 						 }
 					 }
 					 

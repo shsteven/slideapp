@@ -109,6 +109,8 @@
 
 - (BOOL) isFeatureAvailable:(MvrStoreFeature) f;
 
+- (UIViewController*) viewControllerForPresentingModalViewControllers;
+
 @end
 
 // -----

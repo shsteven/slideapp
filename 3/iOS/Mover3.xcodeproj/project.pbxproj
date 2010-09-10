@@ -111,6 +111,7 @@
 		1533F4CC1088FFC20025005B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 1533F4C91088FFC10025005B /* iTunesArtwork */; };
 		1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1537A6E0107A388000B16B88 /* GameKit.framework */; };
 		1537A6E9107A3CC900B16B88 /* MvrBluetoothMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537A6E8107A3CC900B16B88 /* MvrBluetoothMode.m */; };
+		153D4CD512399A96007C38FE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1521B29D123968D9004A34FC /* AssetsLibrary.framework */; };
 		153F18B21228F1AA00AEDD68 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153F18B11228F1AA00AEDD68 /* PLBlocks.framework */; };
 		1541D14011CD375E0061D150 /* MvrProgressReportPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1541D13E11CD375E0061D150 /* MvrProgressReportPart.m */; };
 		1541D14111CD375E0061D150 /* MvrProgressReportPart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1541D13F11CD375E0061D150 /* MvrProgressReportPart.xib */; };
@@ -1052,6 +1053,7 @@
 				1537A6E1107A388000B16B88 /* GameKit.framework in Frameworks */,
 				15CF7B9911CE903E0010EA06 /* AVFoundation.framework in Frameworks */,
 				153F18B21228F1AA00AEDD68 /* PLBlocks.framework in Frameworks */,
+				153D4CD512399A96007C38FE /* AssetsLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
