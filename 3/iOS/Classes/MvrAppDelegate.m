@@ -79,7 +79,7 @@ enum {
 @implementation MvrAppDelegate
 
 - (BOOL) application:(UIApplication*) application didFinishLaunchingWithOptions:(NSDictionary*) options;
-{
+{	
 	UIApp.idleTimerDisabled = YES;
 	
 	[self setUpItemClassesAndUIs];
@@ -120,6 +120,13 @@ enum {
 	
 #if kMvrIsLite
 	[MvrStore setStoreUIBundleFromResource:@"StoreUI" ofType:@"bundle" inBundle:[NSBundle mainBundle]];
+	
+#if DEBUG
+	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrTestByRelockingAllProducts"] boolValue]) {
+		[[MvrStore store] relockAllProducts];
+	}
+#endif
+	
 	[[MvrStore store] beginObservingTransactions];
 #endif
 	

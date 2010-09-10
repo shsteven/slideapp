@@ -164,7 +164,7 @@ static NSData* MvrNegativeAcknowledgmentPacket(NSUInteger seqNo) {
 
 + (NSData*) liteWarningPacket;
 {
-	return [NSData dataWithBytesNoCopy:kMvrIsLitePacket length:kMvrIsLitePacket_Size];
+	return [NSData dataWithBytes:kMvrIsLitePacket length:kMvrIsLitePacket_Size];
 }
 
 + (BOOL) shouldStartReceivingWithData:(NSData*) data;

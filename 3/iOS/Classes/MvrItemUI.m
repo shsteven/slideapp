@@ -21,7 +21,6 @@ static NSMutableArray* MvrItemSources = nil;
 
 - (id) initWithDisplayName:(NSString*) name correspondingUI:(MvrItemUI*) ui;
 
-@property(setter=private_setDisplayName:, copy) NSString* displayName;
 @property(setter=private_setCorrespondingUI:, retain) MvrItemUI* correspondingUI;
 
 @end
@@ -327,6 +326,12 @@ static NSMutableDictionary* MvrItemClassesToUIs = nil;
 {
 	L0AbstractMethod();
 	return nil;
+}
+
+- (BOOL) isItemHighQuality:(id) i;
+{
+	id x = [[i itemNotes] objectForKey:kMvrItemHighQualityNoteKey];
+	return x && [x isEqual:[NSNumber numberWithBool:YES]];
 }
 
 @end

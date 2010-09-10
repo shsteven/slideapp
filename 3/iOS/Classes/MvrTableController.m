@@ -241,18 +241,22 @@ static CGPoint MvrCenterOf(CGRect r) {
 
 - (void) setItem:(MvrItem*) i forSlide:(MvrSlide*) slide;
 {
+	MvrItemUI* ui = [MvrItemUI UIForItem:i];
+	
 	[slide setActionButtonTarget:self selector:@selector(displayActionMenuForItemOfView:)];
 	
 	NSString* title = i.title ?: @"";
 	slide.titleLabel.text = title;
-	slide.imageView.image = [[MvrItemUI UIForItem:i] representingImageWithSize:slide.imageView.bounds.size forItem:i];
+	slide.imageView.image = [ui representingImageWithSize:slide.imageView.bounds.size forItem:i];
 	
 	[itemsToViews setObject:slide forKey:i];
 	[viewsToItems setObject:i forKey:slide];
 	
-	[slide setAccessibilityLabel:[[MvrItemUI UIForItem:i] accessibilityLabelForItem:i]];
+	[slide setAccessibilityLabel:[ui accessibilityLabelForItem:i]];
 	
 	self.editButtonItem.enabled = YES;
+	
+	slide.highQualityMark.hidden = ![ui isItemHighQuality:i];
 }
 
 #pragma mark -

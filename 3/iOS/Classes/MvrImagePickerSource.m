@@ -13,6 +13,8 @@
 #import "MvrImageItem.h"
 #import "MvrVideoItem.h"
 
+#import "MvrItemUI.h" // for kMvrItemHighQualityNoteKey
+
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface MvrImagePickerSource ()
@@ -32,24 +34,33 @@
 
 - (id) initWithDisplayName:(NSString*) dn displayNameWithoutVideo:(NSString*) dnNoVideo sourceType:(UIImagePickerControllerSourceType) s;
 {
-	// UIImagePicker has two possible display names:
-	// "Add Photo" -- if no available video, or
-	// "Add Photo or Video" if video.
-	
-	BOOL isVideoAvailable;
-#if kMvrIsLite
-	isVideoAvailable = [MvrApp() isFeatureAvailable:kMvrFeatureVideoSending];
-#else
-	isVideoAvailable = [UIImagePickerController isSourceTypeAvailable:sourceType] && [[UIImagePickerController availableMediaTypesForSourceType:s] containsObject:(id) kUTTypeMovie];
-#endif
-	
-	NSString* name = isVideoAvailable?
-		dn : dnNoVideo;
-	
-	if (self = [super initWithDisplayName:name])
+	if ((self = [super initWithDisplayName:nil])) {
+		// UIImagePicker has two possible display names:
+		// "Add Photo" -- if no available video, or
+		// "Add Photo or Video" if video.
+		
+		isVideoAvailable = [UIImagePickerController isSourceTypeAvailable:sourceType] && [[UIImagePickerController availableMediaTypesForSourceType:s] containsObject:(id) kUTTypeMovie];
+		
+		displayNameWithVideo = [dn copy];
+		displayNameWithoutVideo = [dnNoVideo copy];
+		
 		sourceType = s;
+	}
 	
 	return self;
+}
+
+- (void) dealloc
+{
+	[displayNameWithVideo release];
+	[displayNameWithoutVideo release];
+	[super dealloc];
+}
+
+
+- (NSString *) displayName;
+{
+	return (isVideoAvailable && [MvrApp() isFeatureAvailable:kMvrFeatureVideoSending])? displayNameWithVideo : displayNameWithoutVideo;
 }
 
 - (void) beginAddingItem;
@@ -57,7 +68,7 @@
 	UIImagePickerController* picker = [[UIImagePickerController alloc] init];
 	picker.delegate = self;
 	picker.sourceType = sourceType;
-	picker.mediaTypes = [NSArray arrayWithObjects:(id) kUTTypeImage, (id) kUTTypeMovie, nil];
+	picker.mediaTypes = (isVideoAvailable && [MvrApp() isFeatureAvailable:kMvrFeatureVideoSending])? [NSArray arrayWithObjects:(id) kUTTypeImage, (id) kUTTypeMovie, nil] : [NSArray arrayWithObject:(id) kUTTypeImage];
 	
 	picker.videoQuality = MvrServices().highQualityVideoEnabled? UIImagePickerControllerQualityTypeHigh : UIImagePickerControllerQualityTypeMedium;
 	
@@ -109,6 +120,8 @@
 						 if (size == 0) { // all was read
 							 MvrVideoItem* videoItem = [[MvrVideoItem alloc] initWithStorage:storage type:type metadata:nil];
 							 [videoItem setObject:[NSNumber numberWithBool:YES] forItemNotesKey:kMvrVideoItemDidSave];
+							 [videoItem setObject:[NSNumber numberWithBool:YES] forItemNotesKey:kMvrItemHighQualityNoteKey];
+
 							 [MvrApp() addItemFromSelf:videoItem];
 							 [videoItem release];
 							 [picker dismissModalViewControllerAnimated:YES];
@@ -132,7 +145,10 @@
 								 
 								 MvrItemStorage* storage = [MvrItemStorage itemStorageWithData:d];
 								 MvrItem* item = [[MvrImageItem alloc] initWithStorage:storage type:type metadata:nil];
+								 [item setObject:[NSNumber numberWithBool:YES] forItemNotesKey:kMvrItemHighQualityNoteKey];
+								 
 								 [MvrApp() addItemFromSelf:item];
+								 
 								 [item release];
 								 
 								 [picker dismissModalViewControllerAnimated:YES];

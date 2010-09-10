@@ -13,6 +13,9 @@
 
 @interface MvrImagePickerSource : MvrItemSource <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
 	UIImagePickerControllerSourceType sourceType;
+	BOOL isVideoAvailable;
+	
+	NSString* displayNameWithVideo, * displayNameWithoutVideo;
 }
 
 @end

@@ -24,7 +24,7 @@
 @implementation MvrSlide
 
 
-@synthesize contentView, titleLabel, imageView, highlightView, backdropView;
+@synthesize contentView, titleLabel, imageView, highlightView, backdropView, highQualityMark;
 @synthesize spinner, progressBar;
 
 - (id) initWithFrame:(CGRect) frame;

@@ -418,6 +418,12 @@
 		15A298AD11D9D35F0013D197 /* MvrGenericItemReceived_CanOpen.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A298AC11D9D35F0013D197 /* MvrGenericItemReceived_CanOpen.alert */; };
 		15A298B111D9D36F0013D197 /* MvrGenericItemReceived_CanOpen.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15A298AF11D9D36F0013D197 /* MvrGenericItemReceived_CanOpen.strings */; };
 		15A7143B11CB698100BB9759 /* MvrStorage+iOSStandardInit.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */; };
+		15A74D6D123A0DC800F207F9 /* StoreUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15A74D48123A0DA800F207F9 /* StoreUI.bundle */; };
+		15A74D6E123A0DCE00F207F9 /* libStoreUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A74D46123A0DA800F207F9 /* libStoreUI.a */; };
+		15A74DC5123A17B000F207F9 /* Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 15A74DC4123A17AC00F207F9 /* Checkmark.png */; };
+		15A74DC6123A17B300F207F9 /* Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 15A74DC4123A17AC00F207F9 /* Checkmark.png */; };
+		15A74DC8123A17C000F207F9 /* Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15A74DC7123A17BB00F207F9 /* Checkmark@2x.png */; };
+		15A74DC9123A17C300F207F9 /* Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15A74DC7123A17BB00F207F9 /* Checkmark@2x.png */; };
 		15A805BC108EECE100DE037F /* MvrGenericItemReceived.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */; };
 		15A8064F108F011C00DE037F /* MvrNetworkTrouble.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */; };
 		15AD032F1073F57200D92F5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AD032E1073F57200D92F5E /* QuartzCore.framework */; };
@@ -622,6 +628,34 @@
 			proxyType = 2;
 			remoteGlobalIDString = 153B4212105BF36700DB8FB2;
 			remoteInfo = "mvr-wifi";
+		};
+		15A74D45123A0DA800F207F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D /* libStoreUI.a */;
+			remoteInfo = StoreUI;
+		};
+		15A74D47123A0DA800F207F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 155C33D611405DB80029B7C0 /* StoreUI.bundle */;
+			remoteInfo = "StoreUI (Resources)";
+		};
+		15A74D49123A0DA800F207F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 158D66C9115E084E004F0DE2 /* StoreTest.app */;
+			remoteInfo = StoreTest;
+		};
+		15A74D4B123A0DB300F207F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 155C33DC11405E0D0029B7C0 /* StoreUI (All) */;
+			remoteInfo = "StoreUI (All)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -839,6 +873,10 @@
 		15A298B011D9D36F0013D197 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrGenericItemReceived_CanOpen.strings; sourceTree = "<group>"; };
 		15A7143911CB698100BB9759 /* MvrStorage+iOSStandardInit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrStorage+iOSStandardInit.h"; sourceTree = "<group>"; };
 		15A7143A11CB698100BB9759 /* MvrStorage+iOSStandardInit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrStorage+iOSStandardInit.m"; sourceTree = "<group>"; };
+		15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StoreUI.xcodeproj; path = StoreUI/StoreUI.xcodeproj; sourceTree = "<group>"; };
+		15A74DBB123A145A00F207F9 /* Checkmark.opacity */ = {isa = PBXFileReference; lastKnownFileType = file; name = Checkmark.opacity; path = ../Checkmark.opacity; sourceTree = "<group>"; };
+		15A74DC4123A17AC00F207F9 /* Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Checkmark.png; path = ../Checkmark.png; sourceTree = "<group>"; };
+		15A74DC7123A17BB00F207F9 /* Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Checkmark@2x.png"; path = "../Checkmark@2x.png"; sourceTree = "<group>"; };
 		15A805BB108EECE100DE037F /* MvrGenericItemReceived.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrGenericItemReceived.alert; sourceTree = "<group>"; };
 		15A8064E108F011C00DE037F /* MvrNetworkTrouble.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNetworkTrouble.alert; sourceTree = "<group>"; };
 		15AD032E1073F57200D92F5E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1012,6 +1050,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15A74D6E123A0DCE00F207F9 /* libStoreUI.a in Frameworks */,
 				154BCB77123503C100D1B145 /* libMoverNetwork.a in Frameworks */,
 				1541D83512350DFA00E32916 /* libMuiKit.a in Frameworks */,
 				154BCB79123503C100D1B145 /* libz.1.1.3.dylib in Frameworks */,
@@ -1419,6 +1458,9 @@
 				151E021F106767A900C6CDFF /* MvrImageItemUI.m */,
 				158CBF7010774EEE006813A7 /* MvrImageVisor.h */,
 				158CBF7110774EEE006813A7 /* MvrImageVisor.m */,
+				15A74DBB123A145A00F207F9 /* Checkmark.opacity */,
+				15A74DC4123A17AC00F207F9 /* Checkmark.png */,
+				15A74DC7123A17BB00F207F9 /* Checkmark@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1494,6 +1536,7 @@
 		15877AD41235168D00ED4AE4 /* Lite Theme Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */,
 				15877AE2123516B100ED4AE4 /* AboutPaneHeader.png */,
 				15877AE3123516B100ED4AE4 /* Backdrop-Bluetooth.png */,
 				15877AE4123516B100ED4AE4 /* Backdrop.png */,
@@ -1583,6 +1626,16 @@
 				15955A1C10776B2200FBC9B4 /* MvrTextVisor.m */,
 			);
 			name = "Text clippings";
+			sourceTree = "<group>";
+		};
+		15A74D39123A0DA700F207F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15A74D46123A0DA800F207F9 /* libStoreUI.a */,
+				15A74D48123A0DA800F207F9 /* StoreUI.bundle */,
+				15A74D4A123A0DA800F207F9 /* StoreTest.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		15AFE6EA108460E400CBCB35 /* Crash Reporting */ = {
@@ -1926,13 +1979,13 @@
 				154BCAE31235017600D1B145 /* Sources */,
 				154BCAE41235017600D1B145 /* Frameworks */,
 				154BCBA31235040600D1B145 /* Build Localizations */,
-				154BCC57123504A300D1B145 /* Build StoreUI & Copy Its Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				154BCB9D123503E800D1B145 /* PBXTargetDependency */,
 				154BCB9F123503EE00D1B145 /* PBXTargetDependency */,
+				15A74D4C123A0DB300F207F9 /* PBXTargetDependency */,
 			);
 			name = "Mover Lite";
 			productName = "Mover Lite";
@@ -1995,6 +2048,10 @@
 				{
 					ProductGroup = 156B0A4610902FFC00209F2D /* Products */;
 					ProjectRef = 156750FE10620DAD006EC706 /* Network+Storage.xcodeproj */;
+				},
+				{
+					ProductGroup = 15A74D39123A0DA700F207F9 /* Products */;
+					ProjectRef = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -2063,6 +2120,27 @@
 			remoteRef = 156B0A4F10902FFC00209F2D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		15A74D46123A0DA800F207F9 /* libStoreUI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libStoreUI.a;
+			remoteRef = 15A74D45123A0DA800F207F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15A74D48123A0DA800F207F9 /* StoreUI.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = StoreUI.bundle;
+			remoteRef = 15A74D47123A0DA800F207F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15A74D4A123A0DA800F207F9 /* StoreTest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = StoreTest.app;
+			remoteRef = 15A74D49123A0DA800F207F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -2077,6 +2155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15A74D6D123A0DC800F207F9 /* StoreUI.bundle in Resources */,
 				154BCBA41235041C00D1B145 /* MuiKit.bundle in Resources */,
 				154BCBA51235041C00D1B145 /* MainWindow.xib in Resources */,
 				154BCBA71235041C00D1B145 /* MvrSlide.xib in Resources */,
@@ -2206,6 +2285,8 @@
 				15877AE5123516B100ED4AE4 /* AboutPaneHeader.png in Resources */,
 				15877AE6123516B100ED4AE4 /* Backdrop-Bluetooth.png in Resources */,
 				15877AE7123516B100ED4AE4 /* Backdrop.png in Resources */,
+				15A74DC6123A17B300F207F9 /* Checkmark.png in Resources */,
+				15A74DC9123A17C300F207F9 /* Checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2344,6 +2425,8 @@
 				1510AB7C1233C33100916C8B /* PlusSign@2x.png in Resources */,
 				1510AC0B1233C85100916C8B /* StoreTableViewCell_Highlighted@2x.png in Resources */,
 				1510AC0C1233C85100916C8B /* StoreTableViewCell@2x.png in Resources */,
+				15A74DC5123A17B000F207F9 /* Checkmark.png in Resources */,
+				15A74DC8123A17C000F207F9 /* Checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2404,20 +2487,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "COMPILED_LOCALES_DIR=\"$BUILT_PRODUCTS_DIR\"/\"$WRAPPER_NAME\" PRODUCE_APPLIED=YES \"$INFINITELABS_TOOLS\"/BuildLocale\n";
-		};
-		154BCC57123504A300D1B145 /* Build StoreUI & Copy Its Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Build StoreUI & Copy Its Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Debug\" ]; then\n\tACTIONS=build\nelse\n\tACTIONS=\"clean build\"\nfi\n\nNO_CODE_SIGNING=\"CODE_SIGN_REQUIRED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= PROVISIONING_PROFILE=\"\n\ncd \"$SRCROOT/StoreUI\"\n\t\nxcodebuild -target \"StoreUI\" -configuration \"$CONFIGURATION\" -sdk \"$SDK_NAME\" $NO_CODE_SIGNING $ACTIONS\nxcodebuild -target \"StoreUI (Resources)\" -configuration \"$CONFIGURATION\" $NO_CODE_SIGNING $ACTIONS\n\ncd \"$SRCROOT\"\ncp -rv \"StoreUI/build/$CONFIGURATION/StoreUI.bundle\" \"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"/\n";
 		};
 		157CBD23108F160900146778 /* Check Current Variant */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2736,6 +2805,11 @@
 			isa = PBXTargetDependency;
 			name = MuiKit;
 			targetProxy = 1567514710620E42006EC706 /* PBXContainerItemProxy */;
+		};
+		15A74D4C123A0DB300F207F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "StoreUI (All)";
+			targetProxy = 15A74D4B123A0DB300F207F9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3102,6 +3176,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=$(IS_DEBUG)",
 					"kMvrIsLite=1",
 					"kMvrCurrentAppVariant=kMvrAppVariantMoverLite",
 					"kMvrCurrentAppVariantDisplayName=@\\\"Mover\\\"",

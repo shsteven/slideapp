@@ -38,6 +38,8 @@
 @property(assign) IBOutlet UIImageView* backdropView;
 @property(assign) IBOutlet UIButton* actionButton;
 
+@property(assign) IBOutlet UIImageView* highQualityMark;
+
 @property(assign) IBOutlet UIActivityIndicatorView* spinner;
 @property(assign) IBOutlet UIProgressView* progressBar;
 

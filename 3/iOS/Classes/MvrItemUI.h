@@ -13,6 +13,8 @@
 
 #import "MvrItemAction.h"
 
+#define kMvrItemHighQualityNoteKey @"MvrItemUIHighQuality"
+
 @class MvrItemSource;
 
 @interface MvrItemUI : NSObject <MFMailComposeViewControllerDelegate> {}
@@ -105,6 +107,10 @@
 // Used by the default impl of -fromItem:getData:mimeType:fileName:messageBody:isHTML: if it can't determine the path extension for an item (because its path has none and CoreServices doesn't know).
 - (NSString*) pathExtensionForItem:(id) i;
 
+// If YES, the item is deemed to be "high quality" when such a distinction is required. High quality items show distinctive marks on their onscreen representation.
+// By default, returns YES if the kMvrItemHighQualityNoteKey is equal to YES (as a NSNumber) in the item notes, NO otherwise.
+- (BOOL) isItemHighQuality:(id)i;
+
 @end
 
 
@@ -125,7 +131,7 @@
 // For UI controllers that make vanilla MvrItemSources and want to get -beginAddingItemForSource:
 + itemSourceWithDisplayName:(NSString*) name correspondingUI:(MvrItemUI*) ui;
 
-@property(readonly, copy) NSString* displayName;
+@property(copy) NSString* displayName;
 
 - (void) beginAddingItem;
 @property(readonly, retain) MvrItemUI* correspondingUI;
