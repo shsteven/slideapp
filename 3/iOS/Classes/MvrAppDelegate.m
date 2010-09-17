@@ -105,6 +105,12 @@ enum {
 	[crashReporting enableReporting];
 	
 	[messageChecker performSelector:@selector(checkIfNeeded) withObject:nil afterDelay:7.0];
+
+	if ([UIDevice instancesRespondToSelector:@selector(isMultitaskingSupported)] && [[UIDevice currentDevice] isMultitaskingSupported]) {
+		// if we're multitasking, we schedule a second check after a few hours, so that it can still trigger if we're kept alive for a long-ish time.
+		// checks are triggered every three hours. this doesn't mean they're DONE -- the call below still obeys our self-imposed limits (once per day/week on WWAN).
+		[self performSelector:@selector(performPeriodicMessagesCheck) withObject:nil afterDelay:(3 * 60 * 60)];
+	}
 		
 #if DEBUG
 	if ([[[[NSProcessInfo processInfo] environment] objectForKey:@"MvrTestByPerformingAlertParade"] boolValue]) {
@@ -139,6 +145,12 @@ enum {
 	[self setUpDirectoryWatching];
 	
 	return !url || [url isFileURL] || ok;
+}
+
+- (void) performPeriodicMessagesCheck;
+{
+	[messageChecker checkIfNeeded];
+	[self performSelector:@selector(performPeriodicMessagesCheck) withObject:nil afterDelay:3 * 60 * 60];	
 }
 
 - (void) applicationWillResignActive:(UIApplication *)application;

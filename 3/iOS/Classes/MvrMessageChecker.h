@@ -39,4 +39,6 @@
 - (void) displayMessage;
 - (void) checkOrDisplayMessage;
 
+- (void) checkIfNeeded;
+
 @end
