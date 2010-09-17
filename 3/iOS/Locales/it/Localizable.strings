@@ -84,5 +84,6 @@
 "%@, Contact" = "%@, Contatto";
 "%@, other device on the network" = "%@, dispositivo su questa rete";
 
-"High Quality Video" = "Video di alta qualità";
-"High quality videos take more time to transfer. Turn off to transfer a smaller, compressed video instead." = "I video di alta qualità richiedono un tempo di trasferimento maggiore. Spegni l'alta qualità per inviare invece video compressi, più piccoli.";
+"High Quality" = "Alta qualità";
+"High quality videos and photos take more time to transfer. Turn off to transfer smaller, compressed media instead." = "Foto e video di alta qualità richiedono più tempo per essere trasferiti. Spegni l'alta qualità per trasferire invece versioni compresse, più piccole.";
+"High quality photos take more time to transfer. Turn off to transfer smaller, compressed photos instead." = "Le foto di alta qualità richiedono più tempo per essere trasferite. Spegni l'alta qualità per trasferire invece versioni compresse, più piccole.";

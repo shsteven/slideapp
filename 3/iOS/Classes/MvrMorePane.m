@@ -298,28 +298,27 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	
 	// ---
 	
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(id) kUTTypeMovie] && [MvrServices() isFeatureAvailable:kMvrFeatureVideoSending]) {
+	BOOL shouldMentionVideo = ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(id) kUTTypeMovie] && [MvrServices() isFeatureAvailable:kMvrFeatureVideoSending]);
 		
-		MvrMorePaneSection* videoQualitySection = [MvrMorePaneSection section];
-		[content addObject:videoQualitySection];
-		
-		// High Quality Videos |--1| <-- UISwitch
-		UITableViewCell* videos = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-		videos.textLabel.text = NSLocalizedString(@"High Quality Video", @"HQ Video on/off cell title");
-		
-		[videos setIsAccessibilityElement:NO];
-		
-		switchy = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
-		[switchy sizeToFit];
-		[switchy addTarget:self action:@selector(didChangeSounds:) forControlEvents:UIControlEventValueChanged];
-		switchy.on = MvrServices().highQualityVideoEnabled;
-		
-		videos.accessoryView = switchy;
-		videos.selectionStyle = UITableViewCellSelectionStyleNone;
-		
-		[videoQualitySection.cells addObject:videos];
-		videoQualitySection.footer = NSLocalizedString(@"High quality videos take more time to transfer. Turn off to transfer a smaller, compressed video instead.", @"HQ Video section footer");
-	}
+	MvrMorePaneSection* videoQualitySection = [MvrMorePaneSection section];
+	[content addObject:videoQualitySection];
+	
+	// High Quality Videos |--1| <-- UISwitch
+	UITableViewCell* videos = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	videos.textLabel.text = NSLocalizedString(@"High Quality", @"HQ Video on/off cell title");
+	
+	[videos setIsAccessibilityElement:NO];
+	
+	switchy = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
+	[switchy sizeToFit];
+	[switchy addTarget:self action:@selector(didChangeHighQualityVideo:) forControlEvents:UIControlEventValueChanged];
+	switchy.on = MvrServices().highQualityVideoEnabled;
+	
+	videos.accessoryView = switchy;
+	videos.selectionStyle = UITableViewCellSelectionStyleNone;
+	
+	[videoQualitySection.cells addObject:videos];
+	videoQualitySection.footer = shouldMentionVideo? NSLocalizedString(@"High quality videos and photos take more time to transfer. Turn off to transfer smaller, compressed media instead.", @"HQ Video section footer") : NSLocalizedString(@"High quality photos take more time to transfer. Turn off to transfer smaller, compressed photos instead.", @"HQ Video section footer");
 	
 	// ---
 	
@@ -356,6 +355,11 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 - (void) didChangeSounds:(UISwitch*) sender;
 {
 	MvrServices().soundsEnabled = sender.on;
+}
+
+- (void) didChangeHighQualityVideo:(UISwitch*) sender;
+{
+	MvrServices().highQualityVideoEnabled = sender.on;
 }
 
 - (void) showLegalities:(id) sender;
