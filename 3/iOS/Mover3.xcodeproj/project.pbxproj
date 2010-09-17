@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		1553101C123AD6F500A15F73 /* Mover (All Variants) */ = {
+		1553101C123AD6F500A15F73 /* Mover (All) */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 1553102A123AD70600A15F73 /* Build configuration list for PBXAggregateTarget "Mover (All Variants)" */;
+			buildConfigurationList = 1553102A123AD70600A15F73 /* Build configuration list for PBXAggregateTarget "Mover (All)" */;
 			buildPhases = (
 			);
 			dependencies = (
 				15531022123AD6FF00A15F73 /* PBXTargetDependency */,
 				15531024123AD6FF00A15F73 /* PBXTargetDependency */,
 			);
-			name = "Mover (All Variants)";
+			name = "Mover (All)";
 			productName = "Mover (All Variants)";
 		};
 /* End PBXAggregateTarget section */
@@ -592,14 +592,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1D6058900D05DD3D006BFB54 /* Mover3 */;
+			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
 			remoteInfo = Mover3;
 		};
 		15531023123AD6FF00A15F73 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 154BCAE51235017600D1B145 /* Mover Lite */;
+			remoteGlobalIDString = 154BCAE51235017600D1B145;
 			remoteInfo = "Mover Lite";
 		};
 		1567513F10620E3C006EC706 /* PBXContainerItemProxy */ = {
@@ -679,12 +679,19 @@
 			remoteGlobalIDString = 158D66C9115E084E004F0DE2;
 			remoteInfo = StoreTest;
 		};
-		15A74D4B123A0DB300F207F9 /* PBXContainerItemProxy */ = {
+		15B58D8F123BB3F900BE3EE3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 155C33DC11405E0D0029B7C0;
-			remoteInfo = "StoreUI (All)";
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = StoreUI;
+		};
+		15B58D91123BB3F900BE3EE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15A74D38123A0DA700F207F9 /* StoreUI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 155C33D511405DB80029B7C0;
+			remoteInfo = "StoreUI (Resources)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -2016,7 +2023,8 @@
 			dependencies = (
 				154BCB9D123503E800D1B145 /* PBXTargetDependency */,
 				154BCB9F123503EE00D1B145 /* PBXTargetDependency */,
-				15A74D4C123A0DB300F207F9 /* PBXTargetDependency */,
+				15B58D90123BB3F900BE3EE3 /* PBXTargetDependency */,
+				15B58D92123BB3F900BE3EE3 /* PBXTargetDependency */,
 			);
 			name = "Mover Lite";
 			productName = "Mover Lite";
@@ -2090,7 +2098,7 @@
 				1D6058900D05DD3D006BFB54 /* Mover3 */,
 				150C411D10A48C1200EBCE51 /* Bug Fixing Tests */,
 				154BCAE51235017600D1B145 /* Mover Lite */,
-				1553101C123AD6F500A15F73 /* Mover (All Variants) */,
+				1553101C123AD6F500A15F73 /* Mover (All) */,
 			);
 		};
 /* End PBXProject section */
@@ -2848,10 +2856,15 @@
 			name = MuiKit;
 			targetProxy = 1567514710620E42006EC706 /* PBXContainerItemProxy */;
 		};
-		15A74D4C123A0DB300F207F9 /* PBXTargetDependency */ = {
+		15B58D90123BB3F900BE3EE3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "StoreUI (All)";
-			targetProxy = 15A74D4B123A0DB300F207F9 /* PBXContainerItemProxy */;
+			name = StoreUI;
+			targetProxy = 15B58D8F123BB3F900BE3EE3 /* PBXContainerItemProxy */;
+		};
+		15B58D92123BB3F900BE3EE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "StoreUI (Resources)";
+			targetProxy = 15B58D91123BB3F900BE3EE3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3352,6 +3365,7 @@
 				PRODUCT_NAME = Mover;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.1;
+				VALIDATE_PRODUCT = YES;
 				kMvrDisableCrashReporting = 1;
 				kMvrLegacyAPIURLScheme = "@\"\\\"$(ILABS_MOVER_API_URL_SCHEME)\\\"\"";
 			};
@@ -3422,7 +3436,7 @@
 			baseConfigurationReference = 154BD796108A039F00C45562 /* Mover-AdHoc.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(VALID_ARCHS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3430,9 +3444,10 @@
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				OTHER_CFLAGS = "-fblocks";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AFB933FE-CCEB-4F5D-966B-9177007876F3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
 		};
@@ -3443,6 +3458,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PRODUCT_NAME = "Mover (All Variants)";
+				SDKROOT = iphoneos4.1;
 			};
 			name = Debug;
 		};
@@ -3453,6 +3469,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PRODUCT_NAME = "Mover (All Variants)";
+				SDKROOT = iphoneos4.1;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -3461,6 +3478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "Mover (All Variants)";
+				SDKROOT = iphoneos4.1;
 			};
 			name = "Ad Hoc";
 		};
@@ -3468,6 +3486,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "Mover (All Variants)";
+				SDKROOT = iphoneos4.1;
 			};
 			name = "App Store";
 		};
@@ -3487,7 +3506,7 @@
 			baseConfigurationReference = 157CBD07108F153D00146778 /* Mover-AppStore.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(VALID_ARCHS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Emanuele Vulcano (PRXG288F87)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3495,7 +3514,7 @@
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				OTHER_CFLAGS = "-fblocks";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A3431E58-8E53-4D3D-B669-6499B6D485E0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B17671A6-081A-4E40-B253-1BB8DCBD59C4";
 				SDKROOT = iphoneos4.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3584,7 +3603,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = "App Store";
 		};
-		1553102A123AD70600A15F73 /* Build configuration list for PBXAggregateTarget "Mover (All Variants)" */ = {
+		1553102A123AD70600A15F73 /* Build configuration list for PBXAggregateTarget "Mover (All)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1553101D123AD6F500A15F73 /* Debug */,
