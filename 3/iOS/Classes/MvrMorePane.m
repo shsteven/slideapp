@@ -299,6 +299,12 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	// ---
 	
 	BOOL shouldMentionVideo = ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(id) kUTTypeMovie] && [MvrServices() isFeatureAvailable:kMvrFeatureVideoSending]);
+	
+#if DEBUG
+	id shouldMentionVideoDebug = [[[NSProcessInfo processInfo] environment] objectForKey:@"MvrTestShouldMentionVideo"];
+	if (shouldMentionVideoDebug)
+		shouldMentionVideo = [shouldMentionVideoDebug boolValue];
+#endif
 		
 	MvrMorePaneSection* videoQualitySection = [MvrMorePaneSection section];
 	[content addObject:videoQualitySection];
