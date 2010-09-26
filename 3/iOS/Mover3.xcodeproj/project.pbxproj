@@ -458,6 +458,9 @@
 		15C1C8901068DCDB000C9CDE /* MvrArrowsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C88F1068DCDB000C9CDE /* MvrArrowsView.m */; };
 		15C34BFF1084FB3300CEA68A /* MvrLegalitiesPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34BFE1084FB3300CEA68A /* MvrLegalitiesPane.m */; };
 		15C34C8E108502A000CEA68A /* Legalities in Resources */ = {isa = PBXBuildFile; fileRef = 15C34C8A108502A000CEA68A /* Legalities */; };
+		15C78C11124FDDF5005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15C78C10124FDDF5005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.alert */; };
+		15C78C16124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15C78C14124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings */; };
+		15C78C17124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15C78C14124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings */; };
 		15C86ACC11BE70470046CFC0 /* L0UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C86ACA11BE70470046CFC0 /* L0UUID.m */; };
 		15C86AD011BE70530046CFC0 /* ILSwapPasteboardSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C86ACE11BE70530046CFC0 /* ILSwapPasteboardSender.m */; };
 		15C86AD511BE70610046CFC0 /* L0Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C86AD311BE70610046CFC0 /* L0Map.m */; };
@@ -941,6 +944,8 @@
 		15C34BFD1084FB3300CEA68A /* MvrLegalitiesPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrLegalitiesPane.h; sourceTree = "<group>"; };
 		15C34BFE1084FB3300CEA68A /* MvrLegalitiesPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrLegalitiesPane.m; sourceTree = "<group>"; };
 		15C34C8A108502A000CEA68A /* Legalities */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Legalities; path = AboutPane/Legalities; sourceTree = "<group>"; };
+		15C78C10124FDDF5005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrLiteNeedConnectPackToOpenArbitraryItems.alert; sourceTree = "<group>"; };
+		15C78C15124FDE34005E9383 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrLiteNeedConnectPackToOpenArbitraryItems.strings; sourceTree = "<group>"; };
 		15C86ACA11BE70470046CFC0 /* L0UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = L0UUID.m; path = SwapKit/L0UUID.m; sourceTree = SOURCE_ROOT; };
 		15C86ACB11BE70470046CFC0 /* L0UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = L0UUID.h; path = SwapKit/L0UUID.h; sourceTree = SOURCE_ROOT; };
 		15C86ACE11BE70530046CFC0 /* ILSwapPasteboardSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ILSwapPasteboardSender.m; path = SwapKit/ILSwapPasteboardSender.m; sourceTree = SOURCE_ROOT; };
@@ -1543,6 +1548,7 @@
 		1585FAB8108CBBE900D2AEAB /* Base strings */ = {
 			isa = PBXGroup;
 			children = (
+				15C78C14124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings */,
 				15A298AF11D9D36F0013D197 /* MvrGenericItemReceived_CanOpen.strings */,
 				1556CB4F11735E4400B7C68D /* MvrLiteNeedConnectPackForPreviewableItems.strings */,
 				1556CB4C11735E1300B7C68D /* MvrLiteNeedsConnectPackForConduit.strings */,
@@ -1850,6 +1856,7 @@
 			children = (
 				15BF40E711613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert */,
 				15BF40EE11613D02001EC1BC /* MvrLiteNeedsConnectPackForConduit.alert */,
+				15C78C10124FDDF5005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.alert */,
 				151060F21093819300307C62 /* MvrNoLiteToLiteBTReminder.alert */,
 				151060F01093818D00307C62 /* MvrNoLiteToLiteBT.alert */,
 				15D91B481092545800D8BAA9 /* MvrNoNewItemSendingInLite.alert */,
@@ -2327,6 +2334,8 @@
 				15877AE7123516B100ED4AE4 /* Backdrop.png in Resources */,
 				15A74DC6123A17B300F207F9 /* Checkmark.png in Resources */,
 				15A74DC9123A17C300F207F9 /* Checkmark@2x.png in Resources */,
+				15C78C11124FDDF5005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.alert in Resources */,
+				15C78C16124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2467,6 +2476,7 @@
 				1510AC0C1233C85100916C8B /* StoreTableViewCell@2x.png in Resources */,
 				15A74DC5123A17B000F207F9 /* Checkmark.png in Resources */,
 				15A74DC8123A17C000F207F9 /* Checkmark@2x.png in Resources */,
+				15C78C17124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2963,6 +2973,14 @@
 				15A298B011D9D36F0013D197 /* en */,
 			);
 			name = MvrGenericItemReceived_CanOpen.strings;
+			sourceTree = "<group>";
+		};
+		15C78C14124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15C78C15124FDE34005E9383 /* en */,
+			);
+			name = MvrLiteNeedConnectPackToOpenArbitraryItems.strings;
 			sourceTree = "<group>";
 		};
 		15D7B4DF108F4B6100FA0428 /* Localizable.strings */ = {

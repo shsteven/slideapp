@@ -47,6 +47,7 @@
 
 #if kMvrIsLite
 #import "MvrStore.h"
+#import "MvrUpsellController.h"
 #endif
 
 @interface MvrAppDelegate () <ILSwapServiceDelegate>
@@ -161,7 +162,6 @@ enum {
 
 - (BOOL) performActionsForURL:(NSURL*) url;
 {
-#if !kMvrIsLite
 	if ([url isFileURL]) {
 		[self addByOpeningFileAtPath:[url path]];
 		return YES;
@@ -187,9 +187,6 @@ enum {
 		return item != nil;
 	} else
 		return NO;
-#else
-	return NO;
-#endif
 }
 	
 
@@ -362,8 +359,17 @@ enum {
 - (void) addByOpeningFileAtPath:(NSString*) path;
 {
 	MvrItem* i = [MvrItem itemForUnidentifiedFileAtPath:path options:0];
-	if (i)
+	if (i) {
+#if kMvrIsLite
+		if (![self isFeatureAvailable:kMvrFeatureAllowNonImageOrContactFileOpening]) {
+			if (![i isKindOfClass:[MvrImageItem class]] && ![i isKindOfClass:[MvrContactItem class]]) {
+				[[MvrUpsellController upsellWithAlertNamed:@"MvrLiteNeedConnectPackToOpenArbitraryItems" cancelButton:0 action:kMvrUpsellDisplayStorePane] show];
+				return;
+			}
+		}
+#endif
 		[self addItemFromSelf:i];
+	}
 }
 
 #pragma mark -
