@@ -40,6 +40,8 @@
 		itemsDirectory = [i copy];
 		metadataDirectory = [m copy];
 		knownFiles = [NSMutableSet new];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 	}
 	
 	return self;
@@ -49,11 +51,18 @@
 
 - (void) dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
 	[storedItemsSet release];
 	[itemsDirectory release];
 	[metadataDirectory release];
 	[knownFiles release];
 	[super dealloc];
+}
+
+- (void) didReceiveMemoryWarning:(NSNotification*) n;
+{
+	[storedItemsSet makeObjectsPerformSelector:@selector(clearCache)];
 }
 
 - (NSSet*) storedItems;

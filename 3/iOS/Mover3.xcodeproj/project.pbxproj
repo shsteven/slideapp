@@ -447,6 +447,10 @@
 		15AFE6EF1084623300CBCB35 /* MvrAskAboutCrash.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */; };
 		15B0FF2A11C26DAD0020ACEF /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B0FF2811C26DAD0020ACEF /* Default-Landscape.png */; };
 		15B0FF2B11C26DAD0020ACEF /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B0FF2911C26DAD0020ACEF /* Default-Portrait.png */; };
+		15B28144126E450300505452 /* ImageTooLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B28143126E44FF00505452 /* ImageTooLarge.png */; };
+		15B28145126E450600505452 /* ImageTooLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B28143126E44FF00505452 /* ImageTooLarge.png */; };
+		15B28147126E451A00505452 /* ImageTooLarge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B28146126E451600505452 /* ImageTooLarge@2x.png */; };
+		15B28148126E451D00505452 /* ImageTooLarge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B28146126E451600505452 /* ImageTooLarge@2x.png */; };
 		15BCFA6911C777B3005EA90C /* Backdrop-Bluetooth-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 15BCFA6811C777B3005EA90C /* Backdrop-Bluetooth-iPad.png */; };
 		15BCFB5A11C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BCFB5911C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m */; };
 		15BF40E811613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15BF40E711613B06001EC1BC /* MvrLiteNeedConnectPackForPreviewableItems.alert */; };
@@ -926,6 +930,8 @@
 		15AFE6EE1084623300CBCB35 /* MvrAskAboutCrash.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrAskAboutCrash.alert; sourceTree = "<group>"; };
 		15B0FF2811C26DAD0020ACEF /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = SOURCE_ROOT; };
 		15B0FF2911C26DAD0020ACEF /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = SOURCE_ROOT; };
+		15B28143126E44FF00505452 /* ImageTooLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ImageTooLarge.png; path = ../ImageTooLarge.png; sourceTree = "<group>"; };
+		15B28146126E451600505452 /* ImageTooLarge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ImageTooLarge@2x.png"; path = "../ImageTooLarge@2x.png"; sourceTree = "<group>"; };
 		15BCFA6811C777B3005EA90C /* Backdrop-Bluetooth-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Backdrop-Bluetooth-iPad.png"; sourceTree = SOURCE_ROOT; };
 		15BCFB5811C78592005EA90C /* MvrItem+UnidentifiedFileAdding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MvrItem+UnidentifiedFileAdding.h"; sourceTree = "<group>"; };
 		15BCFB5911C78592005EA90C /* MvrItem+UnidentifiedFileAdding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MvrItem+UnidentifiedFileAdding.m"; sourceTree = "<group>"; };
@@ -1503,6 +1509,8 @@
 				15A74DBB123A145A00F207F9 /* Checkmark.opacity */,
 				15A74DC4123A17AC00F207F9 /* Checkmark.png */,
 				15A74DC7123A17BB00F207F9 /* Checkmark@2x.png */,
+				15B28143126E44FF00505452 /* ImageTooLarge.png */,
+				15B28146126E451600505452 /* ImageTooLarge@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -2336,6 +2344,8 @@
 				15A74DC9123A17C300F207F9 /* Checkmark@2x.png in Resources */,
 				15C78C11124FDDF5005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.alert in Resources */,
 				15C78C16124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings in Resources */,
+				15B28145126E450600505452 /* ImageTooLarge.png in Resources */,
+				15B28148126E451D00505452 /* ImageTooLarge@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2477,6 +2487,8 @@
 				15A74DC5123A17B000F207F9 /* Checkmark.png in Resources */,
 				15A74DC8123A17C000F207F9 /* Checkmark@2x.png in Resources */,
 				15C78C17124FDE34005E9383 /* MvrLiteNeedConnectPackToOpenArbitraryItems.strings in Resources */,
+				15B28144126E450300505452 /* ImageTooLarge.png in Resources */,
+				15B28147126E451A00505452 /* ImageTooLarge@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

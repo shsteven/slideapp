@@ -49,16 +49,28 @@
 {
 	if (self.item) {
 		UIImage* i = [[self.item image] imageByRenderingRotationAndScalingWithMaximumSide:450];
-
-		CGRect r = imageView.frame;
-		r.origin = CGPointMake(imageViewMargin, imageViewMargin);
-		r.size = i.size;
 		
-		imageView.frame = r;
-		imageView.image = i;
+		if (i) {
+			CGRect r = imageView.frame;
+			r.origin = CGPointMake(imageViewMargin, imageViewMargin);
+			r.size = i.size;
 		
-		r = self.view.bounds;
-		r.size = CGSizeMake(i.size.width + 2 * imageViewMargin, i.size.height + 2 * imageViewMargin);
+			imageView.frame = r;
+			imageView.image = i;
+			
+			tooLargeLabel.hidden = YES;
+			imageTitleLabel.hidden = YES;
+		} else {
+			tooLargeLabel.hidden = NO;
+			imageTitleLabel.text = [self.item title] ?: @"";
+			imageTitleLabel.hidden = NO;
+			
+			imageView.image = nil;
+			imageView.frame = CGRectMake(imageViewMargin, imageViewMargin, 300, 200);
+		}
+		
+		CGRect r = self.view.bounds;
+		r.size = CGSizeMake(imageView.frame.size.width + 2 * imageViewMargin, imageView.frame.size.height + 2 * imageViewMargin);
 		self.view.bounds = r;
 		[self.view setNeedsDisplay];
 	}

@@ -58,7 +58,12 @@
 - (UIImage*) representingImageWithSize:(CGSize) size forItem:(id) i;
 {
 	UIImage* original = [i image];
-	return [original imageByRenderingRotationAndScalingWithMaximumSide:MAX(size.width, size.height)];
+	UIImage* rep = [original imageByRenderingRotationAndScalingWithMaximumSide:MAX(size.width, size.height)];
+	
+	if (!rep)
+		rep = [UIImage imageNamed:@"ImageTooLarge.png"];
+	
+	return rep;
 }
 
 - (void) didStoreItem:(MvrItem*) i;

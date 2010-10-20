@@ -142,9 +142,7 @@ enum {
 	NSURL* url = [options objectForKey:UIApplicationLaunchOptionsURLKey];
 	if (!ok && url && ![url isFileURL])
 		ok = [self performActionsForURL:url];
-	
-	[self setUpDirectoryWatching];
-	
+		
 	return !url || [url isFileURL] || ok;
 }
 
@@ -580,8 +578,21 @@ enum {
 {
 	[self.tableController setUp];
 	
-	for (MvrItem* i in self.storageCentral.storedItems)
+	[self performSelector:@selector(addStartupItemsToTable) withObject:nil afterDelay:0.10];
+}
+
+- (void) addStartupItemsToTable;
+{
+	for (MvrItem* i in self.storageCentral.storedItems) {
+		NSAutoreleasePool* pool = [NSAutoreleasePool new];
+
 		[self.tableController addItem:i animated:NO];
+		[i clearCache];
+		
+		[pool release];
+	}
+
+	[self setUpDirectoryWatching];
 }
 
 #pragma mark -

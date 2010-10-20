@@ -13,6 +13,9 @@
 @interface MvrImageItemController : MvrItemController {
 	IBOutlet UIImageView* imageView;
 	CGFloat imageViewMargin;
+	
+	IBOutlet UILabel* tooLargeLabel;
+	IBOutlet UILabel* imageTitleLabel;
 }
 
 @end

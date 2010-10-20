@@ -102,9 +102,8 @@
 	
 	[window addSubview:viewController.view];
 	[window makeKeyAndVisible];
-	
-	for (MvrItem* i in self.storage.storedItems)
-		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
+
+	[self performSelector:@selector(addStoredItemsToTable) withObject:nil afterDelay:0.01];
 	
 	soundEffects = [MvrSoundEffects new];
 	id on = [[NSUserDefaults standardUserDefaults] objectForKey:kMvrSoundsEffectsEnabledDefaultsKey];
@@ -116,10 +115,6 @@
 		[self openFileAtPath:[u path]];
 	
 	[self clearInbox];
-	
-// ------------- Begin monitoring Documents for File Sharing
-	[self beginMonitoringItemsDirectory];
-	[self performItemsDirectorySweep:nil];
 
 // ------------- Fix up pending crash reports
 	[crashReporting checkForPendingReports];
@@ -129,6 +124,22 @@
 	[MvrAlertIfNotShownBeforeNamed(@"MvrWelcome") show];
 	
 	return YES;
+}
+
+- (void) addStoredItemsToTable;
+{
+	for (MvrItem* i in self.storage.storedItems) {
+		NSAutoreleasePool* pool = [NSAutoreleasePool new];
+		
+		[viewController addItem:i fromSource:nil ofType:kMvrItemSourceSelf];
+		[i clearCache];
+		
+		[pool release];
+	}
+	
+	// ------------- Begin monitoring Documents for File Sharing
+	[self beginMonitoringItemsDirectory];
+	[self performItemsDirectorySweep:nil];
 }
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)u;

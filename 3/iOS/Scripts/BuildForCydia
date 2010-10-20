@@ -37,5 +37,4 @@ fi
 
 "Variants/Switch" $ILABS_FORCE Open || exit 1
 "$HERE/Clobber" || exit 1
-xcodebuild -configuration Release CODE_SIGN_REQUIRED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= PROVISIONING_PROFILE= ARCHS=armv6 || exit 1
-"$L0_LDID" -S Build/Release-iphoneos/MoverOpen.app/MoverOpen || exit 1
+xcodebuild -configuration Release CODE_SIGN_REQUIRED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= PROVISIONING_PROFILE= ARCHS="armv6" || exit 1
