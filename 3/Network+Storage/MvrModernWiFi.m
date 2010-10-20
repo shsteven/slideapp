@@ -132,6 +132,13 @@
 		return;
 	}
 	
+	for (MvrModernWiFiChannel* chan in self.mutableChannels) {
+		if ([chan.identifier isEqual:ident]) {
+			L0Log(@"Skipping %@ -- it's a duplicate of %@", s, chan);
+			return;
+		}
+	}
+	
 	if ([[s type] isEqual:kMvrModernWiFiBonjourConduitServiceType]) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:kMvrModernWiFiDidEncounterConduitChannelNotification object:self];
 		
