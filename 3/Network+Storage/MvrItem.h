@@ -109,6 +109,8 @@
 - (void) setCachedObject:(id) object forKey:(NSString*) key;
 - (void) removeCachedObjectForKey:(NSString*) key;
 
+- (void) clearCache;
+
 // Called when a cached object is requested for an empty key. If - (id) objectForEmpty<Key>CacheKey; exists on self, it's called and its value returned. Otherwise, it returns nil.
 // Example: @"image" calls -objectForEmptyImageCacheKey.
 // Returning nil from this object does not alter the cache, and makes the cachedObjectForKey: call return nil.
