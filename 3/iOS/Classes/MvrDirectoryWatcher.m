@@ -51,7 +51,12 @@
 		running = YES;
 	}
 	
-	[NSThread detachNewThreadSelector:@selector(runKQueueToMonitorDirectory:) toTarget:self withObject:path];
+	// [NSThread detachNewThreadSelector:@selector(runKQueueToMonitorDirectory:) toTarget:self withObject:path];
+	NSThread* thread = [[[NSThread alloc] initWithTarget:self selector:@selector(runKQueueToMonitorDirectory:) object:path] autorelease];
+	
+	[thread setName:[NSString stringWithFormat:@"%@ (watching %@)", [self class], path]];
+	
+	[thread start];
 }
 
 - (BOOL) shouldKeepRunning;
@@ -86,13 +91,13 @@
 	
 	struct kevent toMonitor;
 	EV_SET(&toMonitor, fdes, EVFILT_VNODE, EV_ADD | EV_ENABLE | EV_ONESHOT,
-		   NOTE_WRITE | NOTE_EXTEND | NOTE_DELETE,
+		   NOTE_WRITE | NOTE_EXTEND | NOTE_DELETE | NOTE_LINK | NOTE_RENAME | NOTE_REVOKE,
 		   0, 0);
 	
 	while ([self shouldKeepRunning]) {
 		NSAutoreleasePool* innerPool = [NSAutoreleasePool new];
 		
-		const struct timespec time = { 1, 0 };
+		const struct timespec time = { 10, 0 };
 		struct kevent event;
 		
 		int result = kevent(kq, &toMonitor, 1, &event, 1, &time);

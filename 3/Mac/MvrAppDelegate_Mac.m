@@ -9,7 +9,9 @@
 #import "MvrAppDelegate_Mac.h"
 #import <Carbon/Carbon.h>
 
-#import <Sparkle/Sparkle.h>
+#if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
+	#import <Sparkle/Sparkle.h>
+#endif
 
 #import "MvrTransferController.h"
 
@@ -36,7 +38,9 @@
 	}
 #endif
 	
+#if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
 	PFMoveToApplicationsFolderIfNecessary();
+#endif
 	
 	[aboutVersionLabel setStringValue:[NSString stringWithFormat:[aboutVersionLabel stringValue], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]]];
 	[legalitiesTextView readRTFDFromFile:[[NSBundle mainBundle] pathForResource:@"Legalities" ofType:@"rtf"]];
@@ -58,17 +62,30 @@
 	transfer.enabled = YES;
 	
 	[preferences restartAgentIfJustUpdated];
+
+#if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
+
 	[[SUUpdater sharedUpdater] setDelegate:self];
+	NSMenuItem* i = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Check for Updates\u2026", @"Check for updates") action:@selector(checkForUpdates:) keyEquivalent:nil];
+	[i setTarget:[SUUpdater sharedUpdater]];
+	[applicationMenu insertItem:i atIndex:1];
+	
+#endif
 }
 
 @synthesize transfer;
 
-- (BOOL) applicationShouldHandleReopen:(NSApplication*) sender hasVisibleWindows:(BOOL) noWindows;
+- (BOOL) applicationShouldHandleReopen:(NSApplication*) sender hasVisibleWindows:(BOOL) hasWindows;
 {
-	if (noWindows)
-		[window makeKeyAndOrderFront:self];
+	if (!hasWindows)
+		[window makeKeyAndOrderFront:self];	
 	
-	return NO;
+	return YES;
+}
+
+- (IBAction) showMainWindow:(id) sender;
+{
+	[window makeKeyAndOrderFront:self];
 }
 
 - (BOOL) application:(NSApplication *)sender openFile:(NSString *)filename;
@@ -202,20 +219,37 @@
 
 - (void) warnAboutMissingContacts;
 {
-	NSAlert* a = [NSAlert alertNamed:@"MvrNoContactsForNow"];
+	NSString* alertName;
+#if kMvrConnectTargetDeploymentEnvironment == kMvrConnectMacAppStore
+	alertName = @"MvrNoContactsForNow_AppStore";
+#else
+	alertName = @"MvrNoContactsForNow";
+#endif
+	
+	NSAlert* a = [NSAlert alertNamed:alertName];
 	[a beginSheetModalForWindow:window modalDelegate:self didEndSelector:@selector(warnedAboutContacts:didEndWithButton:context:) contextInfo:NULL];
 }
 
 - (void) warnedAboutContacts:(NSAlert*) a didEndWithButton:(NSInteger) b context:(void*) nothing;
 {
+#if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
+
 	if (b == NSAlertSecondButtonReturn)
 		[[SUUpdater sharedUpdater] checkForUpdates:self];
+	
+#endif
 }
+
+
+#if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
 
 - (void)updater:(SUUpdater *)updater willInstallUpdate:(SUAppcastItem *)update;
 {
 	[preferences prepareAgentForUpdating];
 }
+
+#endif
+
 
 - (IBAction) showAboutWindow:(id) sender;
 {

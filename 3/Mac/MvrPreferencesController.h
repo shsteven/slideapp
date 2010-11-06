@@ -24,6 +24,7 @@
 @property(readonly) NSString* systemDownloadPath;
 
 @property BOOL runMoverAgent;
+- (void) setRunMoverAgent:(BOOL) a ignoringCurrentValue:(BOOL) ignore;
 
 // UI stuff
 - (IBAction) pickSystemDownloadsFolder:(id) sender;

@@ -30,7 +30,7 @@
 
 #define kMvrHighQualityVideoEnabledKey @"MvrHighQualityVideoEnabled"
 
-
+@class MvrSyncService;
 @protocol MvrAppServices <MvrPlatformInfo>
 
 - (void) presentModalViewController:(UIViewController*) ctl;
@@ -45,6 +45,8 @@
 @property(assign) BOOL highQualityVideoEnabled;
 
 - (BOOL) isFeatureAvailable:(MvrStoreFeature) feature;
+
+- (void) addSyncService:(MvrSyncService*) service;
 
 @end
 

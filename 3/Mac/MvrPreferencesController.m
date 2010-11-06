@@ -115,9 +115,16 @@ done:
 
 - (void) setRunMoverAgent:(BOOL) a;
 {
-	BOOL current = self.runMoverAgent;
+	[self setRunMoverAgent:a ignoringCurrentValue:NO];
+}
+
+- (void) setRunMoverAgent:(BOOL) a ignoringCurrentValue:(BOOL) ignoring;
+{
+	BOOL current = NO;
+	if (!ignoring)
+		current = self.runMoverAgent;
 	
-	if (current != a) {
+	if (ignoring || current != a) {
 		
 		LSSharedFileListRef loginItems = (LSSharedFileListRef) CFMakeCollectable(LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL));
 		
@@ -163,6 +170,10 @@ done:
 - (void) awakeFromNib;
 {
 	[downloadsFolderPicker selectItemAtIndex:0];
+	[preferencesPanel center];
+
+	// ick. This restarts the Agent if it was supposed to be running but isn't.
+	[self setRunMoverAgent:self.runMoverAgent ignoringCurrentValue:YES];
 }
 
 - (IBAction) pickSystemDownloadsFolder:(id) sender;

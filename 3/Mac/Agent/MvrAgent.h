@@ -8,14 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "MvrDirectoryWatcher.h"
+
 #define kMvrAgentShouldQuitNotification @"net.infinite-labs.Mover.Mac.Agent.ShouldQuit"
 #define kMvrAgentDistributedNotificationObject @"net.infinite-labs.Mover.Mac.Agent"
+
+#define kMvrModernWiFiBonjourConduitServiceType @"_x-mover-conduit._tcp."
 
 @interface MvrAgent : NSObject <NSApplicationDelegate, NSNetServiceBrowserDelegate> {
 	NSStatusItem* statusItem;
 	IBOutlet NSMenu* statusItemMenu;
 	
-	NSNetServiceBrowser* browser;
+	NSNetServiceBrowser* browser, * macBrowser;
+	
+	MvrDirectoryWatcher* watcher, * connectWatcher;
+	NSString* bundlePath;
 }
 
 - (IBAction) openMoverConnect:(id) sender;

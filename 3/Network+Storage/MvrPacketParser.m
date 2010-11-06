@@ -41,6 +41,8 @@
 - (void) expectMetadataItemValueWithTitle:(NSString*) s;
 - (void) expectBody; // This starts body consumption.
 
+- (unsigned long long) expectedSize;
+
 - (void) processAndReportMetadataItemWithTitle:(NSString*) title value:(NSString*) s;
 
 @end
@@ -98,12 +100,9 @@ static NSInteger MvrPacketParserAutomaticConsumptionThreshold = 500 * 1024;
 	[currentBuffer appendData:data];
 	
 	// An optimization: if we're in the expecting body state and we need to read a body, we only consume every 500 KiB or so.
-	if (self.state == kMvrPacketParserExpectingBody) {
-		if ([currentBuffer length] < MIN(MvrPacketParserAutomaticConsumptionThreshold, toReadForCurrentStop))
-			return;
-	}
-	
-	[self consumeCurrentBuffer];
+	unsigned long long expect = [self expectedSize];
+	if (!(expect > 0 && [currentBuffer length] < expect))
+		[self consumeCurrentBuffer];
 }
 
 - (unsigned long long) expectedSize;
@@ -111,7 +110,9 @@ static NSInteger MvrPacketParserAutomaticConsumptionThreshold = 500 * 1024;
 	if (self.state != kMvrPacketParserExpectingBody)
 		return 0;
 	
-	return MIN(toReadForCurrentStop - [currentBuffer length], MvrPacketParserAutomaticConsumptionThreshold - [currentBuffer length]);
+	unsigned long long threshold = MIN(MvrPacketParserAutomaticConsumptionThreshold, payloadLength / 10.0);
+	
+	return MIN(toReadForCurrentStop - [currentBuffer length], threshold - [currentBuffer length]);
 }
 
 - (void) consumeCurrentBuffer;

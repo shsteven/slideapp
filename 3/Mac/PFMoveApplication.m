@@ -54,7 +54,7 @@ static BOOL CopyBundle(NSString *srcPath, NSString *dstPath);
 
 // Main worker function
 void PFMoveToApplicationsFolderIfNecessary()
-{
+{	
 	// Skip if user suppressed the alert before
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:AlertSuppressKey]) return;
 

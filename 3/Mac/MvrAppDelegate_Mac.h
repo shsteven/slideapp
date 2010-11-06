@@ -39,6 +39,8 @@
 	IBOutlet NSWindow* aboutPanel;
 	IBOutlet NSTextField* aboutVersionLabel;
 	IBOutlet NSTextView* legalitiesTextView;
+	
+	IBOutlet NSMenu* applicationMenu;
 }
 
 - (IBAction) openMoverPlusAppStore:(id) sender;
@@ -63,6 +65,8 @@
 - (IBAction) showAboutWindow:(id) sender;
 
 - (void) showFirstTimeDeviceFoundAlertIfNeeded;
+
+- (IBAction) showMainWindow:(id) sender;
 
 @end
 

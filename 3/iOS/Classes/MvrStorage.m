@@ -27,7 +27,7 @@
 - (void) makeMetadataFileForItem:(MvrItem*) i;
 - (NSString*) userVisibleFilenameForItem:(MvrItem*) i;
 
-- (NSString *) filenameForUserVisibleString:(NSString *)str;
++ (NSString *) filenameForUserVisibleString:(NSString *)str;
 
 @end
 
@@ -196,7 +196,7 @@
 	[itemMeta writeToFile:path atomically:YES];
 }
 
-- (NSString*) filenameForUserVisibleString:(NSString*) str;
++ (NSString*) filenameForUserVisibleString:(NSString*) str;
 {
 	str = [str stringByReplacingOccurrencesOfString:@":" withString:@"-"];
 	str = [str stringByReplacingOccurrencesOfString:@"/" withString:@"-"];
@@ -204,6 +204,19 @@
 }
 
 - (NSString*) userVisibleFilenameForItem:(MvrItem*) i;
+{
+	int attempt = 0;
+	NSString* actualName;
+	
+	do {
+		actualName = [[self class] userVisibleFilenameForItem:i attempt:attempt];
+		attempt++;
+	} while ([[NSFileManager defaultManager] fileExistsAtPath:[itemsDirectory stringByAppendingPathComponent:actualName]]);
+	
+	return actualName;
+}
+
++ (NSString *) userVisibleFilenameForItem:(MvrItem *)i attempt:(NSUInteger)attempt;
 {
 	// step one: does this have a filename? return it then.
 	NSString* filename = [i.metadata objectForKey:kMvrItemOriginalFilenameMetadataKey];
@@ -236,7 +249,7 @@
 		}
 		
 		if (!filename) {
-		
+			
 			// step two: do we know where it's from? then we use "From %@.xxx".
 			// TODO see if this sanitation is sufficient.
 			NSString* whereFrom = [self filenameForUserVisibleString:[i objectForItemNotesKey:kMvrItemWhereFromNoteKey]];
@@ -255,28 +268,21 @@
 	
 	NSAssert(filename, @"We have found a name for this file.");
 	
-	int attempt = 1;
 	NSString* actualName, * basename = nil, * ext = nil;
 	
-	do {
+	if (attempt == 0)
+		actualName = filename;
+	else {
+		if (!basename)
+			basename = [filename stringByDeletingPathExtension];
+		if (!ext)
+			ext = [filename pathExtension];
 		
-		if (attempt == 1)
-			actualName = filename;
-		else {
-			if (!basename)
-				basename = [filename stringByDeletingPathExtension];
-			if (!ext)
-				ext = [filename pathExtension];
-			
-			actualName = [NSString stringWithFormat:@"%@ (%d).%@", basename, attempt, ext];
-		}
-		
-		attempt++;
-		
-	} while ([[NSFileManager defaultManager] fileExistsAtPath:[itemsDirectory stringByAppendingPathComponent:actualName]]);
+		actualName = [NSString stringWithFormat:@"%@ (%d).%@", basename, attempt + 1, ext];
+	}
 	
 	return actualName;
-}
+}	
 
 - (void) removeStoredItemsObject:(MvrItem*) i;
 {

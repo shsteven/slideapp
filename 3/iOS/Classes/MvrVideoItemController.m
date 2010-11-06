@@ -100,6 +100,8 @@ static CGSize MvrAspectRatioSizeWithMaximumSide(CGSize original, CGFloat side) {
 	if (self.item) {
 		pc = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:[[self.item storage] path]]];
 		pc.useApplicationAudioSession = NO;
+		pc.shouldAutoplay = NO;
+		
 		[pc prepareToPlay];
 		// [pc requestThumbnailImagesAtTimes:[NSArray arrayWithObject:[NSNumber numberWithDouble:2.0]] timeOption:MPMovieTimeOptionNearestKeyFrame];
 		
