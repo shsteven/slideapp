@@ -274,7 +274,7 @@
 		153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeviceBackdrop.png; sourceTree = "<group>"; };
 		153EF0AC1135595100B8DDC1 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		15443CF31284B0F0005569EA /* Mover Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mover Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		15443CF51284B0F0005569EA /* Mover Connect-Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mover Connect-Info copy.plist"; sourceTree = "<group>"; };
+		15443CF51284B0F0005569EA /* Mover Connect (Mac App Store).plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mover Connect (Mac App Store).plist"; sourceTree = "<group>"; };
 		15443D251284B2A6005569EA /* MvrNoContactsForNow_AppStore.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoContactsForNow_AppStore.alert; sourceTree = "<group>"; };
 		15523D991173201500888B09 /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
 		15523D9A1173201500888B09 /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
@@ -324,7 +324,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		8D1107310486CEB800E47090 /* Mover Connect-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover Connect-Info.plist"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Mover Connect (Self-Published).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover Connect (Self-Published).plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -527,12 +527,12 @@
 				157280F2113805FA005634C7 /* SpinnerBackdrop.png */,
 				1594394D1133DACB0017B42D /* WaypointLogo.png */,
 				153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */,
-				8D1107310486CEB800E47090 /* Mover Connect-Info.plist */,
+				15443CF51284B0F0005569EA /* Mover Connect (Mac App Store).plist */,
+				8D1107310486CEB800E47090 /* Mover Connect (Self-Published).plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				157280E311380210005634C7 /* MvrDeviceItem.xib */,
 				15D4D0B311732F6000705E3D /* MoverConnect.png */,
-				15443CF51284B0F0005569EA /* Mover Connect-Info copy.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -906,7 +906,7 @@
 					"$(SRCROOT)/..",
 					"$(SRCROOT)/../iOS/Classes",
 				);
-				INFOPLIST_FILE = "Mover Connect-Info copy.plist";
+				INFOPLIST_FILE = "Mover Connect (Mac App Store).plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MvrLinkerFlagsForAllConfigurations = "-ObjC -all_load";
 				MvrPreprocessorMacrosForAllConfigurations = "kMvrConnectMacAppStore=1 kMvrConnectSelfDeployment=0 kMvrConnectTargetDeploymentEnvironment=kMvrConnectMacAppStore";
@@ -939,7 +939,7 @@
 					"$(SRCROOT)/..",
 					"$(SRCROOT)/../iOS/Classes",
 				);
-				INFOPLIST_FILE = "Mover Connect-Info copy.plist";
+				INFOPLIST_FILE = "Mover Connect (Mac App Store).plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MvrLinkerFlagsForAllConfigurations = "-ObjC -all_load";
 				MvrPreprocessorMacrosForAllConfigurations = "kMvrConnectMacAppStore=1 kMvrConnectSelfDeployment=0 kMvrConnectTargetDeploymentEnvironment=kMvrConnectMacAppStore";
@@ -1035,6 +1035,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					x86_64,
+					i386,
+				);
 				CODE_SIGN_IDENTITY = "Infinite Labs Code Signing (Mac OS X)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1058,7 +1062,7 @@
 					"$(SRCROOT)/..",
 					"$(SRCROOT)/../iOS/Classes",
 				);
-				INFOPLIST_FILE = "Mover Connect-Info.plist";
+				INFOPLIST_FILE = "Mover Connect (Self-Published).plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				MvrLinkerFlagsForAllConfigurations = "-ObjC -all_load";
@@ -1073,6 +1077,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					x86_64,
+					i386,
+				);
 				CODE_SIGN_IDENTITY = "Infinite Labs Code Signing (Mac OS X)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1091,7 +1099,7 @@
 					"$(SRCROOT)/..",
 					"$(SRCROOT)/../iOS/Classes",
 				);
-				INFOPLIST_FILE = "Mover Connect-Info.plist";
+				INFOPLIST_FILE = "Mover Connect (Self-Published).plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				MvrLinkerFlagsForAllConfigurations = "-ObjC -all_load";
