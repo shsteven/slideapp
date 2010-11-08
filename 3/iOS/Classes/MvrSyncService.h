@@ -47,6 +47,8 @@
 - (void) cancel;
 - (MvrItem*) item;
 
+- (NSError*) error; // only meaningful after isFinished == YES
+
 // All KVOable beyond this point.
 
 - (BOOL) isFinished;

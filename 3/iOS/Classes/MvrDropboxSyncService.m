@@ -17,37 +17,33 @@
 #import "MvrStorage.h"
 
 #define kMvrDropboxSavePath @"/Mover"
+#define kMvrDropboxPathItemNoteKey @"MvrDropboxPath"
 
 @interface MvrDropboxSyncTask : NSObject <MvrSyncTask, DBRestClientDelegate> {}
 
 @property(retain) MvrItem* item;
 @property(retain) DBRestClient* client;
 
-@property(retain) NSString* temporaryFilename, * finalFilename;
-
-@property(assign) id <MvrPlatformInfo> platformInfo;
+@property(retain) NSString* finalFilename;
 
 @property float progress;
 @property(getter=isFinished) BOOL finished;
+@property(copy) NSError* error;
 
-@property int numberOfFinalFilenameAttempts;
+- (void) beginPickingFinalFilename;
 
-@property(copy) NSString* lastMoverFolderHash;
-
-- (void) buildFinalFilename;
-- (void) buildTemporaryFilename;
+- (void) clear;
+- (void) end;
 
 @end
 
 @implementation MvrDropboxSyncTask
 
-- (id) initWithItem:(MvrItem*) i platformInfo:(id <MvrPlatformInfo>) info lastMoverFolderHash:(NSString*) hash;
+- (id) initWithItem:(MvrItem*) i;
 {
 	if ((self = [super init])) {
 		self.item = i;
 		self.progress = kMvrIndeterminateProgress;
-		self.platformInfo = info;	
-		self.lastMoverFolderHash = hash;
 	}
 	
 	return self;
@@ -55,64 +51,104 @@
 
 - (void) dealloc
 {
-	[self cancel];
+	[self clear];
+	self.error = nil;
 	[super dealloc];
 }
 
 
-- (void) buildTemporaryFilename;
-{
-	self.temporaryFilename = [NSString stringWithFormat:@".%@-%@", self.platformInfo.displayNameForSelf, [[L0UUID UUID] stringValue]];
-}
-
-- (void) buildFinalFilename;
-{
-	self.finalFilename = [MvrStorage userVisibleFilenameForItem:self.item attempt:self.numberOfFinalFilenameAttempts];
-	self.numberOfFinalFilenameAttempts = self.numberOfFinalFilenameAttempts + 1;
-}
-
 - (void) start;
-{	
+{
+	if (self.client || self.finished)
+		return;
+	
 	self.client = [[[DBRestClient alloc] initWithSession:[DBSession sharedSession] root:@"sandbox"] autorelease];
 	self.client.delegate = self;
 	
 	// FOLLOW THE NUMBERS! --> [0]
-	// First of all, we create the /Mover directory. If it's already there, we simply don't care. (We get 403 in that case.)
-	[self.client loadMetadata:kMvrDropboxSavePath withHash:self.lastMoverFolderHash];
+	// First of all, we create the /Mover directory.
+	[self.client createFolder:kMvrDropboxSavePath];
 }
 
 - (void) restClient:(DBRestClient *)client createdFolder:(DBMetadata *)folder;
 {
-	// [1]a OK, let's proceed to making a filename that does not conflict with the stuff we have.
+	// [1] OK, let's proceed to making a filename that does not conflict with the stuff we have.
 	[self beginPickingFinalFilename];
 }
 
 - (void) restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error;
 {
-	if ([[error domain] isEqual:DBErrorDomain] && [error code] == 403) {
-		// already exists!
-		// [1]b OK, let's proceed etc!
-		[self beginPickingFinalFilename];
-	} else
-		[self cancel]; // bail.
+	self.error = error;
+	[self end]; // bail.
 }
 
 - (void) beginPickingFinalFilename;
 {
-	// <#TODO#>
+	// [2] check out the contents of that directory
+	[self.client loadMetadata:kMvrDropboxSavePath];
+}
+
+- (void) restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata;
+{
+	// [3] actually pick a filename and start uploading the file
+	NSMutableSet* unacceptableFilenames = [NSMutableSet set];
+
+	for (DBMetadata* fileMD in metadata.contents)
+		[unacceptableFilenames addObject:[fileMD.path lastPathComponent]];
+	
+	self.finalFilename = [MvrStorage userVisibleFilenameForItem:self.item unacceptableFilenames:unacceptableFilenames];
+	
+	[self.item setObject:[kMvrDropboxSavePath stringByAppendingPathComponent:self.finalFilename] forItemNotesKey:kMvrDropboxPathItemNoteKey];
+	[self.client uploadFile:self.finalFilename toPath:kMvrDropboxSavePath fromPath:self.item.storage.path];
+}
+
+- (void) restClient:(DBRestClient *)client loadMetadataFailedWithError:(NSError *)error;
+{
+	self.error = error;
+	[self end];
+}
+
+- (void) restClient:(DBRestClient *)client uploadProgress:(CGFloat)progress forFile:(NSString *)destPath from:(NSString *)srcPath;
+{
+	self.progress = progress;
+}
+
+- (void) restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath;
+{
+	// [4] done!
+	[self end];
+}
+
+- (void) restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error;
+{
+	self.error = error;
+	[self end];
 }
 
 - (void) cancel;
 {
-	// TODO cancel ongoing stuff
-	
-	self.client.delegate = nil;
-	self.client = nil;
-	self.item = nil;
+	self.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil];
+	[self end];
+}
+
+- (void) end;
+{
+	[self clear];
 	self.finished = YES;
 }
 
-@synthesize item, client, temporaryFilename, finalFilename, progress, finished, numberOfFinalFilenameAttempts;
+- (void) clear;
+{
+	self.client.delegate = nil;
+	
+	if (self.finalFilename)
+		[self.client cancelFileLoad:self.item.storage.path];
+	
+	self.client = nil;
+	self.item = nil;
+}
+
+@synthesize item, client, finalFilename, progress, finished, error;
 
 @end
 
@@ -168,7 +204,9 @@
 		return;
 	}
 	
-	
+	MvrDropboxSyncTask* task = [[[MvrDropboxSyncTask alloc] initWithItem:i] autorelease];
+	[self.mutableOngoingSyncTasks addObject:task];
+	[task start];
 }
 
 - (MvrDropboxSyncTask*) ongoingSyncTaskForSourcePath:(NSString*) path;

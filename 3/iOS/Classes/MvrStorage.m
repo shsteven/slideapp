@@ -284,6 +284,17 @@
 	return actualName;
 }	
 
++ (NSString *) userVisibleFilenameForItem:(MvrItem *)i unacceptableFilenames:(NSSet*) filenames;
+{
+	NSString* filename; int attempt = 0;
+	do {
+		filename = [self userVisibleFilenameForItem:i attempt:attempt];
+		attempt++;
+	} while ([filenames containsObject:filename]);
+
+	return filename;
+}
+
 - (void) removeStoredItemsObject:(MvrItem*) i;
 {
 	if (![storedItemsSet containsObject:i])
