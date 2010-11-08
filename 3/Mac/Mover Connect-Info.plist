@@ -39,6 +39,8 @@
 	<string>2</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>ILDevChannelUpdateDefaultsKey</key>
+	<string>MvrUseTesterUpdateChannel</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

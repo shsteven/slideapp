@@ -64,11 +64,21 @@
 	[preferences restartAgentIfJustUpdated];
 
 #if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
-
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"MvrUseTesterUpdateChannel"])
+		[[SUUpdater sharedUpdater] setFeedURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/mac-dev.rss"]];
+	
 	[[SUUpdater sharedUpdater] setDelegate:self];
-	NSMenuItem* i = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Check for Updates\u2026", @"Check for updates") action:@selector(checkForUpdates:) keyEquivalent:nil];
+
+	NSMenuItem* i = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Check for Updates\u2026", @"Check for updates") action:@selector(checkForUpdates:) keyEquivalent:@""];
 	[i setTarget:[SUUpdater sharedUpdater]];
 	[applicationMenu insertItem:i atIndex:1];
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"MvrUseTesterUpdateChannel"]) {
+		NSMenuItem* sep = [NSMenuItem separatorItem];
+		[applicationMenu insertItemWithTitle:@"Development channel" action:NULL keyEquivalent:@"" atIndex:1];
+		[applicationMenu insertItem:sep atIndex:1];
+	}
 	
 #endif
 }
