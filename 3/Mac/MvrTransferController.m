@@ -81,12 +81,26 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 	}
 }
 
+- (void) sendItem:(MvrItem*) item;
+{
+	if ([channels count] == 1)
+		[[channels anyObject] beginSendingItem:item];
+	else
+		[MvrApp() beginPickingChannelWithDelegate:self selector:@selector(didPickChannel:forSendingItem:) context:item];
+}
+
+
 - (void) sendItemFile:(NSString*) file;
 {
 	if ([channels count] == 1)
 		[self sendItemFile:file throughChannel:[channels anyObject]];
 	else
 		[MvrApp() beginPickingChannelWithDelegate:self selector:@selector(didPickChannel:forSendingFile:) context:file];
+}
+
+- (void) didPickChannel:(id <MvrChannel>)chan forSendingItem:(MvrItem*) item;
+{
+	[chan beginSendingItem:item];
 }
 
 - (void) didPickChannel:(id <MvrChannel>)chan forSendingFile:(NSString*) file;
@@ -257,6 +271,37 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 	NSFileManager* fm = [NSFileManager defaultManager];
 	NSString* downloadDir = [self destinationDirectory];
 	BOOL isDir;
+	
+	if ([i.type isEqual:(id) kUTTypeURL]) {
+		
+		NSString* s = [[NSString alloc] initWithData:i.storage.data encoding:NSUTF8StringEncoding];
+		NSURL* u = [NSURL URLWithString:s];
+		
+		if (u && ([[u scheme] isEqual:@"http"] || [[u scheme] isEqual:@"https"] || [[u scheme] isEqual:@"ftp"])) {
+			NSString* host = [u host];
+			NSString* urlFileContents = [NSString stringWithFormat:@"[InternetShortcut]\r\nURL=%@\r\n", [u absoluteString]];
+			
+			int attempts = 0;
+			NSString* basename, * fullName;
+			do {
+				if (attempts == 0)
+					basename = host;
+				else
+					basename = [NSString stringWithFormat:@"%@ (%d)", host, attempts];
+				
+				fullName = [[downloadDir stringByAppendingPathComponent:basename] stringByAppendingPathExtension:@"url"];
+			} while ([fm fileExistsAtPath:fullName]);
+			
+			BOOL ok = [urlFileContents writeToFile:fullName atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+			if (ok) {
+				[[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.apple.DownloadFileFinished" object:fullName];
+				[[NSWorkspace sharedWorkspace] selectFile:fullName inFileViewerRootedAtPath:@""];
+			}
+			
+		}
+
+		return;
+	}
 	
 	NSString* baseName = [i.metadata objectForKey:kMvrItemOriginalFilenameMetadataKey], * ext = nil;
 	

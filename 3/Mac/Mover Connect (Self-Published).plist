@@ -43,6 +43,17 @@
 	<string>MvrUseTesterUpdateChannel</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>net.infinite-labs.Mover.LegacyURL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>x-infinitelabs-mover</string>
+			</array>
+		</dict>
+	</array>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>

@@ -32,6 +32,7 @@
 
 @property(readonly) NSMutableSet* channels;
 
+- (void) sendItem:(MvrItem*) item;
 - (void) sendItemFile:(NSString*) file throughChannel:(id <MvrChannel>) c;
 - (void) sendItemFile:(NSString*) file;
 - (BOOL) canSendFile:(NSString*) path;

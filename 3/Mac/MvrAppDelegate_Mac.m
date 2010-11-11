@@ -19,6 +19,11 @@
 
 #import "PFMoveApplication.h"
 
+#import <MuiKit/MuiKit.h>
+
+#import "Network+Storage/MvrItem.h"
+#import "Network+Storage/MvrItemStorage.h"
+
 @interface MvrAppDelegate_Mac () <NSUserInterfaceValidations>
 
 - (BOOL) sendFile:(NSString*) file;
@@ -41,6 +46,8 @@
 #if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
 	PFMoveToApplicationsFolderIfNecessary();
 #endif
+	
+	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(performOpenURL:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
 	
 	[aboutVersionLabel setStringValue:[NSString stringWithFormat:[aboutVersionLabel stringValue], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]]];
 	[legalitiesTextView readRTFDFromFile:[[NSBundle mainBundle] pathForResource:@"Legalities" ofType:@"rtf"]];
@@ -278,6 +285,23 @@
 		
 		[ud setBool:YES forKey:kMvrConnectFirstTimeFoundAlertShownKey];
 		
+	}
+}
+
+- (void) performOpenURL:(NSAppleEventDescriptor*) event withReplyEvent:(NSAppleEventDescriptor*) reply;
+{
+	NSString* URLString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+	NSURL* URL = [NSURL URLWithString:URLString];
+	
+	if ([[URL resourceSpecifier] hasPrefix:@"add?"]) {
+	
+		NSDictionary* query = [URL dictionaryByDecodingQueryString];
+		NSString* toSend = [query objectForKey:@"url"];
+		
+		MvrItemStorage* is = [MvrItemStorage itemStorageWithData:[toSend dataUsingEncoding:NSUTF8StringEncoding]];
+		MvrItem* i = [MvrItem itemWithStorage:is type:(id) kUTTypeURL metadata:nil];
+		
+		[self.transfer sendItem:i];
 	}
 }
 
