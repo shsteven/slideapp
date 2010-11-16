@@ -346,4 +346,6 @@
 	}
 }
 
+@synthesize delegate;
+
 @end

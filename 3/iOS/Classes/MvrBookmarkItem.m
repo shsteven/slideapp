@@ -30,7 +30,7 @@ static BOOL MvrBookmarkURLIsNonNilAndSeemsSafe(NSURL* url) {
 
 - (id) initWithAddress:(NSURL*) url;
 {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		if (!MvrBookmarkURLIsNonNilAndSeemsSafe(url)) {
 			[self release];
 			return nil;
@@ -46,7 +46,7 @@ static BOOL MvrBookmarkURLIsNonNilAndSeemsSafe(NSURL* url) {
 
 - (id) initWithStorage:(MvrItemStorage *)s type:(NSString *)t metadata:(NSDictionary *)m;
 {
-	if (self = [super initWithStorage:s type:t metadata:m]) {
+	if ((self = [super initWithStorage:s type:t metadata:m])) {
 		if (!MvrBookmarkURLIsNonNilAndSeemsSafe(self.address)) {
 			[self release];
 			return nil;

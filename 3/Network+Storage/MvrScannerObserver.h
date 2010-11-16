@@ -27,6 +27,8 @@
 
 - (id) initWithScanner:(id <MvrScanner>) scanner delegate:(id <MvrScannerObserverDelegate>) delegate;
 
+@property(assign) id <MvrScannerObserverDelegate> delegate;
+
 @end
 
 @protocol MvrScannerObserverDelegate <NSObject>

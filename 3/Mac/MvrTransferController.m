@@ -34,7 +34,7 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 
 - (id) init;
 {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		[MvrPacketParser setAutomaticConsumptionThreshold:1024 * 1024];
 		
 		channels = [NSMutableSet new];
@@ -192,6 +192,15 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 		return;
 	}
 	
+	NSURL* url = [NSURL URLFromPasteboard:pb];
+	if (url) {
+		MvrBookmarkItem* bookmark = [[MvrBookmarkItem alloc] initWithAddress:url];
+		if (bookmark) {
+			[c beginSendingItem:bookmark];
+			return;
+		}
+	}
+	
 	NSString* str = [pb stringForType:NSStringPboardType];
 	if (str) {
 		// autodetect URLs.
@@ -290,6 +299,7 @@ static NSArray* MvrTypeForExtension(NSString* ext) {
 					basename = [NSString stringWithFormat:@"%@ (%d)", host, attempts];
 				
 				fullName = [[downloadDir stringByAppendingPathComponent:basename] stringByAppendingPathExtension:@"url"];
+				attempts++;
 			} while ([fm fileExistsAtPath:fullName]);
 			
 			BOOL ok = [urlFileContents writeToFile:fullName atomically:YES encoding:NSUTF8StringEncoding error:NULL];

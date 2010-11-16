@@ -72,7 +72,11 @@
 
 #if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"MvrUseTesterUpdateChannel"])
+	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+	
+	BOOL useDevelopmentByDefault = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"ILShouldUseDevelopmentChannelByDefault"] boolValue];
+	
+	if ((![ud objectForKey:@"MvrUseTesterUpdateChannel"] && useDevelopmentByDefault) || [ud boolForKey:@"MvrUseTesterUpdateChannel"])
 		[[SUUpdater sharedUpdater] setFeedURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/mac-dev.rss"]];
 	
 	[[SUUpdater sharedUpdater] setDelegate:self];
@@ -293,16 +297,24 @@
 	NSString* URLString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
 	NSURL* URL = [NSURL URLWithString:URLString];
 	
-	if ([[URL resourceSpecifier] hasPrefix:@"add?"]) {
-	
-		NSDictionary* query = [URL dictionaryByDecodingQueryString];
-		NSString* toSend = [query objectForKey:@"url"];
-		
-		MvrItemStorage* is = [MvrItemStorage itemStorageWithData:[toSend dataUsingEncoding:NSUTF8StringEncoding]];
-		MvrItem* i = [MvrItem itemWithStorage:is type:(id) kUTTypeURL metadata:nil];
-		
-		[self.transfer sendItem:i];
-	}
+    if ([[URL scheme] isEqual:@"x-infinitelabs-mover"]) {
+        if ([[URL resourceSpecifier] hasPrefix:@"add?"]) {
+        
+            NSDictionary* query = [URL dictionaryByDecodingQueryString];
+            NSString* toSend = [query objectForKey:@"url"];
+            
+            NSString* title = [[NSURL URLWithString:toSend] host];
+            if (!title)
+                return;
+            
+            MvrItemStorage* is = [MvrItemStorage itemStorageWithData:[toSend dataUsingEncoding:NSUTF8StringEncoding]];
+            MvrItem* i = [MvrItem itemWithStorage:is type:(id) kUTTypeURL metadata:
+                          [NSDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey]
+                          ];
+            
+            [self.transfer sendItem:i];
+        }
+    }
 }
 
 @end

@@ -35,14 +35,6 @@
 	<string>3.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>3</string>
-	<key>LSMinimumSystemVersion</key>
-	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
-	<key>ILDevChannelUpdateDefaultsKey</key>
-	<string>MvrUseTesterUpdateChannel</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -54,6 +46,16 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>36.4</string>
+	<key>ILDevChannelUpdateDefaultsKey</key>
+	<string>MvrUseTesterUpdateChannel</string>
+	<key>ILShouldUseDevelopmentChannelByDefault</key>
+	<string>${MvrUseDevelopmentChannelByDefault}</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>

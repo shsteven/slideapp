@@ -804,7 +804,7 @@
 					"$(MvrPreprocessorMacrosForAllConfigurations)",
 					"DEBUG=1",
 				);
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
 					"$(SRCROOT)/..",
@@ -815,6 +815,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				MvrLinkerFlagsForAllConfigurations = "-ObjC -all_load";
 				MvrPreprocessorMacrosForAllConfigurations = "kMvrConnectMacAppStore=1 kMvrConnectSelfDeployment=0 kMvrConnectTargetDeploymentEnvironment=kMvrConnectSelfDeployment";
+				MvrUseDevelopmentChannelByDefault = YES;
 				OTHER_LDFLAGS = "$(MvrLinkerFlagsForAllConfigurations)";
 				PRODUCT_NAME = "Mover Connect for Mac";
 				SDKROOT = macosx10.6;
@@ -841,7 +842,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(MvrPreprocessorMacrosForAllConfigurations)";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
 					"$(SRCROOT)/..",
@@ -852,6 +853,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				MvrLinkerFlagsForAllConfigurations = "-ObjC -all_load";
 				MvrPreprocessorMacrosForAllConfigurations = "kMvrConnectMacAppStore=1 kMvrConnectSelfDeployment=0 kMvrConnectTargetDeploymentEnvironment=kMvrConnectSelfDeployment";
+				MvrUseDevelopmentChannelByDefault = NO;
 				OTHER_LDFLAGS = "$(MvrLinkerFlagsForAllConfigurations)";
 				PRODUCT_NAME = "Mover Connect for Mac";
 				SDKROOT = macosx10.6;

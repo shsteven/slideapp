@@ -33,7 +33,7 @@
 
 - (id) initWithChannel:(id <MvrChannel>) chan;
 {
-	if (self = [super initWithNibName:@"MvrDeviceItem" bundle:nil]) {
+	if ((self = [super initWithNibName:@"MvrDeviceItem" bundle:nil])) {
 		self.channel = chan;	
 		kvo = [[L0KVODispatcher alloc] initWithTarget:self];
 		

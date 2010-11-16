@@ -29,7 +29,7 @@
 
 - (id) initWithText:(NSString*) text;
 {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		self.text = text;
 		self.type = (id) kUTTypeUTF8PlainText;
 		[self.metadata setDictionary:[self defaultMetadata]];
