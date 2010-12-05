@@ -17,7 +17,6 @@
 #import "MvrStorage.h"
 
 #define kMvrDropboxSavePath @"/Mover"
-#define kMvrDropboxPathItemNoteKey @"MvrDropboxPath"
 
 @interface MvrDropboxSyncTask : NSObject <MvrSyncTask, DBRestClientDelegate> {}
 
@@ -53,6 +52,7 @@
 {
 	[self clear];
 	self.error = nil;
+	
 	[super dealloc];
 }
 
@@ -62,7 +62,7 @@
 	if (self.client || self.finished)
 		return;
 	
-	self.client = [[[DBRestClient alloc] initWithSession:[DBSession sharedSession] root:@"sandbox"] autorelease];
+	self.client = [[[DBRestClient alloc] initWithSession:[DBSession sharedSession]] autorelease];
 	self.client.delegate = self;
 	
 	// FOLLOW THE NUMBERS! --> [0]
@@ -78,8 +78,12 @@
 
 - (void) restClient:(DBRestClient *)client createFolderFailedWithError:(NSError *)error;
 {
-	self.error = error;
-	[self end]; // bail.
+	if ([error code] == 403) { // folder already there
+		[self beginPickingFinalFilename];
+	} else {
+		self.error = error;
+		[self end]; // bail.
+	}
 }
 
 - (void) beginPickingFinalFilename;
@@ -98,7 +102,7 @@
 	
 	self.finalFilename = [MvrStorage userVisibleFilenameForItem:self.item unacceptableFilenames:unacceptableFilenames];
 	
-	[self.item setObject:[kMvrDropboxSavePath stringByAppendingPathComponent:self.finalFilename] forItemNotesKey:kMvrDropboxPathItemNoteKey];
+	[self.item setObject:[kMvrDropboxSavePath stringByAppendingPathComponent:self.finalFilename] forItemNotesKey:kMvrDropboxSyncPathKey];
 	[self.client uploadFile:self.finalFilename toPath:kMvrDropboxSavePath fromPath:self.item.storage.path];
 }
 
@@ -116,6 +120,7 @@
 - (void) restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath;
 {
 	// [4] done!
+	self.finalFilename = nil;
 	[self end];
 }
 
@@ -131,10 +136,16 @@
 	[self end];
 }
 
+- (void) cancelAndDoNotAttemptNewSync;
+{
+	self.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:kMvrSyncErrorCannotReattemptSyncKey]];
+	[self end];
+}
+
 - (void) end;
 {
-	[self clear];
 	self.finished = YES;
+	[self clear];
 }
 
 - (void) clear;
@@ -164,17 +175,67 @@
 
 @implementation MvrDropboxSyncService
 
-- (void) didEnqueueAvailableItem:(MvrItem *)i;
+- (void) dealloc;
 {
-	if ([[DBSession sharedSession] isLinked])
-		[self beginSynchronizingItem:i];
+#if TARGET_OS_IPHONE
+	loginController.delegate = nil;
+	[loginController release];
+	
+	[modalLoginController release];
+#endif
+	
+	[super dealloc];
 }
 
-- (void) didRemoveAvailableItemFromQueue:(MvrItem *)i;
+
++ sharedDropboxSyncService;
 {
-	id <MvrSyncTask> task = [self ongoingSyncTaskForItem:i];
+	static id me = nil; if (!me)
+		me = [self new];
+	
+	return me;
+}
+
++ (void) setUpSharedSessionWithKey:(NSString*) key secret:(NSString*) secret;
+{
+	NSAssert(![DBSession sharedSession], @"Can only set up the shared session once per app launch");
+	
+	DBSession* session = [[[DBSession alloc] initWithConsumerKey:key consumerSecret:secret] autorelease];
+	session.delegate = [self sharedDropboxSyncService];
+	[DBSession setSharedSession:session];
+}
+
+- (void) itemIsAvailable:(MvrItem *)i;
+{
+	// Do we have a sync task for it? Don't make a new one.
+	if ([self ongoingSyncTaskForItem:i])
+		return;
+	
+	// Is it a hidden file (eg a contact)? We don't sync those (TODO).
+	if (![MvrStorage hasUserVisibleFileRepresentation:i]) {
+		[self finishedSynchronizingAvailableItem:i];
+		return;
+	}
+	
+	// Have we already synchronized this item?
+	if ([i objectForItemNotesKey:kMvrDropboxSyncPathKey]) {
+		[self finishedSynchronizingAvailableItem:i];
+		return;
+	}
+	
+	if (!self.linked)
+		return;
+		
+	MvrDropboxSyncTask* task = [[[MvrDropboxSyncTask alloc] initWithItem:i] autorelease];
+	[self.mutableOngoingSyncTasks addObject:task];
+	[task start];
+}
+
+- (void) itemWillBecomeUnavailable:(MvrItem *)i;
+{
+	MvrDropboxSyncTask* task = (MvrDropboxSyncTask*) [self ongoingSyncTaskForItem:i];
 	if (task) {
-		[task cancel];
+		[task cancelAndDoNotAttemptNewSync];
 		[self.mutableOngoingSyncTasks removeObject:task];
 	}
 }
@@ -196,17 +257,6 @@
 
 - (void) beginSynchronizingItem:(MvrItem*) i;
 {
-	NSString* path = i.storage.path;
-	
-	// Is it a hidden file (eg a contact)? We don't sync those (TODO).
-	if ([[path lastPathComponent] hasPrefix:@"."]) {
-		[self finishedSynchronizingAvailableItem:i];
-		return;
-	}
-	
-	MvrDropboxSyncTask* task = [[[MvrDropboxSyncTask alloc] initWithItem:i] autorelease];
-	[self.mutableOngoingSyncTasks addObject:task];
-	[task start];
 }
 
 - (MvrDropboxSyncTask*) ongoingSyncTaskForSourcePath:(NSString*) path;
@@ -217,6 +267,51 @@
 	}
 	
 	return nil;
+}
+
+- (BOOL) isLinked;
+{
+	return [[DBSession sharedSession] isLinked];
+}
+
+- (void) unlink;
+{
+	[[DBSession sharedSession] unlink];
+	[self didChangeDropboxAccountLinkState];
+}
+
+#if TARGET_OS_IPHONE
+
+- (UIViewController *) loginController;
+{
+	if (!loginController) {
+		loginController = [DBLoginController new];
+		loginController.delegate = self;
+	}
+	
+	if (!modalLoginController) {
+		modalLoginController = [[UINavigationController alloc] initWithRootViewController:loginController];
+		modalLoginController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+	}
+	
+	return modalLoginController;
+}
+
+- (void) loginControllerDidLogin:(DBLoginController *)controller;
+{
+	[self didChangeDropboxAccountLinkState];
+}
+
+- (void) loginControllerDidCancel:(DBLoginController *)controller;
+{
+	[self didChangeDropboxAccountLinkState];
+}
+
+#endif
+
+- (void) sessionDidReceiveAuthorizationFailure:(DBSession *)session;
+{
+	// ??? TODO
 }
 
 @end

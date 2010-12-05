@@ -230,6 +230,8 @@
 		wifi.enabled = YES;
 }
 
+@synthesize scanner = wifi;
+
 @end
 
 #endif // #if !kMvrInstrumentForAds

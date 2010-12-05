@@ -216,6 +216,12 @@
 	return actualName;
 }
 
++ (BOOL) hasUserVisibleFileRepresentation:(MvrItem*) i;
+{
+	// ick. Better way TODO
+	return ![[self userVisibleFilenameForItem:i attempt:0] hasPrefix:@"."];
+}
+
 + (NSString *) userVisibleFilenameForItem:(MvrItem *)i attempt:(NSUInteger)attempt;
 {
 	// step one: does this have a filename? return it then.

@@ -22,7 +22,7 @@
 	self = [super init];
 	if (self != nil) {
 		self.mutableAvailableItems = [NSMutableArray array];
-		ongoingSyncTasks = [NSMutableArray array]; // WANT IVARS IN CLASS CONTINUATIONS NOWWWWW
+		ongoingSyncTasksArray = [NSMutableArray new]; // WANT IVARS IN CLASS CONTINUATIONS NOWWWWW
 	}
 	
 	return self;
@@ -31,7 +31,11 @@
 - (void) dealloc
 {
 	self.mutableAvailableItems = nil;
-	[ongoingSyncTasks release];
+
+	for (id x in ongoingSyncTasksArray)
+		[x removeObserver:self forKeyPath:@"finished"];
+	
+	[ongoingSyncTasksArray release];
 	[super dealloc];
 }
 
@@ -49,7 +53,7 @@
 		return;
 	
 	[self.mutableAvailableItems addObject:i];
-	[self didEnqueueAvailableItem:i];
+	[self itemIsAvailable:i];
 }
 
 - (void) removeAvailableItem:(MvrItem *)i;
@@ -58,15 +62,15 @@
 		return;
 	
 	[self.mutableAvailableItems removeObject:i];
-	[self didRemoveAvailableItemFromQueue:i];
+	[self itemWillBecomeUnavailable:i];
 }
 
-- (void) didEnqueueAvailableItem:(MvrItem *)i;
+- (void) itemIsAvailable:(MvrItem *)i;
 {
 	L0AbstractMethod();
 }
 
-- (void) didRemoveAvailableItemFromQueue:(MvrItem *)i;
+- (void) itemWillBecomeUnavailable:(MvrItem *)i;
 {
 	L0AbstractMethod();
 }
@@ -78,7 +82,20 @@
 
 - (NSArray *) ongoingSyncTasks;
 {
-	return ongoingSyncTasks;
+	return ongoingSyncTasksArray;
+}
+
+- (void) insertObject:(id <MvrSyncTask>) o inOngoingSyncTasksAtIndex:(NSUInteger) i;
+{
+	[ongoingSyncTasksArray insertObject:o atIndex:i];
+	[o addObserver:self forKeyPath:@"finished" options:0 context:NULL];
+}
+
+- (void) removeObjectFromOngoingSyncTasksAtIndex:(NSUInteger) i;
+{
+	id x = [ongoingSyncTasksArray objectAtIndex:i];
+	[x removeObserver:self forKeyPath:@"finished"];
+	[ongoingSyncTasksArray removeObjectAtIndex:i];
 }
 
 - (NSMutableArray*) mutableOngoingSyncTasks;
@@ -94,6 +111,40 @@
 	}
 	
 	return nil;
+}
+
+- (void) ongoingSyncTaskDidFinish:(id <MvrSyncTask>) syncTask;
+{
+	[[syncTask retain] autorelease];
+	
+	MvrItem* item = [[syncTask.item retain] autorelease];
+	BOOL reenqueue = NO;
+	
+	if (syncTask.error) {
+		id x = [[syncTask.error userInfo] objectForKey:kMvrSyncErrorCannotReattemptSyncKey];
+		reenqueue = !(x && [x boolValue]);
+	}
+	
+	[self.mutableOngoingSyncTasks removeObject:syncTask];
+	
+	if (reenqueue)
+		[self itemIsAvailable:item];
+	else
+		[self finishedSynchronizingAvailableItem:item];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
+{
+	if ([object conformsToProtocol:@protocol(MvrSyncTask)] && [keyPath isEqual:@"finished"]) {
+		if ([object isFinished])
+			[self ongoingSyncTaskDidFinish:object];
+	}
+}
+
+- (void) reevaluateEnqueuedItems;
+{
+	for (MvrItem* i in self.availableItems)
+		[self itemIsAvailable:i];
 }
 
 @end

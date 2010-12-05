@@ -109,12 +109,16 @@
 		151E02011067652E00C6CDFF /* MvrImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02001067652E00C6CDFF /* MvrImageItem.m */; };
 		151E0220106767A900C6CDFF /* MvrImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E021F106767A900C6CDFF /* MvrImageItemUI.m */; };
 		151E02231067683400C6CDFF /* MvrImagePickerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 151E02221067683400C6CDFF /* MvrImagePickerSource.m */; };
+		15206A6B12AAFAF90033B11A /* ILHostReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 15206A6A12AAFAF90033B11A /* ILHostReachability.m */; };
+		15206A6C12AAFAF90033B11A /* ILHostReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 15206A6A12AAFAF90033B11A /* ILHostReachability.m */; };
 		1521B29E123968D9004A34FC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1521B29D123968D9004A34FC /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		1522444010CAB0C600ACF91B /* MvrImageVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */; };
 		1522444110CAB0C600ACF91B /* MvrTextVisor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */; };
 		152426A811D7E26E00C3535F /* MvrNoOpeningOptions.strings in Resources */ = {isa = PBXBuildFile; fileRef = 152426A611D7E26E00C3535F /* MvrNoOpeningOptions.strings */; };
 		152426BC11D7E6D700C3535F /* MvrAddPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152426BB11D7E6D700C3535F /* MvrAddPane.xib */; };
 		152426BE11D7E6F100C3535F /* MvrWiFiNetworkStatePane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 152426BD11D7E6F100C3535F /* MvrWiFiNetworkStatePane.xib */; };
+		152C5625128FF2220040F6B8 /* MvrSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C5624128FF2220040F6B8 /* MvrSyncController.m */; };
+		152C5626128FF2220040F6B8 /* MvrSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 152C5624128FF2220040F6B8 /* MvrSyncController.m */; };
 		152D460711D79E7100A4DC2E /* MvrDocumentOpenAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 152D460611D79E7100A4DC2E /* MvrDocumentOpenAction.m */; };
 		1531319110837AC100D28022 /* MvrAboutPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1531319010837AC100D28022 /* MvrAboutPane.m */; };
 		1531319910837C2C00D28022 /* AboutPaneHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 1531319810837C2C00D28022 /* AboutPaneHeader.png */; };
@@ -836,12 +840,16 @@
 		151E021F106767A900C6CDFF /* MvrImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImageItemUI.m; sourceTree = "<group>"; };
 		151E02211067683400C6CDFF /* MvrImagePickerSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrImagePickerSource.h; sourceTree = "<group>"; };
 		151E02221067683400C6CDFF /* MvrImagePickerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrImagePickerSource.m; sourceTree = "<group>"; };
+		15206A6912AAFAF90033B11A /* ILHostReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILHostReachability.h; sourceTree = "<group>"; };
+		15206A6A12AAFAF90033B11A /* ILHostReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILHostReachability.m; sourceTree = "<group>"; };
 		1521B29D123968D9004A34FC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		1522443E10CAB0C600ACF91B /* MvrImageVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrImageVisor.xib; sourceTree = "<group>"; };
 		1522443F10CAB0C600ACF91B /* MvrTextVisor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MvrTextVisor.xib; sourceTree = "<group>"; };
 		152426A711D7E26E00C3535F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MvrNoOpeningOptions.strings; sourceTree = SOURCE_ROOT; };
 		152426C111D7E9E200C3535F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../en.lproj/MvrWiFiNetworkStatePane.xib; sourceTree = "<group>"; };
 		152426C311D7E9ED00C3535F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MvrAddPane.xib; sourceTree = SOURCE_ROOT; };
+		152C5623128FF2220040F6B8 /* MvrSyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrSyncController.h; sourceTree = "<group>"; };
+		152C5624128FF2220040F6B8 /* MvrSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrSyncController.m; sourceTree = "<group>"; };
 		152D460511D79E7100A4DC2E /* MvrDocumentOpenAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDocumentOpenAction.h; sourceTree = "<group>"; };
 		152D460611D79E7100A4DC2E /* MvrDocumentOpenAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDocumentOpenAction.m; sourceTree = "<group>"; };
 		1531318F10837AC100D28022 /* MvrAboutPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrAboutPane.h; sourceTree = "<group>"; };
@@ -1355,6 +1363,8 @@
 				15CB30901084C76D00CB285F /* Accessibility */,
 				152D460411D79E5B00A4DC2E /* Post-3.2 (mostly shared between iPhone and iPad) */,
 				15CF7B9D11CE91F80010EA06 /* SFX */,
+				15206A6912AAFAF90033B11A /* ILHostReachability.h */,
+				15206A6A12AAFAF90033B11A /* ILHostReachability.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1607,8 +1617,6 @@
 				156625DF1282A1A9005C4A85 /* DBAccountInfo.m */,
 				156625E01282A1A9005C4A85 /* DBAccountInfo.h */,
 				1566256F1282A1A9005C4A85 /* Resources */,
-				1566262F1282A1A9005C4A85 /* MvrDropboxSyncService.h */,
-				156626301282A1A9005C4A85 /* MvrDropboxSyncService.m */,
 			);
 			name = Dropbox;
 			sourceTree = "<group>";
@@ -2012,6 +2020,10 @@
 				156625921282A1A9005C4A85 /* Dropbox */,
 				15BEDFA81280BAD800A7B3B3 /* MvrSyncService.h */,
 				15BEDFA91280BAD800A7B3B3 /* MvrSyncService.m */,
+				1566262F1282A1A9005C4A85 /* MvrDropboxSyncService.h */,
+				156626301282A1A9005C4A85 /* MvrDropboxSyncService.m */,
+				152C5623128FF2220040F6B8 /* MvrSyncController.h */,
+				152C5624128FF2220040F6B8 /* MvrSyncController.m */,
 			);
 			name = Sync;
 			sourceTree = "<group>";
@@ -3113,6 +3125,8 @@
 				156626211282A1A9005C4A85 /* DBCreateAccountController.m in Sources */,
 				156626221282A1A9005C4A85 /* DBAccountInfo.m in Sources */,
 				156626321282A1A9005C4A85 /* MvrDropboxSyncService.m in Sources */,
+				152C5625128FF2220040F6B8 /* MvrSyncController.m in Sources */,
+				15206A6C12AAFAF90033B11A /* ILHostReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3244,6 +3258,8 @@
 				156626001282A1A9005C4A85 /* DBCreateAccountController.m in Sources */,
 				156626011282A1A9005C4A85 /* DBAccountInfo.m in Sources */,
 				156626311282A1A9005C4A85 /* MvrDropboxSyncService.m in Sources */,
+				152C5626128FF2220040F6B8 /* MvrSyncController.m in Sources */,
+				15206A6B12AAFAF90033B11A /* ILHostReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

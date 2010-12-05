@@ -1,0 +1,16 @@
+//
+//  MoverMac-MacAppStore.xcconfig
+//  Mover Connect
+//
+//  Created by ∞ on 19/11/10.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//
+
+#include "MoverMac-Common.xcconfig"
+
+MvrDeploymentTargetSuffix = MacAppStore
+GCC_PREPROCESSOR_DEFINITIONS = kMvrConnectTargetDeploymentEnvironment=kMvrConnectMacAppStore $(inherited)
+
+ARCHS = x86_64 i386
+CODE_SIGN_IDENTITY = 3rd Party Mac Developer Application
+MACOSX_DEPLOYMENT_TARGET = 10.6

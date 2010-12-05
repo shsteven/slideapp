@@ -12,6 +12,8 @@
 #import "MvrAppDelegate.h"
 #import "MvrMessagesCell.h"
 
+#import "MvrDropboxSyncService.h"
+
 #if kMvrIsLite
 #import "MvrStore.h"
 #import "MvrStorePane.h"
@@ -204,8 +206,38 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 }
 #endif
 
+- (void) linkOrUnlinkDropbox:(UISwitch*) sender;
+{
+	MvrDropboxSyncService* sync = [MvrDropboxSyncService sharedDropboxSyncService];
+	
+	if (!sender.on && sync.linked) {
+		[sync unlink];
+		[sync didChangeDropboxAccountLinkState];
+	} else {
+		[MvrApp() presentModalViewController:sync.loginController];
+	}
+}
+
 - (void) makeTableStructure:(NSMutableArray*) content;
 {
+	UISwitch* switchy;
+	
+	MvrMorePaneSection* dropboxSection = [MvrMorePaneSection section];
+	[content addObject:dropboxSection];
+	
+	dropboxSection.footer = NSLocalizedString(@"While on, items on your table will also be saved to a 'Mover' folder in your Dropbox account.", @"Dropbox footer");
+
+	UITableViewCell* dropboxLinkCell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	
+	dropboxLinkCell.textLabel.text = NSLocalizedString(@"Dropbox Sync", @"Dropbox sync cell in about box");
+
+	switchy = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
+	[switchy sizeToFit];
+	[switchy addTarget:self action:@selector(linkOrUnlinkDropbox:) forControlEvents:UIControlEventValueChanged];
+	dropboxLinkCell.accessoryView = switchy;
+	
+	[dropboxSection.cells addObject:dropboxLinkCell];
+	
 #if kMvrIsLite
 	// All stuff that wasn't in the MvrAboutPane because of the upsell is here now.
 	MvrMorePaneSection* commandsSection = [MvrMorePaneSection section];
@@ -257,7 +289,7 @@ UIFont* MvrWhiteSectionFooterDefaultFont() {
 	UITableViewCell* messagesConsent = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 	messagesConsent.textLabel.text = NSLocalizedString(@"Check for News", @"Messages opt-in/out cell title");
 	
-	UISwitch* switchy = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
+	switchy = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
 	[switchy sizeToFit];
 	[switchy addTarget:self action:@selector(didChangeOptInOutForMessages:) forControlEvents:UIControlEventValueChanged];
 	switchy.on = [MvrServices().messageChecker.userOptedInToMessages boolValue];

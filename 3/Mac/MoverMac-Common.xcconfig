@@ -1,0 +1,33 @@
+//
+//  MoverMac-Common.xcconfig
+//  Mover Connect
+//
+//  Created by ∞ on 19/11/10.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//
+
+SDKROOT = macosx10.6
+
+GCC_VERSION = com.apple.compilers.llvm.clang.1_0
+
+OTHER_LDFLAGS = -ObjC -all_load
+HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers" "$(SRCROOT)/.." "$(SRCROOT)/../iOS/Classes" "$(INFINITELABS_TOOLS)"
+ALWAYS_SEARCH_USER_PATHS = NO
+
+FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)"
+
+GCC_PRECOMPILE_PREFIX_HEADER = YES
+GCC_PREFIX_HEADER = MoverMac.pch
+
+SYMROOT = build/$(MvrDeploymentTargetSuffix)
+MvrDeploymentTargetSuffix = Development
+
+INSTALL_PATH = $(HOME)/Applications
+COPY_PHASE_STRIP = NO
+
+PRODUCT_NAME = Mover Connect
+
+GCC_ENABLE_OBJC_GC = required
+
+MvrConnectVersion = 36.5
+MvrConnectUserVisibleVersion = 3.6

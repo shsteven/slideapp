@@ -266,6 +266,8 @@ enum {
 #endif
 }
 
+@synthesize scanner;
+
 @end
 
 #endif // #if !kMvrInstrumentForAds

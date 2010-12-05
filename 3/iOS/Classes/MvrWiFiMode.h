@@ -29,4 +29,6 @@
 @property(assign) IBOutlet UIView* connectionStateContainer;
 @property(assign) IBOutlet UIView* bluetoothButtonView;
 
+@property(readonly) MvrWiFi* scanner;
+
 @end

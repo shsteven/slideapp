@@ -1,0 +1,18 @@
+/*
+ *  MoverMac.pch
+ *  Mover Connect
+ *
+ *  Created by ∞ on 19/11/10.
+ *  Copyright 2010 __MyCompanyName__. All rights reserved.
+ *
+ */
+
+#import <Common/Mac/AppKit.pch>
+
+#define kMvrConnectSelfDeployment	0
+#define kMvrConnectMacAppStore		1
+
+#ifndef kMvrConnectTargetDeploymentEnvironment
+#warning No target deployment environment set. Setting to self-deployment, but remember to set kMvrConnectTargetDeploymentEnvironment to the right one before shipping.
+#define kMvrConnectTargetDeploymentEnvironment kMvrConnectSelfDeployment
+#endif

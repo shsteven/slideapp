@@ -50,6 +50,10 @@
 #import "MvrUpsellController.h"
 #endif
 
+#import "MvrSyncService.h"
+#import "MvrSyncController.h"
+#import "MvrDropboxSyncService.h"
+
 @interface MvrAppDelegate () <ILSwapServiceDelegate>
 
 - (void) setUpItemClassesAndUIs;
@@ -137,6 +141,14 @@ enum {
 	[[MvrStore store] beginObservingTransactions];
 #endif
 	
+	[MvrDropboxSyncService setUpSharedSessionWithKey:kMvrDropboxMoverKey secret:kMvrDropboxMoverSecret];
+	syncController = [[MvrSyncController alloc] init];
+	
+	syncController.observedStorage = storageCentral;
+	[syncController.mutableObservedScanners addObject:wifiMode.scanner];
+	[syncController.mutableObservedScanners addObject:bluetoothMode.scanner];
+	[syncController addSyncService:[MvrDropboxSyncService sharedDropboxSyncService]];
+
 	BOOL ok = [ILSwapService didFinishLaunchingWithOptions:options];
 	
 	NSURL* url = [options objectForKey:UIApplicationLaunchOptionsURLKey];
@@ -145,6 +157,8 @@ enum {
 		
 	return !url || [url isFileURL] || ok;
 }
+
+@synthesize syncController;
 
 - (void) performPeriodicMessagesCheck;
 {

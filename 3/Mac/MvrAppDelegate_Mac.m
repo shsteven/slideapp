@@ -23,6 +23,7 @@
 
 #import "Network+Storage/MvrItem.h"
 #import "Network+Storage/MvrItemStorage.h"
+#import "MvrBookmarkItem.h"
 
 @interface MvrAppDelegate_Mac () <NSUserInterfaceValidations>
 
@@ -34,6 +35,7 @@
 @implementation MvrAppDelegate_Mac
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+
 #if defined(kMvrMacPrereleaseTimeLimit)
 	NSDate* limit = [NSDate dateWithTimeIntervalSince1970:kMvrMacPrereleaseTimeLimit];
 	if ([limit timeIntervalSinceNow] < 0) {
@@ -46,8 +48,8 @@
 #if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
 	PFMoveToApplicationsFolderIfNecessary();
 #endif
-	
-	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(performOpenURL:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(performOpenURL:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
 	
 	[aboutVersionLabel setStringValue:[NSString stringWithFormat:[aboutVersionLabel stringValue], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]]];
 	[legalitiesTextView readRTFDFromFile:[[NSBundle mainBundle] pathForResource:@"Legalities" ofType:@"rtf"]];
@@ -68,16 +70,18 @@
 	
 	transfer.enabled = YES;
 	
-	[preferences restartAgentIfJustUpdated];
-
 #if kMvrConnectTargetDeploymentEnvironment != kMvrConnectMacAppStore
 	
+	[preferences restartAgentIfJustUpdated];
 	NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
 	
 	BOOL useDevelopmentByDefault = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"ILShouldUseDevelopmentChannelByDefault"] boolValue];
+	BOOL usingDevelopment = NO;
 	
-	if ((![ud objectForKey:@"MvrUseTesterUpdateChannel"] && useDevelopmentByDefault) || [ud boolForKey:@"MvrUseTesterUpdateChannel"])
+	if ((![ud objectForKey:@"MvrUseTesterUpdateChannel"] && useDevelopmentByDefault) || [ud boolForKey:@"MvrUseTesterUpdateChannel"]) {
 		[[SUUpdater sharedUpdater] setFeedURL:[NSURL URLWithString:@"http://infinite-labs.net/mover/mac-dev.rss"]];
+		usingDevelopment = YES;
+	}
 	
 	[[SUUpdater sharedUpdater] setDelegate:self];
 
@@ -85,13 +89,17 @@
 	[i setTarget:[SUUpdater sharedUpdater]];
 	[applicationMenu insertItem:i atIndex:1];
 
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"MvrUseTesterUpdateChannel"]) {
+	if (usingDevelopment) {
 		NSMenuItem* sep = [NSMenuItem separatorItem];
 		[applicationMenu insertItemWithTitle:@"Development channel" action:NULL keyEquivalent:@"" atIndex:1];
 		[applicationMenu insertItem:sep atIndex:1];
 	}
 	
 #endif
+	
+	NSProcessInfo* process = [NSProcessInfo processInfo];
+	if ([process respondsToSelector:@selector(enableSuddenTermination)])
+		[process enableSuddenTermination];
 }
 
 @synthesize transfer;
@@ -294,6 +302,7 @@
 
 - (void) performOpenURL:(NSAppleEventDescriptor*) event withReplyEvent:(NSAppleEventDescriptor*) reply;
 {
+    NSAssert(self.transfer, @"Not set");
 	NSString* URLString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
 	NSURL* URL = [NSURL URLWithString:URLString];
 	
@@ -302,17 +311,14 @@
         
             NSDictionary* query = [URL dictionaryByDecodingQueryString];
             NSString* toSend = [query objectForKey:@"url"];
+            NSURL* toSendURL = [NSURL URLWithString:toSend];
+
+            MvrBookmarkItem* i = nil;
+            if (toSendURL)
+                i = [[MvrBookmarkItem alloc] initWithAddress:toSendURL];
             
-            NSString* title = [[NSURL URLWithString:toSend] host];
-            if (!title)
-                return;
-            
-            MvrItemStorage* is = [MvrItemStorage itemStorageWithData:[toSend dataUsingEncoding:NSUTF8StringEncoding]];
-            MvrItem* i = [MvrItem itemWithStorage:is type:(id) kUTTypeURL metadata:
-                          [NSDictionary dictionaryWithObject:title forKey:kMvrItemTitleMetadataKey]
-                          ];
-            
-            [self.transfer sendItem:i];
+            if (i)
+                [self.transfer sendItem:i];
         }
     }
 }

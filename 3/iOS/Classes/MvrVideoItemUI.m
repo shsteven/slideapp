@@ -80,7 +80,7 @@
 {
 	Class mpvc = ILWeakClass(MPMoviePlayerViewController);
 	if (mpvc) {
-		MPMoviePlayerViewController* m = [[mpvc alloc] initWithContentURL:[NSURL fileURLWithPath:i.storage.path]];
+		MPMoviePlayerViewController* m = [[[mpvc alloc] initWithContentURL:[NSURL fileURLWithPath:i.storage.path]] autorelease];
 		m.moviePlayer.useApplicationAudioSession = NO;
 		[[MvrApp() viewControllerForPresentingModalViewControllers] presentMoviePlayerViewControllerAnimated:m];
 		return;

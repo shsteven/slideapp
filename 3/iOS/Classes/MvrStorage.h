@@ -35,6 +35,9 @@
 - (BOOL) hasItemForFileAtPath:(NSString*) path;
 - (BOOL) isPathInItemsDirectory:(NSString*) path;
 
+
++ (BOOL) hasUserVisibleFileRepresentation:(MvrItem*) i;
+
 + (NSString*) userVisibleFilenameForItem:(MvrItem*) i attempt:(NSUInteger) attempt;
 + (NSString *) userVisibleFilenameForItem:(MvrItem *)i unacceptableFilenames:(NSSet*) filenames;
 

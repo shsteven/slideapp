@@ -27,6 +27,7 @@
 
 #import "MvrDirectoryWatcher.h"
 
+#import "MvrSyncController.h"
 
 #define kMvrHighQualityVideoEnabledKey @"MvrHighQualityVideoEnabled"
 
@@ -46,7 +47,7 @@
 
 - (BOOL) isFeatureAvailable:(MvrStoreFeature) feature;
 
-- (void) addSyncService:(MvrSyncService*) service;
+@property(readonly) MvrSyncController* syncController;
 
 @end
 
@@ -78,6 +79,8 @@
 	MvrMessageChecker* messageChecker;
 	
 	MvrDirectoryWatcher* itemsDirectoryWatcher;
+	
+	MvrSyncController* syncController;
 }
 
 @property(nonatomic, retain) IBOutlet UIWindow *window;

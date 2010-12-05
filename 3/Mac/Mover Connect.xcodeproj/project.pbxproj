@@ -14,6 +14,7 @@
 			);
 			dependencies = (
 				155D6CAC128559DD0096BCB9 /* PBXTargetDependency */,
+				151EF98512968553004DC23A /* PBXTargetDependency */,
 			);
 			name = All;
 			productName = All;
@@ -24,6 +25,7 @@
 		150072E8113967C3007BF995 /* NSAlert+L0Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 150072E7113967C3007BF995 /* NSAlert+L0Alert.m */; };
 		150072EA113967F1007BF995 /* PrereleaseExpired.alert in Resources */ = {isa = PBXBuildFile; fileRef = 150072E9113967F1007BF995 /* PrereleaseExpired.alert */; };
 		1500975A116682B40072DC8C /* MvrBookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15009759116682B40072DC8C /* MvrBookmarkItem.m */; };
+		151EF93A129672D8004DC23A /* Mover Agent.app in Copy Mover Agent */ = {isa = PBXBuildFile; fileRef = 15DEC2001296702000E5C7C5 /* Mover Agent.app */; };
 		153DBB351173121800F2080B /* Sparkle.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = 153DBB341173121800F2080B /* Sparkle.framework */; };
 		153DBB4C1173141E00F2080B /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 153DBB4B1173141E00F2080B /* dsa_pub.pem */; };
 		153EF04F113551D000B8DDC1 /* DeviceBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */; };
@@ -52,6 +54,52 @@
 		15D4D0B411732F6000705E3D /* MoverConnect.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D4D0B311732F6000705E3D /* MoverConnect.png */; };
 		15D4D0BA117331D300705E3D /* Legalities.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15D4D0B9117331D300705E3D /* Legalities.rtf */; };
 		15DA20F4113EF76C00E2BC10 /* MvrDevicesLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */; };
+		15DEC1191296604E00E5C7C5 /* MoverMac-Common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15DEC1181296604E00E5C7C5 /* MoverMac-Common.xcconfig */; };
+		15DEC1BE1296701700E5C7C5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		15DEC1BF1296701700E5C7C5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		15DEC1C01296701700E5C7C5 /* WaypointLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1594394D1133DACB0017B42D /* WaypointLogo.png */; };
+		15DEC1C11296701700E5C7C5 /* DeviceBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */; };
+		15DEC1C21296701700E5C7C5 /* MvrDeviceItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157280E311380210005634C7 /* MvrDeviceItem.xib */; };
+		15DEC1C31296701700E5C7C5 /* SpinnerBackdrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 157280F2113805FA005634C7 /* SpinnerBackdrop.png */; };
+		15DEC1C41296701700E5C7C5 /* PrereleaseExpired.alert in Resources */ = {isa = PBXBuildFile; fileRef = 150072E9113967F1007BF995 /* PrereleaseExpired.alert */; };
+		15DEC1C51296701700E5C7C5 /* MiniSlide.png in Resources */ = {isa = PBXBuildFile; fileRef = 15CCE81B114FF9D100E45AC6 /* MiniSlide.png */; };
+		15DEC1C61296701700E5C7C5 /* LocalizedMoverItemsStrings in Resources */ = {isa = PBXBuildFile; fileRef = 15F933E41167736800AA71AB /* LocalizedMoverItemsStrings */; };
+		15DEC1C71296701700E5C7C5 /* Connect.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15E6E29D1167ED07000184F3 /* Connect.icns */; };
+		15DEC1C81296701700E5C7C5 /* MvrNoContactsForNow.alert in Resources */ = {isa = PBXBuildFile; fileRef = 1565BBCE11730E5700745B9A /* MvrNoContactsForNow.alert */; };
+		15DEC1CA1296701700E5C7C5 /* MoverConnect.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D4D0B311732F6000705E3D /* MoverConnect.png */; };
+		15DEC1CB1296701700E5C7C5 /* Legalities.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15D4D0B9117331D300705E3D /* Legalities.rtf */; };
+		15DEC1CC1296701700E5C7C5 /* MvrConnectFirstTimeFound.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15A3B23611783CA6000876C8 /* MvrConnectFirstTimeFound.alert */; };
+		15DEC1CD1296701700E5C7C5 /* MvrNoContactsForNow_AppStore.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15443D251284B2A6005569EA /* MvrNoContactsForNow_AppStore.alert */; };
+		15DEC1CE1296701700E5C7C5 /* MoverMac-Common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15DEC1181296604E00E5C7C5 /* MoverMac-Common.xcconfig */; };
+		15DEC1D01296701700E5C7C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		15DEC1D11296701700E5C7C5 /* MvrAppDelegate_Mac.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* MvrAppDelegate_Mac.m */; };
+		15DEC1D21296701700E5C7C5 /* MvrDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 157280D21137FE63005634C7 /* MvrDevice.m */; };
+		15DEC1D31296701700E5C7C5 /* NSAlert+L0Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 150072E7113967C3007BF995 /* NSAlert+L0Alert.m */; };
+		15DEC1D41296701700E5C7C5 /* MvrDevicesLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */; };
+		15DEC1D51296701700E5C7C5 /* MvrTransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F965DD11652D2E00EE3F9E /* MvrTransferController.m */; };
+		15DEC1D61296701700E5C7C5 /* MvrTextItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 157705D8116619B700EE3C83 /* MvrTextItem.m */; };
+		15DEC1D71296701700E5C7C5 /* MvrBookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15009759116682B40072DC8C /* MvrBookmarkItem.m */; };
+		15DEC1D81296701700E5C7C5 /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9312C11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m */; };
+		15DEC1D91296701700E5C7C5 /* MvrPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F931F011673E0A00AA71AB /* MvrPreferencesController.m */; };
+		15DEC1DA1296701700E5C7C5 /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 15523D991173201500888B09 /* PFMoveApplication.m */; };
+		15DEC1DD1296701700E5C7C5 /* libMuiKit-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B4230B11D0F3FA00304CDC /* libMuiKit-Mac.a */; };
+		15DEC1DE1296701700E5C7C5 /* libMoverNetwork-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */; };
+		15DEC1DF1296701700E5C7C5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		15DEC1E01296701700E5C7C5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574452111343C630088C65E /* SystemConfiguration.framework */; };
+		15DEC1E11296701700E5C7C5 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1574453A11343D090088C65E /* libz.1.1.3.dylib */; };
+		15DEC1E21296701700E5C7C5 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EF0AC1135595100B8DDC1 /* Carbon.framework */; };
+		15DEC1E31296701700E5C7C5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CCE820114FFC3400E45AC6 /* QuartzCore.framework */; };
+		15DEC1E41296701700E5C7C5 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D327A61172F48E001DD969 /* AddressBook.framework */; };
+		15DEC1E51296701700E5C7C5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15523DA51173208F00888B09 /* Security.framework */; };
+		15DEC1F21296702000E5C7C5 /* SlideMenuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F932041167416000AA71AB /* SlideMenuIcon.png */; };
+		15DEC1F31296702000E5C7C5 /* MoverAgent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F932061167418B00AA71AB /* MoverAgent.xib */; };
+		15DEC1F41296702000E5C7C5 /* Connect.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15E6E29D1167ED07000184F3 /* Connect.icns */; };
+		15DEC1F51296702000E5C7C5 /* SlideMenuIcon_Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 15AD84951168D49800F88021 /* SlideMenuIcon_Selected.png */; };
+		15DEC1F71296702000E5C7C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		15DEC1F81296702000E5C7C5 /* MvrAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9320E116741C900AA71AB /* MvrAgent.m */; };
+		15DEC1F91296702000E5C7C5 /* MvrDirectoryWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 155D6BA31285510F0096BCB9 /* MvrDirectoryWatcher.m */; };
+		15DEC1FB1296702000E5C7C5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F932021167410500AA71AB /* Cocoa.framework */; };
+		15DEC1FC1296702000E5C7C5 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153EF0AC1135595100B8DDC1 /* Carbon.framework */; };
 		15E3A4B3113F972900F301D8 /* libMoverNetwork-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E3A48D113F96FC00F301D8 /* libMoverNetwork-Mac.a */; };
 		15E6E29E1167ED07000184F3 /* Connect.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15E6E29D1167ED07000184F3 /* Connect.icns */; };
 		15F9312E11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15F9312C11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m */; };
@@ -72,6 +120,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		151EF938129672CA004DC23A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 15DEC1F01296702000E5C7C5 /* Mover Agent (Mac App Store) */;
+			remoteInfo = "Mover Agent (Mac App Store)";
+		};
+		151EF98412968553004DC23A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 15DEC1F01296702000E5C7C5 /* Mover Agent (Mac App Store) */;
+			remoteInfo = "Mover Agent (Mac App Store)";
+		};
 		155D6CAB128559DD0096BCB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -108,6 +170,20 @@
 			remoteInfo = "MuiKit (Library - Mac OS X)";
 		};
 		15B4231C11D0F41A00304CDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 157968F211BFB1C200AA504B /* MuiKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 153B41BA105BF0B100DB8FB2;
+			remoteInfo = "MuiKit (Mac OS X)";
+		};
+		15DEC1B81296701700E5C7C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1594397D1133E1410017B42D /* Network+Storage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1535D1CB1090336700CBF778;
+			remoteInfo = "Network (Mac OS X)";
+		};
+		15DEC1BC1296701700E5C7C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 157968F211BFB1C200AA504B /* MuiKit.xcodeproj */;
 			proxyType = 1;
@@ -170,6 +246,17 @@
 			name = "Copy Sparkle";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		15DEC1E61296701700E5C7C5 /* Copy Mover Agent */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents;
+			dstSubfolderSpec = 1;
+			files = (
+				151EF93A129672D8004DC23A /* Mover Agent.app in Copy Mover Agent */,
+			);
+			name = "Copy Mover Agent";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		15F932B411674A2400AA71AB /* Copy Mover Agent */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,7 +289,7 @@
 		15523DA51173208F00888B09 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		155D6BA21285510F0096BCB9 /* MvrDirectoryWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MvrDirectoryWatcher.h; path = ../iOS/Classes/MvrDirectoryWatcher.h; sourceTree = SOURCE_ROOT; };
 		155D6BA31285510F0096BCB9 /* MvrDirectoryWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MvrDirectoryWatcher.m; path = ../iOS/Classes/MvrDirectoryWatcher.m; sourceTree = SOURCE_ROOT; };
-		155D6BAA128552160096BCB9 /* Mover Connect for Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mover Connect for Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		155D6BAA128552160096BCB9 /* Mover Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mover Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1565BBCE11730E5700745B9A /* MvrNoContactsForNow.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MvrNoContactsForNow.alert; sourceTree = "<group>"; };
 		157280D11137FE63005634C7 /* MvrDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevice.h; sourceTree = "<group>"; };
 		157280D21137FE63005634C7 /* MvrDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevice.m; sourceTree = "<group>"; };
@@ -224,6 +311,13 @@
 		15D4D0B9117331D300705E3D /* Legalities.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Legalities.rtf; sourceTree = "<group>"; };
 		15DA20F2113EF76C00E2BC10 /* MvrDevicesLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MvrDevicesLineView.h; sourceTree = "<group>"; };
 		15DA20F3113EF76C00E2BC10 /* MvrDevicesLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MvrDevicesLineView.m; sourceTree = "<group>"; };
+		15DEC1181296604E00E5C7C5 /* MoverMac-Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "MoverMac-Common.xcconfig"; sourceTree = "<group>"; };
+		15DEC11A129660F400E5C7C5 /* MoverMac.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoverMac.pch; sourceTree = "<group>"; };
+		15DEC18F12966AF600E5C7C5 /* Mover Connect (MacAppStore).plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mover Connect (MacAppStore).plist"; sourceTree = "<group>"; };
+		15DEC1A712966D8E00E5C7C5 /* MoverMac-SelfPublished.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "MoverMac-SelfPublished.xcconfig"; sourceTree = "<group>"; };
+		15DEC1ED1296701700E5C7C5 /* Mover Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mover Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		15DEC2001296702000E5C7C5 /* Mover Agent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mover Agent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		15DEC2041296705500E5C7C5 /* MoverMac-MacAppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "MoverMac-MacAppStore.xcconfig"; sourceTree = "<group>"; };
 		15E6E29D1167ED07000184F3 /* Connect.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Connect.icns; sourceTree = "<group>"; };
 		15F9312C11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		15F9312D11672CA200AA71AB /* RSVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
@@ -245,10 +339,35 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		8D1107310486CEB800E47090 /* Mover Connect (Self-Published).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover Connect (Self-Published).plist"; plistStructureDefinitionIdentifier = "<none>"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Mover Connect (SelfPublished).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mover Connect (SelfPublished).plist"; plistStructureDefinitionIdentifier = "<none>"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		15DEC1DB1296701700E5C7C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15DEC1DD1296701700E5C7C5 /* libMuiKit-Mac.a in Frameworks */,
+				15DEC1DE1296701700E5C7C5 /* libMoverNetwork-Mac.a in Frameworks */,
+				15DEC1DF1296701700E5C7C5 /* Cocoa.framework in Frameworks */,
+				15DEC1E01296701700E5C7C5 /* SystemConfiguration.framework in Frameworks */,
+				15DEC1E11296701700E5C7C5 /* libz.1.1.3.dylib in Frameworks */,
+				15DEC1E21296701700E5C7C5 /* Carbon.framework in Frameworks */,
+				15DEC1E31296701700E5C7C5 /* QuartzCore.framework in Frameworks */,
+				15DEC1E41296701700E5C7C5 /* AddressBook.framework in Frameworks */,
+				15DEC1E51296701700E5C7C5 /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15DEC1FA1296702000E5C7C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15DEC1FB1296702000E5C7C5 /* Cocoa.framework in Frameworks */,
+				15DEC1FC1296702000E5C7C5 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		15F931F9116740CB00AA71AB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -351,6 +470,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		15DEC1171296602E00E5C7C5 /* Configuration Files & Prefix Header */ = {
+			isa = PBXGroup;
+			children = (
+				15DEC1181296604E00E5C7C5 /* MoverMac-Common.xcconfig */,
+				15DEC11A129660F400E5C7C5 /* MoverMac.pch */,
+				15DEC1A712966D8E00E5C7C5 /* MoverMac-SelfPublished.xcconfig */,
+				15DEC2041296705500E5C7C5 /* MoverMac-MacAppStore.xcconfig */,
+			);
+			name = "Configuration Files & Prefix Header";
+			sourceTree = "<group>";
+		};
 		15E3A486113F96FC00F301D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,7 +511,9 @@
 			isa = PBXGroup;
 			children = (
 				15F931FB116740CB00AA71AB /* Mover Agent.app */,
-				155D6BAA128552160096BCB9 /* Mover Connect for Mac.app */,
+				155D6BAA128552160096BCB9 /* Mover Connect.app */,
+				15DEC1ED1296701700E5C7C5 /* Mover Connect.app */,
+				15DEC2001296702000E5C7C5 /* Mover Agent.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -389,6 +521,7 @@
 		29B97314FDCFA39411CA2CEA /* MoverWaypoint */ = {
 			isa = PBXGroup;
 			children = (
+				15DEC1171296602E00E5C7C5 /* Configuration Files & Prefix Header */,
 				157968F211BFB1C200AA504B /* MuiKit.xcodeproj */,
 				1594397D1133E1410017B42D /* Network+Storage.xcodeproj */,
 				15F931F5116740BF00AA71AB /* Agent */,
@@ -431,7 +564,8 @@
 				157280F2113805FA005634C7 /* SpinnerBackdrop.png */,
 				1594394D1133DACB0017B42D /* WaypointLogo.png */,
 				153EF04E113551D000B8DDC1 /* DeviceBackdrop.png */,
-				8D1107310486CEB800E47090 /* Mover Connect (Self-Published).plist */,
+				15DEC18F12966AF600E5C7C5 /* Mover Connect (MacAppStore).plist */,
+				8D1107310486CEB800E47090 /* Mover Connect (SelfPublished).plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				157280E311380210005634C7 /* MvrDeviceItem.xib */,
@@ -452,6 +586,45 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		15DEC1B61296701700E5C7C5 /* Mover Connect (Mac App Store) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15DEC1EA1296701700E5C7C5 /* Build configuration list for PBXNativeTarget "Mover Connect (Mac App Store)" */;
+			buildPhases = (
+				15DEC1BD1296701700E5C7C5 /* Resources */,
+				15DEC1CF1296701700E5C7C5 /* Sources */,
+				15DEC1DB1296701700E5C7C5 /* Frameworks */,
+				15DEC1E61296701700E5C7C5 /* Copy Mover Agent */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15DEC1B71296701700E5C7C5 /* PBXTargetDependency */,
+				15DEC1BB1296701700E5C7C5 /* PBXTargetDependency */,
+				151EF939129672CA004DC23A /* PBXTargetDependency */,
+			);
+			name = "Mover Connect (Mac App Store)";
+			productInstallPath = "$(HOME)/Applications";
+			productName = MoverWaypoint;
+			productReference = 15DEC1ED1296701700E5C7C5 /* Mover Connect.app */;
+			productType = "com.apple.product-type.application";
+		};
+		15DEC1F01296702000E5C7C5 /* Mover Agent (Mac App Store) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15DEC1FD1296702000E5C7C5 /* Build configuration list for PBXNativeTarget "Mover Agent (Mac App Store)" */;
+			buildPhases = (
+				15DEC1F11296702000E5C7C5 /* Resources */,
+				15DEC1F61296702000E5C7C5 /* Sources */,
+				15DEC1FA1296702000E5C7C5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mover Agent (Mac App Store)";
+			productName = "Mover Agent";
+			productReference = 15DEC2001296702000E5C7C5 /* Mover Agent.app */;
+			productType = "com.apple.product-type.application";
+		};
 		15F931FA116740CB00AA71AB /* Mover Agent */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 15F93200116740CB00AA71AB /* Build configuration list for PBXNativeTarget "Mover Agent" */;
@@ -489,7 +662,7 @@
 			name = "Mover Connect";
 			productInstallPath = "$(HOME)/Applications";
 			productName = MoverWaypoint;
-			productReference = 155D6BAA128552160096BCB9 /* Mover Connect for Mac.app */;
+			productReference = 155D6BAA128552160096BCB9 /* Mover Connect.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -524,6 +697,8 @@
 				8D1107260486CEB800E47090 /* Mover Connect */,
 				15F931FA116740CB00AA71AB /* Mover Agent */,
 				155D6CA8128559CD0096BCB9 /* All */,
+				15DEC1B61296701700E5C7C5 /* Mover Connect (Mac App Store) */,
+				15DEC1F01296702000E5C7C5 /* Mover Agent (Mac App Store) */,
 			);
 		};
 /* End PBXProject section */
@@ -588,6 +763,40 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		15DEC1BD1296701700E5C7C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15DEC1BE1296701700E5C7C5 /* InfoPlist.strings in Resources */,
+				15DEC1BF1296701700E5C7C5 /* MainMenu.xib in Resources */,
+				15DEC1C01296701700E5C7C5 /* WaypointLogo.png in Resources */,
+				15DEC1C11296701700E5C7C5 /* DeviceBackdrop.png in Resources */,
+				15DEC1C21296701700E5C7C5 /* MvrDeviceItem.xib in Resources */,
+				15DEC1C31296701700E5C7C5 /* SpinnerBackdrop.png in Resources */,
+				15DEC1C41296701700E5C7C5 /* PrereleaseExpired.alert in Resources */,
+				15DEC1C51296701700E5C7C5 /* MiniSlide.png in Resources */,
+				15DEC1C61296701700E5C7C5 /* LocalizedMoverItemsStrings in Resources */,
+				15DEC1C71296701700E5C7C5 /* Connect.icns in Resources */,
+				15DEC1C81296701700E5C7C5 /* MvrNoContactsForNow.alert in Resources */,
+				15DEC1CA1296701700E5C7C5 /* MoverConnect.png in Resources */,
+				15DEC1CB1296701700E5C7C5 /* Legalities.rtf in Resources */,
+				15DEC1CC1296701700E5C7C5 /* MvrConnectFirstTimeFound.alert in Resources */,
+				15DEC1CD1296701700E5C7C5 /* MvrNoContactsForNow_AppStore.alert in Resources */,
+				15DEC1CE1296701700E5C7C5 /* MoverMac-Common.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15DEC1F11296702000E5C7C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15DEC1F21296702000E5C7C5 /* SlideMenuIcon.png in Resources */,
+				15DEC1F31296702000E5C7C5 /* MoverAgent.xib in Resources */,
+				15DEC1F41296702000E5C7C5 /* Connect.icns in Resources */,
+				15DEC1F51296702000E5C7C5 /* SlideMenuIcon_Selected.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		15F931F7116740CB00AA71AB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -619,12 +828,41 @@
 				15D4D0BA117331D300705E3D /* Legalities.rtf in Resources */,
 				15A3B23711783CA6000876C8 /* MvrConnectFirstTimeFound.alert in Resources */,
 				15443D261284B2A6005569EA /* MvrNoContactsForNow_AppStore.alert in Resources */,
+				15DEC1191296604E00E5C7C5 /* MoverMac-Common.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		15DEC1CF1296701700E5C7C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15DEC1D01296701700E5C7C5 /* main.m in Sources */,
+				15DEC1D11296701700E5C7C5 /* MvrAppDelegate_Mac.m in Sources */,
+				15DEC1D21296701700E5C7C5 /* MvrDevice.m in Sources */,
+				15DEC1D31296701700E5C7C5 /* NSAlert+L0Alert.m in Sources */,
+				15DEC1D41296701700E5C7C5 /* MvrDevicesLineView.m in Sources */,
+				15DEC1D51296701700E5C7C5 /* MvrTransferController.m in Sources */,
+				15DEC1D61296701700E5C7C5 /* MvrTextItem.m in Sources */,
+				15DEC1D71296701700E5C7C5 /* MvrBookmarkItem.m in Sources */,
+				15DEC1D81296701700E5C7C5 /* RSVerticallyCenteredTextFieldCell.m in Sources */,
+				15DEC1D91296701700E5C7C5 /* MvrPreferencesController.m in Sources */,
+				15DEC1DA1296701700E5C7C5 /* PFMoveApplication.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		15DEC1F61296702000E5C7C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15DEC1F71296702000E5C7C5 /* main.m in Sources */,
+				15DEC1F81296702000E5C7C5 /* MvrAgent.m in Sources */,
+				15DEC1F91296702000E5C7C5 /* MvrDirectoryWatcher.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		15F931F8116740CB00AA71AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -656,6 +894,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		151EF939129672CA004DC23A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 15DEC1F01296702000E5C7C5 /* Mover Agent (Mac App Store) */;
+			targetProxy = 151EF938129672CA004DC23A /* PBXContainerItemProxy */;
+		};
+		151EF98512968553004DC23A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 15DEC1F01296702000E5C7C5 /* Mover Agent (Mac App Store) */;
+			targetProxy = 151EF98412968553004DC23A /* PBXContainerItemProxy */;
+		};
 		155D6CAC128559DD0096BCB9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D1107260486CEB800E47090 /* Mover Connect */;
@@ -665,6 +913,16 @@
 			isa = PBXTargetDependency;
 			name = "MuiKit (Mac OS X)";
 			targetProxy = 15B4231C11D0F41A00304CDC /* PBXContainerItemProxy */;
+		};
+		15DEC1B71296701700E5C7C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Network (Mac OS X)";
+			targetProxy = 15DEC1B81296701700E5C7C5 /* PBXContainerItemProxy */;
+		};
+		15DEC1BB1296701700E5C7C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "MuiKit (Mac OS X)";
+			targetProxy = 15DEC1BC1296701700E5C7C5 /* PBXContainerItemProxy */;
 		};
 		15E3A4A8113F970600F301D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -719,33 +977,74 @@
 			};
 			name = Release;
 		};
-		15F931FE116740CB00AA71AB /* Debug */ = {
+		15DEC1EB1296701700E5C7C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DEC2041296705500E5C7C5 /* MoverMac-MacAppStore.xcconfig */;
+			buildSettings = {
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "Mover Connect ($(MvrDeploymentTargetSuffix)).plist";
+			};
+			name = Debug;
+		};
+		15DEC1EC1296701700E5C7C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DEC2041296705500E5C7C5 /* MoverMac-MacAppStore.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = "Mover Connect ($(MvrDeploymentTargetSuffix)).plist";
+			};
+			name = Release;
+		};
+		15DEC1FE1296702000E5C7C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DEC2041296705500E5C7C5 /* MoverMac-MacAppStore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"kMvrMacPrereleaseTimeLimit=1271331554",
-				);
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/..";
+				INFOPLIST_FILE = "$(SRCROOT)/Mover Agent-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				PREBINDING = NO;
+				PRODUCT_NAME = "Mover Agent";
+			};
+			name = Debug;
+		};
+		15DEC1FF1296702000E5C7C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DEC2041296705500E5C7C5 /* MoverMac-MacAppStore.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = "$(SRCROOT)/Mover Agent-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				PREBINDING = NO;
+				PRODUCT_NAME = "Mover Agent";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		15F931FE116740CB00AA71AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DEC1A712966D8E00E5C7C5 /* MoverMac-SelfPublished.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Mover Agent-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "Mover Agent";
 			};
@@ -753,26 +1052,15 @@
 		};
 		15F931FF116740CB00AA71AB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DEC1A712966D8E00E5C7C5 /* MoverMac-SelfPublished.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/..";
 				INFOPLIST_FILE = "Mover Agent-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "Mover Agent";
 				ZERO_LINK = NO;
@@ -781,82 +1069,25 @@
 		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DEC1A712966D8E00E5C7C5 /* MoverMac-SelfPublished.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					x86_64,
-					i386,
-				);
-				CODE_SIGN_IDENTITY = "Infinite Labs Code Signing (Mac OS X)";
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_ENABLE_OBJC_GC = required;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(MvrPreprocessorMacrosForAllConfigurations)",
-					"DEBUG=1",
-				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
-					"$(SRCROOT)/..",
-					"$(SRCROOT)/../iOS/Classes",
-				);
-				INFOPLIST_FILE = "Mover Connect (Self-Published).plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				MvrLinkerFlagsForAllConfigurations = "-ObjC -all_load";
-				MvrPreprocessorMacrosForAllConfigurations = "kMvrConnectMacAppStore=1 kMvrConnectSelfDeployment=0 kMvrConnectTargetDeploymentEnvironment=kMvrConnectSelfDeployment";
+				INFOPLIST_FILE = "Mover Connect (SelfPublished).plist";
 				MvrUseDevelopmentChannelByDefault = YES;
-				OTHER_LDFLAGS = "$(MvrLinkerFlagsForAllConfigurations)";
-				PRODUCT_NAME = "Mover Connect for Mac";
-				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15DEC1A712966D8E00E5C7C5 /* MoverMac-SelfPublished.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					x86_64,
-					i386,
-				);
-				CODE_SIGN_IDENTITY = "Infinite Labs Code Signing (Mac OS X)";
-				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				GCC_ENABLE_OBJC_GC = required;
 				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/Mac/AppKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "$(MvrPreprocessorMacrosForAllConfigurations)";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
-					"$(SRCROOT)/..",
-					"$(SRCROOT)/../iOS/Classes",
-				);
-				INFOPLIST_FILE = "Mover Connect (Self-Published).plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				MvrLinkerFlagsForAllConfigurations = "-ObjC -all_load";
-				MvrPreprocessorMacrosForAllConfigurations = "kMvrConnectMacAppStore=1 kMvrConnectSelfDeployment=0 kMvrConnectTargetDeploymentEnvironment=kMvrConnectSelfDeployment";
+				INFOPLIST_FILE = "Mover Connect (SelfPublished).plist";
 				MvrUseDevelopmentChannelByDefault = NO;
-				OTHER_LDFLAGS = "$(MvrLinkerFlagsForAllConfigurations)";
-				PRODUCT_NAME = "Mover Connect for Mac";
-				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};
@@ -894,6 +1125,24 @@
 			buildConfigurations = (
 				155D6CA9128559CD0096BCB9 /* Debug */,
 				155D6CAA128559CD0096BCB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15DEC1EA1296701700E5C7C5 /* Build configuration list for PBXNativeTarget "Mover Connect (Mac App Store)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15DEC1EB1296701700E5C7C5 /* Debug */,
+				15DEC1EC1296701700E5C7C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15DEC1FD1296702000E5C7C5 /* Build configuration list for PBXNativeTarget "Mover Agent (Mac App Store)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15DEC1FE1296702000E5C7C5 /* Debug */,
+				15DEC1FF1296702000E5C7C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

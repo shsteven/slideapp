@@ -27,6 +27,7 @@
 - (void) stopPickingPeer;
 
 @property(readonly, getter=isAvailable) BOOL available;
+@property(readonly) MvrBTScanner* scanner;
 
 @end
 

@@ -12,10 +12,12 @@
 
 #define kMvrSyncItemPersistentIDNoteKey @"MvrSyncID"
 
+#define kMvrSyncErrorCannotReattemptSyncKey @"MvrSyncErrorCannotReattemptSyncKey"
+
 @protocol MvrSyncTask;
 
 @interface MvrSyncService : NSObject {
-	NSMutableArray* ongoingSyncTasks;
+	NSMutableArray* ongoingSyncTasksArray;
 }
 
 // set by the MvrServices thingy when we add the sync service to it.
@@ -30,11 +32,16 @@
 @property(readonly) NSArray* ongoingSyncTasks;
 
 // --- for subclasses ----------------------------------
-- (void) didEnqueueAvailableItem:(MvrItem*) i;
-- (void) didRemoveAvailableItemFromQueue:(MvrItem*) i;
+- (void) itemIsAvailable:(MvrItem*) i;
+- (void) itemWillBecomeUnavailable:(MvrItem*) i;
 - (void) finishedSynchronizingAvailableItem:(MvrItem*) i; // call to remove from available items without a didRemove... call.
 
+- (void) reevaluateEnqueuedItems;
+
 - (id <MvrSyncTask>) ongoingSyncTaskForItem:(MvrItem*) i;
+
+// Default impl simply calls -finishedSynchronizingAvailableItem:.
+- (void) ongoingSyncTaskDidFinish:(id <MvrSyncTask>) syncTask;
 
 // automatically generates KVO notifications for the ongoingSyncTasks key.
 @property(readonly) NSMutableArray* mutableOngoingSyncTasks;

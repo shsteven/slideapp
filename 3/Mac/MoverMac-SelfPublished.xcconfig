@@ -1,0 +1,16 @@
+//
+//  MoverMac-SelfPublished.xcconfig
+//  Mover Connect
+//
+//  Created by ∞ on 19/11/10.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//
+
+#include "MoverMac-Common.xcconfig"
+
+MvrDeploymentTargetSuffix = SelfPublished
+GCC_PREPROCESSOR_DEFINITIONS = kMvrConnectTargetDeploymentEnvironment=kMvrConnectSelfDeployment $(inherited)
+
+ARCHS = $(ARCHS_STANDARD_32_64_BIT)
+CODE_SIGN_IDENTITY = Infinite Labs Code Signing (Mac OS X)
+MACOSX_DEPLOYMENT_TARGET = 10.5
